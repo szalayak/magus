@@ -13,7 +13,8 @@
     },
     "categories": {
       "auth": {
-        "magusa74e493a": {}
+        "magusa74e493a": {},
+        "userPoolGroups": {}
       }
     }
   }

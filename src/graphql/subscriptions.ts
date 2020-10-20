@@ -114,6 +114,7 @@ export const onCreateClass = /* GraphQL */ `
   subscription OnCreateClass {
     onCreateClass {
       id
+      mainClassId
       mainClass {
         id
         _version
@@ -139,6 +140,7 @@ export const onUpdateClass = /* GraphQL */ `
   subscription OnUpdateClass {
     onUpdateClass {
       id
+      mainClassId
       mainClass {
         id
         _version
@@ -164,6 +166,7 @@ export const onDeleteClass = /* GraphQL */ `
   subscription OnDeleteClass {
     onDeleteClass {
       id
+      mainClassId
       mainClass {
         id
         _version
@@ -330,6 +333,342 @@ export const onDeleteRace = /* GraphQL */ `
         title
         description
       }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreatePsiSchool = /* GraphQL */ `
+  subscription OnCreatePsiSchool {
+    onCreatePsiSchool {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      basePsiPoints
+      psiPointsPerLevel
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdatePsiSchool = /* GraphQL */ `
+  subscription OnUpdatePsiSchool {
+    onUpdatePsiSchool {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      basePsiPoints
+      psiPointsPerLevel
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeletePsiSchool = /* GraphQL */ `
+  subscription OnDeletePsiSchool {
+    onDeletePsiSchool {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      basePsiPoints
+      psiPointsPerLevel
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateSpellCategory = /* GraphQL */ `
+  subscription OnCreateSpellCategory {
+    onCreateSpellCategory {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateSpellCategory = /* GraphQL */ `
+  subscription OnUpdateSpellCategory {
+    onUpdateSpellCategory {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteSpellCategory = /* GraphQL */ `
+  subscription OnDeleteSpellCategory {
+    onDeleteSpellCategory {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateSpellClass = /* GraphQL */ `
+  subscription OnCreateSpellClass {
+    onCreateSpellClass {
+      id
+      spellCategoryId
+      SpellCategory {
+        id
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      descriptions {
+        locale
+        title
+        description
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateSpellClass = /* GraphQL */ `
+  subscription OnUpdateSpellClass {
+    onUpdateSpellClass {
+      id
+      spellCategoryId
+      SpellCategory {
+        id
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      descriptions {
+        locale
+        title
+        description
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteSpellClass = /* GraphQL */ `
+  subscription OnDeleteSpellClass {
+    onDeleteSpellClass {
+      id
+      spellCategoryId
+      SpellCategory {
+        id
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      descriptions {
+        locale
+        title
+        description
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateArmour = /* GraphQL */ `
+  subscription OnCreateArmour {
+    onCreateArmour {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      weight
+      movementPreventionValue
+      damageReductionValue
+      price
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateArmour = /* GraphQL */ `
+  subscription OnUpdateArmour {
+    onUpdateArmour {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      weight
+      movementPreventionValue
+      damageReductionValue
+      price
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteArmour = /* GraphQL */ `
+  subscription OnDeleteArmour {
+    onDeleteArmour {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      weight
+      movementPreventionValue
+      damageReductionValue
+      price
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateShield = /* GraphQL */ `
+  subscription OnCreateShield {
+    onCreateShield {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      combatValues {
+        initiation
+        offence
+        defence
+        aiming
+      }
+      damage {
+        numberOfDice
+        dieId
+        modifier
+      }
+      weight
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateShield = /* GraphQL */ `
+  subscription OnUpdateShield {
+    onUpdateShield {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      combatValues {
+        initiation
+        offence
+        defence
+        aiming
+      }
+      damage {
+        numberOfDice
+        dieId
+        modifier
+      }
+      weight
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteShield = /* GraphQL */ `
+  subscription OnDeleteShield {
+    onDeleteShield {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      combatValues {
+        initiation
+        offence
+        defence
+        aiming
+      }
+      damage {
+        numberOfDice
+        dieId
+        modifier
+      }
+      weight
       _version
       _deleted
       _lastChangedAt

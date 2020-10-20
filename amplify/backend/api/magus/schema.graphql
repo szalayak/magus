@@ -19,7 +19,7 @@ type Die @model @auth(rules: [ { allow: private}])
 
 type Damage {
 	numberOfDice: Int!
-  dieId: ID!
+  	dieId: ID!
 	die: Die!
 	modifier: Int!
 }
@@ -37,9 +37,11 @@ type MainClass @model @auth(rules: [ { allow: private}])
 	descriptions: [Description!]!
 }
 
-type Class @model @auth(rules: [ { allow: private}]) {
+type Class @model @auth(rules: [ { allow: private}]) @key(name:"classesByMainClass",fields:["mainClassId"],queryField:"classesByMainClass") 
+{
 	id: ID!
-	mainClass: MainClass!
+	mainClassId: ID!
+	mainClass: MainClass! @connection(fields:["mainClassId"])
 	descriptions: [Description!]!
 }
 
@@ -59,4 +61,45 @@ type Race @model @auth(rules: [ { allow: private}])
  {
 	id: ID!
 	descriptions: [Description!]!
+}
+
+type PsiSchool @model @auth(rules: [ { allow: private}])
+{
+	id: ID!
+	descriptions: [Description!]!
+	basePsiPoints: Int!
+	psiPointsPerLevel: Int!
+}
+
+type SpellCategory @model @auth(rules: [ { allow: private}])
+{
+	id: ID!
+	descriptions: [Description!]!
+} 
+
+type SpellClass @model @auth(rules: [ { allow: private}]) @key(name:"spellClassesByCategory",fields:["spellCategoryId"],queryField:"spellClassesByCategory")
+{
+	id: ID!
+	spellCategoryId: ID!
+	SpellCategory: SpellCategory! @connection(fields:["spellCategoryId"])
+	descriptions: [Description!]!
+}
+
+type Armour @model @auth(rules: [ { allow: private}])
+{
+	id: ID!
+	descriptions: [Description!]!
+	weight: String
+	movementPreventionValue: Int!
+	damageReductionValue: Int!
+	price: Int!
+} 
+
+type Shield  @model @auth(rules: [ { allow: private}])
+{
+	id: ID!
+	descriptions: [Description!]!
+	combatValues: CombatValues!
+	damage: Damage!
+	weight: String
 }

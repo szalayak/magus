@@ -135,6 +135,7 @@ export const createClass = /* GraphQL */ `
   ) {
     createClass(input: $input, condition: $condition) {
       id
+      mainClassId
       mainClass {
         id
         _version
@@ -163,6 +164,7 @@ export const updateClass = /* GraphQL */ `
   ) {
     updateClass(input: $input, condition: $condition) {
       id
+      mainClassId
       mainClass {
         id
         _version
@@ -191,6 +193,7 @@ export const deleteClass = /* GraphQL */ `
   ) {
     deleteClass(input: $input, condition: $condition) {
       id
+      mainClassId
       mainClass {
         id
         _version
@@ -384,6 +387,387 @@ export const deleteRace = /* GraphQL */ `
         title
         description
       }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createPsiSchool = /* GraphQL */ `
+  mutation CreatePsiSchool(
+    $input: CreatePsiSchoolInput!
+    $condition: ModelPsiSchoolConditionInput
+  ) {
+    createPsiSchool(input: $input, condition: $condition) {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      basePsiPoints
+      psiPointsPerLevel
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updatePsiSchool = /* GraphQL */ `
+  mutation UpdatePsiSchool(
+    $input: UpdatePsiSchoolInput!
+    $condition: ModelPsiSchoolConditionInput
+  ) {
+    updatePsiSchool(input: $input, condition: $condition) {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      basePsiPoints
+      psiPointsPerLevel
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deletePsiSchool = /* GraphQL */ `
+  mutation DeletePsiSchool(
+    $input: DeletePsiSchoolInput!
+    $condition: ModelPsiSchoolConditionInput
+  ) {
+    deletePsiSchool(input: $input, condition: $condition) {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      basePsiPoints
+      psiPointsPerLevel
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createSpellCategory = /* GraphQL */ `
+  mutation CreateSpellCategory(
+    $input: CreateSpellCategoryInput!
+    $condition: ModelSpellCategoryConditionInput
+  ) {
+    createSpellCategory(input: $input, condition: $condition) {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateSpellCategory = /* GraphQL */ `
+  mutation UpdateSpellCategory(
+    $input: UpdateSpellCategoryInput!
+    $condition: ModelSpellCategoryConditionInput
+  ) {
+    updateSpellCategory(input: $input, condition: $condition) {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteSpellCategory = /* GraphQL */ `
+  mutation DeleteSpellCategory(
+    $input: DeleteSpellCategoryInput!
+    $condition: ModelSpellCategoryConditionInput
+  ) {
+    deleteSpellCategory(input: $input, condition: $condition) {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createSpellClass = /* GraphQL */ `
+  mutation CreateSpellClass(
+    $input: CreateSpellClassInput!
+    $condition: ModelSpellClassConditionInput
+  ) {
+    createSpellClass(input: $input, condition: $condition) {
+      id
+      spellCategoryId
+      SpellCategory {
+        id
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      descriptions {
+        locale
+        title
+        description
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateSpellClass = /* GraphQL */ `
+  mutation UpdateSpellClass(
+    $input: UpdateSpellClassInput!
+    $condition: ModelSpellClassConditionInput
+  ) {
+    updateSpellClass(input: $input, condition: $condition) {
+      id
+      spellCategoryId
+      SpellCategory {
+        id
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      descriptions {
+        locale
+        title
+        description
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteSpellClass = /* GraphQL */ `
+  mutation DeleteSpellClass(
+    $input: DeleteSpellClassInput!
+    $condition: ModelSpellClassConditionInput
+  ) {
+    deleteSpellClass(input: $input, condition: $condition) {
+      id
+      spellCategoryId
+      SpellCategory {
+        id
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      descriptions {
+        locale
+        title
+        description
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createArmour = /* GraphQL */ `
+  mutation CreateArmour(
+    $input: CreateArmourInput!
+    $condition: ModelArmourConditionInput
+  ) {
+    createArmour(input: $input, condition: $condition) {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      weight
+      movementPreventionValue
+      damageReductionValue
+      price
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateArmour = /* GraphQL */ `
+  mutation UpdateArmour(
+    $input: UpdateArmourInput!
+    $condition: ModelArmourConditionInput
+  ) {
+    updateArmour(input: $input, condition: $condition) {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      weight
+      movementPreventionValue
+      damageReductionValue
+      price
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteArmour = /* GraphQL */ `
+  mutation DeleteArmour(
+    $input: DeleteArmourInput!
+    $condition: ModelArmourConditionInput
+  ) {
+    deleteArmour(input: $input, condition: $condition) {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      weight
+      movementPreventionValue
+      damageReductionValue
+      price
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createShield = /* GraphQL */ `
+  mutation CreateShield(
+    $input: CreateShieldInput!
+    $condition: ModelShieldConditionInput
+  ) {
+    createShield(input: $input, condition: $condition) {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      combatValues {
+        initiation
+        offence
+        defence
+        aiming
+      }
+      damage {
+        numberOfDice
+        dieId
+        modifier
+      }
+      weight
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateShield = /* GraphQL */ `
+  mutation UpdateShield(
+    $input: UpdateShieldInput!
+    $condition: ModelShieldConditionInput
+  ) {
+    updateShield(input: $input, condition: $condition) {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      combatValues {
+        initiation
+        offence
+        defence
+        aiming
+      }
+      damage {
+        numberOfDice
+        dieId
+        modifier
+      }
+      weight
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteShield = /* GraphQL */ `
+  mutation DeleteShield(
+    $input: DeleteShieldInput!
+    $condition: ModelShieldConditionInput
+  ) {
+    deleteShield(input: $input, condition: $condition) {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      combatValues {
+        initiation
+        offence
+        defence
+        aiming
+      }
+      damage {
+        numberOfDice
+        dieId
+        modifier
+      }
+      weight
       _version
       _deleted
       _lastChangedAt

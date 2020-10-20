@@ -94,18 +94,47 @@ export type DeleteMainClassInput = {
 
 export type CreateClassInput = {
   id?: string | null,
+  mainClassId: string,
   descriptions: Array< DescriptionInput >,
   _version?: number | null,
 };
 
 export type ModelClassConditionInput = {
+  mainClassId?: ModelIDInput | null,
   and?: Array< ModelClassConditionInput | null > | null,
   or?: Array< ModelClassConditionInput | null > | null,
   not?: ModelClassConditionInput | null,
 };
 
+export type ModelIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
+};
+
+export type ModelSizeInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+};
+
 export type UpdateClassInput = {
   id: string,
+  mainClassId?: string | null,
   descriptions?: Array< DescriptionInput > | null,
   _version?: number | null,
 };
@@ -184,16 +213,105 @@ export type DeleteRaceInput = {
   _version?: number | null,
 };
 
-export type ModelDieFilterInput = {
-  id?: ModelIDInput | null,
-  minValue?: ModelIntInput | null,
-  maxValue?: ModelIntInput | null,
-  and?: Array< ModelDieFilterInput | null > | null,
-  or?: Array< ModelDieFilterInput | null > | null,
-  not?: ModelDieFilterInput | null,
+export type CreatePsiSchoolInput = {
+  id?: string | null,
+  descriptions: Array< DescriptionInput >,
+  basePsiPoints: number,
+  psiPointsPerLevel: number,
+  _version?: number | null,
 };
 
-export type ModelIDInput = {
+export type ModelPsiSchoolConditionInput = {
+  basePsiPoints?: ModelIntInput | null,
+  psiPointsPerLevel?: ModelIntInput | null,
+  and?: Array< ModelPsiSchoolConditionInput | null > | null,
+  or?: Array< ModelPsiSchoolConditionInput | null > | null,
+  not?: ModelPsiSchoolConditionInput | null,
+};
+
+export type UpdatePsiSchoolInput = {
+  id: string,
+  descriptions?: Array< DescriptionInput > | null,
+  basePsiPoints?: number | null,
+  psiPointsPerLevel?: number | null,
+  _version?: number | null,
+};
+
+export type DeletePsiSchoolInput = {
+  id?: string | null,
+  _version?: number | null,
+};
+
+export type CreateSpellCategoryInput = {
+  id?: string | null,
+  descriptions: Array< DescriptionInput >,
+  _version?: number | null,
+};
+
+export type ModelSpellCategoryConditionInput = {
+  and?: Array< ModelSpellCategoryConditionInput | null > | null,
+  or?: Array< ModelSpellCategoryConditionInput | null > | null,
+  not?: ModelSpellCategoryConditionInput | null,
+};
+
+export type UpdateSpellCategoryInput = {
+  id: string,
+  descriptions?: Array< DescriptionInput > | null,
+  _version?: number | null,
+};
+
+export type DeleteSpellCategoryInput = {
+  id?: string | null,
+  _version?: number | null,
+};
+
+export type CreateSpellClassInput = {
+  id?: string | null,
+  spellCategoryId: string,
+  descriptions: Array< DescriptionInput >,
+  _version?: number | null,
+};
+
+export type ModelSpellClassConditionInput = {
+  spellCategoryId?: ModelIDInput | null,
+  and?: Array< ModelSpellClassConditionInput | null > | null,
+  or?: Array< ModelSpellClassConditionInput | null > | null,
+  not?: ModelSpellClassConditionInput | null,
+};
+
+export type UpdateSpellClassInput = {
+  id: string,
+  spellCategoryId?: string | null,
+  descriptions?: Array< DescriptionInput > | null,
+  _version?: number | null,
+};
+
+export type DeleteSpellClassInput = {
+  id?: string | null,
+  _version?: number | null,
+};
+
+export type CreateArmourInput = {
+  id?: string | null,
+  descriptions: Array< DescriptionInput >,
+  weight?: string | null,
+  movementPreventionValue: number,
+  damageReductionValue: number,
+  price: number,
+  _version?: number | null,
+};
+
+export type ModelArmourConditionInput = {
+  weight?: ModelStringInput | null,
+  movementPreventionValue?: ModelIntInput | null,
+  damageReductionValue?: ModelIntInput | null,
+  price?: ModelIntInput | null,
+  and?: Array< ModelArmourConditionInput | null > | null,
+  or?: Array< ModelArmourConditionInput | null > | null,
+  not?: ModelArmourConditionInput | null,
+};
+
+export type ModelStringInput = {
   ne?: string | null,
   eq?: string | null,
   le?: string | null,
@@ -209,14 +327,71 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type ModelSizeInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
+export type UpdateArmourInput = {
+  id: string,
+  descriptions?: Array< DescriptionInput > | null,
+  weight?: string | null,
+  movementPreventionValue?: number | null,
+  damageReductionValue?: number | null,
+  price?: number | null,
+  _version?: number | null,
+};
+
+export type DeleteArmourInput = {
+  id?: string | null,
+  _version?: number | null,
+};
+
+export type CreateShieldInput = {
+  id?: string | null,
+  descriptions: Array< DescriptionInput >,
+  combatValues: CombatValuesInput,
+  damage: DamageInput,
+  weight?: string | null,
+  _version?: number | null,
+};
+
+export type CombatValuesInput = {
+  initiation: number,
+  offence: number,
+  defence: number,
+  aiming: number,
+};
+
+export type DamageInput = {
+  numberOfDice: number,
+  dieId: string,
+  modifier: number,
+};
+
+export type ModelShieldConditionInput = {
+  weight?: ModelStringInput | null,
+  and?: Array< ModelShieldConditionInput | null > | null,
+  or?: Array< ModelShieldConditionInput | null > | null,
+  not?: ModelShieldConditionInput | null,
+};
+
+export type UpdateShieldInput = {
+  id: string,
+  descriptions?: Array< DescriptionInput > | null,
+  combatValues?: CombatValuesInput | null,
+  damage?: DamageInput | null,
+  weight?: string | null,
+  _version?: number | null,
+};
+
+export type DeleteShieldInput = {
+  id?: string | null,
+  _version?: number | null,
+};
+
+export type ModelDieFilterInput = {
+  id?: ModelIDInput | null,
+  minValue?: ModelIntInput | null,
+  maxValue?: ModelIntInput | null,
+  and?: Array< ModelDieFilterInput | null > | null,
+  or?: Array< ModelDieFilterInput | null > | null,
+  not?: ModelDieFilterInput | null,
 };
 
 export type ModelMainClassFilterInput = {
@@ -228,6 +403,7 @@ export type ModelMainClassFilterInput = {
 
 export type ModelClassFilterInput = {
   id?: ModelIDInput | null,
+  mainClassId?: ModelIDInput | null,
   and?: Array< ModelClassFilterInput | null > | null,
   or?: Array< ModelClassFilterInput | null > | null,
   not?: ModelClassFilterInput | null,
@@ -253,6 +429,55 @@ export type ModelRaceFilterInput = {
   or?: Array< ModelRaceFilterInput | null > | null,
   not?: ModelRaceFilterInput | null,
 };
+
+export type ModelPsiSchoolFilterInput = {
+  id?: ModelIDInput | null,
+  basePsiPoints?: ModelIntInput | null,
+  psiPointsPerLevel?: ModelIntInput | null,
+  and?: Array< ModelPsiSchoolFilterInput | null > | null,
+  or?: Array< ModelPsiSchoolFilterInput | null > | null,
+  not?: ModelPsiSchoolFilterInput | null,
+};
+
+export type ModelSpellCategoryFilterInput = {
+  id?: ModelIDInput | null,
+  and?: Array< ModelSpellCategoryFilterInput | null > | null,
+  or?: Array< ModelSpellCategoryFilterInput | null > | null,
+  not?: ModelSpellCategoryFilterInput | null,
+};
+
+export type ModelSpellClassFilterInput = {
+  id?: ModelIDInput | null,
+  spellCategoryId?: ModelIDInput | null,
+  and?: Array< ModelSpellClassFilterInput | null > | null,
+  or?: Array< ModelSpellClassFilterInput | null > | null,
+  not?: ModelSpellClassFilterInput | null,
+};
+
+export type ModelArmourFilterInput = {
+  id?: ModelIDInput | null,
+  weight?: ModelStringInput | null,
+  movementPreventionValue?: ModelIntInput | null,
+  damageReductionValue?: ModelIntInput | null,
+  price?: ModelIntInput | null,
+  and?: Array< ModelArmourFilterInput | null > | null,
+  or?: Array< ModelArmourFilterInput | null > | null,
+  not?: ModelArmourFilterInput | null,
+};
+
+export type ModelShieldFilterInput = {
+  id?: ModelIDInput | null,
+  weight?: ModelStringInput | null,
+  and?: Array< ModelShieldFilterInput | null > | null,
+  or?: Array< ModelShieldFilterInput | null > | null,
+  not?: ModelShieldFilterInput | null,
+};
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
 
 export type CreateDieMutationVariables = {
   input: CreateDieInput,
@@ -407,6 +632,7 @@ export type CreateClassMutation = {
   createClass:  {
     __typename: "Class",
     id: string,
+    mainClassId: string,
     mainClass:  {
       __typename: "MainClass",
       id: string,
@@ -439,6 +665,7 @@ export type UpdateClassMutation = {
   updateClass:  {
     __typename: "Class",
     id: string,
+    mainClassId: string,
     mainClass:  {
       __typename: "MainClass",
       id: string,
@@ -471,6 +698,7 @@ export type DeleteClassMutation = {
   deleteClass:  {
     __typename: "Class",
     id: string,
+    mainClassId: string,
     mainClass:  {
       __typename: "MainClass",
       id: string,
@@ -701,6 +929,441 @@ export type DeleteRaceMutation = {
   } | null,
 };
 
+export type CreatePsiSchoolMutationVariables = {
+  input: CreatePsiSchoolInput,
+  condition?: ModelPsiSchoolConditionInput | null,
+};
+
+export type CreatePsiSchoolMutation = {
+  createPsiSchool:  {
+    __typename: "PsiSchool",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    basePsiPoints: number,
+    psiPointsPerLevel: number,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdatePsiSchoolMutationVariables = {
+  input: UpdatePsiSchoolInput,
+  condition?: ModelPsiSchoolConditionInput | null,
+};
+
+export type UpdatePsiSchoolMutation = {
+  updatePsiSchool:  {
+    __typename: "PsiSchool",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    basePsiPoints: number,
+    psiPointsPerLevel: number,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeletePsiSchoolMutationVariables = {
+  input: DeletePsiSchoolInput,
+  condition?: ModelPsiSchoolConditionInput | null,
+};
+
+export type DeletePsiSchoolMutation = {
+  deletePsiSchool:  {
+    __typename: "PsiSchool",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    basePsiPoints: number,
+    psiPointsPerLevel: number,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateSpellCategoryMutationVariables = {
+  input: CreateSpellCategoryInput,
+  condition?: ModelSpellCategoryConditionInput | null,
+};
+
+export type CreateSpellCategoryMutation = {
+  createSpellCategory:  {
+    __typename: "SpellCategory",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateSpellCategoryMutationVariables = {
+  input: UpdateSpellCategoryInput,
+  condition?: ModelSpellCategoryConditionInput | null,
+};
+
+export type UpdateSpellCategoryMutation = {
+  updateSpellCategory:  {
+    __typename: "SpellCategory",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteSpellCategoryMutationVariables = {
+  input: DeleteSpellCategoryInput,
+  condition?: ModelSpellCategoryConditionInput | null,
+};
+
+export type DeleteSpellCategoryMutation = {
+  deleteSpellCategory:  {
+    __typename: "SpellCategory",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateSpellClassMutationVariables = {
+  input: CreateSpellClassInput,
+  condition?: ModelSpellClassConditionInput | null,
+};
+
+export type CreateSpellClassMutation = {
+  createSpellClass:  {
+    __typename: "SpellClass",
+    id: string,
+    spellCategoryId: string,
+    SpellCategory:  {
+      __typename: "SpellCategory",
+      id: string,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    },
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateSpellClassMutationVariables = {
+  input: UpdateSpellClassInput,
+  condition?: ModelSpellClassConditionInput | null,
+};
+
+export type UpdateSpellClassMutation = {
+  updateSpellClass:  {
+    __typename: "SpellClass",
+    id: string,
+    spellCategoryId: string,
+    SpellCategory:  {
+      __typename: "SpellCategory",
+      id: string,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    },
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteSpellClassMutationVariables = {
+  input: DeleteSpellClassInput,
+  condition?: ModelSpellClassConditionInput | null,
+};
+
+export type DeleteSpellClassMutation = {
+  deleteSpellClass:  {
+    __typename: "SpellClass",
+    id: string,
+    spellCategoryId: string,
+    SpellCategory:  {
+      __typename: "SpellCategory",
+      id: string,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    },
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateArmourMutationVariables = {
+  input: CreateArmourInput,
+  condition?: ModelArmourConditionInput | null,
+};
+
+export type CreateArmourMutation = {
+  createArmour:  {
+    __typename: "Armour",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    weight: string | null,
+    movementPreventionValue: number,
+    damageReductionValue: number,
+    price: number,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateArmourMutationVariables = {
+  input: UpdateArmourInput,
+  condition?: ModelArmourConditionInput | null,
+};
+
+export type UpdateArmourMutation = {
+  updateArmour:  {
+    __typename: "Armour",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    weight: string | null,
+    movementPreventionValue: number,
+    damageReductionValue: number,
+    price: number,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteArmourMutationVariables = {
+  input: DeleteArmourInput,
+  condition?: ModelArmourConditionInput | null,
+};
+
+export type DeleteArmourMutation = {
+  deleteArmour:  {
+    __typename: "Armour",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    weight: string | null,
+    movementPreventionValue: number,
+    damageReductionValue: number,
+    price: number,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateShieldMutationVariables = {
+  input: CreateShieldInput,
+  condition?: ModelShieldConditionInput | null,
+};
+
+export type CreateShieldMutation = {
+  createShield:  {
+    __typename: "Shield",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    combatValues:  {
+      __typename: "CombatValues",
+      initiation: number,
+      offence: number,
+      defence: number,
+      aiming: number,
+    },
+    damage:  {
+      __typename: "Damage",
+      numberOfDice: number,
+      dieId: string,
+      modifier: number,
+    },
+    weight: string | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateShieldMutationVariables = {
+  input: UpdateShieldInput,
+  condition?: ModelShieldConditionInput | null,
+};
+
+export type UpdateShieldMutation = {
+  updateShield:  {
+    __typename: "Shield",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    combatValues:  {
+      __typename: "CombatValues",
+      initiation: number,
+      offence: number,
+      defence: number,
+      aiming: number,
+    },
+    damage:  {
+      __typename: "Damage",
+      numberOfDice: number,
+      dieId: string,
+      modifier: number,
+    },
+    weight: string | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteShieldMutationVariables = {
+  input: DeleteShieldInput,
+  condition?: ModelShieldConditionInput | null,
+};
+
+export type DeleteShieldMutation = {
+  deleteShield:  {
+    __typename: "Shield",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    combatValues:  {
+      __typename: "CombatValues",
+      initiation: number,
+      offence: number,
+      defence: number,
+      aiming: number,
+    },
+    damage:  {
+      __typename: "Damage",
+      numberOfDice: number,
+      dieId: string,
+      modifier: number,
+    },
+    weight: string | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type SyncDiceQueryVariables = {
   filter?: ModelDieFilterInput | null,
   limit?: number | null,
@@ -858,6 +1521,7 @@ export type SyncClassesQuery = {
     items:  Array< {
       __typename: "Class",
       id: string,
+      mainClassId: string,
       _version: number,
       _deleted: boolean | null,
       _lastChangedAt: number,
@@ -877,6 +1541,7 @@ export type GetClassQuery = {
   getClass:  {
     __typename: "Class",
     id: string,
+    mainClassId: string,
     mainClass:  {
       __typename: "MainClass",
       id: string,
@@ -912,6 +1577,7 @@ export type ListClasssQuery = {
     items:  Array< {
       __typename: "Class",
       id: string,
+      mainClassId: string,
       _version: number,
       _deleted: boolean | null,
       _lastChangedAt: number,
@@ -1130,6 +1796,449 @@ export type ListRacesQuery = {
   } | null,
 };
 
+export type SyncPsiSchoolsQueryVariables = {
+  filter?: ModelPsiSchoolFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncPsiSchoolsQuery = {
+  syncPsiSchools:  {
+    __typename: "ModelPsiSchoolConnection",
+    items:  Array< {
+      __typename: "PsiSchool",
+      id: string,
+      basePsiPoints: number,
+      psiPointsPerLevel: number,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type GetPsiSchoolQueryVariables = {
+  id: string,
+};
+
+export type GetPsiSchoolQuery = {
+  getPsiSchool:  {
+    __typename: "PsiSchool",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    basePsiPoints: number,
+    psiPointsPerLevel: number,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListPsiSchoolsQueryVariables = {
+  filter?: ModelPsiSchoolFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListPsiSchoolsQuery = {
+  listPsiSchools:  {
+    __typename: "ModelPsiSchoolConnection",
+    items:  Array< {
+      __typename: "PsiSchool",
+      id: string,
+      basePsiPoints: number,
+      psiPointsPerLevel: number,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type SyncSpellCategoriesQueryVariables = {
+  filter?: ModelSpellCategoryFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncSpellCategoriesQuery = {
+  syncSpellCategories:  {
+    __typename: "ModelSpellCategoryConnection",
+    items:  Array< {
+      __typename: "SpellCategory",
+      id: string,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type GetSpellCategoryQueryVariables = {
+  id: string,
+};
+
+export type GetSpellCategoryQuery = {
+  getSpellCategory:  {
+    __typename: "SpellCategory",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListSpellCategorysQueryVariables = {
+  filter?: ModelSpellCategoryFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListSpellCategorysQuery = {
+  listSpellCategorys:  {
+    __typename: "ModelSpellCategoryConnection",
+    items:  Array< {
+      __typename: "SpellCategory",
+      id: string,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type SyncSpellClassesQueryVariables = {
+  filter?: ModelSpellClassFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncSpellClassesQuery = {
+  syncSpellClasses:  {
+    __typename: "ModelSpellClassConnection",
+    items:  Array< {
+      __typename: "SpellClass",
+      id: string,
+      spellCategoryId: string,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type GetSpellClassQueryVariables = {
+  id: string,
+};
+
+export type GetSpellClassQuery = {
+  getSpellClass:  {
+    __typename: "SpellClass",
+    id: string,
+    spellCategoryId: string,
+    SpellCategory:  {
+      __typename: "SpellCategory",
+      id: string,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    },
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListSpellClasssQueryVariables = {
+  filter?: ModelSpellClassFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListSpellClasssQuery = {
+  listSpellClasss:  {
+    __typename: "ModelSpellClassConnection",
+    items:  Array< {
+      __typename: "SpellClass",
+      id: string,
+      spellCategoryId: string,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type SyncArmoursQueryVariables = {
+  filter?: ModelArmourFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncArmoursQuery = {
+  syncArmours:  {
+    __typename: "ModelArmourConnection",
+    items:  Array< {
+      __typename: "Armour",
+      id: string,
+      weight: string | null,
+      movementPreventionValue: number,
+      damageReductionValue: number,
+      price: number,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type GetArmourQueryVariables = {
+  id: string,
+};
+
+export type GetArmourQuery = {
+  getArmour:  {
+    __typename: "Armour",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    weight: string | null,
+    movementPreventionValue: number,
+    damageReductionValue: number,
+    price: number,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListArmoursQueryVariables = {
+  filter?: ModelArmourFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListArmoursQuery = {
+  listArmours:  {
+    __typename: "ModelArmourConnection",
+    items:  Array< {
+      __typename: "Armour",
+      id: string,
+      weight: string | null,
+      movementPreventionValue: number,
+      damageReductionValue: number,
+      price: number,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type SyncShieldsQueryVariables = {
+  filter?: ModelShieldFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncShieldsQuery = {
+  syncShields:  {
+    __typename: "ModelShieldConnection",
+    items:  Array< {
+      __typename: "Shield",
+      id: string,
+      weight: string | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type GetShieldQueryVariables = {
+  id: string,
+};
+
+export type GetShieldQuery = {
+  getShield:  {
+    __typename: "Shield",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    combatValues:  {
+      __typename: "CombatValues",
+      initiation: number,
+      offence: number,
+      defence: number,
+      aiming: number,
+    },
+    damage:  {
+      __typename: "Damage",
+      numberOfDice: number,
+      dieId: string,
+      modifier: number,
+    },
+    weight: string | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListShieldsQueryVariables = {
+  filter?: ModelShieldFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListShieldsQuery = {
+  listShields:  {
+    __typename: "ModelShieldConnection",
+    items:  Array< {
+      __typename: "Shield",
+      id: string,
+      weight: string | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type ClassesByMainClassQueryVariables = {
+  mainClassId?: string | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelClassFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ClassesByMainClassQuery = {
+  classesByMainClass:  {
+    __typename: "ModelClassConnection",
+    items:  Array< {
+      __typename: "Class",
+      id: string,
+      mainClassId: string,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type SpellClassesByCategoryQueryVariables = {
+  spellCategoryId?: string | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelSpellClassFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type SpellClassesByCategoryQuery = {
+  spellClassesByCategory:  {
+    __typename: "ModelSpellClassConnection",
+    items:  Array< {
+      __typename: "SpellClass",
+      id: string,
+      spellCategoryId: string,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
 export type OnCreateDieSubscription = {
   onCreateDie:  {
     __typename: "Die",
@@ -1248,6 +2357,7 @@ export type OnCreateClassSubscription = {
   onCreateClass:  {
     __typename: "Class",
     id: string,
+    mainClassId: string,
     mainClass:  {
       __typename: "MainClass",
       id: string,
@@ -1275,6 +2385,7 @@ export type OnUpdateClassSubscription = {
   onUpdateClass:  {
     __typename: "Class",
     id: string,
+    mainClassId: string,
     mainClass:  {
       __typename: "MainClass",
       id: string,
@@ -1302,6 +2413,7 @@ export type OnDeleteClassSubscription = {
   onDeleteClass:  {
     __typename: "Class",
     id: string,
+    mainClassId: string,
     mainClass:  {
       __typename: "MainClass",
       id: string,
@@ -1479,6 +2591,366 @@ export type OnDeleteRaceSubscription = {
       title: string,
       description: string | null,
     } >,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreatePsiSchoolSubscription = {
+  onCreatePsiSchool:  {
+    __typename: "PsiSchool",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    basePsiPoints: number,
+    psiPointsPerLevel: number,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdatePsiSchoolSubscription = {
+  onUpdatePsiSchool:  {
+    __typename: "PsiSchool",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    basePsiPoints: number,
+    psiPointsPerLevel: number,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeletePsiSchoolSubscription = {
+  onDeletePsiSchool:  {
+    __typename: "PsiSchool",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    basePsiPoints: number,
+    psiPointsPerLevel: number,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateSpellCategorySubscription = {
+  onCreateSpellCategory:  {
+    __typename: "SpellCategory",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateSpellCategorySubscription = {
+  onUpdateSpellCategory:  {
+    __typename: "SpellCategory",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteSpellCategorySubscription = {
+  onDeleteSpellCategory:  {
+    __typename: "SpellCategory",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateSpellClassSubscription = {
+  onCreateSpellClass:  {
+    __typename: "SpellClass",
+    id: string,
+    spellCategoryId: string,
+    SpellCategory:  {
+      __typename: "SpellCategory",
+      id: string,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    },
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateSpellClassSubscription = {
+  onUpdateSpellClass:  {
+    __typename: "SpellClass",
+    id: string,
+    spellCategoryId: string,
+    SpellCategory:  {
+      __typename: "SpellCategory",
+      id: string,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    },
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteSpellClassSubscription = {
+  onDeleteSpellClass:  {
+    __typename: "SpellClass",
+    id: string,
+    spellCategoryId: string,
+    SpellCategory:  {
+      __typename: "SpellCategory",
+      id: string,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    },
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateArmourSubscription = {
+  onCreateArmour:  {
+    __typename: "Armour",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    weight: string | null,
+    movementPreventionValue: number,
+    damageReductionValue: number,
+    price: number,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateArmourSubscription = {
+  onUpdateArmour:  {
+    __typename: "Armour",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    weight: string | null,
+    movementPreventionValue: number,
+    damageReductionValue: number,
+    price: number,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteArmourSubscription = {
+  onDeleteArmour:  {
+    __typename: "Armour",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    weight: string | null,
+    movementPreventionValue: number,
+    damageReductionValue: number,
+    price: number,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateShieldSubscription = {
+  onCreateShield:  {
+    __typename: "Shield",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    combatValues:  {
+      __typename: "CombatValues",
+      initiation: number,
+      offence: number,
+      defence: number,
+      aiming: number,
+    },
+    damage:  {
+      __typename: "Damage",
+      numberOfDice: number,
+      dieId: string,
+      modifier: number,
+    },
+    weight: string | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateShieldSubscription = {
+  onUpdateShield:  {
+    __typename: "Shield",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    combatValues:  {
+      __typename: "CombatValues",
+      initiation: number,
+      offence: number,
+      defence: number,
+      aiming: number,
+    },
+    damage:  {
+      __typename: "Damage",
+      numberOfDice: number,
+      dieId: string,
+      modifier: number,
+    },
+    weight: string | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteShieldSubscription = {
+  onDeleteShield:  {
+    __typename: "Shield",
+    id: string,
+    descriptions:  Array< {
+      __typename: "Description",
+      locale: Locale,
+      title: string,
+      description: string | null,
+    } >,
+    combatValues:  {
+      __typename: "CombatValues",
+      initiation: number,
+      offence: number,
+      defence: number,
+      aiming: number,
+    },
+    damage:  {
+      __typename: "Damage",
+      numberOfDice: number,
+      dieId: string,
+      modifier: number,
+    },
+    weight: string | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
