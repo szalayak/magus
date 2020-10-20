@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-magus-dev-173539-authRole",
+      "UnauthRoleArn": "arn:aws:iam::539245837614:role/amplify-magus-dev-173539-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::539245837614:role/amplify-magus-dev-173539-authRole",
+      "Region": "eu-west-2",
+      "DeploymentBucketName": "amplify-magus-dev-173539-deployment",
+      "UnauthRoleName": "amplify-magus-dev-173539-unauthRole",
+      "StackName": "amplify-magus-dev-173539",
+      "StackId": "arn:aws:cloudformation:eu-west-2:539245837614:stack/amplify-magus-dev-173539/4b91bd00-12f2-11eb-bc1f-06ac7056bee8",
+      "AmplifyAppId": "dbrhju8xm1gij"
+    }
+  }
+}
