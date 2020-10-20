@@ -1,0 +1,62 @@
+enum Locale {
+	en
+	hu
+}
+
+type Description {
+	locale: Locale!
+	title: String!
+	description: String
+}
+
+type Die @model @auth(rules: [ { allow: private}])
+ {
+	id: ID!
+	descriptions: [Description!]!
+	minValue: Int!
+	maxValue: Int!
+}
+
+type Damage {
+	numberOfDice: Int!
+  dieId: ID!
+	die: Die!
+	modifier: Int!
+}
+
+type CombatValues {
+	initiation: Int!
+	offence: Int!
+	defence: Int!
+	aiming: Int!
+}
+
+type MainClass @model @auth(rules: [ { allow: private}])
+ {
+	id: ID!
+	descriptions: [Description!]!
+}
+
+type Class @model @auth(rules: [ { allow: private}]) {
+	id: ID!
+	mainClass: MainClass!
+	descriptions: [Description!]!
+}
+
+type Personality @model @auth(rules: [ { allow: private}])
+ {
+	id: ID!
+	descriptions: [Description!]!
+}
+
+type Mastery @model @auth(rules: [ { allow: private}])
+ {
+	id: ID!
+	descriptions: [Description!]!
+}
+
+type Race @model @auth(rules: [ { allow: private}])
+ {
+	id: ID!
+	descriptions: [Description!]!
+}
