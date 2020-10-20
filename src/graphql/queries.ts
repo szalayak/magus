@@ -366,11 +366,6 @@ export const getRace = /* GraphQL */ `
         title
         description
       }
-      damage {
-        numberOfDice
-        dieId
-        modifier
-      }
       _version
       _deleted
       _lastChangedAt

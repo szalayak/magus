@@ -164,14 +164,7 @@ export type DeleteMasteryInput = {
 export type CreateRaceInput = {
   id?: string | null,
   descriptions: Array< DescriptionInput >,
-  damage?: DamageInput | null,
   _version?: number | null,
-};
-
-export type DamageInput = {
-  numberOfDice: number,
-  dieId: string,
-  modifier: number,
 };
 
 export type ModelRaceConditionInput = {
@@ -183,7 +176,6 @@ export type ModelRaceConditionInput = {
 export type UpdateRaceInput = {
   id: string,
   descriptions?: Array< DescriptionInput > | null,
-  damage?: DamageInput | null,
   _version?: number | null,
 };
 
@@ -655,12 +647,6 @@ export type CreateRaceMutation = {
       title: string,
       description: string | null,
     } >,
-    damage:  {
-      __typename: "Damage",
-      numberOfDice: number,
-      dieId: string,
-      modifier: number,
-    } | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -684,12 +670,6 @@ export type UpdateRaceMutation = {
       title: string,
       description: string | null,
     } >,
-    damage:  {
-      __typename: "Damage",
-      numberOfDice: number,
-      dieId: string,
-      modifier: number,
-    } | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -713,12 +693,6 @@ export type DeleteRaceMutation = {
       title: string,
       description: string | null,
     } >,
-    damage:  {
-      __typename: "Damage",
-      numberOfDice: number,
-      dieId: string,
-      modifier: number,
-    } | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -1125,12 +1099,6 @@ export type GetRaceQuery = {
       title: string,
       description: string | null,
     } >,
-    damage:  {
-      __typename: "Damage",
-      numberOfDice: number,
-      dieId: string,
-      modifier: number,
-    } | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -1475,12 +1443,6 @@ export type OnCreateRaceSubscription = {
       title: string,
       description: string | null,
     } >,
-    damage:  {
-      __typename: "Damage",
-      numberOfDice: number,
-      dieId: string,
-      modifier: number,
-    } | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -1499,12 +1461,6 @@ export type OnUpdateRaceSubscription = {
       title: string,
       description: string | null,
     } >,
-    damage:  {
-      __typename: "Damage",
-      numberOfDice: number,
-      dieId: string,
-      modifier: number,
-    } | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -1523,12 +1479,6 @@ export type OnDeleteRaceSubscription = {
       title: string,
       description: string | null,
     } >,
-    damage:  {
-      __typename: "Damage",
-      numberOfDice: number,
-      dieId: string,
-      modifier: number,
-    } | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,

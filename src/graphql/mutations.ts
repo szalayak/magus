@@ -344,11 +344,6 @@ export const createRace = /* GraphQL */ `
         title
         description
       }
-      damage {
-        numberOfDice
-        dieId
-        modifier
-      }
       _version
       _deleted
       _lastChangedAt
@@ -369,11 +364,6 @@ export const updateRace = /* GraphQL */ `
         title
         description
       }
-      damage {
-        numberOfDice
-        dieId
-        modifier
-      }
       _version
       _deleted
       _lastChangedAt
@@ -393,11 +383,6 @@ export const deleteRace = /* GraphQL */ `
         locale
         title
         description
-      }
-      damage {
-        numberOfDice
-        dieId
-        modifier
       }
       _version
       _deleted
