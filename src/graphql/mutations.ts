@@ -2,6 +2,156 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createObjectType = /* GraphQL */ `
+  mutation CreateObjectType(
+    $input: CreateObjectTypeInput!
+    $condition: ModelObjectTypeConditionInput
+  ) {
+    createObjectType(input: $input, condition: $condition) {
+      id
+      name
+      descriptions {
+        locale
+        title
+        description
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateObjectType = /* GraphQL */ `
+  mutation UpdateObjectType(
+    $input: UpdateObjectTypeInput!
+    $condition: ModelObjectTypeConditionInput
+  ) {
+    updateObjectType(input: $input, condition: $condition) {
+      id
+      name
+      descriptions {
+        locale
+        title
+        description
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteObjectType = /* GraphQL */ `
+  mutation DeleteObjectType(
+    $input: DeleteObjectTypeInput!
+    $condition: ModelObjectTypeConditionInput
+  ) {
+    deleteObjectType(input: $input, condition: $condition) {
+      id
+      name
+      descriptions {
+        locale
+        title
+        description
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createObjectDescription = /* GraphQL */ `
+  mutation CreateObjectDescription(
+    $input: CreateObjectDescriptionInput!
+    $condition: ModelObjectDescriptionConditionInput
+  ) {
+    createObjectDescription(input: $input, condition: $condition) {
+      id
+      objectTypeId
+      type {
+        id
+        name
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      objectId
+      locale
+      title
+      description
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateObjectDescription = /* GraphQL */ `
+  mutation UpdateObjectDescription(
+    $input: UpdateObjectDescriptionInput!
+    $condition: ModelObjectDescriptionConditionInput
+  ) {
+    updateObjectDescription(input: $input, condition: $condition) {
+      id
+      objectTypeId
+      type {
+        id
+        name
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      objectId
+      locale
+      title
+      description
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteObjectDescription = /* GraphQL */ `
+  mutation DeleteObjectDescription(
+    $input: DeleteObjectDescriptionInput!
+    $condition: ModelObjectDescriptionConditionInput
+  ) {
+    deleteObjectDescription(input: $input, condition: $condition) {
+      id
+      objectTypeId
+      type {
+        id
+        name
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      objectId
+      locale
+      title
+      description
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createDie = /* GraphQL */ `
   mutation CreateDie(
     $input: CreateDieInput!
@@ -68,13 +218,98 @@ export const deleteDie = /* GraphQL */ `
     }
   }
 `;
-export const createMainClass = /* GraphQL */ `
-  mutation CreateMainClass(
-    $input: CreateMainClassInput!
-    $condition: ModelMainClassConditionInput
+export const createThrowScenario = /* GraphQL */ `
+  mutation CreateThrowScenario(
+    $input: CreateThrowScenarioInput!
+    $condition: ModelThrowScenarioConditionInput
   ) {
-    createMainClass(input: $input, condition: $condition) {
+    createThrowScenario(input: $input, condition: $condition) {
       id
+      dieId
+      die {
+        id
+        minValue
+        maxValue
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      iterationCount
+      modifier
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateThrowScenario = /* GraphQL */ `
+  mutation UpdateThrowScenario(
+    $input: UpdateThrowScenarioInput!
+    $condition: ModelThrowScenarioConditionInput
+  ) {
+    updateThrowScenario(input: $input, condition: $condition) {
+      id
+      dieId
+      die {
+        id
+        minValue
+        maxValue
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      iterationCount
+      modifier
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteThrowScenario = /* GraphQL */ `
+  mutation DeleteThrowScenario(
+    $input: DeleteThrowScenarioInput!
+    $condition: ModelThrowScenarioConditionInput
+  ) {
+    deleteThrowScenario(input: $input, condition: $condition) {
+      id
+      dieId
+      die {
+        id
+        minValue
+        maxValue
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      iterationCount
+      modifier
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createValueRangeValue = /* GraphQL */ `
+  mutation CreateValueRangeValue(
+    $input: CreateValueRangeValueInput!
+    $condition: ModelValueRangeValueConditionInput
+  ) {
+    createValueRangeValue(input: $input, condition: $condition) {
+      id
+      type
       descriptions {
         locale
         title
@@ -88,13 +323,14 @@ export const createMainClass = /* GraphQL */ `
     }
   }
 `;
-export const updateMainClass = /* GraphQL */ `
-  mutation UpdateMainClass(
-    $input: UpdateMainClassInput!
-    $condition: ModelMainClassConditionInput
+export const updateValueRangeValue = /* GraphQL */ `
+  mutation UpdateValueRangeValue(
+    $input: UpdateValueRangeValueInput!
+    $condition: ModelValueRangeValueConditionInput
   ) {
-    updateMainClass(input: $input, condition: $condition) {
+    updateValueRangeValue(input: $input, condition: $condition) {
       id
+      type
       descriptions {
         locale
         title
@@ -108,13 +344,14 @@ export const updateMainClass = /* GraphQL */ `
     }
   }
 `;
-export const deleteMainClass = /* GraphQL */ `
-  mutation DeleteMainClass(
-    $input: DeleteMainClassInput!
-    $condition: ModelMainClassConditionInput
+export const deleteValueRangeValue = /* GraphQL */ `
+  mutation DeleteValueRangeValue(
+    $input: DeleteValueRangeValueInput!
+    $condition: ModelValueRangeValueConditionInput
   ) {
-    deleteMainClass(input: $input, condition: $condition) {
+    deleteValueRangeValue(input: $input, condition: $condition) {
       id
+      type
       descriptions {
         locale
         title
@@ -138,6 +375,7 @@ export const createClass = /* GraphQL */ `
       mainClassId
       mainClass {
         id
+        type
         _version
         _deleted
         _lastChangedAt
@@ -149,6 +387,7 @@ export const createClass = /* GraphQL */ `
         title
         description
       }
+      magicUser
       _version
       _deleted
       _lastChangedAt
@@ -167,6 +406,7 @@ export const updateClass = /* GraphQL */ `
       mainClassId
       mainClass {
         id
+        type
         _version
         _deleted
         _lastChangedAt
@@ -178,6 +418,7 @@ export const updateClass = /* GraphQL */ `
         title
         description
       }
+      magicUser
       _version
       _deleted
       _lastChangedAt
@@ -196,6 +437,7 @@ export const deleteClass = /* GraphQL */ `
       mainClassId
       mainClass {
         id
+        type
         _version
         _deleted
         _lastChangedAt
@@ -207,126 +449,7 @@ export const deleteClass = /* GraphQL */ `
         title
         description
       }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createPersonality = /* GraphQL */ `
-  mutation CreatePersonality(
-    $input: CreatePersonalityInput!
-    $condition: ModelPersonalityConditionInput
-  ) {
-    createPersonality(input: $input, condition: $condition) {
-      id
-      descriptions {
-        locale
-        title
-        description
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updatePersonality = /* GraphQL */ `
-  mutation UpdatePersonality(
-    $input: UpdatePersonalityInput!
-    $condition: ModelPersonalityConditionInput
-  ) {
-    updatePersonality(input: $input, condition: $condition) {
-      id
-      descriptions {
-        locale
-        title
-        description
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deletePersonality = /* GraphQL */ `
-  mutation DeletePersonality(
-    $input: DeletePersonalityInput!
-    $condition: ModelPersonalityConditionInput
-  ) {
-    deletePersonality(input: $input, condition: $condition) {
-      id
-      descriptions {
-        locale
-        title
-        description
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createMastery = /* GraphQL */ `
-  mutation CreateMastery(
-    $input: CreateMasteryInput!
-    $condition: ModelMasteryConditionInput
-  ) {
-    createMastery(input: $input, condition: $condition) {
-      id
-      descriptions {
-        locale
-        title
-        description
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateMastery = /* GraphQL */ `
-  mutation UpdateMastery(
-    $input: UpdateMasteryInput!
-    $condition: ModelMasteryConditionInput
-  ) {
-    updateMastery(input: $input, condition: $condition) {
-      id
-      descriptions {
-        locale
-        title
-        description
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteMastery = /* GraphQL */ `
-  mutation DeleteMastery(
-    $input: DeleteMasteryInput!
-    $condition: ModelMasteryConditionInput
-  ) {
-    deleteMastery(input: $input, condition: $condition) {
-      id
-      descriptions {
-        locale
-        title
-        description
-      }
+      magicUser
       _version
       _deleted
       _lastChangedAt
@@ -461,66 +584,6 @@ export const deletePsiSchool = /* GraphQL */ `
     }
   }
 `;
-export const createSpellCategory = /* GraphQL */ `
-  mutation CreateSpellCategory(
-    $input: CreateSpellCategoryInput!
-    $condition: ModelSpellCategoryConditionInput
-  ) {
-    createSpellCategory(input: $input, condition: $condition) {
-      id
-      descriptions {
-        locale
-        title
-        description
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateSpellCategory = /* GraphQL */ `
-  mutation UpdateSpellCategory(
-    $input: UpdateSpellCategoryInput!
-    $condition: ModelSpellCategoryConditionInput
-  ) {
-    updateSpellCategory(input: $input, condition: $condition) {
-      id
-      descriptions {
-        locale
-        title
-        description
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteSpellCategory = /* GraphQL */ `
-  mutation DeleteSpellCategory(
-    $input: DeleteSpellCategoryInput!
-    $condition: ModelSpellCategoryConditionInput
-  ) {
-    deleteSpellCategory(input: $input, condition: $condition) {
-      id
-      descriptions {
-        locale
-        title
-        description
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const createSpellClass = /* GraphQL */ `
   mutation CreateSpellClass(
     $input: CreateSpellClassInput!
@@ -529,8 +592,9 @@ export const createSpellClass = /* GraphQL */ `
     createSpellClass(input: $input, condition: $condition) {
       id
       spellCategoryId
-      SpellCategory {
+      spellCategory {
         id
+        type
         _version
         _deleted
         _lastChangedAt
@@ -558,8 +622,9 @@ export const updateSpellClass = /* GraphQL */ `
     updateSpellClass(input: $input, condition: $condition) {
       id
       spellCategoryId
-      SpellCategory {
+      spellCategory {
         id
+        type
         _version
         _deleted
         _lastChangedAt
@@ -587,8 +652,9 @@ export const deleteSpellClass = /* GraphQL */ `
     deleteSpellClass(input: $input, condition: $condition) {
       id
       spellCategoryId
-      SpellCategory {
+      spellCategory {
         id
+        type
         _version
         _deleted
         _lastChangedAt
@@ -698,12 +764,18 @@ export const createShield = /* GraphQL */ `
         defence
         aiming
       }
-      damage {
-        numberOfDice
-        dieId
-        modifier
-      }
       weight
+      damage {
+        id
+        dieId
+        iterationCount
+        modifier
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
       _version
       _deleted
       _lastChangedAt
@@ -730,12 +802,18 @@ export const updateShield = /* GraphQL */ `
         defence
         aiming
       }
-      damage {
-        numberOfDice
-        dieId
-        modifier
-      }
       weight
+      damage {
+        id
+        dieId
+        iterationCount
+        modifier
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
       _version
       _deleted
       _lastChangedAt
@@ -762,12 +840,951 @@ export const deleteShield = /* GraphQL */ `
         defence
         aiming
       }
+      weight
       damage {
-        numberOfDice
+        id
         dieId
+        iterationCount
         modifier
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createWeapon = /* GraphQL */ `
+  mutation CreateWeapon(
+    $input: CreateWeaponInput!
+    $condition: ModelWeaponConditionInput
+  ) {
+    createWeapon(input: $input, condition: $condition) {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      ranged
+      weaponTypeId
+      weaponType {
+        id
+        type
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
       }
       weight
+      price
+      attackRange
+      combatValues {
+        initiation
+        offence
+        defence
+        aiming
+      }
+      damage {
+        id
+        dieId
+        iterationCount
+        modifier
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      attacksPerTurn
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateWeapon = /* GraphQL */ `
+  mutation UpdateWeapon(
+    $input: UpdateWeaponInput!
+    $condition: ModelWeaponConditionInput
+  ) {
+    updateWeapon(input: $input, condition: $condition) {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      ranged
+      weaponTypeId
+      weaponType {
+        id
+        type
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      weight
+      price
+      attackRange
+      combatValues {
+        initiation
+        offence
+        defence
+        aiming
+      }
+      damage {
+        id
+        dieId
+        iterationCount
+        modifier
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      attacksPerTurn
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteWeapon = /* GraphQL */ `
+  mutation DeleteWeapon(
+    $input: DeleteWeaponInput!
+    $condition: ModelWeaponConditionInput
+  ) {
+    deleteWeapon(input: $input, condition: $condition) {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      ranged
+      weaponTypeId
+      weaponType {
+        id
+        type
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      weight
+      price
+      attackRange
+      combatValues {
+        initiation
+        offence
+        defence
+        aiming
+      }
+      damage {
+        id
+        dieId
+        iterationCount
+        modifier
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      attacksPerTurn
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createSkill = /* GraphQL */ `
+  mutation CreateSkill(
+    $input: CreateSkillInput!
+    $condition: ModelSkillConditionInput
+  ) {
+    createSkill(input: $input, condition: $condition) {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      percentageSkill
+      skillGroupId
+      skillGroup {
+        id
+        type
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      basicCost
+      masterCost
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateSkill = /* GraphQL */ `
+  mutation UpdateSkill(
+    $input: UpdateSkillInput!
+    $condition: ModelSkillConditionInput
+  ) {
+    updateSkill(input: $input, condition: $condition) {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      percentageSkill
+      skillGroupId
+      skillGroup {
+        id
+        type
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      basicCost
+      masterCost
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteSkill = /* GraphQL */ `
+  mutation DeleteSkill(
+    $input: DeleteSkillInput!
+    $condition: ModelSkillConditionInput
+  ) {
+    deleteSkill(input: $input, condition: $condition) {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      percentageSkill
+      skillGroupId
+      skillGroup {
+        id
+        type
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      basicCost
+      masterCost
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createMagicalItem = /* GraphQL */ `
+  mutation CreateMagicalItem(
+    $input: CreateMagicalItemInput!
+    $condition: ModelMagicalItemConditionInput
+  ) {
+    createMagicalItem(input: $input, condition: $condition) {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      class {
+        id
+        mainClassId
+        magicUser
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      manaCost
+      duration
+      price
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateMagicalItem = /* GraphQL */ `
+  mutation UpdateMagicalItem(
+    $input: UpdateMagicalItemInput!
+    $condition: ModelMagicalItemConditionInput
+  ) {
+    updateMagicalItem(input: $input, condition: $condition) {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      class {
+        id
+        mainClassId
+        magicUser
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      manaCost
+      duration
+      price
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteMagicalItem = /* GraphQL */ `
+  mutation DeleteMagicalItem(
+    $input: DeleteMagicalItemInput!
+    $condition: ModelMagicalItemConditionInput
+  ) {
+    deleteMagicalItem(input: $input, condition: $condition) {
+      id
+      descriptions {
+        locale
+        title
+        description
+      }
+      class {
+        id
+        mainClassId
+        magicUser
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      manaCost
+      duration
+      price
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createThrow = /* GraphQL */ `
+  mutation CreateThrow(
+    $input: CreateThrowInput!
+    $condition: ModelThrowConditionInput
+  ) {
+    createThrow(input: $input, condition: $condition) {
+      id
+      dieId
+      die {
+        id
+        minValue
+        maxValue
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      iterationCount
+      modifier
+      throwResults
+      throwSum
+      total
+      owner
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateThrow = /* GraphQL */ `
+  mutation UpdateThrow(
+    $input: UpdateThrowInput!
+    $condition: ModelThrowConditionInput
+  ) {
+    updateThrow(input: $input, condition: $condition) {
+      id
+      dieId
+      die {
+        id
+        minValue
+        maxValue
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      iterationCount
+      modifier
+      throwResults
+      throwSum
+      total
+      owner
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteThrow = /* GraphQL */ `
+  mutation DeleteThrow(
+    $input: DeleteThrowInput!
+    $condition: ModelThrowConditionInput
+  ) {
+    deleteThrow(input: $input, condition: $condition) {
+      id
+      dieId
+      die {
+        id
+        minValue
+        maxValue
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      iterationCount
+      modifier
+      throwResults
+      throwSum
+      total
+      owner
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createPlayerCharacter = /* GraphQL */ `
+  mutation CreatePlayerCharacter(
+    $input: CreatePlayerCharacterInput!
+    $condition: ModelPlayerCharacterConditionInput
+  ) {
+    createPlayerCharacter(input: $input, condition: $condition) {
+      id
+      name
+      startDate
+      dungeonMasters
+      owner
+      basicInfo {
+        sex
+        height
+        weight
+        hair
+        eyes
+        age
+        visibleAge
+        family
+        attire
+        personalityTraits
+        specialAbilities
+        likes
+        dislikes
+        fears
+        companions
+        fame
+      }
+      abilities {
+        strength
+        agility
+        dexterity
+        stamina
+        health
+        beauty
+        intelligence
+        willpower
+        astral
+      }
+      health {
+        baseVitality
+        baseHitPoints
+        hitPointsPerLevel
+      }
+      class {
+        id
+        mainClassId
+        magicUser
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      subclass
+      specialisation
+      race {
+        id
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      personality {
+        id
+        type
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      religion
+      country
+      school
+      level {
+        currentLevel
+        currentExperience
+        experienceForNextLevel
+      }
+      psiUser
+      psiSchool {
+        id
+        basePsiPoints
+        psiPointsPerLevel
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      psiMastery {
+        id
+        type
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      psiPoints {
+        current
+        max
+      }
+      magicUser
+      magicalAbility {
+        manaPointsPerLevel
+        modifiers
+        manaPointsStoredElsehwere
+        rechargingMethod
+      }
+      holySymbol {
+        bucket
+        region
+        key
+      }
+      coatOfArms {
+        bucket
+        region
+        key
+      }
+      baseCombatValues {
+        initiation
+        offence
+        defence
+        aiming
+      }
+      spentCombatValueModifiers {
+        initiation
+        offence
+        defence
+        aiming
+      }
+      otherCombatValueModifiers {
+        initiation
+        offence
+        defence
+        aiming
+      }
+      combatValueModifiersPerLevel
+      mandatoryCombatValueModifierDistribution
+      languages {
+        language
+        level
+      }
+      inventory {
+        name
+        amount
+        location
+      }
+      notes
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updatePlayerCharacter = /* GraphQL */ `
+  mutation UpdatePlayerCharacter(
+    $input: UpdatePlayerCharacterInput!
+    $condition: ModelPlayerCharacterConditionInput
+  ) {
+    updatePlayerCharacter(input: $input, condition: $condition) {
+      id
+      name
+      startDate
+      dungeonMasters
+      owner
+      basicInfo {
+        sex
+        height
+        weight
+        hair
+        eyes
+        age
+        visibleAge
+        family
+        attire
+        personalityTraits
+        specialAbilities
+        likes
+        dislikes
+        fears
+        companions
+        fame
+      }
+      abilities {
+        strength
+        agility
+        dexterity
+        stamina
+        health
+        beauty
+        intelligence
+        willpower
+        astral
+      }
+      health {
+        baseVitality
+        baseHitPoints
+        hitPointsPerLevel
+      }
+      class {
+        id
+        mainClassId
+        magicUser
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      subclass
+      specialisation
+      race {
+        id
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      personality {
+        id
+        type
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      religion
+      country
+      school
+      level {
+        currentLevel
+        currentExperience
+        experienceForNextLevel
+      }
+      psiUser
+      psiSchool {
+        id
+        basePsiPoints
+        psiPointsPerLevel
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      psiMastery {
+        id
+        type
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      psiPoints {
+        current
+        max
+      }
+      magicUser
+      magicalAbility {
+        manaPointsPerLevel
+        modifiers
+        manaPointsStoredElsehwere
+        rechargingMethod
+      }
+      holySymbol {
+        bucket
+        region
+        key
+      }
+      coatOfArms {
+        bucket
+        region
+        key
+      }
+      baseCombatValues {
+        initiation
+        offence
+        defence
+        aiming
+      }
+      spentCombatValueModifiers {
+        initiation
+        offence
+        defence
+        aiming
+      }
+      otherCombatValueModifiers {
+        initiation
+        offence
+        defence
+        aiming
+      }
+      combatValueModifiersPerLevel
+      mandatoryCombatValueModifierDistribution
+      languages {
+        language
+        level
+      }
+      inventory {
+        name
+        amount
+        location
+      }
+      notes
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deletePlayerCharacter = /* GraphQL */ `
+  mutation DeletePlayerCharacter(
+    $input: DeletePlayerCharacterInput!
+    $condition: ModelPlayerCharacterConditionInput
+  ) {
+    deletePlayerCharacter(input: $input, condition: $condition) {
+      id
+      name
+      startDate
+      dungeonMasters
+      owner
+      basicInfo {
+        sex
+        height
+        weight
+        hair
+        eyes
+        age
+        visibleAge
+        family
+        attire
+        personalityTraits
+        specialAbilities
+        likes
+        dislikes
+        fears
+        companions
+        fame
+      }
+      abilities {
+        strength
+        agility
+        dexterity
+        stamina
+        health
+        beauty
+        intelligence
+        willpower
+        astral
+      }
+      health {
+        baseVitality
+        baseHitPoints
+        hitPointsPerLevel
+      }
+      class {
+        id
+        mainClassId
+        magicUser
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      subclass
+      specialisation
+      race {
+        id
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      personality {
+        id
+        type
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      religion
+      country
+      school
+      level {
+        currentLevel
+        currentExperience
+        experienceForNextLevel
+      }
+      psiUser
+      psiSchool {
+        id
+        basePsiPoints
+        psiPointsPerLevel
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      psiMastery {
+        id
+        type
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      psiPoints {
+        current
+        max
+      }
+      magicUser
+      magicalAbility {
+        manaPointsPerLevel
+        modifiers
+        manaPointsStoredElsehwere
+        rechargingMethod
+      }
+      holySymbol {
+        bucket
+        region
+        key
+      }
+      coatOfArms {
+        bucket
+        region
+        key
+      }
+      baseCombatValues {
+        initiation
+        offence
+        defence
+        aiming
+      }
+      spentCombatValueModifiers {
+        initiation
+        offence
+        defence
+        aiming
+      }
+      otherCombatValueModifiers {
+        initiation
+        offence
+        defence
+        aiming
+      }
+      combatValueModifiersPerLevel
+      mandatoryCombatValueModifierDistribution
+      languages {
+        language
+        level
+      }
+      inventory {
+        name
+        amount
+        location
+      }
+      notes
       _version
       _deleted
       _lastChangedAt
