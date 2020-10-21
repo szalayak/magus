@@ -38,37 +38,6 @@ enum ValueRangeType {
   SKILL_GROUP
 }
 
-type ObjectType
-  @model
-  @auth(rules: [{ allow: private, operations: [read] }])
-  @key(name: "byName", fields: ["name"], queryField: "getObjectTypeByName") {
-  id: ID!
-  name: String!
-  descriptions: [Description!]!
-}
-
-type ObjectDescription
-  @model
-  @auth(rules: [{ allow: private, operations: [read] }])
-  @key(
-    name: "byTitle"
-    fields: ["locale", "title"]
-    queryField: "listObjectDescriptionsByTitle"
-  )
-  @key(
-    name: "byObjectId"
-    fields: ["objectId"]
-    queryField: "getObjectDescriptionsByObjectId"
-  ) {
-  id: ID!
-  objectTypeId: ID!
-  type: ObjectType! @connection(fields: ["objectTypeId"])
-  objectId: ID!
-  locale: Locale!
-  title: String!
-  description: String
-}
-
 type Die @model @auth(rules: [{ allow: private }]) {
   id: ID!
   descriptions: [Description!]!
@@ -123,21 +92,6 @@ type PsiSchool @model @auth(rules: [{ allow: private }]) {
   descriptions: [Description!]!
   basePsiPoints: Int!
   psiPointsPerLevel: Int!
-}
-
-type SpellClass
-  @model
-  @auth(rules: [{ allow: private }])
-  @key(
-    name: "spellClassesByCategory"
-    fields: ["spellCategoryId"]
-    queryField: "listSpellClassesByCategory"
-  ) {
-  id: ID!
-  spellCategoryId: ID!
-  spellCategory(type: ValueRangeType = SPELL_CATEGORY): ValueRangeValue!
-    @connection(fields: ["spellCategoryId"])
-  descriptions: [Description!]!
 }
 
 type Armour @model @auth(rules: [{ allow: private }]) {

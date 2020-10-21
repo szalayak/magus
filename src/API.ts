@@ -2,10 +2,11 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateObjectTypeInput = {
+export type CreateDieInput = {
   id?: string | null,
-  name: string,
   descriptions: Array< DescriptionInput >,
+  minValue: number,
+  maxValue: number,
   _version?: number | null,
 };
 
@@ -20,130 +21,6 @@ export enum Locale {
   hu = "hu",
 }
 
-
-export type ModelObjectTypeConditionInput = {
-  name?: ModelStringInput | null,
-  and?: Array< ModelObjectTypeConditionInput | null > | null,
-  or?: Array< ModelObjectTypeConditionInput | null > | null,
-  not?: ModelObjectTypeConditionInput | null,
-};
-
-export type ModelStringInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
-};
-
-export enum ModelAttributeTypes {
-  binary = "binary",
-  binarySet = "binarySet",
-  bool = "bool",
-  list = "list",
-  map = "map",
-  number = "number",
-  numberSet = "numberSet",
-  string = "string",
-  stringSet = "stringSet",
-  _null = "_null",
-}
-
-
-export type ModelSizeInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-};
-
-export type UpdateObjectTypeInput = {
-  id: string,
-  name?: string | null,
-  descriptions?: Array< DescriptionInput > | null,
-  _version?: number | null,
-};
-
-export type DeleteObjectTypeInput = {
-  id?: string | null,
-  _version?: number | null,
-};
-
-export type CreateObjectDescriptionInput = {
-  id?: string | null,
-  objectTypeId: string,
-  objectId: string,
-  locale: Locale,
-  title: string,
-  description?: string | null,
-  _version?: number | null,
-};
-
-export type ModelObjectDescriptionConditionInput = {
-  objectTypeId?: ModelIDInput | null,
-  objectId?: ModelIDInput | null,
-  locale?: ModelLocaleInput | null,
-  title?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  and?: Array< ModelObjectDescriptionConditionInput | null > | null,
-  or?: Array< ModelObjectDescriptionConditionInput | null > | null,
-  not?: ModelObjectDescriptionConditionInput | null,
-};
-
-export type ModelIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
-};
-
-export type ModelLocaleInput = {
-  eq?: Locale | null,
-  ne?: Locale | null,
-};
-
-export type UpdateObjectDescriptionInput = {
-  id: string,
-  objectTypeId?: string | null,
-  objectId?: string | null,
-  locale?: Locale | null,
-  title?: string | null,
-  description?: string | null,
-  _version?: number | null,
-};
-
-export type DeleteObjectDescriptionInput = {
-  id?: string | null,
-  _version?: number | null,
-};
-
-export type CreateDieInput = {
-  id?: string | null,
-  descriptions: Array< DescriptionInput >,
-  minValue: number,
-  maxValue: number,
-  _version?: number | null,
-};
 
 export type ModelDieConditionInput = {
   minValue?: ModelIntInput | null,
@@ -164,6 +41,20 @@ export type ModelIntInput = {
   attributeExists?: boolean | null,
   attributeType?: ModelAttributeTypes | null,
 };
+
+export enum ModelAttributeTypes {
+  binary = "binary",
+  binarySet = "binarySet",
+  bool = "bool",
+  list = "list",
+  map = "map",
+  number = "number",
+  numberSet = "numberSet",
+  string = "string",
+  stringSet = "stringSet",
+  _null = "_null",
+}
+
 
 export type UpdateDieInput = {
   id: string,
@@ -193,6 +84,32 @@ export type ModelThrowScenarioConditionInput = {
   and?: Array< ModelThrowScenarioConditionInput | null > | null,
   or?: Array< ModelThrowScenarioConditionInput | null > | null,
   not?: ModelThrowScenarioConditionInput | null,
+};
+
+export type ModelIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
+};
+
+export type ModelSizeInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
 };
 
 export type UpdateThrowScenarioInput = {
@@ -336,32 +253,6 @@ export type DeletePsiSchoolInput = {
   _version?: number | null,
 };
 
-export type CreateSpellClassInput = {
-  id?: string | null,
-  spellCategoryId: string,
-  descriptions: Array< DescriptionInput >,
-  _version?: number | null,
-};
-
-export type ModelSpellClassConditionInput = {
-  spellCategoryId?: ModelIDInput | null,
-  and?: Array< ModelSpellClassConditionInput | null > | null,
-  or?: Array< ModelSpellClassConditionInput | null > | null,
-  not?: ModelSpellClassConditionInput | null,
-};
-
-export type UpdateSpellClassInput = {
-  id: string,
-  spellCategoryId?: string | null,
-  descriptions?: Array< DescriptionInput > | null,
-  _version?: number | null,
-};
-
-export type DeleteSpellClassInput = {
-  id?: string | null,
-  _version?: number | null,
-};
-
 export type CreateArmourInput = {
   id?: string | null,
   descriptions: Array< DescriptionInput >,
@@ -380,6 +271,22 @@ export type ModelArmourConditionInput = {
   and?: Array< ModelArmourConditionInput | null > | null,
   or?: Array< ModelArmourConditionInput | null > | null,
   not?: ModelArmourConditionInput | null,
+};
+
+export type ModelStringInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
 };
 
 export type UpdateArmourInput = {
@@ -1089,26 +996,6 @@ export type DeleteMagicalItemAssignmentInput = {
   _version?: number | null,
 };
 
-export type ModelObjectTypeFilterInput = {
-  id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
-  and?: Array< ModelObjectTypeFilterInput | null > | null,
-  or?: Array< ModelObjectTypeFilterInput | null > | null,
-  not?: ModelObjectTypeFilterInput | null,
-};
-
-export type ModelObjectDescriptionFilterInput = {
-  id?: ModelIDInput | null,
-  objectTypeId?: ModelIDInput | null,
-  objectId?: ModelIDInput | null,
-  locale?: ModelLocaleInput | null,
-  title?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  and?: Array< ModelObjectDescriptionFilterInput | null > | null,
-  or?: Array< ModelObjectDescriptionFilterInput | null > | null,
-  not?: ModelObjectDescriptionFilterInput | null,
-};
-
 export type ModelDieFilterInput = {
   id?: ModelIDInput | null,
   minValue?: ModelIntInput | null,
@@ -1159,14 +1046,6 @@ export type ModelPsiSchoolFilterInput = {
   and?: Array< ModelPsiSchoolFilterInput | null > | null,
   or?: Array< ModelPsiSchoolFilterInput | null > | null,
   not?: ModelPsiSchoolFilterInput | null,
-};
-
-export type ModelSpellClassFilterInput = {
-  id?: ModelIDInput | null,
-  spellCategoryId?: ModelIDInput | null,
-  and?: Array< ModelSpellClassFilterInput | null > | null,
-  or?: Array< ModelSpellClassFilterInput | null > | null,
-  not?: ModelSpellClassFilterInput | null,
 };
 
 export type ModelArmourFilterInput = {
@@ -1321,22 +1200,6 @@ export type ModelMagicalItemAssignmentFilterInput = {
   not?: ModelMagicalItemAssignmentFilterInput | null,
 };
 
-export enum ModelSortDirection {
-  ASC = "ASC",
-  DESC = "DESC",
-}
-
-
-export type ModelStringKeyConditionInput = {
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-};
-
 export type ModelIDKeyConditionInput = {
   eq?: string | null,
   le?: string | null,
@@ -1347,191 +1210,11 @@ export type ModelIDKeyConditionInput = {
   beginsWith?: string | null,
 };
 
-export type CreateObjectTypeMutationVariables = {
-  input: CreateObjectTypeInput,
-  condition?: ModelObjectTypeConditionInput | null,
-};
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
 
-export type CreateObjectTypeMutation = {
-  createObjectType:  {
-    __typename: "ObjectType",
-    id: string,
-    name: string,
-    descriptions:  Array< {
-      __typename: "Description",
-      locale: Locale,
-      title: string,
-      description: string | null,
-    } >,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdateObjectTypeMutationVariables = {
-  input: UpdateObjectTypeInput,
-  condition?: ModelObjectTypeConditionInput | null,
-};
-
-export type UpdateObjectTypeMutation = {
-  updateObjectType:  {
-    __typename: "ObjectType",
-    id: string,
-    name: string,
-    descriptions:  Array< {
-      __typename: "Description",
-      locale: Locale,
-      title: string,
-      description: string | null,
-    } >,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteObjectTypeMutationVariables = {
-  input: DeleteObjectTypeInput,
-  condition?: ModelObjectTypeConditionInput | null,
-};
-
-export type DeleteObjectTypeMutation = {
-  deleteObjectType:  {
-    __typename: "ObjectType",
-    id: string,
-    name: string,
-    descriptions:  Array< {
-      __typename: "Description",
-      locale: Locale,
-      title: string,
-      description: string | null,
-    } >,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type CreateObjectDescriptionMutationVariables = {
-  input: CreateObjectDescriptionInput,
-  condition?: ModelObjectDescriptionConditionInput | null,
-};
-
-export type CreateObjectDescriptionMutation = {
-  createObjectDescription:  {
-    __typename: "ObjectDescription",
-    id: string,
-    objectTypeId: string,
-    type:  {
-      __typename: "ObjectType",
-      id: string,
-      name: string,
-      descriptions:  Array< {
-        __typename: "Description",
-        locale: Locale,
-        title: string,
-        description: string | null,
-      } >,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    },
-    objectId: string,
-    locale: Locale,
-    title: string,
-    description: string | null,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdateObjectDescriptionMutationVariables = {
-  input: UpdateObjectDescriptionInput,
-  condition?: ModelObjectDescriptionConditionInput | null,
-};
-
-export type UpdateObjectDescriptionMutation = {
-  updateObjectDescription:  {
-    __typename: "ObjectDescription",
-    id: string,
-    objectTypeId: string,
-    type:  {
-      __typename: "ObjectType",
-      id: string,
-      name: string,
-      descriptions:  Array< {
-        __typename: "Description",
-        locale: Locale,
-        title: string,
-        description: string | null,
-      } >,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    },
-    objectId: string,
-    locale: Locale,
-    title: string,
-    description: string | null,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteObjectDescriptionMutationVariables = {
-  input: DeleteObjectDescriptionInput,
-  condition?: ModelObjectDescriptionConditionInput | null,
-};
-
-export type DeleteObjectDescriptionMutation = {
-  deleteObjectDescription:  {
-    __typename: "ObjectDescription",
-    id: string,
-    objectTypeId: string,
-    type:  {
-      __typename: "ObjectType",
-      id: string,
-      name: string,
-      descriptions:  Array< {
-        __typename: "Description",
-        locale: Locale,
-        title: string,
-        description: string | null,
-      } >,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    },
-    objectId: string,
-    locale: Locale,
-    title: string,
-    description: string | null,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
 
 export type CreateDieMutationVariables = {
   input: CreateDieInput,
@@ -2050,126 +1733,6 @@ export type DeletePsiSchoolMutation = {
     } >,
     basePsiPoints: number,
     psiPointsPerLevel: number,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type CreateSpellClassMutationVariables = {
-  input: CreateSpellClassInput,
-  condition?: ModelSpellClassConditionInput | null,
-};
-
-export type CreateSpellClassMutation = {
-  createSpellClass:  {
-    __typename: "SpellClass",
-    id: string,
-    spellCategoryId: string,
-    spellCategory:  {
-      __typename: "ValueRangeValue",
-      id: string,
-      type: ValueRangeType,
-      descriptions:  Array< {
-        __typename: "Description",
-        locale: Locale,
-        title: string,
-        description: string | null,
-      } >,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    },
-    descriptions:  Array< {
-      __typename: "Description",
-      locale: Locale,
-      title: string,
-      description: string | null,
-    } >,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdateSpellClassMutationVariables = {
-  input: UpdateSpellClassInput,
-  condition?: ModelSpellClassConditionInput | null,
-};
-
-export type UpdateSpellClassMutation = {
-  updateSpellClass:  {
-    __typename: "SpellClass",
-    id: string,
-    spellCategoryId: string,
-    spellCategory:  {
-      __typename: "ValueRangeValue",
-      id: string,
-      type: ValueRangeType,
-      descriptions:  Array< {
-        __typename: "Description",
-        locale: Locale,
-        title: string,
-        description: string | null,
-      } >,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    },
-    descriptions:  Array< {
-      __typename: "Description",
-      locale: Locale,
-      title: string,
-      description: string | null,
-    } >,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteSpellClassMutationVariables = {
-  input: DeleteSpellClassInput,
-  condition?: ModelSpellClassConditionInput | null,
-};
-
-export type DeleteSpellClassMutation = {
-  deleteSpellClass:  {
-    __typename: "SpellClass",
-    id: string,
-    spellCategoryId: string,
-    spellCategory:  {
-      __typename: "ValueRangeValue",
-      id: string,
-      type: ValueRangeType,
-      descriptions:  Array< {
-        __typename: "Description",
-        locale: Locale,
-        title: string,
-        description: string | null,
-      } >,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    },
-    descriptions:  Array< {
-      __typename: "Description",
-      locale: Locale,
-      title: string,
-      description: string | null,
-    } >,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -7935,216 +7498,6 @@ export type DeleteMagicalItemAssignmentMutation = {
   } | null,
 };
 
-export type SyncObjectTypesQueryVariables = {
-  filter?: ModelObjectTypeFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncObjectTypesQuery = {
-  syncObjectTypes:  {
-    __typename: "ModelObjectTypeConnection",
-    items:  Array< {
-      __typename: "ObjectType",
-      id: string,
-      name: string,
-      descriptions:  Array< {
-        __typename: "Description",
-        locale: Locale,
-        title: string,
-        description: string | null,
-      } >,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null > | null,
-    nextToken: string | null,
-    startedAt: number | null,
-  } | null,
-};
-
-export type GetObjectTypeQueryVariables = {
-  id: string,
-};
-
-export type GetObjectTypeQuery = {
-  getObjectType:  {
-    __typename: "ObjectType",
-    id: string,
-    name: string,
-    descriptions:  Array< {
-      __typename: "Description",
-      locale: Locale,
-      title: string,
-      description: string | null,
-    } >,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListObjectTypesQueryVariables = {
-  filter?: ModelObjectTypeFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListObjectTypesQuery = {
-  listObjectTypes:  {
-    __typename: "ModelObjectTypeConnection",
-    items:  Array< {
-      __typename: "ObjectType",
-      id: string,
-      name: string,
-      descriptions:  Array< {
-        __typename: "Description",
-        locale: Locale,
-        title: string,
-        description: string | null,
-      } >,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null > | null,
-    nextToken: string | null,
-    startedAt: number | null,
-  } | null,
-};
-
-export type SyncObjectDescriptionsQueryVariables = {
-  filter?: ModelObjectDescriptionFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncObjectDescriptionsQuery = {
-  syncObjectDescriptions:  {
-    __typename: "ModelObjectDescriptionConnection",
-    items:  Array< {
-      __typename: "ObjectDescription",
-      id: string,
-      objectTypeId: string,
-      type:  {
-        __typename: "ObjectType",
-        id: string,
-        name: string,
-        descriptions:  Array< {
-          __typename: "Description",
-          locale: Locale,
-          title: string,
-          description: string | null,
-        } >,
-        _version: number,
-        _deleted: boolean | null,
-        _lastChangedAt: number,
-        createdAt: string,
-        updatedAt: string,
-      },
-      objectId: string,
-      locale: Locale,
-      title: string,
-      description: string | null,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null > | null,
-    nextToken: string | null,
-    startedAt: number | null,
-  } | null,
-};
-
-export type GetObjectDescriptionQueryVariables = {
-  id: string,
-};
-
-export type GetObjectDescriptionQuery = {
-  getObjectDescription:  {
-    __typename: "ObjectDescription",
-    id: string,
-    objectTypeId: string,
-    type:  {
-      __typename: "ObjectType",
-      id: string,
-      name: string,
-      descriptions:  Array< {
-        __typename: "Description",
-        locale: Locale,
-        title: string,
-        description: string | null,
-      } >,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    },
-    objectId: string,
-    locale: Locale,
-    title: string,
-    description: string | null,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListObjectDescriptionsQueryVariables = {
-  filter?: ModelObjectDescriptionFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListObjectDescriptionsQuery = {
-  listObjectDescriptions:  {
-    __typename: "ModelObjectDescriptionConnection",
-    items:  Array< {
-      __typename: "ObjectDescription",
-      id: string,
-      objectTypeId: string,
-      type:  {
-        __typename: "ObjectType",
-        id: string,
-        name: string,
-        descriptions:  Array< {
-          __typename: "Description",
-          locale: Locale,
-          title: string,
-          description: string | null,
-        } >,
-        _version: number,
-        _deleted: boolean | null,
-        _lastChangedAt: number,
-        createdAt: string,
-        updatedAt: string,
-      },
-      objectId: string,
-      locale: Locale,
-      title: string,
-      description: string | null,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null > | null,
-    nextToken: string | null,
-    startedAt: number | null,
-  } | null,
-};
-
 export type SyncDiceQueryVariables = {
   filter?: ModelDieFilterInput | null,
   limit?: number | null,
@@ -8731,138 +8084,6 @@ export type ListPsiSchoolsQuery = {
       } >,
       basePsiPoints: number,
       psiPointsPerLevel: number,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null > | null,
-    nextToken: string | null,
-    startedAt: number | null,
-  } | null,
-};
-
-export type SyncSpellClassesQueryVariables = {
-  filter?: ModelSpellClassFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncSpellClassesQuery = {
-  syncSpellClasses:  {
-    __typename: "ModelSpellClassConnection",
-    items:  Array< {
-      __typename: "SpellClass",
-      id: string,
-      spellCategoryId: string,
-      spellCategory:  {
-        __typename: "ValueRangeValue",
-        id: string,
-        type: ValueRangeType,
-        descriptions:  Array< {
-          __typename: "Description",
-          locale: Locale,
-          title: string,
-          description: string | null,
-        } >,
-        _version: number,
-        _deleted: boolean | null,
-        _lastChangedAt: number,
-        createdAt: string,
-        updatedAt: string,
-      },
-      descriptions:  Array< {
-        __typename: "Description",
-        locale: Locale,
-        title: string,
-        description: string | null,
-      } >,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null > | null,
-    nextToken: string | null,
-    startedAt: number | null,
-  } | null,
-};
-
-export type GetSpellClassQueryVariables = {
-  id: string,
-};
-
-export type GetSpellClassQuery = {
-  getSpellClass:  {
-    __typename: "SpellClass",
-    id: string,
-    spellCategoryId: string,
-    spellCategory:  {
-      __typename: "ValueRangeValue",
-      id: string,
-      type: ValueRangeType,
-      descriptions:  Array< {
-        __typename: "Description",
-        locale: Locale,
-        title: string,
-        description: string | null,
-      } >,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    },
-    descriptions:  Array< {
-      __typename: "Description",
-      locale: Locale,
-      title: string,
-      description: string | null,
-    } >,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListSpellClasssQueryVariables = {
-  filter?: ModelSpellClassFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListSpellClasssQuery = {
-  listSpellClasss:  {
-    __typename: "ModelSpellClassConnection",
-    items:  Array< {
-      __typename: "SpellClass",
-      id: string,
-      spellCategoryId: string,
-      spellCategory:  {
-        __typename: "ValueRangeValue",
-        id: string,
-        type: ValueRangeType,
-        descriptions:  Array< {
-          __typename: "Description",
-          locale: Locale,
-          title: string,
-          description: string | null,
-        } >,
-        _version: number,
-        _deleted: boolean | null,
-        _lastChangedAt: number,
-        createdAt: string,
-        updatedAt: string,
-      },
-      descriptions:  Array< {
-        __typename: "Description",
-        locale: Locale,
-        title: string,
-        description: string | null,
-      } >,
       _version: number,
       _deleted: boolean | null,
       _lastChangedAt: number,
@@ -14199,131 +13420,6 @@ export type ListMagicalItemAssignmentsQuery = {
   } | null,
 };
 
-export type GetObjectTypeByNameQueryVariables = {
-  name?: string | null,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelObjectTypeFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type GetObjectTypeByNameQuery = {
-  getObjectTypeByName:  {
-    __typename: "ModelObjectTypeConnection",
-    items:  Array< {
-      __typename: "ObjectType",
-      id: string,
-      name: string,
-      descriptions:  Array< {
-        __typename: "Description",
-        locale: Locale,
-        title: string,
-        description: string | null,
-      } >,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null > | null,
-    nextToken: string | null,
-    startedAt: number | null,
-  } | null,
-};
-
-export type ListObjectDescriptionsByTitleQueryVariables = {
-  locale?: Locale | null,
-  title?: ModelStringKeyConditionInput | null,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelObjectDescriptionFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListObjectDescriptionsByTitleQuery = {
-  listObjectDescriptionsByTitle:  {
-    __typename: "ModelObjectDescriptionConnection",
-    items:  Array< {
-      __typename: "ObjectDescription",
-      id: string,
-      objectTypeId: string,
-      type:  {
-        __typename: "ObjectType",
-        id: string,
-        name: string,
-        descriptions:  Array< {
-          __typename: "Description",
-          locale: Locale,
-          title: string,
-          description: string | null,
-        } >,
-        _version: number,
-        _deleted: boolean | null,
-        _lastChangedAt: number,
-        createdAt: string,
-        updatedAt: string,
-      },
-      objectId: string,
-      locale: Locale,
-      title: string,
-      description: string | null,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null > | null,
-    nextToken: string | null,
-    startedAt: number | null,
-  } | null,
-};
-
-export type GetObjectDescriptionsByObjectIdQueryVariables = {
-  objectId?: string | null,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelObjectDescriptionFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type GetObjectDescriptionsByObjectIdQuery = {
-  getObjectDescriptionsByObjectId:  {
-    __typename: "ModelObjectDescriptionConnection",
-    items:  Array< {
-      __typename: "ObjectDescription",
-      id: string,
-      objectTypeId: string,
-      type:  {
-        __typename: "ObjectType",
-        id: string,
-        name: string,
-        descriptions:  Array< {
-          __typename: "Description",
-          locale: Locale,
-          title: string,
-          description: string | null,
-        } >,
-        _version: number,
-        _deleted: boolean | null,
-        _lastChangedAt: number,
-        createdAt: string,
-        updatedAt: string,
-      },
-      objectId: string,
-      locale: Locale,
-      title: string,
-      description: string | null,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null > | null,
-    nextToken: string | null,
-    startedAt: number | null,
-  } | null,
-};
-
 export type ListValueRangeValuesByTypeQueryVariables = {
   type?: ValueRangeType | null,
   id?: ModelIDKeyConditionInput | null,
@@ -14403,210 +13499,6 @@ export type ListClassesByMainClassQuery = {
     } | null > | null,
     nextToken: string | null,
     startedAt: number | null,
-  } | null,
-};
-
-export type ListSpellClassesByCategoryQueryVariables = {
-  spellCategoryId?: string | null,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelSpellClassFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListSpellClassesByCategoryQuery = {
-  listSpellClassesByCategory:  {
-    __typename: "ModelSpellClassConnection",
-    items:  Array< {
-      __typename: "SpellClass",
-      id: string,
-      spellCategoryId: string,
-      spellCategory:  {
-        __typename: "ValueRangeValue",
-        id: string,
-        type: ValueRangeType,
-        descriptions:  Array< {
-          __typename: "Description",
-          locale: Locale,
-          title: string,
-          description: string | null,
-        } >,
-        _version: number,
-        _deleted: boolean | null,
-        _lastChangedAt: number,
-        createdAt: string,
-        updatedAt: string,
-      },
-      descriptions:  Array< {
-        __typename: "Description",
-        locale: Locale,
-        title: string,
-        description: string | null,
-      } >,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null > | null,
-    nextToken: string | null,
-    startedAt: number | null,
-  } | null,
-};
-
-export type OnCreateObjectTypeSubscription = {
-  onCreateObjectType:  {
-    __typename: "ObjectType",
-    id: string,
-    name: string,
-    descriptions:  Array< {
-      __typename: "Description",
-      locale: Locale,
-      title: string,
-      description: string | null,
-    } >,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdateObjectTypeSubscription = {
-  onUpdateObjectType:  {
-    __typename: "ObjectType",
-    id: string,
-    name: string,
-    descriptions:  Array< {
-      __typename: "Description",
-      locale: Locale,
-      title: string,
-      description: string | null,
-    } >,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteObjectTypeSubscription = {
-  onDeleteObjectType:  {
-    __typename: "ObjectType",
-    id: string,
-    name: string,
-    descriptions:  Array< {
-      __typename: "Description",
-      locale: Locale,
-      title: string,
-      description: string | null,
-    } >,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnCreateObjectDescriptionSubscription = {
-  onCreateObjectDescription:  {
-    __typename: "ObjectDescription",
-    id: string,
-    objectTypeId: string,
-    type:  {
-      __typename: "ObjectType",
-      id: string,
-      name: string,
-      descriptions:  Array< {
-        __typename: "Description",
-        locale: Locale,
-        title: string,
-        description: string | null,
-      } >,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    },
-    objectId: string,
-    locale: Locale,
-    title: string,
-    description: string | null,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdateObjectDescriptionSubscription = {
-  onUpdateObjectDescription:  {
-    __typename: "ObjectDescription",
-    id: string,
-    objectTypeId: string,
-    type:  {
-      __typename: "ObjectType",
-      id: string,
-      name: string,
-      descriptions:  Array< {
-        __typename: "Description",
-        locale: Locale,
-        title: string,
-        description: string | null,
-      } >,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    },
-    objectId: string,
-    locale: Locale,
-    title: string,
-    description: string | null,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteObjectDescriptionSubscription = {
-  onDeleteObjectDescription:  {
-    __typename: "ObjectDescription",
-    id: string,
-    objectTypeId: string,
-    type:  {
-      __typename: "ObjectType",
-      id: string,
-      name: string,
-      descriptions:  Array< {
-        __typename: "Description",
-        locale: Locale,
-        title: string,
-        description: string | null,
-      } >,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    },
-    objectId: string,
-    locale: Locale,
-    title: string,
-    description: string | null,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -15037,111 +13929,6 @@ export type OnDeletePsiSchoolSubscription = {
     } >,
     basePsiPoints: number,
     psiPointsPerLevel: number,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnCreateSpellClassSubscription = {
-  onCreateSpellClass:  {
-    __typename: "SpellClass",
-    id: string,
-    spellCategoryId: string,
-    spellCategory:  {
-      __typename: "ValueRangeValue",
-      id: string,
-      type: ValueRangeType,
-      descriptions:  Array< {
-        __typename: "Description",
-        locale: Locale,
-        title: string,
-        description: string | null,
-      } >,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    },
-    descriptions:  Array< {
-      __typename: "Description",
-      locale: Locale,
-      title: string,
-      description: string | null,
-    } >,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdateSpellClassSubscription = {
-  onUpdateSpellClass:  {
-    __typename: "SpellClass",
-    id: string,
-    spellCategoryId: string,
-    spellCategory:  {
-      __typename: "ValueRangeValue",
-      id: string,
-      type: ValueRangeType,
-      descriptions:  Array< {
-        __typename: "Description",
-        locale: Locale,
-        title: string,
-        description: string | null,
-      } >,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    },
-    descriptions:  Array< {
-      __typename: "Description",
-      locale: Locale,
-      title: string,
-      description: string | null,
-    } >,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteSpellClassSubscription = {
-  onDeleteSpellClass:  {
-    __typename: "SpellClass",
-    id: string,
-    spellCategoryId: string,
-    spellCategory:  {
-      __typename: "ValueRangeValue",
-      id: string,
-      type: ValueRangeType,
-      descriptions:  Array< {
-        __typename: "Description",
-        locale: Locale,
-        title: string,
-        description: string | null,
-      } >,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    },
-    descriptions:  Array< {
-      __typename: "Description",
-      locale: Locale,
-      title: string,
-      description: string | null,
-    } >,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,

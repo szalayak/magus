@@ -1,0 +1,40 @@
+<template>
+  <v-navigation-drawer v-model="navDrawerOpen" absolute temporary>
+    <v-list nav dense>
+      <v-list-item to="/">
+        <v-list-item-icon>
+          <v-icon>mdi-home</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title>
+          Home
+        </v-list-item-title>
+      </v-list-item>
+      <v-list-item to="/about">
+        <v-list-item-icon>
+          <v-icon>mdi-information</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title>
+          About
+        </v-list-item-title>
+      </v-list-item>
+    </v-list>
+  </v-navigation-drawer>
+</template>
+<script lang="ts">
+import Vue from "vue";
+import { mapMutations, mapState } from "vuex";
+export default Vue.extend({
+  computed: {
+    ...mapState(["app"]),
+    navDrawerOpen: {
+      get() {
+        return this.app.navDrawerOpen;
+      },
+      set(value) {
+        this.toggleNavDrawer(value);
+      }
+    }
+  },
+  methods: mapMutations(["toggleNavDrawer"])
+});
+</script>
