@@ -18,6 +18,11 @@ export const syncObjectTypes = /* GraphQL */ `
       items {
         id
         name
+        descriptions {
+          locale
+          title
+          description
+        }
         _version
         _deleted
         _lastChangedAt
@@ -57,6 +62,11 @@ export const listObjectTypes = /* GraphQL */ `
       items {
         id
         name
+        descriptions {
+          locale
+          title
+          description
+        }
         _version
         _deleted
         _lastChangedAt
@@ -84,6 +94,20 @@ export const syncObjectDescriptions = /* GraphQL */ `
       items {
         id
         objectTypeId
+        type {
+          id
+          name
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
         objectId
         locale
         title
@@ -107,6 +131,11 @@ export const getObjectDescription = /* GraphQL */ `
       type {
         id
         name
+        descriptions {
+          locale
+          title
+          description
+        }
         _version
         _deleted
         _lastChangedAt
@@ -139,6 +168,20 @@ export const listObjectDescriptions = /* GraphQL */ `
       items {
         id
         objectTypeId
+        type {
+          id
+          name
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
         objectId
         locale
         title
@@ -169,6 +212,11 @@ export const syncDice = /* GraphQL */ `
     ) {
       items {
         id
+        descriptions {
+          locale
+          title
+          description
+        }
         minValue
         maxValue
         _version
@@ -210,6 +258,11 @@ export const listDies = /* GraphQL */ `
     listDies(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        descriptions {
+          locale
+          title
+          description
+        }
         minValue
         maxValue
         _version
@@ -239,6 +292,21 @@ export const syncThrowScenarios = /* GraphQL */ `
       items {
         id
         dieId
+        die {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          minValue
+          maxValue
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
         iterationCount
         modifier
         _version
@@ -259,6 +327,11 @@ export const getThrowScenario = /* GraphQL */ `
       dieId
       die {
         id
+        descriptions {
+          locale
+          title
+          description
+        }
         minValue
         maxValue
         _version
@@ -287,6 +360,21 @@ export const listThrowScenarios = /* GraphQL */ `
       items {
         id
         dieId
+        die {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          minValue
+          maxValue
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
         iterationCount
         modifier
         _version
@@ -316,6 +404,11 @@ export const syncValueRangeValues = /* GraphQL */ `
       items {
         id
         type
+        descriptions {
+          locale
+          title
+          description
+        }
         _version
         _deleted
         _lastChangedAt
@@ -359,6 +452,11 @@ export const listValueRangeValues = /* GraphQL */ `
       items {
         id
         type
+        descriptions {
+          locale
+          title
+          description
+        }
         _version
         _deleted
         _lastChangedAt
@@ -386,6 +484,25 @@ export const syncClasses = /* GraphQL */ `
       items {
         id
         mainClassId
+        mainClass {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        descriptions {
+          locale
+          title
+          description
+        }
         magicUser
         _version
         _deleted
@@ -406,6 +523,11 @@ export const getClass = /* GraphQL */ `
       mainClass {
         id
         type
+        descriptions {
+          locale
+          title
+          description
+        }
         _version
         _deleted
         _lastChangedAt
@@ -436,6 +558,25 @@ export const listClasss = /* GraphQL */ `
       items {
         id
         mainClassId
+        mainClass {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        descriptions {
+          locale
+          title
+          description
+        }
         magicUser
         _version
         _deleted
@@ -463,6 +604,11 @@ export const syncRaces = /* GraphQL */ `
     ) {
       items {
         id
+        descriptions {
+          locale
+          title
+          description
+        }
         _version
         _deleted
         _lastChangedAt
@@ -500,6 +646,11 @@ export const listRaces = /* GraphQL */ `
     listRaces(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        descriptions {
+          locale
+          title
+          description
+        }
         _version
         _deleted
         _lastChangedAt
@@ -526,6 +677,11 @@ export const syncPsiSchools = /* GraphQL */ `
     ) {
       items {
         id
+        descriptions {
+          locale
+          title
+          description
+        }
         basePsiPoints
         psiPointsPerLevel
         _version
@@ -567,6 +723,11 @@ export const listPsiSchools = /* GraphQL */ `
     listPsiSchools(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        descriptions {
+          locale
+          title
+          description
+        }
         basePsiPoints
         psiPointsPerLevel
         _version
@@ -596,6 +757,25 @@ export const syncSpellClasses = /* GraphQL */ `
       items {
         id
         spellCategoryId
+        spellCategory {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        descriptions {
+          locale
+          title
+          description
+        }
         _version
         _deleted
         _lastChangedAt
@@ -615,6 +795,11 @@ export const getSpellClass = /* GraphQL */ `
       spellCategory {
         id
         type
+        descriptions {
+          locale
+          title
+          description
+        }
         _version
         _deleted
         _lastChangedAt
@@ -644,6 +829,25 @@ export const listSpellClasss = /* GraphQL */ `
       items {
         id
         spellCategoryId
+        spellCategory {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        descriptions {
+          locale
+          title
+          description
+        }
         _version
         _deleted
         _lastChangedAt
@@ -670,6 +874,11 @@ export const syncArmours = /* GraphQL */ `
     ) {
       items {
         id
+        descriptions {
+          locale
+          title
+          description
+        }
         weight
         movementPreventionValue
         damageReductionValue
@@ -715,6 +924,11 @@ export const listArmours = /* GraphQL */ `
     listArmours(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        descriptions {
+          locale
+          title
+          description
+        }
         weight
         movementPreventionValue
         damageReductionValue
@@ -745,7 +959,44 @@ export const syncShields = /* GraphQL */ `
     ) {
       items {
         id
+        descriptions {
+          locale
+          title
+          description
+        }
+        combatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
         weight
+        damage {
+          id
+          dieId
+          die {
+            id
+            descriptions {
+              locale
+              title
+              description
+            }
+            minValue
+            maxValue
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          iterationCount
+          modifier
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
         _version
         _deleted
         _lastChangedAt
@@ -776,6 +1027,21 @@ export const getShield = /* GraphQL */ `
       damage {
         id
         dieId
+        die {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          minValue
+          maxValue
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
         iterationCount
         modifier
         _version
@@ -801,7 +1067,44 @@ export const listShields = /* GraphQL */ `
     listShields(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        descriptions {
+          locale
+          title
+          description
+        }
+        combatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
         weight
+        damage {
+          id
+          dieId
+          die {
+            id
+            descriptions {
+              locale
+              title
+              description
+            }
+            minValue
+            maxValue
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          iterationCount
+          modifier
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
         _version
         _deleted
         _lastChangedAt
@@ -828,12 +1131,63 @@ export const syncWeapons = /* GraphQL */ `
     ) {
       items {
         id
-        ranged
+        descriptions {
+          locale
+          title
+          description
+        }
         weaponTypeId
+        weaponType {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
         weight
         price
         attackRange
+        combatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        damage {
+          id
+          dieId
+          die {
+            id
+            descriptions {
+              locale
+              title
+              description
+            }
+            minValue
+            maxValue
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          iterationCount
+          modifier
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
         attacksPerTurn
+        ranged
         _version
         _deleted
         _lastChangedAt
@@ -854,11 +1208,15 @@ export const getWeapon = /* GraphQL */ `
         title
         description
       }
-      ranged
       weaponTypeId
       weaponType {
         id
         type
+        descriptions {
+          locale
+          title
+          description
+        }
         _version
         _deleted
         _lastChangedAt
@@ -877,6 +1235,21 @@ export const getWeapon = /* GraphQL */ `
       damage {
         id
         dieId
+        die {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          minValue
+          maxValue
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
         iterationCount
         modifier
         _version
@@ -886,6 +1259,7 @@ export const getWeapon = /* GraphQL */ `
         updatedAt
       }
       attacksPerTurn
+      ranged
       _version
       _deleted
       _lastChangedAt
@@ -903,12 +1277,63 @@ export const listWeapons = /* GraphQL */ `
     listWeapons(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        ranged
+        descriptions {
+          locale
+          title
+          description
+        }
         weaponTypeId
+        weaponType {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
         weight
         price
         attackRange
+        combatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        damage {
+          id
+          dieId
+          die {
+            id
+            descriptions {
+              locale
+              title
+              description
+            }
+            minValue
+            maxValue
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          iterationCount
+          modifier
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
         attacksPerTurn
+        ranged
         _version
         _deleted
         _lastChangedAt
@@ -935,8 +1360,27 @@ export const syncSkills = /* GraphQL */ `
     ) {
       items {
         id
+        descriptions {
+          locale
+          title
+          description
+        }
         percentageSkill
         skillGroupId
+        skillGroup {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
         basicCost
         masterCost
         _version
@@ -964,6 +1408,11 @@ export const getSkill = /* GraphQL */ `
       skillGroup {
         id
         type
+        descriptions {
+          locale
+          title
+          description
+        }
         _version
         _deleted
         _lastChangedAt
@@ -989,8 +1438,27 @@ export const listSkills = /* GraphQL */ `
     listSkills(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        descriptions {
+          locale
+          title
+          description
+        }
         percentageSkill
         skillGroupId
+        skillGroup {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
         basicCost
         masterCost
         _version
@@ -1019,6 +1487,40 @@ export const syncMagicalItems = /* GraphQL */ `
     ) {
       items {
         id
+        descriptions {
+          locale
+          title
+          description
+        }
+        class {
+          id
+          mainClassId
+          mainClass {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          descriptions {
+            locale
+            title
+            description
+          }
+          magicUser
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
         manaCost
         duration
         price
@@ -1045,6 +1547,25 @@ export const getMagicalItem = /* GraphQL */ `
       class {
         id
         mainClassId
+        mainClass {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        descriptions {
+          locale
+          title
+          description
+        }
         magicUser
         _version
         _deleted
@@ -1072,6 +1593,40 @@ export const listMagicalItems = /* GraphQL */ `
     listMagicalItems(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        descriptions {
+          locale
+          title
+          description
+        }
+        class {
+          id
+          mainClassId
+          mainClass {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          descriptions {
+            locale
+            title
+            description
+          }
+          magicUser
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
         manaCost
         duration
         price
@@ -1102,6 +1657,21 @@ export const syncThrows = /* GraphQL */ `
       items {
         id
         dieId
+        die {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          minValue
+          maxValue
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
         iterationCount
         modifier
         throwResults
@@ -1126,6 +1696,11 @@ export const getThrow = /* GraphQL */ `
       dieId
       die {
         id
+        descriptions {
+          locale
+          title
+          description
+        }
         minValue
         maxValue
         _version
@@ -1158,6 +1733,21 @@ export const listThrows = /* GraphQL */ `
       items {
         id
         dieId
+        die {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          minValue
+          maxValue
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
         iterationCount
         modifier
         throwResults
@@ -1194,16 +1784,404 @@ export const syncPlayerCharacters = /* GraphQL */ `
         startDate
         dungeonMasters
         owner
+        basicInfo {
+          image {
+            bucket
+            region
+            key
+          }
+          sex
+          height
+          weight
+          hair
+          eyes
+          age
+          visibleAge
+          family
+          attire
+          personalityTraits
+          specialAbilities
+          likes
+          dislikes
+          fears
+          companions
+          fame
+          religion
+          country
+          school
+          holySymbol {
+            bucket
+            region
+            key
+          }
+          coatOfArms {
+            bucket
+            region
+            key
+          }
+        }
+        abilities {
+          strength
+          agility
+          dexterity
+          stamina
+          health
+          beauty
+          intelligence
+          willpower
+          astral
+        }
+        currentAbilities {
+          strength
+          agility
+          dexterity
+          stamina
+          health
+          beauty
+          intelligence
+          willpower
+          astral
+        }
+        health {
+          vitality {
+            current
+            max
+          }
+          baseVitality
+          hitPoints {
+            current
+            max
+          }
+          baseHitPoints
+          hitPointsPerLevel
+        }
+        class {
+          id
+          mainClassId
+          mainClass {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          descriptions {
+            locale
+            title
+            description
+          }
+          magicUser
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
         subclass
         specialisation
-        religion
-        country
-        school
+        race {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        personality {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        level {
+          currentLevel
+          currentExperience
+          experienceForNextLevel
+        }
         psiUser
+        psiSchool {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          basePsiPoints
+          psiPointsPerLevel
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        psiMastery
+        psiPoints {
+          current
+          max
+        }
+        spellResistance {
+          astral {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+          mental {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+        }
         magicUser
+        magicalAbility {
+          manaPoints {
+            current
+            max
+          }
+          manaPointsPerLevel
+          modifiers
+          manaPointsStoredElsehwere
+          rechargingMethod
+        }
+        baseCombatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        spentCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        otherCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        temporaryCombatValuesModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
         combatValueModifiersPerLevel
         mandatoryCombatValueModifierDistribution
+        wallet {
+          money
+          mithrill
+          gemstones
+          misc
+        }
+        languages {
+          language
+          level
+        }
+        inventory {
+          name
+          amount
+          location
+        }
+        poisons {
+          name
+          amount
+        }
         notes
+        weapons {
+          items {
+            id
+            characterId
+            custom
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            descriptions {
+              locale
+              title
+              description
+            }
+            weight
+            price
+            attackRange
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              id
+              dieId
+              iterationCount
+              modifier
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            ranged
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        skills {
+          items {
+            id
+            characterId
+            skillId
+            skill {
+              id
+              percentageSkill
+              skillGroupId
+              basicCost
+              masterCost
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            mastery
+            percentageValue
+            skillPointsUsed
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        companions {
+          items {
+            id
+            characterId
+            name
+            type
+            health {
+              baseVitality
+              baseHitPoints
+              hitPointsPerLevel
+            }
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              id
+              dieId
+              iterationCount
+              modifier
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            maxDistance
+            maxLoad
+            badHabit
+            specialAbilities
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        magicalItems {
+          items {
+            id
+            characterId
+            magicalItemId
+            magicalItem {
+              id
+              manaCost
+              duration
+              price
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            location
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
         _version
         _deleted
         _lastChangedAt
@@ -1224,6 +2202,11 @@ export const getPlayerCharacter = /* GraphQL */ `
       dungeonMasters
       owner
       basicInfo {
+        image {
+          bucket
+          region
+          key
+        }
         sex
         height
         weight
@@ -1240,6 +2223,19 @@ export const getPlayerCharacter = /* GraphQL */ `
         fears
         companions
         fame
+        religion
+        country
+        school
+        holySymbol {
+          bucket
+          region
+          key
+        }
+        coatOfArms {
+          bucket
+          region
+          key
+        }
       }
       abilities {
         strength
@@ -1252,14 +2248,52 @@ export const getPlayerCharacter = /* GraphQL */ `
         willpower
         astral
       }
+      currentAbilities {
+        strength
+        agility
+        dexterity
+        stamina
+        health
+        beauty
+        intelligence
+        willpower
+        astral
+      }
       health {
+        vitality {
+          current
+          max
+        }
         baseVitality
+        hitPoints {
+          current
+          max
+        }
         baseHitPoints
         hitPointsPerLevel
       }
       class {
         id
         mainClassId
+        mainClass {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        descriptions {
+          locale
+          title
+          description
+        }
         magicUser
         _version
         _deleted
@@ -1271,6 +2305,11 @@ export const getPlayerCharacter = /* GraphQL */ `
       specialisation
       race {
         id
+        descriptions {
+          locale
+          title
+          description
+        }
         _version
         _deleted
         _lastChangedAt
@@ -1280,15 +2319,17 @@ export const getPlayerCharacter = /* GraphQL */ `
       personality {
         id
         type
+        descriptions {
+          locale
+          title
+          description
+        }
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
       }
-      religion
-      country
-      school
       level {
         currentLevel
         currentExperience
@@ -1297,6 +2338,11 @@ export const getPlayerCharacter = /* GraphQL */ `
       psiUser
       psiSchool {
         id
+        descriptions {
+          locale
+          title
+          description
+        }
         basePsiPoints
         psiPointsPerLevel
         _version
@@ -1305,35 +2351,37 @@ export const getPlayerCharacter = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      psiMastery {
-        id
-        type
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
+      psiMastery
       psiPoints {
         current
         max
       }
+      spellResistance {
+        astral {
+          staticShield
+          dynamicShield
+          innate
+          magical
+          modifier
+        }
+        mental {
+          staticShield
+          dynamicShield
+          innate
+          magical
+          modifier
+        }
+      }
       magicUser
       magicalAbility {
+        manaPoints {
+          current
+          max
+        }
         manaPointsPerLevel
         modifiers
         manaPointsStoredElsehwere
         rechargingMethod
-      }
-      holySymbol {
-        bucket
-        region
-        key
-      }
-      coatOfArms {
-        bucket
-        region
-        key
       }
       baseCombatValues {
         initiation
@@ -1353,8 +2401,20 @@ export const getPlayerCharacter = /* GraphQL */ `
         defence
         aiming
       }
+      temporaryCombatValuesModifiers {
+        initiation
+        offence
+        defence
+        aiming
+      }
       combatValueModifiersPerLevel
       mandatoryCombatValueModifierDistribution
+      wallet {
+        money
+        mithrill
+        gemstones
+        misc
+      }
       languages {
         language
         level
@@ -1364,7 +2424,300 @@ export const getPlayerCharacter = /* GraphQL */ `
         amount
         location
       }
+      poisons {
+        name
+        amount
+      }
       notes
+      weapons {
+        items {
+          id
+          characterId
+          custom
+          weapon {
+            id
+            descriptions {
+              locale
+              title
+              description
+            }
+            weaponTypeId
+            weaponType {
+              id
+              type
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            weight
+            price
+            attackRange
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              id
+              dieId
+              iterationCount
+              modifier
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            ranged
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          descriptions {
+            locale
+            title
+            description
+          }
+          weight
+          price
+          attackRange
+          combatValues {
+            initiation
+            offence
+            defence
+            aiming
+          }
+          damage {
+            id
+            dieId
+            die {
+              id
+              minValue
+              maxValue
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            iterationCount
+            modifier
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          attacksPerTurn
+          ranged
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      skills {
+        items {
+          id
+          characterId
+          skillId
+          skill {
+            id
+            descriptions {
+              locale
+              title
+              description
+            }
+            percentageSkill
+            skillGroupId
+            skillGroup {
+              id
+              type
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            basicCost
+            masterCost
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          mastery
+          percentageValue
+          skillPointsUsed
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      companions {
+        items {
+          id
+          characterId
+          name
+          type
+          health {
+            vitality {
+              current
+              max
+            }
+            baseVitality
+            hitPoints {
+              current
+              max
+            }
+            baseHitPoints
+            hitPointsPerLevel
+          }
+          combatValues {
+            initiation
+            offence
+            defence
+            aiming
+          }
+          damage {
+            id
+            dieId
+            die {
+              id
+              minValue
+              maxValue
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            iterationCount
+            modifier
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          weapon {
+            id
+            descriptions {
+              locale
+              title
+              description
+            }
+            weaponTypeId
+            weaponType {
+              id
+              type
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            weight
+            price
+            attackRange
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              id
+              dieId
+              iterationCount
+              modifier
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            ranged
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          attacksPerTurn
+          maxDistance
+          maxLoad
+          badHabit
+          specialAbilities
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      magicalItems {
+        items {
+          id
+          characterId
+          magicalItemId
+          magicalItem {
+            id
+            descriptions {
+              locale
+              title
+              description
+            }
+            class {
+              id
+              mainClassId
+              magicUser
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            manaCost
+            duration
+            price
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          location
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
       _version
       _deleted
       _lastChangedAt
@@ -1390,21 +2743,2893 @@ export const listPlayerCharacters = /* GraphQL */ `
         startDate
         dungeonMasters
         owner
+        basicInfo {
+          image {
+            bucket
+            region
+            key
+          }
+          sex
+          height
+          weight
+          hair
+          eyes
+          age
+          visibleAge
+          family
+          attire
+          personalityTraits
+          specialAbilities
+          likes
+          dislikes
+          fears
+          companions
+          fame
+          religion
+          country
+          school
+          holySymbol {
+            bucket
+            region
+            key
+          }
+          coatOfArms {
+            bucket
+            region
+            key
+          }
+        }
+        abilities {
+          strength
+          agility
+          dexterity
+          stamina
+          health
+          beauty
+          intelligence
+          willpower
+          astral
+        }
+        currentAbilities {
+          strength
+          agility
+          dexterity
+          stamina
+          health
+          beauty
+          intelligence
+          willpower
+          astral
+        }
+        health {
+          vitality {
+            current
+            max
+          }
+          baseVitality
+          hitPoints {
+            current
+            max
+          }
+          baseHitPoints
+          hitPointsPerLevel
+        }
+        class {
+          id
+          mainClassId
+          mainClass {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          descriptions {
+            locale
+            title
+            description
+          }
+          magicUser
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
         subclass
         specialisation
-        religion
-        country
-        school
+        race {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        personality {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        level {
+          currentLevel
+          currentExperience
+          experienceForNextLevel
+        }
         psiUser
+        psiSchool {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          basePsiPoints
+          psiPointsPerLevel
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        psiMastery
+        psiPoints {
+          current
+          max
+        }
+        spellResistance {
+          astral {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+          mental {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+        }
         magicUser
+        magicalAbility {
+          manaPoints {
+            current
+            max
+          }
+          manaPointsPerLevel
+          modifiers
+          manaPointsStoredElsehwere
+          rechargingMethod
+        }
+        baseCombatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        spentCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        otherCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        temporaryCombatValuesModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
         combatValueModifiersPerLevel
         mandatoryCombatValueModifierDistribution
+        wallet {
+          money
+          mithrill
+          gemstones
+          misc
+        }
+        languages {
+          language
+          level
+        }
+        inventory {
+          name
+          amount
+          location
+        }
+        poisons {
+          name
+          amount
+        }
         notes
+        weapons {
+          items {
+            id
+            characterId
+            custom
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            descriptions {
+              locale
+              title
+              description
+            }
+            weight
+            price
+            attackRange
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              id
+              dieId
+              iterationCount
+              modifier
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            ranged
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        skills {
+          items {
+            id
+            characterId
+            skillId
+            skill {
+              id
+              percentageSkill
+              skillGroupId
+              basicCost
+              masterCost
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            mastery
+            percentageValue
+            skillPointsUsed
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        companions {
+          items {
+            id
+            characterId
+            name
+            type
+            health {
+              baseVitality
+              baseHitPoints
+              hitPointsPerLevel
+            }
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              id
+              dieId
+              iterationCount
+              modifier
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            maxDistance
+            maxLoad
+            badHabit
+            specialAbilities
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        magicalItems {
+          items {
+            id
+            characterId
+            magicalItemId
+            magicalItem {
+              id
+              manaCost
+              duration
+              price
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            location
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncNonPlayerCharacters = /* GraphQL */ `
+  query SyncNonPlayerCharacters(
+    $filter: ModelNonPlayerCharacterFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncNonPlayerCharacters(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        name
+        owner
+        basicInfo {
+          image {
+            bucket
+            region
+            key
+          }
+          sex
+          height
+          weight
+          hair
+          eyes
+          age
+          visibleAge
+          family
+          attire
+          personalityTraits
+          specialAbilities
+          likes
+          dislikes
+          fears
+          companions
+          fame
+          religion
+          country
+          school
+          holySymbol {
+            bucket
+            region
+            key
+          }
+          coatOfArms {
+            bucket
+            region
+            key
+          }
+        }
+        abilities {
+          strength
+          agility
+          dexterity
+          stamina
+          health
+          beauty
+          intelligence
+          willpower
+          astral
+        }
+        currentAbilities {
+          strength
+          agility
+          dexterity
+          stamina
+          health
+          beauty
+          intelligence
+          willpower
+          astral
+        }
+        health {
+          vitality {
+            current
+            max
+          }
+          baseVitality
+          hitPoints {
+            current
+            max
+          }
+          baseHitPoints
+          hitPointsPerLevel
+        }
+        class {
+          id
+          mainClassId
+          mainClass {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          descriptions {
+            locale
+            title
+            description
+          }
+          magicUser
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        subclass
+        specialisation
+        race {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        personality {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        level {
+          currentLevel
+          currentExperience
+          experienceForNextLevel
+        }
+        psiUser
+        psiSchool {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          basePsiPoints
+          psiPointsPerLevel
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        psiMastery
+        psiPoints {
+          current
+          max
+        }
+        spellResistance {
+          astral {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+          mental {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+        }
+        magicUser
+        magicalAbility {
+          manaPoints {
+            current
+            max
+          }
+          manaPointsPerLevel
+          modifiers
+          manaPointsStoredElsehwere
+          rechargingMethod
+        }
+        combatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        wallet {
+          money
+          mithrill
+          gemstones
+          misc
+        }
+        languages {
+          language
+          level
+        }
+        inventory {
+          name
+          amount
+          location
+        }
+        poisons {
+          name
+          amount
+        }
+        notes
+        weapons {
+          items {
+            id
+            characterId
+            custom
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            descriptions {
+              locale
+              title
+              description
+            }
+            weight
+            price
+            attackRange
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              id
+              dieId
+              iterationCount
+              modifier
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            ranged
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        skills {
+          items {
+            id
+            characterId
+            skillId
+            skill {
+              id
+              percentageSkill
+              skillGroupId
+              basicCost
+              masterCost
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            mastery
+            percentageValue
+            skillPointsUsed
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        companions {
+          items {
+            id
+            characterId
+            name
+            type
+            health {
+              baseVitality
+              baseHitPoints
+              hitPointsPerLevel
+            }
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              id
+              dieId
+              iterationCount
+              modifier
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            maxDistance
+            maxLoad
+            badHabit
+            specialAbilities
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        magicalItems {
+          items {
+            id
+            characterId
+            magicalItemId
+            magicalItem {
+              id
+              manaCost
+              duration
+              price
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            location
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getNonPlayerCharacter = /* GraphQL */ `
+  query GetNonPlayerCharacter($id: ID!) {
+    getNonPlayerCharacter(id: $id) {
+      id
+      name
+      owner
+      basicInfo {
+        image {
+          bucket
+          region
+          key
+        }
+        sex
+        height
+        weight
+        hair
+        eyes
+        age
+        visibleAge
+        family
+        attire
+        personalityTraits
+        specialAbilities
+        likes
+        dislikes
+        fears
+        companions
+        fame
+        religion
+        country
+        school
+        holySymbol {
+          bucket
+          region
+          key
+        }
+        coatOfArms {
+          bucket
+          region
+          key
+        }
+      }
+      abilities {
+        strength
+        agility
+        dexterity
+        stamina
+        health
+        beauty
+        intelligence
+        willpower
+        astral
+      }
+      currentAbilities {
+        strength
+        agility
+        dexterity
+        stamina
+        health
+        beauty
+        intelligence
+        willpower
+        astral
+      }
+      health {
+        vitality {
+          current
+          max
+        }
+        baseVitality
+        hitPoints {
+          current
+          max
+        }
+        baseHitPoints
+        hitPointsPerLevel
+      }
+      class {
+        id
+        mainClassId
+        mainClass {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        descriptions {
+          locale
+          title
+          description
+        }
+        magicUser
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      subclass
+      specialisation
+      race {
+        id
+        descriptions {
+          locale
+          title
+          description
+        }
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      personality {
+        id
+        type
+        descriptions {
+          locale
+          title
+          description
+        }
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      level {
+        currentLevel
+        currentExperience
+        experienceForNextLevel
+      }
+      psiUser
+      psiSchool {
+        id
+        descriptions {
+          locale
+          title
+          description
+        }
+        basePsiPoints
+        psiPointsPerLevel
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      psiMastery
+      psiPoints {
+        current
+        max
+      }
+      spellResistance {
+        astral {
+          staticShield
+          dynamicShield
+          innate
+          magical
+          modifier
+        }
+        mental {
+          staticShield
+          dynamicShield
+          innate
+          magical
+          modifier
+        }
+      }
+      magicUser
+      magicalAbility {
+        manaPoints {
+          current
+          max
+        }
+        manaPointsPerLevel
+        modifiers
+        manaPointsStoredElsehwere
+        rechargingMethod
+      }
+      combatValues {
+        initiation
+        offence
+        defence
+        aiming
+      }
+      wallet {
+        money
+        mithrill
+        gemstones
+        misc
+      }
+      languages {
+        language
+        level
+      }
+      inventory {
+        name
+        amount
+        location
+      }
+      poisons {
+        name
+        amount
+      }
+      notes
+      weapons {
+        items {
+          id
+          characterId
+          custom
+          weapon {
+            id
+            descriptions {
+              locale
+              title
+              description
+            }
+            weaponTypeId
+            weaponType {
+              id
+              type
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            weight
+            price
+            attackRange
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              id
+              dieId
+              iterationCount
+              modifier
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            ranged
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          descriptions {
+            locale
+            title
+            description
+          }
+          weight
+          price
+          attackRange
+          combatValues {
+            initiation
+            offence
+            defence
+            aiming
+          }
+          damage {
+            id
+            dieId
+            die {
+              id
+              minValue
+              maxValue
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            iterationCount
+            modifier
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          attacksPerTurn
+          ranged
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      skills {
+        items {
+          id
+          characterId
+          skillId
+          skill {
+            id
+            descriptions {
+              locale
+              title
+              description
+            }
+            percentageSkill
+            skillGroupId
+            skillGroup {
+              id
+              type
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            basicCost
+            masterCost
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          mastery
+          percentageValue
+          skillPointsUsed
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      companions {
+        items {
+          id
+          characterId
+          name
+          type
+          health {
+            vitality {
+              current
+              max
+            }
+            baseVitality
+            hitPoints {
+              current
+              max
+            }
+            baseHitPoints
+            hitPointsPerLevel
+          }
+          combatValues {
+            initiation
+            offence
+            defence
+            aiming
+          }
+          damage {
+            id
+            dieId
+            die {
+              id
+              minValue
+              maxValue
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            iterationCount
+            modifier
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          weapon {
+            id
+            descriptions {
+              locale
+              title
+              description
+            }
+            weaponTypeId
+            weaponType {
+              id
+              type
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            weight
+            price
+            attackRange
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              id
+              dieId
+              iterationCount
+              modifier
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            ranged
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          attacksPerTurn
+          maxDistance
+          maxLoad
+          badHabit
+          specialAbilities
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      magicalItems {
+        items {
+          id
+          characterId
+          magicalItemId
+          magicalItem {
+            id
+            descriptions {
+              locale
+              title
+              description
+            }
+            class {
+              id
+              mainClassId
+              magicUser
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            manaCost
+            duration
+            price
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          location
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listNonPlayerCharacters = /* GraphQL */ `
+  query ListNonPlayerCharacters(
+    $filter: ModelNonPlayerCharacterFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listNonPlayerCharacters(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        owner
+        basicInfo {
+          image {
+            bucket
+            region
+            key
+          }
+          sex
+          height
+          weight
+          hair
+          eyes
+          age
+          visibleAge
+          family
+          attire
+          personalityTraits
+          specialAbilities
+          likes
+          dislikes
+          fears
+          companions
+          fame
+          religion
+          country
+          school
+          holySymbol {
+            bucket
+            region
+            key
+          }
+          coatOfArms {
+            bucket
+            region
+            key
+          }
+        }
+        abilities {
+          strength
+          agility
+          dexterity
+          stamina
+          health
+          beauty
+          intelligence
+          willpower
+          astral
+        }
+        currentAbilities {
+          strength
+          agility
+          dexterity
+          stamina
+          health
+          beauty
+          intelligence
+          willpower
+          astral
+        }
+        health {
+          vitality {
+            current
+            max
+          }
+          baseVitality
+          hitPoints {
+            current
+            max
+          }
+          baseHitPoints
+          hitPointsPerLevel
+        }
+        class {
+          id
+          mainClassId
+          mainClass {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          descriptions {
+            locale
+            title
+            description
+          }
+          magicUser
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        subclass
+        specialisation
+        race {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        personality {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        level {
+          currentLevel
+          currentExperience
+          experienceForNextLevel
+        }
+        psiUser
+        psiSchool {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          basePsiPoints
+          psiPointsPerLevel
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        psiMastery
+        psiPoints {
+          current
+          max
+        }
+        spellResistance {
+          astral {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+          mental {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+        }
+        magicUser
+        magicalAbility {
+          manaPoints {
+            current
+            max
+          }
+          manaPointsPerLevel
+          modifiers
+          manaPointsStoredElsehwere
+          rechargingMethod
+        }
+        combatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        wallet {
+          money
+          mithrill
+          gemstones
+          misc
+        }
+        languages {
+          language
+          level
+        }
+        inventory {
+          name
+          amount
+          location
+        }
+        poisons {
+          name
+          amount
+        }
+        notes
+        weapons {
+          items {
+            id
+            characterId
+            custom
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            descriptions {
+              locale
+              title
+              description
+            }
+            weight
+            price
+            attackRange
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              id
+              dieId
+              iterationCount
+              modifier
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            ranged
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        skills {
+          items {
+            id
+            characterId
+            skillId
+            skill {
+              id
+              percentageSkill
+              skillGroupId
+              basicCost
+              masterCost
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            mastery
+            percentageValue
+            skillPointsUsed
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        companions {
+          items {
+            id
+            characterId
+            name
+            type
+            health {
+              baseVitality
+              baseHitPoints
+              hitPointsPerLevel
+            }
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              id
+              dieId
+              iterationCount
+              modifier
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            maxDistance
+            maxLoad
+            badHabit
+            specialAbilities
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        magicalItems {
+          items {
+            id
+            characterId
+            magicalItemId
+            magicalItem {
+              id
+              manaCost
+              duration
+              price
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            location
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncWeaponAssignments = /* GraphQL */ `
+  query SyncWeaponAssignments(
+    $filter: ModelWeaponAssignmentFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncWeaponAssignments(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        characterId
+        custom
+        weapon {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          weaponTypeId
+          weaponType {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          weight
+          price
+          attackRange
+          combatValues {
+            initiation
+            offence
+            defence
+            aiming
+          }
+          damage {
+            id
+            dieId
+            die {
+              id
+              minValue
+              maxValue
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            iterationCount
+            modifier
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          attacksPerTurn
+          ranged
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        descriptions {
+          locale
+          title
+          description
+        }
+        weight
+        price
+        attackRange
+        combatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        damage {
+          id
+          dieId
+          die {
+            id
+            descriptions {
+              locale
+              title
+              description
+            }
+            minValue
+            maxValue
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          iterationCount
+          modifier
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        attacksPerTurn
+        ranged
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getWeaponAssignment = /* GraphQL */ `
+  query GetWeaponAssignment($id: ID!) {
+    getWeaponAssignment(id: $id) {
+      id
+      characterId
+      custom
+      weapon {
+        id
+        descriptions {
+          locale
+          title
+          description
+        }
+        weaponTypeId
+        weaponType {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        weight
+        price
+        attackRange
+        combatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        damage {
+          id
+          dieId
+          die {
+            id
+            descriptions {
+              locale
+              title
+              description
+            }
+            minValue
+            maxValue
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          iterationCount
+          modifier
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        attacksPerTurn
+        ranged
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      descriptions {
+        locale
+        title
+        description
+      }
+      weight
+      price
+      attackRange
+      combatValues {
+        initiation
+        offence
+        defence
+        aiming
+      }
+      damage {
+        id
+        dieId
+        die {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          minValue
+          maxValue
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        iterationCount
+        modifier
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      attacksPerTurn
+      ranged
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listWeaponAssignments = /* GraphQL */ `
+  query ListWeaponAssignments(
+    $filter: ModelWeaponAssignmentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listWeaponAssignments(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        characterId
+        custom
+        weapon {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          weaponTypeId
+          weaponType {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          weight
+          price
+          attackRange
+          combatValues {
+            initiation
+            offence
+            defence
+            aiming
+          }
+          damage {
+            id
+            dieId
+            die {
+              id
+              minValue
+              maxValue
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            iterationCount
+            modifier
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          attacksPerTurn
+          ranged
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        descriptions {
+          locale
+          title
+          description
+        }
+        weight
+        price
+        attackRange
+        combatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        damage {
+          id
+          dieId
+          die {
+            id
+            descriptions {
+              locale
+              title
+              description
+            }
+            minValue
+            maxValue
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          iterationCount
+          modifier
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        attacksPerTurn
+        ranged
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncSkillAssignments = /* GraphQL */ `
+  query SyncSkillAssignments(
+    $filter: ModelSkillAssignmentFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncSkillAssignments(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        characterId
+        skillId
+        skill {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          percentageSkill
+          skillGroupId
+          skillGroup {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          basicCost
+          masterCost
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        mastery
+        percentageValue
+        skillPointsUsed
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getSkillAssignment = /* GraphQL */ `
+  query GetSkillAssignment($id: ID!) {
+    getSkillAssignment(id: $id) {
+      id
+      characterId
+      skillId
+      skill {
+        id
+        descriptions {
+          locale
+          title
+          description
+        }
+        percentageSkill
+        skillGroupId
+        skillGroup {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        basicCost
+        masterCost
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      mastery
+      percentageValue
+      skillPointsUsed
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listSkillAssignments = /* GraphQL */ `
+  query ListSkillAssignments(
+    $filter: ModelSkillAssignmentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSkillAssignments(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        characterId
+        skillId
+        skill {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          percentageSkill
+          skillGroupId
+          skillGroup {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          basicCost
+          masterCost
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        mastery
+        percentageValue
+        skillPointsUsed
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncCharacterCompanions = /* GraphQL */ `
+  query SyncCharacterCompanions(
+    $filter: ModelCharacterCompanionFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncCharacterCompanions(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        characterId
+        name
+        type
+        health {
+          vitality {
+            current
+            max
+          }
+          baseVitality
+          hitPoints {
+            current
+            max
+          }
+          baseHitPoints
+          hitPointsPerLevel
+        }
+        combatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        damage {
+          id
+          dieId
+          die {
+            id
+            descriptions {
+              locale
+              title
+              description
+            }
+            minValue
+            maxValue
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          iterationCount
+          modifier
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        weapon {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          weaponTypeId
+          weaponType {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          weight
+          price
+          attackRange
+          combatValues {
+            initiation
+            offence
+            defence
+            aiming
+          }
+          damage {
+            id
+            dieId
+            die {
+              id
+              minValue
+              maxValue
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            iterationCount
+            modifier
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          attacksPerTurn
+          ranged
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        attacksPerTurn
+        maxDistance
+        maxLoad
+        badHabit
+        specialAbilities
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getCharacterCompanion = /* GraphQL */ `
+  query GetCharacterCompanion($id: ID!) {
+    getCharacterCompanion(id: $id) {
+      id
+      characterId
+      name
+      type
+      health {
+        vitality {
+          current
+          max
+        }
+        baseVitality
+        hitPoints {
+          current
+          max
+        }
+        baseHitPoints
+        hitPointsPerLevel
+      }
+      combatValues {
+        initiation
+        offence
+        defence
+        aiming
+      }
+      damage {
+        id
+        dieId
+        die {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          minValue
+          maxValue
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        iterationCount
+        modifier
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      weapon {
+        id
+        descriptions {
+          locale
+          title
+          description
+        }
+        weaponTypeId
+        weaponType {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        weight
+        price
+        attackRange
+        combatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        damage {
+          id
+          dieId
+          die {
+            id
+            descriptions {
+              locale
+              title
+              description
+            }
+            minValue
+            maxValue
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          iterationCount
+          modifier
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        attacksPerTurn
+        ranged
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      attacksPerTurn
+      maxDistance
+      maxLoad
+      badHabit
+      specialAbilities
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listCharacterCompanions = /* GraphQL */ `
+  query ListCharacterCompanions(
+    $filter: ModelCharacterCompanionFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCharacterCompanions(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        characterId
+        name
+        type
+        health {
+          vitality {
+            current
+            max
+          }
+          baseVitality
+          hitPoints {
+            current
+            max
+          }
+          baseHitPoints
+          hitPointsPerLevel
+        }
+        combatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        damage {
+          id
+          dieId
+          die {
+            id
+            descriptions {
+              locale
+              title
+              description
+            }
+            minValue
+            maxValue
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          iterationCount
+          modifier
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        weapon {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          weaponTypeId
+          weaponType {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          weight
+          price
+          attackRange
+          combatValues {
+            initiation
+            offence
+            defence
+            aiming
+          }
+          damage {
+            id
+            dieId
+            die {
+              id
+              minValue
+              maxValue
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            iterationCount
+            modifier
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          attacksPerTurn
+          ranged
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        attacksPerTurn
+        maxDistance
+        maxLoad
+        badHabit
+        specialAbilities
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncMagicalItemAssignments = /* GraphQL */ `
+  query SyncMagicalItemAssignments(
+    $filter: ModelMagicalItemAssignmentFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncMagicalItemAssignments(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        characterId
+        magicalItemId
+        magicalItem {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          class {
+            id
+            mainClassId
+            mainClass {
+              id
+              type
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            descriptions {
+              locale
+              title
+              description
+            }
+            magicUser
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          manaCost
+          duration
+          price
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        location
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getMagicalItemAssignment = /* GraphQL */ `
+  query GetMagicalItemAssignment($id: ID!) {
+    getMagicalItemAssignment(id: $id) {
+      id
+      characterId
+      magicalItemId
+      magicalItem {
+        id
+        descriptions {
+          locale
+          title
+          description
+        }
+        class {
+          id
+          mainClassId
+          mainClass {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          descriptions {
+            locale
+            title
+            description
+          }
+          magicUser
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        manaCost
+        duration
+        price
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      location
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listMagicalItemAssignments = /* GraphQL */ `
+  query ListMagicalItemAssignments(
+    $filter: ModelMagicalItemAssignmentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listMagicalItemAssignments(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        characterId
+        magicalItemId
+        magicalItem {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          class {
+            id
+            mainClassId
+            mainClass {
+              id
+              type
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+            }
+            descriptions {
+              locale
+              title
+              description
+            }
+            magicUser
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+          }
+          manaCost
+          duration
+          price
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        location
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
       }
       nextToken
       startedAt
@@ -1429,6 +5654,11 @@ export const getObjectTypeByName = /* GraphQL */ `
       items {
         id
         name
+        descriptions {
+          locale
+          title
+          description
+        }
         _version
         _deleted
         _lastChangedAt
@@ -1460,6 +5690,20 @@ export const listObjectDescriptionsByTitle = /* GraphQL */ `
       items {
         id
         objectTypeId
+        type {
+          id
+          name
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
         objectId
         locale
         title
@@ -1493,6 +5737,20 @@ export const getObjectDescriptionsByObjectId = /* GraphQL */ `
       items {
         id
         objectTypeId
+        type {
+          id
+          name
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
         objectId
         locale
         title
@@ -1528,6 +5786,11 @@ export const listValueRangeValuesByType = /* GraphQL */ `
       items {
         id
         type
+        descriptions {
+          locale
+          title
+          description
+        }
         _version
         _deleted
         _lastChangedAt
@@ -1557,6 +5820,25 @@ export const listClassesByMainClass = /* GraphQL */ `
       items {
         id
         mainClassId
+        mainClass {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        descriptions {
+          locale
+          title
+          description
+        }
         magicUser
         _version
         _deleted
@@ -1587,6 +5869,25 @@ export const listSpellClassesByCategory = /* GraphQL */ `
       items {
         id
         spellCategoryId
+        spellCategory {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        descriptions {
+          locale
+          title
+          description
+        }
         _version
         _deleted
         _lastChangedAt

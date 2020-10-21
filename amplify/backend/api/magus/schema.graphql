@@ -16,19 +16,23 @@ type CombatValues {
   aiming: Int!
 }
 
-enum LanguageLevel{
-	LL1
-	LL2
-	LL3
-	LL4
-	LL5
-	LLM
+enum LanguageLevel {
+  LL1
+  LL2
+  LL3
+  LL4
+  LL5
+  LLM
+}
+
+enum Mastery{
+  BASIC
+  MASTER
 }
 
 enum ValueRangeType {
   MAIN_CLASS
   PERSONALITY
-  MASTERY
   SPELL_CATEGORY
   WEAPON_TYPE
   SKILL_GROUP
@@ -156,7 +160,6 @@ type Shield @model @auth(rules: [{ allow: private }]) {
 type Weapon @model @auth(rules: [{ allow: private }]) {
   id: ID!
   descriptions: [Description!]!
-  ranged: Boolean
   weaponTypeId: ID!
   weaponType(type: ValueRangeType = WEAPON_TYPE): ValueRangeValue!
     @connection(fields: ["weaponTypeId"])
@@ -166,6 +169,7 @@ type Weapon @model @auth(rules: [{ allow: private }]) {
   combatValues: CombatValues!
   damage: ThrowScenario! @connection
   attacksPerTurn: Float!
+  ranged: Boolean
 }
 
 type Skill @model @auth(rules: [{ allow: private }]) {
@@ -232,6 +236,11 @@ type CharacterBasicInfo {
   fears: String
   companions: String
   fame: Int
+  religion: String
+  country: String
+  school: String  
+  holySymbol: S3Object
+  coatOfArms: S3Object  
 }
 
 type CharacterLevel {
@@ -241,63 +250,82 @@ type CharacterLevel {
 }
 
 type Abilities {
-	strength: Int!
-	agility: Int!
-	dexterity: Int!
-	stamina: Int!
-	health: Int!
-	beauty: Int!
-	intelligence: Int!
-	willpower: Int!
-	astral: Int!
+  strength: Int!
+  agility: Int!
+  dexterity: Int!
+  stamina: Int!
+  health: Int!
+  beauty: Int!
+  intelligence: Int!
+  willpower: Int!
+  astral: Int!
 }
 
 type MutablePointValue {
-	current: Int!
-	max: Int!
+  current: Int!
+  max: Int!
 }
 
 type HealthInformation {
-	vitality: MutablePointValue
-	baseVitality: Int
-	hitPoints: MutablePointValue
-	baseHitPoints: Int
-	hitPointsPerLevel: String
+  vitality: MutablePointValue
+  baseVitality: Int
+  hitPoints: MutablePointValue
+  baseHitPoints: Int
+  hitPointsPerLevel: String
 }
 
-type SpellResistanceValues{
-	staticShield: Int
-	dynamicShield: Int
-	innate: Int
-	magical: Int
-	modifier: Int
+type SpellResistanceValues {
+  staticShield: Int
+  dynamicShield: Int
+  innate: Int
+  magical: Int
+  modifier: Int
 }
 
-type SpellResistance{
-	astral: SpellResistanceValues
-	mental: SpellResistanceValues
+type SpellResistance {
+  astral: SpellResistanceValues
+  mental: SpellResistanceValues
 }
 
-type MagicalAbility{
-	manaPoints: MutablePointValue
-	manaPointsPerLevel: String
-	modifiers: String
-	manaPointsStoredElsehwere: String
-	rechargingMethod: String
+type MagicalAbility {
+  manaPoints: MutablePointValue
+  manaPointsPerLevel: String
+  modifiers: String
+  manaPointsStoredElsehwere: String
+  rechargingMethod: String
 }
 
-type LanguageAbility{
-	language: String
-	level: LanguageLevel
+type LanguageAbility {
+  language: String
+  level: LanguageLevel
 }
 
-type InventoryItem{
-	name: String
-	amount: String
-	location: String
+type InventoryItem {
+  name: String
+  amount: String
+  location: String
 }
 
-type PlayerCharacter   @model @auth(rules: [{ allow: owner }, { allow: owner, ownerField:"dungeonMasters", operations: [read] }]) {
+type Poison {
+  name: String!
+  amount: Int!
+}
+
+type Wallet {
+  money: Int
+  mithrill: String
+  gemstones: String
+  misc: String
+}
+
+type PlayerCharacter
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: owner, ownerField: "dungeonMasters", operations: [read] }
+    ]
+  ) {
   id: ID!
   name: String!
   startDate: AWSDate!
@@ -305,31 +333,146 @@ type PlayerCharacter   @model @auth(rules: [{ allow: owner }, { allow: owner, ow
   owner: String
   basicInfo: CharacterBasicInfo
   abilities: Abilities
+  currentAbilities: Abilities
   health: HealthInformation
   class: Class @connection
   subclass: String
   specialisation: String
   race: Race @connection
   personality(type: ValueRangeType = PERSONALITY): ValueRangeValue @connection
-  religion: String
-  country: String
-  school: String
   level: CharacterLevel
   psiUser: Boolean
   psiSchool: PsiSchool @connection
-  psiMastery(type: ValueRangeType = MASTERY): ValueRangeValue @connection
+  psiMastery: Mastery
   psiPoints: MutablePointValue
   spellResistance: SpellResistance
   magicUser: Boolean
   magicalAbility: MagicalAbility
-  holySymbol: S3Object
-  coatOfArms: S3Object
   baseCombatValues: CombatValues
   spentCombatValueModifiers: CombatValues
   otherCombatValueModifiers: CombatValues
+  temporaryCombatValuesModifiers: CombatValues
   combatValueModifiersPerLevel: Int
   mandatoryCombatValueModifierDistribution: String
+  wallet: Wallet
   languages: [LanguageAbility!]
   inventory: [InventoryItem!]
+  poisons: [Poison!]
   notes: [String]
+  weapons: [WeaponAssignment!] @connection(keyName: "byCharacter", fields: ["id"])
+  skills: [SkillAssignment!] @connection(keyName: "byCharacter", fields:["id"])
+  companions: [CharacterCompanion!] @connection(keyName: "byCharacter", fields:["id"]) 
+  magicalItems: [MagicalItemAssignment!] @connection(keyName: "byCharacter", fields:["id"])  
+}
+
+type NonPlayerCharacter @model @auth(rules: [{allow: owner}]){
+  id: ID!
+  name: String!
+  owner: String
+  basicInfo: CharacterBasicInfo
+  abilities: Abilities
+  currentAbilities: Abilities
+  health: HealthInformation
+  class: Class @connection
+  subclass: String
+  specialisation: String
+  race: Race @connection  
+  personality(type: ValueRangeType = PERSONALITY): ValueRangeValue @connection
+  level: CharacterLevel
+  psiUser: Boolean
+  psiSchool: PsiSchool @connection
+  psiMastery: Mastery
+  psiPoints: MutablePointValue
+  spellResistance: SpellResistance
+  magicUser: Boolean
+  magicalAbility: MagicalAbility
+  combatValues: CombatValues  
+  wallet: Wallet
+  languages: [LanguageAbility!]
+  inventory: [InventoryItem!]
+  poisons: [Poison!]
+  notes: [String]
+  weapons: [WeaponAssignment!] @connection(keyName: "byCharacter", fields: ["id"])
+  skills: [SkillAssignment!] @connection(keyName: "byCharacter", fields:["id"])
+  companions: [CharacterCompanion!] @connection(keyName: "byCharacter", fields:["id"]) 
+  magicalItems: [MagicalItemAssignment!] @connection(keyName: "byCharacter", fields:["id"])    
+}
+
+type WeaponAssignment @model @key(name:"byCharacter", fields:["characterId"]) @auth
+(
+    rules: [
+      { allow: owner }
+    ]
+  )
+{
+  id: ID!
+  characterId: ID!
+  custom: Boolean
+  weapon: Weapon @connection
+  descriptions: [Description]
+  weight: String
+  price: Int
+  attackRange: Int
+  combatValues: CombatValues
+  damage: ThrowScenario @connection
+  attacksPerTurn: Float
+  ranged: Boolean
+}
+
+type SkillAssignment @model @key(name:"byCharacter", fields:["characterId"]) @auth
+(
+    rules: [
+      { allow: owner }
+    ]
+  )
+{
+  id: ID!
+  characterId: ID!
+  skillId: ID!
+  skill: Skill @connection(fields: ["skillId"])
+  mastery: Mastery
+  percentageValue: Int
+  skillPointsUsed: Int  
+}
+
+enum CompanionType{
+  MOUNT
+  ANIMAL
+  SERVANT
+}
+
+type CharacterCompanion @model @key(name:"byCharacter", fields:["characterId"]) @auth
+(
+    rules: [
+      { allow: owner }
+    ]
+  )
+{
+  id: ID!
+  characterId: ID!
+  name: String!
+  type: CompanionType!
+  health: HealthInformation
+  combatValues: CombatValues
+  damage: ThrowScenario @connection
+  weapon: Weapon @connection
+  attacksPerTurn: Float
+  maxDistance: String
+  maxLoad: String
+  badHabit: String
+  specialAbilities: String
+}    
+
+type MagicalItemAssignment @model @key(name:"byCharacter", fields:["characterId"]) @auth
+(
+    rules: [
+      { allow: owner }
+    ]
+  )
+{
+  id: ID!
+  characterId: ID!
+  magicalItemId: ID!
+  magicalItem: MagicalItem! @connection(fields: ["magicalItemId"])
+  location: String
 }

@@ -1,57 +1,73 @@
 <template>
   <v-app>
     <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
+      <v-toolbar-title>M.A.G.U.S</v-toolbar-title>
 
       <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+      <v-menu v-if="user">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn text v-bind="attrs" v-on="on">
+            {{ user.attributes.name }}
+            <v-icon>mdi-account</v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item @click="signOut">
+            <v-list-item-title>Sign Out</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-app-bar>
 
     <v-main>
-      <HelloWorld />
-    </v-main>
+      <v-container v-if="authState !== 'signedin'" fluid fill-height>
+        <v-row align="center" justify="center">
+          <amplify-authenticator
+            ><amplify-sign-in slot="sign-in" hide-sign-up
+          /></amplify-authenticator>
+        </v-row> </v-container
+    ></v-main>
   </v-app>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
+import { onAuthUIStateChange, AuthState } from "@aws-amplify/ui-components";
+import { Auth } from "aws-amplify";
+
+type AppData = {
+  user: object | undefined;
+  authState: AuthState | undefined;
+};
 
 export default Vue.extend({
   name: "App",
 
-  components: {
-    HelloWorld
-  },
+  components: {},
 
-  data: () => ({
-    //
-  })
+  data() {
+    const appData: AppData = {
+      user: undefined,
+      authState: undefined
+    };
+    return appData;
+  },
+  created() {
+    onAuthUIStateChange((authState, authData) => {
+      this.authState = authState;
+      this.user = authData;
+      console.log(authData); // TODO remove
+    });
+  },
+  beforeDestroy() {
+    return onAuthUIStateChange;
+  },
+  methods: {
+    signOut() {
+      Auth.signOut();
+    }
+  }
 });
 </script>
