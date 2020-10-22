@@ -33,7 +33,6 @@ enum Mastery{
 enum ValueRangeType {
   MAIN_CLASS
   PERSONALITY
-  SPELL_CATEGORY
   WEAPON_TYPE
   SKILL_GROUP
 }

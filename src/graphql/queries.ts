@@ -2,39 +2,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const syncDice = /* GraphQL */ `
-  query SyncDice(
-    $filter: ModelDieFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncDice(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        descriptions {
-          locale
-          title
-          description
-        }
-        minValue
-        maxValue
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
 export const getDie = /* GraphQL */ `
   query GetDie($id: ID!) {
     getDie(id: $id) {
@@ -46,9 +13,6 @@ export const getDie = /* GraphQL */ `
       }
       minValue
       maxValue
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -70,58 +34,10 @@ export const listDies = /* GraphQL */ `
         }
         minValue
         maxValue
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncThrowScenarios = /* GraphQL */ `
-  query SyncThrowScenarios(
-    $filter: ModelThrowScenarioFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncThrowScenarios(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        dieId
-        die {
-          id
-          descriptions {
-            locale
-            title
-            description
-          }
-          minValue
-          maxValue
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        iterationCount
-        modifier
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -139,17 +55,11 @@ export const getThrowScenario = /* GraphQL */ `
         }
         minValue
         maxValue
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       iterationCount
       modifier
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -174,54 +84,15 @@ export const listThrowScenarios = /* GraphQL */ `
           }
           minValue
           maxValue
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         iterationCount
         modifier
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncValueRangeValues = /* GraphQL */ `
-  query SyncValueRangeValues(
-    $filter: ModelValueRangeValueFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncValueRangeValues(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        type
-        descriptions {
-          locale
-          title
-          description
-        }
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -235,9 +106,6 @@ export const getValueRangeValue = /* GraphQL */ `
         title
         description
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -262,61 +130,10 @@ export const listValueRangeValues = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncClasses = /* GraphQL */ `
-  query SyncClasses(
-    $filter: ModelClassFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncClasses(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        mainClassId
-        mainClass {
-          id
-          type
-          descriptions {
-            locale
-            title
-            description
-          }
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        descriptions {
-          locale
-          title
-          description
-        }
-        magicUser
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -333,9 +150,6 @@ export const getClass = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -345,9 +159,6 @@ export const getClass = /* GraphQL */ `
         description
       }
       magicUser
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -371,9 +182,6 @@ export const listClasss = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -383,45 +191,10 @@ export const listClasss = /* GraphQL */ `
           description
         }
         magicUser
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncRaces = /* GraphQL */ `
-  query SyncRaces(
-    $filter: ModelRaceFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncRaces(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        descriptions {
-          locale
-          title
-          description
-        }
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -434,9 +207,6 @@ export const getRace = /* GraphQL */ `
         title
         description
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -456,47 +226,10 @@ export const listRaces = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncPsiSchools = /* GraphQL */ `
-  query SyncPsiSchools(
-    $filter: ModelPsiSchoolFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncPsiSchools(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        descriptions {
-          locale
-          title
-          description
-        }
-        basePsiPoints
-        psiPointsPerLevel
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -511,9 +244,6 @@ export const getPsiSchool = /* GraphQL */ `
       }
       basePsiPoints
       psiPointsPerLevel
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -535,49 +265,10 @@ export const listPsiSchools = /* GraphQL */ `
         }
         basePsiPoints
         psiPointsPerLevel
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncArmours = /* GraphQL */ `
-  query SyncArmours(
-    $filter: ModelArmourFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncArmours(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        descriptions {
-          locale
-          title
-          description
-        }
-        weight
-        movementPreventionValue
-        damageReductionValue
-        price
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -594,9 +285,6 @@ export const getArmour = /* GraphQL */ `
       movementPreventionValue
       damageReductionValue
       price
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -620,78 +308,10 @@ export const listArmours = /* GraphQL */ `
         movementPreventionValue
         damageReductionValue
         price
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncShields = /* GraphQL */ `
-  query SyncShields(
-    $filter: ModelShieldFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncShields(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        descriptions {
-          locale
-          title
-          description
-        }
-        combatValues {
-          initiation
-          offence
-          defence
-          aiming
-        }
-        weight
-        damage {
-          id
-          dieId
-          die {
-            id
-            descriptions {
-              locale
-              title
-              description
-            }
-            minValue
-            maxValue
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          iterationCount
-          modifier
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -723,23 +343,14 @@ export const getShield = /* GraphQL */ `
           }
           minValue
           maxValue
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         iterationCount
         modifier
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -778,111 +389,18 @@ export const listShields = /* GraphQL */ `
             }
             minValue
             maxValue
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           iterationCount
           modifier
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncWeapons = /* GraphQL */ `
-  query SyncWeapons(
-    $filter: ModelWeaponFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncWeapons(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        descriptions {
-          locale
-          title
-          description
-        }
-        weaponTypeId
-        weaponType {
-          id
-          type
-          descriptions {
-            locale
-            title
-            description
-          }
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        weight
-        price
-        attackRange
-        combatValues {
-          initiation
-          offence
-          defence
-          aiming
-        }
-        damage {
-          id
-          dieId
-          die {
-            id
-            descriptions {
-              locale
-              title
-              description
-            }
-            minValue
-            maxValue
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          iterationCount
-          modifier
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        attacksPerTurn
-        ranged
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -904,9 +422,6 @@ export const getWeapon = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -931,25 +446,16 @@ export const getWeapon = /* GraphQL */ `
           }
           minValue
           maxValue
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         iterationCount
         modifier
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       attacksPerTurn
       ranged
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -978,9 +484,6 @@ export const listWeapons = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -1005,79 +508,20 @@ export const listWeapons = /* GraphQL */ `
             }
             minValue
             maxValue
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           iterationCount
           modifier
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         attacksPerTurn
         ranged
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncSkills = /* GraphQL */ `
-  query SyncSkills(
-    $filter: ModelSkillFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncSkills(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        descriptions {
-          locale
-          title
-          description
-        }
-        percentageSkill
-        skillGroupId
-        skillGroup {
-          id
-          type
-          descriptions {
-            locale
-            title
-            description
-          }
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        basicCost
-        masterCost
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -1100,17 +544,11 @@ export const getSkill = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       basicCost
       masterCost
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -1140,85 +578,15 @@ export const listSkills = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         basicCost
         masterCost
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncMagicalItems = /* GraphQL */ `
-  query SyncMagicalItems(
-    $filter: ModelMagicalItemFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncMagicalItems(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        descriptions {
-          locale
-          title
-          description
-        }
-        class {
-          id
-          mainClassId
-          mainClass {
-            id
-            type
-            descriptions {
-              locale
-              title
-              description
-            }
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          descriptions {
-            locale
-            title
-            description
-          }
-          magicUser
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        manaCost
-        duration
-        price
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -1242,9 +610,6 @@ export const getMagicalItem = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -1254,18 +619,12 @@ export const getMagicalItem = /* GraphQL */ `
           description
         }
         magicUser
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       manaCost
       duration
       price
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -1296,9 +655,6 @@ export const listMagicalItems = /* GraphQL */ `
               title
               description
             }
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -1308,71 +664,16 @@ export const listMagicalItems = /* GraphQL */ `
             description
           }
           magicUser
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         manaCost
         duration
         price
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncThrows = /* GraphQL */ `
-  query SyncThrows(
-    $filter: ModelThrowFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncThrows(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        dieId
-        die {
-          id
-          descriptions {
-            locale
-            title
-            description
-          }
-          minValue
-          maxValue
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        iterationCount
-        modifier
-        throwResults
-        throwSum
-        total
-        owner
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -1390,9 +691,6 @@ export const getThrow = /* GraphQL */ `
         }
         minValue
         maxValue
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -1402,9 +700,6 @@ export const getThrow = /* GraphQL */ `
       throwSum
       total
       owner
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -1429,9 +724,6 @@ export const listThrows = /* GraphQL */ `
           }
           minValue
           maxValue
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -1441,442 +733,10 @@ export const listThrows = /* GraphQL */ `
         throwSum
         total
         owner
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncPlayerCharacters = /* GraphQL */ `
-  query SyncPlayerCharacters(
-    $filter: ModelPlayerCharacterFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncPlayerCharacters(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        name
-        startDate
-        dungeonMasters
-        owner
-        basicInfo {
-          image {
-            bucket
-            region
-            key
-          }
-          sex
-          height
-          weight
-          hair
-          eyes
-          age
-          visibleAge
-          family
-          attire
-          personalityTraits
-          specialAbilities
-          likes
-          dislikes
-          fears
-          companions
-          fame
-          religion
-          country
-          school
-          holySymbol {
-            bucket
-            region
-            key
-          }
-          coatOfArms {
-            bucket
-            region
-            key
-          }
-        }
-        abilities {
-          strength
-          agility
-          dexterity
-          stamina
-          health
-          beauty
-          intelligence
-          willpower
-          astral
-        }
-        currentAbilities {
-          strength
-          agility
-          dexterity
-          stamina
-          health
-          beauty
-          intelligence
-          willpower
-          astral
-        }
-        health {
-          vitality {
-            current
-            max
-          }
-          baseVitality
-          hitPoints {
-            current
-            max
-          }
-          baseHitPoints
-          hitPointsPerLevel
-        }
-        class {
-          id
-          mainClassId
-          mainClass {
-            id
-            type
-            descriptions {
-              locale
-              title
-              description
-            }
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          descriptions {
-            locale
-            title
-            description
-          }
-          magicUser
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        subclass
-        specialisation
-        race {
-          id
-          descriptions {
-            locale
-            title
-            description
-          }
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        personality {
-          id
-          type
-          descriptions {
-            locale
-            title
-            description
-          }
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        level {
-          currentLevel
-          currentExperience
-          experienceForNextLevel
-        }
-        psiUser
-        psiSchool {
-          id
-          descriptions {
-            locale
-            title
-            description
-          }
-          basePsiPoints
-          psiPointsPerLevel
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        psiMastery
-        psiPoints {
-          current
-          max
-        }
-        spellResistance {
-          astral {
-            staticShield
-            dynamicShield
-            innate
-            magical
-            modifier
-          }
-          mental {
-            staticShield
-            dynamicShield
-            innate
-            magical
-            modifier
-          }
-        }
-        magicUser
-        magicalAbility {
-          manaPoints {
-            current
-            max
-          }
-          manaPointsPerLevel
-          modifiers
-          manaPointsStoredElsehwere
-          rechargingMethod
-        }
-        baseCombatValues {
-          initiation
-          offence
-          defence
-          aiming
-        }
-        spentCombatValueModifiers {
-          initiation
-          offence
-          defence
-          aiming
-        }
-        otherCombatValueModifiers {
-          initiation
-          offence
-          defence
-          aiming
-        }
-        temporaryCombatValuesModifiers {
-          initiation
-          offence
-          defence
-          aiming
-        }
-        combatValueModifiersPerLevel
-        mandatoryCombatValueModifierDistribution
-        wallet {
-          money
-          mithrill
-          gemstones
-          misc
-        }
-        languages {
-          language
-          level
-        }
-        inventory {
-          name
-          amount
-          location
-        }
-        poisons {
-          name
-          amount
-        }
-        notes
-        weapons {
-          items {
-            id
-            characterId
-            custom
-            weapon {
-              id
-              weaponTypeId
-              weight
-              price
-              attackRange
-              attacksPerTurn
-              ranged
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            descriptions {
-              locale
-              title
-              description
-            }
-            weight
-            price
-            attackRange
-            combatValues {
-              initiation
-              offence
-              defence
-              aiming
-            }
-            damage {
-              id
-              dieId
-              iterationCount
-              modifier
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            attacksPerTurn
-            ranged
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-          startedAt
-        }
-        skills {
-          items {
-            id
-            characterId
-            skillId
-            skill {
-              id
-              percentageSkill
-              skillGroupId
-              basicCost
-              masterCost
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            mastery
-            percentageValue
-            skillPointsUsed
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-          startedAt
-        }
-        companions {
-          items {
-            id
-            characterId
-            name
-            type
-            health {
-              baseVitality
-              baseHitPoints
-              hitPointsPerLevel
-            }
-            combatValues {
-              initiation
-              offence
-              defence
-              aiming
-            }
-            damage {
-              id
-              dieId
-              iterationCount
-              modifier
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            weapon {
-              id
-              weaponTypeId
-              weight
-              price
-              attackRange
-              attacksPerTurn
-              ranged
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            attacksPerTurn
-            maxDistance
-            maxLoad
-            badHabit
-            specialAbilities
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-          startedAt
-        }
-        magicalItems {
-          items {
-            id
-            characterId
-            magicalItemId
-            magicalItem {
-              id
-              manaCost
-              duration
-              price
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            location
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-          startedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -1970,9 +830,6 @@ export const getPlayerCharacter = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -1982,9 +839,6 @@ export const getPlayerCharacter = /* GraphQL */ `
           description
         }
         magicUser
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -1997,9 +851,6 @@ export const getPlayerCharacter = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -2011,9 +862,6 @@ export const getPlayerCharacter = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -2032,9 +880,6 @@ export const getPlayerCharacter = /* GraphQL */ `
         }
         basePsiPoints
         psiPointsPerLevel
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -2132,9 +977,6 @@ export const getPlayerCharacter = /* GraphQL */ `
             weaponType {
               id
               type
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
@@ -2152,17 +994,11 @@ export const getPlayerCharacter = /* GraphQL */ `
               dieId
               iterationCount
               modifier
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             attacksPerTurn
             ranged
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -2187,31 +1023,21 @@ export const getPlayerCharacter = /* GraphQL */ `
               id
               minValue
               maxValue
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             iterationCount
             modifier
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           attacksPerTurn
           ranged
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       skills {
         items {
@@ -2230,32 +1056,22 @@ export const getPlayerCharacter = /* GraphQL */ `
             skillGroup {
               id
               type
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             basicCost
             masterCost
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           mastery
           percentageValue
           skillPointsUsed
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       companions {
         items {
@@ -2289,17 +1105,11 @@ export const getPlayerCharacter = /* GraphQL */ `
               id
               minValue
               maxValue
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             iterationCount
             modifier
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -2314,9 +1124,6 @@ export const getPlayerCharacter = /* GraphQL */ `
             weaponType {
               id
               type
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
@@ -2334,17 +1141,11 @@ export const getPlayerCharacter = /* GraphQL */ `
               dieId
               iterationCount
               modifier
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             attacksPerTurn
             ranged
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -2353,15 +1154,11 @@ export const getPlayerCharacter = /* GraphQL */ `
           maxLoad
           badHabit
           specialAbilities
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       magicalItems {
         items {
@@ -2379,35 +1176,22 @@ export const getPlayerCharacter = /* GraphQL */ `
               id
               mainClassId
               magicUser
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             manaCost
             duration
             price
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           location
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -2512,9 +1296,6 @@ export const listPlayerCharacters = /* GraphQL */ `
               title
               description
             }
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -2524,9 +1305,6 @@ export const listPlayerCharacters = /* GraphQL */ `
             description
           }
           magicUser
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -2539,9 +1317,6 @@ export const listPlayerCharacters = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -2553,9 +1328,6 @@ export const listPlayerCharacters = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -2574,9 +1346,6 @@ export const listPlayerCharacters = /* GraphQL */ `
           }
           basePsiPoints
           psiPointsPerLevel
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -2671,9 +1440,6 @@ export const listPlayerCharacters = /* GraphQL */ `
               attackRange
               attacksPerTurn
               ranged
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
@@ -2696,23 +1462,16 @@ export const listPlayerCharacters = /* GraphQL */ `
               dieId
               iterationCount
               modifier
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             attacksPerTurn
             ranged
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
             owner
           }
           nextToken
-          startedAt
         }
         skills {
           items {
@@ -2725,24 +1484,17 @@ export const listPlayerCharacters = /* GraphQL */ `
               skillGroupId
               basicCost
               masterCost
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             mastery
             percentageValue
             skillPointsUsed
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
             owner
           }
           nextToken
-          startedAt
         }
         companions {
           items {
@@ -2766,9 +1518,6 @@ export const listPlayerCharacters = /* GraphQL */ `
               dieId
               iterationCount
               modifier
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
@@ -2780,9 +1529,6 @@ export const listPlayerCharacters = /* GraphQL */ `
               attackRange
               attacksPerTurn
               ranged
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
@@ -2791,15 +1537,11 @@ export const listPlayerCharacters = /* GraphQL */ `
             maxLoad
             badHabit
             specialAbilities
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
             owner
           }
           nextToken
-          startedAt
         }
         magicalItems {
           items {
@@ -2811,437 +1553,20 @@ export const listPlayerCharacters = /* GraphQL */ `
               manaCost
               duration
               price
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             location
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
             owner
           }
           nextToken
-          startedAt
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncNonPlayerCharacters = /* GraphQL */ `
-  query SyncNonPlayerCharacters(
-    $filter: ModelNonPlayerCharacterFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncNonPlayerCharacters(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        name
-        owner
-        basicInfo {
-          image {
-            bucket
-            region
-            key
-          }
-          sex
-          height
-          weight
-          hair
-          eyes
-          age
-          visibleAge
-          family
-          attire
-          personalityTraits
-          specialAbilities
-          likes
-          dislikes
-          fears
-          companions
-          fame
-          religion
-          country
-          school
-          holySymbol {
-            bucket
-            region
-            key
-          }
-          coatOfArms {
-            bucket
-            region
-            key
-          }
-        }
-        abilities {
-          strength
-          agility
-          dexterity
-          stamina
-          health
-          beauty
-          intelligence
-          willpower
-          astral
-        }
-        currentAbilities {
-          strength
-          agility
-          dexterity
-          stamina
-          health
-          beauty
-          intelligence
-          willpower
-          astral
-        }
-        health {
-          vitality {
-            current
-            max
-          }
-          baseVitality
-          hitPoints {
-            current
-            max
-          }
-          baseHitPoints
-          hitPointsPerLevel
-        }
-        class {
-          id
-          mainClassId
-          mainClass {
-            id
-            type
-            descriptions {
-              locale
-              title
-              description
-            }
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          descriptions {
-            locale
-            title
-            description
-          }
-          magicUser
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        subclass
-        specialisation
-        race {
-          id
-          descriptions {
-            locale
-            title
-            description
-          }
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        personality {
-          id
-          type
-          descriptions {
-            locale
-            title
-            description
-          }
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        level {
-          currentLevel
-          currentExperience
-          experienceForNextLevel
-        }
-        psiUser
-        psiSchool {
-          id
-          descriptions {
-            locale
-            title
-            description
-          }
-          basePsiPoints
-          psiPointsPerLevel
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        psiMastery
-        psiPoints {
-          current
-          max
-        }
-        spellResistance {
-          astral {
-            staticShield
-            dynamicShield
-            innate
-            magical
-            modifier
-          }
-          mental {
-            staticShield
-            dynamicShield
-            innate
-            magical
-            modifier
-          }
-        }
-        magicUser
-        magicalAbility {
-          manaPoints {
-            current
-            max
-          }
-          manaPointsPerLevel
-          modifiers
-          manaPointsStoredElsehwere
-          rechargingMethod
-        }
-        combatValues {
-          initiation
-          offence
-          defence
-          aiming
-        }
-        wallet {
-          money
-          mithrill
-          gemstones
-          misc
-        }
-        languages {
-          language
-          level
-        }
-        inventory {
-          name
-          amount
-          location
-        }
-        poisons {
-          name
-          amount
-        }
-        notes
-        weapons {
-          items {
-            id
-            characterId
-            custom
-            weapon {
-              id
-              weaponTypeId
-              weight
-              price
-              attackRange
-              attacksPerTurn
-              ranged
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            descriptions {
-              locale
-              title
-              description
-            }
-            weight
-            price
-            attackRange
-            combatValues {
-              initiation
-              offence
-              defence
-              aiming
-            }
-            damage {
-              id
-              dieId
-              iterationCount
-              modifier
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            attacksPerTurn
-            ranged
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-          startedAt
-        }
-        skills {
-          items {
-            id
-            characterId
-            skillId
-            skill {
-              id
-              percentageSkill
-              skillGroupId
-              basicCost
-              masterCost
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            mastery
-            percentageValue
-            skillPointsUsed
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-          startedAt
-        }
-        companions {
-          items {
-            id
-            characterId
-            name
-            type
-            health {
-              baseVitality
-              baseHitPoints
-              hitPointsPerLevel
-            }
-            combatValues {
-              initiation
-              offence
-              defence
-              aiming
-            }
-            damage {
-              id
-              dieId
-              iterationCount
-              modifier
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            weapon {
-              id
-              weaponTypeId
-              weight
-              price
-              attackRange
-              attacksPerTurn
-              ranged
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            attacksPerTurn
-            maxDistance
-            maxLoad
-            badHabit
-            specialAbilities
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-          startedAt
-        }
-        magicalItems {
-          items {
-            id
-            characterId
-            magicalItemId
-            magicalItem {
-              id
-              manaCost
-              duration
-              price
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            location
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-          startedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -3333,9 +1658,6 @@ export const getNonPlayerCharacter = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -3345,9 +1667,6 @@ export const getNonPlayerCharacter = /* GraphQL */ `
           description
         }
         magicUser
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -3360,9 +1679,6 @@ export const getNonPlayerCharacter = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -3374,9 +1690,6 @@ export const getNonPlayerCharacter = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -3395,9 +1708,6 @@ export const getNonPlayerCharacter = /* GraphQL */ `
         }
         basePsiPoints
         psiPointsPerLevel
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -3475,9 +1785,6 @@ export const getNonPlayerCharacter = /* GraphQL */ `
             weaponType {
               id
               type
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
@@ -3495,17 +1802,11 @@ export const getNonPlayerCharacter = /* GraphQL */ `
               dieId
               iterationCount
               modifier
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             attacksPerTurn
             ranged
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -3530,31 +1831,21 @@ export const getNonPlayerCharacter = /* GraphQL */ `
               id
               minValue
               maxValue
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             iterationCount
             modifier
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           attacksPerTurn
           ranged
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       skills {
         items {
@@ -3573,32 +1864,22 @@ export const getNonPlayerCharacter = /* GraphQL */ `
             skillGroup {
               id
               type
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             basicCost
             masterCost
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           mastery
           percentageValue
           skillPointsUsed
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       companions {
         items {
@@ -3632,17 +1913,11 @@ export const getNonPlayerCharacter = /* GraphQL */ `
               id
               minValue
               maxValue
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             iterationCount
             modifier
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -3657,9 +1932,6 @@ export const getNonPlayerCharacter = /* GraphQL */ `
             weaponType {
               id
               type
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
@@ -3677,17 +1949,11 @@ export const getNonPlayerCharacter = /* GraphQL */ `
               dieId
               iterationCount
               modifier
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             attacksPerTurn
             ranged
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -3696,15 +1962,11 @@ export const getNonPlayerCharacter = /* GraphQL */ `
           maxLoad
           badHabit
           specialAbilities
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       magicalItems {
         items {
@@ -3722,35 +1984,22 @@ export const getNonPlayerCharacter = /* GraphQL */ `
               id
               mainClassId
               magicUser
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             manaCost
             duration
             price
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           location
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -3853,9 +2102,6 @@ export const listNonPlayerCharacters = /* GraphQL */ `
               title
               description
             }
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -3865,9 +2111,6 @@ export const listNonPlayerCharacters = /* GraphQL */ `
             description
           }
           magicUser
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -3880,9 +2123,6 @@ export const listNonPlayerCharacters = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -3894,9 +2134,6 @@ export const listNonPlayerCharacters = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -3915,9 +2152,6 @@ export const listNonPlayerCharacters = /* GraphQL */ `
           }
           basePsiPoints
           psiPointsPerLevel
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -3992,9 +2226,6 @@ export const listNonPlayerCharacters = /* GraphQL */ `
               attackRange
               attacksPerTurn
               ranged
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
@@ -4017,23 +2248,16 @@ export const listNonPlayerCharacters = /* GraphQL */ `
               dieId
               iterationCount
               modifier
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             attacksPerTurn
             ranged
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
             owner
           }
           nextToken
-          startedAt
         }
         skills {
           items {
@@ -4046,24 +2270,17 @@ export const listNonPlayerCharacters = /* GraphQL */ `
               skillGroupId
               basicCost
               masterCost
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             mastery
             percentageValue
             skillPointsUsed
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
             owner
           }
           nextToken
-          startedAt
         }
         companions {
           items {
@@ -4087,9 +2304,6 @@ export const listNonPlayerCharacters = /* GraphQL */ `
               dieId
               iterationCount
               modifier
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
@@ -4101,9 +2315,6 @@ export const listNonPlayerCharacters = /* GraphQL */ `
               attackRange
               attacksPerTurn
               ranged
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
@@ -4112,15 +2323,11 @@ export const listNonPlayerCharacters = /* GraphQL */ `
             maxLoad
             badHabit
             specialAbilities
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
             owner
           }
           nextToken
-          startedAt
         }
         magicalItems {
           items {
@@ -4132,162 +2339,20 @@ export const listNonPlayerCharacters = /* GraphQL */ `
               manaCost
               duration
               price
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             location
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
             owner
           }
           nextToken
-          startedAt
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncWeaponAssignments = /* GraphQL */ `
-  query SyncWeaponAssignments(
-    $filter: ModelWeaponAssignmentFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncWeaponAssignments(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        characterId
-        custom
-        weapon {
-          id
-          descriptions {
-            locale
-            title
-            description
-          }
-          weaponTypeId
-          weaponType {
-            id
-            type
-            descriptions {
-              locale
-              title
-              description
-            }
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          weight
-          price
-          attackRange
-          combatValues {
-            initiation
-            offence
-            defence
-            aiming
-          }
-          damage {
-            id
-            dieId
-            die {
-              id
-              minValue
-              maxValue
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            iterationCount
-            modifier
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          attacksPerTurn
-          ranged
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        descriptions {
-          locale
-          title
-          description
-        }
-        weight
-        price
-        attackRange
-        combatValues {
-          initiation
-          offence
-          defence
-          aiming
-        }
-        damage {
-          id
-          dieId
-          die {
-            id
-            descriptions {
-              locale
-              title
-              description
-            }
-            minValue
-            maxValue
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          iterationCount
-          modifier
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        attacksPerTurn
-        ranged
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -4313,9 +2378,6 @@ export const getWeaponAssignment = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -4340,25 +2402,16 @@ export const getWeaponAssignment = /* GraphQL */ `
             }
             minValue
             maxValue
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           iterationCount
           modifier
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         attacksPerTurn
         ranged
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -4388,25 +2441,16 @@ export const getWeaponAssignment = /* GraphQL */ `
           }
           minValue
           maxValue
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         iterationCount
         modifier
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       attacksPerTurn
       ranged
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -4444,9 +2488,6 @@ export const listWeaponAssignments = /* GraphQL */ `
               title
               description
             }
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -4466,25 +2507,16 @@ export const listWeaponAssignments = /* GraphQL */ `
               id
               minValue
               maxValue
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             iterationCount
             modifier
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           attacksPerTurn
           ranged
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -4514,94 +2546,21 @@ export const listWeaponAssignments = /* GraphQL */ `
             }
             minValue
             maxValue
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           iterationCount
           modifier
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         attacksPerTurn
         ranged
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncSkillAssignments = /* GraphQL */ `
-  query SyncSkillAssignments(
-    $filter: ModelSkillAssignmentFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncSkillAssignments(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        characterId
-        skillId
-        skill {
-          id
-          descriptions {
-            locale
-            title
-            description
-          }
-          percentageSkill
-          skillGroupId
-          skillGroup {
-            id
-            type
-            descriptions {
-              locale
-              title
-              description
-            }
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          basicCost
-          masterCost
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        mastery
-        percentageValue
-        skillPointsUsed
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -4628,26 +2587,17 @@ export const getSkillAssignment = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         basicCost
         masterCost
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       mastery
       percentageValue
       skillPointsUsed
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -4686,172 +2636,22 @@ export const listSkillAssignments = /* GraphQL */ `
               title
               description
             }
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           basicCost
           masterCost
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         mastery
         percentageValue
         skillPointsUsed
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncCharacterCompanions = /* GraphQL */ `
-  query SyncCharacterCompanions(
-    $filter: ModelCharacterCompanionFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncCharacterCompanions(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        characterId
-        name
-        type
-        health {
-          vitality {
-            current
-            max
-          }
-          baseVitality
-          hitPoints {
-            current
-            max
-          }
-          baseHitPoints
-          hitPointsPerLevel
-        }
-        combatValues {
-          initiation
-          offence
-          defence
-          aiming
-        }
-        damage {
-          id
-          dieId
-          die {
-            id
-            descriptions {
-              locale
-              title
-              description
-            }
-            minValue
-            maxValue
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          iterationCount
-          modifier
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        weapon {
-          id
-          descriptions {
-            locale
-            title
-            description
-          }
-          weaponTypeId
-          weaponType {
-            id
-            type
-            descriptions {
-              locale
-              title
-              description
-            }
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          weight
-          price
-          attackRange
-          combatValues {
-            initiation
-            offence
-            defence
-            aiming
-          }
-          damage {
-            id
-            dieId
-            die {
-              id
-              minValue
-              maxValue
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            iterationCount
-            modifier
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          attacksPerTurn
-          ranged
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        attacksPerTurn
-        maxDistance
-        maxLoad
-        badHabit
-        specialAbilities
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -4893,17 +2693,11 @@ export const getCharacterCompanion = /* GraphQL */ `
           }
           minValue
           maxValue
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         iterationCount
         modifier
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -4923,9 +2717,6 @@ export const getCharacterCompanion = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -4950,25 +2741,16 @@ export const getCharacterCompanion = /* GraphQL */ `
             }
             minValue
             maxValue
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           iterationCount
           modifier
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         attacksPerTurn
         ranged
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -4977,9 +2759,6 @@ export const getCharacterCompanion = /* GraphQL */ `
       maxLoad
       badHabit
       specialAbilities
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -5033,17 +2812,11 @@ export const listCharacterCompanions = /* GraphQL */ `
             }
             minValue
             maxValue
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           iterationCount
           modifier
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -5063,9 +2836,6 @@ export const listCharacterCompanions = /* GraphQL */ `
               title
               description
             }
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -5085,25 +2855,16 @@ export const listCharacterCompanions = /* GraphQL */ `
               id
               minValue
               maxValue
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             iterationCount
             modifier
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           attacksPerTurn
           ranged
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -5112,85 +2873,11 @@ export const listCharacterCompanions = /* GraphQL */ `
         maxLoad
         badHabit
         specialAbilities
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncMagicalItemAssignments = /* GraphQL */ `
-  query SyncMagicalItemAssignments(
-    $filter: ModelMagicalItemAssignmentFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncMagicalItemAssignments(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        characterId
-        magicalItemId
-        magicalItem {
-          id
-          descriptions {
-            locale
-            title
-            description
-          }
-          class {
-            id
-            mainClassId
-            mainClass {
-              id
-              type
-              _version
-              _deleted
-              _lastChangedAt
-              createdAt
-              updatedAt
-            }
-            descriptions {
-              locale
-              title
-              description
-            }
-            magicUser
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-          }
-          manaCost
-          duration
-          price
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        location
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -5218,9 +2905,6 @@ export const getMagicalItemAssignment = /* GraphQL */ `
               title
               description
             }
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -5230,25 +2914,16 @@ export const getMagicalItemAssignment = /* GraphQL */ `
             description
           }
           magicUser
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         manaCost
         duration
         price
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       location
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -5283,9 +2958,6 @@ export const listMagicalItemAssignments = /* GraphQL */ `
             mainClass {
               id
               type
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
@@ -5295,31 +2967,21 @@ export const listMagicalItemAssignments = /* GraphQL */ `
               description
             }
             magicUser
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           manaCost
           duration
           price
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         location
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
       nextToken
-      startedAt
     }
   }
 `;
@@ -5348,14 +3010,10 @@ export const listValueRangeValuesByType = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
     }
   }
 `;
@@ -5385,9 +3043,6 @@ export const listClassesByMainClass = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -5397,14 +3052,10 @@ export const listClassesByMainClass = /* GraphQL */ `
           description
         }
         magicUser
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
     }
   }
 `;

@@ -48,7 +48,7 @@ export default Vue.extend({
   name: "App",
 
   components: {
-    "navigation-drawer": NavigationDrawer
+    "navigation-drawer": NavigationDrawer,
   },
 
   computed: mapState(["app"]),
@@ -66,8 +66,8 @@ export default Vue.extend({
       "toggleNavDrawer",
       "setAuthState",
       "loginUser",
-      "logoutUser"
-    ])
-  }
+      "logoutUser",
+    ]),
+  },
 });
 </script>

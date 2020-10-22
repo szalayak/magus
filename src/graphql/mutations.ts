@@ -16,9 +16,6 @@ export const createDie = /* GraphQL */ `
       }
       minValue
       maxValue
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -38,9 +35,6 @@ export const updateDie = /* GraphQL */ `
       }
       minValue
       maxValue
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -60,9 +54,6 @@ export const deleteDie = /* GraphQL */ `
       }
       minValue
       maxValue
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -85,17 +76,11 @@ export const createThrowScenario = /* GraphQL */ `
         }
         minValue
         maxValue
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       iterationCount
       modifier
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -118,17 +103,11 @@ export const updateThrowScenario = /* GraphQL */ `
         }
         minValue
         maxValue
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       iterationCount
       modifier
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -151,17 +130,11 @@ export const deleteThrowScenario = /* GraphQL */ `
         }
         minValue
         maxValue
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       iterationCount
       modifier
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -180,9 +153,6 @@ export const createValueRangeValue = /* GraphQL */ `
         title
         description
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -201,9 +171,6 @@ export const updateValueRangeValue = /* GraphQL */ `
         title
         description
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -222,9 +189,6 @@ export const deleteValueRangeValue = /* GraphQL */ `
         title
         description
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -246,9 +210,6 @@ export const createClass = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -258,9 +219,6 @@ export const createClass = /* GraphQL */ `
         description
       }
       magicUser
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -282,9 +240,6 @@ export const updateClass = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -294,9 +249,6 @@ export const updateClass = /* GraphQL */ `
         description
       }
       magicUser
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -318,9 +270,6 @@ export const deleteClass = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -330,9 +279,6 @@ export const deleteClass = /* GraphQL */ `
         description
       }
       magicUser
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -350,9 +296,6 @@ export const createRace = /* GraphQL */ `
         title
         description
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -370,9 +313,6 @@ export const updateRace = /* GraphQL */ `
         title
         description
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -390,9 +330,6 @@ export const deleteRace = /* GraphQL */ `
         title
         description
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -412,9 +349,6 @@ export const createPsiSchool = /* GraphQL */ `
       }
       basePsiPoints
       psiPointsPerLevel
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -434,9 +368,6 @@ export const updatePsiSchool = /* GraphQL */ `
       }
       basePsiPoints
       psiPointsPerLevel
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -456,9 +387,6 @@ export const deletePsiSchool = /* GraphQL */ `
       }
       basePsiPoints
       psiPointsPerLevel
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -480,9 +408,6 @@ export const createArmour = /* GraphQL */ `
       movementPreventionValue
       damageReductionValue
       price
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -504,9 +429,6 @@ export const updateArmour = /* GraphQL */ `
       movementPreventionValue
       damageReductionValue
       price
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -528,9 +450,6 @@ export const deleteArmour = /* GraphQL */ `
       movementPreventionValue
       damageReductionValue
       price
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -567,23 +486,14 @@ export const createShield = /* GraphQL */ `
           }
           minValue
           maxValue
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         iterationCount
         modifier
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -620,23 +530,14 @@ export const updateShield = /* GraphQL */ `
           }
           minValue
           maxValue
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         iterationCount
         modifier
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -673,23 +574,14 @@ export const deleteShield = /* GraphQL */ `
           }
           minValue
           maxValue
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         iterationCount
         modifier
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -716,9 +608,6 @@ export const createWeapon = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -743,25 +632,16 @@ export const createWeapon = /* GraphQL */ `
           }
           minValue
           maxValue
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         iterationCount
         modifier
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       attacksPerTurn
       ranged
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -788,9 +668,6 @@ export const updateWeapon = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -815,25 +692,16 @@ export const updateWeapon = /* GraphQL */ `
           }
           minValue
           maxValue
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         iterationCount
         modifier
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       attacksPerTurn
       ranged
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -860,9 +728,6 @@ export const deleteWeapon = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -887,25 +752,16 @@ export const deleteWeapon = /* GraphQL */ `
           }
           minValue
           maxValue
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         iterationCount
         modifier
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       attacksPerTurn
       ranged
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -933,17 +789,11 @@ export const createSkill = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       basicCost
       masterCost
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -971,17 +821,11 @@ export const updateSkill = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       basicCost
       masterCost
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -1009,17 +853,11 @@ export const deleteSkill = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       basicCost
       masterCost
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -1048,9 +886,6 @@ export const createMagicalItem = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -1060,18 +895,12 @@ export const createMagicalItem = /* GraphQL */ `
           description
         }
         magicUser
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       manaCost
       duration
       price
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -1100,9 +929,6 @@ export const updateMagicalItem = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -1112,18 +938,12 @@ export const updateMagicalItem = /* GraphQL */ `
           description
         }
         magicUser
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       manaCost
       duration
       price
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -1152,9 +972,6 @@ export const deleteMagicalItem = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -1164,18 +981,12 @@ export const deleteMagicalItem = /* GraphQL */ `
           description
         }
         magicUser
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       manaCost
       duration
       price
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -1198,9 +1009,6 @@ export const createThrow = /* GraphQL */ `
         }
         minValue
         maxValue
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -1210,9 +1018,6 @@ export const createThrow = /* GraphQL */ `
       throwSum
       total
       owner
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -1235,9 +1040,6 @@ export const updateThrow = /* GraphQL */ `
         }
         minValue
         maxValue
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -1247,9 +1049,6 @@ export const updateThrow = /* GraphQL */ `
       throwSum
       total
       owner
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -1272,9 +1071,6 @@ export const deleteThrow = /* GraphQL */ `
         }
         minValue
         maxValue
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -1284,9 +1080,6 @@ export const deleteThrow = /* GraphQL */ `
       throwSum
       total
       owner
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -1385,9 +1178,6 @@ export const createPlayerCharacter = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -1397,9 +1187,6 @@ export const createPlayerCharacter = /* GraphQL */ `
           description
         }
         magicUser
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -1412,9 +1199,6 @@ export const createPlayerCharacter = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -1426,9 +1210,6 @@ export const createPlayerCharacter = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -1447,9 +1228,6 @@ export const createPlayerCharacter = /* GraphQL */ `
         }
         basePsiPoints
         psiPointsPerLevel
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -1547,9 +1325,6 @@ export const createPlayerCharacter = /* GraphQL */ `
             weaponType {
               id
               type
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
@@ -1567,17 +1342,11 @@ export const createPlayerCharacter = /* GraphQL */ `
               dieId
               iterationCount
               modifier
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             attacksPerTurn
             ranged
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -1602,31 +1371,21 @@ export const createPlayerCharacter = /* GraphQL */ `
               id
               minValue
               maxValue
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             iterationCount
             modifier
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           attacksPerTurn
           ranged
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       skills {
         items {
@@ -1645,32 +1404,22 @@ export const createPlayerCharacter = /* GraphQL */ `
             skillGroup {
               id
               type
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             basicCost
             masterCost
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           mastery
           percentageValue
           skillPointsUsed
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       companions {
         items {
@@ -1704,17 +1453,11 @@ export const createPlayerCharacter = /* GraphQL */ `
               id
               minValue
               maxValue
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             iterationCount
             modifier
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -1729,9 +1472,6 @@ export const createPlayerCharacter = /* GraphQL */ `
             weaponType {
               id
               type
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
@@ -1749,17 +1489,11 @@ export const createPlayerCharacter = /* GraphQL */ `
               dieId
               iterationCount
               modifier
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             attacksPerTurn
             ranged
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -1768,15 +1502,11 @@ export const createPlayerCharacter = /* GraphQL */ `
           maxLoad
           badHabit
           specialAbilities
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       magicalItems {
         items {
@@ -1794,35 +1524,22 @@ export const createPlayerCharacter = /* GraphQL */ `
               id
               mainClassId
               magicUser
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             manaCost
             duration
             price
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           location
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -1921,9 +1638,6 @@ export const updatePlayerCharacter = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -1933,9 +1647,6 @@ export const updatePlayerCharacter = /* GraphQL */ `
           description
         }
         magicUser
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -1948,9 +1659,6 @@ export const updatePlayerCharacter = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -1962,9 +1670,6 @@ export const updatePlayerCharacter = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -1983,9 +1688,6 @@ export const updatePlayerCharacter = /* GraphQL */ `
         }
         basePsiPoints
         psiPointsPerLevel
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -2083,9 +1785,6 @@ export const updatePlayerCharacter = /* GraphQL */ `
             weaponType {
               id
               type
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
@@ -2103,17 +1802,11 @@ export const updatePlayerCharacter = /* GraphQL */ `
               dieId
               iterationCount
               modifier
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             attacksPerTurn
             ranged
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -2138,31 +1831,21 @@ export const updatePlayerCharacter = /* GraphQL */ `
               id
               minValue
               maxValue
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             iterationCount
             modifier
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           attacksPerTurn
           ranged
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       skills {
         items {
@@ -2181,32 +1864,22 @@ export const updatePlayerCharacter = /* GraphQL */ `
             skillGroup {
               id
               type
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             basicCost
             masterCost
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           mastery
           percentageValue
           skillPointsUsed
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       companions {
         items {
@@ -2240,17 +1913,11 @@ export const updatePlayerCharacter = /* GraphQL */ `
               id
               minValue
               maxValue
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             iterationCount
             modifier
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -2265,9 +1932,6 @@ export const updatePlayerCharacter = /* GraphQL */ `
             weaponType {
               id
               type
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
@@ -2285,17 +1949,11 @@ export const updatePlayerCharacter = /* GraphQL */ `
               dieId
               iterationCount
               modifier
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             attacksPerTurn
             ranged
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -2304,15 +1962,11 @@ export const updatePlayerCharacter = /* GraphQL */ `
           maxLoad
           badHabit
           specialAbilities
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       magicalItems {
         items {
@@ -2330,35 +1984,22 @@ export const updatePlayerCharacter = /* GraphQL */ `
               id
               mainClassId
               magicUser
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             manaCost
             duration
             price
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           location
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -2457,9 +2098,6 @@ export const deletePlayerCharacter = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -2469,9 +2107,6 @@ export const deletePlayerCharacter = /* GraphQL */ `
           description
         }
         magicUser
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -2484,9 +2119,6 @@ export const deletePlayerCharacter = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -2498,9 +2130,6 @@ export const deletePlayerCharacter = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -2519,9 +2148,6 @@ export const deletePlayerCharacter = /* GraphQL */ `
         }
         basePsiPoints
         psiPointsPerLevel
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -2619,9 +2245,6 @@ export const deletePlayerCharacter = /* GraphQL */ `
             weaponType {
               id
               type
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
@@ -2639,17 +2262,11 @@ export const deletePlayerCharacter = /* GraphQL */ `
               dieId
               iterationCount
               modifier
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             attacksPerTurn
             ranged
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -2674,31 +2291,21 @@ export const deletePlayerCharacter = /* GraphQL */ `
               id
               minValue
               maxValue
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             iterationCount
             modifier
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           attacksPerTurn
           ranged
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       skills {
         items {
@@ -2717,32 +2324,22 @@ export const deletePlayerCharacter = /* GraphQL */ `
             skillGroup {
               id
               type
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             basicCost
             masterCost
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           mastery
           percentageValue
           skillPointsUsed
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       companions {
         items {
@@ -2776,17 +2373,11 @@ export const deletePlayerCharacter = /* GraphQL */ `
               id
               minValue
               maxValue
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             iterationCount
             modifier
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -2801,9 +2392,6 @@ export const deletePlayerCharacter = /* GraphQL */ `
             weaponType {
               id
               type
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
@@ -2821,17 +2409,11 @@ export const deletePlayerCharacter = /* GraphQL */ `
               dieId
               iterationCount
               modifier
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             attacksPerTurn
             ranged
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -2840,15 +2422,11 @@ export const deletePlayerCharacter = /* GraphQL */ `
           maxLoad
           badHabit
           specialAbilities
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       magicalItems {
         items {
@@ -2866,35 +2444,22 @@ export const deletePlayerCharacter = /* GraphQL */ `
               id
               mainClassId
               magicUser
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             manaCost
             duration
             price
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           location
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -2991,9 +2556,6 @@ export const createNonPlayerCharacter = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -3003,9 +2565,6 @@ export const createNonPlayerCharacter = /* GraphQL */ `
           description
         }
         magicUser
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -3018,9 +2577,6 @@ export const createNonPlayerCharacter = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -3032,9 +2588,6 @@ export const createNonPlayerCharacter = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -3053,9 +2606,6 @@ export const createNonPlayerCharacter = /* GraphQL */ `
         }
         basePsiPoints
         psiPointsPerLevel
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -3133,9 +2683,6 @@ export const createNonPlayerCharacter = /* GraphQL */ `
             weaponType {
               id
               type
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
@@ -3153,17 +2700,11 @@ export const createNonPlayerCharacter = /* GraphQL */ `
               dieId
               iterationCount
               modifier
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             attacksPerTurn
             ranged
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -3188,31 +2729,21 @@ export const createNonPlayerCharacter = /* GraphQL */ `
               id
               minValue
               maxValue
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             iterationCount
             modifier
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           attacksPerTurn
           ranged
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       skills {
         items {
@@ -3231,32 +2762,22 @@ export const createNonPlayerCharacter = /* GraphQL */ `
             skillGroup {
               id
               type
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             basicCost
             masterCost
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           mastery
           percentageValue
           skillPointsUsed
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       companions {
         items {
@@ -3290,17 +2811,11 @@ export const createNonPlayerCharacter = /* GraphQL */ `
               id
               minValue
               maxValue
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             iterationCount
             modifier
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -3315,9 +2830,6 @@ export const createNonPlayerCharacter = /* GraphQL */ `
             weaponType {
               id
               type
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
@@ -3335,17 +2847,11 @@ export const createNonPlayerCharacter = /* GraphQL */ `
               dieId
               iterationCount
               modifier
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             attacksPerTurn
             ranged
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -3354,15 +2860,11 @@ export const createNonPlayerCharacter = /* GraphQL */ `
           maxLoad
           badHabit
           specialAbilities
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       magicalItems {
         items {
@@ -3380,35 +2882,22 @@ export const createNonPlayerCharacter = /* GraphQL */ `
               id
               mainClassId
               magicUser
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             manaCost
             duration
             price
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           location
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -3505,9 +2994,6 @@ export const updateNonPlayerCharacter = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -3517,9 +3003,6 @@ export const updateNonPlayerCharacter = /* GraphQL */ `
           description
         }
         magicUser
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -3532,9 +3015,6 @@ export const updateNonPlayerCharacter = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -3546,9 +3026,6 @@ export const updateNonPlayerCharacter = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -3567,9 +3044,6 @@ export const updateNonPlayerCharacter = /* GraphQL */ `
         }
         basePsiPoints
         psiPointsPerLevel
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -3647,9 +3121,6 @@ export const updateNonPlayerCharacter = /* GraphQL */ `
             weaponType {
               id
               type
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
@@ -3667,17 +3138,11 @@ export const updateNonPlayerCharacter = /* GraphQL */ `
               dieId
               iterationCount
               modifier
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             attacksPerTurn
             ranged
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -3702,31 +3167,21 @@ export const updateNonPlayerCharacter = /* GraphQL */ `
               id
               minValue
               maxValue
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             iterationCount
             modifier
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           attacksPerTurn
           ranged
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       skills {
         items {
@@ -3745,32 +3200,22 @@ export const updateNonPlayerCharacter = /* GraphQL */ `
             skillGroup {
               id
               type
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             basicCost
             masterCost
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           mastery
           percentageValue
           skillPointsUsed
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       companions {
         items {
@@ -3804,17 +3249,11 @@ export const updateNonPlayerCharacter = /* GraphQL */ `
               id
               minValue
               maxValue
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             iterationCount
             modifier
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -3829,9 +3268,6 @@ export const updateNonPlayerCharacter = /* GraphQL */ `
             weaponType {
               id
               type
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
@@ -3849,17 +3285,11 @@ export const updateNonPlayerCharacter = /* GraphQL */ `
               dieId
               iterationCount
               modifier
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             attacksPerTurn
             ranged
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -3868,15 +3298,11 @@ export const updateNonPlayerCharacter = /* GraphQL */ `
           maxLoad
           badHabit
           specialAbilities
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       magicalItems {
         items {
@@ -3894,35 +3320,22 @@ export const updateNonPlayerCharacter = /* GraphQL */ `
               id
               mainClassId
               magicUser
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             manaCost
             duration
             price
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           location
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -4019,9 +3432,6 @@ export const deleteNonPlayerCharacter = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -4031,9 +3441,6 @@ export const deleteNonPlayerCharacter = /* GraphQL */ `
           description
         }
         magicUser
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -4046,9 +3453,6 @@ export const deleteNonPlayerCharacter = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -4060,9 +3464,6 @@ export const deleteNonPlayerCharacter = /* GraphQL */ `
           title
           description
         }
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -4081,9 +3482,6 @@ export const deleteNonPlayerCharacter = /* GraphQL */ `
         }
         basePsiPoints
         psiPointsPerLevel
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -4161,9 +3559,6 @@ export const deleteNonPlayerCharacter = /* GraphQL */ `
             weaponType {
               id
               type
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
@@ -4181,17 +3576,11 @@ export const deleteNonPlayerCharacter = /* GraphQL */ `
               dieId
               iterationCount
               modifier
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             attacksPerTurn
             ranged
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -4216,31 +3605,21 @@ export const deleteNonPlayerCharacter = /* GraphQL */ `
               id
               minValue
               maxValue
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             iterationCount
             modifier
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           attacksPerTurn
           ranged
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       skills {
         items {
@@ -4259,32 +3638,22 @@ export const deleteNonPlayerCharacter = /* GraphQL */ `
             skillGroup {
               id
               type
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             basicCost
             masterCost
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           mastery
           percentageValue
           skillPointsUsed
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       companions {
         items {
@@ -4318,17 +3687,11 @@ export const deleteNonPlayerCharacter = /* GraphQL */ `
               id
               minValue
               maxValue
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             iterationCount
             modifier
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -4343,9 +3706,6 @@ export const deleteNonPlayerCharacter = /* GraphQL */ `
             weaponType {
               id
               type
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
@@ -4363,17 +3723,11 @@ export const deleteNonPlayerCharacter = /* GraphQL */ `
               dieId
               iterationCount
               modifier
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             attacksPerTurn
             ranged
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -4382,15 +3736,11 @@ export const deleteNonPlayerCharacter = /* GraphQL */ `
           maxLoad
           badHabit
           specialAbilities
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       magicalItems {
         items {
@@ -4408,35 +3758,22 @@ export const deleteNonPlayerCharacter = /* GraphQL */ `
               id
               mainClassId
               magicUser
-              _version
-              _deleted
-              _lastChangedAt
               createdAt
               updatedAt
             }
             manaCost
             duration
             price
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           location
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -4467,9 +3804,6 @@ export const createWeaponAssignment = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -4494,25 +3828,16 @@ export const createWeaponAssignment = /* GraphQL */ `
             }
             minValue
             maxValue
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           iterationCount
           modifier
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         attacksPerTurn
         ranged
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -4542,25 +3867,16 @@ export const createWeaponAssignment = /* GraphQL */ `
           }
           minValue
           maxValue
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         iterationCount
         modifier
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       attacksPerTurn
       ranged
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -4592,9 +3908,6 @@ export const updateWeaponAssignment = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -4619,25 +3932,16 @@ export const updateWeaponAssignment = /* GraphQL */ `
             }
             minValue
             maxValue
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           iterationCount
           modifier
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         attacksPerTurn
         ranged
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -4667,25 +3971,16 @@ export const updateWeaponAssignment = /* GraphQL */ `
           }
           minValue
           maxValue
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         iterationCount
         modifier
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       attacksPerTurn
       ranged
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -4717,9 +4012,6 @@ export const deleteWeaponAssignment = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -4744,25 +4036,16 @@ export const deleteWeaponAssignment = /* GraphQL */ `
             }
             minValue
             maxValue
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           iterationCount
           modifier
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         attacksPerTurn
         ranged
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -4792,25 +4075,16 @@ export const deleteWeaponAssignment = /* GraphQL */ `
           }
           minValue
           maxValue
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         iterationCount
         modifier
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       attacksPerTurn
       ranged
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -4843,26 +4117,17 @@ export const createSkillAssignment = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         basicCost
         masterCost
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       mastery
       percentageValue
       skillPointsUsed
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -4895,26 +4160,17 @@ export const updateSkillAssignment = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         basicCost
         masterCost
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       mastery
       percentageValue
       skillPointsUsed
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -4947,26 +4203,17 @@ export const deleteSkillAssignment = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         basicCost
         masterCost
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       mastery
       percentageValue
       skillPointsUsed
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -5014,17 +4261,11 @@ export const createCharacterCompanion = /* GraphQL */ `
           }
           minValue
           maxValue
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         iterationCount
         modifier
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -5044,9 +4285,6 @@ export const createCharacterCompanion = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -5071,25 +4309,16 @@ export const createCharacterCompanion = /* GraphQL */ `
             }
             minValue
             maxValue
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           iterationCount
           modifier
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         attacksPerTurn
         ranged
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -5098,9 +4327,6 @@ export const createCharacterCompanion = /* GraphQL */ `
       maxLoad
       badHabit
       specialAbilities
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -5148,17 +4374,11 @@ export const updateCharacterCompanion = /* GraphQL */ `
           }
           minValue
           maxValue
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         iterationCount
         modifier
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -5178,9 +4398,6 @@ export const updateCharacterCompanion = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -5205,25 +4422,16 @@ export const updateCharacterCompanion = /* GraphQL */ `
             }
             minValue
             maxValue
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           iterationCount
           modifier
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         attacksPerTurn
         ranged
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -5232,9 +4440,6 @@ export const updateCharacterCompanion = /* GraphQL */ `
       maxLoad
       badHabit
       specialAbilities
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -5282,17 +4487,11 @@ export const deleteCharacterCompanion = /* GraphQL */ `
           }
           minValue
           maxValue
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         iterationCount
         modifier
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -5312,9 +4511,6 @@ export const deleteCharacterCompanion = /* GraphQL */ `
             title
             description
           }
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
@@ -5339,25 +4535,16 @@ export const deleteCharacterCompanion = /* GraphQL */ `
             }
             minValue
             maxValue
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
           iterationCount
           modifier
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         attacksPerTurn
         ranged
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -5366,9 +4553,6 @@ export const deleteCharacterCompanion = /* GraphQL */ `
       maxLoad
       badHabit
       specialAbilities
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -5402,9 +4586,6 @@ export const createMagicalItemAssignment = /* GraphQL */ `
               title
               description
             }
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -5414,25 +4595,16 @@ export const createMagicalItemAssignment = /* GraphQL */ `
             description
           }
           magicUser
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         manaCost
         duration
         price
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       location
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -5466,9 +4638,6 @@ export const updateMagicalItemAssignment = /* GraphQL */ `
               title
               description
             }
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -5478,25 +4647,16 @@ export const updateMagicalItemAssignment = /* GraphQL */ `
             description
           }
           magicUser
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         manaCost
         duration
         price
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       location
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -5530,9 +4690,6 @@ export const deleteMagicalItemAssignment = /* GraphQL */ `
               title
               description
             }
-            _version
-            _deleted
-            _lastChangedAt
             createdAt
             updatedAt
           }
@@ -5542,25 +4699,16 @@ export const deleteMagicalItemAssignment = /* GraphQL */ `
             description
           }
           magicUser
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         manaCost
         duration
         price
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       location
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner

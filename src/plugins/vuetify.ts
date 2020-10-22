@@ -9,18 +9,18 @@ Vue.use(VueI18n);
 
 const messages = {
   en: { $vuetify: en },
-  hu: { $vuetify: hu }
+  hu: { $vuetify: hu },
 };
 
 const i18n = new VueI18n({
   locale: "en", // set locale
-  messages // set locale messages
+  messages, // set locale messages
 });
 
 export default new Vuetify({
   lang: {
     t: (key: string, ...params: unknown[]) => i18n.t(key, params) as string,
     locales: { en, hu },
-    current: "en"
-  }
+    current: "en",
+  },
 });

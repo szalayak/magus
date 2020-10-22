@@ -1,6 +1,7 @@
 <template>
   <v-navigation-drawer v-model="navDrawerOpen" absolute temporary>
     <v-list nav dense>
+      <v-subheader>General</v-subheader>
       <v-list-item to="/">
         <v-list-item-icon>
           <v-icon>mdi-home</v-icon>
@@ -15,6 +16,15 @@
         </v-list-item-icon>
         <v-list-item-title>
           About
+        </v-list-item-title>
+      </v-list-item>
+      <v-subheader>Admin</v-subheader>
+      <v-list-item to="/dice">
+        <v-list-item-icon>
+          <v-icon>mdi-dice-5</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title>
+          Dice
         </v-list-item-title>
       </v-list-item>
     </v-list>
@@ -32,9 +42,9 @@ export default Vue.extend({
       },
       set(value) {
         this.toggleNavDrawer(value);
-      }
-    }
+      },
+    },
   },
-  methods: mapMutations(["toggleNavDrawer"])
+  methods: mapMutations(["toggleNavDrawer"]),
 });
 </script>
