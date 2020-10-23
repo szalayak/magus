@@ -25,7 +25,7 @@ enum LanguageLevel {
   LLM
 }
 
-enum Mastery{
+enum Mastery {
   BASIC
   MASTER
 }
@@ -37,19 +37,22 @@ enum ValueRangeType {
   SKILL_GROUP
 }
 
-type Die @model @auth(rules: [{ allow: private }]) {
-  id: ID!
-  descriptions: [Description!]!
-  minValue: Int!
-  maxValue: Int!
+enum Dice {
+  D1
+  D2
+  D3
+  D4
+  D5
+  D6
+  D8
+  D10
+  D100
 }
 
-type ThrowScenario @model @auth(rules: [{ allow: private }]) {
-  id: ID!
-  dieId: ID!
-  die: Die! @connection(fields: ["dieId"])
+type ThrowScenario {
+  dice: Dice!
   iterationCount: Int!
-  modifier: Int
+  modifier: Int!
 }
 
 type ValueRangeValue
@@ -107,7 +110,7 @@ type Shield @model @auth(rules: [{ allow: private }]) {
   descriptions: [Description!]!
   combatValues: CombatValues!
   weight: String
-  damage: ThrowScenario! @connection
+  damage: ThrowScenario!
 }
 
 type Weapon @model @auth(rules: [{ allow: private }]) {
@@ -120,7 +123,7 @@ type Weapon @model @auth(rules: [{ allow: private }]) {
   price: Int
   attackRange: Int
   combatValues: CombatValues!
-  damage: ThrowScenario! @connection
+  damage: ThrowScenario!
   attacksPerTurn: Float!
   ranged: Boolean
 }
@@ -149,10 +152,7 @@ type Throw
   @model
   @auth(rules: [{ allow: owner }, { allow: private, operations: [read] }]) {
   id: ID!
-  dieId: ID!
-  die: Die! @connection(fields: ["dieId"])
-  iterationCount: Int!
-  modifier: Int
+  throwScenario: ThrowScenario
   throwResults: [Int!]!
   throwSum: Int!
   total: Int!
@@ -191,9 +191,9 @@ type CharacterBasicInfo {
   fame: Int
   religion: String
   country: String
-  school: String  
+  school: String
   holySymbol: S3Object
-  coatOfArms: S3Object  
+  coatOfArms: S3Object
 }
 
 type CharacterLevel {
@@ -312,13 +312,16 @@ type PlayerCharacter
   inventory: [InventoryItem!]
   poisons: [Poison!]
   notes: [String]
-  weapons: [WeaponAssignment!] @connection(keyName: "byCharacter", fields: ["id"])
-  skills: [SkillAssignment!] @connection(keyName: "byCharacter", fields:["id"])
-  companions: [CharacterCompanion!] @connection(keyName: "byCharacter", fields:["id"]) 
-  magicalItems: [MagicalItemAssignment!] @connection(keyName: "byCharacter", fields:["id"])  
+  weapons: [WeaponAssignment!]
+    @connection(keyName: "byCharacter", fields: ["id"])
+  skills: [SkillAssignment!] @connection(keyName: "byCharacter", fields: ["id"])
+  companions: [CharacterCompanion!]
+    @connection(keyName: "byCharacter", fields: ["id"])
+  magicalItems: [MagicalItemAssignment!]
+    @connection(keyName: "byCharacter", fields: ["id"])
 }
 
-type NonPlayerCharacter @model @auth(rules: [{allow: owner}]){
+type NonPlayerCharacter @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   name: String!
   owner: String
@@ -329,7 +332,7 @@ type NonPlayerCharacter @model @auth(rules: [{allow: owner}]){
   class: Class @connection
   subclass: String
   specialisation: String
-  race: Race @connection  
+  race: Race @connection
   personality(type: ValueRangeType = PERSONALITY): ValueRangeValue @connection
   level: CharacterLevel
   psiUser: Boolean
@@ -339,25 +342,25 @@ type NonPlayerCharacter @model @auth(rules: [{allow: owner}]){
   spellResistance: SpellResistance
   magicUser: Boolean
   magicalAbility: MagicalAbility
-  combatValues: CombatValues  
+  combatValues: CombatValues
   wallet: Wallet
   languages: [LanguageAbility!]
   inventory: [InventoryItem!]
   poisons: [Poison!]
   notes: [String]
-  weapons: [WeaponAssignment!] @connection(keyName: "byCharacter", fields: ["id"])
-  skills: [SkillAssignment!] @connection(keyName: "byCharacter", fields:["id"])
-  companions: [CharacterCompanion!] @connection(keyName: "byCharacter", fields:["id"]) 
-  magicalItems: [MagicalItemAssignment!] @connection(keyName: "byCharacter", fields:["id"])    
+  weapons: [WeaponAssignment!]
+    @connection(keyName: "byCharacter", fields: ["id"])
+  skills: [SkillAssignment!] @connection(keyName: "byCharacter", fields: ["id"])
+  companions: [CharacterCompanion!]
+    @connection(keyName: "byCharacter", fields: ["id"])
+  magicalItems: [MagicalItemAssignment!]
+    @connection(keyName: "byCharacter", fields: ["id"])
 }
 
-type WeaponAssignment @model @key(name:"byCharacter", fields:["characterId"]) @auth
-(
-    rules: [
-      { allow: owner }
-    ]
-  )
-{
+type WeaponAssignment
+  @model
+  @key(name: "byCharacter", fields: ["characterId"])
+  @auth(rules: [{ allow: owner }]) {
   id: ID!
   characterId: ID!
   custom: Boolean
@@ -367,62 +370,53 @@ type WeaponAssignment @model @key(name:"byCharacter", fields:["characterId"]) @a
   price: Int
   attackRange: Int
   combatValues: CombatValues
-  damage: ThrowScenario @connection
+  damage: ThrowScenario
   attacksPerTurn: Float
   ranged: Boolean
 }
 
-type SkillAssignment @model @key(name:"byCharacter", fields:["characterId"]) @auth
-(
-    rules: [
-      { allow: owner }
-    ]
-  )
-{
+type SkillAssignment
+  @model
+  @key(name: "byCharacter", fields: ["characterId"])
+  @auth(rules: [{ allow: owner }]) {
   id: ID!
   characterId: ID!
   skillId: ID!
   skill: Skill @connection(fields: ["skillId"])
   mastery: Mastery
   percentageValue: Int
-  skillPointsUsed: Int  
+  skillPointsUsed: Int
 }
 
-enum CompanionType{
+enum CompanionType {
   MOUNT
   ANIMAL
   SERVANT
 }
 
-type CharacterCompanion @model @key(name:"byCharacter", fields:["characterId"]) @auth
-(
-    rules: [
-      { allow: owner }
-    ]
-  )
-{
+type CharacterCompanion
+  @model
+  @key(name: "byCharacter", fields: ["characterId"])
+  @auth(rules: [{ allow: owner }]) {
   id: ID!
   characterId: ID!
   name: String!
   type: CompanionType!
   health: HealthInformation
   combatValues: CombatValues
-  damage: ThrowScenario @connection
+  damage: ThrowScenario
   weapon: Weapon @connection
   attacksPerTurn: Float
   maxDistance: String
   maxLoad: String
   badHabit: String
   specialAbilities: String
-}    
+}
 
-type MagicalItemAssignment @model @key(name:"byCharacter", fields:["characterId"]) @auth
-(
-    rules: [
-      { allow: owner }
-    ]
-  )
-{
+type MagicalItemAssignment
+  @model
+  @key(name: "byCharacter", fields: ["characterId"])
+  @auth(rules: [{ allow: owner }]) {
   id: ID!
   characterId: ID!
   magicalItemId: ID!

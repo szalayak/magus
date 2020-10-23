@@ -1,19 +1,20 @@
 <template>
   <v-container fluid>
     <v-row justify="center">
-      <dice-table />
+      <race-admin />
     </v-row>
   </v-container>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import DiceTable from "../components/DiceTable.vue";
+import RaceAdmin from "@/components/admin/RaceAdmin.vue";
 
 @Component({
+  name: "races",
   components: {
-    "dice-table": DiceTable,
+    "race-admin": RaceAdmin,
   },
 })
-export default class Dice extends Vue {}
+export default class Races extends Vue {}
 </script>

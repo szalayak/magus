@@ -19,12 +19,12 @@
         </v-list-item-title>
       </v-list-item>
       <v-subheader>Admin</v-subheader>
-      <v-list-item to="/dice">
+      <v-list-item to="/races">
         <v-list-item-icon>
-          <v-icon>mdi-dice-5</v-icon>
+          <v-icon>mdi-account-multiple</v-icon>
         </v-list-item-icon>
         <v-list-item-title>
-          Dice
+          Races
         </v-list-item-title>
       </v-list-item>
     </v-list>

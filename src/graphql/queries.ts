@@ -2,100 +2,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getDie = /* GraphQL */ `
-  query GetDie($id: ID!) {
-    getDie(id: $id) {
-      id
-      descriptions {
-        locale
-        title
-        description
-      }
-      minValue
-      maxValue
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listDies = /* GraphQL */ `
-  query ListDies(
-    $filter: ModelDieFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listDies(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        descriptions {
-          locale
-          title
-          description
-        }
-        minValue
-        maxValue
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getThrowScenario = /* GraphQL */ `
-  query GetThrowScenario($id: ID!) {
-    getThrowScenario(id: $id) {
-      id
-      dieId
-      die {
-        id
-        descriptions {
-          locale
-          title
-          description
-        }
-        minValue
-        maxValue
-        createdAt
-        updatedAt
-      }
-      iterationCount
-      modifier
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listThrowScenarios = /* GraphQL */ `
-  query ListThrowScenarios(
-    $filter: ModelThrowScenarioFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listThrowScenarios(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        dieId
-        die {
-          id
-          descriptions {
-            locale
-            title
-            description
-          }
-          minValue
-          maxValue
-          createdAt
-          updatedAt
-        }
-        iterationCount
-        modifier
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
 export const getValueRangeValue = /* GraphQL */ `
   query GetValueRangeValue($id: ID!) {
     getValueRangeValue(id: $id) {
@@ -332,24 +238,9 @@ export const getShield = /* GraphQL */ `
       }
       weight
       damage {
-        id
-        dieId
-        die {
-          id
-          descriptions {
-            locale
-            title
-            description
-          }
-          minValue
-          maxValue
-          createdAt
-          updatedAt
-        }
+        dice
         iterationCount
         modifier
-        createdAt
-        updatedAt
       }
       createdAt
       updatedAt
@@ -378,24 +269,9 @@ export const listShields = /* GraphQL */ `
         }
         weight
         damage {
-          id
-          dieId
-          die {
-            id
-            descriptions {
-              locale
-              title
-              description
-            }
-            minValue
-            maxValue
-            createdAt
-            updatedAt
-          }
+          dice
           iterationCount
           modifier
-          createdAt
-          updatedAt
         }
         createdAt
         updatedAt
@@ -435,24 +311,9 @@ export const getWeapon = /* GraphQL */ `
         aiming
       }
       damage {
-        id
-        dieId
-        die {
-          id
-          descriptions {
-            locale
-            title
-            description
-          }
-          minValue
-          maxValue
-          createdAt
-          updatedAt
-        }
+        dice
         iterationCount
         modifier
-        createdAt
-        updatedAt
       }
       attacksPerTurn
       ranged
@@ -497,24 +358,9 @@ export const listWeapons = /* GraphQL */ `
           aiming
         }
         damage {
-          id
-          dieId
-          die {
-            id
-            descriptions {
-              locale
-              title
-              description
-            }
-            minValue
-            maxValue
-            createdAt
-            updatedAt
-          }
+          dice
           iterationCount
           modifier
-          createdAt
-          updatedAt
         }
         attacksPerTurn
         ranged
@@ -681,21 +527,11 @@ export const getThrow = /* GraphQL */ `
   query GetThrow($id: ID!) {
     getThrow(id: $id) {
       id
-      dieId
-      die {
-        id
-        descriptions {
-          locale
-          title
-          description
-        }
-        minValue
-        maxValue
-        createdAt
-        updatedAt
+      throwScenario {
+        dice
+        iterationCount
+        modifier
       }
-      iterationCount
-      modifier
       throwResults
       throwSum
       total
@@ -714,21 +550,11 @@ export const listThrows = /* GraphQL */ `
     listThrows(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        dieId
-        die {
-          id
-          descriptions {
-            locale
-            title
-            description
-          }
-          minValue
-          maxValue
-          createdAt
-          updatedAt
+        throwScenario {
+          dice
+          iterationCount
+          modifier
         }
-        iterationCount
-        modifier
         throwResults
         throwSum
         total
@@ -990,12 +816,9 @@ export const getPlayerCharacter = /* GraphQL */ `
               aiming
             }
             damage {
-              id
-              dieId
+              dice
               iterationCount
               modifier
-              createdAt
-              updatedAt
             }
             attacksPerTurn
             ranged
@@ -1017,19 +840,9 @@ export const getPlayerCharacter = /* GraphQL */ `
             aiming
           }
           damage {
-            id
-            dieId
-            die {
-              id
-              minValue
-              maxValue
-              createdAt
-              updatedAt
-            }
+            dice
             iterationCount
             modifier
-            createdAt
-            updatedAt
           }
           attacksPerTurn
           ranged
@@ -1099,19 +912,9 @@ export const getPlayerCharacter = /* GraphQL */ `
             aiming
           }
           damage {
-            id
-            dieId
-            die {
-              id
-              minValue
-              maxValue
-              createdAt
-              updatedAt
-            }
+            dice
             iterationCount
             modifier
-            createdAt
-            updatedAt
           }
           weapon {
             id
@@ -1137,12 +940,9 @@ export const getPlayerCharacter = /* GraphQL */ `
               aiming
             }
             damage {
-              id
-              dieId
+              dice
               iterationCount
               modifier
-              createdAt
-              updatedAt
             }
             attacksPerTurn
             ranged
@@ -1458,12 +1258,9 @@ export const listPlayerCharacters = /* GraphQL */ `
               aiming
             }
             damage {
-              id
-              dieId
+              dice
               iterationCount
               modifier
-              createdAt
-              updatedAt
             }
             attacksPerTurn
             ranged
@@ -1514,12 +1311,9 @@ export const listPlayerCharacters = /* GraphQL */ `
               aiming
             }
             damage {
-              id
-              dieId
+              dice
               iterationCount
               modifier
-              createdAt
-              updatedAt
             }
             weapon {
               id
@@ -1798,12 +1592,9 @@ export const getNonPlayerCharacter = /* GraphQL */ `
               aiming
             }
             damage {
-              id
-              dieId
+              dice
               iterationCount
               modifier
-              createdAt
-              updatedAt
             }
             attacksPerTurn
             ranged
@@ -1825,19 +1616,9 @@ export const getNonPlayerCharacter = /* GraphQL */ `
             aiming
           }
           damage {
-            id
-            dieId
-            die {
-              id
-              minValue
-              maxValue
-              createdAt
-              updatedAt
-            }
+            dice
             iterationCount
             modifier
-            createdAt
-            updatedAt
           }
           attacksPerTurn
           ranged
@@ -1907,19 +1688,9 @@ export const getNonPlayerCharacter = /* GraphQL */ `
             aiming
           }
           damage {
-            id
-            dieId
-            die {
-              id
-              minValue
-              maxValue
-              createdAt
-              updatedAt
-            }
+            dice
             iterationCount
             modifier
-            createdAt
-            updatedAt
           }
           weapon {
             id
@@ -1945,12 +1716,9 @@ export const getNonPlayerCharacter = /* GraphQL */ `
               aiming
             }
             damage {
-              id
-              dieId
+              dice
               iterationCount
               modifier
-              createdAt
-              updatedAt
             }
             attacksPerTurn
             ranged
@@ -2244,12 +2012,9 @@ export const listNonPlayerCharacters = /* GraphQL */ `
               aiming
             }
             damage {
-              id
-              dieId
+              dice
               iterationCount
               modifier
-              createdAt
-              updatedAt
             }
             attacksPerTurn
             ranged
@@ -2300,12 +2065,9 @@ export const listNonPlayerCharacters = /* GraphQL */ `
               aiming
             }
             damage {
-              id
-              dieId
+              dice
               iterationCount
               modifier
-              createdAt
-              updatedAt
             }
             weapon {
               id
@@ -2391,24 +2153,9 @@ export const getWeaponAssignment = /* GraphQL */ `
           aiming
         }
         damage {
-          id
-          dieId
-          die {
-            id
-            descriptions {
-              locale
-              title
-              description
-            }
-            minValue
-            maxValue
-            createdAt
-            updatedAt
-          }
+          dice
           iterationCount
           modifier
-          createdAt
-          updatedAt
         }
         attacksPerTurn
         ranged
@@ -2430,24 +2177,9 @@ export const getWeaponAssignment = /* GraphQL */ `
         aiming
       }
       damage {
-        id
-        dieId
-        die {
-          id
-          descriptions {
-            locale
-            title
-            description
-          }
-          minValue
-          maxValue
-          createdAt
-          updatedAt
-        }
+        dice
         iterationCount
         modifier
-        createdAt
-        updatedAt
       }
       attacksPerTurn
       ranged
@@ -2501,19 +2233,9 @@ export const listWeaponAssignments = /* GraphQL */ `
             aiming
           }
           damage {
-            id
-            dieId
-            die {
-              id
-              minValue
-              maxValue
-              createdAt
-              updatedAt
-            }
+            dice
             iterationCount
             modifier
-            createdAt
-            updatedAt
           }
           attacksPerTurn
           ranged
@@ -2535,24 +2257,9 @@ export const listWeaponAssignments = /* GraphQL */ `
           aiming
         }
         damage {
-          id
-          dieId
-          die {
-            id
-            descriptions {
-              locale
-              title
-              description
-            }
-            minValue
-            maxValue
-            createdAt
-            updatedAt
-          }
+          dice
           iterationCount
           modifier
-          createdAt
-          updatedAt
         }
         attacksPerTurn
         ranged
@@ -2682,24 +2389,9 @@ export const getCharacterCompanion = /* GraphQL */ `
         aiming
       }
       damage {
-        id
-        dieId
-        die {
-          id
-          descriptions {
-            locale
-            title
-            description
-          }
-          minValue
-          maxValue
-          createdAt
-          updatedAt
-        }
+        dice
         iterationCount
         modifier
-        createdAt
-        updatedAt
       }
       weapon {
         id
@@ -2730,24 +2422,9 @@ export const getCharacterCompanion = /* GraphQL */ `
           aiming
         }
         damage {
-          id
-          dieId
-          die {
-            id
-            descriptions {
-              locale
-              title
-              description
-            }
-            minValue
-            maxValue
-            createdAt
-            updatedAt
-          }
+          dice
           iterationCount
           modifier
-          createdAt
-          updatedAt
         }
         attacksPerTurn
         ranged
@@ -2801,24 +2478,9 @@ export const listCharacterCompanions = /* GraphQL */ `
           aiming
         }
         damage {
-          id
-          dieId
-          die {
-            id
-            descriptions {
-              locale
-              title
-              description
-            }
-            minValue
-            maxValue
-            createdAt
-            updatedAt
-          }
+          dice
           iterationCount
           modifier
-          createdAt
-          updatedAt
         }
         weapon {
           id
@@ -2849,19 +2511,9 @@ export const listCharacterCompanions = /* GraphQL */ `
             aiming
           }
           damage {
-            id
-            dieId
-            die {
-              id
-              minValue
-              maxValue
-              createdAt
-              updatedAt
-            }
+            dice
             iterationCount
             modifier
-            createdAt
-            updatedAt
           }
           attacksPerTurn
           ranged
