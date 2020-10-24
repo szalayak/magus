@@ -5942,14 +5942,14 @@ export type GetClassQuery = {
   } | null,
 };
 
-export type ListClasssQueryVariables = {
+export type ListClassesQueryVariables = {
   filter?: ModelClassFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListClasssQuery = {
-  listClasss:  {
+export type ListClassesQuery = {
+  listClasses:  {
     __typename: "ModelClassConnection",
     items:  Array< {
       __typename: "Class",

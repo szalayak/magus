@@ -69,7 +69,7 @@ type ValueRangeValue
 }
 
 type Class
-  @model
+  @model(queries: { list: "listClasses", get: "getClass" })
   @auth(rules: [{ allow: private }])
   @key(
     name: "classesByMainClass"

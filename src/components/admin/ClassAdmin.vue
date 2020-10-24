@@ -9,12 +9,12 @@
   >
     <template v-slot:top>
       <v-toolbar flat>
-        <v-toolbar-title>{{ $t("value-ranges") }}</v-toolbar-title>
+        <v-toolbar-title>{{ $t("classes") }}</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="auto">
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-              {{ $t("new-value") }}
+              {{ $t("new-class") }}
             </v-btn>
           </template>
           <v-card>
@@ -25,7 +25,7 @@
               <v-form v-model="valid">
                 <v-container>
                   <v-row>
-                    <v-col cols="12" sm="12" md="6">
+                    <v-col cols="12">
                       <v-text-field
                         v-model="editedItem.id"
                         :disabled="!isNewItem"
@@ -36,14 +36,21 @@
                     </v-col>
                     <v-col cols="12" sm="12" md="6">
                       <v-select
-                        v-model="editedItem.type"
-                        :items="valueRangeTypes"
-                        item-text="title"
+                        v-model="editedItem.mainClass"
+                        :items="mainClasses"
+                        item-text="description.title"
                         item-value="id"
-                        :label="$t('type')"
+                        :label="$t('main-class')"
                         single-line
+                        return-object
                         outlined
                       ></v-select>
+                    </v-col>
+                    <v-col cols="12" sm="12" md="6">
+                      <v-checkbox
+                        v-model="editedItem.magicUser"
+                        :label="$t('magic-user')"
+                      />
                     </v-col>
                   </v-row>
                   <v-row>
@@ -138,50 +145,68 @@
   </v-data-table>
 </template>
 <script lang="ts">
-import { Race } from "@/store/modules/race";
-import { localise, getDescriptionsForLocales } from "@/utils/localise";
-import { getValueRangeTypes } from "@/utils/valueRangeTypes";
+import {
+  localise,
+  getDescriptionsForLocales,
+  localiseItem,
+} from "@/utils/localise";
 import Component from "vue-class-component";
 import Vue from "vue";
+import { Class } from "@/store/modules/class";
 import { ValueRange } from "@/store/modules/valueRange";
+import { Locale, ValueRangeType } from "@/API";
 
 @Component({
-  name: "value-range-admin",
+  name: "class-admin",
 })
-export default class ValueRangeAdmin extends Vue {
+export default class ClassAdmin extends Vue {
   dialog = false;
   valid = true;
   headers = [
     { text: this.$t("id"), value: "id" },
-    { text: this.$t("type"), value: "typeTitle" },
+    { text: this.$t("main-class"), value: "mainClass.description.title" },
     { text: this.$t("title"), value: "description.title" },
     { text: this.$t("actions"), value: "actions", sortable: false },
   ];
   sortBy = ["description.title"];
   editedIndex = -1;
   dialogDelete = false;
-  editedItem: ValueRange = {
+  editedItem: Class = {
     id: "",
+    mainClass: {
+      id: "",
+      description: { locale: this.$i18n.locale as Locale, title: "" },
+    },
     descriptions: getDescriptionsForLocales(),
   };
-  defaultItem: ValueRange = {
+  defaultItem: Class = {
     id: "",
+    mainClass: {
+      id: "",
+      description: { locale: this.$i18n.locale as Locale, title: "" },
+    },
     descriptions: getDescriptionsForLocales(),
   };
-  valueRangeTypes = getValueRangeTypes(this.$i18n);
 
-  get items(): ValueRange[] {
+  get items(): Class[] {
     const items = localise(
-      this.$store.state.valueRange.result?.listValueRangeValues?.items,
+      this.$store.state.class.result?.listClasses?.items,
       this.$i18n.locale
-    ) as ValueRange[];
+    ) as Class[];
     return items.map(
       item =>
         ({
           ...item,
-          typeTitle: this.$t(item.type as string),
-        } as ValueRange)
+          mainClass: item.mainClass
+            ? localiseItem(item.mainClass, this.$i18n.locale)
+            : undefined,
+        } as Class)
     );
+  }
+
+  get mainClasses(): ValueRange[] {
+    const mainClasses = this.$store.getters["valueRange/getMainClasses"];
+    return localise(mainClasses, this.$i18n.locale) as ValueRange[];
   }
 
   get isNewItem() {
@@ -190,25 +215,25 @@ export default class ValueRangeAdmin extends Vue {
 
   get formTitle() {
     return this.editedIndex === -1
-      ? this.$t("new-value")
-      : this.$t("edit-value");
+      ? this.$t("new-class")
+      : this.$t("edit-class");
   }
 
   refresh() {
-    this.$store.dispatch("valueRange/load");
+    this.$store.dispatch("class/load");
   }
   close() {
     this.dialog = false;
   }
   save() {
     this.$store.dispatch(
-      this.isNewItem ? "valueRange/create" : "valueRange/update",
+      this.isNewItem ? "class/create" : "class/update",
       this.editedItem
     );
     this.dialog = false;
   }
   deleteItemConfirm() {
-    this.$store.dispatch("valueRange/delete", this.editedItem.id);
+    this.$store.dispatch("class/delete", this.editedItem.id);
     this.closeDelete();
   }
   closeDelete() {
@@ -218,18 +243,21 @@ export default class ValueRangeAdmin extends Vue {
       this.editedIndex = -1;
     });
   }
-  editItem(item: Race) {
+  editItem(item: Class) {
     this.editedIndex = this.items.indexOf(item);
     this.editedItem = Object.assign({}, item);
     this.dialog = true;
   }
-  deleteItem(item: Race) {
+  deleteItem(item: Class) {
     this.editedIndex = this.items.indexOf(item);
     this.editedItem = Object.assign({}, item);
     this.dialogDelete = true;
   }
   mounted() {
     this.refresh();
+  }
+  created() {
+    this.$store.dispatch("valueRange/loadByType", ValueRangeType.MAIN_CLASS);
   }
 }
 </script>

@@ -5,6 +5,7 @@ import { Auth } from "aws-amplify";
 import race, { RaceState } from "./modules/race";
 import valueRange, { ValueRangeState } from "./modules/valueRange";
 import { Locale } from "@/API";
+import classModule, { ClassState } from "./modules/class";
 
 Vue.use(Vuex);
 
@@ -31,7 +32,8 @@ export interface AppState {
 export interface RootState {
   app: AppState;
   race?: RaceState;
-  valueRange: ValueRangeState;
+  valueRange?: ValueRangeState;
+  class?: ClassState;
 }
 
 export interface Description {
@@ -41,7 +43,7 @@ export interface Description {
 }
 
 export interface Describable {
-  descriptions: Description[];
+  descriptions?: Description[];
   description?: Description;
 }
 
@@ -79,5 +81,6 @@ export default new Vuex.Store<RootState>({
   modules: {
     race,
     valueRange,
+    class: classModule,
   },
 });

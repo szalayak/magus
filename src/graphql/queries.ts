@@ -70,13 +70,13 @@ export const getClass = /* GraphQL */ `
     }
   }
 `;
-export const listClasss = /* GraphQL */ `
-  query ListClasss(
+export const listClasses = /* GraphQL */ `
+  query ListClasses(
     $filter: ModelClassFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listClasss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listClasses(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         mainClassId

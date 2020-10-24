@@ -10,7 +10,6 @@
     <template v-slot:top>
       <v-toolbar flat>
         <v-toolbar-title>{{ $t("races") }}</v-toolbar-title>
-        <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="auto">
           <template v-slot:activator="{ on, attrs }">

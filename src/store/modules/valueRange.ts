@@ -1,5 +1,6 @@
 import {
   CreateValueRangeValueMutation,
+  ListValueRangeValuesByTypeQuery,
   ListValueRangeValuesQuery,
   UpdateValueRangeValueMutation,
   ValueRangeType,
@@ -9,7 +10,10 @@ import {
   deleteValueRangeValue,
   updateValueRangeValue,
 } from "@/graphql/mutations";
-import { listValueRangeValues } from "@/graphql/queries";
+import {
+  listValueRangeValues,
+  listValueRangeValuesByType,
+} from "@/graphql/queries";
 import { API } from "aws-amplify";
 import { Module } from "vuex";
 import { Describable, RootState } from "..";
@@ -30,12 +34,47 @@ const race: Module<ValueRangeState, RootState> = {
     ({
       result: {},
     } as ValueRangeState),
+  getters: {
+    getMainClasses(state) {
+      return state.result?.listValueRangeValues?.items?.filter(item => {
+        return item?.type === ValueRangeType.MAIN_CLASS;
+      });
+    },
+    getPersonalities(state) {
+      return state.result?.listValueRangeValues?.items?.filter(item => {
+        return item?.type === ValueRangeType.PERSONALITY;
+      });
+    },
+    getSkillGroups(state) {
+      return state.result?.listValueRangeValues?.items?.filter(item => {
+        return item?.type === ValueRangeType.SKILL_GROUP;
+      });
+    },
+    getWeaponTypes(state) {
+      return state.result?.listValueRangeValues?.items?.filter(item => {
+        return item?.type === ValueRangeType.WEAPON_TYPE;
+      });
+    },
+  },
   mutations: {
     set(state, result: ListValueRangeValuesQuery) {
       state.result = result;
     },
     add(state, newItem) {
       state.result?.listValueRangeValues?.items?.push(newItem);
+    },
+    merge(state, result: ListValueRangeValuesByTypeQuery) {
+      if (state.result?.listValueRangeValues?.items) {
+        const newItems = result.listValueRangeValuesByType?.items;
+        if (newItems) {
+          state.result?.listValueRangeValues?.items?.concat(newItems);
+        }
+      } else {
+        const typeRes: ListValueRangeValuesQuery = {
+          listValueRangeValues: result.listValueRangeValuesByType,
+        };
+        state.result = typeRes;
+      }
     },
     change(state, updateItem) {
       const oldState = state.result?.listValueRangeValues?.items?.find(
@@ -64,6 +103,15 @@ const race: Module<ValueRangeState, RootState> = {
         data: ListValueRangeValuesQuery;
       };
       context.commit("set", result);
+    },
+    async loadByType(context, type: ValueRangeType) {
+      const { data: result } = (await API.graphql({
+        query: listValueRangeValuesByType,
+        variables: { type },
+      })) as {
+        data: ListValueRangeValuesByTypeQuery;
+      };
+      context.commit("merge", result);
     },
     async create(context, item: ValueRange) {
       const {
