@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row justify="center">
       <v-col cols="12">
-        <race-admin />
+        <value-range-admin />
       </v-col>
     </v-row>
   </v-container>
@@ -10,13 +10,13 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import RaceAdmin from "@/components/admin/RaceAdmin.vue";
+import ValueRangeAdmin from "@/components/admin/ValueRangeAdmin.vue";
 
 @Component({
   name: "races",
   components: {
-    "race-admin": RaceAdmin,
+    "value-range-admin": ValueRangeAdmin,
   },
 })
-export default class Races extends Vue {}
+export default class ValueRanges extends Vue {}
 </script>

@@ -52,33 +52,33 @@ const race: Module<RaceState, RootState> = {
       };
       context.commit("set", result);
     },
-    async create(context, race: Race) {
+    async create(context, item: Race) {
       const {
-        data: { createRace: newRace },
+        data: { createRace: newItem },
       } = (await API.graphql({
         query: createRace,
         variables: {
           input: {
-            id: race.id.length > 0 ? race.id : null,
-            descriptions: race.descriptions,
+            id: item.id.length > 0 ? item.id : null,
+            descriptions: item.descriptions,
           },
         },
       })) as { data: CreateRaceMutation };
-      context.commit("add", newRace);
+      context.commit("add", newItem);
     },
-    async update(context, race: Race) {
+    async update(context, item: Race) {
       const {
-        data: { updateRace: updatedRace },
+        data: { updateRace: updatedItem },
       } = (await API.graphql({
         query: updateRace,
         variables: {
           input: {
-            id: race.id,
-            descriptions: race.descriptions,
+            id: item.id,
+            descriptions: item.descriptions,
           },
         },
       })) as { data: UpdateRaceMutation };
-      context.commit("change", updatedRace);
+      context.commit("change", updatedItem);
     },
     async delete(context, id: string) {
       await API.graphql({ query: deleteRace, variables: { input: { id } } });

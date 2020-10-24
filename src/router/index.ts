@@ -25,6 +25,12 @@ const routes: Array<RouteConfig> = [
     component: () =>
       import(/* webpackChunkName: "dice" */ "../views/Races.vue"),
   },
+  {
+    path: "/value-ranges",
+    name: "Value Ranges",
+    component: () =>
+      import(/* webpackChunkName: "dice" */ "../views/ValueRanges.vue"),
+  },
 ];
 
 const router = new VueRouter({

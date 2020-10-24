@@ -7,7 +7,7 @@
           <v-icon>mdi-home</v-icon>
         </v-list-item-icon>
         <v-list-item-title>
-          Home
+          {{ $t("home") }}
         </v-list-item-title>
       </v-list-item>
       <v-list-item to="/about">
@@ -15,16 +15,24 @@
           <v-icon>mdi-information</v-icon>
         </v-list-item-icon>
         <v-list-item-title>
-          About
+          {{ $t("about") }}
         </v-list-item-title>
       </v-list-item>
       <v-subheader>Admin</v-subheader>
+      <v-list-item to="/value-ranges">
+        <v-list-item-icon>
+          <v-icon>mdi-code-braces</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title>
+          {{ $t("value-ranges") }}
+        </v-list-item-title>
+      </v-list-item>
       <v-list-item to="/races">
         <v-list-item-icon>
           <v-icon>mdi-account-multiple</v-icon>
         </v-list-item-icon>
         <v-list-item-title>
-          Races
+          {{ $t("races") }}
         </v-list-item-title>
       </v-list-item>
     </v-list>

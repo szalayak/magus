@@ -9,13 +9,13 @@
   >
     <template v-slot:top>
       <v-toolbar flat>
-        <v-toolbar-title>{{ $t("races") }}</v-toolbar-title>
+        <v-toolbar-title>{{ $t("value-ranges") }}</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="auto">
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-              {{ $t("new-race") }}
+              {{ $t("new-value") }}
             </v-btn>
           </template>
           <v-card>
@@ -26,7 +26,7 @@
               <v-form v-model="valid">
                 <v-container>
                   <v-row>
-                    <v-col cols="12" sm="12">
+                    <v-col cols="12" sm="12" md="6">
                       <v-text-field
                         v-model="editedItem.id"
                         :disabled="!isNewItem"
@@ -34,6 +34,17 @@
                         :hint="$t('id-empty-auto-generated-message')"
                         outlined
                       ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="12" md="6">
+                      <v-select
+                        v-model="editedItem.type"
+                        :items="valueRangeTypes"
+                        item-text="title"
+                        item-value="id"
+                        :label="$t('type')"
+                        single-line
+                        outlined
+                      ></v-select>
                     </v-col>
                   </v-row>
                   <v-row>
@@ -130,37 +141,48 @@
 <script lang="ts">
 import { Race } from "@/store/modules/race";
 import { localise, getDescriptionsForLocales } from "@/utils/localise";
+import { getValueRangeTypes } from "@/utils/valueRangeTypes";
 import Component from "vue-class-component";
 import Vue from "vue";
+import { ValueRange } from "@/store/modules/valueRange";
 
 @Component({
-  name: "race-admin",
+  name: "value-range-admin",
 })
-export default class RaceAdmin extends Vue {
+export default class ValueRangeAdmin extends Vue {
   dialog = false;
   valid = true;
   headers = [
     { text: this.$t("id"), value: "id" },
+    { text: this.$t("type"), value: "typeTitle" },
     { text: this.$t("title"), value: "description.title" },
     { text: this.$t("actions"), value: "actions", sortable: false },
   ];
   sortBy = ["description.title"];
   editedIndex = -1;
   dialogDelete = false;
-  editedItem: Race = {
+  editedItem: ValueRange = {
     id: "",
     descriptions: getDescriptionsForLocales(),
   };
-  defaultItem: Race = {
+  defaultItem: ValueRange = {
     id: "",
     descriptions: getDescriptionsForLocales(),
   };
+  valueRangeTypes = getValueRangeTypes(this.$i18n);
 
-  get items(): Race[] {
-    return localise(
-      this.$store.state.race.result?.listRaces?.items,
+  get items(): ValueRange[] {
+    const items = localise(
+      this.$store.state.valueRange.result?.listValueRangeValues?.items,
       this.$i18n.locale
-    ) as Race[];
+    ) as ValueRange[];
+    return items.map(
+      item =>
+        ({
+          ...item,
+          typeTitle: this.$t(item.type as string),
+        } as ValueRange)
+    );
   }
 
   get isNewItem() {
@@ -168,24 +190,26 @@ export default class RaceAdmin extends Vue {
   }
 
   get formTitle() {
-    return this.editedIndex === -1 ? this.$t("new-race") : this.$t("edit-race");
+    return this.editedIndex === -1
+      ? this.$t("new-value")
+      : this.$t("edit-value");
   }
 
   refresh() {
-    this.$store.dispatch("race/load");
+    this.$store.dispatch("valueRange/load");
   }
   close() {
     this.dialog = false;
   }
   save() {
     this.$store.dispatch(
-      this.isNewItem ? "race/create" : "race/update",
+      this.isNewItem ? "valueRange/create" : "valueRange/update",
       this.editedItem
     );
     this.dialog = false;
   }
   deleteItemConfirm() {
-    this.$store.dispatch("race/delete", this.editedItem.id);
+    this.$store.dispatch("valueRange/delete", this.editedItem.id);
     this.closeDelete();
   }
   closeDelete() {

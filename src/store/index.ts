@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import { AuthState } from "@aws-amplify/ui-components";
 import { Auth } from "aws-amplify";
 import race, { RaceState } from "./modules/race";
+import valueRange, { ValueRangeState } from "./modules/valueRange";
 import { Locale } from "@/API";
 
 Vue.use(Vuex);
@@ -30,6 +31,7 @@ export interface AppState {
 export interface RootState {
   app: AppState;
   race?: RaceState;
+  valueRange: ValueRangeState;
 }
 
 export interface Description {
@@ -76,5 +78,6 @@ export default new Vuex.Store<RootState>({
   },
   modules: {
     race,
+    valueRange,
   },
 });
