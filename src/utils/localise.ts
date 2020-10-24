@@ -1,12 +1,21 @@
-import { Describable } from "@/store";
+import { Locale } from "@/API";
+import { Describable, Description } from "@/store";
 
-export default function(objects: Describable[], component: Vue): Describable[] {
+export const localise = (
+  objects: Describable[],
+  locale: string
+): Describable[] => {
   return objects
     ? objects.map((obj: Describable) => ({
         ...obj,
-        description: obj.descriptions.find(
-          d => d.locale === component.$i18n.locale
-        ),
+        description: obj.descriptions.find(d => d.locale === locale),
       }))
     : [];
-}
+};
+
+export const getDescriptionsForLocales = (
+  localesIn?: string[]
+): Description[] => {
+  const locales = localesIn || Object.keys(Locale);
+  return locales.map(l => ({ locale: l, title: "" } as Description));
+};

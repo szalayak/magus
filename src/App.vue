@@ -17,7 +17,7 @@
           </v-btn>
         </template>
         <v-list>
-          <v-list-item @click="logoutUser()">
+          <v-list-item @click="logout()">
             <v-list-item-title>Sign Out</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -42,7 +42,7 @@
 import Vue from "vue";
 import { onAuthUIStateChange } from "@aws-amplify/ui-components";
 import NavigationDrawer from "./components/NavigationDrawer.vue";
-import { mapMutations, mapState } from "vuex";
+import { mapActions, mapMutations, mapState } from "vuex";
 
 export default Vue.extend({
   name: "App",
@@ -55,7 +55,7 @@ export default Vue.extend({
   created() {
     onAuthUIStateChange((authState, authData) => {
       this.setAuthState(authState);
-      this.loginUser(authData);
+      this.setUser(authData);
     });
   },
   beforeDestroy() {
@@ -65,9 +65,10 @@ export default Vue.extend({
     ...mapMutations([
       "toggleNavDrawer",
       "setAuthState",
-      "loginUser",
+      "setUser",
       "logoutUser",
     ]),
+    ...mapActions(["logout"]),
   },
 });
 </script>

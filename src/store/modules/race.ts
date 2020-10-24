@@ -20,22 +20,22 @@ const race: Module<RaceState, RootState> = {
       result: {},
     } as RaceState),
   mutations: {
-    setResult(state, result: ListRacesQuery) {
+    set(state, result: ListRacesQuery) {
       state.result = result;
     },
-    addRaceFromResult(state, newRace) {
-      state.result?.listRaces?.items?.push(newRace);
+    add(state, newItem) {
+      state.result?.listRaces?.items?.push(newItem);
     },
-    updateRaceFromResult(state, updatedRace) {
+    change(state, updateItem) {
       const oldState = state.result?.listRaces?.items?.find(
-        item => item?.id === updatedRace.id
+        item => item?.id === updateItem.id
       );
       if (oldState) {
         const items = state.result?.listRaces?.items;
-        items?.splice(items.indexOf(oldState), 1, updatedRace);
+        items?.splice(items.indexOf(oldState), 1, updateItem);
       }
     },
-    removeRace(state, id: string) {
+    remove(state, id: string) {
       const oldState = state.result?.listRaces?.items?.find(
         item => item?.id === id
       );
@@ -46,13 +46,13 @@ const race: Module<RaceState, RootState> = {
     },
   },
   actions: {
-    async loadRaces(context) {
+    async load(context) {
       const { data: result } = (await API.graphql({ query: listRaces })) as {
         data: ListRacesQuery;
       };
-      context.commit("setResult", result);
+      context.commit("set", result);
     },
-    async createRace(context, race: Race) {
+    async create(context, race: Race) {
       const {
         data: { createRace: newRace },
       } = (await API.graphql({
@@ -64,9 +64,9 @@ const race: Module<RaceState, RootState> = {
           },
         },
       })) as { data: CreateRaceMutation };
-      context.commit("addRaceFromResult", newRace);
+      context.commit("add", newRace);
     },
-    async updateRace(context, race: Race) {
+    async update(context, race: Race) {
       const {
         data: { updateRace: updatedRace },
       } = (await API.graphql({
@@ -78,11 +78,11 @@ const race: Module<RaceState, RootState> = {
           },
         },
       })) as { data: UpdateRaceMutation };
-      context.commit("updateRaceFromResult", updateRace);
+      context.commit("change", updatedRace);
     },
-    async deleteRace(context, id: string) {
+    async delete(context, id: string) {
       await API.graphql({ query: deleteRace, variables: { input: { id } } });
-      context.commit("removeRace", id);
+      context.commit("remove", id);
     },
   },
 };

@@ -7,11 +7,24 @@ import { Locale } from "@/API";
 
 Vue.use(Vuex);
 
+export interface User {
+  signInUserSession?: {
+    accessToken?: {
+      payload?: { [key: string]: unknown };
+      [key: string]: unknown;
+    };
+    [key: string]: unknown;
+  };
+  [key: string]: unknown;
+}
+
 export interface AppState {
   navDrawerOpen: boolean;
-  user?: { [key: string]: unknown };
+  user?: User;
   authState?: AuthState;
   isLoggedIn: boolean;
+  isAdmin?: boolean;
+  isEditor?: boolean;
 }
 
 export interface RootState {
@@ -45,15 +58,22 @@ export default new Vuex.Store<RootState>({
       state.app.authState = authState;
       state.app.isLoggedIn = authState === "signedin";
     },
-    loginUser(state, user: { [key: string]: unknown }) {
+    setUser(state, user?: User) {
       state.app.user = user;
-    },
-    logoutUser(state: RootState) {
-      state.app.user = undefined;
-      Auth.signOut();
+      const payload = user?.signInUserSession?.accessToken?.payload;
+      const groups: string[] = payload
+        ? (payload["cognito:groups"] as string[])
+        : [];
+      state.app.isAdmin = !!groups.find(group => group === "Admin");
+      state.app.isEditor = !!groups.find(group => group === "Editor");
     },
   },
-  actions: {},
+  actions: {
+    async logout(context) {
+      await Auth.signOut();
+      context.commit("setUser");
+    },
+  },
   modules: {
     race,
   },

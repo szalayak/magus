@@ -9,5 +9,16 @@
   "D10": "D10",
   "D100": "D100",
   "en": "English",
-  "hu": "Hungarian"
+  "hu": "Hungarian",
+  "cancel": "Cancel",
+  "save": "Save",
+  "ok": "OK",
+  "refresh":"Refresh",
+  "confirm-delete-message": "Are you sure you want to delete this item?",
+  "id":"ID",
+  "title":"Title",
+  "description":"Description",
+  "races": "Races",
+  "new-race":"New Race",
+  "edit-race":"Edit Race"
 }

@@ -9,20 +9,19 @@
   >
     <template v-slot:top>
       <v-toolbar flat>
-        <v-toolbar-title>Races</v-toolbar-title>
+        <v-toolbar-title>{{ $t("races") }}</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" max-width="500px">
+        <v-dialog v-model="dialog" max-width="auto">
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-              New Item
+              {{ $t("new-race") }}
             </v-btn>
           </template>
           <v-card>
-            <v-card-title>
-              <span class="headline">{{ formTitle }}</span>
-            </v-card-title>
-
+            <v-toolbar dark color="primary">
+              <v-toolbar-title>{{ formTitle }}</v-toolbar-title>
+            </v-toolbar>
             <v-card-text>
               <v-form v-model="valid">
                 <v-container>
@@ -31,48 +30,53 @@
                       <v-text-field
                         v-model="editedItem.id"
                         :disabled="!isNewItem"
-                        label="ID"
+                        :label="$t('id')"
+                        :hint="$t('id-empty-auto-generated-message')"
                         outlined
                       ></v-text-field>
                     </v-col>
                   </v-row>
                   <v-row>
-                    <v-data-iterator
-                      :items="editedItem.descriptions"
-                      item-key="id"
-                      hide-default-footer
-                    >
-                      <template v-for="description in editedItem.descriptions">
-                        <v-col
-                          :key="`input-${description.locale}`"
-                          cols="12"
-                          sm="12"
-                        >
+                    <v-col cols="12">
+                      <v-data-iterator
+                        :items="editedItem.descriptions"
+                        item-key="id"
+                        hide-default-footer
+                      >
+                        <template>
                           <v-row>
-                            <v-col cols="12" sm="12">
-                              <v-subheader>{{
-                                $t(description.locale)
-                              }}</v-subheader>
-                            </v-col>
-                            <v-col cols="12" sm="12">
-                              <v-text-field
-                                v-model="description.title"
-                                label="Title"
-                                outlined
-                                required
-                              ></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="12">
-                              <v-textarea
-                                v-model="description.description"
-                                label="Description"
-                                outlined
-                              ></v-textarea>
+                            <v-col
+                              v-for="description in editedItem.descriptions"
+                              cols="6"
+                              :key="`input-${description.locale}`"
+                            >
+                              <v-row>
+                                <v-subheader>{{
+                                  $t(description.locale)
+                                }}</v-subheader>
+                              </v-row>
+                              <v-row>
+                                <v-col cols="12">
+                                  <v-text-field
+                                    v-model="description.title"
+                                    :label="$t('title')"
+                                    outlined
+                                    required
+                                  ></v-text-field>
+                                </v-col>
+                                <v-col cols="12">
+                                  <v-textarea
+                                    v-model="description.description"
+                                    :label="$t('description')"
+                                    outlined
+                                  ></v-textarea>
+                                </v-col>
+                              </v-row>
                             </v-col>
                           </v-row>
-                        </v-col>
-                      </template>
-                    </v-data-iterator>
+                        </template>
+                      </v-data-iterator>
+                    </v-col>
                   </v-row>
                 </v-container>
               </v-form>
@@ -80,28 +84,28 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="close">
-                Cancel
+              <v-btn color="error" text @click="close">
+                {{ $t("cancel") }}
               </v-btn>
-              <v-btn color="blue darken-1" text @click="save">
-                Save
+              <v-btn color="primary" text @click="save">
+                {{ $t("save") }}
               </v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
         <v-dialog v-model="dialogDelete" max-width="500px">
           <v-card>
-            <v-card-title class="headline"
-              >Are you sure you want to delete this item?</v-card-title
-            >
+            <v-card-title class="headline">{{
+              $t("confirm-delete-message")
+            }}</v-card-title>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="closeDelete"
-                >Cancel</v-btn
-              >
-              <v-btn color="blue darken-1" text @click="deleteItemConfirm"
-                >OK</v-btn
-              >
+              <v-btn color="error" text @click="closeDelete">{{
+                $t("cancel")
+              }}</v-btn>
+              <v-btn color="primary" text @click="deleteItemConfirm">{{
+                $t("ok")
+              }}</v-btn>
               <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
@@ -118,16 +122,14 @@
     </template>
     <template v-slot:no-data>
       <v-btn color="primary" @click="refresh">
-        Reset
+        {{ $t("refresh") }}
       </v-btn>
     </template>
   </v-data-table>
 </template>
 <script lang="ts">
 import { Race } from "@/store/modules/race";
-import localise from "@/utils/localise";
-import { Locale } from "@/API";
-import { Description } from "@/store";
+import { localise, getDescriptionsForLocales } from "@/utils/localise";
 import Component from "vue-class-component";
 import Vue from "vue";
 
@@ -147,24 +149,17 @@ export default class RaceAdmin extends Vue {
   dialogDelete = false;
   editedItem: Race = {
     id: "",
-    descriptions: Object.keys(Locale).map(
-      l => ({ locale: l, title: "" } as Description)
-    ),
+    descriptions: getDescriptionsForLocales(),
   };
   defaultItem: Race = {
     id: "",
-    descriptions: Object.keys(Locale).map(
-      l => ({ locale: l, title: "" } as Description)
-    ),
+    descriptions: getDescriptionsForLocales(),
   };
-  locales: Array<{ id: string }> = Object.keys(Locale).map(locale => ({
-    id: locale,
-  }));
 
   get items(): Race[] {
     return localise(
       this.$store.state.race.result?.listRaces?.items,
-      this
+      this.$i18n.locale
     ) as Race[];
   }
 
@@ -173,24 +168,24 @@ export default class RaceAdmin extends Vue {
   }
 
   get formTitle() {
-    return this.editedIndex === -1 ? "New Item" : "Edit Item";
+    return this.editedIndex === -1 ? this.$t("new-race") : this.$t("edit-race");
   }
 
   refresh() {
-    this.$store.dispatch("race/loadRaces");
+    this.$store.dispatch("race/load");
   }
   close() {
     this.dialog = false;
   }
   save() {
     this.$store.dispatch(
-      this.isNewItem ? "race/createRace" : "race/updateRace",
+      this.isNewItem ? "race/create" : "race/update",
       this.editedItem
     );
     this.dialog = false;
   }
   deleteItemConfirm() {
-    this.$store.dispatch("race/deleteRace", this.editedItem.id);
+    this.$store.dispatch("race/delete", this.editedItem.id);
     this.closeDelete();
   }
   closeDelete() {
