@@ -10,10 +10,10 @@ type Description {
 }
 
 type CombatValues {
-  initiation: Int!
-  offence: Int!
-  defence: Int!
-  aiming: Int!
+  initiation: Int
+  offence: Int
+  defence: Int
+  aiming: Int
 }
 
 enum LanguageLevel {
@@ -52,7 +52,7 @@ enum Dice {
 type ThrowScenario {
   dice: Dice!
   iterationCount: Int!
-  modifier: Int!
+  modifier: Int
 }
 
 type ValueRangeValue
@@ -102,15 +102,17 @@ type Armour @model @auth(rules: [{ allow: private }]) {
   weight: String
   movementPreventionValue: Int!
   damageReductionValue: Int!
-  price: Int!
+  price: Int
 }
 
 type Shield @model @auth(rules: [{ allow: private }]) {
   id: ID!
   descriptions: [Description!]!
-  combatValues: CombatValues!
+  combatValues: CombatValues
+  movementPreventionValue: Int
   weight: String
-  damage: ThrowScenario!
+  price: Int
+  damage: ThrowScenario
 }
 
 type Weapon @model @auth(rules: [{ allow: private }]) {

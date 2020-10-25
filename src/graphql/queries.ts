@@ -236,7 +236,9 @@ export const getShield = /* GraphQL */ `
         defence
         aiming
       }
+      movementPreventionValue
       weight
+      price
       damage {
         dice
         iterationCount
@@ -267,7 +269,9 @@ export const listShields = /* GraphQL */ `
           defence
           aiming
         }
+        movementPreventionValue
         weight
+        price
         damage {
           dice
           iterationCount

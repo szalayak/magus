@@ -2,10 +2,15 @@ import Vue from "vue";
 import Vuex from "vuex";
 import { AuthState } from "@aws-amplify/ui-components";
 import { Auth } from "aws-amplify";
-import race, { RaceState } from "./modules/race";
-import valueRange, { ValueRangeState } from "./modules/valueRange";
-import { Locale } from "@/API";
+import armour, { ArmourState } from "./modules/armour";
 import classModule, { ClassState } from "./modules/class";
+import magicalItem, { MagicalItemState } from "./modules/magicalItem";
+import psiSchool, { PsiSchoolState } from "./modules/psiSchool";
+import race, { RaceState } from "./modules/race";
+import shield, { ShieldState } from "./modules/shield";
+import skill, { SkillState } from "./modules/skill";
+import valueRange, { ValueRangeState } from "./modules/valueRange";
+import weapon, { WeaponState } from "./modules/weapon";
 
 Vue.use(Vuex);
 
@@ -31,20 +36,15 @@ export interface AppState {
 
 export interface RootState {
   app: AppState;
-  race?: RaceState;
-  valueRange?: ValueRangeState;
+  armour?: ArmourState;
   class?: ClassState;
-}
-
-export interface Description {
-  locale: Locale;
-  title: string;
-  description?: string;
-}
-
-export interface Describable {
-  descriptions?: Description[];
-  description?: Description;
+  magicalItem?: MagicalItemState;
+  psiSchool: PsiSchoolState;
+  race?: RaceState;
+  shield?: ShieldState;
+  skill?: SkillState;
+  valueRange?: ValueRangeState;
+  weapon?: WeaponState;
 }
 
 export default new Vuex.Store<RootState>({
@@ -79,8 +79,14 @@ export default new Vuex.Store<RootState>({
     },
   },
   modules: {
-    race,
-    valueRange,
+    armour,
     class: classModule,
+    magicalItem,
+    psiSchool,
+    race,
+    shield,
+    skill,
+    valueRange,
+    weapon,
   },
 });

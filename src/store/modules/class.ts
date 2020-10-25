@@ -7,8 +7,9 @@ import { createClass, deleteClass, updateClass } from "@/graphql/mutations";
 import { listClasses } from "@/graphql/queries";
 import { API } from "aws-amplify";
 import { Module } from "vuex";
-import { Describable, RootState } from "..";
+import { RootState } from "..";
 import { ValueRange } from "./valueRange";
+import { Describable } from "../types";
 
 export interface Class extends Describable {
   id: string;
@@ -52,6 +53,11 @@ const classModule: Module<ClassState, RootState> = {
       }
     },
   },
+  getters: {
+    getMagicUserClasses(state) {
+      return state.result?.listClasses?.items?.filter(c => c?.magicUser);
+    },
+  },
   actions: {
     async load(context) {
       const { data: result } = (await API.graphql({ query: listClasses })) as {
@@ -82,6 +88,7 @@ const classModule: Module<ClassState, RootState> = {
         query: updateClass,
         variables: {
           input: {
+            id: item.id,
             mainClassId: item.mainClass?.id,
             magicUser: item.magicUser,
             descriptions: item.descriptions,

@@ -16,7 +16,8 @@ import {
 } from "@/graphql/queries";
 import { API } from "aws-amplify";
 import { Module } from "vuex";
-import { Describable, RootState } from "..";
+import { RootState } from "..";
+import { Describable } from "../types";
 
 export interface ValueRange extends Describable {
   id: string;

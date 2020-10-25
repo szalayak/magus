@@ -287,7 +287,9 @@ export const onCreateShield = /* GraphQL */ `
         defence
         aiming
       }
+      movementPreventionValue
       weight
+      price
       damage {
         dice
         iterationCount
@@ -313,7 +315,9 @@ export const onUpdateShield = /* GraphQL */ `
         defence
         aiming
       }
+      movementPreventionValue
       weight
+      price
       damage {
         dice
         iterationCount
@@ -339,7 +343,9 @@ export const onDeleteShield = /* GraphQL */ `
         defence
         aiming
       }
+      movementPreventionValue
       weight
+      price
       damage {
         dice
         iterationCount

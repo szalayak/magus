@@ -1,12 +1,12 @@
-import { Locale } from "@/API";
-import { Describable, Description } from "@/store";
+import { Dice, Locale } from "@/API";
+import { Describable, Description } from "@/store/types";
 
 export const localiseItem = (
   obj: Describable,
   locale: string
 ): Describable => ({
   ...obj,
-  description: obj.descriptions.find(d => d.locale === locale),
+  description: obj.descriptions?.find(d => d.locale === locale),
 });
 
 export const localise = (

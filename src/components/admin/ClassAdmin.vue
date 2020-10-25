@@ -11,7 +11,7 @@
       <v-toolbar flat>
         <v-toolbar-title>{{ $t("classes") }}</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" max-width="auto">
+        <v-dialog scrollable v-model="dialog" max-width="auto">
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
               {{ $t("new-class") }}
@@ -41,7 +41,6 @@
                         item-text="description.title"
                         item-value="id"
                         :label="$t('main-class')"
-                        single-line
                         return-object
                         outlined
                       ></v-select>
@@ -129,6 +128,9 @@
         </v-dialog>
       </v-toolbar>
     </template>
+    <template v-slot:[`item.magicUser`]="{ item }">
+      <v-simple-checkbox v-model="item.magicUser" disabled></v-simple-checkbox>
+    </template>
     <template v-slot:[`item.actions`]="{ item }">
       <v-icon small class="mr-2" @click="editItem(item)">
         mdi-pencil
@@ -166,6 +168,7 @@ export default class ClassAdmin extends Vue {
     { text: this.$t("id"), value: "id" },
     { text: this.$t("main-class"), value: "mainClass.description.title" },
     { text: this.$t("title"), value: "description.title" },
+    { text: this.$t("magic-user"), value: "magicUser" },
     { text: this.$t("actions"), value: "actions", sortable: false },
   ];
   sortBy = ["description.title"];
