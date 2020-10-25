@@ -3,29 +3,29 @@
     <v-col cols="12" sm="12" md="4">
       <v-text-field
         type="number"
-        :value="throwScenario.iterationCount"
+        :value="iterationCount"
         :label="$t('iteration-count')"
-        @change="onIterationCountChange"
+        @input="$emit('update:iterationCount', parseInt($event))"
         outlined
       ></v-text-field>
     </v-col>
     <v-col cols="12" sm="12" md="4">
       <v-select
-        :value="throwScenario.dice"
-        :items="dice"
+        :value="dice"
+        :items="diceList"
         item-text="title"
         item-value="id"
         :label="$t('dice')"
-        @change="onDiceChange"
+        @input="$emit('update:dice', $event)"
         outlined
       ></v-select>
     </v-col>
     <v-col cols="12" sm="12" md="4">
       <v-text-field
         type="number"
-        :value="throwScenario.modifier"
+        :value="modifier"
         :label="$t('modifier')"
-        @change="onModifierChange"
+        @input="$emit('update:modifier', parseInt($event))"
         outlined
       ></v-text-field>
     </v-col>
@@ -33,30 +33,15 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
-import { Component } from "vue-property-decorator";
 import { getDice } from "@/utils/dice";
-import { Dice } from "@/API";
 
-const ThrowScenarioProps = Vue.extend({
-  props: {
-    throwScenario: Object,
+export default Vue.extend({
+  name: "throw-scenario-editor",
+  props: ["iterationCount", "dice", "modifier"],
+  computed: {
+    diceList() {
+      return getDice(this.$i18n);
+    },
   },
 });
-
-@Component
-export default class ThrowScenarioEditor extends ThrowScenarioProps {
-  get dice() {
-    return getDice(this.$i18n);
-  }
-
-  onIterationCountChange(newValue: number) {
-    this.$emit("update:iterationCount", newValue);
-  }
-  onDiceChange(newValue: Dice) {
-    this.$emit("update:dice", newValue);
-  }
-  onModifierChange(newValue: number) {
-    this.$emit("update:modifier", newValue);
-  }
-}
 </script>

@@ -25,7 +25,7 @@
               <v-form v-model="valid">
                 <v-container>
                   <v-row>
-                    <v-col cols="12" sm="12">
+                    <v-col cols="12" sm="12" md="6">
                       <v-text-field
                         v-model="editedItem.id"
                         :disabled="!isNewItem"
@@ -34,19 +34,47 @@
                         outlined
                       ></v-text-field>
                     </v-col>
+                    <v-col cols="12" sm="12" md="6">
+                      <v-text-field
+                        v-model="editedItem.description.title"
+                        :label="$t('title')"
+                        outlined
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col cols="12" sm="12" md="6" lg="4">
+                      <v-text-field
+                        v-model.number="editedItem.movementPreventionValue"
+                        type="number"
+                        :label="$t('movement-prevention-value')"
+                        outlined
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="12" md="6" lg="4">
+                      <v-text-field
+                        v-model="editedItem.weight"
+                        :label="$t('weight')"
+                        outlined
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="12" md="6" lg="4">
+                      <v-text-field
+                        v-model.number="editedItem.price"
+                        type="number"
+                        :label="$t('weight')"
+                        outlined
+                      ></v-text-field>
+                    </v-col>
                   </v-row>
                   <v-row>
                     <v-subheader>{{ $t("combat-values") }}</v-subheader>
                   </v-row>
-                  <combat-value-editor
-                    :combatValues.sync="editedItem.combatValues"
-                  />
+                  <combat-value-editor v-bind.sync="editedItem.combatValues" />
                   <v-row>
                     <v-subheader>{{ $t("damage") }}</v-subheader>
                   </v-row>
-                  <throw-scenario-editor
-                    :throwScenario.sync="editedItem.damage"
-                  />
+                  <throw-scenario-editor v-bind.sync="editedItem.damage" />
                   <v-row>
                     <v-col cols="12">
                       <v-data-iterator
@@ -140,11 +168,36 @@
 </template>
 <script lang="ts">
 import { Shield } from "@/store/modules/shield";
-import { localise, getDescriptionsForLocales } from "@/utils/localise";
+import {
+  localise,
+  getDescriptionsForLocales,
+  mergeDescriptions,
+} from "@/utils/localise";
 import Component from "vue-class-component";
 import Vue from "vue";
 import CombatValueEditor from "./CombatValueEditor.vue";
 import ThrowScenarioEditor from "./ThrowScenarioEditor.vue";
+import { Locale } from "@/API";
+
+const getDefaultItem = (component: Vue): Shield => ({
+  id: "",
+  descriptions: getDescriptionsForLocales(),
+  description: {
+    locale: component.$i18n.locale as Locale,
+    title: "",
+  },
+  combatValues: {
+    initiation: undefined,
+    offence: undefined,
+    defence: undefined,
+    aiming: undefined,
+  },
+  damage: {
+    iterationCount: undefined,
+    dice: undefined,
+    modifier: undefined,
+  },
+});
 
 @Component({
   name: "shield-admin",
@@ -164,22 +217,12 @@ export default class ShieldAdmin extends Vue {
   sortBy = ["description.title"];
   editedIndex = -1;
   dialogDelete = false;
-  editedItem: Shield = {
-    id: "",
-    descriptions: getDescriptionsForLocales(),
-    combatValues: {},
-    damage: {},
-  };
-  defaultItem: Shield = {
-    id: "",
-    descriptions: getDescriptionsForLocales(),
-    combatValues: {},
-    damage: {},
-  };
+  editedItem = getDefaultItem(this);
+  defaultItem = getDefaultItem(this);
 
   get items(): Shield[] {
     return localise(
-      this.$store.state.armour.result?.listArmours?.items,
+      this.$store.state.shield.result?.listShields?.items,
       this.$i18n.locale
     ) as Shield[];
   }
@@ -203,7 +246,7 @@ export default class ShieldAdmin extends Vue {
   save() {
     this.$store.dispatch(
       this.isNewItem ? "shield/create" : "shield/update",
-      this.editedItem
+      mergeDescriptions(this.editedItem, this.$i18n.locale)
     );
     this.dialog = false;
   }
