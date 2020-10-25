@@ -11,6 +11,12 @@ export interface Describable {
   description?: Description;
 }
 
+export interface Identifiable {
+  id: string;
+}
+
+export interface Editable extends Identifiable, Describable {}
+
 export interface ThrowScenario {
   dice?: Dice;
   iterationCount?: number;

@@ -33,6 +33,11 @@ const weapon: Module<WeaponState, RootState> = {
     ({
       result: {},
     } as WeaponState),
+  getters: {
+    list(state) {
+      return state.result?.listWeapons?.items;
+    },
+  },
   mutations: {
     set(state, result: ListWeaponsQuery) {
       state.result = result;

@@ -73,5 +73,9 @@
   "dice": "Dice",
   "modifier": "Modifier",
   "skills": "Skills",
-  "weapons": "Weapons"
+  "weapons": "Weapons",
+  "new-weapon": "New Weapon",
+  "edit-weapon": "Edit Weapon",
+  "ranged": "Ranged",
+  "weapon-type": "Weapon Type"
 }

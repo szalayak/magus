@@ -8,10 +8,9 @@ import { listShields } from "@/graphql/queries";
 import { API } from "aws-amplify";
 import { Module } from "vuex";
 import { RootState } from "..";
-import { CombatValues, Describable, ThrowScenario } from "../types";
+import { CombatValues, Editable, ThrowScenario } from "../types";
 
-export interface Shield extends Describable {
-  id: string;
+export interface Shield extends Editable {
   combatValues?: CombatValues;
   damage?: ThrowScenario;
   movementPreventionValue?: number;
@@ -53,6 +52,11 @@ const shield: Module<ShieldState, RootState> = {
         const items = state.result?.listShields?.items;
         items?.splice(items.indexOf(oldState), 1);
       }
+    },
+  },
+  getters: {
+    list(state) {
+      return state.result?.listShields?.items;
     },
   },
   actions: {

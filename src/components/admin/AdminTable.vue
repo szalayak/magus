@@ -9,12 +9,12 @@
   >
     <template v-slot:top>
       <v-toolbar flat>
-        <v-toolbar-title>{{ $t("shields") }}</v-toolbar-title>
+        <v-toolbar-title>{{ $t(title) }}</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-dialog scrollable v-model="dialog" max-width="auto">
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-              {{ $t("new-shield") }}
+              {{ $t(newText) }}
             </v-btn>
           </template>
           <v-card>
@@ -42,39 +42,7 @@
                       ></v-text-field>
                     </v-col>
                   </v-row>
-                  <v-row>
-                    <v-col cols="12" sm="12" md="6" lg="4">
-                      <v-text-field
-                        v-model.number="editedItem.movementPreventionValue"
-                        type="number"
-                        :label="$t('movement-prevention-value')"
-                        outlined
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="6" lg="4">
-                      <v-text-field
-                        v-model="editedItem.weight"
-                        :label="$t('weight')"
-                        outlined
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="6" lg="4">
-                      <v-text-field
-                        v-model.number="editedItem.price"
-                        type="number"
-                        :label="$t('weight')"
-                        outlined
-                      ></v-text-field>
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-subheader>{{ $t("combat-values") }}</v-subheader>
-                  </v-row>
-                  <combat-value-editor v-bind.sync="editedItem.combatValues" />
-                  <v-row>
-                    <v-subheader>{{ $t("damage") }}</v-subheader>
-                  </v-row>
-                  <throw-scenario-editor v-bind.sync="editedItem.damage" />
+                  <slot name="editable-fields" :editedItem="editedItem"></slot>
                   <v-row>
                     <v-col cols="12">
                       <v-data-iterator
@@ -164,73 +132,53 @@
         {{ $t("refresh") }}
       </v-btn>
     </template>
+    <template
+      v-for="customColumn in customColumns"
+      v-slot:[`item.${customColumn}`]="{ item }"
+    >
+      <slot :name="`item.${customColumn}`" :item="item" />
+    </template>
   </v-data-table>
 </template>
-<script lang="ts">
-import { Shield } from "@/store/modules/shield";
-import {
-  localise,
-  getDescriptionsForLocales,
-  mergeDescriptions,
-} from "@/utils/localise";
-import Component from "vue-class-component";
-import Vue from "vue";
-import CombatValueEditor from "./CombatValueEditor.vue";
-import ThrowScenarioEditor from "./ThrowScenarioEditor.vue";
-import { Locale } from "@/API";
 
-const getDefaultItem = (component: Vue): Shield => ({
-  id: "",
-  descriptions: getDescriptionsForLocales(),
-  description: {
-    locale: component.$i18n.locale as Locale,
-    title: "",
-  },
-  combatValues: {
-    initiation: undefined,
-    offence: undefined,
-    defence: undefined,
-    aiming: undefined,
-  },
-  damage: {
-    iterationCount: undefined,
-    dice: undefined,
-    modifier: undefined,
+<script lang="ts">
+import { Editable } from "@/store/types";
+import { localise, mergeDescriptions } from "@/utils/localise";
+import Vue from "vue";
+import Component from "vue-class-component";
+
+const AdminTableProps = Vue.extend({
+  props: {
+    defaultItem: Object,
+    headers: Array,
+    module: String,
+    newText: String,
+    editText: String,
+    title: String,
+    customColumns: Array,
+    localiseDependencies: Function,
   },
 });
 
 @Component({
-  name: "shield-admin",
-  components: {
-    "combat-value-editor": CombatValueEditor,
-    "throw-scenario-editor": ThrowScenarioEditor,
-  },
+  name: "admin-table",
 })
-export default class ShieldAdmin extends Vue {
+export default class AdminTable extends AdminTableProps {
   dialog = false;
   valid = true;
-  headers = [
-    { text: this.$t("id"), value: "id" },
-    { text: this.$t("title"), value: "description.title" },
-    {
-      text: this.$t("movement-prevention-value"),
-      value: "movementPreventionValue",
-    },
-    { text: this.$t("price"), value: "price" },
-    { text: this.$t("weight"), value: "weight" },
-    { text: this.$t("actions"), value: "actions", sortable: false },
-  ];
-  sortBy = ["description.title"];
   editedIndex = -1;
   dialogDelete = false;
-  editedItem = getDefaultItem(this);
-  defaultItem = getDefaultItem(this);
+  sortBy = ["description.title"];
+  editedItem = mergeDescriptions(
+    this.defaultItem,
+    this.$i18n.locale
+  ) as Editable;
 
-  get items(): Shield[] {
+  get items(): Editable[] {
     return localise(
-      this.$store.state.shield.result?.listShields?.items,
+      this.$store.getters[`${this.module}/list`],
       this.$i18n.locale
-    ) as Shield[];
+    ) as Editable[];
   }
 
   get isNewItem() {
@@ -239,40 +187,43 @@ export default class ShieldAdmin extends Vue {
 
   get formTitle() {
     return this.editedIndex === -1
-      ? this.$t("new-shield")
-      : this.$t("edit-shield");
+      ? this.$t(this.newText)
+      : this.$t(this.editText);
   }
 
   refresh() {
-    this.$store.dispatch("shield/load");
+    this.$store.dispatch(`${this.module}/load`);
   }
   close() {
     this.dialog = false;
   }
   save() {
     this.$store.dispatch(
-      this.isNewItem ? "shield/create" : "shield/update",
+      this.isNewItem ? `${this.module}/create` : `${this.module}/update`,
       mergeDescriptions(this.editedItem, this.$i18n.locale)
     );
     this.dialog = false;
   }
   deleteItemConfirm() {
-    this.$store.dispatch("shield/delete", this.editedItem.id);
+    this.$store.dispatch(`${this.module}/delete`, this.editedItem.id);
     this.closeDelete();
   }
   closeDelete() {
     this.dialogDelete = false;
     this.$nextTick(() => {
-      this.editedItem = Object.assign({}, this.defaultItem);
+      this.editedItem = Object.assign(
+        {},
+        mergeDescriptions(this.defaultItem, this.$i18n.locale) as Editable
+      );
       this.editedIndex = -1;
     });
   }
-  editItem(item: Shield) {
+  editItem(item: Editable) {
     this.editedIndex = this.items.indexOf(item);
     this.editedItem = Object.assign({}, item);
     this.dialog = true;
   }
-  deleteItem(item: Shield) {
+  deleteItem(item: Editable) {
     this.editedIndex = this.items.indexOf(item);
     this.editedItem = Object.assign({}, item);
     this.dialogDelete = true;
