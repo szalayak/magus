@@ -49,7 +49,6 @@ import CombatValueEditor from "./CombatValueEditor.vue";
 import ThrowScenarioEditor from "./ThrowScenarioEditor.vue";
 import AdminTable from "./AdminTable.vue";
 import { ValueRange } from "@/store/modules/valueRange";
-import { Editable } from "@/store/types";
 
 @Component({
   name: "weapon-table",
