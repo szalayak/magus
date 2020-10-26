@@ -13,10 +13,9 @@ import { API } from "aws-amplify";
 import { Module } from "vuex";
 import { RootState } from "..";
 import { Class } from "./class";
-import { Describable } from "../types";
+import { Editable } from "../types";
 
-export interface MagicalItem extends Describable {
-  id: string;
+export interface MagicalItem extends Editable {
   class?: Class;
   manaCost?: number;
   duration?: string;
@@ -33,6 +32,11 @@ const magicalItem: Module<MagicalItemState, RootState> = {
     ({
       result: {},
     } as MagicalItemState),
+  getters: {
+    list(state): MagicalItem[] {
+      return state.result?.listMagicalItems?.items as MagicalItem[];
+    },
+  },
   mutations: {
     set(state, result: ListMagicalItemsQuery) {
       state.result = result;

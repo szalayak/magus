@@ -25,6 +25,9 @@
               <v-form v-model="valid">
                 <v-container>
                   <v-row>
+                    <v-subheader>{{ $t("general-properties") }}</v-subheader>
+                  </v-row>
+                  <v-row>
                     <v-col cols="12" sm="12" md="6">
                       <v-text-field
                         v-model="editedItem.id"
@@ -44,46 +47,54 @@
                   </v-row>
                   <slot name="editable-fields" :editedItem="editedItem"></slot>
                   <v-row>
-                    <v-col cols="12">
-                      <v-data-iterator
-                        :items="editedItem.descriptions"
-                        item-key="id"
-                        hide-default-footer
-                      >
-                        <template>
-                          <v-row>
-                            <v-col
-                              v-for="description in editedItem.descriptions"
-                              cols="6"
-                              :key="`input-${description.locale}`"
-                            >
+                    <v-subheader>{{ $t("descriptions") }}</v-subheader>
+                    <v-expansion-panels accordion flat>
+                      <v-expansion-panel>
+                        <v-expansion-panel-header></v-expansion-panel-header>
+                        <v-expansion-panel-content>
+                          <v-data-iterator
+                            :items="editedItem.descriptions"
+                            item-key="id"
+                            hide-default-footer
+                          >
+                            <template>
                               <v-row>
-                                <v-subheader>{{
-                                  $t(description.locale)
-                                }}</v-subheader>
-                              </v-row>
-                              <v-row>
-                                <v-col cols="12">
-                                  <v-text-field
-                                    v-model="description.title"
-                                    :label="$t('title')"
-                                    outlined
-                                    required
-                                  ></v-text-field>
+                                <v-col
+                                  v-for="description in editedItem.descriptions"
+                                  cols="6"
+                                  sm="12"
+                                  md="6"
+                                  :key="`input-${description.locale}`"
+                                >
+                                  <v-row>
+                                    <v-subheader>{{
+                                      $t(description.locale)
+                                    }}</v-subheader>
+                                  </v-row>
+                                  <v-row>
+                                    <v-col cols="12">
+                                      <v-text-field
+                                        v-model="description.title"
+                                        :label="$t('title')"
+                                        outlined
+                                        required
+                                      ></v-text-field>
+                                    </v-col>
+                                    <v-col cols="12">
+                                      <v-textarea
+                                        v-model="description.description"
+                                        :label="$t('description')"
+                                        outlined
+                                      ></v-textarea>
+                                    </v-col>
+                                  </v-row>
                                 </v-col>
-                                <v-col cols="12">
-                                  <v-textarea
-                                    v-model="description.description"
-                                    :label="$t('description')"
-                                    outlined
-                                  ></v-textarea>
-                                </v-col>
                               </v-row>
-                            </v-col>
-                          </v-row>
-                        </template>
-                      </v-data-iterator>
-                    </v-col>
+                            </template>
+                          </v-data-iterator>
+                        </v-expansion-panel-content>
+                      </v-expansion-panel>
+                    </v-expansion-panels>
                   </v-row>
                 </v-container>
               </v-form>

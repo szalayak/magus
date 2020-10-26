@@ -16,6 +16,7 @@ export interface Shield extends Editable {
   movementPreventionValue?: number;
   weight?: string;
   price?: number;
+  attacksPerTurn: number;
 }
 
 export interface ShieldState {
@@ -55,8 +56,9 @@ const shield: Module<ShieldState, RootState> = {
     },
   },
   getters: {
-    list(state) {
-      return state.result?.listShields?.items;
+    list(state): Shield[] {
+      console.log(state.result?.listShields?.items);
+      return state.result?.listShields?.items as Shield[];
     },
   },
   actions: {
@@ -80,6 +82,7 @@ const shield: Module<ShieldState, RootState> = {
             movementPreventionValue: item.movementPreventionValue,
             weight: item.weight,
             price: item.price,
+            attacksPerTurn: item.attacksPerTurn,
           },
         },
       })) as { data: CreateShieldMutation };
@@ -99,6 +102,7 @@ const shield: Module<ShieldState, RootState> = {
             movementPreventionValue: item.movementPreventionValue,
             weight: item.weight,
             price: item.price,
+            attacksPerTurn: item.attacksPerTurn,
           },
         },
       })) as { data: UpdateShieldMutation };

@@ -12,10 +12,9 @@ import { listPsiSchools } from "@/graphql/queries";
 import { API } from "aws-amplify";
 import { Module } from "vuex";
 import { RootState } from "..";
-import { Describable } from "../types";
+import { Editable } from "../types";
 
-export interface PsiSchool extends Describable {
-  id: string;
+export interface PsiSchool extends Editable {
   basePsiPoints: number;
   psiPointsPerLevel: number;
 }
@@ -30,6 +29,11 @@ const psiSchool: Module<PsiSchoolState, RootState> = {
     ({
       result: {},
     } as PsiSchoolState),
+  getters: {
+    list(state): PsiSchool[] {
+      return state.result?.listPsiSchools?.items as PsiSchool[];
+    },
+  },
   mutations: {
     set(state, result: ListPsiSchoolsQuery) {
       state.result = result;

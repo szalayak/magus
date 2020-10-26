@@ -51,7 +51,7 @@ enum Dice {
 
 type ThrowScenario {
   dice: Dice!
-  iterationCount: Int!
+  iterationCount: Int
   modifier: Int
 }
 
@@ -87,6 +87,7 @@ type Class
 type Race @model @auth(rules: [{ allow: private }]) {
   id: ID!
   descriptions: [Description!]!
+  playable: Boolean
 }
 
 type PsiSchool @model @auth(rules: [{ allow: private }]) {
@@ -113,6 +114,7 @@ type Shield @model @auth(rules: [{ allow: private }]) {
   weight: String
   price: Int
   damage: ThrowScenario
+  attacksPerTurn: Float!  
 }
 
 type Weapon @model @auth(rules: [{ allow: private }]) {

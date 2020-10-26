@@ -4,10 +4,10 @@ import { listRaces } from "@/graphql/queries";
 import { API } from "aws-amplify";
 import { Module } from "vuex";
 import { RootState } from "..";
-import { Describable } from "../types";
+import { Editable } from "../types";
 
-export interface Race extends Describable {
-  id: string;
+export interface Race extends Editable {
+  playable?: boolean;
 }
 
 export interface RaceState {
@@ -20,6 +20,11 @@ const race: Module<RaceState, RootState> = {
     ({
       result: {},
     } as RaceState),
+  getters: {
+    list(state): Race[] {
+      return state.result?.listRaces?.items as Race[];
+    },
+  },
   mutations: {
     set(state, result: ListRacesQuery) {
       state.result = result;
@@ -62,6 +67,7 @@ const race: Module<RaceState, RootState> = {
           input: {
             id: item.id.length > 0 ? item.id : null,
             descriptions: item.descriptions,
+            playable: item.playable,
           },
         },
       })) as { data: CreateRaceMutation };
@@ -76,6 +82,7 @@ const race: Module<RaceState, RootState> = {
           input: {
             id: item.id,
             descriptions: item.descriptions,
+            playable: item.playable,
           },
         },
       })) as { data: UpdateRaceMutation };

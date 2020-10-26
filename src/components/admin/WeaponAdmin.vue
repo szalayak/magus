@@ -1,14 +1,17 @@
 <template>
   <admin-table
     :defaultItem="defaultItem"
-    :module="module"
+    module="weapon"
     :headers="headers"
-    :newText="newText"
-    :editText="editText"
-    :title="title"
+    newText="new-weapon"
+    editText="edit-weapon"
+    title="weapons"
     :customColumns="customColumns"
   >
     <template v-slot:editable-fields="{ editedItem }">
+      <v-row>
+        <v-subheader>{{ $t("category") }}</v-subheader>
+      </v-row>
       <v-row>
         <v-col cols="12" sm="12" md="6">
           <v-select
@@ -21,21 +24,68 @@
             outlined
           ></v-select>
         </v-col>
-        <v-col cols="12" sm="12" md="6">
+        <v-col cols="6" sm="6" md="2">
+          <v-text-field
+            v-model.number="editedItem.attacksPerTurn"
+            :label="$t('attacks-per-turn')"
+            type="number"
+            outlined
+          />
+        </v-col>
+        <v-col cols="6" sm="6" md="2">
           <v-checkbox v-model="editedItem.ranged" :label="$t('ranged')" />
+        </v-col>
+        <v-col cols="6" sm="6" md="2" v-if="editedItem.ranged">
+          <v-text-field
+            v-model.number="editedItem.attackRange"
+            type="number"
+            :label="$t('attack-range')"
+            outlined
+          />
         </v-col>
       </v-row>
       <v-row>
         <v-subheader>{{ $t("combat-values") }}</v-subheader>
       </v-row>
-      <combat-value-editor v-bind.sync="editedItem.combatValues" />
+      <combat-value-editor
+        v-bind.sync="editedItem.combatValues"
+        :ranged="editedItem.ranged"
+      />
       <v-row>
         <v-subheader>{{ $t("damage") }}</v-subheader>
       </v-row>
       <throw-scenario-editor v-bind.sync="editedItem.damage" />
+      <v-row>
+        <v-subheader>{{ $t("misc-properties") }}</v-subheader>
+      </v-row>
+      <v-row>
+        <v-col cols="12" sm="12" md="6">
+          <v-text-field
+            v-model.number="editedItem.price"
+            type="number"
+            :label="$t('price')"
+            outlined
+          />
+        </v-col>
+        <v-col cols="12" sm="12" md="6">
+          <v-text-field
+            v-model="editedItem.weight"
+            :label="$t('weight')"
+            outlined
+          /> </v-col
+      ></v-row>
     </template>
     <template v-slot:[`item.ranged`]="{ item }">
       <v-simple-checkbox v-model="item.ranged" disabled></v-simple-checkbox>
+    </template>
+    <template v-slot:[`item.damage`]="{ item }">
+      {{ damageToString(item.damage) }}
+    </template>
+    <template v-slot:[`item.weaponType`]="{ item }">
+      {{ weaponTypeToString(item.weaponType) }}
+    </template>
+    <template v-slot:[`item.price`]="{ item }">
+      {{ priceToString(item.price) }}
     </template>
   </admin-table>
 </template>
@@ -49,6 +99,9 @@ import CombatValueEditor from "./CombatValueEditor.vue";
 import ThrowScenarioEditor from "./ThrowScenarioEditor.vue";
 import AdminTable from "./AdminTable.vue";
 import { ValueRange } from "@/store/modules/valueRange";
+import { getThrowScenarioString } from "@/utils/throwScenario";
+import { ThrowScenario } from "@/store/types";
+import { getPriceString } from "@/utils/price";
 
 @Component({
   name: "weapon-table",
@@ -79,24 +132,42 @@ export default class WeaponAdmin extends Vue {
   headers = [
     { text: this.$t("id"), value: "id" },
     { text: this.$t("title"), value: "description.title" },
-    { text: this.$t("weapon-type"), value: "weaponType.description.title" },
+    { text: this.$t("weapon-type"), value: "weaponType" },
     { text: this.$t("ranged"), value: "ranged" },
-    { text: this.$t("attack-range"), value: "attackRange" },
     { text: this.$t("attacks-per-turn"), value: "attacksPerTurn" },
+    {
+      text: this.$t("initiation-value"),
+      value: "combatValues.initiation",
+    },
+    { text: this.$t("offence-value"), value: "combatValues.offence" },
+    { text: this.$t("defence-value"), value: "combatValues.defence" },
+    { text: this.$t("aiming-value"), value: "combatValues.aiming" },
+    { text: this.$t("damage"), value: "damage" },
+    { text: this.$t("attack-range"), value: "attackRange" },
     { text: this.$t("price"), value: "price" },
     { text: this.$t("weight"), value: "weight" },
     { text: this.$t("actions"), value: "actions", sortable: false },
   ];
-  module = "weapon";
-  newText = this.$t("new-weapon");
-  editText = this.$t("edit-weapon");
-  title = this.$t("weapons");
-  customColumns = ["ranged"];
+  customColumns = ["ranged", "damage", "weaponType", "price"];
 
   get weaponTypes(): ValueRange[] {
     const mainClasses = this.$store.getters["valueRange/getWeaponTypes"];
     return localise(mainClasses, this.$i18n.locale) as ValueRange[];
   }
+
+  damageToString(damage: ThrowScenario) {
+    return getThrowScenarioString(damage, this.$i18n);
+  }
+
+  weaponTypeToString(weaponType?: ValueRange): string | undefined {
+    return this.weaponTypes.find(wt => wt.id === weaponType?.id)?.description
+      ?.title;
+  }
+
+  priceToString(price: number) {
+    return getPriceString(price, this.$i18n);
+  }
+
   created() {
     this.$store.dispatch("valueRange/loadByType", ValueRangeType.WEAPON_TYPE);
   }

@@ -126,9 +126,11 @@ export type DeleteClassInput = {
 export type CreateRaceInput = {
   id?: string | null,
   descriptions: Array< DescriptionInput >,
+  playable?: boolean | null,
 };
 
 export type ModelRaceConditionInput = {
+  playable?: ModelBooleanInput | null,
   and?: Array< ModelRaceConditionInput | null > | null,
   or?: Array< ModelRaceConditionInput | null > | null,
   not?: ModelRaceConditionInput | null,
@@ -137,6 +139,7 @@ export type ModelRaceConditionInput = {
 export type UpdateRaceInput = {
   id: string,
   descriptions?: Array< DescriptionInput > | null,
+  playable?: boolean | null,
 };
 
 export type DeleteRaceInput = {
@@ -237,6 +240,7 @@ export type CreateShieldInput = {
   weight?: string | null,
   price?: number | null,
   damage?: ThrowScenarioInput | null,
+  attacksPerTurn: number,
 };
 
 export type CombatValuesInput = {
@@ -248,7 +252,7 @@ export type CombatValuesInput = {
 
 export type ThrowScenarioInput = {
   dice: Dice,
-  iterationCount: number,
+  iterationCount?: number | null,
   modifier?: number | null,
 };
 
@@ -269,9 +273,22 @@ export type ModelShieldConditionInput = {
   movementPreventionValue?: ModelIntInput | null,
   weight?: ModelStringInput | null,
   price?: ModelIntInput | null,
+  attacksPerTurn?: ModelFloatInput | null,
   and?: Array< ModelShieldConditionInput | null > | null,
   or?: Array< ModelShieldConditionInput | null > | null,
   not?: ModelShieldConditionInput | null,
+};
+
+export type ModelFloatInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
 };
 
 export type UpdateShieldInput = {
@@ -282,6 +299,7 @@ export type UpdateShieldInput = {
   weight?: string | null,
   price?: number | null,
   damage?: ThrowScenarioInput | null,
+  attacksPerTurn?: number | null,
 };
 
 export type DeleteShieldInput = {
@@ -311,18 +329,6 @@ export type ModelWeaponConditionInput = {
   and?: Array< ModelWeaponConditionInput | null > | null,
   or?: Array< ModelWeaponConditionInput | null > | null,
   not?: ModelWeaponConditionInput | null,
-};
-
-export type ModelFloatInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
 };
 
 export type UpdateWeaponInput = {
@@ -925,6 +931,7 @@ export type ModelClassFilterInput = {
 
 export type ModelRaceFilterInput = {
   id?: ModelIDInput | null,
+  playable?: ModelBooleanInput | null,
   and?: Array< ModelRaceFilterInput | null > | null,
   or?: Array< ModelRaceFilterInput | null > | null,
   not?: ModelRaceFilterInput | null,
@@ -955,6 +962,7 @@ export type ModelShieldFilterInput = {
   movementPreventionValue?: ModelIntInput | null,
   weight?: ModelStringInput | null,
   price?: ModelIntInput | null,
+  attacksPerTurn?: ModelFloatInput | null,
   and?: Array< ModelShieldFilterInput | null > | null,
   or?: Array< ModelShieldFilterInput | null > | null,
   not?: ModelShieldFilterInput | null,
@@ -1289,6 +1297,7 @@ export type CreateRaceMutation = {
       title: string,
       description: string | null,
     } >,
+    playable: boolean | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1309,6 +1318,7 @@ export type UpdateRaceMutation = {
       title: string,
       description: string | null,
     } >,
+    playable: boolean | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1329,6 +1339,7 @@ export type DeleteRaceMutation = {
       title: string,
       description: string | null,
     } >,
+    playable: boolean | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1500,9 +1511,10 @@ export type CreateShieldMutation = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
+    attacksPerTurn: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1536,9 +1548,10 @@ export type UpdateShieldMutation = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
+    attacksPerTurn: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1572,9 +1585,10 @@ export type DeleteShieldMutation = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
+    attacksPerTurn: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1622,7 +1636,7 @@ export type CreateWeaponMutation = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     },
     attacksPerTurn: number,
@@ -1674,7 +1688,7 @@ export type UpdateWeaponMutation = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     },
     attacksPerTurn: number,
@@ -1726,7 +1740,7 @@ export type DeleteWeaponMutation = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     },
     attacksPerTurn: number,
@@ -2009,7 +2023,7 @@ export type CreateThrowMutation = {
     throwScenario:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
     throwResults: Array< number >,
@@ -2033,7 +2047,7 @@ export type UpdateThrowMutation = {
     throwScenario:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
     throwResults: Array< number >,
@@ -2057,7 +2071,7 @@ export type DeleteThrowMutation = {
     throwScenario:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
     throwResults: Array< number >,
@@ -2200,6 +2214,7 @@ export type CreatePlayerCharacterMutation = {
         title: string,
         description: string | null,
       } >,
+      playable: boolean | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -2366,7 +2381,7 @@ export type CreatePlayerCharacterMutation = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -2393,7 +2408,7 @@ export type CreatePlayerCharacterMutation = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         attacksPerTurn: number | null,
@@ -2477,7 +2492,7 @@ export type CreatePlayerCharacterMutation = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         weapon:  {
@@ -2510,7 +2525,7 @@ export type CreatePlayerCharacterMutation = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -2702,6 +2717,7 @@ export type UpdatePlayerCharacterMutation = {
         title: string,
         description: string | null,
       } >,
+      playable: boolean | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -2868,7 +2884,7 @@ export type UpdatePlayerCharacterMutation = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -2895,7 +2911,7 @@ export type UpdatePlayerCharacterMutation = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         attacksPerTurn: number | null,
@@ -2979,7 +2995,7 @@ export type UpdatePlayerCharacterMutation = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         weapon:  {
@@ -3012,7 +3028,7 @@ export type UpdatePlayerCharacterMutation = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -3204,6 +3220,7 @@ export type DeletePlayerCharacterMutation = {
         title: string,
         description: string | null,
       } >,
+      playable: boolean | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -3370,7 +3387,7 @@ export type DeletePlayerCharacterMutation = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -3397,7 +3414,7 @@ export type DeletePlayerCharacterMutation = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         attacksPerTurn: number | null,
@@ -3481,7 +3498,7 @@ export type DeletePlayerCharacterMutation = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         weapon:  {
@@ -3514,7 +3531,7 @@ export type DeletePlayerCharacterMutation = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -3704,6 +3721,7 @@ export type CreateNonPlayerCharacterMutation = {
         title: string,
         description: string | null,
       } >,
+      playable: boolean | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -3847,7 +3865,7 @@ export type CreateNonPlayerCharacterMutation = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -3874,7 +3892,7 @@ export type CreateNonPlayerCharacterMutation = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         attacksPerTurn: number | null,
@@ -3958,7 +3976,7 @@ export type CreateNonPlayerCharacterMutation = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         weapon:  {
@@ -3991,7 +4009,7 @@ export type CreateNonPlayerCharacterMutation = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -4181,6 +4199,7 @@ export type UpdateNonPlayerCharacterMutation = {
         title: string,
         description: string | null,
       } >,
+      playable: boolean | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -4324,7 +4343,7 @@ export type UpdateNonPlayerCharacterMutation = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -4351,7 +4370,7 @@ export type UpdateNonPlayerCharacterMutation = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         attacksPerTurn: number | null,
@@ -4435,7 +4454,7 @@ export type UpdateNonPlayerCharacterMutation = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         weapon:  {
@@ -4468,7 +4487,7 @@ export type UpdateNonPlayerCharacterMutation = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -4658,6 +4677,7 @@ export type DeleteNonPlayerCharacterMutation = {
         title: string,
         description: string | null,
       } >,
+      playable: boolean | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -4801,7 +4821,7 @@ export type DeleteNonPlayerCharacterMutation = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -4828,7 +4848,7 @@ export type DeleteNonPlayerCharacterMutation = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         attacksPerTurn: number | null,
@@ -4912,7 +4932,7 @@ export type DeleteNonPlayerCharacterMutation = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         weapon:  {
@@ -4945,7 +4965,7 @@ export type DeleteNonPlayerCharacterMutation = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -5053,7 +5073,7 @@ export type CreateWeaponAssignmentMutation = {
       damage:  {
         __typename: "ThrowScenario",
         dice: Dice,
-        iterationCount: number,
+        iterationCount: number | null,
         modifier: number | null,
       },
       attacksPerTurn: number,
@@ -5080,7 +5100,7 @@ export type CreateWeaponAssignmentMutation = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
     attacksPerTurn: number | null,
@@ -5138,7 +5158,7 @@ export type UpdateWeaponAssignmentMutation = {
       damage:  {
         __typename: "ThrowScenario",
         dice: Dice,
-        iterationCount: number,
+        iterationCount: number | null,
         modifier: number | null,
       },
       attacksPerTurn: number,
@@ -5165,7 +5185,7 @@ export type UpdateWeaponAssignmentMutation = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
     attacksPerTurn: number | null,
@@ -5223,7 +5243,7 @@ export type DeleteWeaponAssignmentMutation = {
       damage:  {
         __typename: "ThrowScenario",
         dice: Dice,
-        iterationCount: number,
+        iterationCount: number | null,
         modifier: number | null,
       },
       attacksPerTurn: number,
@@ -5250,7 +5270,7 @@ export type DeleteWeaponAssignmentMutation = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
     attacksPerTurn: number | null,
@@ -5446,7 +5466,7 @@ export type CreateCharacterCompanionMutation = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
     weapon:  {
@@ -5485,7 +5505,7 @@ export type CreateCharacterCompanionMutation = {
       damage:  {
         __typename: "ThrowScenario",
         dice: Dice,
-        iterationCount: number,
+        iterationCount: number | null,
         modifier: number | null,
       },
       attacksPerTurn: number,
@@ -5542,7 +5562,7 @@ export type UpdateCharacterCompanionMutation = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
     weapon:  {
@@ -5581,7 +5601,7 @@ export type UpdateCharacterCompanionMutation = {
       damage:  {
         __typename: "ThrowScenario",
         dice: Dice,
-        iterationCount: number,
+        iterationCount: number | null,
         modifier: number | null,
       },
       attacksPerTurn: number,
@@ -5638,7 +5658,7 @@ export type DeleteCharacterCompanionMutation = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
     weapon:  {
@@ -5677,7 +5697,7 @@ export type DeleteCharacterCompanionMutation = {
       damage:  {
         __typename: "ThrowScenario",
         dice: Dice,
-        iterationCount: number,
+        iterationCount: number | null,
         modifier: number | null,
       },
       attacksPerTurn: number,
@@ -6010,6 +6030,7 @@ export type GetRaceQuery = {
       title: string,
       description: string | null,
     } >,
+    playable: boolean | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -6033,6 +6054,7 @@ export type ListRacesQuery = {
         title: string,
         description: string | null,
       } >,
+      playable: boolean | null,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -6167,9 +6189,10 @@ export type GetShieldQuery = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
+    attacksPerTurn: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -6206,9 +6229,10 @@ export type ListShieldsQuery = {
       damage:  {
         __typename: "ThrowScenario",
         dice: Dice,
-        iterationCount: number,
+        iterationCount: number | null,
         modifier: number | null,
       } | null,
+      attacksPerTurn: number,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -6257,7 +6281,7 @@ export type GetWeaponQuery = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     },
     attacksPerTurn: number,
@@ -6312,7 +6336,7 @@ export type ListWeaponsQuery = {
       damage:  {
         __typename: "ThrowScenario",
         dice: Dice,
-        iterationCount: number,
+        iterationCount: number | null,
         modifier: number | null,
       },
       attacksPerTurn: number,
@@ -6517,7 +6541,7 @@ export type GetThrowQuery = {
     throwScenario:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
     throwResults: Array< number >,
@@ -6544,7 +6568,7 @@ export type ListThrowsQuery = {
       throwScenario:  {
         __typename: "ThrowScenario",
         dice: Dice,
-        iterationCount: number,
+        iterationCount: number | null,
         modifier: number | null,
       } | null,
       throwResults: Array< number >,
@@ -6688,6 +6712,7 @@ export type GetPlayerCharacterQuery = {
         title: string,
         description: string | null,
       } >,
+      playable: boolean | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -6854,7 +6879,7 @@ export type GetPlayerCharacterQuery = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -6881,7 +6906,7 @@ export type GetPlayerCharacterQuery = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         attacksPerTurn: number | null,
@@ -6965,7 +6990,7 @@ export type GetPlayerCharacterQuery = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         weapon:  {
@@ -6998,7 +7023,7 @@ export type GetPlayerCharacterQuery = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -7193,6 +7218,7 @@ export type ListPlayerCharactersQuery = {
           title: string,
           description: string | null,
         } >,
+        playable: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -7360,7 +7386,7 @@ export type ListPlayerCharactersQuery = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           } | null,
           attacksPerTurn: number | null,
@@ -7421,7 +7447,7 @@ export type ListPlayerCharactersQuery = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           } | null,
           weapon:  {
@@ -7605,6 +7631,7 @@ export type GetNonPlayerCharacterQuery = {
         title: string,
         description: string | null,
       } >,
+      playable: boolean | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -7748,7 +7775,7 @@ export type GetNonPlayerCharacterQuery = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -7775,7 +7802,7 @@ export type GetNonPlayerCharacterQuery = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         attacksPerTurn: number | null,
@@ -7859,7 +7886,7 @@ export type GetNonPlayerCharacterQuery = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         weapon:  {
@@ -7892,7 +7919,7 @@ export type GetNonPlayerCharacterQuery = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -8085,6 +8112,7 @@ export type ListNonPlayerCharactersQuery = {
           title: string,
           description: string | null,
         } >,
+        playable: boolean | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -8229,7 +8257,7 @@ export type ListNonPlayerCharactersQuery = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           } | null,
           attacksPerTurn: number | null,
@@ -8290,7 +8318,7 @@ export type ListNonPlayerCharactersQuery = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           } | null,
           weapon:  {
@@ -8392,7 +8420,7 @@ export type GetWeaponAssignmentQuery = {
       damage:  {
         __typename: "ThrowScenario",
         dice: Dice,
-        iterationCount: number,
+        iterationCount: number | null,
         modifier: number | null,
       },
       attacksPerTurn: number,
@@ -8419,7 +8447,7 @@ export type GetWeaponAssignmentQuery = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
     attacksPerTurn: number | null,
@@ -8480,7 +8508,7 @@ export type ListWeaponAssignmentsQuery = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         },
         attacksPerTurn: number,
@@ -8507,7 +8535,7 @@ export type ListWeaponAssignmentsQuery = {
       damage:  {
         __typename: "ThrowScenario",
         dice: Dice,
-        iterationCount: number,
+        iterationCount: number | null,
         modifier: number | null,
       } | null,
       attacksPerTurn: number | null,
@@ -8659,7 +8687,7 @@ export type GetCharacterCompanionQuery = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
     weapon:  {
@@ -8698,7 +8726,7 @@ export type GetCharacterCompanionQuery = {
       damage:  {
         __typename: "ThrowScenario",
         dice: Dice,
-        iterationCount: number,
+        iterationCount: number | null,
         modifier: number | null,
       },
       attacksPerTurn: number,
@@ -8758,7 +8786,7 @@ export type ListCharacterCompanionsQuery = {
       damage:  {
         __typename: "ThrowScenario",
         dice: Dice,
-        iterationCount: number,
+        iterationCount: number | null,
         modifier: number | null,
       } | null,
       weapon:  {
@@ -8797,7 +8825,7 @@ export type ListCharacterCompanionsQuery = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         },
         attacksPerTurn: number,
@@ -9155,6 +9183,7 @@ export type OnCreateRaceSubscription = {
       title: string,
       description: string | null,
     } >,
+    playable: boolean | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -9170,6 +9199,7 @@ export type OnUpdateRaceSubscription = {
       title: string,
       description: string | null,
     } >,
+    playable: boolean | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -9185,6 +9215,7 @@ export type OnDeleteRaceSubscription = {
       title: string,
       description: string | null,
     } >,
+    playable: boolean | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -9321,9 +9352,10 @@ export type OnCreateShieldSubscription = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
+    attacksPerTurn: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -9352,9 +9384,10 @@ export type OnUpdateShieldSubscription = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
+    attacksPerTurn: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -9383,9 +9416,10 @@ export type OnDeleteShieldSubscription = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
+    attacksPerTurn: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -9428,7 +9462,7 @@ export type OnCreateWeaponSubscription = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     },
     attacksPerTurn: number,
@@ -9475,7 +9509,7 @@ export type OnUpdateWeaponSubscription = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     },
     attacksPerTurn: number,
@@ -9522,7 +9556,7 @@ export type OnDeleteWeaponSubscription = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     },
     attacksPerTurn: number,
@@ -9770,7 +9804,7 @@ export type OnCreateThrowSubscription = {
     throwScenario:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
     throwResults: Array< number >,
@@ -9789,7 +9823,7 @@ export type OnUpdateThrowSubscription = {
     throwScenario:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
     throwResults: Array< number >,
@@ -9808,7 +9842,7 @@ export type OnDeleteThrowSubscription = {
     throwScenario:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
     throwResults: Array< number >,
@@ -9951,6 +9985,7 @@ export type OnCreatePlayerCharacterSubscription = {
         title: string,
         description: string | null,
       } >,
+      playable: boolean | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -10117,7 +10152,7 @@ export type OnCreatePlayerCharacterSubscription = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -10144,7 +10179,7 @@ export type OnCreatePlayerCharacterSubscription = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         attacksPerTurn: number | null,
@@ -10228,7 +10263,7 @@ export type OnCreatePlayerCharacterSubscription = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         weapon:  {
@@ -10261,7 +10296,7 @@ export type OnCreatePlayerCharacterSubscription = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -10453,6 +10488,7 @@ export type OnUpdatePlayerCharacterSubscription = {
         title: string,
         description: string | null,
       } >,
+      playable: boolean | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -10619,7 +10655,7 @@ export type OnUpdatePlayerCharacterSubscription = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -10646,7 +10682,7 @@ export type OnUpdatePlayerCharacterSubscription = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         attacksPerTurn: number | null,
@@ -10730,7 +10766,7 @@ export type OnUpdatePlayerCharacterSubscription = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         weapon:  {
@@ -10763,7 +10799,7 @@ export type OnUpdatePlayerCharacterSubscription = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -10955,6 +10991,7 @@ export type OnDeletePlayerCharacterSubscription = {
         title: string,
         description: string | null,
       } >,
+      playable: boolean | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -11121,7 +11158,7 @@ export type OnDeletePlayerCharacterSubscription = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -11148,7 +11185,7 @@ export type OnDeletePlayerCharacterSubscription = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         attacksPerTurn: number | null,
@@ -11232,7 +11269,7 @@ export type OnDeletePlayerCharacterSubscription = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         weapon:  {
@@ -11265,7 +11302,7 @@ export type OnDeletePlayerCharacterSubscription = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -11454,6 +11491,7 @@ export type OnCreateNonPlayerCharacterSubscription = {
         title: string,
         description: string | null,
       } >,
+      playable: boolean | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -11597,7 +11635,7 @@ export type OnCreateNonPlayerCharacterSubscription = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -11624,7 +11662,7 @@ export type OnCreateNonPlayerCharacterSubscription = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         attacksPerTurn: number | null,
@@ -11708,7 +11746,7 @@ export type OnCreateNonPlayerCharacterSubscription = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         weapon:  {
@@ -11741,7 +11779,7 @@ export type OnCreateNonPlayerCharacterSubscription = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -11930,6 +11968,7 @@ export type OnUpdateNonPlayerCharacterSubscription = {
         title: string,
         description: string | null,
       } >,
+      playable: boolean | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -12073,7 +12112,7 @@ export type OnUpdateNonPlayerCharacterSubscription = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -12100,7 +12139,7 @@ export type OnUpdateNonPlayerCharacterSubscription = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         attacksPerTurn: number | null,
@@ -12184,7 +12223,7 @@ export type OnUpdateNonPlayerCharacterSubscription = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         weapon:  {
@@ -12217,7 +12256,7 @@ export type OnUpdateNonPlayerCharacterSubscription = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -12406,6 +12445,7 @@ export type OnDeleteNonPlayerCharacterSubscription = {
         title: string,
         description: string | null,
       } >,
+      playable: boolean | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -12549,7 +12589,7 @@ export type OnDeleteNonPlayerCharacterSubscription = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -12576,7 +12616,7 @@ export type OnDeleteNonPlayerCharacterSubscription = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         attacksPerTurn: number | null,
@@ -12660,7 +12700,7 @@ export type OnDeleteNonPlayerCharacterSubscription = {
         damage:  {
           __typename: "ThrowScenario",
           dice: Dice,
-          iterationCount: number,
+          iterationCount: number | null,
           modifier: number | null,
         } | null,
         weapon:  {
@@ -12693,7 +12733,7 @@ export type OnDeleteNonPlayerCharacterSubscription = {
           damage:  {
             __typename: "ThrowScenario",
             dice: Dice,
-            iterationCount: number,
+            iterationCount: number | null,
             modifier: number | null,
           },
           attacksPerTurn: number,
@@ -12800,7 +12840,7 @@ export type OnCreateWeaponAssignmentSubscription = {
       damage:  {
         __typename: "ThrowScenario",
         dice: Dice,
-        iterationCount: number,
+        iterationCount: number | null,
         modifier: number | null,
       },
       attacksPerTurn: number,
@@ -12827,7 +12867,7 @@ export type OnCreateWeaponAssignmentSubscription = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
     attacksPerTurn: number | null,
@@ -12884,7 +12924,7 @@ export type OnUpdateWeaponAssignmentSubscription = {
       damage:  {
         __typename: "ThrowScenario",
         dice: Dice,
-        iterationCount: number,
+        iterationCount: number | null,
         modifier: number | null,
       },
       attacksPerTurn: number,
@@ -12911,7 +12951,7 @@ export type OnUpdateWeaponAssignmentSubscription = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
     attacksPerTurn: number | null,
@@ -12968,7 +13008,7 @@ export type OnDeleteWeaponAssignmentSubscription = {
       damage:  {
         __typename: "ThrowScenario",
         dice: Dice,
-        iterationCount: number,
+        iterationCount: number | null,
         modifier: number | null,
       },
       attacksPerTurn: number,
@@ -12995,7 +13035,7 @@ export type OnDeleteWeaponAssignmentSubscription = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
     attacksPerTurn: number | null,
@@ -13187,7 +13227,7 @@ export type OnCreateCharacterCompanionSubscription = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
     weapon:  {
@@ -13226,7 +13266,7 @@ export type OnCreateCharacterCompanionSubscription = {
       damage:  {
         __typename: "ThrowScenario",
         dice: Dice,
-        iterationCount: number,
+        iterationCount: number | null,
         modifier: number | null,
       },
       attacksPerTurn: number,
@@ -13282,7 +13322,7 @@ export type OnUpdateCharacterCompanionSubscription = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
     weapon:  {
@@ -13321,7 +13361,7 @@ export type OnUpdateCharacterCompanionSubscription = {
       damage:  {
         __typename: "ThrowScenario",
         dice: Dice,
-        iterationCount: number,
+        iterationCount: number | null,
         modifier: number | null,
       },
       attacksPerTurn: number,
@@ -13377,7 +13417,7 @@ export type OnDeleteCharacterCompanionSubscription = {
     damage:  {
       __typename: "ThrowScenario",
       dice: Dice,
-      iterationCount: number,
+      iterationCount: number | null,
       modifier: number | null,
     } | null,
     weapon:  {
@@ -13416,7 +13456,7 @@ export type OnDeleteCharacterCompanionSubscription = {
       damage:  {
         __typename: "ThrowScenario",
         dice: Dice,
-        iterationCount: number,
+        iterationCount: number | null,
         modifier: number | null,
       },
       attacksPerTurn: number,

@@ -113,6 +113,7 @@ export const getRace = /* GraphQL */ `
         title
         description
       }
+      playable
       createdAt
       updatedAt
     }
@@ -132,6 +133,7 @@ export const listRaces = /* GraphQL */ `
           title
           description
         }
+        playable
         createdAt
         updatedAt
       }
@@ -244,6 +246,7 @@ export const getShield = /* GraphQL */ `
         iterationCount
         modifier
       }
+      attacksPerTurn
       createdAt
       updatedAt
     }
@@ -277,6 +280,7 @@ export const listShields = /* GraphQL */ `
           iterationCount
           modifier
         }
+        attacksPerTurn
         createdAt
         updatedAt
       }
@@ -681,6 +685,7 @@ export const getPlayerCharacter = /* GraphQL */ `
           title
           description
         }
+        playable
         createdAt
         updatedAt
       }
@@ -1121,6 +1126,7 @@ export const listPlayerCharacters = /* GraphQL */ `
             title
             description
           }
+          playable
           createdAt
           updatedAt
         }
@@ -1477,6 +1483,7 @@ export const getNonPlayerCharacter = /* GraphQL */ `
           title
           description
         }
+        playable
         createdAt
         updatedAt
       }
@@ -1895,6 +1902,7 @@ export const listNonPlayerCharacters = /* GraphQL */ `
             title
             description
           }
+          playable
           createdAt
           updatedAt
         }

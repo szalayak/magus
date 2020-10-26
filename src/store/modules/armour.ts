@@ -8,10 +8,9 @@ import { listArmours } from "@/graphql/queries";
 import { API } from "aws-amplify";
 import { Module } from "vuex";
 import { RootState } from "..";
-import { Describable } from "../types";
+import { Editable } from "../types";
 
-export interface Armour extends Describable {
-  id: string;
+export interface Armour extends Editable {
   weight?: string;
   movementPreventionValue: number;
   damageReductionValue: number;
@@ -28,6 +27,11 @@ const armour: Module<ArmourState, RootState> = {
     ({
       result: {},
     } as ArmourState),
+  getters: {
+    list(state): Armour[] {
+      return state.result?.listArmours?.items as Armour[];
+    },
+  },
   mutations: {
     set(state, result: ListArmoursQuery) {
       state.result = result;

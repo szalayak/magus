@@ -2,7 +2,7 @@ import { API } from "aws-amplify";
 import { Module } from "vuex";
 import { RootState } from "..";
 import { ValueRange } from "./valueRange";
-import { CombatValues, Describable, ThrowScenario } from "../types";
+import { CombatValues, Editable, ThrowScenario } from "../types";
 import {
   CreateWeaponMutation,
   ListWeaponsQuery,
@@ -11,8 +11,7 @@ import {
 import { listWeapons } from "@/graphql/queries";
 import { createWeapon, deleteWeapon, updateWeapon } from "@/graphql/mutations";
 
-export interface Weapon extends Describable {
-  id: string;
+export interface Weapon extends Editable {
   weaponType?: ValueRange;
   weight?: string;
   price?: number;
@@ -34,8 +33,8 @@ const weapon: Module<WeaponState, RootState> = {
       result: {},
     } as WeaponState),
   getters: {
-    list(state) {
-      return state.result?.listWeapons?.items;
+    list(state): Weapon[] {
+      return state.result?.listWeapons?.items as Weapon[];
     },
   },
   mutations: {

@@ -17,10 +17,9 @@ import {
 import { API } from "aws-amplify";
 import { Module } from "vuex";
 import { RootState } from "..";
-import { Describable } from "../types";
+import { Editable } from "../types";
 
-export interface ValueRange extends Describable {
-  id: string;
+export interface ValueRange extends Editable {
   type?: ValueRangeType;
   typeTitle?: string;
 }
@@ -36,25 +35,28 @@ const race: Module<ValueRangeState, RootState> = {
       result: {},
     } as ValueRangeState),
   getters: {
-    getMainClasses(state) {
+    getMainClasses(state): ValueRange[] {
       return state.result?.listValueRangeValues?.items?.filter(item => {
         return item?.type === ValueRangeType.MAIN_CLASS;
-      });
+      }) as ValueRange[];
     },
-    getPersonalities(state) {
+    getPersonalities(state): ValueRange[] {
       return state.result?.listValueRangeValues?.items?.filter(item => {
         return item?.type === ValueRangeType.PERSONALITY;
-      });
+      }) as ValueRange[];
     },
-    getSkillGroups(state) {
+    getSkillGroups(state): ValueRange[] {
       return state.result?.listValueRangeValues?.items?.filter(item => {
         return item?.type === ValueRangeType.SKILL_GROUP;
-      });
+      }) as ValueRange[];
     },
-    getWeaponTypes(state) {
+    getWeaponTypes(state): ValueRange[] {
       return state.result?.listValueRangeValues?.items?.filter(item => {
         return item?.type === ValueRangeType.WEAPON_TYPE;
-      });
+      }) as ValueRange[];
+    },
+    list(state): ValueRange[] {
+      return state.result?.listValueRangeValues?.items as ValueRange[];
     },
   },
   mutations: {

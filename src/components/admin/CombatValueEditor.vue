@@ -15,6 +15,7 @@
         :value="offence"
         :label="$t('offence-value')"
         @input="$emit('update:offence', parseInt($event))"
+        :disabled="ranged"
         outlined
       ></v-text-field>
     </v-col>
@@ -24,6 +25,7 @@
         :value="defence"
         :label="$t('defence-value')"
         @input="$emit('update:defence', parseInt($event))"
+        :disabled="ranged"
         outlined
       ></v-text-field>
     </v-col>
@@ -33,6 +35,7 @@
         :value="aiming"
         :label="$t('aiming-value')"
         @input="$emit('update:aiming', parseInt($event))"
+        :disabled="!ranged"
         outlined
       ></v-text-field>
     </v-col>
@@ -42,6 +45,6 @@
 import Vue from "vue";
 
 export default Vue.extend({
-  props: ["initiation", "offence", "defence", "aiming"],
+  props: ["initiation", "offence", "defence", "aiming", "ranged"],
 });
 </script>

@@ -9,10 +9,9 @@ import { API } from "aws-amplify";
 import { Module } from "vuex";
 import { RootState } from "..";
 import { ValueRange } from "./valueRange";
-import { Describable } from "../types";
+import { Editable } from "../types";
 
-export interface Class extends Describable {
-  id: string;
+export interface Class extends Editable {
   mainClass?: ValueRange;
   magicUser?: boolean;
 }
@@ -27,6 +26,14 @@ const classModule: Module<ClassState, RootState> = {
     ({
       result: {},
     } as ClassState),
+  getters: {
+    list(state): Class[] {
+      return state.result?.listClasses?.items as Class[];
+    },
+    getMagicUserClasses(state) {
+      return state.result?.listClasses?.items?.filter(c => c?.magicUser);
+    },
+  },
   mutations: {
     set(state, result: ListClassesQuery) {
       state.result = result;
@@ -51,11 +58,6 @@ const classModule: Module<ClassState, RootState> = {
         const items = state.result?.listClasses?.items;
         items?.splice(items.indexOf(oldState), 1);
       }
-    },
-  },
-  getters: {
-    getMagicUserClasses(state) {
-      return state.result?.listClasses?.items?.filter(c => c?.magicUser);
     },
   },
   actions: {

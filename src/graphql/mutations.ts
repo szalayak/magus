@@ -158,6 +158,7 @@ export const createRace = /* GraphQL */ `
         title
         description
       }
+      playable
       createdAt
       updatedAt
     }
@@ -175,6 +176,7 @@ export const updateRace = /* GraphQL */ `
         title
         description
       }
+      playable
       createdAt
       updatedAt
     }
@@ -192,6 +194,7 @@ export const deleteRace = /* GraphQL */ `
         title
         description
       }
+      playable
       createdAt
       updatedAt
     }
@@ -343,6 +346,7 @@ export const createShield = /* GraphQL */ `
         iterationCount
         modifier
       }
+      attacksPerTurn
       createdAt
       updatedAt
     }
@@ -374,6 +378,7 @@ export const updateShield = /* GraphQL */ `
         iterationCount
         modifier
       }
+      attacksPerTurn
       createdAt
       updatedAt
     }
@@ -405,6 +410,7 @@ export const deleteShield = /* GraphQL */ `
         iterationCount
         modifier
       }
+      attacksPerTurn
       createdAt
       updatedAt
     }
@@ -947,6 +953,7 @@ export const createPlayerCharacter = /* GraphQL */ `
           title
           description
         }
+        playable
         createdAt
         updatedAt
       }
@@ -1381,6 +1388,7 @@ export const updatePlayerCharacter = /* GraphQL */ `
           title
           description
         }
+        playable
         createdAt
         updatedAt
       }
@@ -1815,6 +1823,7 @@ export const deletePlayerCharacter = /* GraphQL */ `
           title
           description
         }
+        playable
         createdAt
         updatedAt
       }
@@ -2247,6 +2256,7 @@ export const createNonPlayerCharacter = /* GraphQL */ `
           title
           description
         }
+        playable
         createdAt
         updatedAt
       }
@@ -2659,6 +2669,7 @@ export const updateNonPlayerCharacter = /* GraphQL */ `
           title
           description
         }
+        playable
         createdAt
         updatedAt
       }
@@ -3071,6 +3082,7 @@ export const deleteNonPlayerCharacter = /* GraphQL */ `
           title
           description
         }
+        playable
         createdAt
         updatedAt
       }

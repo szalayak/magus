@@ -137,6 +137,7 @@ export const onCreateRace = /* GraphQL */ `
         title
         description
       }
+      playable
       createdAt
       updatedAt
     }
@@ -151,6 +152,7 @@ export const onUpdateRace = /* GraphQL */ `
         title
         description
       }
+      playable
       createdAt
       updatedAt
     }
@@ -165,6 +167,7 @@ export const onDeleteRace = /* GraphQL */ `
         title
         description
       }
+      playable
       createdAt
       updatedAt
     }
@@ -295,6 +298,7 @@ export const onCreateShield = /* GraphQL */ `
         iterationCount
         modifier
       }
+      attacksPerTurn
       createdAt
       updatedAt
     }
@@ -323,6 +327,7 @@ export const onUpdateShield = /* GraphQL */ `
         iterationCount
         modifier
       }
+      attacksPerTurn
       createdAt
       updatedAt
     }
@@ -351,6 +356,7 @@ export const onDeleteShield = /* GraphQL */ `
         iterationCount
         modifier
       }
+      attacksPerTurn
       createdAt
       updatedAt
     }
@@ -857,6 +863,7 @@ export const onCreatePlayerCharacter = /* GraphQL */ `
           title
           description
         }
+        playable
         createdAt
         updatedAt
       }
@@ -1291,6 +1298,7 @@ export const onUpdatePlayerCharacter = /* GraphQL */ `
           title
           description
         }
+        playable
         createdAt
         updatedAt
       }
@@ -1725,6 +1733,7 @@ export const onDeletePlayerCharacter = /* GraphQL */ `
           title
           description
         }
+        playable
         createdAt
         updatedAt
       }
@@ -2154,6 +2163,7 @@ export const onCreateNonPlayerCharacter = /* GraphQL */ `
           title
           description
         }
+        playable
         createdAt
         updatedAt
       }
@@ -2563,6 +2573,7 @@ export const onUpdateNonPlayerCharacter = /* GraphQL */ `
           title
           description
         }
+        playable
         createdAt
         updatedAt
       }
@@ -2972,6 +2983,7 @@ export const onDeleteNonPlayerCharacter = /* GraphQL */ `
           title
           description
         }
+        playable
         createdAt
         updatedAt
       }

@@ -2,7 +2,7 @@ import { API } from "aws-amplify";
 import { Module } from "vuex";
 import { RootState } from "..";
 import { ValueRange } from "./valueRange";
-import { Describable } from "../types";
+import { Editable } from "../types";
 import {
   CreateSkillMutation,
   ListSkillsQuery,
@@ -11,8 +11,7 @@ import {
 import { listSkills } from "@/graphql/queries";
 import { createSkill, deleteSkill, updateSkill } from "@/graphql/mutations";
 
-export interface Skill extends Describable {
-  id: string;
+export interface Skill extends Editable {
   skillGroup?: ValueRange;
   percentageSkill?: boolean;
   basicCost?: number;
@@ -29,6 +28,11 @@ const skill: Module<SkillState, RootState> = {
     ({
       result: {},
     } as SkillState),
+  getters: {
+    list(state): Skill[] {
+      return state.result?.listSkills?.items as Skill[];
+    },
+  },
   mutations: {
     set(state, result: ListSkillsQuery) {
       state.result = result;
@@ -73,8 +77,8 @@ const skill: Module<SkillState, RootState> = {
             descriptions: item.descriptions,
             skillGroupId: item.skillGroup?.id,
             percentageSkill: item.percentageSkill,
-            basicCost: item.basicCost,
-            masterCost: item.masterCost,
+            basicCost: item.percentageSkill ? undefined : item.basicCost,
+            masterCost: item.percentageSkill ? undefined : item.masterCost,
           },
         },
       })) as { data: CreateSkillMutation };
@@ -91,8 +95,8 @@ const skill: Module<SkillState, RootState> = {
             descriptions: item.descriptions,
             skillGroupId: item.skillGroup?.id,
             percentageSkill: item.percentageSkill,
-            basicCost: item.basicCost,
-            masterCost: item.masterCost,
+            basicCost: item.percentageSkill ? undefined : item.basicCost,
+            masterCost: item.percentageSkill ? undefined : item.masterCost,
           },
         },
       })) as { data: UpdateSkillMutation };

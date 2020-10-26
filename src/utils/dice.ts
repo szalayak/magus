@@ -14,3 +14,14 @@ export const getDice = (i18n: VueI18n): DiceObject[] => {
     })
   );
 };
+
+export const throwDice = (dice: Dice): number => {
+  const minValue = 1;
+  const maxValue =
+    dice === Dice.D1 ? 6 : parseInt(dice.match(/[0-9]/g)!.join(""));
+
+  const value = Math.floor(Math.random() * maxValue) + 1;
+
+  if (dice === Dice.D1) return value < 6 ? 0 : 1;
+  else return value;
+};
