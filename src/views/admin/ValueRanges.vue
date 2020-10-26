@@ -1,11 +1,5 @@
 <template>
-  <v-container fluid>
-    <v-row justify="center">
-      <v-col cols="12">
-        <value-range-admin />
-      </v-col>
-    </v-row>
-  </v-container>
+  <value-range-admin />
 </template>
 
 <script lang="ts">

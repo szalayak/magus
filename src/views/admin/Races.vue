@@ -1,11 +1,5 @@
 <template>
-  <v-container fluid>
-    <v-row justify="center">
-      <v-col cols="12">
-        <race-admin />
-      </v-col>
-    </v-row>
-  </v-container>
+  <race-admin />
 </template>
 
 <script lang="ts">

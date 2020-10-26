@@ -1,11 +1,5 @@
 <template>
-  <v-container fluid>
-    <v-row justify="center">
-      <v-col cols="12">
-        <shield-admin />
-      </v-col>
-    </v-row>
-  </v-container>
+  <shield-admin />
 </template>
 
 <script lang="ts">

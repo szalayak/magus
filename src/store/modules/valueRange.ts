@@ -21,7 +21,6 @@ import { Editable } from "../types";
 
 export interface ValueRange extends Editable {
   type?: ValueRangeType;
-  typeTitle?: string;
 }
 
 export interface ValueRangeState {

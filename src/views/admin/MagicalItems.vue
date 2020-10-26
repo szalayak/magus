@@ -1,11 +1,5 @@
 <template>
-  <v-container fluid>
-    <v-row justify="center">
-      <v-col cols="12">
-        <magical-item-admin />
-      </v-col>
-    </v-row>
-  </v-container>
+  <magical-item-admin />
 </template>
 
 <script lang="ts">

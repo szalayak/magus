@@ -1,11 +1,5 @@
 <template>
-  <v-container fluid>
-    <v-row justify="center">
-      <v-col cols="12">
-        <psi-school-admin />
-      </v-col>
-    </v-row>
-  </v-container>
+  <psi-school-admin />
 </template>
 
 <script lang="ts">
