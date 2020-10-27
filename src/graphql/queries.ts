@@ -574,13 +574,14 @@ export const listThrows = /* GraphQL */ `
     }
   }
 `;
-export const getPlayerCharacter = /* GraphQL */ `
-  query GetPlayerCharacter($id: ID!) {
-    getPlayerCharacter(id: $id) {
+export const getCharacter = /* GraphQL */ `
+  query GetCharacter($id: ID!) {
+    getCharacter(id: $id) {
       id
       name
+      playerCharacter
       startDate
-      dungeonMasters
+      dungeonMaster
       owner
       basicInfo {
         image {
@@ -768,7 +769,7 @@ export const getPlayerCharacter = /* GraphQL */ `
         defence
         aiming
       }
-      temporaryCombatValuesModifiers {
+      temporaryCombatValueModifiers {
         initiation
         offence
         defence
@@ -1006,22 +1007,19 @@ export const getPlayerCharacter = /* GraphQL */ `
     }
   }
 `;
-export const listPlayerCharacters = /* GraphQL */ `
-  query ListPlayerCharacters(
-    $filter: ModelPlayerCharacterFilterInput
+export const listCharacters = /* GraphQL */ `
+  query ListCharacters(
+    $filter: ModelCharacterFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listPlayerCharacters(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
+    listCharacters(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         name
+        playerCharacter
         startDate
-        dungeonMasters
+        dungeonMaster
         owner
         basicInfo {
           image {
@@ -1209,7 +1207,7 @@ export const listPlayerCharacters = /* GraphQL */ `
           defence
           aiming
         }
-        temporaryCombatValuesModifiers {
+        temporaryCombatValueModifiers {
           initiation
           offence
           defence
@@ -1217,762 +1215,6 @@ export const listPlayerCharacters = /* GraphQL */ `
         }
         combatValueModifiersPerLevel
         mandatoryCombatValueModifierDistribution
-        wallet {
-          money
-          mithrill
-          gemstones
-          misc
-        }
-        languages {
-          language
-          level
-        }
-        inventory {
-          name
-          amount
-          location
-        }
-        poisons {
-          name
-          amount
-        }
-        notes
-        weapons {
-          items {
-            id
-            characterId
-            custom
-            weapon {
-              id
-              weaponTypeId
-              weight
-              price
-              attackRange
-              attacksPerTurn
-              ranged
-              createdAt
-              updatedAt
-            }
-            descriptions {
-              locale
-              title
-              description
-            }
-            weight
-            price
-            attackRange
-            combatValues {
-              initiation
-              offence
-              defence
-              aiming
-            }
-            damage {
-              dice
-              iterationCount
-              modifier
-            }
-            attacksPerTurn
-            ranged
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        skills {
-          items {
-            id
-            characterId
-            skillId
-            skill {
-              id
-              percentageSkill
-              skillGroupId
-              basicCost
-              masterCost
-              createdAt
-              updatedAt
-            }
-            mastery
-            percentageValue
-            skillPointsUsed
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        companions {
-          items {
-            id
-            characterId
-            name
-            type
-            health {
-              baseVitality
-              baseHitPoints
-              hitPointsPerLevel
-            }
-            combatValues {
-              initiation
-              offence
-              defence
-              aiming
-            }
-            damage {
-              dice
-              iterationCount
-              modifier
-            }
-            weapon {
-              id
-              weaponTypeId
-              weight
-              price
-              attackRange
-              attacksPerTurn
-              ranged
-              createdAt
-              updatedAt
-            }
-            attacksPerTurn
-            maxDistance
-            maxLoad
-            badHabit
-            specialAbilities
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        magicalItems {
-          items {
-            id
-            characterId
-            magicalItemId
-            magicalItem {
-              id
-              manaCost
-              duration
-              price
-              createdAt
-              updatedAt
-            }
-            location
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getNonPlayerCharacter = /* GraphQL */ `
-  query GetNonPlayerCharacter($id: ID!) {
-    getNonPlayerCharacter(id: $id) {
-      id
-      name
-      owner
-      basicInfo {
-        image {
-          bucket
-          region
-          key
-        }
-        sex
-        height
-        weight
-        hair
-        eyes
-        age
-        visibleAge
-        family
-        attire
-        personalityTraits
-        specialAbilities
-        likes
-        dislikes
-        fears
-        companions
-        fame
-        religion
-        country
-        school
-        holySymbol {
-          bucket
-          region
-          key
-        }
-        coatOfArms {
-          bucket
-          region
-          key
-        }
-      }
-      abilities {
-        strength
-        agility
-        dexterity
-        stamina
-        health
-        beauty
-        intelligence
-        willpower
-        astral
-      }
-      currentAbilities {
-        strength
-        agility
-        dexterity
-        stamina
-        health
-        beauty
-        intelligence
-        willpower
-        astral
-      }
-      health {
-        vitality {
-          current
-          max
-        }
-        baseVitality
-        hitPoints {
-          current
-          max
-        }
-        baseHitPoints
-        hitPointsPerLevel
-      }
-      class {
-        id
-        mainClassId
-        mainClass {
-          id
-          type
-          descriptions {
-            locale
-            title
-            description
-          }
-          createdAt
-          updatedAt
-        }
-        descriptions {
-          locale
-          title
-          description
-        }
-        magicUser
-        createdAt
-        updatedAt
-      }
-      subclass
-      specialisation
-      race {
-        id
-        descriptions {
-          locale
-          title
-          description
-        }
-        playable
-        createdAt
-        updatedAt
-      }
-      personality {
-        id
-        type
-        descriptions {
-          locale
-          title
-          description
-        }
-        createdAt
-        updatedAt
-      }
-      level {
-        currentLevel
-        currentExperience
-        experienceForNextLevel
-      }
-      psiUser
-      psiSchool {
-        id
-        descriptions {
-          locale
-          title
-          description
-        }
-        basePsiPoints
-        psiPointsPerLevel
-        createdAt
-        updatedAt
-      }
-      psiMastery
-      psiPoints {
-        current
-        max
-      }
-      spellResistance {
-        astral {
-          staticShield
-          dynamicShield
-          innate
-          magical
-          modifier
-        }
-        mental {
-          staticShield
-          dynamicShield
-          innate
-          magical
-          modifier
-        }
-      }
-      magicUser
-      magicalAbility {
-        manaPoints {
-          current
-          max
-        }
-        manaPointsPerLevel
-        modifiers
-        manaPointsStoredElsehwere
-        rechargingMethod
-      }
-      combatValues {
-        initiation
-        offence
-        defence
-        aiming
-      }
-      wallet {
-        money
-        mithrill
-        gemstones
-        misc
-      }
-      languages {
-        language
-        level
-      }
-      inventory {
-        name
-        amount
-        location
-      }
-      poisons {
-        name
-        amount
-      }
-      notes
-      weapons {
-        items {
-          id
-          characterId
-          custom
-          weapon {
-            id
-            descriptions {
-              locale
-              title
-              description
-            }
-            weaponTypeId
-            weaponType {
-              id
-              type
-              createdAt
-              updatedAt
-            }
-            weight
-            price
-            attackRange
-            combatValues {
-              initiation
-              offence
-              defence
-              aiming
-            }
-            damage {
-              dice
-              iterationCount
-              modifier
-            }
-            attacksPerTurn
-            ranged
-            createdAt
-            updatedAt
-          }
-          descriptions {
-            locale
-            title
-            description
-          }
-          weight
-          price
-          attackRange
-          combatValues {
-            initiation
-            offence
-            defence
-            aiming
-          }
-          damage {
-            dice
-            iterationCount
-            modifier
-          }
-          attacksPerTurn
-          ranged
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      skills {
-        items {
-          id
-          characterId
-          skillId
-          skill {
-            id
-            descriptions {
-              locale
-              title
-              description
-            }
-            percentageSkill
-            skillGroupId
-            skillGroup {
-              id
-              type
-              createdAt
-              updatedAt
-            }
-            basicCost
-            masterCost
-            createdAt
-            updatedAt
-          }
-          mastery
-          percentageValue
-          skillPointsUsed
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      companions {
-        items {
-          id
-          characterId
-          name
-          type
-          health {
-            vitality {
-              current
-              max
-            }
-            baseVitality
-            hitPoints {
-              current
-              max
-            }
-            baseHitPoints
-            hitPointsPerLevel
-          }
-          combatValues {
-            initiation
-            offence
-            defence
-            aiming
-          }
-          damage {
-            dice
-            iterationCount
-            modifier
-          }
-          weapon {
-            id
-            descriptions {
-              locale
-              title
-              description
-            }
-            weaponTypeId
-            weaponType {
-              id
-              type
-              createdAt
-              updatedAt
-            }
-            weight
-            price
-            attackRange
-            combatValues {
-              initiation
-              offence
-              defence
-              aiming
-            }
-            damage {
-              dice
-              iterationCount
-              modifier
-            }
-            attacksPerTurn
-            ranged
-            createdAt
-            updatedAt
-          }
-          attacksPerTurn
-          maxDistance
-          maxLoad
-          badHabit
-          specialAbilities
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      magicalItems {
-        items {
-          id
-          characterId
-          magicalItemId
-          magicalItem {
-            id
-            descriptions {
-              locale
-              title
-              description
-            }
-            class {
-              id
-              mainClassId
-              magicUser
-              createdAt
-              updatedAt
-            }
-            manaCost
-            duration
-            price
-            createdAt
-            updatedAt
-          }
-          location
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listNonPlayerCharacters = /* GraphQL */ `
-  query ListNonPlayerCharacters(
-    $filter: ModelNonPlayerCharacterFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listNonPlayerCharacters(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        name
-        owner
-        basicInfo {
-          image {
-            bucket
-            region
-            key
-          }
-          sex
-          height
-          weight
-          hair
-          eyes
-          age
-          visibleAge
-          family
-          attire
-          personalityTraits
-          specialAbilities
-          likes
-          dislikes
-          fears
-          companions
-          fame
-          religion
-          country
-          school
-          holySymbol {
-            bucket
-            region
-            key
-          }
-          coatOfArms {
-            bucket
-            region
-            key
-          }
-        }
-        abilities {
-          strength
-          agility
-          dexterity
-          stamina
-          health
-          beauty
-          intelligence
-          willpower
-          astral
-        }
-        currentAbilities {
-          strength
-          agility
-          dexterity
-          stamina
-          health
-          beauty
-          intelligence
-          willpower
-          astral
-        }
-        health {
-          vitality {
-            current
-            max
-          }
-          baseVitality
-          hitPoints {
-            current
-            max
-          }
-          baseHitPoints
-          hitPointsPerLevel
-        }
-        class {
-          id
-          mainClassId
-          mainClass {
-            id
-            type
-            descriptions {
-              locale
-              title
-              description
-            }
-            createdAt
-            updatedAt
-          }
-          descriptions {
-            locale
-            title
-            description
-          }
-          magicUser
-          createdAt
-          updatedAt
-        }
-        subclass
-        specialisation
-        race {
-          id
-          descriptions {
-            locale
-            title
-            description
-          }
-          playable
-          createdAt
-          updatedAt
-        }
-        personality {
-          id
-          type
-          descriptions {
-            locale
-            title
-            description
-          }
-          createdAt
-          updatedAt
-        }
-        level {
-          currentLevel
-          currentExperience
-          experienceForNextLevel
-        }
-        psiUser
-        psiSchool {
-          id
-          descriptions {
-            locale
-            title
-            description
-          }
-          basePsiPoints
-          psiPointsPerLevel
-          createdAt
-          updatedAt
-        }
-        psiMastery
-        psiPoints {
-          current
-          max
-        }
-        spellResistance {
-          astral {
-            staticShield
-            dynamicShield
-            innate
-            magical
-            modifier
-          }
-          mental {
-            staticShield
-            dynamicShield
-            innate
-            magical
-            modifier
-          }
-        }
-        magicUser
-        magicalAbility {
-          manaPoints {
-            current
-            max
-          }
-          manaPointsPerLevel
-          modifiers
-          manaPointsStoredElsehwere
-          rechargingMethod
-        }
-        combatValues {
-          initiation
-          offence
-          defence
-          aiming
-        }
         wallet {
           money
           mithrill
@@ -2716,6 +1958,752 @@ export const listClassesByMainClass = /* GraphQL */ `
           description
         }
         magicUser
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const listCharactersByOwner = /* GraphQL */ `
+  query ListCharactersByOwner(
+    $owner: String
+    $sortDirection: ModelSortDirection
+    $filter: ModelCharacterFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCharactersByOwner(
+      owner: $owner
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        playerCharacter
+        startDate
+        dungeonMaster
+        owner
+        basicInfo {
+          image {
+            bucket
+            region
+            key
+          }
+          sex
+          height
+          weight
+          hair
+          eyes
+          age
+          visibleAge
+          family
+          attire
+          personalityTraits
+          specialAbilities
+          likes
+          dislikes
+          fears
+          companions
+          fame
+          religion
+          country
+          school
+          holySymbol {
+            bucket
+            region
+            key
+          }
+          coatOfArms {
+            bucket
+            region
+            key
+          }
+        }
+        abilities {
+          strength
+          agility
+          dexterity
+          stamina
+          health
+          beauty
+          intelligence
+          willpower
+          astral
+        }
+        currentAbilities {
+          strength
+          agility
+          dexterity
+          stamina
+          health
+          beauty
+          intelligence
+          willpower
+          astral
+        }
+        health {
+          vitality {
+            current
+            max
+          }
+          baseVitality
+          hitPoints {
+            current
+            max
+          }
+          baseHitPoints
+          hitPointsPerLevel
+        }
+        class {
+          id
+          mainClassId
+          mainClass {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            createdAt
+            updatedAt
+          }
+          descriptions {
+            locale
+            title
+            description
+          }
+          magicUser
+          createdAt
+          updatedAt
+        }
+        subclass
+        specialisation
+        race {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          playable
+          createdAt
+          updatedAt
+        }
+        personality {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          createdAt
+          updatedAt
+        }
+        level {
+          currentLevel
+          currentExperience
+          experienceForNextLevel
+        }
+        psiUser
+        psiSchool {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          basePsiPoints
+          psiPointsPerLevel
+          createdAt
+          updatedAt
+        }
+        psiMastery
+        psiPoints {
+          current
+          max
+        }
+        spellResistance {
+          astral {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+          mental {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+        }
+        magicUser
+        magicalAbility {
+          manaPoints {
+            current
+            max
+          }
+          manaPointsPerLevel
+          modifiers
+          manaPointsStoredElsehwere
+          rechargingMethod
+        }
+        baseCombatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        spentCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        otherCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        temporaryCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        combatValueModifiersPerLevel
+        mandatoryCombatValueModifierDistribution
+        wallet {
+          money
+          mithrill
+          gemstones
+          misc
+        }
+        languages {
+          language
+          level
+        }
+        inventory {
+          name
+          amount
+          location
+        }
+        poisons {
+          name
+          amount
+        }
+        notes
+        weapons {
+          items {
+            id
+            characterId
+            custom
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            descriptions {
+              locale
+              title
+              description
+            }
+            weight
+            price
+            attackRange
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              dice
+              iterationCount
+              modifier
+            }
+            attacksPerTurn
+            ranged
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        skills {
+          items {
+            id
+            characterId
+            skillId
+            skill {
+              id
+              percentageSkill
+              skillGroupId
+              basicCost
+              masterCost
+              createdAt
+              updatedAt
+            }
+            mastery
+            percentageValue
+            skillPointsUsed
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        companions {
+          items {
+            id
+            characterId
+            name
+            type
+            health {
+              baseVitality
+              baseHitPoints
+              hitPointsPerLevel
+            }
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              dice
+              iterationCount
+              modifier
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            maxDistance
+            maxLoad
+            badHabit
+            specialAbilities
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        magicalItems {
+          items {
+            id
+            characterId
+            magicalItemId
+            magicalItem {
+              id
+              manaCost
+              duration
+              price
+              createdAt
+              updatedAt
+            }
+            location
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const listCharactersByDungeonMaster = /* GraphQL */ `
+  query ListCharactersByDungeonMaster(
+    $dungeonMaster: String
+    $sortDirection: ModelSortDirection
+    $filter: ModelCharacterFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCharactersByDungeonMaster(
+      dungeonMaster: $dungeonMaster
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        playerCharacter
+        startDate
+        dungeonMaster
+        owner
+        basicInfo {
+          image {
+            bucket
+            region
+            key
+          }
+          sex
+          height
+          weight
+          hair
+          eyes
+          age
+          visibleAge
+          family
+          attire
+          personalityTraits
+          specialAbilities
+          likes
+          dislikes
+          fears
+          companions
+          fame
+          religion
+          country
+          school
+          holySymbol {
+            bucket
+            region
+            key
+          }
+          coatOfArms {
+            bucket
+            region
+            key
+          }
+        }
+        abilities {
+          strength
+          agility
+          dexterity
+          stamina
+          health
+          beauty
+          intelligence
+          willpower
+          astral
+        }
+        currentAbilities {
+          strength
+          agility
+          dexterity
+          stamina
+          health
+          beauty
+          intelligence
+          willpower
+          astral
+        }
+        health {
+          vitality {
+            current
+            max
+          }
+          baseVitality
+          hitPoints {
+            current
+            max
+          }
+          baseHitPoints
+          hitPointsPerLevel
+        }
+        class {
+          id
+          mainClassId
+          mainClass {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            createdAt
+            updatedAt
+          }
+          descriptions {
+            locale
+            title
+            description
+          }
+          magicUser
+          createdAt
+          updatedAt
+        }
+        subclass
+        specialisation
+        race {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          playable
+          createdAt
+          updatedAt
+        }
+        personality {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          createdAt
+          updatedAt
+        }
+        level {
+          currentLevel
+          currentExperience
+          experienceForNextLevel
+        }
+        psiUser
+        psiSchool {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          basePsiPoints
+          psiPointsPerLevel
+          createdAt
+          updatedAt
+        }
+        psiMastery
+        psiPoints {
+          current
+          max
+        }
+        spellResistance {
+          astral {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+          mental {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+        }
+        magicUser
+        magicalAbility {
+          manaPoints {
+            current
+            max
+          }
+          manaPointsPerLevel
+          modifiers
+          manaPointsStoredElsehwere
+          rechargingMethod
+        }
+        baseCombatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        spentCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        otherCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        temporaryCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        combatValueModifiersPerLevel
+        mandatoryCombatValueModifierDistribution
+        wallet {
+          money
+          mithrill
+          gemstones
+          misc
+        }
+        languages {
+          language
+          level
+        }
+        inventory {
+          name
+          amount
+          location
+        }
+        poisons {
+          name
+          amount
+        }
+        notes
+        weapons {
+          items {
+            id
+            characterId
+            custom
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            descriptions {
+              locale
+              title
+              description
+            }
+            weight
+            price
+            attackRange
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              dice
+              iterationCount
+              modifier
+            }
+            attacksPerTurn
+            ranged
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        skills {
+          items {
+            id
+            characterId
+            skillId
+            skill {
+              id
+              percentageSkill
+              skillGroupId
+              basicCost
+              masterCost
+              createdAt
+              updatedAt
+            }
+            mastery
+            percentageValue
+            skillPointsUsed
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        companions {
+          items {
+            id
+            characterId
+            name
+            type
+            health {
+              baseVitality
+              baseHitPoints
+              hitPointsPerLevel
+            }
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              dice
+              iterationCount
+              modifier
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            maxDistance
+            maxLoad
+            badHabit
+            specialAbilities
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        magicalItems {
+          items {
+            id
+            characterId
+            magicalItemId
+            magicalItem {
+              id
+              manaCost
+              duration
+              price
+              createdAt
+              updatedAt
+            }
+            location
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }

@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="navDrawerOpen" absolute temporary>
+  <v-navigation-drawer v-model="navDrawerOpen" absolute temporary app>
     <v-list nav dense>
       <v-subheader>{{ $t("general") }}</v-subheader>
       <v-list-item to="/">
@@ -19,12 +19,16 @@
         </v-list-item-title>
       </v-list-item>
       <v-subheader>{{ $t("player-area") }}</v-subheader>
-      <v-list-item to="/my-player-characters">
+      <v-list-item
+        v-for="playerAreaRoute in playerAreaRoutes"
+        :key="playerAreaRoute.name"
+        :to="playerAreaRoute.path"
+      >
         <v-list-item-icon>
-          <v-icon>mdi-account-group</v-icon>
+          <v-icon>{{ playerAreaRoute.icon }}</v-icon>
         </v-list-item-icon>
         <v-list-item-title>
-          {{ $t("player-characters") }}
+          {{ $t(playerAreaRoute.title) }}
         </v-list-item-title>
       </v-list-item>
       <v-subheader>{{ $t("dungeon-master-area") }}</v-subheader>
@@ -66,9 +70,11 @@
 import Vue from "vue";
 import { mapMutations, mapState } from "vuex";
 import { adminRoutes } from "@/router/admin";
+import { playerAreaRoutes } from "@/router/playerArea";
 export default Vue.extend({
   data: () => ({
     adminRoutes,
+    playerAreaRoutes,
   }),
   computed: {
     ...mapState(["app"]),

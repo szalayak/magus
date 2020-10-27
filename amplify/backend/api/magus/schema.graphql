@@ -164,9 +164,9 @@ type Throw
 }
 
 type S3Object {
-  bucket: String!
-  region: String!
-  key: String!
+  bucket: String
+  region: String
+  key: String
 }
 
 enum Sex {
@@ -201,26 +201,26 @@ type CharacterBasicInfo {
 }
 
 type CharacterLevel {
-  currentLevel: Int!
-  currentExperience: Int!
-  experienceForNextLevel: Int!
+  currentLevel: Int
+  currentExperience: Int
+  experienceForNextLevel: Int
 }
 
 type Abilities {
-  strength: Int!
-  agility: Int!
-  dexterity: Int!
-  stamina: Int!
-  health: Int!
-  beauty: Int!
-  intelligence: Int!
-  willpower: Int!
-  astral: Int!
+  strength: Int
+  agility: Int
+  dexterity: Int
+  stamina: Int
+  health: Int
+  beauty: Int
+  intelligence: Int
+  willpower: Int
+  astral: Int
 }
 
 type MutablePointValue {
-  current: Int!
-  max: Int!
+  current: Int
+  max: Int
 }
 
 type HealthInformation {
@@ -275,18 +275,21 @@ type Wallet {
   misc: String
 }
 
-type PlayerCharacter
+type Character
   @model
+  @key(name: "byOwner", fields: ["owner"], queryField: "listCharactersByOwner")
+  @key(name: "byDungeonMaster", fields: ["dungeonMaster"], queryField: "listCharactersByDungeonMaster")
   @auth(
     rules: [
       { allow: owner }
-      { allow: owner, ownerField: "dungeonMasters", operations: [read] }
+      { allow: owner, ownerField: "dungeonMaster", operations: [read] }
     ]
   ) {
   id: ID!
   name: String!
-  startDate: AWSDate!
-  dungeonMasters: [String]
+  playerCharacter: Boolean
+  startDate: AWSDate
+  dungeonMaster: String
   owner: String
   basicInfo: CharacterBasicInfo
   abilities: Abilities
@@ -308,45 +311,9 @@ type PlayerCharacter
   baseCombatValues: CombatValues
   spentCombatValueModifiers: CombatValues
   otherCombatValueModifiers: CombatValues
-  temporaryCombatValuesModifiers: CombatValues
+  temporaryCombatValueModifiers: CombatValues
   combatValueModifiersPerLevel: Int
   mandatoryCombatValueModifierDistribution: String
-  wallet: Wallet
-  languages: [LanguageAbility!]
-  inventory: [InventoryItem!]
-  poisons: [Poison!]
-  notes: [String]
-  weapons: [WeaponAssignment!]
-    @connection(keyName: "byCharacter", fields: ["id"])
-  skills: [SkillAssignment!] @connection(keyName: "byCharacter", fields: ["id"])
-  companions: [CharacterCompanion!]
-    @connection(keyName: "byCharacter", fields: ["id"])
-  magicalItems: [MagicalItemAssignment!]
-    @connection(keyName: "byCharacter", fields: ["id"])
-}
-
-type NonPlayerCharacter @model @auth(rules: [{ allow: owner }]) {
-  id: ID!
-  name: String!
-  owner: String
-  basicInfo: CharacterBasicInfo
-  abilities: Abilities
-  currentAbilities: Abilities
-  health: HealthInformation
-  class: Class @connection
-  subclass: String
-  specialisation: String
-  race: Race @connection
-  personality(type: ValueRangeType = PERSONALITY): ValueRangeValue @connection
-  level: CharacterLevel
-  psiUser: Boolean
-  psiSchool: PsiSchool @connection
-  psiMastery: Mastery
-  psiPoints: MutablePointValue
-  spellResistance: SpellResistance
-  magicUser: Boolean
-  magicalAbility: MagicalAbility
-  combatValues: CombatValues
   wallet: Wallet
   languages: [LanguageAbility!]
   inventory: [InventoryItem!]
@@ -384,7 +351,7 @@ type SkillAssignment
   @key(name: "byCharacter", fields: ["characterId"])
   @auth(rules: [{ allow: owner }]) {
   id: ID!
-  characterId: ID!
+  characterId: ID!  
   skillId: ID!
   skill: Skill @connection(fields: ["skillId"])
   mastery: Mastery

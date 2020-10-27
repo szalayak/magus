@@ -1,14 +1,9 @@
 import {
-  CompanionType,
   Dice,
   LanguageLevel,
   Locale,
-  Mastery,
   Sex,
 } from "@/API";
-import { MagicalItem } from "./modules/magicalItem";
-import { Skill } from "./modules/skill";
-import { Weapon } from "./modules/weapon";
 
 export interface Description {
   locale: Locale;
@@ -22,7 +17,7 @@ export interface Describable {
 }
 
 export interface Identifiable {
-  id: string;
+  id?: string;
 }
 
 export interface Editable extends Identifiable, Describable {}
@@ -144,43 +139,4 @@ export interface Wallet {
   mithrill?: string;
   gemstones?: string;
   misc?: string;
-}
-
-export interface WeaponAssignment extends Identifiable {
-  custom?: boolean;
-  weapon?: Weapon;
-  descriptions?: Description[];
-  weight?: string;
-  price?: number;
-  attackRange?: number;
-  combatValues?: CombatValues;
-  damage?: ThrowScenario;
-  attacksPerTurn?: number;
-  ranged?: boolean;
-}
-
-export interface SkillAssignment extends Identifiable {
-  skill: Skill;
-  mastery?: Mastery;
-  percentageValue?: number;
-  skillPointsUsed?: number;
-}
-
-export interface CharacterCompanion extends Identifiable {
-  name: string;
-  type?: CompanionType;
-  health?: HealthInformation;
-  combatValues?: CombatValues;
-  damage?: ThrowScenario;
-  weapon?: Weapon;
-  attacksPerTurn?: number;
-  maxDistance?: string;
-  maxLoad?: string;
-  badHabit?: string;
-  specialAbilities?: string;
-}
-
-export interface MagicalItemAssignment extends Identifiable {
-  magicalItem?: MagicalItem;
-  location?: string;
 }

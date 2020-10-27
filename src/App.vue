@@ -3,7 +3,7 @@
     <v-app-bar app color="primary" dark>
       <v-app-bar-nav-icon
         v-if="app.isLoggedIn"
-        @click="toggleNavDrawer(true)"
+        @click="toggleNavDrawer(!$store.state.app.navDrawerOpen)"
       ></v-app-bar-nav-icon>
 
       <v-toolbar-title>M.A.G.U.S</v-toolbar-title>
@@ -37,6 +37,7 @@
           <v-list-item @click="logout()">
             <v-list-item-title>Sign Out</v-list-item-title>
           </v-list-item>
+          <user-attributes />
         </v-list>
       </v-menu>
     </v-app-bar>
@@ -68,6 +69,8 @@ import { onAuthUIStateChange } from "@aws-amplify/ui-components";
 import NavigationDrawer from "./components/NavigationDrawer.vue";
 import { mapActions, mapMutations, mapState } from "vuex";
 import { DiceObject, getDice, throwDice } from "./utils/dice";
+import { Auth } from "aws-amplify";
+import UserAttributes from "./views/UserAttributes.vue";
 
 export default Vue.extend({
   name: "App",
@@ -80,6 +83,7 @@ export default Vue.extend({
   },
   components: {
     "navigation-drawer": NavigationDrawer,
+    "user-attributes": UserAttributes,
   },
 
   computed: mapState(["app"]),
@@ -87,6 +91,18 @@ export default Vue.extend({
     onAuthUIStateChange((authState, authData) => {
       this.setAuthState(authState);
       this.setUser(authData);
+      if (this.$store.state.app.isLoggedIn) {
+        Auth.userAttributes(authData).then(attributes => {
+          const locale = attributes
+            .find(attribute => attribute.getName() === "locale")
+            ?.getValue();
+          if (locale) {
+            this.$i18n.locale = locale;
+            this.$root.$i18n.locale = locale;
+            this.$vuetify.lang.current = locale;
+          }
+        });
+      }
     });
   },
   beforeDestroy() {

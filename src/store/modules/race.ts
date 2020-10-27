@@ -24,6 +24,11 @@ const race: Module<RaceState, RootState> = {
     list(state): Race[] {
       return state.result?.listRaces?.items as Race[];
     },
+    getPlayableRaces(state): Race[] {
+      return state.result?.listRaces?.items?.filter(
+        race => race?.playable
+      ) as Race[];
+    },
   },
   mutations: {
     set(state, result: ListRacesQuery) {
@@ -65,7 +70,7 @@ const race: Module<RaceState, RootState> = {
         query: createRace,
         variables: {
           input: {
-            id: item.id.length > 0 ? item.id : null,
+            id: item.id && item.id.length > 0 ? item.id : null,
             descriptions: item.descriptions,
             playable: item.playable,
           },

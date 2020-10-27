@@ -1,9 +1,17 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
+import { RouteConfigSingleView } from "vue-router/types/router";
 import Home from "../views/Home.vue";
 import { adminRoutes } from "./admin";
+import { characterRoutes } from "./character";
+import { playerAreaRoutes } from "./playerArea";
 
 Vue.use(VueRouter);
+
+export interface NavItemConfig extends RouteConfigSingleView {
+  title: string;
+  icon: string;
+}
 
 const routes: Array<RouteConfig> = [
   {
@@ -21,6 +29,8 @@ const routes: Array<RouteConfig> = [
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   ...adminRoutes,
+  ...playerAreaRoutes,
+  ...characterRoutes,
 ];
 
 const router = new VueRouter({

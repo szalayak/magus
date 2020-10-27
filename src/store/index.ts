@@ -11,6 +11,7 @@ import shield, { ShieldState } from "./modules/shield";
 import skill, { SkillState } from "./modules/skill";
 import valueRange, { ValueRangeState } from "./modules/valueRange";
 import weapon, { WeaponState } from "./modules/weapon";
+import character, { CharacterState } from "./modules/character";
 
 Vue.use(Vuex);
 
@@ -45,6 +46,7 @@ export interface RootState {
   skill?: SkillState;
   valueRange?: ValueRangeState;
   weapon?: WeaponState;
+  character?: CharacterState;
 }
 
 export default new Vuex.Store<RootState>({
@@ -88,5 +90,6 @@ export default new Vuex.Store<RootState>({
     skill,
     valueRange,
     weapon,
+    character,
   },
 });

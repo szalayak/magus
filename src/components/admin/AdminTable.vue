@@ -244,7 +244,6 @@ export default class AdminTable extends AdminTableProps {
       .catch((error: GraphQLResult<Editable>) => {
         this.messages = error.errors?.map(err => err.message) || [];
         this.notification = true;
-        console.log(this.messages);
       });
     this.dialog = false;
   }

@@ -1,9 +1,4 @@
-import { RouteConfigSingleView } from "vue-router/types/router";
-
-interface NavItemConfig extends RouteConfigSingleView {
-  title: string;
-  icon: string;
-}
+import { NavItemConfig } from ".";
 
 export const adminRoutes: Array<NavItemConfig> = [
   {
