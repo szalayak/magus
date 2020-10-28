@@ -596,6 +596,7 @@ export const getCharacter = /* GraphQL */ `
         eyes
         age
         visibleAge
+        identifier
         family
         attire
         personalityTraits
@@ -1034,6 +1035,7 @@ export const listCharacters = /* GraphQL */ `
           eyes
           age
           visibleAge
+          identifier
           family
           attire
           personalityTraits
@@ -2000,6 +2002,7 @@ export const listCharactersByOwner = /* GraphQL */ `
           eyes
           age
           visibleAge
+          identifier
           family
           attire
           personalityTraits
@@ -2373,6 +2376,7 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
           eyes
           age
           visibleAge
+          identifier
           family
           attire
           personalityTraits

@@ -864,6 +864,7 @@ export const createCharacter = /* GraphQL */ `
         eyes
         age
         visibleAge
+        identifier
         family
         attire
         personalityTraits
@@ -1300,6 +1301,7 @@ export const updateCharacter = /* GraphQL */ `
         eyes
         age
         visibleAge
+        identifier
         family
         attire
         personalityTraits
@@ -1736,6 +1738,7 @@ export const deleteCharacter = /* GraphQL */ `
         eyes
         age
         visibleAge
+        identifier
         family
         attire
         personalityTraits

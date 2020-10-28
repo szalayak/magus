@@ -50,6 +50,7 @@ export interface CharacterBasicInfo {
   eyes?: string;
   age?: number;
   visibleAge?: number;
+  identifier?: string;
   family?: string;
   attire?: string;
   personalityTraits?: string;

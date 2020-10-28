@@ -130,5 +130,13 @@
   "race-and-class": "Race/Class",
   "level": "Level",
   "appearance": "Appearance",
-  "sex":"Sex"
+  "sex":"Sex",
+  "eyes":"Eyes",
+  "hair":"Hair",
+  "height":"Height",
+  "age":"Age",
+  "visible-age":"Visible Age",
+  "identifier":"Identifier",
+  "family":"Family, Tribe, Clan",
+  "attire":"Attire, Jewelry, Visible Weapons"
 }

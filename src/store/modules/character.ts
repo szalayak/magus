@@ -189,12 +189,6 @@ const weapon: Module<CharacterState, RootState> = {
     mergeQueryResult(state, result: CharacterResult) {
       result.items?.forEach(item => mergePersistent(state, item));
     },
-    updateTransientProperty(
-      state: CharacterState,
-      params: {id: string, property:string, value?: any}
-    ) {
-      const transient = state.transient.find((tr: Character) => tr.id === params.id);
-    },
     add(state, newItem) {
       state.result?.items?.push(newItem);
     },
@@ -286,7 +280,7 @@ const weapon: Module<CharacterState, RootState> = {
             baseCombatValues: item.baseCombatValues,
             spentCombatValueModifiers: item.spentCombatValueModifiers,
             otherCombatValueModifiers: item.otherCombatValueModifiers,
-            temporaryCombatValuesModifiers: item.temporaryCombatValueModifiers,
+            temporaryCombatValueModifiers: item.temporaryCombatValueModifiers,
             combatValueModifiersPerLevel: item.combatValueModifiersPerLevel,
             mandatoryCombatValueModifierDistribution:
               item.mandatoryCombatValueModifierDistribution,
@@ -295,10 +289,6 @@ const weapon: Module<CharacterState, RootState> = {
             inventory: item.inventory,
             poisons: item.poisons,
             notes: item.notes,
-            weapons: item.weapons,
-            skills: item.skills,
-            companions: item.companions,
-            magicalItems: item.magicalItems,
           },
         },
       })) as { data: CreateCharacterMutation };
@@ -336,7 +326,7 @@ const weapon: Module<CharacterState, RootState> = {
             baseCombatValues: item.baseCombatValues,
             spentCombatValueModifiers: item.spentCombatValueModifiers,
             otherCombatValueModifiers: item.otherCombatValueModifiers,
-            temporaryCombatValuesModifiers: item.temporaryCombatValueModifiers,
+            temporaryCombatValueModifiers: item.temporaryCombatValueModifiers,
             combatValueModifiersPerLevel: item.combatValueModifiersPerLevel,
             mandatoryCombatValueModifierDistribution:
               item.mandatoryCombatValueModifierDistribution,
@@ -345,10 +335,6 @@ const weapon: Module<CharacterState, RootState> = {
             inventory: item.inventory,
             poisons: item.poisons,
             notes: item.notes,
-            weapons: item.weapons,
-            skills: item.skills,
-            companions: item.companions,
-            magicalItems: item.magicalItems,
           },
         },
       })) as { data: UpdateCharacterMutation };

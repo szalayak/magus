@@ -4,7 +4,7 @@
       <v-toolbar-title>{{ character.name }}</v-toolbar-title>
       <v-container>
         <v-row justify="center">
-          <v-btn-toggle tile color="primary" group v-model="page">
+          <v-btn-toggle dense tile color="primary" group v-model="page">
             <v-btn>Page 1</v-btn>
             <v-btn>Page 2</v-btn>
             <v-btn>Page 3</v-btn>
@@ -14,8 +14,8 @@
       </v-container>
     </v-toolbar>
     <v-row>
-      <v-col v-show="page === 0" cols="12" sm="12" md="3" lg="2">
-        <appearance :id="character.id" />
+      <v-col v-show="page === 0" cols="12" sm="12" md="6" lg="4">
+        <appearance :id="id" />
       </v-col>
       <v-col v-show="page === 1" cols="12" sm="12" md="3" lg="2">
         <v-card>
@@ -124,7 +124,7 @@
 import { Character } from "@/store/modules/character";
 import Vue from "vue";
 import Component from "vue-class-component";
-import Appearance from "./Appearance.vue";
+import Appearance from "@/components/character/Appearance.vue";
 
 @Component({
   name: "player-character",
