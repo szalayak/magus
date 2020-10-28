@@ -19,7 +19,6 @@ import {
   listCharactersByDungeonMaster,
   listCharactersByOwner,
 } from "@/graphql/queries";
-import { mergeDescriptions } from "@/utils/localise";
 import { API } from "aws-amplify";
 import { Module } from "vuex";
 import { RootState } from "..";
@@ -189,6 +188,12 @@ const weapon: Module<CharacterState, RootState> = {
     },
     mergeQueryResult(state, result: CharacterResult) {
       result.items?.forEach(item => mergePersistent(state, item));
+    },
+    updateTransientProperty(
+      state: CharacterState,
+      params: {id: string, property:string, value?: any}
+    ) {
+      const transient = state.transient.find((tr: Character) => tr.id === params.id);
     },
     add(state, newItem) {
       state.result?.items?.push(newItem);
