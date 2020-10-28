@@ -75,7 +75,7 @@ const shield: Module<ShieldState, RootState> = {
         query: createShield,
         variables: {
           input: {
-            id: item.id.length > 0 ? item.id : null,
+            id: item.id && item.id.length > 0 ? item.id : null,
             descriptions: item.descriptions,
             combatValues: item.combatValues,
             damage: item.damage,

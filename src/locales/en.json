@@ -27,10 +27,14 @@
   "PERSONALITY": "Personality",
   "WEAPON_TYPE": "Weapon Type",
   "SKILL_GROUP": "Skill Group",
+  "MALE":"Male",
+  "FEMALE":"Female",
+  "OTHER":"Other",
   "en": "English",
   "hu": "Hungarian",
   "yes": "Yes",
   "no": "no",
+  "edit":"Edit",
   "cancel": "Cancel",
   "save": "Save",
   "ok": "OK",
@@ -124,5 +128,7 @@
   "current-experience": "Current Experience",
   "experience-for-next-level": "Experience for Next Level",
   "race-and-class": "Race/Class",
-  "level": "Level"
+  "level": "Level",
+  "appearance": "Appearance",
+  "sex":"Sex"
 }

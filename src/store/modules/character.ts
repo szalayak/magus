@@ -19,6 +19,7 @@ import {
   listCharactersByDungeonMaster,
   listCharactersByOwner,
 } from "@/graphql/queries";
+import { mergeDescriptions } from "@/utils/localise";
 import { API } from "aws-amplify";
 import { Module } from "vuex";
 import { RootState } from "..";
@@ -135,8 +136,28 @@ export interface CharacterResult {
 }
 
 export interface CharacterState {
-  result?: CharacterResult;
+  result: CharacterResult;
+  transient: Character[];
 }
+
+const mergeTransient = (state: CharacterState, item: Character) => {
+  const transient = state.transient.find(tr => tr.id === item.id);
+  if (transient)
+    state.transient.splice(
+      state.transient.indexOf(transient),
+      1,
+      JSON.parse(JSON.stringify(item))
+    );
+  // deep copy
+  else state.transient.push(JSON.parse(JSON.stringify(item))); // deep copy
+};
+
+const mergePersistent = (state: CharacterState, item: Character) => {
+  const existing = state.result.items?.find(ex => ex.id === item.id);
+  if (existing) Object.assign(existing, item);
+  else state.result.items?.push(item);
+  mergeTransient(state, item);
+};
 
 const weapon: Module<CharacterState, RootState> = {
   namespaced: true,
@@ -145,25 +166,29 @@ const weapon: Module<CharacterState, RootState> = {
       result: {
         items: [],
       },
+      transient: [],
     } as CharacterState),
   getters: {
     list(state): Character[] {
       return state.result?.items || [];
     },
+    listTransient(state): Character[] {
+      return state.transient || [];
+    },
   },
   mutations: {
     set(state, result: CharacterResult) {
-      state.result = result;
+      state.result.nextToken = result.nextToken;
+      result.items?.forEach(item => mergePersistent(state, item));
     },
-    merge(state, result: CharacterResult) {
-      result.items?.forEach(item => {
-        const existing = state.result?.items?.find(ex => ex.id === item.id);
-        if (existing) {
-          Object.assign(existing, item);
-        } else {
-          state.result?.items?.push(item);
-        }
-      });
+    mergeTransient(state, item: Character) {
+      mergeTransient(state, item);
+    },
+    merge(state, item: Character) {
+      mergePersistent(state, item);
+    },
+    mergeQueryResult(state, result: CharacterResult) {
+      result.items?.forEach(item => mergePersistent(state, item));
     },
     add(state, newItem) {
       state.result?.items?.push(newItem);
@@ -184,6 +209,10 @@ const weapon: Module<CharacterState, RootState> = {
         items?.splice(items.indexOf(oldState), 1);
       }
     },
+    revert(state, id: string) {
+      const existing = state.result.items?.find(ex => ex.id === id);
+      if (existing) mergeTransient(state, existing);
+    },
   },
   actions: {
     async load(context) {
@@ -199,7 +228,7 @@ const weapon: Module<CharacterState, RootState> = {
         query: getCharacter,
         variables: { id },
       })) as { data: GetCharacterQuery };
-      commit("merge", { items: [result.getCharacter] });
+      commit("merge", result.getCharacter);
     },
     async loadByOwner(context, owner: string) {
       const { data: result } = (await API.graphql({
@@ -208,7 +237,7 @@ const weapon: Module<CharacterState, RootState> = {
       })) as {
         data: ListCharactersByOwnerQuery;
       };
-      context.commit("merge", result.listCharactersByOwner);
+      context.commit("mergeQueryResult", result.listCharactersByOwner);
     },
     async loadByDungeonMaster(context, dungeonMaster: string) {
       const { data: result } = (await API.graphql({
@@ -219,7 +248,7 @@ const weapon: Module<CharacterState, RootState> = {
       })) as {
         data: ListCharactersByDungeonMasterQuery;
       };
-      context.commit("merge", result.listCharactersByDungeonMaster);
+      context.commit("mergeQueryResult", result.listCharactersByDungeonMaster);
     },
     async create(context, item: Character) {
       const {
@@ -318,7 +347,7 @@ const weapon: Module<CharacterState, RootState> = {
           },
         },
       })) as { data: UpdateCharacterMutation };
-      context.commit("change", updatedItem);
+      context.commit("merge", updatedItem);
     },
     async delete(context, id: string) {
       await API.graphql({

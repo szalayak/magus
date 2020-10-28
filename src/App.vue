@@ -91,7 +91,7 @@ export default Vue.extend({
     onAuthUIStateChange((authState, authData) => {
       this.setAuthState(authState);
       this.setUser(authData);
-      if (this.$store.state.app.isLoggedIn) {
+      if (this.app.isLoggedIn) {
         Auth.userAttributes(authData).then(attributes => {
           const locale = attributes
             .find(attribute => attribute.getName() === "locale")

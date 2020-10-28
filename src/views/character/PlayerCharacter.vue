@@ -15,14 +15,7 @@
     </v-toolbar>
     <v-row>
       <v-col v-show="page === 0" cols="12" sm="12" md="3" lg="2">
-        <v-card>
-          <v-card-title>Basic Info</v-card-title>
-        </v-card>
-      </v-col>
-      <v-col v-show="page === 0" cols="12" sm="12" md="3" lg="2">
-        <v-card>
-          <v-card-title>Appearance</v-card-title>
-        </v-card>
+        <appearance :id="character.id" />
       </v-col>
       <v-col v-show="page === 1" cols="12" sm="12" md="3" lg="2">
         <v-card>
@@ -131,9 +124,13 @@
 import { Character } from "@/store/modules/character";
 import Vue from "vue";
 import Component from "vue-class-component";
+import Appearance from "./Appearance.vue";
 
 @Component({
   name: "player-character",
+  components: {
+    appearance: Appearance,
+  },
 })
 export default class PlayerCharacter extends Vue {
   id = this.$route.params.id;
@@ -141,10 +138,18 @@ export default class PlayerCharacter extends Vue {
 
   get character(): Character {
     return (
-      this.$store.getters["character/list"].find(
+      this.$store.getters["character/listTransient"].find(
         (char: Character) => char.id === this.id
       ) || {}
     );
+  }
+
+  set character(character: Character) {
+    this.$store.commit("race/mergeTransient", character);
+  }
+
+  save() {
+    this.$store.dispatch("character/update", this.character);
   }
 
   mounted() {

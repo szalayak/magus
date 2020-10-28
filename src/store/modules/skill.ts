@@ -73,7 +73,7 @@ const skill: Module<SkillState, RootState> = {
         query: createSkill,
         variables: {
           input: {
-            id: item.id.length > 0 ? item.id : null,
+            id: item.id && item.id.length > 0 ? item.id : null,
             descriptions: item.descriptions,
             skillGroupId: item.skillGroup?.id,
             percentageSkill: item.percentageSkill,

@@ -1,9 +1,9 @@
-import {
-  Dice,
-  LanguageLevel,
-  Locale,
-  Sex,
-} from "@/API";
+import { Dice, LanguageLevel, Locale, Sex } from "@/API";
+
+export interface DropdownValueList {
+  value?: string;
+  text?: string;
+}
 
 export interface Description {
   locale: Locale;

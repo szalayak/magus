@@ -77,7 +77,7 @@ const weapon: Module<WeaponState, RootState> = {
         query: createWeapon,
         variables: {
           input: {
-            id: item.id.length > 0 ? item.id : null,
+            id: item.id && item.id.length > 0 ? item.id : null,
             descriptions: item.descriptions,
             weaponTypeId: item.weaponType?.id,
             weight: item.weight,

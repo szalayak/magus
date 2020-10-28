@@ -122,7 +122,7 @@ const race: Module<ValueRangeState, RootState> = {
         query: createValueRangeValue,
         variables: {
           input: {
-            id: item.id.length > 0 ? item.id : null,
+            id: item.id && item.id.length > 0 ? item.id : null,
             type: item.type,
             descriptions: item.descriptions,
           },

@@ -79,7 +79,7 @@ const magicalItem: Module<MagicalItemState, RootState> = {
         query: createMagicalItem,
         variables: {
           input: {
-            id: item.id.length > 0 ? item.id : null,
+            id: item.id && item.id.length > 0 ? item.id : null,
             descriptions: item.descriptions,
             magicalItemClassId: item.class?.id,
             price: item.price,

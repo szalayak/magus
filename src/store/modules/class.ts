@@ -74,7 +74,7 @@ const classModule: Module<ClassState, RootState> = {
         query: createClass,
         variables: {
           input: {
-            id: item.id.length > 0 ? item.id : null,
+            id: item.id && item.id.length > 0 ? item.id : null,
             mainClassId: item.mainClass?.id,
             magicUser: item.magicUser,
             descriptions: item.descriptions,

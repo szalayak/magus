@@ -72,7 +72,7 @@ const armour: Module<ArmourState, RootState> = {
         query: createArmour,
         variables: {
           input: {
-            id: item.id.length > 0 ? item.id : null,
+            id: item.id && item.id.length > 0 ? item.id : null,
             descriptions: item.descriptions,
             weight: item.weight,
             movementPreventionValue: item.movementPreventionValue,
