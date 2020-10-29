@@ -175,9 +175,9 @@ const weapon: Module<CharacterState, RootState> = {
       return state.transient || [];
     },
     playerCharactersAsPlayer(
-      state,
+      _state,
       getters,
-      rootState,
+      _rootState,
       rootGetters
     ): Character[] {
       return getters.listTransient.filter((character: Character) => {
@@ -188,18 +188,29 @@ const weapon: Module<CharacterState, RootState> = {
         );
       });
     },
-    playerCharactersAsDM(state, rootState): Character[] {
-      return state.transient.filter(character => {
+    playerCharactersAsDM(
+      _state,
+      getters,
+      _rootState,
+      rootGetters
+    ): Character[] {
+      return getters.listTransient.filter((character: Character) => {
         return (
-          character.dungeonMaster === rootState.app?.user?.username &&
+          character.dungeonMaster === rootGetters.currentUser &&
           character.playerCharacter
         );
       });
     },
-    nonPlayerCharactersAsDM(state, rootState): Character[] {
-      return state.transient.filter(character => {
+    nonPlayerCharactersAsDM(
+      _state,
+      getters,
+      _rootState,
+      rootGetters
+    ): Character[] {
+      return getters.listTransient.filter((character: Character) => {
         return (
-          character.owner === rootState.app?.user?.username &&
+          (character.owner === rootGetters.currentUser ||
+            rootGetters.isCurrentUserAdmin) &&
           !character.playerCharacter
         );
       });

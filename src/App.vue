@@ -1,9 +1,9 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
+    <v-app-bar clipped-left app color="primary" dark>
       <v-app-bar-nav-icon
         v-if="app.isLoggedIn"
-        @click="toggleNavDrawer(!$store.state.app.navDrawerOpen)"
+        @click="navDrawerOpen = !navDrawerOpen"
       ></v-app-bar-nav-icon>
 
       <v-toolbar-title>M.A.G.U.S</v-toolbar-title>
@@ -12,8 +12,8 @@
       <v-menu offset-y v-if="app.isLoggedIn">
         <template v-slot:activator="{ on, attrs }">
           <v-btn text v-bind="attrs" v-on="on"
-            >{{ $t("throw-dice")
-            }}<v-icon class="ml-2">mdi-dice-5</v-icon></v-btn
+            ><div class="d-none d-sm-flex">{{ $t("throw-dice") }}</div>
+            <v-icon class="ml-2">mdi-dice-5</v-icon></v-btn
           >
         </template>
         <v-list>
@@ -29,19 +29,26 @@
       <v-menu offset-y v-if="app.isLoggedIn">
         <template v-slot:activator="{ on, attrs }">
           <v-btn text v-bind="attrs" v-on="on">
-            {{ app.user.attributes.name }}
+            <div class="d-none d-sm-flex">{{ app.user.attributes.name }}</div>
             <v-icon class="ml-2">mdi-account</v-icon>
           </v-btn>
         </template>
         <v-list>
+          <v-list-item class="d-flex d-sm-none">
+            <v-list-item-title>{{
+              app.user.attributes.name
+            }}</v-list-item-title>
+          </v-list-item>
           <v-list-item @click="logout()">
-            <v-list-item-title>Sign Out</v-list-item-title>
+            <v-list-item-title>{{ $t("sign-out") }}</v-list-item-title>
           </v-list-item>
           <user-attributes />
         </v-list>
       </v-menu>
     </v-app-bar>
-    <navigation-drawer />
+    <v-navigation-drawer v-model="navDrawerOpen" clipped app>
+      <navigation-drawer />
+    </v-navigation-drawer>
     <v-main>
       <v-container v-if="!app.isLoggedIn" fluid fill-height>
         <v-row align="center" justify="center">
@@ -79,6 +86,7 @@ export default Vue.extend({
       dice: getDice(this.$i18n),
       throwResult: 0,
       throwResultNotification: false,
+      navDrawerOpen: !this.$vuetify.breakpoint.mdAndDown,
     };
   },
   components: {

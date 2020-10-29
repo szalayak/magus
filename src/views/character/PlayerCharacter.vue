@@ -7,10 +7,10 @@
       <v-container>
         <v-row justify="center">
           <v-btn-toggle dense tile color="primary" group v-model="page">
-            <v-btn>Page 1</v-btn>
-            <v-btn>Page 2</v-btn>
-            <v-btn>Page 3</v-btn>
-            <v-btn>Page 4</v-btn>
+            <v-btn>1</v-btn>
+            <v-btn>2</v-btn>
+            <v-btn>3</v-btn>
+            <v-btn>4</v-btn>
           </v-btn-toggle>
         </v-row>
       </v-container>

@@ -64,6 +64,9 @@ export default new Vuex.Store<RootState>({
     isCurrentUserAdmin(state) {
       return state.app?.isAdmin;
     },
+    isCurrentUserEditor(state) {
+      return state.app?.isEditor;
+    },
   },
   mutations: {
     toggleNavDrawer(state: RootState, value: boolean) {
