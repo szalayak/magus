@@ -1,7 +1,9 @@
 <template>
   <v-container fluid>
     <v-toolbar flat>
-      <v-toolbar-title>{{ character.name }}</v-toolbar-title>
+      <v-toolbar-title
+        ><div class="text-h4">{{ character.name }}</div></v-toolbar-title
+      >
       <v-container>
         <v-row justify="center">
           <v-btn-toggle dense tile color="primary" group v-model="page">
@@ -15,7 +17,7 @@
     </v-toolbar>
     <v-row>
       <v-col v-show="page === 0" cols="12" sm="12" md="6" lg="4">
-        <appearance :id="id" />
+        <appearance :id="id" :editable="editable" />
       </v-col>
       <v-col v-show="page === 1" cols="12" sm="12" md="3" lg="2">
         <v-card>
@@ -136,20 +138,19 @@ export default class PlayerCharacter extends Vue {
   id = this.$route.params.id;
   page = 0;
 
+  get editable(): boolean {
+    return (
+      this.character.owner === this.$store.getters["currentUser"] ||
+      this.$store.getters["isCurrentUserAdmin"]
+    );
+  }
+
   get character(): Character {
     return (
       this.$store.getters["character/listTransient"].find(
         (char: Character) => char.id === this.id
       ) || {}
     );
-  }
-
-  set character(character: Character) {
-    this.$store.commit("race/mergeTransient", character);
-  }
-
-  save() {
-    this.$store.dispatch("character/update", this.character);
   }
 
   mounted() {

@@ -174,6 +174,36 @@ const weapon: Module<CharacterState, RootState> = {
     listTransient(state): Character[] {
       return state.transient || [];
     },
+    playerCharactersAsPlayer(
+      state,
+      getters,
+      rootState,
+      rootGetters
+    ): Character[] {
+      return getters.listTransient.filter((character: Character) => {
+        return (
+          (character.owner === rootGetters.currentUser ||
+            rootGetters.isCurrentUserAdmin) &&
+          character.playerCharacter
+        );
+      });
+    },
+    playerCharactersAsDM(state, rootState): Character[] {
+      return state.transient.filter(character => {
+        return (
+          character.dungeonMaster === rootState.app?.user?.username &&
+          character.playerCharacter
+        );
+      });
+    },
+    nonPlayerCharactersAsDM(state, rootState): Character[] {
+      return state.transient.filter(character => {
+        return (
+          character.owner === rootState.app?.user?.username &&
+          !character.playerCharacter
+        );
+      });
+    },
   },
   mutations: {
     set(state, result: CharacterResult) {
@@ -190,22 +220,20 @@ const weapon: Module<CharacterState, RootState> = {
       result.items?.forEach(item => mergePersistent(state, item));
     },
     add(state, newItem) {
-      state.result?.items?.push(newItem);
+      mergePersistent(state, newItem);
     },
     change(state, updateItem) {
-      const oldState = state.result?.items?.find(
-        item => item?.id === updateItem.id
-      );
-      if (oldState) {
-        const items = state.result?.items;
-        items?.splice(items.indexOf(oldState), 1, updateItem);
-      }
+      mergePersistent(state, updateItem);
     },
     remove(state, id: string) {
       const oldState = state.result?.items?.find(item => item?.id === id);
       if (oldState) {
         const items = state.result?.items;
         items?.splice(items.indexOf(oldState), 1);
+      }
+      const existing = state.transient.find(ex => ex.id === id);
+      if (existing) {
+        state.transient?.splice(state.transient.indexOf(existing), 1);
       }
     },
     revert(state, id: string) {

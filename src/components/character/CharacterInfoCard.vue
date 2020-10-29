@@ -3,13 +3,16 @@
     <v-card>
       <v-card-title>{{ title }}</v-card-title>
       <v-card-text>
+        <v-alert v-if="error" dense outlined type="error">
+          {{ messages }}
+        </v-alert>
         <slot name="fields" :edit="edit" />
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
           color="primary"
-          v-if="hover && !edit"
+          v-if="editable && hover && !edit"
           text
           @click="edit = true"
           >{{ $t("edit") }}</v-btn
@@ -36,7 +39,12 @@ export default class CharacterInfoCard extends CharacterInfo {
   @Prop({ type: String })
   title!: string;
 
+  @Prop({ type: Boolean })
+  editable!: boolean;
+
   edit = false;
+  messages: string[] = [];
+  error = false;
 
   save() {
     this.$store.dispatch("character/update", this.character);

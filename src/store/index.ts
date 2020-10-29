@@ -16,6 +16,7 @@ import character, { CharacterState } from "./modules/character";
 Vue.use(Vuex);
 
 export interface User {
+  username?: string;
   signInUserSession?: {
     accessToken?: {
       payload?: { [key: string]: unknown };
@@ -56,6 +57,14 @@ export default new Vuex.Store<RootState>({
       isLoggedIn: false,
     } as AppState,
   } as RootState,
+  getters: {
+    currentUser(state) {
+      return state.app?.user?.username;
+    },
+    isCurrentUserAdmin(state) {
+      return state.app?.isAdmin;
+    },
+  },
   mutations: {
     toggleNavDrawer(state: RootState, value: boolean) {
       state.app.navDrawerOpen = value;

@@ -1,5 +1,5 @@
 <template>
-  <character-info-card :id="id" :title="$t('appearance')">
+  <character-info-card :id="id" :editable="editable" :title="$t('appearance')">
     <template v-slot:fields="{ edit }">
       <v-row>
         <v-col cols="12" sm="12" md="3">
@@ -52,8 +52,6 @@
             type="number"
             :label="$t('visible-age')"
             :disabled="!edit"
-            v-bind="attrs"
-            v-on="on"
           />
         </v-col>
         <v-col cols="12" sm="12" md="4">

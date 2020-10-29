@@ -4,6 +4,7 @@ import { RouteConfigSingleView } from "vue-router/types/router";
 import Home from "../views/Home.vue";
 import { adminRoutes } from "./admin";
 import { characterRoutes } from "./character";
+import { dungeonMasterAreaRoutes } from "./dungeonMasterArea";
 import { playerAreaRoutes } from "./playerArea";
 
 Vue.use(VueRouter);
@@ -30,6 +31,7 @@ const routes: Array<RouteConfig> = [
   },
   ...adminRoutes,
   ...playerAreaRoutes,
+  ...dungeonMasterAreaRoutes,
   ...characterRoutes,
 ];
 

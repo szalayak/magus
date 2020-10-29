@@ -6,7 +6,9 @@ export default class CharacterInfo extends Vue {
   @Prop({ type: String, required: true })
   id!: string;
 
-  test = "";
+  @Prop({ type: Boolean })
+  editable!: boolean;
+
   get character(): Character {
     return (
       this.$store.getters["character/listTransient"].find(

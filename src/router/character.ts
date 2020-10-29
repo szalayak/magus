@@ -9,4 +9,12 @@ export const characterRoutes: Array<RouteConfigSingleView> = [
         /* webpackChunkName: "player-area/player-character" */ "../views/character/PlayerCharacter.vue"
       ),
   },
+  {
+    path: "/dm-area/player-characters/:id",
+    name: "Player Character",
+    component: () =>
+      import(
+        /* webpackChunkName: "dm-area/player-character" */ "../views/character/PlayerCharacter.vue"
+      ),
+  },
 ];

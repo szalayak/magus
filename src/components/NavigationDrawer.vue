@@ -32,20 +32,16 @@
         </v-list-item-title>
       </v-list-item>
       <v-subheader>{{ $t("dungeon-master-area") }}</v-subheader>
-      <v-list-item to="/shared-player-characters">
+      <v-list-item
+        v-for="dungeonMasterAreaRoute in dungeonMasterAreaRoutes"
+        :key="dungeonMasterAreaRoute.name"
+        :to="dungeonMasterAreaRoute.path"
+      >
         <v-list-item-icon>
-          <v-icon>mdi-account-group</v-icon>
+          <v-icon>{{ dungeonMasterAreaRoute.icon }}</v-icon>
         </v-list-item-icon>
         <v-list-item-title>
-          {{ $t("player-characters") }}
-        </v-list-item-title>
-      </v-list-item>
-      <v-list-item to="/non-player-characters">
-        <v-list-item-icon>
-          <v-icon>mdi-account-group-outline</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title>
-          {{ $t("non-player-characters") }}
+          {{ $t(dungeonMasterAreaRoute.title) }}
         </v-list-item-title>
       </v-list-item>
       <template v-if="app.isAdmin">
@@ -71,10 +67,12 @@ import Vue from "vue";
 import { mapMutations, mapState } from "vuex";
 import { adminRoutes } from "@/router/admin";
 import { playerAreaRoutes } from "@/router/playerArea";
+import { dungeonMasterAreaRoutes } from "@/router/dungeonMasterArea";
 export default Vue.extend({
   data: () => ({
     adminRoutes,
     playerAreaRoutes,
+    dungeonMasterAreaRoutes,
   }),
   computed: {
     ...mapState(["app"]),

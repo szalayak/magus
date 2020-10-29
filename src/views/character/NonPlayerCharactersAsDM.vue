@@ -191,31 +191,25 @@ import { localise, localiseItem } from "@/utils/localise";
 import Vue from "vue";
 import Component from "vue-class-component";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
+import PlayerCharacters from "./PlayerCharacters";
 
 type Form = Vue & { validate: () => boolean };
 
-interface User {
-  username: string;
-  name: string;
-}
-
 @Component({
-  name: "player-characters",
+  name: "player-characters-as-player",
 })
-export default class PlayerCharacters extends Vue {
+export default class PlayerCharactersAsPlayer extends PlayerCharacters {
   createDialog = false;
   createValid = false;
   startDatePicker = false;
   editedItem: Character = {
     name: "",
     level: { currentLevel: 1, currentExperience: 0 },
+    playerCharacter: true,
   };
-  users: User[] = [];
-  messages: string[] = [];
-  notification = false;
 
   get characters(): Character[] {
-    return this.$store.getters["character/list"];
+    return this.$store.getters["character/playerCharactersAsPlayer"];
   }
 
   get races(): Race[] {
@@ -229,26 +223,6 @@ export default class PlayerCharacters extends Vue {
     return localise(this.$store.getters["class/list"], this.$i18n.locale);
   }
 
-  raceToString(race: Race): string {
-    return localiseItem(race, this.$i18n.locale)?.description?.title || "";
-  }
-
-  classToString(cl: Class): string {
-    return localiseItem(cl, this.$i18n.locale)?.description?.title || "";
-  }
-
-  characterToString(character: Character) {
-    const raceString = character.race
-      ? `${this.raceToString(character.race)} `
-      : "";
-    const classString = character.class
-      ? `${this.classToString(character.class)} `
-      : "";
-    return `${this.$t("level")} ${
-      character.level?.currentLevel
-    } ${raceString}${classString}`;
-  }
-
   save() {
     if ((this.$refs.create as Form).validate()) {
       this.createDialog = false;
@@ -260,13 +234,24 @@ export default class PlayerCharacters extends Vue {
         });
     }
   }
+
+  mounted() {
+    this.$store
+      .dispatch("character/loadByOwner", this.$store.state.app.user.username)
+      .catch((error: GraphQLResult<Character>) => {
+        this.messages = error.errors?.map(err => err.message) || [];
+        this.notification = true;
+      });
+  }
+
   created() {
-    this.$store.dispatch(
-      "character/loadByOwner",
-      this.$store.state.app.user.username
-    );
-    this.$store.dispatch("race/load");
-    this.$store.dispatch("class/load");
+    Promise.all([
+      this.$store.dispatch("race/load"),
+      this.$store.dispatch("class/load"),
+    ]).catch((error: GraphQLResult<Character>) => {
+      this.messages = error.errors?.map(err => err.message) || [];
+      this.notification = true;
+    });
   }
 }
 </script>

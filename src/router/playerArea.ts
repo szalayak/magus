@@ -8,7 +8,7 @@ export const playerAreaRoutes: Array<NavItemConfig> = [
     icon: "mdi-account-group",
     component: () =>
       import(
-        /* webpackChunkName: "player-area/player-characters" */ "../views/character/PlayerCharacters.vue"
+        /* webpackChunkName: "player-area/player-characters" */ "../views/character/PlayerCharactersAsPlayer.vue"
       ),
   },
 ];
