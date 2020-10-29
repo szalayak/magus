@@ -64,13 +64,10 @@ export default class CharacterList extends Vue {
   @Prop({ type: String, required: true })
   title!: string;
 
-  @Prop({ type: String, required: true })
-  area!: string;
-
   @Prop({ type: Array, required: false })
   messages!: string[];
 
-  @Prop({ type: Notification, required: false })
+  @Prop({ type: Boolean, required: false })
   notification!: boolean;
 
   raceToString(race: Race): string {

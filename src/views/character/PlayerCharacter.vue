@@ -1,33 +1,44 @@
 <template>
   <v-container fluid>
     <v-toolbar flat>
-      <v-toolbar-title
-        ><div class="text-h4">{{ character.name }}</div></v-toolbar-title
-      >
-      <v-container>
-        <v-row justify="center">
-          <v-btn-toggle dense tile color="primary" group v-model="page">
-            <v-btn>1</v-btn>
-            <v-btn>2</v-btn>
-            <v-btn>3</v-btn>
-            <v-btn>4</v-btn>
-          </v-btn-toggle>
-        </v-row>
-      </v-container>
+      <v-toolbar-title>{{ character.name }}</v-toolbar-title>
+      <v-spacer />
+      <!-- <v-text-field
+        clearable
+        prepend-inner-icon="mdi-magnify"
+        label="search"
+        single-line
+        hide-details
+        @input="search"
+      /> -->
+      <v-btn-toggle dense tile color="primary" group v-model="page">
+        <v-btn>1</v-btn>
+        <v-btn>2</v-btn>
+        <v-btn>3</v-btn>
+        <v-btn>4</v-btn>
+      </v-btn-toggle>
     </v-toolbar>
     <v-row>
       <v-col v-show="page === 0" cols="12" sm="12" md="6" lg="4">
         <appearance :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 1" cols="12" sm="12" md="3" lg="2">
-        <v-card>
-          <v-card-title>Basic Info</v-card-title>
-        </v-card>
+      <v-col v-show="page === 0" cols="12" sm="12" md="6" lg="4">
+        <administrative-info :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 1" cols="12" sm="12" md="3" lg="2">
-        <v-card>
-          <v-card-title>Abilities</v-card-title>
-        </v-card>
+      <v-col v-show="page === 0" cols="12" sm="12" md="6" lg="4">
+        <properties :id="id" :editable="editable" />
+      </v-col>
+      <v-col v-show="page === 0" cols="12" sm="12" md="6" lg="4">
+        <likes-and-dislikes :id="id" :editable="editable" />
+      </v-col>
+      <v-col v-show="page === 0" cols="12" sm="12" md="6" lg="4">
+        <connections :id="id" :editable="editable" />
+      </v-col>
+      <v-col v-show="page === 1" cols="12" sm="12" md="6" lg="4">
+        <core-information :id="id" :editable="editable" />
+      </v-col>
+      <v-col v-show="page === 1" cols="12" sm="12" md="6" lg="4">
+        <abilities :id="id" :editable="editable" />
       </v-col>
       <v-col v-show="page === 1" cols="12" sm="12" md="3" lg="2">
         <v-card>
@@ -120,6 +131,19 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-snackbar
+      v-for="message in messages"
+      v-model="notification"
+      :key="message"
+    >
+      {{ message }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn text v-bind="attrs" @click="notification = false">
+          {{ $t("close") }}
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-container>
 </template>
 <script lang="ts">
@@ -127,16 +151,31 @@ import { Character } from "@/store/modules/character";
 import Vue from "vue";
 import Component from "vue-class-component";
 import Appearance from "@/components/character/Appearance.vue";
+import Properties from "@/components/character/Properties.vue";
+import LikesAndDislikes from "@/components/character/LikesAndDislikes.vue";
+import Connections from "@/components/character/Connections.vue";
+import AdministrativeInfo from "@/components/character/AdministrativeInfo.vue";
+import { GraphQLResult } from "@aws-amplify/api-graphql";
+import CoreInformation from "@/components/character/CoreInformation.vue";
+import AbilitiesCard from "@/components/character/Abilities.vue";
 
 @Component({
   name: "player-character",
   components: {
     appearance: Appearance,
+    properties: Properties,
+    "likes-and-dislikes": LikesAndDislikes,
+    connections: Connections,
+    "administrative-info": AdministrativeInfo,
+    "core-information": CoreInformation,
+    abilities: AbilitiesCard,
   },
 })
 export default class PlayerCharacter extends Vue {
   id = this.$route.params.id;
   page = 0;
+  messages: string[] = [];
+  notification = false;
 
   get editable(): boolean {
     return (
@@ -155,6 +194,17 @@ export default class PlayerCharacter extends Vue {
 
   mounted() {
     this.$store.dispatch("character/loadItem", this.id);
+  }
+
+  created() {
+    Promise.all([
+      this.$store.dispatch("race/load"),
+      this.$store.dispatch("class/load"),
+      this.$store.dispatch("valueRange/load"),
+    ]).catch((error: GraphQLResult<Character>) => {
+      this.messages = error.errors?.map(err => err.message) || [];
+      this.notification = true;
+    });
   }
 }
 </script>

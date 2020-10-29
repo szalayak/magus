@@ -1,22 +1,34 @@
 <template>
   <v-hover v-slot="{ hover }">
     <v-card>
-      <v-card-title>{{ title }}</v-card-title>
-      <v-card-text>
+      <v-app-bar flat>
+        <v-toolbar-title>{{ title }}</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-btn icon @click="edit = true" v-if="editable && hover && !edit">
+          <v-icon>mdi-pencil</v-icon>
+        </v-btn>
+        <v-btn icon @click="show = !show">
+          <v-icon>{{ show ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
+        </v-btn>
+      </v-app-bar>
+      <!-- <v-card-title>{{ title }}</v-card-title> -->
+      <v-card-text v-show="show">
         <v-alert v-if="error" dense outlined type="error">
           {{ messages }}
         </v-alert>
-        <slot name="fields" :edit="edit" />
+        <v-form :valid="valid" ref="data">
+          <slot name="fields" :edit="edit" />
+        </v-form>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn
+        <!-- <v-btn
           color="primary"
           v-if="editable && hover && !edit"
           text
           @click="edit = true"
           >{{ $t("edit") }}</v-btn
-        >
+        > -->
         <v-btn color="error" v-if="edit" text @click="cancel">{{
           $t("cancel")
         }}</v-btn>
@@ -32,6 +44,8 @@ import CharacterInfo from "@/components/character/CharacterInfo";
 import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
 
+type Form = Vue & { validate: () => boolean };
+
 @Component({
   name: "character-info-card",
 })
@@ -45,10 +59,14 @@ export default class CharacterInfoCard extends CharacterInfo {
   edit = false;
   messages: string[] = [];
   error = false;
+  valid = true;
+  show = true;
 
   save() {
-    this.$store.dispatch("character/update", this.character);
-    this.edit = false;
+    if ((this.$refs.data as Form).validate()) {
+      this.$store.dispatch("character/update", this.character);
+      this.edit = false;
+    }
   }
 
   cancel() {

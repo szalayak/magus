@@ -25,6 +25,8 @@ type Form = Vue & { validate: () => boolean };
   },
 })
 export default class NonPlayerCharactersAsDM extends Vue {
+  messages: string[] = [];
+  notification = false;
   createDialog = false;
   createValid = false;
   startDatePicker = false;
