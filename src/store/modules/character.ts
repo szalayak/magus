@@ -105,7 +105,7 @@ export interface Character extends Identifiable {
   level?: CharacterLevel;
   psiUser?: boolean;
   psiSchool?: PsiSchool;
-  psiMastery?: Mastery;
+  psiLevel?: number;
   psiPoints?: MutablePointValue;
   spellResistance?: SpellResistance;
   magicUser?: boolean;
@@ -311,7 +311,7 @@ const weapon: Module<CharacterState, RootState> = {
             level: item.level,
             psiUser: item.psiUser,
             characterPsiSchoolId: item.psiSchool?.id,
-            psiMastery: item.psiMastery,
+            psiLevel: item.psiLevel,
             psiPoints: item.psiPoints,
             spellResistance: item.spellResistance,
             magicUser: item.class?.magicUser || item.magicUser,
@@ -357,7 +357,7 @@ const weapon: Module<CharacterState, RootState> = {
             level: item.level,
             psiUser: item.psiUser,
             characterPsiSchoolId: item.psiSchool?.id,
-            psiMastery: item.psiMastery,
+            psiLevel: item.psiLevel,
             psiPoints: item.psiPoints,
             spellResistance: item.spellResistance,
             magicUser: item.magicUser,

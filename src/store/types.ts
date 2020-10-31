@@ -93,9 +93,11 @@ export interface MutablePointValue {
 export interface HealthInformation {
   vitality?: MutablePointValue;
   baseVitality?: number;
+  vitalityModifier?: number;
   hitPoints?: MutablePointValue;
   baseHitPoints?: number;
-  hitPointsPerLevel?: string;
+  hitPointModifier?: number;
+  hitPointsPerLevel?: ThrowScenario;
 }
 
 export interface SpellResistanceValues {
@@ -112,6 +114,7 @@ export interface SpellResistance {
 }
 
 export interface MagicalAbility {
+  notes?: string;
   manaPoints?: MutablePointValue;
   manaPointsPerLevel?: string;
   modifiers?: string;

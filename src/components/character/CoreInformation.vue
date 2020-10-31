@@ -6,20 +6,7 @@
   >
     <template v-slot:fields="{ edit }">
       <v-row dense>
-        <v-col cols="12" sm="12" md="4">
-          <v-select
-            v-model="character.class"
-            :label="$t('class')"
-            :items="classes"
-            item-value="id"
-            item-text="description.title"
-            :disabled="!edit"
-            :rules="[v => !!v || $t('field-is-mandatory')]"
-            required
-            return-object
-          />
-        </v-col>
-        <v-col cols="12" sm="12" md="4">
+        <v-col cols="12" sm="12" md="1">
           <v-select
             v-model="character.race"
             :label="$t('race')"
@@ -32,21 +19,34 @@
             return-object
           />
         </v-col>
-        <v-col cols="12" sm="12" md="4">
+        <v-col cols="12" sm="12" md="2">
+          <v-select
+            v-model="character.class"
+            :label="$t('class')"
+            :items="classes"
+            item-value="id"
+            item-text="description.title"
+            :disabled="!edit"
+            :rules="[v => !!v || $t('field-is-mandatory')]"
+            required
+            return-object
+          />
+        </v-col>
+        <v-col cols="12" sm="12" md="2">
           <v-text-field
             v-model="character.subclass"
             :label="$t('subclass')"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="4">
+        <v-col cols="12" sm="12" md="2">
           <v-text-field
             v-model="character.specialisation"
             :label="$t('specialisation')"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="4">
+        <v-col cols="12" sm="12" md="1">
           <v-select
             v-model="character.personality"
             :label="$t('personality')"
@@ -58,14 +58,14 @@
             return-object
           />
         </v-col>
-        <v-col cols="12" sm="12" md="4">
+        <v-col cols="12" sm="12" md="2">
           <v-text-field
             v-model="basicInfo.country"
             :label="$t('country')"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="4">
+        <v-col cols="12" sm="12" md="2">
           <v-text-field
             v-model="basicInfo.religion"
             :label="$t('religion')"
@@ -74,7 +74,7 @@
         </v-col>
       </v-row>
       <v-row dense>
-        <v-col cols="12" sm="12" md="4">
+        <v-col cols="12" sm="12" md="2">
           <v-text-field
             v-model.number="level.currentLevel"
             :label="$t('current-level')"
@@ -82,7 +82,7 @@
             type="number"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="4">
+        <v-col cols="12" sm="12" md="2">
           <v-text-field
             v-model.number="level.currentExperience"
             :label="$t('current-experience')"
@@ -90,12 +90,26 @@
             type="number"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="4">
+        <v-col cols="12" sm="12" md="2">
           <v-text-field
             v-model.number="level.experienceForNextLevel"
             :label="$t('experience-for-next-level')"
             :disabled="!edit"
             type="number"
+          />
+        </v-col>
+        <v-col cols="6" sm="12" md="2">
+          <v-checkbox
+            v-model="character.magicUser"
+            :label="$t('magic-user')"
+            :disabled="!edit"
+          />
+        </v-col>
+        <v-col cols="6" sm="12" md="2">
+          <v-checkbox
+            v-model="character.psiUser"
+            :label="$t('psi-user')"
+            :disabled="!edit"
           />
         </v-col>
       </v-row>

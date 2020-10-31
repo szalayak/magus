@@ -1,7 +1,7 @@
 <template>
   <v-hover v-slot="{ hover }">
     <v-card>
-      <v-app-bar flat>
+      <v-app-bar color="white" flat>
         <v-toolbar-title>{{ title }}</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn icon @click="edit = true" v-if="editable && hover && !edit">

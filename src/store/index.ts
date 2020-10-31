@@ -28,12 +28,8 @@ export interface User {
 }
 
 export interface AppState {
-  navDrawerOpen: boolean;
   user?: User;
   authState?: AuthState;
-  isLoggedIn: boolean;
-  isAdmin?: boolean;
-  isEditor?: boolean;
 }
 
 export interface RootState {
@@ -50,11 +46,19 @@ export interface RootState {
   character?: CharacterState;
 }
 
+const isUserInGroup = (user?: User, group?: string) => {
+  const payload = user?.signInUserSession?.accessToken?.payload;
+  const groups: string[] = payload
+    ? (payload["cognito:groups"] as string[])
+    : [];
+  return !!groups.find(g => g === group);
+};
+
 export default new Vuex.Store<RootState>({
   state: {
     app: {
-      navDrawerOpen: false,
-      isLoggedIn: false,
+      user: {},
+      authState: AuthState.Loading,
     } as AppState,
   } as RootState,
   getters: {
@@ -62,28 +66,21 @@ export default new Vuex.Store<RootState>({
       return state.app?.user?.username;
     },
     isCurrentUserAdmin(state) {
-      return state.app?.isAdmin;
+      return isUserInGroup(state.app?.user, "Admin");
     },
     isCurrentUserEditor(state) {
-      return state.app?.isEditor;
+      return isUserInGroup(state.app?.user, "Editor");
+    },
+    isLoggedIn(state) {
+      return state.app.authState === "signedin";
     },
   },
   mutations: {
-    toggleNavDrawer(state: RootState, value: boolean) {
-      state.app.navDrawerOpen = value;
-    },
     setAuthState(state, authState: AuthState) {
       state.app.authState = authState;
-      state.app.isLoggedIn = authState === "signedin";
     },
     setUser(state, user?: User) {
       state.app.user = user;
-      const payload = user?.signInUserSession?.accessToken?.payload;
-      const groups: string[] = payload
-        ? (payload["cognito:groups"] as string[])
-        : [];
-      state.app.isAdmin = !!groups.find(group => group === "Admin");
-      state.app.isEditor = !!groups.find(group => group === "Editor");
     },
   },
   actions: {

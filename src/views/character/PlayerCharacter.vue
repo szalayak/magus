@@ -34,30 +34,38 @@
       <v-col v-show="page === 0" cols="12" sm="12" md="6" lg="4">
         <connections :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 1" cols="12" sm="12" md="6" lg="4">
+      <v-col v-show="page === 1" cols="12" sm="12">
         <core-information :id="id" :editable="editable" />
       </v-col>
       <v-col v-show="page === 1" cols="12" sm="12" md="6" lg="4">
         <abilities :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 1" cols="12" sm="12" md="3" lg="2">
-        <v-card>
-          <v-card-title>Health</v-card-title>
-        </v-card>
+      <v-col v-show="page === 1" cols="12" sm="12" md="6" lg="4">
+        <health :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 1" cols="12" sm="12" md="3" lg="2">
+      <v-col
+        v-show="page === 1 && character.psiUser"
+        cols="12"
+        sm="12"
+        md="6"
+        lg="2"
+      >
+        <psi :id="id" :editable="editable" />
+      </v-col>
+      <v-col
+        v-show="page === 1 && character.magicUser"
+        cols="12"
+        sm="12"
+        md="3"
+        lg="2"
+      >
         <v-card>
-          <v-card-title>Psi</v-card-title>
+          <v-card-title>Magic</v-card-title>
         </v-card>
       </v-col>
       <v-col v-show="page === 1" cols="12" sm="12" md="3" lg="2">
         <v-card>
           <v-card-title>Spell Resistance</v-card-title>
-        </v-card>
-      </v-col>
-      <v-col v-show="page === 1" cols="12" sm="12" md="3" lg="2">
-        <v-card>
-          <v-card-title>Magic</v-card-title>
         </v-card>
       </v-col>
       <v-col v-show="page === 1" cols="12" sm="12" md="3" lg="2">
@@ -158,6 +166,8 @@ import AdministrativeInfo from "@/components/character/AdministrativeInfo.vue";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
 import CoreInformation from "@/components/character/CoreInformation.vue";
 import AbilitiesCard from "@/components/character/Abilities.vue";
+import HealthCard from "@/components/character/HealthCard.vue";
+import PsiCard from "@/components/character/PsiCard.vue";
 
 @Component({
   name: "player-character",
@@ -169,13 +179,25 @@ import AbilitiesCard from "@/components/character/Abilities.vue";
     "administrative-info": AdministrativeInfo,
     "core-information": CoreInformation,
     abilities: AbilitiesCard,
+    health: HealthCard,
+    psi: PsiCard,
   },
 })
 export default class PlayerCharacter extends Vue {
   id = this.$route.params.id;
-  page = 0;
   messages: string[] = [];
   notification = false;
+
+  get page() {
+    return this.$route.params.page ? parseInt(this.$route.params.page) - 1 : 0;
+  }
+
+  set page(page) {
+    this.$router.push({
+      name: this.$route.name || undefined,
+      params: { ...this.$route.params, page: (page + 1).toString() },
+    });
+  }
 
   get editable(): boolean {
     return (
@@ -201,6 +223,7 @@ export default class PlayerCharacter extends Vue {
       this.$store.dispatch("race/load"),
       this.$store.dispatch("class/load"),
       this.$store.dispatch("valueRange/load"),
+      this.$store.dispatch("psiSchool/load"),
     ]).catch((error: GraphQLResult<Character>) => {
       this.messages = error.errors?.map(err => err.message) || [];
       this.notification = true;

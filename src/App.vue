@@ -2,14 +2,14 @@
   <v-app>
     <v-app-bar clipped-left app color="primary" dark>
       <v-app-bar-nav-icon
-        v-if="app.isLoggedIn"
+        v-if="isLoggedIn"
         @click="navDrawerOpen = !navDrawerOpen"
       ></v-app-bar-nav-icon>
 
       <v-toolbar-title>M.A.G.U.S</v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <v-menu offset-y v-if="app.isLoggedIn">
+      <v-menu offset-y v-if="isLoggedIn">
         <template v-slot:activator="{ on, attrs }">
           <v-btn text v-bind="attrs" v-on="on"
             ><div class="d-none d-sm-flex">{{ $t("throw-dice") }}</div>
@@ -26,7 +26,7 @@
           </v-list-item>
         </v-list>
       </v-menu>
-      <v-menu offset-y v-if="app.isLoggedIn">
+      <v-menu offset-y v-if="isLoggedIn">
         <template v-slot:activator="{ on, attrs }">
           <v-btn text v-bind="attrs" v-on="on">
             <div class="d-none d-sm-flex">{{ app.user.attributes.name }}</div>
@@ -46,18 +46,18 @@
         </v-list>
       </v-menu>
     </v-app-bar>
-    <v-navigation-drawer v-model="navDrawerOpen" clipped app>
+    <v-navigation-drawer v-if="isLoggedIn" v-model="navDrawerOpen" clipped app>
       <navigation-drawer />
     </v-navigation-drawer>
     <v-main>
-      <v-container v-if="!app.isLoggedIn" fluid fill-height>
+      <v-container v-if="!isLoggedIn" fluid fill-height>
         <v-row align="center" justify="center">
           <amplify-authenticator
             ><amplify-sign-in slot="sign-in" hide-sign-up
           /></amplify-authenticator>
         </v-row>
       </v-container>
-      <router-view v-if="app.isLoggedIn" />
+      <router-view v-if="isLoggedIn" />
     </v-main>
     <v-snackbar v-model="throwResultNotification" timeout="-1">
       {{ $t("result") }}: {{ throwResult }}
@@ -74,7 +74,7 @@
 import Vue from "vue";
 import { onAuthUIStateChange } from "@aws-amplify/ui-components";
 import NavigationDrawer from "./components/NavigationDrawer.vue";
-import { mapActions, mapMutations, mapState } from "vuex";
+import { mapActions, mapGetters, mapMutations, mapState } from "vuex";
 import { DiceObject, getDice, throwDice } from "./utils/dice";
 import { Auth } from "aws-amplify";
 import UserAttributes from "./views/UserAttributes.vue";
@@ -86,7 +86,7 @@ export default Vue.extend({
       dice: getDice(this.$i18n),
       throwResult: 0,
       throwResultNotification: false,
-      navDrawerOpen: !this.$vuetify.breakpoint.mdAndDown,
+      navDrawerOpen: !this.$vuetify.breakpoint.lgAndDown,
     };
   },
   components: {
@@ -94,12 +94,12 @@ export default Vue.extend({
     "user-attributes": UserAttributes,
   },
 
-  computed: mapState(["app"]),
+  computed: { ...mapState(["app"]), ...mapGetters(["isLoggedIn"]) },
   created() {
     onAuthUIStateChange((authState, authData) => {
       this.setAuthState(authState);
       this.setUser(authData);
-      if (this.app.isLoggedIn) {
+      if (this.isLoggedIn) {
         Auth.userAttributes(authData).then(attributes => {
           const locale = attributes
             .find(attribute => attribute.getName() === "locale")
@@ -117,12 +117,7 @@ export default Vue.extend({
     return onAuthUIStateChange;
   },
   methods: {
-    ...mapMutations([
-      "toggleNavDrawer",
-      "setAuthState",
-      "setUser",
-      "logoutUser",
-    ]),
+    ...mapMutations(["setAuthState", "setUser", "logoutUser"]),
     ...mapActions(["logout"]),
     doThrow(diceObject: DiceObject) {
       this.throwResult = throwDice(diceObject.id);

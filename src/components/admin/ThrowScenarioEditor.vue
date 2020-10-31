@@ -1,12 +1,11 @@
 <template>
-  <v-row>
+  <v-row dense>
     <v-col cols="12" sm="12" md="4">
       <v-text-field
         type="number"
         :value="iterationCount"
         :label="$t('iteration-count')"
         @input="$emit('update:iterationCount', parseInt($event))"
-        outlined
       ></v-text-field>
     </v-col>
     <v-col cols="12" sm="12" md="4">
@@ -17,7 +16,6 @@
         item-value="id"
         :label="$t('dice')"
         @input="$emit('update:dice', $event)"
-        outlined
       ></v-select>
     </v-col>
     <v-col cols="12" sm="12" md="4">
@@ -26,7 +24,6 @@
         :value="modifier"
         :label="$t('modifier')"
         @input="$emit('update:modifier', parseInt($event))"
-        outlined
       ></v-text-field>
     </v-col>
   </v-row>

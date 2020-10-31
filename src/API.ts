@@ -251,7 +251,7 @@ export type CombatValuesInput = {
 };
 
 export type ThrowScenarioInput = {
-  dice: Dice,
+  dice?: Dice | null,
   iterationCount?: number | null,
   modifier?: number | null,
 };
@@ -457,7 +457,7 @@ export type CreateCharacterInput = {
   specialisation?: string | null,
   level?: CharacterLevelInput | null,
   psiUser?: boolean | null,
-  psiMastery?: Mastery | null,
+  psiLevel?: number | null,
   psiPoints?: MutablePointValueInput | null,
   spellResistance?: SpellResistanceInput | null,
   magicUser?: boolean | null,
@@ -533,9 +533,11 @@ export type AbilitiesInput = {
 export type HealthInformationInput = {
   vitality?: MutablePointValueInput | null,
   baseVitality?: number | null,
+  vitalityModifier?: number | null,
   hitPoints?: MutablePointValueInput | null,
   baseHitPoints?: number | null,
-  hitPointsPerLevel?: string | null,
+  hitPointModifier?: number | null,
+  hitPointsPerLevel?: ThrowScenarioInput | null,
 };
 
 export type MutablePointValueInput = {
@@ -548,12 +550,6 @@ export type CharacterLevelInput = {
   currentExperience?: number | null,
   experienceForNextLevel?: number | null,
 };
-
-export enum Mastery {
-  BASIC = "BASIC",
-  MASTER = "MASTER",
-}
-
 
 export type SpellResistanceInput = {
   astral?: SpellResistanceValuesInput | null,
@@ -569,6 +565,7 @@ export type SpellResistanceValuesInput = {
 };
 
 export type MagicalAbilityInput = {
+  notes?: string | null,
   manaPoints?: MutablePointValueInput | null,
   manaPointsPerLevel?: string | null,
   modifiers?: string | null,
@@ -616,7 +613,7 @@ export type ModelCharacterConditionInput = {
   subclass?: ModelStringInput | null,
   specialisation?: ModelStringInput | null,
   psiUser?: ModelBooleanInput | null,
-  psiMastery?: ModelMasteryInput | null,
+  psiLevel?: ModelIntInput | null,
   magicUser?: ModelBooleanInput | null,
   combatValueModifiersPerLevel?: ModelIntInput | null,
   mandatoryCombatValueModifierDistribution?: ModelStringInput | null,
@@ -626,10 +623,11 @@ export type ModelCharacterConditionInput = {
   not?: ModelCharacterConditionInput | null,
 };
 
-export type ModelMasteryInput = {
-  eq?: Mastery | null,
-  ne?: Mastery | null,
-};
+export enum Mastery {
+  BASIC = "BASIC",
+  MASTER = "MASTER",
+}
+
 
 export enum CompanionType {
   MOUNT = "MOUNT",
@@ -653,7 +651,7 @@ export type UpdateCharacterInput = {
   specialisation?: string | null,
   level?: CharacterLevelInput | null,
   psiUser?: boolean | null,
-  psiMastery?: Mastery | null,
+  psiLevel?: number | null,
   psiPoints?: MutablePointValueInput | null,
   spellResistance?: SpellResistanceInput | null,
   magicUser?: boolean | null,
@@ -744,6 +742,11 @@ export type ModelSkillAssignmentConditionInput = {
   and?: Array< ModelSkillAssignmentConditionInput | null > | null,
   or?: Array< ModelSkillAssignmentConditionInput | null > | null,
   not?: ModelSkillAssignmentConditionInput | null,
+};
+
+export type ModelMasteryInput = {
+  eq?: Mastery | null,
+  ne?: Mastery | null,
 };
 
 export type UpdateSkillAssignmentInput = {
@@ -952,7 +955,7 @@ export type ModelCharacterFilterInput = {
   subclass?: ModelStringInput | null,
   specialisation?: ModelStringInput | null,
   psiUser?: ModelBooleanInput | null,
-  psiMastery?: ModelMasteryInput | null,
+  psiLevel?: ModelIntInput | null,
   magicUser?: ModelBooleanInput | null,
   combatValueModifiersPerLevel?: ModelIntInput | null,
   mandatoryCombatValueModifierDistribution?: ModelStringInput | null,
@@ -1425,7 +1428,7 @@ export type CreateShieldMutation = {
     price: number | null,
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -1462,7 +1465,7 @@ export type UpdateShieldMutation = {
     price: number | null,
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -1499,7 +1502,7 @@ export type DeleteShieldMutation = {
     price: number | null,
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -1550,7 +1553,7 @@ export type CreateWeaponMutation = {
     },
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     },
@@ -1602,7 +1605,7 @@ export type UpdateWeaponMutation = {
     },
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     },
@@ -1654,7 +1657,7 @@ export type DeleteWeaponMutation = {
     },
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     },
@@ -1937,7 +1940,7 @@ export type CreateThrowMutation = {
     id: string,
     throwScenario:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -1961,7 +1964,7 @@ export type UpdateThrowMutation = {
     id: string,
     throwScenario:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -1985,7 +1988,7 @@ export type DeleteThrowMutation = {
     id: string,
     throwScenario:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -2085,13 +2088,20 @@ export type CreateCharacterMutation = {
         max: number | null,
       } | null,
       baseVitality: number | null,
+      vitalityModifier: number | null,
       hitPoints:  {
         __typename: "MutablePointValue",
         current: number | null,
         max: number | null,
       } | null,
       baseHitPoints: number | null,
-      hitPointsPerLevel: string | null,
+      hitPointModifier: number | null,
+      hitPointsPerLevel:  {
+        __typename: "ThrowScenario",
+        dice: Dice | null,
+        iterationCount: number | null,
+        modifier: number | null,
+      } | null,
     } | null,
     class:  {
       __typename: "Class",
@@ -2169,7 +2179,7 @@ export type CreateCharacterMutation = {
       createdAt: string,
       updatedAt: string,
     } | null,
-    psiMastery: Mastery | null,
+    psiLevel: number | null,
     psiPoints:  {
       __typename: "MutablePointValue",
       current: number | null,
@@ -2197,6 +2207,7 @@ export type CreateCharacterMutation = {
     magicUser: boolean | null,
     magicalAbility:  {
       __typename: "MagicalAbility",
+      notes: string | null,
       manaPoints:  {
         __typename: "MutablePointValue",
         current: number | null,
@@ -2297,7 +2308,7 @@ export type CreateCharacterMutation = {
           },
           damage:  {
             __typename: "ThrowScenario",
-            dice: Dice,
+            dice: Dice | null,
             iterationCount: number | null,
             modifier: number | null,
           },
@@ -2324,7 +2335,7 @@ export type CreateCharacterMutation = {
         } | null,
         damage:  {
           __typename: "ThrowScenario",
-          dice: Dice,
+          dice: Dice | null,
           iterationCount: number | null,
           modifier: number | null,
         } | null,
@@ -2391,13 +2402,20 @@ export type CreateCharacterMutation = {
             max: number | null,
           } | null,
           baseVitality: number | null,
+          vitalityModifier: number | null,
           hitPoints:  {
             __typename: "MutablePointValue",
             current: number | null,
             max: number | null,
           } | null,
           baseHitPoints: number | null,
-          hitPointsPerLevel: string | null,
+          hitPointModifier: number | null,
+          hitPointsPerLevel:  {
+            __typename: "ThrowScenario",
+            dice: Dice | null,
+            iterationCount: number | null,
+            modifier: number | null,
+          } | null,
         } | null,
         combatValues:  {
           __typename: "CombatValues",
@@ -2408,7 +2426,7 @@ export type CreateCharacterMutation = {
         } | null,
         damage:  {
           __typename: "ThrowScenario",
-          dice: Dice,
+          dice: Dice | null,
           iterationCount: number | null,
           modifier: number | null,
         } | null,
@@ -2441,7 +2459,7 @@ export type CreateCharacterMutation = {
           },
           damage:  {
             __typename: "ThrowScenario",
-            dice: Dice,
+            dice: Dice | null,
             iterationCount: number | null,
             modifier: number | null,
           },
@@ -2590,13 +2608,20 @@ export type UpdateCharacterMutation = {
         max: number | null,
       } | null,
       baseVitality: number | null,
+      vitalityModifier: number | null,
       hitPoints:  {
         __typename: "MutablePointValue",
         current: number | null,
         max: number | null,
       } | null,
       baseHitPoints: number | null,
-      hitPointsPerLevel: string | null,
+      hitPointModifier: number | null,
+      hitPointsPerLevel:  {
+        __typename: "ThrowScenario",
+        dice: Dice | null,
+        iterationCount: number | null,
+        modifier: number | null,
+      } | null,
     } | null,
     class:  {
       __typename: "Class",
@@ -2674,7 +2699,7 @@ export type UpdateCharacterMutation = {
       createdAt: string,
       updatedAt: string,
     } | null,
-    psiMastery: Mastery | null,
+    psiLevel: number | null,
     psiPoints:  {
       __typename: "MutablePointValue",
       current: number | null,
@@ -2702,6 +2727,7 @@ export type UpdateCharacterMutation = {
     magicUser: boolean | null,
     magicalAbility:  {
       __typename: "MagicalAbility",
+      notes: string | null,
       manaPoints:  {
         __typename: "MutablePointValue",
         current: number | null,
@@ -2802,7 +2828,7 @@ export type UpdateCharacterMutation = {
           },
           damage:  {
             __typename: "ThrowScenario",
-            dice: Dice,
+            dice: Dice | null,
             iterationCount: number | null,
             modifier: number | null,
           },
@@ -2829,7 +2855,7 @@ export type UpdateCharacterMutation = {
         } | null,
         damage:  {
           __typename: "ThrowScenario",
-          dice: Dice,
+          dice: Dice | null,
           iterationCount: number | null,
           modifier: number | null,
         } | null,
@@ -2896,13 +2922,20 @@ export type UpdateCharacterMutation = {
             max: number | null,
           } | null,
           baseVitality: number | null,
+          vitalityModifier: number | null,
           hitPoints:  {
             __typename: "MutablePointValue",
             current: number | null,
             max: number | null,
           } | null,
           baseHitPoints: number | null,
-          hitPointsPerLevel: string | null,
+          hitPointModifier: number | null,
+          hitPointsPerLevel:  {
+            __typename: "ThrowScenario",
+            dice: Dice | null,
+            iterationCount: number | null,
+            modifier: number | null,
+          } | null,
         } | null,
         combatValues:  {
           __typename: "CombatValues",
@@ -2913,7 +2946,7 @@ export type UpdateCharacterMutation = {
         } | null,
         damage:  {
           __typename: "ThrowScenario",
-          dice: Dice,
+          dice: Dice | null,
           iterationCount: number | null,
           modifier: number | null,
         } | null,
@@ -2946,7 +2979,7 @@ export type UpdateCharacterMutation = {
           },
           damage:  {
             __typename: "ThrowScenario",
-            dice: Dice,
+            dice: Dice | null,
             iterationCount: number | null,
             modifier: number | null,
           },
@@ -3095,13 +3128,20 @@ export type DeleteCharacterMutation = {
         max: number | null,
       } | null,
       baseVitality: number | null,
+      vitalityModifier: number | null,
       hitPoints:  {
         __typename: "MutablePointValue",
         current: number | null,
         max: number | null,
       } | null,
       baseHitPoints: number | null,
-      hitPointsPerLevel: string | null,
+      hitPointModifier: number | null,
+      hitPointsPerLevel:  {
+        __typename: "ThrowScenario",
+        dice: Dice | null,
+        iterationCount: number | null,
+        modifier: number | null,
+      } | null,
     } | null,
     class:  {
       __typename: "Class",
@@ -3179,7 +3219,7 @@ export type DeleteCharacterMutation = {
       createdAt: string,
       updatedAt: string,
     } | null,
-    psiMastery: Mastery | null,
+    psiLevel: number | null,
     psiPoints:  {
       __typename: "MutablePointValue",
       current: number | null,
@@ -3207,6 +3247,7 @@ export type DeleteCharacterMutation = {
     magicUser: boolean | null,
     magicalAbility:  {
       __typename: "MagicalAbility",
+      notes: string | null,
       manaPoints:  {
         __typename: "MutablePointValue",
         current: number | null,
@@ -3307,7 +3348,7 @@ export type DeleteCharacterMutation = {
           },
           damage:  {
             __typename: "ThrowScenario",
-            dice: Dice,
+            dice: Dice | null,
             iterationCount: number | null,
             modifier: number | null,
           },
@@ -3334,7 +3375,7 @@ export type DeleteCharacterMutation = {
         } | null,
         damage:  {
           __typename: "ThrowScenario",
-          dice: Dice,
+          dice: Dice | null,
           iterationCount: number | null,
           modifier: number | null,
         } | null,
@@ -3401,13 +3442,20 @@ export type DeleteCharacterMutation = {
             max: number | null,
           } | null,
           baseVitality: number | null,
+          vitalityModifier: number | null,
           hitPoints:  {
             __typename: "MutablePointValue",
             current: number | null,
             max: number | null,
           } | null,
           baseHitPoints: number | null,
-          hitPointsPerLevel: string | null,
+          hitPointModifier: number | null,
+          hitPointsPerLevel:  {
+            __typename: "ThrowScenario",
+            dice: Dice | null,
+            iterationCount: number | null,
+            modifier: number | null,
+          } | null,
         } | null,
         combatValues:  {
           __typename: "CombatValues",
@@ -3418,7 +3466,7 @@ export type DeleteCharacterMutation = {
         } | null,
         damage:  {
           __typename: "ThrowScenario",
-          dice: Dice,
+          dice: Dice | null,
           iterationCount: number | null,
           modifier: number | null,
         } | null,
@@ -3451,7 +3499,7 @@ export type DeleteCharacterMutation = {
           },
           damage:  {
             __typename: "ThrowScenario",
-            dice: Dice,
+            dice: Dice | null,
             iterationCount: number | null,
             modifier: number | null,
           },
@@ -3559,7 +3607,7 @@ export type CreateWeaponAssignmentMutation = {
       },
       damage:  {
         __typename: "ThrowScenario",
-        dice: Dice,
+        dice: Dice | null,
         iterationCount: number | null,
         modifier: number | null,
       },
@@ -3586,7 +3634,7 @@ export type CreateWeaponAssignmentMutation = {
     } | null,
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -3644,7 +3692,7 @@ export type UpdateWeaponAssignmentMutation = {
       },
       damage:  {
         __typename: "ThrowScenario",
-        dice: Dice,
+        dice: Dice | null,
         iterationCount: number | null,
         modifier: number | null,
       },
@@ -3671,7 +3719,7 @@ export type UpdateWeaponAssignmentMutation = {
     } | null,
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -3729,7 +3777,7 @@ export type DeleteWeaponAssignmentMutation = {
       },
       damage:  {
         __typename: "ThrowScenario",
-        dice: Dice,
+        dice: Dice | null,
         iterationCount: number | null,
         modifier: number | null,
       },
@@ -3756,7 +3804,7 @@ export type DeleteWeaponAssignmentMutation = {
     } | null,
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -3935,13 +3983,20 @@ export type CreateCharacterCompanionMutation = {
         max: number | null,
       } | null,
       baseVitality: number | null,
+      vitalityModifier: number | null,
       hitPoints:  {
         __typename: "MutablePointValue",
         current: number | null,
         max: number | null,
       } | null,
       baseHitPoints: number | null,
-      hitPointsPerLevel: string | null,
+      hitPointModifier: number | null,
+      hitPointsPerLevel:  {
+        __typename: "ThrowScenario",
+        dice: Dice | null,
+        iterationCount: number | null,
+        modifier: number | null,
+      } | null,
     } | null,
     combatValues:  {
       __typename: "CombatValues",
@@ -3952,7 +4007,7 @@ export type CreateCharacterCompanionMutation = {
     } | null,
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -3991,7 +4046,7 @@ export type CreateCharacterCompanionMutation = {
       },
       damage:  {
         __typename: "ThrowScenario",
-        dice: Dice,
+        dice: Dice | null,
         iterationCount: number | null,
         modifier: number | null,
       },
@@ -4031,13 +4086,20 @@ export type UpdateCharacterCompanionMutation = {
         max: number | null,
       } | null,
       baseVitality: number | null,
+      vitalityModifier: number | null,
       hitPoints:  {
         __typename: "MutablePointValue",
         current: number | null,
         max: number | null,
       } | null,
       baseHitPoints: number | null,
-      hitPointsPerLevel: string | null,
+      hitPointModifier: number | null,
+      hitPointsPerLevel:  {
+        __typename: "ThrowScenario",
+        dice: Dice | null,
+        iterationCount: number | null,
+        modifier: number | null,
+      } | null,
     } | null,
     combatValues:  {
       __typename: "CombatValues",
@@ -4048,7 +4110,7 @@ export type UpdateCharacterCompanionMutation = {
     } | null,
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -4087,7 +4149,7 @@ export type UpdateCharacterCompanionMutation = {
       },
       damage:  {
         __typename: "ThrowScenario",
-        dice: Dice,
+        dice: Dice | null,
         iterationCount: number | null,
         modifier: number | null,
       },
@@ -4127,13 +4189,20 @@ export type DeleteCharacterCompanionMutation = {
         max: number | null,
       } | null,
       baseVitality: number | null,
+      vitalityModifier: number | null,
       hitPoints:  {
         __typename: "MutablePointValue",
         current: number | null,
         max: number | null,
       } | null,
       baseHitPoints: number | null,
-      hitPointsPerLevel: string | null,
+      hitPointModifier: number | null,
+      hitPointsPerLevel:  {
+        __typename: "ThrowScenario",
+        dice: Dice | null,
+        iterationCount: number | null,
+        modifier: number | null,
+      } | null,
     } | null,
     combatValues:  {
       __typename: "CombatValues",
@@ -4144,7 +4213,7 @@ export type DeleteCharacterCompanionMutation = {
     } | null,
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -4183,7 +4252,7 @@ export type DeleteCharacterCompanionMutation = {
       },
       damage:  {
         __typename: "ThrowScenario",
-        dice: Dice,
+        dice: Dice | null,
         iterationCount: number | null,
         modifier: number | null,
       },
@@ -4675,7 +4744,7 @@ export type GetShieldQuery = {
     price: number | null,
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -4715,7 +4784,7 @@ export type ListShieldsQuery = {
       price: number | null,
       damage:  {
         __typename: "ThrowScenario",
-        dice: Dice,
+        dice: Dice | null,
         iterationCount: number | null,
         modifier: number | null,
       } | null,
@@ -4767,7 +4836,7 @@ export type GetWeaponQuery = {
     },
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     },
@@ -4822,7 +4891,7 @@ export type ListWeaponsQuery = {
       },
       damage:  {
         __typename: "ThrowScenario",
-        dice: Dice,
+        dice: Dice | null,
         iterationCount: number | null,
         modifier: number | null,
       },
@@ -5027,7 +5096,7 @@ export type GetThrowQuery = {
     id: string,
     throwScenario:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -5054,7 +5123,7 @@ export type ListThrowsQuery = {
       id: string,
       throwScenario:  {
         __typename: "ThrowScenario",
-        dice: Dice,
+        dice: Dice | null,
         iterationCount: number | null,
         modifier: number | null,
       } | null,
@@ -5155,13 +5224,20 @@ export type GetCharacterQuery = {
         max: number | null,
       } | null,
       baseVitality: number | null,
+      vitalityModifier: number | null,
       hitPoints:  {
         __typename: "MutablePointValue",
         current: number | null,
         max: number | null,
       } | null,
       baseHitPoints: number | null,
-      hitPointsPerLevel: string | null,
+      hitPointModifier: number | null,
+      hitPointsPerLevel:  {
+        __typename: "ThrowScenario",
+        dice: Dice | null,
+        iterationCount: number | null,
+        modifier: number | null,
+      } | null,
     } | null,
     class:  {
       __typename: "Class",
@@ -5239,7 +5315,7 @@ export type GetCharacterQuery = {
       createdAt: string,
       updatedAt: string,
     } | null,
-    psiMastery: Mastery | null,
+    psiLevel: number | null,
     psiPoints:  {
       __typename: "MutablePointValue",
       current: number | null,
@@ -5267,6 +5343,7 @@ export type GetCharacterQuery = {
     magicUser: boolean | null,
     magicalAbility:  {
       __typename: "MagicalAbility",
+      notes: string | null,
       manaPoints:  {
         __typename: "MutablePointValue",
         current: number | null,
@@ -5367,7 +5444,7 @@ export type GetCharacterQuery = {
           },
           damage:  {
             __typename: "ThrowScenario",
-            dice: Dice,
+            dice: Dice | null,
             iterationCount: number | null,
             modifier: number | null,
           },
@@ -5394,7 +5471,7 @@ export type GetCharacterQuery = {
         } | null,
         damage:  {
           __typename: "ThrowScenario",
-          dice: Dice,
+          dice: Dice | null,
           iterationCount: number | null,
           modifier: number | null,
         } | null,
@@ -5461,13 +5538,20 @@ export type GetCharacterQuery = {
             max: number | null,
           } | null,
           baseVitality: number | null,
+          vitalityModifier: number | null,
           hitPoints:  {
             __typename: "MutablePointValue",
             current: number | null,
             max: number | null,
           } | null,
           baseHitPoints: number | null,
-          hitPointsPerLevel: string | null,
+          hitPointModifier: number | null,
+          hitPointsPerLevel:  {
+            __typename: "ThrowScenario",
+            dice: Dice | null,
+            iterationCount: number | null,
+            modifier: number | null,
+          } | null,
         } | null,
         combatValues:  {
           __typename: "CombatValues",
@@ -5478,7 +5562,7 @@ export type GetCharacterQuery = {
         } | null,
         damage:  {
           __typename: "ThrowScenario",
-          dice: Dice,
+          dice: Dice | null,
           iterationCount: number | null,
           modifier: number | null,
         } | null,
@@ -5511,7 +5595,7 @@ export type GetCharacterQuery = {
           },
           damage:  {
             __typename: "ThrowScenario",
-            dice: Dice,
+            dice: Dice | null,
             iterationCount: number | null,
             modifier: number | null,
           },
@@ -5663,13 +5747,20 @@ export type ListCharactersQuery = {
           max: number | null,
         } | null,
         baseVitality: number | null,
+        vitalityModifier: number | null,
         hitPoints:  {
           __typename: "MutablePointValue",
           current: number | null,
           max: number | null,
         } | null,
         baseHitPoints: number | null,
-        hitPointsPerLevel: string | null,
+        hitPointModifier: number | null,
+        hitPointsPerLevel:  {
+          __typename: "ThrowScenario",
+          dice: Dice | null,
+          iterationCount: number | null,
+          modifier: number | null,
+        } | null,
       } | null,
       class:  {
         __typename: "Class",
@@ -5747,7 +5838,7 @@ export type ListCharactersQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      psiMastery: Mastery | null,
+      psiLevel: number | null,
       psiPoints:  {
         __typename: "MutablePointValue",
         current: number | null,
@@ -5775,6 +5866,7 @@ export type ListCharactersQuery = {
       magicUser: boolean | null,
       magicalAbility:  {
         __typename: "MagicalAbility",
+        notes: string | null,
         manaPoints:  {
           __typename: "MutablePointValue",
           current: number | null,
@@ -5876,7 +5968,7 @@ export type ListCharactersQuery = {
           } | null,
           damage:  {
             __typename: "ThrowScenario",
-            dice: Dice,
+            dice: Dice | null,
             iterationCount: number | null,
             modifier: number | null,
           } | null,
@@ -5925,8 +6017,9 @@ export type ListCharactersQuery = {
           health:  {
             __typename: "HealthInformation",
             baseVitality: number | null,
+            vitalityModifier: number | null,
             baseHitPoints: number | null,
-            hitPointsPerLevel: string | null,
+            hitPointModifier: number | null,
           } | null,
           combatValues:  {
             __typename: "CombatValues",
@@ -5937,7 +6030,7 @@ export type ListCharactersQuery = {
           } | null,
           damage:  {
             __typename: "ThrowScenario",
-            dice: Dice,
+            dice: Dice | null,
             iterationCount: number | null,
             modifier: number | null,
           } | null,
@@ -6039,7 +6132,7 @@ export type GetWeaponAssignmentQuery = {
       },
       damage:  {
         __typename: "ThrowScenario",
-        dice: Dice,
+        dice: Dice | null,
         iterationCount: number | null,
         modifier: number | null,
       },
@@ -6066,7 +6159,7 @@ export type GetWeaponAssignmentQuery = {
     } | null,
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -6127,7 +6220,7 @@ export type ListWeaponAssignmentsQuery = {
         },
         damage:  {
           __typename: "ThrowScenario",
-          dice: Dice,
+          dice: Dice | null,
           iterationCount: number | null,
           modifier: number | null,
         },
@@ -6154,7 +6247,7 @@ export type ListWeaponAssignmentsQuery = {
       } | null,
       damage:  {
         __typename: "ThrowScenario",
-        dice: Dice,
+        dice: Dice | null,
         iterationCount: number | null,
         modifier: number | null,
       } | null,
@@ -6289,13 +6382,20 @@ export type GetCharacterCompanionQuery = {
         max: number | null,
       } | null,
       baseVitality: number | null,
+      vitalityModifier: number | null,
       hitPoints:  {
         __typename: "MutablePointValue",
         current: number | null,
         max: number | null,
       } | null,
       baseHitPoints: number | null,
-      hitPointsPerLevel: string | null,
+      hitPointModifier: number | null,
+      hitPointsPerLevel:  {
+        __typename: "ThrowScenario",
+        dice: Dice | null,
+        iterationCount: number | null,
+        modifier: number | null,
+      } | null,
     } | null,
     combatValues:  {
       __typename: "CombatValues",
@@ -6306,7 +6406,7 @@ export type GetCharacterCompanionQuery = {
     } | null,
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -6345,7 +6445,7 @@ export type GetCharacterCompanionQuery = {
       },
       damage:  {
         __typename: "ThrowScenario",
-        dice: Dice,
+        dice: Dice | null,
         iterationCount: number | null,
         modifier: number | null,
       },
@@ -6388,13 +6488,20 @@ export type ListCharacterCompanionsQuery = {
           max: number | null,
         } | null,
         baseVitality: number | null,
+        vitalityModifier: number | null,
         hitPoints:  {
           __typename: "MutablePointValue",
           current: number | null,
           max: number | null,
         } | null,
         baseHitPoints: number | null,
-        hitPointsPerLevel: string | null,
+        hitPointModifier: number | null,
+        hitPointsPerLevel:  {
+          __typename: "ThrowScenario",
+          dice: Dice | null,
+          iterationCount: number | null,
+          modifier: number | null,
+        } | null,
       } | null,
       combatValues:  {
         __typename: "CombatValues",
@@ -6405,7 +6512,7 @@ export type ListCharacterCompanionsQuery = {
       } | null,
       damage:  {
         __typename: "ThrowScenario",
-        dice: Dice,
+        dice: Dice | null,
         iterationCount: number | null,
         modifier: number | null,
       } | null,
@@ -6444,7 +6551,7 @@ export type ListCharacterCompanionsQuery = {
         },
         damage:  {
           __typename: "ThrowScenario",
-          dice: Dice,
+          dice: Dice | null,
           iterationCount: number | null,
           modifier: number | null,
         },
@@ -6747,13 +6854,20 @@ export type ListCharactersByOwnerQuery = {
           max: number | null,
         } | null,
         baseVitality: number | null,
+        vitalityModifier: number | null,
         hitPoints:  {
           __typename: "MutablePointValue",
           current: number | null,
           max: number | null,
         } | null,
         baseHitPoints: number | null,
-        hitPointsPerLevel: string | null,
+        hitPointModifier: number | null,
+        hitPointsPerLevel:  {
+          __typename: "ThrowScenario",
+          dice: Dice | null,
+          iterationCount: number | null,
+          modifier: number | null,
+        } | null,
       } | null,
       class:  {
         __typename: "Class",
@@ -6831,7 +6945,7 @@ export type ListCharactersByOwnerQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      psiMastery: Mastery | null,
+      psiLevel: number | null,
       psiPoints:  {
         __typename: "MutablePointValue",
         current: number | null,
@@ -6859,6 +6973,7 @@ export type ListCharactersByOwnerQuery = {
       magicUser: boolean | null,
       magicalAbility:  {
         __typename: "MagicalAbility",
+        notes: string | null,
         manaPoints:  {
           __typename: "MutablePointValue",
           current: number | null,
@@ -6960,7 +7075,7 @@ export type ListCharactersByOwnerQuery = {
           } | null,
           damage:  {
             __typename: "ThrowScenario",
-            dice: Dice,
+            dice: Dice | null,
             iterationCount: number | null,
             modifier: number | null,
           } | null,
@@ -7009,8 +7124,9 @@ export type ListCharactersByOwnerQuery = {
           health:  {
             __typename: "HealthInformation",
             baseVitality: number | null,
+            vitalityModifier: number | null,
             baseHitPoints: number | null,
-            hitPointsPerLevel: string | null,
+            hitPointModifier: number | null,
           } | null,
           combatValues:  {
             __typename: "CombatValues",
@@ -7021,7 +7137,7 @@ export type ListCharactersByOwnerQuery = {
           } | null,
           damage:  {
             __typename: "ThrowScenario",
-            dice: Dice,
+            dice: Dice | null,
             iterationCount: number | null,
             modifier: number | null,
           } | null,
@@ -7170,13 +7286,20 @@ export type ListCharactersByDungeonMasterQuery = {
           max: number | null,
         } | null,
         baseVitality: number | null,
+        vitalityModifier: number | null,
         hitPoints:  {
           __typename: "MutablePointValue",
           current: number | null,
           max: number | null,
         } | null,
         baseHitPoints: number | null,
-        hitPointsPerLevel: string | null,
+        hitPointModifier: number | null,
+        hitPointsPerLevel:  {
+          __typename: "ThrowScenario",
+          dice: Dice | null,
+          iterationCount: number | null,
+          modifier: number | null,
+        } | null,
       } | null,
       class:  {
         __typename: "Class",
@@ -7254,7 +7377,7 @@ export type ListCharactersByDungeonMasterQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
-      psiMastery: Mastery | null,
+      psiLevel: number | null,
       psiPoints:  {
         __typename: "MutablePointValue",
         current: number | null,
@@ -7282,6 +7405,7 @@ export type ListCharactersByDungeonMasterQuery = {
       magicUser: boolean | null,
       magicalAbility:  {
         __typename: "MagicalAbility",
+        notes: string | null,
         manaPoints:  {
           __typename: "MutablePointValue",
           current: number | null,
@@ -7383,7 +7507,7 @@ export type ListCharactersByDungeonMasterQuery = {
           } | null,
           damage:  {
             __typename: "ThrowScenario",
-            dice: Dice,
+            dice: Dice | null,
             iterationCount: number | null,
             modifier: number | null,
           } | null,
@@ -7432,8 +7556,9 @@ export type ListCharactersByDungeonMasterQuery = {
           health:  {
             __typename: "HealthInformation",
             baseVitality: number | null,
+            vitalityModifier: number | null,
             baseHitPoints: number | null,
-            hitPointsPerLevel: string | null,
+            hitPointModifier: number | null,
           } | null,
           combatValues:  {
             __typename: "CombatValues",
@@ -7444,7 +7569,7 @@ export type ListCharactersByDungeonMasterQuery = {
           } | null,
           damage:  {
             __typename: "ThrowScenario",
-            dice: Dice,
+            dice: Dice | null,
             iterationCount: number | null,
             modifier: number | null,
           } | null,
@@ -7817,7 +7942,7 @@ export type OnCreateShieldSubscription = {
     price: number | null,
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -7849,7 +7974,7 @@ export type OnUpdateShieldSubscription = {
     price: number | null,
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -7881,7 +8006,7 @@ export type OnDeleteShieldSubscription = {
     price: number | null,
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -7927,7 +8052,7 @@ export type OnCreateWeaponSubscription = {
     },
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     },
@@ -7974,7 +8099,7 @@ export type OnUpdateWeaponSubscription = {
     },
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     },
@@ -8021,7 +8146,7 @@ export type OnDeleteWeaponSubscription = {
     },
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     },
@@ -8269,7 +8394,7 @@ export type OnCreateThrowSubscription = {
     id: string,
     throwScenario:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -8288,7 +8413,7 @@ export type OnUpdateThrowSubscription = {
     id: string,
     throwScenario:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -8307,7 +8432,7 @@ export type OnDeleteThrowSubscription = {
     id: string,
     throwScenario:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -8407,13 +8532,20 @@ export type OnCreateCharacterSubscription = {
         max: number | null,
       } | null,
       baseVitality: number | null,
+      vitalityModifier: number | null,
       hitPoints:  {
         __typename: "MutablePointValue",
         current: number | null,
         max: number | null,
       } | null,
       baseHitPoints: number | null,
-      hitPointsPerLevel: string | null,
+      hitPointModifier: number | null,
+      hitPointsPerLevel:  {
+        __typename: "ThrowScenario",
+        dice: Dice | null,
+        iterationCount: number | null,
+        modifier: number | null,
+      } | null,
     } | null,
     class:  {
       __typename: "Class",
@@ -8491,7 +8623,7 @@ export type OnCreateCharacterSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
-    psiMastery: Mastery | null,
+    psiLevel: number | null,
     psiPoints:  {
       __typename: "MutablePointValue",
       current: number | null,
@@ -8519,6 +8651,7 @@ export type OnCreateCharacterSubscription = {
     magicUser: boolean | null,
     magicalAbility:  {
       __typename: "MagicalAbility",
+      notes: string | null,
       manaPoints:  {
         __typename: "MutablePointValue",
         current: number | null,
@@ -8619,7 +8752,7 @@ export type OnCreateCharacterSubscription = {
           },
           damage:  {
             __typename: "ThrowScenario",
-            dice: Dice,
+            dice: Dice | null,
             iterationCount: number | null,
             modifier: number | null,
           },
@@ -8646,7 +8779,7 @@ export type OnCreateCharacterSubscription = {
         } | null,
         damage:  {
           __typename: "ThrowScenario",
-          dice: Dice,
+          dice: Dice | null,
           iterationCount: number | null,
           modifier: number | null,
         } | null,
@@ -8713,13 +8846,20 @@ export type OnCreateCharacterSubscription = {
             max: number | null,
           } | null,
           baseVitality: number | null,
+          vitalityModifier: number | null,
           hitPoints:  {
             __typename: "MutablePointValue",
             current: number | null,
             max: number | null,
           } | null,
           baseHitPoints: number | null,
-          hitPointsPerLevel: string | null,
+          hitPointModifier: number | null,
+          hitPointsPerLevel:  {
+            __typename: "ThrowScenario",
+            dice: Dice | null,
+            iterationCount: number | null,
+            modifier: number | null,
+          } | null,
         } | null,
         combatValues:  {
           __typename: "CombatValues",
@@ -8730,7 +8870,7 @@ export type OnCreateCharacterSubscription = {
         } | null,
         damage:  {
           __typename: "ThrowScenario",
-          dice: Dice,
+          dice: Dice | null,
           iterationCount: number | null,
           modifier: number | null,
         } | null,
@@ -8763,7 +8903,7 @@ export type OnCreateCharacterSubscription = {
           },
           damage:  {
             __typename: "ThrowScenario",
-            dice: Dice,
+            dice: Dice | null,
             iterationCount: number | null,
             modifier: number | null,
           },
@@ -8912,13 +9052,20 @@ export type OnUpdateCharacterSubscription = {
         max: number | null,
       } | null,
       baseVitality: number | null,
+      vitalityModifier: number | null,
       hitPoints:  {
         __typename: "MutablePointValue",
         current: number | null,
         max: number | null,
       } | null,
       baseHitPoints: number | null,
-      hitPointsPerLevel: string | null,
+      hitPointModifier: number | null,
+      hitPointsPerLevel:  {
+        __typename: "ThrowScenario",
+        dice: Dice | null,
+        iterationCount: number | null,
+        modifier: number | null,
+      } | null,
     } | null,
     class:  {
       __typename: "Class",
@@ -8996,7 +9143,7 @@ export type OnUpdateCharacterSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
-    psiMastery: Mastery | null,
+    psiLevel: number | null,
     psiPoints:  {
       __typename: "MutablePointValue",
       current: number | null,
@@ -9024,6 +9171,7 @@ export type OnUpdateCharacterSubscription = {
     magicUser: boolean | null,
     magicalAbility:  {
       __typename: "MagicalAbility",
+      notes: string | null,
       manaPoints:  {
         __typename: "MutablePointValue",
         current: number | null,
@@ -9124,7 +9272,7 @@ export type OnUpdateCharacterSubscription = {
           },
           damage:  {
             __typename: "ThrowScenario",
-            dice: Dice,
+            dice: Dice | null,
             iterationCount: number | null,
             modifier: number | null,
           },
@@ -9151,7 +9299,7 @@ export type OnUpdateCharacterSubscription = {
         } | null,
         damage:  {
           __typename: "ThrowScenario",
-          dice: Dice,
+          dice: Dice | null,
           iterationCount: number | null,
           modifier: number | null,
         } | null,
@@ -9218,13 +9366,20 @@ export type OnUpdateCharacterSubscription = {
             max: number | null,
           } | null,
           baseVitality: number | null,
+          vitalityModifier: number | null,
           hitPoints:  {
             __typename: "MutablePointValue",
             current: number | null,
             max: number | null,
           } | null,
           baseHitPoints: number | null,
-          hitPointsPerLevel: string | null,
+          hitPointModifier: number | null,
+          hitPointsPerLevel:  {
+            __typename: "ThrowScenario",
+            dice: Dice | null,
+            iterationCount: number | null,
+            modifier: number | null,
+          } | null,
         } | null,
         combatValues:  {
           __typename: "CombatValues",
@@ -9235,7 +9390,7 @@ export type OnUpdateCharacterSubscription = {
         } | null,
         damage:  {
           __typename: "ThrowScenario",
-          dice: Dice,
+          dice: Dice | null,
           iterationCount: number | null,
           modifier: number | null,
         } | null,
@@ -9268,7 +9423,7 @@ export type OnUpdateCharacterSubscription = {
           },
           damage:  {
             __typename: "ThrowScenario",
-            dice: Dice,
+            dice: Dice | null,
             iterationCount: number | null,
             modifier: number | null,
           },
@@ -9417,13 +9572,20 @@ export type OnDeleteCharacterSubscription = {
         max: number | null,
       } | null,
       baseVitality: number | null,
+      vitalityModifier: number | null,
       hitPoints:  {
         __typename: "MutablePointValue",
         current: number | null,
         max: number | null,
       } | null,
       baseHitPoints: number | null,
-      hitPointsPerLevel: string | null,
+      hitPointModifier: number | null,
+      hitPointsPerLevel:  {
+        __typename: "ThrowScenario",
+        dice: Dice | null,
+        iterationCount: number | null,
+        modifier: number | null,
+      } | null,
     } | null,
     class:  {
       __typename: "Class",
@@ -9501,7 +9663,7 @@ export type OnDeleteCharacterSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
-    psiMastery: Mastery | null,
+    psiLevel: number | null,
     psiPoints:  {
       __typename: "MutablePointValue",
       current: number | null,
@@ -9529,6 +9691,7 @@ export type OnDeleteCharacterSubscription = {
     magicUser: boolean | null,
     magicalAbility:  {
       __typename: "MagicalAbility",
+      notes: string | null,
       manaPoints:  {
         __typename: "MutablePointValue",
         current: number | null,
@@ -9629,7 +9792,7 @@ export type OnDeleteCharacterSubscription = {
           },
           damage:  {
             __typename: "ThrowScenario",
-            dice: Dice,
+            dice: Dice | null,
             iterationCount: number | null,
             modifier: number | null,
           },
@@ -9656,7 +9819,7 @@ export type OnDeleteCharacterSubscription = {
         } | null,
         damage:  {
           __typename: "ThrowScenario",
-          dice: Dice,
+          dice: Dice | null,
           iterationCount: number | null,
           modifier: number | null,
         } | null,
@@ -9723,13 +9886,20 @@ export type OnDeleteCharacterSubscription = {
             max: number | null,
           } | null,
           baseVitality: number | null,
+          vitalityModifier: number | null,
           hitPoints:  {
             __typename: "MutablePointValue",
             current: number | null,
             max: number | null,
           } | null,
           baseHitPoints: number | null,
-          hitPointsPerLevel: string | null,
+          hitPointModifier: number | null,
+          hitPointsPerLevel:  {
+            __typename: "ThrowScenario",
+            dice: Dice | null,
+            iterationCount: number | null,
+            modifier: number | null,
+          } | null,
         } | null,
         combatValues:  {
           __typename: "CombatValues",
@@ -9740,7 +9910,7 @@ export type OnDeleteCharacterSubscription = {
         } | null,
         damage:  {
           __typename: "ThrowScenario",
-          dice: Dice,
+          dice: Dice | null,
           iterationCount: number | null,
           modifier: number | null,
         } | null,
@@ -9773,7 +9943,7 @@ export type OnDeleteCharacterSubscription = {
           },
           damage:  {
             __typename: "ThrowScenario",
-            dice: Dice,
+            dice: Dice | null,
             iterationCount: number | null,
             modifier: number | null,
           },
@@ -9880,7 +10050,7 @@ export type OnCreateWeaponAssignmentSubscription = {
       },
       damage:  {
         __typename: "ThrowScenario",
-        dice: Dice,
+        dice: Dice | null,
         iterationCount: number | null,
         modifier: number | null,
       },
@@ -9907,7 +10077,7 @@ export type OnCreateWeaponAssignmentSubscription = {
     } | null,
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -9964,7 +10134,7 @@ export type OnUpdateWeaponAssignmentSubscription = {
       },
       damage:  {
         __typename: "ThrowScenario",
-        dice: Dice,
+        dice: Dice | null,
         iterationCount: number | null,
         modifier: number | null,
       },
@@ -9991,7 +10161,7 @@ export type OnUpdateWeaponAssignmentSubscription = {
     } | null,
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -10048,7 +10218,7 @@ export type OnDeleteWeaponAssignmentSubscription = {
       },
       damage:  {
         __typename: "ThrowScenario",
-        dice: Dice,
+        dice: Dice | null,
         iterationCount: number | null,
         modifier: number | null,
       },
@@ -10075,7 +10245,7 @@ export type OnDeleteWeaponAssignmentSubscription = {
     } | null,
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -10250,13 +10420,20 @@ export type OnCreateCharacterCompanionSubscription = {
         max: number | null,
       } | null,
       baseVitality: number | null,
+      vitalityModifier: number | null,
       hitPoints:  {
         __typename: "MutablePointValue",
         current: number | null,
         max: number | null,
       } | null,
       baseHitPoints: number | null,
-      hitPointsPerLevel: string | null,
+      hitPointModifier: number | null,
+      hitPointsPerLevel:  {
+        __typename: "ThrowScenario",
+        dice: Dice | null,
+        iterationCount: number | null,
+        modifier: number | null,
+      } | null,
     } | null,
     combatValues:  {
       __typename: "CombatValues",
@@ -10267,7 +10444,7 @@ export type OnCreateCharacterCompanionSubscription = {
     } | null,
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -10306,7 +10483,7 @@ export type OnCreateCharacterCompanionSubscription = {
       },
       damage:  {
         __typename: "ThrowScenario",
-        dice: Dice,
+        dice: Dice | null,
         iterationCount: number | null,
         modifier: number | null,
       },
@@ -10345,13 +10522,20 @@ export type OnUpdateCharacterCompanionSubscription = {
         max: number | null,
       } | null,
       baseVitality: number | null,
+      vitalityModifier: number | null,
       hitPoints:  {
         __typename: "MutablePointValue",
         current: number | null,
         max: number | null,
       } | null,
       baseHitPoints: number | null,
-      hitPointsPerLevel: string | null,
+      hitPointModifier: number | null,
+      hitPointsPerLevel:  {
+        __typename: "ThrowScenario",
+        dice: Dice | null,
+        iterationCount: number | null,
+        modifier: number | null,
+      } | null,
     } | null,
     combatValues:  {
       __typename: "CombatValues",
@@ -10362,7 +10546,7 @@ export type OnUpdateCharacterCompanionSubscription = {
     } | null,
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -10401,7 +10585,7 @@ export type OnUpdateCharacterCompanionSubscription = {
       },
       damage:  {
         __typename: "ThrowScenario",
-        dice: Dice,
+        dice: Dice | null,
         iterationCount: number | null,
         modifier: number | null,
       },
@@ -10440,13 +10624,20 @@ export type OnDeleteCharacterCompanionSubscription = {
         max: number | null,
       } | null,
       baseVitality: number | null,
+      vitalityModifier: number | null,
       hitPoints:  {
         __typename: "MutablePointValue",
         current: number | null,
         max: number | null,
       } | null,
       baseHitPoints: number | null,
-      hitPointsPerLevel: string | null,
+      hitPointModifier: number | null,
+      hitPointsPerLevel:  {
+        __typename: "ThrowScenario",
+        dice: Dice | null,
+        iterationCount: number | null,
+        modifier: number | null,
+      } | null,
     } | null,
     combatValues:  {
       __typename: "CombatValues",
@@ -10457,7 +10648,7 @@ export type OnDeleteCharacterCompanionSubscription = {
     } | null,
     damage:  {
       __typename: "ThrowScenario",
-      dice: Dice,
+      dice: Dice | null,
       iterationCount: number | null,
       modifier: number | null,
     } | null,
@@ -10496,7 +10687,7 @@ export type OnDeleteCharacterCompanionSubscription = {
       },
       damage:  {
         __typename: "ThrowScenario",
-        dice: Dice,
+        dice: Dice | null,
         iterationCount: number | null,
         modifier: number | null,
       },

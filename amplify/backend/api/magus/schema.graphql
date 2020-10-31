@@ -50,7 +50,7 @@ enum Dice {
 }
 
 type ThrowScenario {
-  dice: Dice!
+  dice: Dice
   iterationCount: Int
   modifier: Int
 }
@@ -227,9 +227,11 @@ type MutablePointValue {
 type HealthInformation {
   vitality: MutablePointValue
   baseVitality: Int
+  vitalityModifier: Int
   hitPoints: MutablePointValue
   baseHitPoints: Int
-  hitPointsPerLevel: String
+  hitPointModifier: Int
+  hitPointsPerLevel: ThrowScenario
 }
 
 type SpellResistanceValues {
@@ -246,6 +248,7 @@ type SpellResistance {
 }
 
 type MagicalAbility {
+  notes: String
   manaPoints: MutablePointValue
   manaPointsPerLevel: String
   modifiers: String
@@ -304,7 +307,7 @@ type Character
   level: CharacterLevel
   psiUser: Boolean
   psiSchool: PsiSchool @connection
-  psiMastery: Mastery
+  psiLevel: Int
   psiPoints: MutablePointValue
   spellResistance: SpellResistance
   magicUser: Boolean

@@ -109,6 +109,7 @@
   "weapon-type": "Weapon Type",
   "attacks-per-turn": "Attacks/Turn",
   "attack-range": "Range",
+  "misc-properties": "Miscellaneous",
   "gold-abbr": "g",
   "silver-abbr": "s",
   "copper-abbr": "c",
@@ -168,5 +169,14 @@
   "willpower": "Willpower",
   "astral": "Astral",
   "damage-bonus": "Damage Bonus",
-  "in-armour": "In Armour"
+  "in-armour": "In Armour",
+  "vitality": "Vitality",
+  "hit-points": "Hit Points",
+  "base": "Base",
+  "current": "Current",
+  "max": "Max",
+  "hit-points-per-level": "Hit Points / Level",
+  "psi-user":"Psi User",
+  "psi": "Psi",
+  "school":"School"
 }

@@ -5,7 +5,11 @@ export const getThrowScenarioString = (
   scenario: ThrowScenario,
   i18n: VueI18n
 ) => {
-  return `${scenario.iterationCount?.toString() || ""}${
-    scenario.dice ? i18n.t(scenario.dice) : ""
-  }${scenario.modifier ? "+" + scenario.modifier : ""}`;
+  const iterationCount =
+    scenario.iterationCount && scenario.iterationCount > 1
+      ? scenario.iterationCount.toString()
+      : "";
+  return `${iterationCount}${scenario.dice ? i18n.t(scenario.dice) : ""}${
+    scenario.modifier ? "+" + scenario.modifier : ""
+  }`;
 };

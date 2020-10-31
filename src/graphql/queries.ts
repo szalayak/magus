@@ -648,12 +648,18 @@ export const getCharacter = /* GraphQL */ `
           max
         }
         baseVitality
+        vitalityModifier
         hitPoints {
           current
           max
         }
         baseHitPoints
-        hitPointsPerLevel
+        hitPointModifier
+        hitPointsPerLevel {
+          dice
+          iterationCount
+          modifier
+        }
       }
       class {
         id
@@ -720,7 +726,7 @@ export const getCharacter = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      psiMastery
+      psiLevel
       psiPoints {
         current
         max
@@ -743,6 +749,7 @@ export const getCharacter = /* GraphQL */ `
       }
       magicUser
       magicalAbility {
+        notes
         manaPoints {
           current
           max
@@ -909,12 +916,18 @@ export const getCharacter = /* GraphQL */ `
               max
             }
             baseVitality
+            vitalityModifier
             hitPoints {
               current
               max
             }
             baseHitPoints
-            hitPointsPerLevel
+            hitPointModifier
+            hitPointsPerLevel {
+              dice
+              iterationCount
+              modifier
+            }
           }
           combatValues {
             initiation
@@ -1087,12 +1100,18 @@ export const listCharacters = /* GraphQL */ `
             max
           }
           baseVitality
+          vitalityModifier
           hitPoints {
             current
             max
           }
           baseHitPoints
-          hitPointsPerLevel
+          hitPointModifier
+          hitPointsPerLevel {
+            dice
+            iterationCount
+            modifier
+          }
         }
         class {
           id
@@ -1159,7 +1178,7 @@ export const listCharacters = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        psiMastery
+        psiLevel
         psiPoints {
           current
           max
@@ -1182,6 +1201,7 @@ export const listCharacters = /* GraphQL */ `
         }
         magicUser
         magicalAbility {
+          notes
           manaPoints {
             current
             max
@@ -1311,8 +1331,9 @@ export const listCharacters = /* GraphQL */ `
             type
             health {
               baseVitality
+              vitalityModifier
               baseHitPoints
-              hitPointsPerLevel
+              hitPointModifier
             }
             combatValues {
               initiation
@@ -1631,12 +1652,18 @@ export const getCharacterCompanion = /* GraphQL */ `
           max
         }
         baseVitality
+        vitalityModifier
         hitPoints {
           current
           max
         }
         baseHitPoints
-        hitPointsPerLevel
+        hitPointModifier
+        hitPointsPerLevel {
+          dice
+          iterationCount
+          modifier
+        }
       }
       combatValues {
         initiation
@@ -1720,12 +1747,18 @@ export const listCharacterCompanions = /* GraphQL */ `
             max
           }
           baseVitality
+          vitalityModifier
           hitPoints {
             current
             max
           }
           baseHitPoints
-          hitPointsPerLevel
+          hitPointModifier
+          hitPointsPerLevel {
+            dice
+            iterationCount
+            modifier
+          }
         }
         combatValues {
           initiation
@@ -2054,12 +2087,18 @@ export const listCharactersByOwner = /* GraphQL */ `
             max
           }
           baseVitality
+          vitalityModifier
           hitPoints {
             current
             max
           }
           baseHitPoints
-          hitPointsPerLevel
+          hitPointModifier
+          hitPointsPerLevel {
+            dice
+            iterationCount
+            modifier
+          }
         }
         class {
           id
@@ -2126,7 +2165,7 @@ export const listCharactersByOwner = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        psiMastery
+        psiLevel
         psiPoints {
           current
           max
@@ -2149,6 +2188,7 @@ export const listCharactersByOwner = /* GraphQL */ `
         }
         magicUser
         magicalAbility {
+          notes
           manaPoints {
             current
             max
@@ -2278,8 +2318,9 @@ export const listCharactersByOwner = /* GraphQL */ `
             type
             health {
               baseVitality
+              vitalityModifier
               baseHitPoints
-              hitPointsPerLevel
+              hitPointModifier
             }
             combatValues {
               initiation
@@ -2428,12 +2469,18 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
             max
           }
           baseVitality
+          vitalityModifier
           hitPoints {
             current
             max
           }
           baseHitPoints
-          hitPointsPerLevel
+          hitPointModifier
+          hitPointsPerLevel {
+            dice
+            iterationCount
+            modifier
+          }
         }
         class {
           id
@@ -2500,7 +2547,7 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        psiMastery
+        psiLevel
         psiPoints {
           current
           max
@@ -2523,6 +2570,7 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
         }
         magicUser
         magicalAbility {
+          notes
           manaPoints {
             current
             max
@@ -2652,8 +2700,9 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
             type
             health {
               baseVitality
+              vitalityModifier
               baseHitPoints
-              hitPointsPerLevel
+              hitPointModifier
             }
             combatValues {
               initiation

@@ -916,12 +916,18 @@ export const createCharacter = /* GraphQL */ `
           max
         }
         baseVitality
+        vitalityModifier
         hitPoints {
           current
           max
         }
         baseHitPoints
-        hitPointsPerLevel
+        hitPointModifier
+        hitPointsPerLevel {
+          dice
+          iterationCount
+          modifier
+        }
       }
       class {
         id
@@ -988,7 +994,7 @@ export const createCharacter = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      psiMastery
+      psiLevel
       psiPoints {
         current
         max
@@ -1011,6 +1017,7 @@ export const createCharacter = /* GraphQL */ `
       }
       magicUser
       magicalAbility {
+        notes
         manaPoints {
           current
           max
@@ -1177,12 +1184,18 @@ export const createCharacter = /* GraphQL */ `
               max
             }
             baseVitality
+            vitalityModifier
             hitPoints {
               current
               max
             }
             baseHitPoints
-            hitPointsPerLevel
+            hitPointModifier
+            hitPointsPerLevel {
+              dice
+              iterationCount
+              modifier
+            }
           }
           combatValues {
             initiation
@@ -1353,12 +1366,18 @@ export const updateCharacter = /* GraphQL */ `
           max
         }
         baseVitality
+        vitalityModifier
         hitPoints {
           current
           max
         }
         baseHitPoints
-        hitPointsPerLevel
+        hitPointModifier
+        hitPointsPerLevel {
+          dice
+          iterationCount
+          modifier
+        }
       }
       class {
         id
@@ -1425,7 +1444,7 @@ export const updateCharacter = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      psiMastery
+      psiLevel
       psiPoints {
         current
         max
@@ -1448,6 +1467,7 @@ export const updateCharacter = /* GraphQL */ `
       }
       magicUser
       magicalAbility {
+        notes
         manaPoints {
           current
           max
@@ -1614,12 +1634,18 @@ export const updateCharacter = /* GraphQL */ `
               max
             }
             baseVitality
+            vitalityModifier
             hitPoints {
               current
               max
             }
             baseHitPoints
-            hitPointsPerLevel
+            hitPointModifier
+            hitPointsPerLevel {
+              dice
+              iterationCount
+              modifier
+            }
           }
           combatValues {
             initiation
@@ -1790,12 +1816,18 @@ export const deleteCharacter = /* GraphQL */ `
           max
         }
         baseVitality
+        vitalityModifier
         hitPoints {
           current
           max
         }
         baseHitPoints
-        hitPointsPerLevel
+        hitPointModifier
+        hitPointsPerLevel {
+          dice
+          iterationCount
+          modifier
+        }
       }
       class {
         id
@@ -1862,7 +1894,7 @@ export const deleteCharacter = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      psiMastery
+      psiLevel
       psiPoints {
         current
         max
@@ -1885,6 +1917,7 @@ export const deleteCharacter = /* GraphQL */ `
       }
       magicUser
       magicalAbility {
+        notes
         manaPoints {
           current
           max
@@ -2051,12 +2084,18 @@ export const deleteCharacter = /* GraphQL */ `
               max
             }
             baseVitality
+            vitalityModifier
             hitPoints {
               current
               max
             }
             baseHitPoints
-            hitPointsPerLevel
+            hitPointModifier
+            hitPointsPerLevel {
+              dice
+              iterationCount
+              modifier
+            }
           }
           combatValues {
             initiation
@@ -2517,12 +2556,18 @@ export const createCharacterCompanion = /* GraphQL */ `
           max
         }
         baseVitality
+        vitalityModifier
         hitPoints {
           current
           max
         }
         baseHitPoints
-        hitPointsPerLevel
+        hitPointModifier
+        hitPointsPerLevel {
+          dice
+          iterationCount
+          modifier
+        }
       }
       combatValues {
         initiation
@@ -2600,12 +2645,18 @@ export const updateCharacterCompanion = /* GraphQL */ `
           max
         }
         baseVitality
+        vitalityModifier
         hitPoints {
           current
           max
         }
         baseHitPoints
-        hitPointsPerLevel
+        hitPointModifier
+        hitPointsPerLevel {
+          dice
+          iterationCount
+          modifier
+        }
       }
       combatValues {
         initiation
@@ -2683,12 +2734,18 @@ export const deleteCharacterCompanion = /* GraphQL */ `
           max
         }
         baseVitality
+        vitalityModifier
         hitPoints {
           current
           max
         }
         baseHitPoints
-        hitPointsPerLevel
+        hitPointModifier
+        hitPointsPerLevel {
+          dice
+          iterationCount
+          modifier
+        }
       }
       combatValues {
         initiation
