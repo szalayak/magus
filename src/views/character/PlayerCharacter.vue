@@ -23,9 +23,6 @@
         <appearance :id="id" :editable="editable" />
       </v-col>
       <v-col v-show="page === 0" cols="12" sm="12" md="6" lg="4">
-        <administrative-info :id="id" :editable="editable" />
-      </v-col>
-      <v-col v-show="page === 0" cols="12" sm="12" md="6" lg="4">
         <properties :id="id" :editable="editable" />
       </v-col>
       <v-col v-show="page === 0" cols="12" sm="12" md="6" lg="4">
@@ -33,6 +30,9 @@
       </v-col>
       <v-col v-show="page === 0" cols="12" sm="12" md="6" lg="4">
         <connections :id="id" :editable="editable" />
+      </v-col>
+      <v-col v-show="page === 0" cols="12" sm="12" md="6" lg="4">
+        <administrative-info :id="id" :editable="editable" />
       </v-col>
       <v-col v-show="page === 1" cols="12" sm="12">
         <core-information :id="id" :editable="editable" />
@@ -59,14 +59,10 @@
         md="3"
         lg="2"
       >
-        <v-card>
-          <v-card-title>Magic</v-card-title>
-        </v-card>
+        <magical-ability :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 1" cols="12" sm="12" md="3" lg="2">
-        <v-card>
-          <v-card-title>Spell Resistance</v-card-title>
-        </v-card>
+      <v-col v-show="page === 1" cols="12" sm="12" md="6" lg="4">
+        <spell-resistance :id="id" :editable="editable" />
       </v-col>
       <v-col v-show="page === 1" cols="12" sm="12" md="3" lg="2">
         <v-card>
@@ -168,6 +164,8 @@ import CoreInformation from "@/components/character/CoreInformation.vue";
 import AbilitiesCard from "@/components/character/Abilities.vue";
 import HealthCard from "@/components/character/HealthCard.vue";
 import PsiCard from "@/components/character/PsiCard.vue";
+import MagicalAbilityCard from "@/components/character/MagicalAbilityCard.vue";
+import SpellResistanceCard from "@/components/character/SpellResistanceCard.vue";
 
 @Component({
   name: "player-character",
@@ -181,6 +179,8 @@ import PsiCard from "@/components/character/PsiCard.vue";
     abilities: AbilitiesCard,
     health: HealthCard,
     psi: PsiCard,
+    "magical-ability": MagicalAbilityCard,
+    "spell-resistance": SpellResistanceCard,
   },
 })
 export default class PlayerCharacter extends Vue {

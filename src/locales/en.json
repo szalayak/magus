@@ -176,7 +176,19 @@
   "current": "Current",
   "max": "Max",
   "hit-points-per-level": "Hit Points / Level",
-  "psi-user":"Psi User",
+  "psi-user": "Psi User",
   "psi": "Psi",
-  "school":"School"
+  "school": "School",
+  "mana-points": "Mana Points",
+  "mana-points-per-level": "MP / Level",
+  "mana-points-stored-elsewhere": "MP Stored Elsewhere",
+  "recharging-method": "Recharging Method",
+  "notes": "Notes",
+  "modifiers": "Modifiers",
+  "spell-resistance": "Spell Resistance",
+  "mental": "Mental",
+  "static": "Static",
+  "dynamic": "Dynamic",
+  "innate": "Innate",
+  "magical": "Magical"
 }
