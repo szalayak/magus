@@ -19,6 +19,7 @@ import {
   listCharactersByDungeonMaster,
   listCharactersByOwner,
 } from "@/graphql/queries";
+import { characterRoutes } from "@/router/character";
 import { API } from "aws-amplify";
 import { Module } from "vuex";
 import { RootState } from "..";
@@ -39,10 +40,12 @@ import {
   ThrowScenario,
   Wallet,
 } from "../types";
+import { Armour } from "./armour";
 import { Class } from "./class";
 import { MagicalItem } from "./magicalItem";
 import { PsiSchool } from "./psiSchool";
 import { Race } from "./race";
+import { Shield } from "./shield";
 import { Skill } from "./skill";
 import { ValueRange } from "./valueRange";
 import { Weapon } from "./weapon";
@@ -121,6 +124,8 @@ export interface Character extends Identifiable {
   inventory?: InventoryItem[];
   poisons?: Poison[];
   notes?: string[];
+  armour?: Armour;
+  shield?: Shield;
   weapons?: WeaponAssignment[];
   skills?: SkillAssignment[];
   companions?: CharacterCompanion[];
@@ -328,6 +333,8 @@ const weapon: Module<CharacterState, RootState> = {
             inventory: item.inventory,
             poisons: item.poisons,
             notes: item.notes,
+            characterArmourId: item.armour?.id,
+            characterShieldId: item.shield?.id,
           },
         },
       })) as { data: CreateCharacterMutation };
@@ -374,6 +381,8 @@ const weapon: Module<CharacterState, RootState> = {
             inventory: item.inventory,
             poisons: item.poisons,
             notes: item.notes,
+            characterArmourId: item.armour?.id,
+            characterShieldId: item.shield?.id,
           },
         },
       })) as { data: UpdateCharacterMutation };

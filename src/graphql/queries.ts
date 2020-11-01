@@ -805,6 +805,45 @@ export const getCharacter = /* GraphQL */ `
         amount
       }
       notes
+      armour {
+        id
+        descriptions {
+          locale
+          title
+          description
+        }
+        weight
+        movementPreventionValue
+        damageReductionValue
+        price
+        createdAt
+        updatedAt
+      }
+      shield {
+        id
+        descriptions {
+          locale
+          title
+          description
+        }
+        combatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        movementPreventionValue
+        weight
+        price
+        damage {
+          dice
+          iterationCount
+          modifier
+        }
+        attacksPerTurn
+        createdAt
+        updatedAt
+      }
       weapons {
         items {
           id
@@ -1257,6 +1296,45 @@ export const listCharacters = /* GraphQL */ `
           amount
         }
         notes
+        armour {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          weight
+          movementPreventionValue
+          damageReductionValue
+          price
+          createdAt
+          updatedAt
+        }
+        shield {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          combatValues {
+            initiation
+            offence
+            defence
+            aiming
+          }
+          movementPreventionValue
+          weight
+          price
+          damage {
+            dice
+            iterationCount
+            modifier
+          }
+          attacksPerTurn
+          createdAt
+          updatedAt
+        }
         weapons {
           items {
             id
@@ -2244,6 +2322,45 @@ export const listCharactersByOwner = /* GraphQL */ `
           amount
         }
         notes
+        armour {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          weight
+          movementPreventionValue
+          damageReductionValue
+          price
+          createdAt
+          updatedAt
+        }
+        shield {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          combatValues {
+            initiation
+            offence
+            defence
+            aiming
+          }
+          movementPreventionValue
+          weight
+          price
+          damage {
+            dice
+            iterationCount
+            modifier
+          }
+          attacksPerTurn
+          createdAt
+          updatedAt
+        }
         weapons {
           items {
             id
@@ -2626,6 +2743,45 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
           amount
         }
         notes
+        armour {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          weight
+          movementPreventionValue
+          damageReductionValue
+          price
+          createdAt
+          updatedAt
+        }
+        shield {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          combatValues {
+            initiation
+            offence
+            defence
+            aiming
+          }
+          movementPreventionValue
+          weight
+          price
+          damage {
+            dice
+            iterationCount
+            modifier
+          }
+          attacksPerTurn
+          createdAt
+          updatedAt
+        }
         weapons {
           items {
             id

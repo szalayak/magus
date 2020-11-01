@@ -323,6 +323,8 @@ type Character
   inventory: [InventoryItem!]
   poisons: [Poison!]
   notes: [String]
+  armour: Armour @connection
+  shield: Shield @connection
   weapons: [WeaponAssignment!]
     @connection(keyName: "byCharacter", fields: ["id"])
   skills: [SkillAssignment!] @connection(keyName: "byCharacter", fields: ["id"])

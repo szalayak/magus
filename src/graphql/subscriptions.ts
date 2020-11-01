@@ -980,6 +980,45 @@ export const onCreateCharacter = /* GraphQL */ `
         amount
       }
       notes
+      armour {
+        id
+        descriptions {
+          locale
+          title
+          description
+        }
+        weight
+        movementPreventionValue
+        damageReductionValue
+        price
+        createdAt
+        updatedAt
+      }
+      shield {
+        id
+        descriptions {
+          locale
+          title
+          description
+        }
+        combatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        movementPreventionValue
+        weight
+        price
+        damage {
+          dice
+          iterationCount
+          modifier
+        }
+        attacksPerTurn
+        createdAt
+        updatedAt
+      }
       weapons {
         items {
           id
@@ -1427,6 +1466,45 @@ export const onUpdateCharacter = /* GraphQL */ `
         amount
       }
       notes
+      armour {
+        id
+        descriptions {
+          locale
+          title
+          description
+        }
+        weight
+        movementPreventionValue
+        damageReductionValue
+        price
+        createdAt
+        updatedAt
+      }
+      shield {
+        id
+        descriptions {
+          locale
+          title
+          description
+        }
+        combatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        movementPreventionValue
+        weight
+        price
+        damage {
+          dice
+          iterationCount
+          modifier
+        }
+        attacksPerTurn
+        createdAt
+        updatedAt
+      }
       weapons {
         items {
           id
@@ -1874,6 +1952,45 @@ export const onDeleteCharacter = /* GraphQL */ `
         amount
       }
       notes
+      armour {
+        id
+        descriptions {
+          locale
+          title
+          description
+        }
+        weight
+        movementPreventionValue
+        damageReductionValue
+        price
+        createdAt
+        updatedAt
+      }
+      shield {
+        id
+        descriptions {
+          locale
+          title
+          description
+        }
+        combatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        movementPreventionValue
+        weight
+        price
+        damage {
+          dice
+          iterationCount
+          modifier
+        }
+        attacksPerTurn
+        createdAt
+        updatedAt
+      }
       weapons {
         items {
           id

@@ -8,51 +8,19 @@
       <v-subheader class="pl-0">{{
         `${$t("initiation")}: ${initiationTotal}`
       }}</v-subheader>
-      <v-row dense>
-        <v-col cols="12" sm="12" md="6">
-          <v-text-field
-            v-model.number="spellResistance.astral.staticShield"
-            :label="$t('static')"
-            :disabled="!edit"
-          />
-        </v-col>
-      </v-row>
+      <v-row dense> </v-row>
       <v-subheader class="pl-0">{{
         `${$t("offence")}: ${offenceTotal}`
       }}</v-subheader>
-      <v-row dense>
-        <v-col cols="12" sm="12" md="6">
-          <v-text-field
-            v-model.number="spellResistance.mental.staticShield"
-            :label="$t('static')"
-            :disabled="!edit"
-          />
-        </v-col>
-      </v-row>
+      <v-row dense> </v-row>
       <v-subheader class="pl-0">{{
         `${$t("defence")}: ${defenceTotal}`
       }}</v-subheader>
-      <v-row dense>
-        <v-col cols="12" sm="12" md="6">
-          <v-text-field
-            v-model.number="spellResistance.mental.staticShield"
-            :label="$t('static')"
-            :disabled="!edit"
-          />
-        </v-col>
-      </v-row>
+      <v-row dense> </v-row>
       <v-subheader class="pl-0">{{
         `${$t("aiming")}: ${aimingTotal}`
       }}</v-subheader>
-      <v-row dense>
-        <v-col cols="12" sm="12" md="6">
-          <v-text-field
-            v-model.number="spellResistance.mental.staticShield"
-            :label="$t('static')"
-            :disabled="!edit"
-          />
-        </v-col>
-      </v-row>
+      <v-row dense> </v-row>
     </template>
   </character-info-card>
 </template>
@@ -60,6 +28,13 @@
 import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
+import { CombatValues } from "@/store/types";
+import {
+  aimingTotal,
+  defenceTotal,
+  initiationTotal,
+  offenceTotal,
+} from "@/utils/character";
 
 @Component({
   name: "combat-values-card",
@@ -68,38 +43,45 @@ import CharacterInfoCard from "./CharacterInfoCard.vue";
   },
 })
 export default class CombatValuesCard extends CharacterInfo {
-  calculateTotal(
-    base?: number,
-    spentModifier?: number,
-    otherModifier?: number,
-    abilities?: Array<number | undefined>
-  ) {
-    const baseValue = base || 0;
-    const spentValue = spentModifier || 0;
-    const otherValue = otherModifier || 0;
-
-    const abilityValue =
-      abilities?.reduce((acc, value) => {
-        return (acc || 0) + (value || 0);
-      }) || 0;
-
-    return baseValue + spentValue + otherValue + abilityValue;
-  }
-
   get initiationTotal() {
-    return 0;
+    return initiationTotal(this.character);
   }
 
   get offenceTotal() {
-    return 0;
+    return offenceTotal(this.character);
   }
 
   get defenceTotal() {
-    return 0;
+    return defenceTotal(this.character);
   }
 
   get aimingTotal() {
-    return 0;
+    return aimingTotal(this.character);
+  }
+
+  get base(): CombatValues {
+    if (!this.character.baseCombatValues) this.character.baseCombatValues = {};
+    return this.character.baseCombatValues || {};
+  }
+
+  set base(values: CombatValues) {
+    Object.assign(this.character.baseCombatValues, values);
+  }
+
+  get spent(): CombatValues {
+    if (!this.character.spentCombatValueModifiers)
+      this.character.spentCombatValueModifiers = {};
+    return this.character.spentCombatValueModifiers || {};
+  }
+
+  set spent(values: CombatValues) {
+    Object.assign(this.character.spentCombatValueModifiers, values);
+  }
+
+  get modifiers(): CombatValues {
+    if (!this.character.otherCombatValueModifiers)
+      this.character.otherCombatValueModifiers = {};
+    return this.character.otherCombatValueModifiers || {};
   }
 }
 </script>
