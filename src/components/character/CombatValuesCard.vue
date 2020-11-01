@@ -2,25 +2,125 @@
   <character-info-card
     :id="id"
     :editable="editable"
-    :title="$t('spell-resistance')"
+    :title="$t('combat-values')"
   >
     <template v-slot:fields="{ edit }">
       <v-subheader class="pl-0">{{
-        `${$t("initiation")}: ${initiationTotal}`
+        `${$t("initiation")}: ${initiationString}`
       }}</v-subheader>
-      <v-row dense> </v-row>
+      <v-row dense>
+        <v-col cols="12" sm="12" md="6" lg="4">
+          <v-text-field
+            v-model.number="base.initiation"
+            :label="$t('base')"
+            :disabled="!edit"
+            type="number"
+          />
+        </v-col>
+        <v-col cols="12" sm="12" md="6" lg="4">
+          <v-text-field
+            v-model.number="spent.initiation"
+            :label="$t('spent-cm')"
+            :disabled="!edit"
+            type="number"
+          />
+        </v-col>
+        <v-col cols="12" sm="12" md="6" lg="4">
+          <v-text-field
+            v-model.number="other.initiation"
+            :label="$t('modifier')"
+            :disabled="!edit"
+            type="number"
+          />
+        </v-col>
+      </v-row>
       <v-subheader class="pl-0">{{
-        `${$t("offence")}: ${offenceTotal}`
+        `${$t("offence")}: ${offenceString}`
       }}</v-subheader>
-      <v-row dense> </v-row>
+      <v-row dense>
+        <v-col cols="12" sm="12" md="6" lg="4">
+          <v-text-field
+            v-model.number="base.offence"
+            :label="$t('base')"
+            :disabled="!edit"
+            type="number"
+          />
+        </v-col>
+        <v-col cols="12" sm="12" md="6" lg="4">
+          <v-text-field
+            v-model.number="spent.offence"
+            :label="$t('spent-cm')"
+            :disabled="!edit"
+            type="number"
+          />
+        </v-col>
+        <v-col cols="12" sm="12" md="6" lg="4">
+          <v-text-field
+            v-model.number="other.offence"
+            :label="$t('modifier')"
+            :disabled="!edit"
+            type="number"
+          />
+        </v-col>
+      </v-row>
       <v-subheader class="pl-0">{{
-        `${$t("defence")}: ${defenceTotal}`
+        `${$t("defence")}: ${defenceString}`
       }}</v-subheader>
-      <v-row dense> </v-row>
+      <v-row dense>
+        <v-col cols="12" sm="12" md="6" lg="4">
+          <v-text-field
+            v-model.number="base.defence"
+            :label="$t('base')"
+            :disabled="!edit"
+            type="number"
+          />
+        </v-col>
+        <v-col cols="12" sm="12" md="6" lg="4">
+          <v-text-field
+            v-model.number="spent.defence"
+            :label="$t('spent-cm')"
+            :disabled="!edit"
+            type="number"
+          />
+        </v-col>
+        <v-col cols="12" sm="12" md="6" lg="4">
+          <v-text-field
+            v-model.number="other.defence"
+            :label="$t('modifier')"
+            :disabled="!edit"
+            type="number"
+          />
+        </v-col>
+      </v-row>
       <v-subheader class="pl-0">{{
-        `${$t("aiming")}: ${aimingTotal}`
+        `${$t("aiming")}: ${aimingString}`
       }}</v-subheader>
-      <v-row dense> </v-row>
+      <v-row dense>
+        <v-col cols="12" sm="12" md="6" lg="4">
+          <v-text-field
+            v-model.number="base.aiming"
+            :label="$t('base')"
+            :disabled="!edit"
+            type="number"
+          />
+        </v-col>
+        <v-col cols="12" sm="12" md="6" lg="4">
+          <v-text-field
+            v-model.number="spent.aiming"
+            :label="$t('spent-cm')"
+            :disabled="!edit"
+            type="number"
+          />
+        </v-col>
+        <v-col cols="12" sm="12" md="6" lg="4">
+          <v-text-field
+            v-model.number="other.aiming"
+            :label="$t('modifier')"
+            :disabled="!edit"
+            type="number"
+          />
+        </v-col>
+      </v-row>
     </template>
   </character-info-card>
 </template>
@@ -33,6 +133,7 @@ import {
   aimingTotal,
   defenceTotal,
   initiationTotal,
+  isCharacterMovementRestricted,
   offenceTotal,
 } from "@/utils/character";
 
@@ -43,6 +144,45 @@ import {
   },
 })
 export default class CombatValuesCard extends CharacterInfo {
+  get initiationString() {
+    const total = initiationTotal(this.character);
+    if (isCharacterMovementRestricted(this.character))
+      return `${total}, ${this.$t("in-armour")}:${initiationTotal(
+        this.character,
+        true
+      )}`;
+    return total;
+  }
+  get offenceString() {
+    const total = offenceTotal(this.character);
+    if (isCharacterMovementRestricted(this.character))
+      return `${total}, ${this.$t("in-armour")}:${offenceTotal(
+        this.character,
+        true
+      )}`;
+    return total;
+  }
+
+  get defenceString() {
+    const total = defenceTotal(this.character);
+    if (isCharacterMovementRestricted(this.character))
+      return `${total}, ${this.$t("in-armour")}:${defenceTotal(
+        this.character,
+        true
+      )}`;
+    return total;
+  }
+
+  get aimingString() {
+    const total = aimingTotal(this.character);
+    if (isCharacterMovementRestricted(this.character))
+      return `${total}, ${this.$t("in-armour")}:${aimingTotal(
+        this.character,
+        true
+      )}`;
+    return total;
+  }
+
   get initiationTotal() {
     return initiationTotal(this.character);
   }
@@ -78,10 +218,14 @@ export default class CombatValuesCard extends CharacterInfo {
     Object.assign(this.character.spentCombatValueModifiers, values);
   }
 
-  get modifiers(): CombatValues {
+  get other(): CombatValues {
     if (!this.character.otherCombatValueModifiers)
       this.character.otherCombatValueModifiers = {};
     return this.character.otherCombatValueModifiers || {};
+  }
+
+  set other(values: CombatValues) {
+    Object.assign(this.character.otherCombatValueModifiers, values);
   }
 }
 </script>

@@ -20,13 +20,13 @@ const calculateAbilityModifier = (
   abilities: Array<{ value?: number; modifier?: number }>
 ): number => {
   const values = abilities.map(({ value, modifier }) => {
-    const result = (value || 0) - (modifier || 0);
+    const result = (value || 0) - 10 - (modifier || 0);
     return result > 0 ? result : 0;
   });
   return values.reduce((acc, value) => acc + value);
 };
 
-const movementPreventionValueTotal = (
+export const movementPreventionValueTotal = (
   armour?: Armour,
   shield?: Shield
 ): number => {
@@ -130,4 +130,10 @@ export const aimingTotal = (
     character.otherCombatValueModifiers?.aiming,
     calculateAimingAbilityModifier(character, inArmour)
   );
+};
+
+export const isCharacterMovementRestricted = (
+  character: Character
+): boolean => {
+  return movementPreventionValueTotal(character.armour, character.shield) > 0;
 };

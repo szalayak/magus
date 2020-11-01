@@ -6,7 +6,7 @@
   >
     <template v-slot:fields="{ edit }">
       <v-subheader class="pl-0">{{
-        `${$t("astral")}: ${astralTotal}`
+        `${$t("astral-sr")}: ${astralTotal}`
       }}</v-subheader>
       <v-row dense>
         <v-col cols="12" sm="12" md="6">

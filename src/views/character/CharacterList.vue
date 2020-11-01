@@ -85,9 +85,9 @@ export default class CharacterList extends Vue {
     const classString = character.class
       ? `${this.classToString(character.class)} `
       : "";
-    return `${this.$t("level")} ${
+    return `${raceString}${classString}, ${this.$t("level")}: ${
       character.level?.currentLevel
-    } ${raceString}${classString}`;
+    }`;
   }
 
   characterToLink(character: Character) {

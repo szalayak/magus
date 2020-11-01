@@ -16,7 +16,7 @@ export interface Shield extends Editable {
   movementPreventionValue?: number;
   weight?: string;
   price?: number;
-  attacksPerTurn: number;
+  attacksPerTurn?: number;
 }
 
 export interface ShieldState {

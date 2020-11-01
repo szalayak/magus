@@ -43,6 +43,9 @@
       <v-col v-show="page === 1" cols="12" sm="12" md="6" lg="4">
         <health :id="id" :editable="editable" />
       </v-col>
+      <v-col v-show="page === 1" cols="12" sm="12" md="6" lg="4">
+        <combat-values :id="id" :editable="editable" />
+      </v-col>
       <v-col
         v-show="page === 1 && character.psiUser"
         cols="12"
@@ -65,19 +68,10 @@
         <spell-resistance :id="id" :editable="editable" />
       </v-col>
       <v-col v-show="page === 1" cols="12" sm="12" md="3" lg="2">
-        <v-card>
-          <v-card-title>Combat Values</v-card-title>
-        </v-card>
+        <armour :id="id" :editable="editable" />
       </v-col>
       <v-col v-show="page === 1" cols="12" sm="12" md="3" lg="2">
-        <v-card>
-          <v-card-title>Armour</v-card-title>
-        </v-card>
-      </v-col>
-      <v-col v-show="page === 1" cols="12" sm="12" md="3" lg="2">
-        <v-card>
-          <v-card-title>Shield</v-card-title>
-        </v-card>
+        <shield :id="id" :editable="editable" />
       </v-col>
       <v-col v-show="page === 2" cols="12" sm="12" md="3" lg="2">
         <v-card>
@@ -166,6 +160,9 @@ import HealthCard from "@/components/character/HealthCard.vue";
 import PsiCard from "@/components/character/PsiCard.vue";
 import MagicalAbilityCard from "@/components/character/MagicalAbilityCard.vue";
 import SpellResistanceCard from "@/components/character/SpellResistanceCard.vue";
+import CombatValuesCard from "@/components/character/CombatValuesCard.vue";
+import ArmourCard from "@/components/character/ArmourCard.vue";
+import ShieldCard from "@/components/character/ShieldCard.vue";
 
 @Component({
   name: "player-character",
@@ -181,6 +178,9 @@ import SpellResistanceCard from "@/components/character/SpellResistanceCard.vue"
     psi: PsiCard,
     "magical-ability": MagicalAbilityCard,
     "spell-resistance": SpellResistanceCard,
+    "combat-values": CombatValuesCard,
+    armour: ArmourCard,
+    shield: ShieldCard,
   },
 })
 export default class PlayerCharacter extends Vue {
@@ -224,6 +224,8 @@ export default class PlayerCharacter extends Vue {
       this.$store.dispatch("class/load"),
       this.$store.dispatch("valueRange/load"),
       this.$store.dispatch("psiSchool/load"),
+      this.$store.dispatch("shield/load"),
+      this.$store.dispatch("armour/load"),
     ]).catch((error: GraphQLResult<Character>) => {
       this.messages = error.errors?.map(err => err.message) || [];
       this.notification = true;

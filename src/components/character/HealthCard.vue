@@ -1,5 +1,5 @@
 <template>
-  <character-info-card :id="id" :editable="editable" :title="$t('health')">
+  <character-info-card :id="id" :editable="editable" :title="$t('vitality')">
     <template v-slot:fields="{ edit }">
       <v-subheader class="pl-0">{{ $t("vitality") }}</v-subheader>
       <v-row dense>

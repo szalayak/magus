@@ -27,7 +27,12 @@
           />
         </v-col>
         <v-col cols="6">
-          <v-text-field :label="$t('in-armour')" type="number" disabled />
+          <v-text-field
+            :value="agilityInArmour"
+            :label="$t('in-armour')"
+            type="number"
+            disabled
+          />
         </v-col>
         <v-col cols="6">
           <v-text-field
@@ -38,7 +43,12 @@
           />
         </v-col>
         <v-col cols="6">
-          <v-text-field :label="$t('in-armour')" type="number" disabled />
+          <v-text-field
+            :value="dexterityInArmour"
+            :label="$t('in-armour')"
+            type="number"
+            disabled
+          />
         </v-col>
         <v-col cols="6">
           <v-text-field
@@ -97,6 +107,7 @@ import { Abilities } from "@/store/types";
 import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
+import { movementPreventionValueTotal } from "@/utils/character";
 
 @Component({
   name: "abilities-card",
@@ -105,6 +116,26 @@ import CharacterInfoCard from "./CharacterInfoCard.vue";
   },
 })
 export default class AbilitiesCard extends CharacterInfo {
+  get agilityInArmour() {
+    return this.character.abilities?.agility
+      ? this.character.abilities.agility -
+          movementPreventionValueTotal(
+            this.character.armour,
+            this.character.shield
+          )
+      : 0;
+  }
+
+  get dexterityInArmour() {
+    return this.character.abilities?.dexterity
+      ? this.character.abilities.dexterity -
+          movementPreventionValueTotal(
+            this.character.armour,
+            this.character.shield
+          )
+      : 0;
+  }
+
   get damageBonus() {
     return this.abilities.strength && this.abilities.strength > 16
       ? this.abilities.strength - 16

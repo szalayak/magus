@@ -186,9 +186,19 @@
   "notes": "Notes",
   "modifiers": "Modifiers",
   "spell-resistance": "Spell Resistance",
+  "astral-sr":"Astral",
   "mental": "Mental",
   "static": "Static",
   "dynamic": "Dynamic",
   "innate": "Innate",
-  "magical": "Magical"
+  "magical": "Magical",
+  "spent-cm":"Spent CM",
+  "initiation": "Initiation",
+  "offence":"Offence",
+  "defence":"Defence",
+  "aiming":"Aiming",
+  "armour":"Armour",
+  "mpv":"MPV",
+  "drv":"DRV",
+  "shield":"Shield"
 }
