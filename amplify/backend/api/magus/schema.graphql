@@ -1,0 +1,402 @@
+enum Locale {
+  en
+  hu
+}
+
+type Description {
+  locale: Locale!
+  title: String!
+  description: String
+}
+
+type CombatValues {
+  initiation: Int
+  offence: Int
+  defence: Int
+  aiming: Int
+}
+
+enum LanguageLevel {
+  LL1
+  LL2
+  LL3
+  LL4
+  LL5
+  LLM
+}
+
+enum Mastery {
+  BASIC
+  MASTER
+}
+
+enum ValueRangeType {
+  MAIN_CLASS
+  PERSONALITY
+  WEAPON_TYPE
+  SKILL_GROUP
+}
+
+enum Dice {
+  D1
+  D2
+  D3
+  D4
+  D5
+  D6
+  D8
+  D10
+  D100
+}
+
+type ThrowScenario {
+  dice: Dice
+  iterationCount: Int
+  modifier: Int
+}
+
+type ValueRangeValue
+  @model
+  @auth(rules: [{ allow: private }])
+  @key(
+    name: "byType"
+    fields: ["type", "id"]
+    queryField: "listValueRangeValuesByType"
+  ) {
+  id: ID!
+  type: ValueRangeType!
+  descriptions: [Description!]!
+}
+
+type Class
+  @model(queries: { list: "listClasses", get: "getClass" })
+  @auth(rules: [{ allow: private }])
+  @key(
+    name: "classesByMainClass"
+    fields: ["mainClassId"]
+    queryField: "listClassesByMainClass"
+  ) {
+  id: ID!
+  mainClassId: ID!
+  mainClass(type: ValueRangeType = MAIN_CLASS): ValueRangeValue!
+    @connection(fields: ["mainClassId"])
+  descriptions: [Description!]!
+  magicUser: Boolean
+}
+
+type Race @model @auth(rules: [{ allow: private }]) {
+  id: ID!
+  descriptions: [Description!]!
+  playable: Boolean
+}
+
+type PsiSchool @model @auth(rules: [{ allow: private }]) {
+  id: ID!
+  descriptions: [Description!]!
+  basePsiPoints: Int!
+  psiPointsPerLevel: Int!
+}
+
+type Armour @model @auth(rules: [{ allow: private }]) {
+  id: ID!
+  descriptions: [Description!]!
+  weight: String
+  movementPreventionValue: Int!
+  damageReductionValue: Int!
+  price: Int
+}
+
+type Shield @model @auth(rules: [{ allow: private }]) {
+  id: ID!
+  descriptions: [Description!]!
+  combatValues: CombatValues
+  movementPreventionValue: Int
+  weight: String
+  price: Int
+  damage: ThrowScenario
+  attacksPerTurn: Float!  
+}
+
+type Weapon @model @auth(rules: [{ allow: private }]) {
+  id: ID!
+  descriptions: [Description!]!
+  weaponTypeId: ID!
+  weaponType(type: ValueRangeType = WEAPON_TYPE): ValueRangeValue!
+    @connection(fields: ["weaponTypeId"])
+  weight: String
+  price: Int
+  attackRange: Int
+  combatValues: CombatValues!
+  damage: ThrowScenario!
+  attacksPerTurn: Float!
+  ranged: Boolean
+}
+
+type Skill @model @auth(rules: [{ allow: private }]) {
+  id: ID!
+  descriptions: [Description!]!
+  percentageSkill: Boolean
+  skillGroupId: ID!
+  skillGroup(type: ValueRangeType = SKILL_GROUP): ValueRangeValue!
+    @connection(fields: ["skillGroupId"])
+  basicCost: Int
+  masterCost: Int
+}
+
+type MagicalItem @model @auth(rules: [{ allow: private }]) {
+  id: ID!
+  descriptions: [Description!]!
+  class: Class! @connection
+  manaCost: Int!
+  duration: String!
+  price: Int!
+}
+
+type Throw
+  @model
+  @auth(rules: [{ allow: owner }, { allow: private, operations: [read] }]) {
+  id: ID!
+  throwScenario: ThrowScenario
+  throwResults: [Int!]!
+  throwSum: Int!
+  total: Int!
+  owner: String
+}
+
+type S3Object {
+  bucket: String
+  region: String
+  key: String
+}
+
+enum Sex {
+  MALE
+  FEMALE
+  OTHER
+}
+
+type CharacterBasicInfo {
+  image: S3Object
+  sex: Sex
+  height: String
+  weight: String
+  hair: String
+  eyes: String
+  age: Int
+  visibleAge: Int
+  identifier: String
+  family: String
+  attire: String
+  personalityTraits: String
+  specialAbilities: String
+  likes: String
+  dislikes: String
+  fears: String
+  companions: String
+  fame: Int
+  religion: String
+  country: String
+  school: String
+  holySymbol: S3Object
+  coatOfArms: S3Object
+}
+
+type CharacterLevel {
+  currentLevel: Int
+  currentExperience: Int
+  experienceForNextLevel: Int
+}
+
+type Abilities {
+  strength: Int
+  agility: Int
+  dexterity: Int
+  stamina: Int
+  health: Int
+  beauty: Int
+  intelligence: Int
+  willpower: Int
+  astral: Int
+}
+
+type MutablePointValue {
+  current: Int
+  max: Int
+}
+
+type HealthInformation {
+  vitality: MutablePointValue
+  baseVitality: Int
+  vitalityModifier: Int
+  hitPoints: MutablePointValue
+  baseHitPoints: Int
+  hitPointModifier: Int
+  hitPointsPerLevel: ThrowScenario
+}
+
+type SpellResistanceValues {
+  staticShield: Int
+  dynamicShield: Int
+  innate: Int
+  magical: Int
+  modifier: Int
+}
+
+type SpellResistance {
+  astral: SpellResistanceValues
+  mental: SpellResistanceValues
+}
+
+type MagicalAbility {
+  notes: String
+  manaPoints: MutablePointValue
+  manaPointsPerLevel: String
+  modifiers: String
+  manaPointsStoredElsehwere: String
+  rechargingMethod: String
+}
+
+type LanguageAbility {
+  language: String
+  level: LanguageLevel
+}
+
+type InventoryItem {
+  name: String
+  amount: String
+  location: String
+}
+
+type Poison {
+  name: String!
+  amount: Int!
+}
+
+type Wallet {
+  money: Int
+  mithrill: String
+  gemstones: String
+  misc: String
+}
+
+type Character
+  @model
+  @key(name: "byOwner", fields: ["owner"], queryField: "listCharactersByOwner")
+  @key(name: "byDungeonMaster", fields: ["dungeonMaster"], queryField: "listCharactersByDungeonMaster")
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: owner, ownerField: "dungeonMaster", operations: [read] }
+    ]
+  ) {
+  id: ID!
+  name: String!
+  playerCharacter: Boolean
+  startDate: AWSDate
+  dungeonMaster: String
+  owner: String
+  basicInfo: CharacterBasicInfo
+  abilities: Abilities
+  currentAbilities: Abilities
+  health: HealthInformation
+  class: Class @connection
+  subclass: String
+  specialisation: String
+  race: Race @connection
+  personality(type: ValueRangeType = PERSONALITY): ValueRangeValue @connection
+  level: CharacterLevel
+  psiUser: Boolean
+  psiSchool: PsiSchool @connection
+  psiLevel: Int
+  psiPoints: MutablePointValue
+  spellResistance: SpellResistance
+  magicUser: Boolean
+  magicalAbility: MagicalAbility
+  baseCombatValues: CombatValues
+  spentCombatValueModifiers: CombatValues
+  otherCombatValueModifiers: CombatValues
+  temporaryCombatValueModifiers: CombatValues
+  combatValueModifiersPerLevel: Int
+  mandatoryCombatValueModifierDistribution: String
+  wallet: Wallet
+  languages: [LanguageAbility!]
+  inventory: [InventoryItem!]
+  poisons: [Poison!]
+  notes: [String]
+  armour: Armour @connection
+  shield: Shield @connection
+  weapons: [WeaponAssignment!]
+    @connection(keyName: "byCharacter", fields: ["id"])
+  skills: [SkillAssignment!] @connection(keyName: "byCharacter", fields: ["id"])
+  companions: [CharacterCompanion!]
+    @connection(keyName: "byCharacter", fields: ["id"])
+  magicalItems: [MagicalItemAssignment!]
+    @connection(keyName: "byCharacter", fields: ["id"])
+}
+
+type WeaponAssignment
+  @model
+  @key(name: "byCharacter", fields: ["characterId"])
+  @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  characterId: ID!
+  custom: Boolean
+  weapon: Weapon @connection
+  descriptions: [Description]
+  weight: String
+  price: Int
+  attackRange: Int
+  combatValues: CombatValues
+  damage: ThrowScenario
+  attacksPerTurn: Float
+  ranged: Boolean
+}
+
+type SkillAssignment
+  @model
+  @key(name: "byCharacter", fields: ["characterId"])
+  @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  characterId: ID!  
+  skillId: ID!
+  skill: Skill @connection(fields: ["skillId"])
+  mastery: Mastery
+  percentageValue: Int
+  skillPointsUsed: Int
+}
+
+enum CompanionType {
+  MOUNT
+  ANIMAL
+  SERVANT
+}
+
+type CharacterCompanion
+  @model
+  @key(name: "byCharacter", fields: ["characterId"])
+  @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  characterId: ID!
+  name: String!
+  type: CompanionType!
+  health: HealthInformation
+  combatValues: CombatValues
+  damage: ThrowScenario
+  weapon: Weapon @connection
+  attacksPerTurn: Float
+  maxDistance: String
+  maxLoad: String
+  badHabit: String
+  specialAbilities: String
+}
+
+type MagicalItemAssignment
+  @model
+  @key(name: "byCharacter", fields: ["characterId"])
+  @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  characterId: ID!
+  magicalItemId: ID!
+  magicalItem: MagicalItem! @connection(fields: ["magicalItemId"])
+  location: String
+}

@@ -1,18 +1,38 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
-  </div>
+  <character-list
+    :characters="characters"
+    :messages="messages"
+    :notification="notification"
+    :title="$t('my-characters')"
+  />
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+import { GraphQLResult } from "@aws-amplify/api-graphql";
+import CharacterList from "@/views/character/CharacterList.vue";
+import { Character } from "@/store/modules/character";
 
 @Component({
   components: {
-    HelloWorld
-  }
+    "character-list": CharacterList,
+  },
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  messages: string[] = [];
+  notification = false;
+
+  get characters(): Character[] {
+    return this.$store.getters["character/playerCharactersAsPlayer"];
+  }
+
+  mounted() {
+    this.$store
+      .dispatch("character/loadByOwner", this.$store.state.app.user.username)
+      .catch((error: GraphQLResult<Character>) => {
+        this.messages = error.errors?.map(err => err.message) || [];
+        this.notification = true;
+      });
+  }
+}
 </script>
