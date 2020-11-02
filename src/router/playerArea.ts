@@ -4,7 +4,7 @@ export const playerAreaRoutes: Array<NavItemConfig> = [
   {
     path: "/player-area/player-characters",
     name: "Player Characters",
-    title: "player-characters",
+    title: "my-characters",
     icon: "mdi-account-group",
     component: () =>
       import(

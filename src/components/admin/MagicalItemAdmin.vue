@@ -16,7 +16,7 @@
             :items="classes"
             item-text="description.title"
             item-value="id"
-            :label="$t('class')"
+            :label="$t('can-be-made-by')"
             return-object
             outlined
           ></v-select>
@@ -74,7 +74,7 @@ export default class MagicalItemAdmin extends Vue {
   headers = [
     { text: this.$t("id"), value: "id" },
     { text: this.$t("title"), value: "description.title" },
-    { text: this.$t("class"), value: "class" },
+    { text: this.$t("can-be-made-by"), value: "class" },
     { text: this.$t("mana-cost"), value: "manaCost" },
     { text: this.$t("duration"), value: "duration" },
     { text: this.$t("price"), value: "price" },

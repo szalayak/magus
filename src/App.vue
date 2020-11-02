@@ -18,7 +18,7 @@
         </template>
         <v-list>
           <v-list-item
-            v-for="diceObject in dice"
+            v-for="diceObject in dice()"
             :key="diceObject.id"
             @click="doThrow(diceObject)"
           >
@@ -83,7 +83,6 @@ export default Vue.extend({
   name: "App",
   data() {
     return {
-      dice: getDice(this.$i18n),
       throwResult: 0,
       throwResultNotification: false,
       navDrawerOpen: !this.$vuetify.breakpoint.lgAndDown,
@@ -122,6 +121,9 @@ export default Vue.extend({
     doThrow(diceObject: DiceObject) {
       this.throwResult = throwDice(diceObject.id);
       this.throwResultNotification = true;
+    },
+    dice() {
+      return getDice(this.$i18n);
     },
   },
 });

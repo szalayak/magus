@@ -23,6 +23,15 @@
                 {{ item.name }}
               </v-card-title>
               <v-card-subtitle>{{ characterToString(item) }}</v-card-subtitle>
+              <v-card-actions>
+                <v-subheader class="pl-2">{{ $t("page") }}</v-subheader>
+                <v-btn-toggle dense tile color="primary" group>
+                  <v-btn :to="characterPageToLink(item, 1)">1</v-btn>
+                  <v-btn :to="characterPageToLink(item, 2)">2</v-btn>
+                  <v-btn :to="characterPageToLink(item, 3)">3</v-btn>
+                  <v-btn :to="characterPageToLink(item, 4)">4</v-btn>
+                </v-btn-toggle>
+              </v-card-actions>
             </v-card>
           </v-col>
         </v-row>
@@ -85,7 +94,7 @@ export default class CharacterList extends Vue {
     const classString = character.class
       ? `${this.classToString(character.class)} `
       : "";
-    return `${raceString}${classString}, ${this.$t("level")}: ${
+    return `${raceString}${classString}, ${this.$t("ex-lev")}: ${
       character.level?.currentLevel
     }`;
   }
@@ -95,6 +104,10 @@ export default class CharacterList extends Vue {
       ? "player-characters"
       : "non-player-characters";
     return `/${type}/${character.id}`;
+  }
+
+  characterPageToLink(character: Character, page: number) {
+    return `${this.characterToLink(character)}/${page}`;
   }
 }
 </script>

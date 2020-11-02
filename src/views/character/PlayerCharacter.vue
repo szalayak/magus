@@ -19,8 +19,11 @@
       </v-btn-toggle>
     </v-toolbar>
     <v-row>
-      <v-col v-show="page === 0" cols="12" sm="12" md="6" lg="4">
+      <v-col v-show="page === 0" cols="12" sm="12" lg="10">
         <appearance :id="id" :editable="editable" />
+      </v-col>
+      <v-col v-show="page === 0" cols="12" sm="12" lg="2">
+        <administrative-info :id="id" :editable="editable" />
       </v-col>
       <v-col v-show="page === 0" cols="12" sm="12" md="6" lg="4">
         <properties :id="id" :editable="editable" />
@@ -30,9 +33,6 @@
       </v-col>
       <v-col v-show="page === 0" cols="12" sm="12" md="6" lg="4">
         <connections :id="id" :editable="editable" />
-      </v-col>
-      <v-col v-show="page === 0" cols="12" sm="12" md="6" lg="4">
-        <administrative-info :id="id" :editable="editable" />
       </v-col>
       <v-col v-show="page === 1" cols="12" sm="12">
         <core-information :id="id" :editable="editable" />

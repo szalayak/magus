@@ -2,7 +2,7 @@
   <character-info-card :id="id" :editable="editable" :title="$t('appearance')">
     <template v-slot:fields="{ edit }">
       <v-row dense>
-        <v-col cols="12" sm="12" md="4">
+        <v-col cols="12" sm="12" md="1">
           <v-select
             v-model="basicInfo.sex"
             :label="$t('sex')"
@@ -10,35 +10,35 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="4">
+        <v-col cols="12" sm="12" md="1">
           <v-text-field
             v-model="basicInfo.eyes"
             :label="$t('eyes')"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="4">
+        <v-col cols="12" sm="12" md="1">
           <v-text-field
             v-model="basicInfo.hair"
             :label="$t('hair')"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="4">
+        <v-col cols="12" sm="12" md="1">
           <v-text-field
             v-model="basicInfo.weight"
             :label="$t('weight')"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="4">
+        <v-col cols="12" sm="12" md="1">
           <v-text-field
             v-model="basicInfo.height"
             :label="$t('height')"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="4">
+        <v-col cols="12" sm="12" md="1">
           <v-text-field
             v-model.number="basicInfo.age"
             type="number"
@@ -46,7 +46,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="4">
+        <v-col cols="12" sm="12" md="2">
           <v-text-field
             v-model.number="basicInfo.visibleAge"
             type="number"
@@ -62,7 +62,7 @@
           />
         </v-col>
         <v-col cols="12">
-          <v-textarea
+          <v-text-field
             v-model="basicInfo.attire"
             :label="$t('attire')"
             :disabled="!edit"

@@ -200,5 +200,8 @@
   "armour":"Armour",
   "mpv":"MPV",
   "drv":"DRV",
-  "shield":"Shield"
+  "shield":"Shield",
+  "ex-lev":"Level",
+  "page":"Page",
+  "can-be-made-by":"Can be made by"
 }
