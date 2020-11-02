@@ -51,7 +51,7 @@ const isUserInGroup = (user?: User, group?: string) => {
   const groups: string[] = payload
     ? (payload["cognito:groups"] as string[])
     : [];
-  return !!groups.find(g => g === group);
+  return groups ? !!groups.find(g => g === group) : false;
 };
 
 export default new Vuex.Store<RootState>({
