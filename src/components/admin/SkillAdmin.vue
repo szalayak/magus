@@ -9,8 +9,8 @@
     :customColumns="customColumns"
   >
     <template v-slot:editable-fields="{ editedItem }">
-      <v-row>
-        <v-col cols="12" sm="12" md="6">
+      <v-row dense>
+        <v-col cols="12" xs="12" sm="6">
           <v-select
             v-model="editedItem.skillGroup"
             :items="skillGroups"
@@ -18,29 +18,26 @@
             item-value="id"
             :label="$t('skill-group')"
             return-object
-            outlined
           ></v-select>
         </v-col>
-        <v-col cols="12" sm="12" md="6">
+        <v-col cols="12" xs="12" sm="6">
           <v-checkbox
             v-model="editedItem.percentageSkill"
             :label="$t('percentage-skill')"
           />
         </v-col>
-        <v-col v-if="!editedItem.percentageSkill" cols="12" sm="12" md="6">
+        <v-col v-if="!editedItem.percentageSkill" cols="12" xs="12" sm="6">
           <v-text-field
             v-model.number="editedItem.basicCost"
             type="number"
             :label="$t('skill-basic-cost')"
-            outlined
           />
         </v-col>
-        <v-col v-if="!editedItem.percentageSkill" cols="12" sm="12" md="6">
+        <v-col v-if="!editedItem.percentageSkill" cols="12" xs="12" sm="6">
           <v-text-field
             v-model.number="editedItem.masterCost"
             type="number"
             :label="$t('skill-master-cost')"
-            outlined
           />
         </v-col>
       </v-row>
@@ -72,15 +69,6 @@ import AdminTable from "./AdminTable.vue";
   },
 })
 export default class SkillAdmin extends Vue {
-  headers = [
-    { text: this.$t("id"), value: "id" },
-    { text: this.$t("skill-group"), value: "skillGroup" },
-    { text: this.$t("title"), value: "description.title" },
-    { text: this.$t("percentage-skill"), value: "percentageSkill" },
-    { text: this.$t("skill-basic-cost"), value: "basicCost" },
-    { text: this.$t("skill-master-cost"), value: "masterCost" },
-    { text: this.$t("actions"), value: "actions", sortable: false },
-  ];
   defaultItem: Skill = {
     id: "",
     skillGroup: {
@@ -91,6 +79,18 @@ export default class SkillAdmin extends Vue {
     descriptions: getDescriptionsForLocales(),
   };
   customColumns = ["percentageSkill", "skillGroup"];
+
+  get headers() {
+    return [
+      { text: this.$t("id"), value: "id" },
+      { text: this.$t("skill-group"), value: "skillGroup" },
+      { text: this.$t("title"), value: "description.title" },
+      { text: this.$t("percentage-skill"), value: "percentageSkill" },
+      { text: this.$t("skill-basic-cost"), value: "basicCost" },
+      { text: this.$t("skill-master-cost"), value: "masterCost" },
+      { text: this.$t("actions"), value: "actions", sortable: false },
+    ];
+  }
 
   get skillGroups(): ValueRange[] {
     const mainClasses = this.$store.getters["valueRange/getSkillGroups"];

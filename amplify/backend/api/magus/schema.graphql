@@ -297,7 +297,6 @@ type Character
   owner: String
   basicInfo: CharacterBasicInfo
   abilities: Abilities
-  currentAbilities: Abilities
   health: HealthInformation
   class: Class @connection
   subclass: String
@@ -315,7 +314,6 @@ type Character
   baseCombatValues: CombatValues
   spentCombatValueModifiers: CombatValues
   otherCombatValueModifiers: CombatValues
-  temporaryCombatValueModifiers: CombatValues
   combatValueModifiersPerLevel: Int
   mandatoryCombatValueModifierDistribution: String
   wallet: Wallet
@@ -340,16 +338,11 @@ type WeaponAssignment
   @auth(rules: [{ allow: owner }]) {
   id: ID!
   characterId: ID!
-  custom: Boolean
   weapon: Weapon @connection
-  descriptions: [Description]
-  weight: String
-  price: Int
-  attackRange: Int
-  combatValues: CombatValues
-  damage: ThrowScenario
-  attacksPerTurn: Float
-  ranged: Boolean
+  mastery: Mastery
+  inHand: Boolean
+  breakWeapon: Mastery
+  disarm: Mastery
 }
 
 type SkillAssignment

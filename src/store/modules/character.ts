@@ -1,17 +1,22 @@
 import {
   CompanionType,
   CreateCharacterMutation,
+  CreateWeaponAssignmentMutation,
   GetCharacterQuery,
   ListCharactersByDungeonMasterQuery,
   ListCharactersByOwnerQuery,
   ListCharactersQuery,
   Mastery,
   UpdateCharacterMutation,
+  UpdateWeaponAssignmentMutation,
 } from "@/API";
 import {
   createCharacter,
+  createWeaponAssignment,
   deleteCharacter,
+  deleteWeaponAssignment,
   updateCharacter,
+  updateWeaponAssignment,
 } from "@/graphql/mutations";
 import {
   getCharacter,
@@ -19,7 +24,6 @@ import {
   listCharactersByDungeonMaster,
   listCharactersByOwner,
 } from "@/graphql/queries";
-import { characterRoutes } from "@/router/character";
 import { API } from "aws-amplify";
 import { Module } from "vuex";
 import { RootState } from "..";
@@ -28,7 +32,6 @@ import {
   CharacterBasicInfo,
   CharacterLevel,
   CombatValues,
-  Description,
   HealthInformation,
   Identifiable,
   InventoryItem,
@@ -51,16 +54,13 @@ import { ValueRange } from "./valueRange";
 import { Weapon } from "./weapon";
 
 export interface WeaponAssignment extends Identifiable {
+  characterId: string;
   custom?: boolean;
   weapon?: Weapon;
-  descriptions?: Description[];
-  weight?: string;
-  price?: number;
-  attackRange?: number;
-  combatValues?: CombatValues;
-  damage?: ThrowScenario;
-  attacksPerTurn?: number;
-  ranged?: boolean;
+  mastery?: Mastery;
+  inHand?: boolean;
+  breakWeapon?: Mastery;
+  disarm?: Mastery;
 }
 
 export interface SkillAssignment extends Identifiable {
@@ -89,7 +89,7 @@ export interface MagicalItemAssignment extends Identifiable {
   location?: string;
 }
 
-export interface Character extends Identifiable {
+export interface CharacterCore extends Identifiable {
   name: string;
   playerCharacter?: boolean;
   startDate?: string;
@@ -98,7 +98,6 @@ export interface Character extends Identifiable {
   owner?: string;
   basicInfo?: CharacterBasicInfo;
   abilities?: Abilities;
-  currentAbilities?: Abilities;
   health?: HealthInformation;
   class?: Class;
   subclass?: string;
@@ -116,7 +115,6 @@ export interface Character extends Identifiable {
   baseCombatValues?: CombatValues;
   spentCombatValueModifiers?: CombatValues;
   otherCombatValueModifiers?: CombatValues;
-  temporaryCombatValueModifiers?: CombatValues;
   combatValueModifiersPerLevel?: number;
   mandatoryCombatValueModifierDistribution?: string;
   wallet?: Wallet;
@@ -126,44 +124,98 @@ export interface Character extends Identifiable {
   notes?: string[];
   armour?: Armour;
   shield?: Shield;
-  weapons?: WeaponAssignment[];
-  skills?: SkillAssignment[];
-  companions?: CharacterCompanion[];
-  magicalItems?: MagicalItemAssignment[];
   createdAt?: string;
   updatedAt?: string;
 }
 
-export interface CharacterResult {
+export interface Character extends CharacterCore {
+  weapons?: WeaponAssignment[];
+  skills?: SkillAssignment[];
+  companions?: CharacterCompanion[];
+  magicalItems?: MagicalItemAssignment[];
+}
+
+export interface CharacterResults {
   items?: Character[];
   nextToken?: string;
 }
 
+interface CharacterQueryResults {
+  items?: CharacterQueryResult[];
+  nextToken?: string;
+}
+
+interface WeaponAssignmentQueryResults {
+  items?: WeaponAssignment[];
+  nextToken?: string;
+}
+
+interface SkillAssignmentQueryResults {
+  items?: SkillAssignment[];
+  nextToken?: string;
+}
+
+interface CharacterCompanionQueryResults {
+  items?: CharacterCompanion[];
+  nextToken?: string;
+}
+
+interface MagicalItemAssignmentQueryResults {
+  items?: MagicalItemAssignment[];
+  nextToken?: string;
+}
+
+interface CharacterQueryResult extends CharacterCore {
+  weapons?: WeaponAssignmentQueryResults;
+  skills?: SkillAssignmentQueryResults;
+  companions?: CharacterCompanionQueryResults;
+  magicalItems?: MagicalItemAssignmentQueryResults;
+}
+
 export interface CharacterState {
-  result: CharacterResult;
+  result: CharacterResults;
   transient: Character[];
 }
 
+const mapCharacterResult = (item: CharacterQueryResult): Character => {
+  const core = item as CharacterCore;
+  return {
+    ...core,
+    weapons: item.weapons?.items,
+    skills: item.skills?.items,
+    companions: item.companions?.items,
+    magicalItems: item.magicalItems?.items,
+  };
+};
+
+const findPersistent = (state: CharacterState, id?: string) => {
+  return state.result.items?.find(ex => ex.id === id);
+};
+
+const findTransient = (state: CharacterState, id?: string) => {
+  return state.transient?.find(ex => ex.id === id);
+};
+
 const mergeTransient = (state: CharacterState, item: Character) => {
-  const transient = state.transient.find(tr => tr.id === item.id);
+  const transient = findTransient(state, item.id);
   if (transient)
     state.transient.splice(
       state.transient.indexOf(transient),
       1,
-      JSON.parse(JSON.stringify(item))
+      JSON.parse(JSON.stringify(item)) // deep copy
     );
-  // deep copy
   else state.transient.push(JSON.parse(JSON.stringify(item))); // deep copy
 };
 
-const mergePersistent = (state: CharacterState, item: Character) => {
-  const existing = state.result.items?.find(ex => ex.id === item.id);
+const mergePersistent = (state: CharacterState, item: CharacterQueryResult) => {
+  const character = mapCharacterResult(item);
+  const existing = findPersistent(state, item.id);
   if (existing) Object.assign(existing, item);
-  else state.result.items?.push(item);
-  mergeTransient(state, item);
+  else state.result.items?.push(character);
+  mergeTransient(state, character);
 };
 
-const weapon: Module<CharacterState, RootState> = {
+const character: Module<CharacterState, RootState> = {
   namespaced: true,
   state: () =>
     ({
@@ -222,17 +274,17 @@ const weapon: Module<CharacterState, RootState> = {
     },
   },
   mutations: {
-    set(state, result: CharacterResult) {
+    set(state, result: CharacterQueryResults) {
       state.result.nextToken = result.nextToken;
       result.items?.forEach(item => mergePersistent(state, item));
     },
     mergeTransient(state, item: Character) {
       mergeTransient(state, item);
     },
-    merge(state, item: Character) {
+    merge(state, item: CharacterQueryResult) {
       mergePersistent(state, item);
     },
-    mergeQueryResult(state, result: CharacterResult) {
+    mergeQueryResult(state, result: CharacterQueryResults) {
       result.items?.forEach(item => mergePersistent(state, item));
     },
     add(state, newItem) {
@@ -242,19 +294,39 @@ const weapon: Module<CharacterState, RootState> = {
       mergePersistent(state, updateItem);
     },
     remove(state, id: string) {
-      const oldState = state.result?.items?.find(item => item?.id === id);
+      const oldState = findPersistent(state, id);
       if (oldState) {
         const items = state.result?.items;
         items?.splice(items.indexOf(oldState), 1);
       }
-      const existing = state.transient.find(ex => ex.id === id);
+      const existing = findTransient(state, id);
       if (existing) {
         state.transient?.splice(state.transient.indexOf(existing), 1);
       }
     },
     revert(state, id: string) {
-      const existing = state.result.items?.find(ex => ex.id === id);
+      const existing = findPersistent(state, id);
       if (existing) mergeTransient(state, existing);
+    },
+    mergeWeaponAssignment(state, assignment: WeaponAssignment) {
+      const character = findPersistent(state, assignment.characterId);
+      if (character) {
+        if (!character.weapons) character.weapons = [assignment];
+        else {
+          const existing = character.weapons?.find(w => w.id === assignment.id);
+          if (existing) Object.assign(existing, assignment);
+          else character.weapons?.push(assignment);
+        }
+        mergeTransient(state, character);
+      }
+    },
+    removeWeaponAssignment(state, assignment: WeaponAssignment) {
+      const character = findPersistent(state, assignment.characterId);
+      const existing = character?.weapons?.find(w => w.id === assignment.id);
+      if (character && existing) {
+        character?.weapons?.splice(character.weapons.indexOf(existing), 1);
+        mergeTransient(state, character);
+      }
     },
   },
   actions: {
@@ -306,7 +378,6 @@ const weapon: Module<CharacterState, RootState> = {
             dungeonMaster: item.dungeonMaster,
             basicInfo: item.basicInfo,
             abilities: item.abilities,
-            currentAbilities: item.currentAbilities,
             health: item.health,
             characterClassId: item.class?.id,
             subclass: item.subclass,
@@ -324,7 +395,6 @@ const weapon: Module<CharacterState, RootState> = {
             baseCombatValues: item.baseCombatValues,
             spentCombatValueModifiers: item.spentCombatValueModifiers,
             otherCombatValueModifiers: item.otherCombatValueModifiers,
-            temporaryCombatValueModifiers: item.temporaryCombatValueModifiers,
             combatValueModifiersPerLevel: item.combatValueModifiersPerLevel,
             mandatoryCombatValueModifierDistribution:
               item.mandatoryCombatValueModifierDistribution,
@@ -354,7 +424,6 @@ const weapon: Module<CharacterState, RootState> = {
             dungeonMaster: item.dungeonMaster,
             basicInfo: item.basicInfo,
             abilities: item.abilities,
-            currentAbilities: item.currentAbilities,
             health: item.health,
             characterClassId: item.class?.id,
             subclass: item.subclass,
@@ -372,7 +441,6 @@ const weapon: Module<CharacterState, RootState> = {
             baseCombatValues: item.baseCombatValues,
             spentCombatValueModifiers: item.spentCombatValueModifiers,
             otherCombatValueModifiers: item.otherCombatValueModifiers,
-            temporaryCombatValueModifiers: item.temporaryCombatValueModifiers,
             combatValueModifiersPerLevel: item.combatValueModifiersPerLevel,
             mandatoryCombatValueModifierDistribution:
               item.mandatoryCombatValueModifierDistribution,
@@ -395,7 +463,54 @@ const weapon: Module<CharacterState, RootState> = {
       });
       context.commit("remove", id);
     },
+
+    async createWeaponAssignment(context, assignment: WeaponAssignment) {
+      const {
+        data: { createWeaponAssignment: createdAssignment },
+      } = (await API.graphql({
+        query: createWeaponAssignment,
+        variables: {
+          input: {
+            characterId: assignment.characterId,
+            weaponAssignmentWeaponId: assignment.weapon?.id,
+            mastery: assignment.mastery,
+            inHand: assignment.inHand,
+            breakWeapon: assignment.breakWeapon,
+            disarm: assignment.disarm,
+          },
+        },
+      })) as { data: CreateWeaponAssignmentMutation };
+      context.commit("mergeWeaponAssignment", createdAssignment);
+    },
+    async updateWeaponAssignment(context, assignment: WeaponAssignment) {
+      const {
+        data: { updateWeaponAssignment: updatedAssignment },
+      } = (await API.graphql({
+        query: updateWeaponAssignment,
+        variables: {
+          input: {
+            id: assignment.id,
+            mastery: assignment.mastery,
+            inHand: assignment.inHand,
+            breakWeapon: assignment.breakWeapon,
+            disarm: assignment.disarm,
+          },
+        },
+      })) as { data: UpdateWeaponAssignmentMutation };
+      context.commit("mergeWeaponAssignment", updatedAssignment);
+    },
+    async deleteWeaponAssignment(context, assignment: WeaponAssignment) {
+      await API.graphql({
+        query: deleteWeaponAssignment,
+        variables: {
+          input: {
+            id: assignment.id,
+          },
+        },
+      });
+      context.commit("removeWeaponAssignment", assignment);
+    },
   },
 };
 
-export default weapon;
+export default character;

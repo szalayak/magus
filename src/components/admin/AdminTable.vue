@@ -12,7 +12,7 @@
         <v-toolbar flat>
           <v-toolbar-title>{{ $t(title) }}</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-dialog scrollable v-model="dialog" max-width="auto">
+          <v-dialog scrollable v-model="dialog" max-width="800px">
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
                 {{ $t(newText) }}
@@ -25,24 +25,24 @@
               <v-card-text>
                 <v-form v-model="valid">
                   <v-container>
-                    <v-row>
-                      <v-subheader>{{ $t("general-properties") }}</v-subheader>
+                    <v-row dense>
+                      <v-subheader class="pl-1">{{
+                        $t("general-properties")
+                      }}</v-subheader>
                     </v-row>
-                    <v-row>
-                      <v-col cols="12" sm="12" md="6">
+                    <v-row dense>
+                      <v-col cols="12" xs="12" sm="6">
                         <v-text-field
                           v-model="editedItem.id"
                           :disabled="!isNewItem"
                           :label="$t('id')"
                           :hint="$t('id-empty-auto-generated-message')"
-                          outlined
                         ></v-text-field>
                       </v-col>
-                      <v-col cols="12" sm="12" md="6">
+                      <v-col cols="12" xs="12" sm="6">
                         <v-text-field
                           v-model="editedItem.description.title"
                           :label="$t('title')"
-                          outlined
                         ></v-text-field>
                       </v-col>
                     </v-row>
@@ -50,11 +50,13 @@
                       name="editable-fields"
                       :editedItem="editedItem"
                     ></slot>
-                    <v-row>
-                      <v-subheader>{{ $t("descriptions") }}</v-subheader>
+                    <v-row dense>
+                      <!-- <v-subheader>{{ $t("descriptions") }}</v-subheader> -->
                       <v-expansion-panels accordion flat>
                         <v-expansion-panel>
-                          <v-expansion-panel-header></v-expansion-panel-header>
+                          <v-expansion-panel-header class="pl-1">{{
+                            $t("descriptions")
+                          }}</v-expansion-panel-header>
                           <v-expansion-panel-content>
                             <v-data-iterator
                               :items="editedItem.descriptions"
@@ -62,25 +64,24 @@
                               hide-default-footer
                             >
                               <template>
-                                <v-row>
+                                <v-row dense>
                                   <v-col
                                     v-for="description in editedItem.descriptions"
-                                    cols="6"
+                                    cols="12"
                                     sm="12"
                                     md="6"
                                     :key="`input-${description.locale}`"
                                   >
-                                    <v-row>
+                                    <v-row dense>
                                       <v-subheader>{{
                                         $t(description.locale)
                                       }}</v-subheader>
                                     </v-row>
-                                    <v-row>
+                                    <v-row dense>
                                       <v-col cols="12">
                                         <v-text-field
                                           v-model="description.title"
                                           :label="$t('title')"
-                                          outlined
                                           required
                                         ></v-text-field>
                                       </v-col>
@@ -88,7 +89,6 @@
                                         <v-textarea
                                           v-model="description.description"
                                           :label="$t('description')"
-                                          outlined
                                         ></v-textarea>
                                       </v-col>
                                     </v-row>

@@ -9,8 +9,8 @@
     :customColumns="customColumns"
   >
     <template v-slot:editable-fields="{ editedItem }">
-      <v-row>
-        <v-col cols="12" sm="12" md="6" lg="3">
+      <v-row dense>
+        <v-col cols="12" xs="12" sm="6" lg="3">
           <v-select
             v-model="editedItem.class"
             :items="classes"
@@ -18,30 +18,26 @@
             item-value="id"
             :label="$t('can-be-made-by')"
             return-object
-            outlined
           ></v-select>
         </v-col>
-        <v-col cols="12" sm="12" md="6" lg="3">
+        <v-col cols="12" xs="12" sm="6" lg="3">
           <v-text-field
             v-model.number="editedItem.manaCost"
             type="number"
             :label="$t('mana-cost')"
-            outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="12" sm="12" md="6" lg="3">
+        <v-col cols="12" xs="12" sm="6" lg="3">
           <v-text-field
             v-model="editedItem.duration"
             :label="$t('duration')"
-            outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="12" sm="12" md="6" lg="3">
+        <v-col cols="12" xs="12" sm="6" lg="3">
           <v-text-field
             v-model.number="editedItem.price"
             type="number"
             :label="$t('price')"
-            outlined
           ></v-text-field>
         </v-col>
       </v-row>
@@ -71,15 +67,6 @@ import { getPriceString } from "@/utils/price";
   },
 })
 export default class MagicalItemAdmin extends Vue {
-  headers = [
-    { text: this.$t("id"), value: "id" },
-    { text: this.$t("title"), value: "description.title" },
-    { text: this.$t("can-be-made-by"), value: "class" },
-    { text: this.$t("mana-cost"), value: "manaCost" },
-    { text: this.$t("duration"), value: "duration" },
-    { text: this.$t("price"), value: "price" },
-    { text: this.$t("actions"), value: "actions", sortable: false },
-  ];
   defaultItem: MagicalItem = {
     id: "",
     class: {
@@ -90,6 +77,18 @@ export default class MagicalItemAdmin extends Vue {
     descriptions: getDescriptionsForLocales(),
   };
   customColumns = ["price", "class"];
+
+  get headers() {
+    return [
+      { text: this.$t("id"), value: "id" },
+      { text: this.$t("title"), value: "description.title" },
+      { text: this.$t("can-be-made-by"), value: "class" },
+      { text: this.$t("mana-cost"), value: "manaCost" },
+      { text: this.$t("duration"), value: "duration" },
+      { text: this.$t("price"), value: "price" },
+      { text: this.$t("actions"), value: "actions", sortable: false },
+    ];
+  }
 
   get classes(): Class[] {
     const classes = this.$store.getters["class/getMagicUserClasses"];

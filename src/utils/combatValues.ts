@@ -1,5 +1,4 @@
 import { CombatValues } from "@/store/types";
-import { a } from "aws-amplify";
 import VueI18n from "vue-i18n";
 
 export const combatValuesToString = (
@@ -19,4 +18,16 @@ export const combatValuesToString = (
     ? `${i18n.t("ip")}: ${combatValues.aiming.toString()}`
     : "";
   return `${initiationValueString}${offenceValueString}${defenceValueString}${aimingValueString}`;
+};
+
+export const applyMasterSkillToCombatValues = (
+  combatValues?: CombatValues
+): CombatValues => {
+  const { initiation, offence, defence, aiming } = combatValues || {};
+  return {
+    initiation: (initiation || 0) + 5,
+    offence: (offence || 0) + 10,
+    defence: (defence || 0) + 10,
+    aiming: (aiming || 0) + 5,
+  };
 };

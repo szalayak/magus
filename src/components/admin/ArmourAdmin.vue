@@ -9,36 +9,32 @@
     :customColumns="customColumns"
   >
     <template v-slot:editable-fields="{ editedItem }">
-      <v-row>
-        <v-col cols="12" sm="12" md="6" lg="3">
+      <v-row dense>
+        <v-col cols="12" xs="12" sm="6" lg="3">
           <v-text-field
             v-model.number="editedItem.movementPreventionValue"
             type="number"
             :label="$t('movement-prevention-value')"
-            outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="12" sm="12" md="6" lg="3">
+        <v-col cols="12" xs="12" sm="6" lg="3">
           <v-text-field
             v-model.number="editedItem.damageReductionValue"
             type="number"
             :label="$t('damage-reduction-value')"
-            outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="12" sm="12" md="6" lg="3">
+        <v-col cols="12" xs="12" sm="6" lg="3">
           <v-text-field
             v-model="editedItem.weight"
             :label="$t('weight')"
-            outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="12" sm="12" md="6" lg="3">
+        <v-col cols="12" xs="12" sm="6" lg="3">
           <v-text-field
             v-model.number="editedItem.price"
             type="number"
             :label="$t('price')"
-            outlined
           ></v-text-field>
         </v-col>
       </v-row>
@@ -64,18 +60,6 @@ import { getPriceString } from "@/utils/price";
   },
 })
 export default class ArmourAdmin extends Vue {
-  headers = [
-    { text: this.$t("id"), value: "id" },
-    { text: this.$t("title"), value: "description.title" },
-    {
-      text: this.$t("movement-prevention-value"),
-      value: "movementPreventionValue",
-    },
-    { text: this.$t("damage-reduction-value"), value: "damageReductionValue" },
-    { text: this.$t("weight"), value: "weight" },
-    { text: this.$t("price"), value: "price" },
-    { text: this.$t("actions"), value: "actions", sortable: false },
-  ];
   defaultItem: Armour = {
     id: "",
     description: { locale: this.$i18n.locale as Locale, title: "" },
@@ -84,6 +68,24 @@ export default class ArmourAdmin extends Vue {
     damageReductionValue: 0,
   };
   customColumns = ["price"];
+
+  get headers() {
+    return [
+      { text: this.$t("id"), value: "id" },
+      { text: this.$t("title"), value: "description.title" },
+      {
+        text: this.$t("movement-prevention-value"),
+        value: "movementPreventionValue",
+      },
+      {
+        text: this.$t("damage-reduction-value"),
+        value: "damageReductionValue",
+      },
+      { text: this.$t("weight"), value: "weight" },
+      { text: this.$t("price"), value: "price" },
+      { text: this.$t("actions"), value: "actions", sortable: false },
+    ];
+  }
 
   priceToString(price: number) {
     return getPriceString(price, this.$i18n);

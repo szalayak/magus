@@ -1,8 +1,12 @@
+import { Mastery } from "@/API";
 import { Armour } from "@/store/modules/armour";
 import { Character } from "@/store/modules/character";
 import { Shield } from "@/store/modules/shield";
+import { Weapon } from "@/store/modules/weapon";
+import { CombatValues } from "@/store/types";
+import { applyMasterSkillToCombatValues } from "./combatValues";
 
-const calculateTotal = (
+const calculateCombatValueTotal = (
   base?: number,
   spentModifier?: number,
   otherModifier?: number,
@@ -16,7 +20,7 @@ const calculateTotal = (
   );
 };
 
-const calculateAbilityModifier = (
+const calculateCombatValueAbilityModifier = (
   abilities: Array<{ value?: number; modifier?: number }>
 ): number => {
   const values = abilities.map(({ value, modifier }) => {
@@ -41,7 +45,7 @@ const calculateInitiationAbilityModifier = (
   inArmour = false
 ): number => {
   const mpv = movementPreventionValueTotal(character.armour, character.shield);
-  return calculateAbilityModifier([
+  return calculateCombatValueAbilityModifier([
     { value: character.abilities?.agility, modifier: inArmour ? mpv : 0 },
     { value: character.abilities?.dexterity, modifier: inArmour ? mpv : 0 },
   ]);
@@ -51,7 +55,7 @@ export const initiationTotal = (
   character: Character,
   inArmour = false
 ): number => {
-  return calculateTotal(
+  return calculateCombatValueTotal(
     character.baseCombatValues?.initiation,
     character.spentCombatValueModifiers?.initiation,
     character.otherCombatValueModifiers?.initiation,
@@ -64,7 +68,7 @@ const calculateStrengthAbilityModifier = (
   inArmour?: boolean
 ): number => {
   const mpv = movementPreventionValueTotal(character.armour, character.shield);
-  return calculateAbilityModifier([
+  return calculateCombatValueAbilityModifier([
     { value: character.abilities?.strength },
     { value: character.abilities?.agility, modifier: inArmour ? mpv : 0 },
     { value: character.abilities?.dexterity, modifier: inArmour ? mpv : 0 },
@@ -75,7 +79,7 @@ export const offenceTotal = (
   character: Character,
   inArmour?: boolean
 ): number => {
-  return calculateTotal(
+  return calculateCombatValueTotal(
     character.baseCombatValues?.offence,
     character.spentCombatValueModifiers?.offence,
     character.otherCombatValueModifiers?.offence,
@@ -88,7 +92,7 @@ const calculateDefenceAbilityModifier = (
   inArmour?: boolean
 ): number => {
   const mpv = movementPreventionValueTotal(character.armour, character.shield);
-  return calculateAbilityModifier([
+  return calculateCombatValueAbilityModifier([
     { value: character.abilities?.agility, modifier: inArmour ? mpv : 0 },
     { value: character.abilities?.dexterity, modifier: inArmour ? mpv : 0 },
   ]);
@@ -99,7 +103,7 @@ export const defenceTotal = (
   inArmour?: boolean,
   withShield?: boolean
 ): number => {
-  const total = calculateTotal(
+  const total = calculateCombatValueTotal(
     character.baseCombatValues?.defence,
     character.spentCombatValueModifiers?.defence,
     character.otherCombatValueModifiers?.defence,
@@ -115,7 +119,7 @@ const calculateAimingAbilityModifier = (
   inArmour?: boolean
 ): number => {
   const mpv = movementPreventionValueTotal(character.armour, character.shield);
-  return calculateAbilityModifier([
+  return calculateCombatValueAbilityModifier([
     { value: character.abilities?.dexterity, modifier: inArmour ? mpv : 0 },
   ]);
 };
@@ -124,7 +128,7 @@ export const aimingTotal = (
   character: Character,
   inArmour?: boolean
 ): number => {
-  return calculateTotal(
+  return calculateCombatValueTotal(
     character.baseCombatValues?.aiming,
     character.spentCombatValueModifiers?.aiming,
     character.otherCombatValueModifiers?.aiming,
@@ -136,4 +140,43 @@ export const isCharacterMovementRestricted = (
   character: Character
 ): boolean => {
   return movementPreventionValueTotal(character.armour, character.shield) > 0;
+};
+
+type CombatValuesWithWeaponInput = {
+  character: Character;
+  weapon?: Weapon;
+  mastery?: Mastery;
+  inArmour?: boolean;
+  withShield?: boolean;
+};
+
+export const combatValuesWithWeapon = ({
+  character,
+  weapon,
+  mastery,
+  inArmour,
+  withShield,
+}: CombatValuesWithWeaponInput) => {
+  const base: CombatValues = {
+    initiation: calculateCombatValueTotal(
+      initiationTotal(character, inArmour),
+      weapon?.combatValues?.initiation
+    ),
+    offence: calculateCombatValueTotal(
+      offenceTotal(character, inArmour),
+      weapon?.combatValues?.offence
+    ),
+    defence: calculateCombatValueTotal(
+      defenceTotal(character, inArmour, withShield),
+      weapon?.combatValues?.defence
+    ),
+    aiming: calculateCombatValueTotal(
+      aimingTotal(character, inArmour),
+      weapon?.combatValues?.aiming
+    ),
+  };
+
+  return mastery === Mastery.MASTER
+    ? applyMasterSkillToCombatValues(base)
+    : base;
 };
