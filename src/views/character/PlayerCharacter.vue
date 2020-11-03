@@ -19,38 +19,41 @@
       </v-btn-toggle>
     </v-toolbar>
     <v-row>
-      <v-col v-show="page === 0" cols="12" sm="12" lg="10">
+      <v-col v-show="page === 0" cols="12" xs="12" lg="10">
         <appearance :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 0" cols="12" sm="12" lg="2">
+      <v-col v-show="page === 0" cols="12" xs="12" sm="6" lg="2">
         <administrative-info :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 0" cols="12" sm="12" md="6" lg="4">
+      <v-col v-show="page === 0" cols="12" xs="12" sm="6" lg="4">
         <properties :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 0" cols="12" sm="12" md="6" lg="4">
+      <v-col v-show="page === 0" cols="12" xs="12" sm="6" lg="4">
         <likes-and-dislikes :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 0" cols="12" sm="12" md="6" lg="4">
+      <v-col v-show="page === 0" cols="12" xs="12" sm="6" lg="4">
         <connections :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 1" cols="12" sm="12">
+      <v-col v-show="page === 1" cols="12">
         <core-information :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 1" cols="12" sm="12" md="6" lg="4">
+      <v-col v-show="page === 1" cols="12" xs="12" sm="6" lg="4" xl="2">
         <abilities :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 1" cols="12" sm="12" md="6" lg="4">
+      <v-col v-show="page === 1" cols="12" xs="12" sm="6" lg="4" xl="2">
         <health :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 1" cols="12" sm="12" md="6" lg="4">
+      <v-col v-show="page === 1" cols="12" xs="12" sm="6" lg="4" xl="2">
         <combat-values :id="id" :editable="editable" />
+      </v-col>
+      <v-col v-show="page === 1" cols="12" xs="12" sm="6" lg="4" xl="2">
+        <spell-resistance :id="id" :editable="editable" />
       </v-col>
       <v-col
         v-show="page === 1 && character.psiUser"
         cols="12"
-        sm="12"
-        md="6"
+        xs="12"
+        sm="6"
         lg="2"
       >
         <psi :id="id" :editable="editable" />
@@ -58,32 +61,27 @@
       <v-col
         v-show="page === 1 && character.magicUser"
         cols="12"
-        sm="12"
-        md="3"
+        xs="12"
+        sm="3"
         lg="2"
       >
         <magical-ability :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 1" cols="12" sm="12" md="6" lg="4">
-        <spell-resistance :id="id" :editable="editable" />
-      </v-col>
-      <v-col v-show="page === 1" cols="12" sm="12" md="3" lg="2">
+      <v-col v-show="page === 1" cols="12" xs="12" sm="3" lg="2">
         <armour :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 1" cols="12" sm="12" md="3" lg="2">
+      <v-col v-show="page === 1" cols="12" xs="12" sm="3" lg="2">
         <shield :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 2" cols="12" sm="12" md="3" lg="2">
-        <v-card>
-          <v-card-title>Weapons</v-card-title>
-        </v-card>
+      <v-col v-show="page === 2" cols="12">
+        <weapon-assignments :id="id" :editable="false" />
       </v-col>
-      <v-col v-show="page === 2" cols="12" sm="12" md="3" lg="2">
+      <v-col v-show="page === 2" cols="12">
         <v-card>
           <v-card-title>Ranged Weapons</v-card-title>
         </v-card>
       </v-col>
-      <v-col v-show="page === 2" cols="12" sm="12" md="3" lg="2">
+      <v-col v-show="page === 2" cols="12">
         <v-card>
           <v-card-title>Skills</v-card-title>
         </v-card>
@@ -163,6 +161,7 @@ import SpellResistanceCard from "@/components/character/SpellResistanceCard.vue"
 import CombatValuesCard from "@/components/character/CombatValuesCard.vue";
 import ArmourCard from "@/components/character/ArmourCard.vue";
 import ShieldCard from "@/components/character/ShieldCard.vue";
+import WeaponAssignmentCard from "@/components/character/WeaponAssignmentCard.vue";
 
 @Component({
   name: "player-character",
@@ -181,6 +180,7 @@ import ShieldCard from "@/components/character/ShieldCard.vue";
     "combat-values": CombatValuesCard,
     armour: ArmourCard,
     shield: ShieldCard,
+    "weapon-assignments": WeaponAssignmentCard,
   },
 })
 export default class PlayerCharacter extends Vue {
@@ -226,6 +226,7 @@ export default class PlayerCharacter extends Vue {
       this.$store.dispatch("psiSchool/load"),
       this.$store.dispatch("shield/load"),
       this.$store.dispatch("armour/load"),
+      this.$store.dispatch("weapon/load"),
     ]).catch((error: GraphQLResult<Character>) => {
       this.messages = error.errors?.map(err => err.message) || [];
       this.notification = true;

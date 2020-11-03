@@ -899,17 +899,6 @@ export const createCharacter = /* GraphQL */ `
         willpower
         astral
       }
-      currentAbilities {
-        strength
-        agility
-        dexterity
-        stamina
-        health
-        beauty
-        intelligence
-        willpower
-        astral
-      }
       health {
         vitality {
           current
@@ -1045,12 +1034,6 @@ export const createCharacter = /* GraphQL */ `
         defence
         aiming
       }
-      temporaryCombatValueModifiers {
-        initiation
-        offence
-        defence
-        aiming
-      }
       combatValueModifiersPerLevel
       mandatoryCombatValueModifierDistribution
       wallet {
@@ -1116,7 +1099,6 @@ export const createCharacter = /* GraphQL */ `
         items {
           id
           characterId
-          custom
           weapon {
             id
             descriptions {
@@ -1150,27 +1132,10 @@ export const createCharacter = /* GraphQL */ `
             createdAt
             updatedAt
           }
-          descriptions {
-            locale
-            title
-            description
-          }
-          weight
-          price
-          attackRange
-          combatValues {
-            initiation
-            offence
-            defence
-            aiming
-          }
-          damage {
-            dice
-            iterationCount
-            modifier
-          }
-          attacksPerTurn
-          ranged
+          mastery
+          inHand
+          breakWeapon
+          disarm
           createdAt
           updatedAt
           owner
@@ -1388,17 +1353,6 @@ export const updateCharacter = /* GraphQL */ `
         willpower
         astral
       }
-      currentAbilities {
-        strength
-        agility
-        dexterity
-        stamina
-        health
-        beauty
-        intelligence
-        willpower
-        astral
-      }
       health {
         vitality {
           current
@@ -1534,12 +1488,6 @@ export const updateCharacter = /* GraphQL */ `
         defence
         aiming
       }
-      temporaryCombatValueModifiers {
-        initiation
-        offence
-        defence
-        aiming
-      }
       combatValueModifiersPerLevel
       mandatoryCombatValueModifierDistribution
       wallet {
@@ -1605,7 +1553,6 @@ export const updateCharacter = /* GraphQL */ `
         items {
           id
           characterId
-          custom
           weapon {
             id
             descriptions {
@@ -1639,27 +1586,10 @@ export const updateCharacter = /* GraphQL */ `
             createdAt
             updatedAt
           }
-          descriptions {
-            locale
-            title
-            description
-          }
-          weight
-          price
-          attackRange
-          combatValues {
-            initiation
-            offence
-            defence
-            aiming
-          }
-          damage {
-            dice
-            iterationCount
-            modifier
-          }
-          attacksPerTurn
-          ranged
+          mastery
+          inHand
+          breakWeapon
+          disarm
           createdAt
           updatedAt
           owner
@@ -1877,17 +1807,6 @@ export const deleteCharacter = /* GraphQL */ `
         willpower
         astral
       }
-      currentAbilities {
-        strength
-        agility
-        dexterity
-        stamina
-        health
-        beauty
-        intelligence
-        willpower
-        astral
-      }
       health {
         vitality {
           current
@@ -2023,12 +1942,6 @@ export const deleteCharacter = /* GraphQL */ `
         defence
         aiming
       }
-      temporaryCombatValueModifiers {
-        initiation
-        offence
-        defence
-        aiming
-      }
       combatValueModifiersPerLevel
       mandatoryCombatValueModifierDistribution
       wallet {
@@ -2094,7 +2007,6 @@ export const deleteCharacter = /* GraphQL */ `
         items {
           id
           characterId
-          custom
           weapon {
             id
             descriptions {
@@ -2128,27 +2040,10 @@ export const deleteCharacter = /* GraphQL */ `
             createdAt
             updatedAt
           }
-          descriptions {
-            locale
-            title
-            description
-          }
-          weight
-          price
-          attackRange
-          combatValues {
-            initiation
-            offence
-            defence
-            aiming
-          }
-          damage {
-            dice
-            iterationCount
-            modifier
-          }
-          attacksPerTurn
-          ranged
+          mastery
+          inHand
+          breakWeapon
+          disarm
           createdAt
           updatedAt
           owner
@@ -2314,7 +2209,6 @@ export const createWeaponAssignment = /* GraphQL */ `
     createWeaponAssignment(input: $input, condition: $condition) {
       id
       characterId
-      custom
       weapon {
         id
         descriptions {
@@ -2353,27 +2247,10 @@ export const createWeaponAssignment = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      descriptions {
-        locale
-        title
-        description
-      }
-      weight
-      price
-      attackRange
-      combatValues {
-        initiation
-        offence
-        defence
-        aiming
-      }
-      damage {
-        dice
-        iterationCount
-        modifier
-      }
-      attacksPerTurn
-      ranged
+      mastery
+      inHand
+      breakWeapon
+      disarm
       createdAt
       updatedAt
       owner
@@ -2388,7 +2265,6 @@ export const updateWeaponAssignment = /* GraphQL */ `
     updateWeaponAssignment(input: $input, condition: $condition) {
       id
       characterId
-      custom
       weapon {
         id
         descriptions {
@@ -2427,27 +2303,10 @@ export const updateWeaponAssignment = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      descriptions {
-        locale
-        title
-        description
-      }
-      weight
-      price
-      attackRange
-      combatValues {
-        initiation
-        offence
-        defence
-        aiming
-      }
-      damage {
-        dice
-        iterationCount
-        modifier
-      }
-      attacksPerTurn
-      ranged
+      mastery
+      inHand
+      breakWeapon
+      disarm
       createdAt
       updatedAt
       owner
@@ -2462,7 +2321,6 @@ export const deleteWeaponAssignment = /* GraphQL */ `
     deleteWeaponAssignment(input: $input, condition: $condition) {
       id
       characterId
-      custom
       weapon {
         id
         descriptions {
@@ -2501,27 +2359,10 @@ export const deleteWeaponAssignment = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      descriptions {
-        locale
-        title
-        description
-      }
-      weight
-      price
-      attackRange
-      combatValues {
-        initiation
-        offence
-        defence
-        aiming
-      }
-      damage {
-        dice
-        iterationCount
-        modifier
-      }
-      attacksPerTurn
-      ranged
+      mastery
+      inHand
+      breakWeapon
+      disarm
       createdAt
       updatedAt
       owner

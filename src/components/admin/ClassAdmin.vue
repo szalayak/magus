@@ -9,8 +9,8 @@
     :customColumns="customColumns"
   >
     <template v-slot:editable-fields="{ editedItem }">
-      <v-row>
-        <v-col cols="12" sm="12" md="6">
+      <v-row dense>
+        <v-col cols="12" xs="12" sm="6">
           <v-select
             v-model="editedItem.mainClass"
             :items="mainClasses"
@@ -18,10 +18,9 @@
             item-value="id"
             :label="$t('main-class')"
             return-object
-            outlined
           ></v-select>
         </v-col>
-        <v-col cols="12" sm="12" md="6">
+        <v-col cols="12" xs="12" sm="6">
           <v-checkbox
             v-model="editedItem.magicUser"
             :label="$t('magic-user')"
@@ -53,13 +52,6 @@ import AdminTable from "./AdminTable.vue";
   },
 })
 export default class ClassAdmin extends Vue {
-  headers = [
-    { text: this.$t("id"), value: "id" },
-    { text: this.$t("main-class"), value: "mainClass" },
-    { text: this.$t("title"), value: "description.title" },
-    { text: this.$t("magic-user"), value: "magicUser" },
-    { text: this.$t("actions"), value: "actions", sortable: false },
-  ];
   defaultItem: Class = {
     id: "",
     mainClass: {
@@ -70,6 +62,16 @@ export default class ClassAdmin extends Vue {
     descriptions: getDescriptionsForLocales(),
   };
   customColumns = ["magicUser", "mainClass"];
+
+  get headers() {
+    return [
+      { text: this.$t("id"), value: "id" },
+      { text: this.$t("main-class"), value: "mainClass" },
+      { text: this.$t("title"), value: "description.title" },
+      { text: this.$t("magic-user"), value: "magicUser" },
+      { text: this.$t("actions"), value: "actions", sortable: false },
+    ];
+  }
 
   get mainClasses(): ValueRange[] {
     const mainClasses = this.$store.getters["valueRange/getMainClasses"];

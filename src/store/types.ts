@@ -1,7 +1,7 @@
 import { Dice, LanguageLevel, Locale, Sex } from "@/API";
 
 export interface DropdownValueList {
-  value?: string;
+  value?: string | null;
   text?: string;
 }
 

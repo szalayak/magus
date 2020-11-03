@@ -631,17 +631,6 @@ export const getCharacter = /* GraphQL */ `
         willpower
         astral
       }
-      currentAbilities {
-        strength
-        agility
-        dexterity
-        stamina
-        health
-        beauty
-        intelligence
-        willpower
-        astral
-      }
       health {
         vitality {
           current
@@ -777,12 +766,6 @@ export const getCharacter = /* GraphQL */ `
         defence
         aiming
       }
-      temporaryCombatValueModifiers {
-        initiation
-        offence
-        defence
-        aiming
-      }
       combatValueModifiersPerLevel
       mandatoryCombatValueModifierDistribution
       wallet {
@@ -848,7 +831,6 @@ export const getCharacter = /* GraphQL */ `
         items {
           id
           characterId
-          custom
           weapon {
             id
             descriptions {
@@ -882,27 +864,10 @@ export const getCharacter = /* GraphQL */ `
             createdAt
             updatedAt
           }
-          descriptions {
-            locale
-            title
-            description
-          }
-          weight
-          price
-          attackRange
-          combatValues {
-            initiation
-            offence
-            defence
-            aiming
-          }
-          damage {
-            dice
-            iterationCount
-            modifier
-          }
-          attacksPerTurn
-          ranged
+          mastery
+          inHand
+          breakWeapon
+          disarm
           createdAt
           updatedAt
           owner
@@ -1122,17 +1087,6 @@ export const listCharacters = /* GraphQL */ `
           willpower
           astral
         }
-        currentAbilities {
-          strength
-          agility
-          dexterity
-          stamina
-          health
-          beauty
-          intelligence
-          willpower
-          astral
-        }
         health {
           vitality {
             current
@@ -1268,12 +1222,6 @@ export const listCharacters = /* GraphQL */ `
           defence
           aiming
         }
-        temporaryCombatValueModifiers {
-          initiation
-          offence
-          defence
-          aiming
-        }
         combatValueModifiersPerLevel
         mandatoryCombatValueModifierDistribution
         wallet {
@@ -1339,7 +1287,6 @@ export const listCharacters = /* GraphQL */ `
           items {
             id
             characterId
-            custom
             weapon {
               id
               weaponTypeId
@@ -1351,27 +1298,10 @@ export const listCharacters = /* GraphQL */ `
               createdAt
               updatedAt
             }
-            descriptions {
-              locale
-              title
-              description
-            }
-            weight
-            price
-            attackRange
-            combatValues {
-              initiation
-              offence
-              defence
-              aiming
-            }
-            damage {
-              dice
-              iterationCount
-              modifier
-            }
-            attacksPerTurn
-            ranged
+            mastery
+            inHand
+            breakWeapon
+            disarm
             createdAt
             updatedAt
             owner
@@ -1478,7 +1408,6 @@ export const getWeaponAssignment = /* GraphQL */ `
     getWeaponAssignment(id: $id) {
       id
       characterId
-      custom
       weapon {
         id
         descriptions {
@@ -1517,27 +1446,10 @@ export const getWeaponAssignment = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      descriptions {
-        locale
-        title
-        description
-      }
-      weight
-      price
-      attackRange
-      combatValues {
-        initiation
-        offence
-        defence
-        aiming
-      }
-      damage {
-        dice
-        iterationCount
-        modifier
-      }
-      attacksPerTurn
-      ranged
+      mastery
+      inHand
+      breakWeapon
+      disarm
       createdAt
       updatedAt
       owner
@@ -1558,7 +1470,6 @@ export const listWeaponAssignments = /* GraphQL */ `
       items {
         id
         characterId
-        custom
         weapon {
           id
           descriptions {
@@ -1597,27 +1508,10 @@ export const listWeaponAssignments = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        descriptions {
-          locale
-          title
-          description
-        }
-        weight
-        price
-        attackRange
-        combatValues {
-          initiation
-          offence
-          defence
-          aiming
-        }
-        damage {
-          dice
-          iterationCount
-          modifier
-        }
-        attacksPerTurn
-        ranged
+        mastery
+        inHand
+        breakWeapon
+        disarm
         createdAt
         updatedAt
         owner
@@ -2148,17 +2042,6 @@ export const listCharactersByOwner = /* GraphQL */ `
           willpower
           astral
         }
-        currentAbilities {
-          strength
-          agility
-          dexterity
-          stamina
-          health
-          beauty
-          intelligence
-          willpower
-          astral
-        }
         health {
           vitality {
             current
@@ -2294,12 +2177,6 @@ export const listCharactersByOwner = /* GraphQL */ `
           defence
           aiming
         }
-        temporaryCombatValueModifiers {
-          initiation
-          offence
-          defence
-          aiming
-        }
         combatValueModifiersPerLevel
         mandatoryCombatValueModifierDistribution
         wallet {
@@ -2365,7 +2242,6 @@ export const listCharactersByOwner = /* GraphQL */ `
           items {
             id
             characterId
-            custom
             weapon {
               id
               weaponTypeId
@@ -2377,27 +2253,10 @@ export const listCharactersByOwner = /* GraphQL */ `
               createdAt
               updatedAt
             }
-            descriptions {
-              locale
-              title
-              description
-            }
-            weight
-            price
-            attackRange
-            combatValues {
-              initiation
-              offence
-              defence
-              aiming
-            }
-            damage {
-              dice
-              iterationCount
-              modifier
-            }
-            attacksPerTurn
-            ranged
+            mastery
+            inHand
+            breakWeapon
+            disarm
             createdAt
             updatedAt
             owner
@@ -2569,17 +2428,6 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
           willpower
           astral
         }
-        currentAbilities {
-          strength
-          agility
-          dexterity
-          stamina
-          health
-          beauty
-          intelligence
-          willpower
-          astral
-        }
         health {
           vitality {
             current
@@ -2715,12 +2563,6 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
           defence
           aiming
         }
-        temporaryCombatValueModifiers {
-          initiation
-          offence
-          defence
-          aiming
-        }
         combatValueModifiersPerLevel
         mandatoryCombatValueModifierDistribution
         wallet {
@@ -2786,7 +2628,6 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
           items {
             id
             characterId
-            custom
             weapon {
               id
               weaponTypeId
@@ -2798,27 +2639,10 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
               createdAt
               updatedAt
             }
-            descriptions {
-              locale
-              title
-              description
-            }
-            weight
-            price
-            attackRange
-            combatValues {
-              initiation
-              offence
-              defence
-              aiming
-            }
-            damage {
-              dice
-              iterationCount
-              modifier
-            }
-            attacksPerTurn
-            ranged
+            mastery
+            inHand
+            breakWeapon
+            disarm
             createdAt
             updatedAt
             owner

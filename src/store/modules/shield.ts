@@ -57,7 +57,6 @@ const shield: Module<ShieldState, RootState> = {
   },
   getters: {
     list(state): Shield[] {
-      console.log(state.result?.listShields?.items);
       return state.result?.listShields?.items as Shield[];
     },
   },

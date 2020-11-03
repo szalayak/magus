@@ -9,8 +9,8 @@
     :customColumns="customColumns"
   >
     <template v-slot:editable-fields="{ editedItem }">
-      <v-row>
-        <v-col cols="12" sm="12" md="6">
+      <v-row dense>
+        <v-col cols="12" xs="12" sm="6">
           <v-select
             v-model="editedItem.type"
             :items="valueRangeTypes"
@@ -18,7 +18,6 @@
             item-value="id"
             :label="$t('type')"
             single-line
-            outlined
           ></v-select>
         </v-col>
       </v-row>
@@ -44,19 +43,25 @@ import { Locale, ValueRangeType } from "@/API";
   },
 })
 export default class ValueRangeAdmin extends Vue {
-  headers = [
-    { text: this.$t("id"), value: "id" },
-    { text: this.$t("type"), value: "type" },
-    { text: this.$t("title"), value: "description.title" },
-    { text: this.$t("actions"), value: "actions", sortable: false },
-  ];
   defaultItem: ValueRange = {
     id: "",
     descriptions: getDescriptionsForLocales(),
     description: { locale: this.$i18n.locale as Locale, title: "" },
   };
-  valueRangeTypes = getValueRangeTypes(this.$i18n);
   customColumns = ["type"];
+
+  get valueRangeTypes() {
+    return getValueRangeTypes(this.$i18n);
+  }
+
+  get headers() {
+    return [
+      { text: this.$t("id"), value: "id" },
+      { text: this.$t("type"), value: "type" },
+      { text: this.$t("title"), value: "description.title" },
+      { text: this.$t("actions"), value: "actions", sortable: false },
+    ];
+  }
 
   valueRangeTypeToString(valueRangeType?: ValueRangeType): string | undefined {
     return this.valueRangeTypes.find(vt => vt.id === valueRangeType)?.title;

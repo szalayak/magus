@@ -6,9 +6,10 @@
     newText="new-race"
     editText="edit-race"
     title="races"
+    :customColumns="customColumns"
   >
     <template v-slot:editable-fields="{ editedItem }">
-      <v-row>
+      <v-row dense>
         <v-col cols="12">
           <v-checkbox v-model="editedItem.playable" :label="$t('playable')" />
         </v-col>
@@ -34,18 +35,21 @@ import AdminTable from "./AdminTable.vue";
   },
 })
 export default class RaceAdmin extends Vue {
-  headers = [
-    { text: this.$t("id"), value: "id" },
-    { text: this.$t("title"), value: "description.title" },
-    { text: this.$t("playable"), value: "playable" },
-    { text: this.$t("actions"), value: "actions", sortable: false },
-  ];
   defaultItem: Race = {
     id: "",
     description: { locale: this.$i18n.locale as Locale, title: "" },
     descriptions: getDescriptionsForLocales(),
   };
   customColumns = ["playable"];
+
+  get headers() {
+    return [
+      { text: this.$t("id"), value: "id" },
+      { text: this.$t("title"), value: "description.title" },
+      { text: this.$t("playable"), value: "playable" },
+      { text: this.$t("actions"), value: "actions", sortable: false },
+    ];
+  }
 
   get items(): Race[] {
     return localise(

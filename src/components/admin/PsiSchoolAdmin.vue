@@ -8,21 +8,19 @@
     title="psi-schools"
   >
     <template v-slot:editable-fields="{ editedItem }">
-      <v-row>
-        <v-col cols="12" sm="12" md="6">
+      <v-row dense>
+        <v-col cols="12" xs="12" sm="6">
           <v-text-field
             v-model.number="editedItem.basePsiPoints"
             type="number"
             :label="$t('base-psi-points')"
-            outlined
           ></v-text-field>
         </v-col>
-        <v-col cols="12" sm="12" md="6">
+        <v-col cols="12" xs="12" sm="6">
           <v-text-field
             v-model.number="editedItem.psiPointsPerLevel"
             type="number"
             :label="$t('psi-points-per-level')"
-            outlined
           ></v-text-field>
         </v-col>
       </v-row>
@@ -44,13 +42,6 @@ import { Locale } from "@/API";
   },
 })
 export default class PsiSchoolAdmin extends Vue {
-  headers = [
-    { text: this.$t("id"), value: "id" },
-    { text: this.$t("title"), value: "description.title" },
-    { text: this.$t("base-psi-points"), value: "basePsiPoints" },
-    { text: this.$t("psi-points-per-level"), value: "psiPointsPerLevel" },
-    { text: this.$t("actions"), value: "actions", sortable: false },
-  ];
   defaultItem: PsiSchool = {
     id: "",
     descriptions: getDescriptionsForLocales(),
@@ -58,5 +49,15 @@ export default class PsiSchoolAdmin extends Vue {
     basePsiPoints: 0,
     psiPointsPerLevel: 0,
   };
+
+  get headers() {
+    return [
+      { text: this.$t("id"), value: "id" },
+      { text: this.$t("title"), value: "description.title" },
+      { text: this.$t("base-psi-points"), value: "basePsiPoints" },
+      { text: this.$t("psi-points-per-level"), value: "psiPointsPerLevel" },
+      { text: this.$t("actions"), value: "actions", sortable: false },
+    ];
+  }
 }
 </script>
