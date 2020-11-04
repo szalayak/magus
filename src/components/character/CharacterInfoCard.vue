@@ -4,6 +4,7 @@
       <v-app-bar color="white" flat>
         <v-toolbar-title>{{ title }}</v-toolbar-title>
         <v-spacer></v-spacer>
+        <slot name="toolbar" :edit="edit" />
         <v-btn icon @click="edit = true" v-if="editable && hover && !edit">
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
@@ -11,7 +12,6 @@
           <v-icon>{{ show ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
         </v-btn>
       </v-app-bar>
-      <!-- <v-card-title>{{ title }}</v-card-title> -->
       <v-card-text v-show="show">
         <v-alert v-if="error" dense outlined type="error">
           {{ messages }}
@@ -22,13 +22,6 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <!-- <v-btn
-          color="primary"
-          v-if="editable && hover && !edit"
-          text
-          @click="edit = true"
-          >{{ $t("edit") }}</v-btn
-        > -->
         <v-btn color="error" v-if="edit" text @click="cancel">{{
           $t("cancel")
         }}</v-btn>

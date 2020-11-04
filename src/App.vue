@@ -11,7 +11,7 @@
       <v-spacer></v-spacer>
       <v-menu offset-y v-if="isLoggedIn">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn text v-bind="attrs" v-on="on"
+          <v-btn :icon="$vuetify.breakpoint.xs" text v-bind="attrs" v-on="on"
             ><div class="d-none d-sm-flex">{{ $t("throw-dice") }}</div>
             <v-icon class="ml-2">mdi-dice-5</v-icon></v-btn
           >
@@ -28,7 +28,7 @@
       </v-menu>
       <v-menu offset-y v-if="isLoggedIn">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn text v-bind="attrs" v-on="on">
+          <v-btn :icon="$vuetify.breakpoint.xs" text v-bind="attrs" v-on="on">
             <div class="d-none d-sm-flex">{{ app.user.attributes.name }}</div>
             <v-icon class="ml-2">mdi-account</v-icon>
           </v-btn>

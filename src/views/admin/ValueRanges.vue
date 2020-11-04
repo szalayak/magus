@@ -3,8 +3,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
 import ValueRangeAdmin from "@/components/admin/ValueRangeAdmin.vue";
+import TitleComponent from "@/mixins/TitleComponent";
 
 @Component({
   name: "races",
@@ -12,5 +13,7 @@ import ValueRangeAdmin from "@/components/admin/ValueRangeAdmin.vue";
     "value-range-admin": ValueRangeAdmin,
   },
 })
-export default class ValueRanges extends Vue {}
+export default class ValueRanges extends TitleComponent {
+  title = this.$t("value-ranges");
+}
 </script>

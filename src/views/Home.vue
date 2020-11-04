@@ -8,19 +8,22 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
 import CharacterList from "@/views/character/CharacterList.vue";
 import { Character } from "@/store/modules/character";
+import TitleComponent from "@/mixins/TitleComponent";
+import { mixins } from "vue-class-component";
 
 @Component({
   components: {
     "character-list": CharacterList,
   },
 })
-export default class Home extends Vue {
+export default class Home extends mixins(TitleComponent) {
   messages: string[] = [];
   notification = false;
+  title = this.$t("home");
 
   get characters(): Character[] {
     return this.$store.getters["character/playerCharactersAsPlayer"];

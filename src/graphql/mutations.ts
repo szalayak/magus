@@ -1042,6 +1042,13 @@ export const createCharacter = /* GraphQL */ `
         gemstones
         misc
       }
+      skillPoints {
+        base
+        current
+        perLevel
+        intelligence
+        dexterity
+      }
       languages {
         language
         level
@@ -1136,6 +1143,10 @@ export const createCharacter = /* GraphQL */ `
           inHand
           breakWeapon
           disarm
+          arrowCount
+          specialProjectileCount
+          aim
+          horseback
           createdAt
           updatedAt
           owner
@@ -1146,7 +1157,6 @@ export const createCharacter = /* GraphQL */ `
         items {
           id
           characterId
-          skillId
           skill {
             id
             descriptions {
@@ -1496,6 +1506,13 @@ export const updateCharacter = /* GraphQL */ `
         gemstones
         misc
       }
+      skillPoints {
+        base
+        current
+        perLevel
+        intelligence
+        dexterity
+      }
       languages {
         language
         level
@@ -1590,6 +1607,10 @@ export const updateCharacter = /* GraphQL */ `
           inHand
           breakWeapon
           disarm
+          arrowCount
+          specialProjectileCount
+          aim
+          horseback
           createdAt
           updatedAt
           owner
@@ -1600,7 +1621,6 @@ export const updateCharacter = /* GraphQL */ `
         items {
           id
           characterId
-          skillId
           skill {
             id
             descriptions {
@@ -1950,6 +1970,13 @@ export const deleteCharacter = /* GraphQL */ `
         gemstones
         misc
       }
+      skillPoints {
+        base
+        current
+        perLevel
+        intelligence
+        dexterity
+      }
       languages {
         language
         level
@@ -2044,6 +2071,10 @@ export const deleteCharacter = /* GraphQL */ `
           inHand
           breakWeapon
           disarm
+          arrowCount
+          specialProjectileCount
+          aim
+          horseback
           createdAt
           updatedAt
           owner
@@ -2054,7 +2085,6 @@ export const deleteCharacter = /* GraphQL */ `
         items {
           id
           characterId
-          skillId
           skill {
             id
             descriptions {
@@ -2251,6 +2281,10 @@ export const createWeaponAssignment = /* GraphQL */ `
       inHand
       breakWeapon
       disarm
+      arrowCount
+      specialProjectileCount
+      aim
+      horseback
       createdAt
       updatedAt
       owner
@@ -2307,6 +2341,10 @@ export const updateWeaponAssignment = /* GraphQL */ `
       inHand
       breakWeapon
       disarm
+      arrowCount
+      specialProjectileCount
+      aim
+      horseback
       createdAt
       updatedAt
       owner
@@ -2363,6 +2401,10 @@ export const deleteWeaponAssignment = /* GraphQL */ `
       inHand
       breakWeapon
       disarm
+      arrowCount
+      specialProjectileCount
+      aim
+      horseback
       createdAt
       updatedAt
       owner
@@ -2377,7 +2419,6 @@ export const createSkillAssignment = /* GraphQL */ `
     createSkillAssignment(input: $input, condition: $condition) {
       id
       characterId
-      skillId
       skill {
         id
         descriptions {
@@ -2420,7 +2461,6 @@ export const updateSkillAssignment = /* GraphQL */ `
     updateSkillAssignment(input: $input, condition: $condition) {
       id
       characterId
-      skillId
       skill {
         id
         descriptions {
@@ -2463,7 +2503,6 @@ export const deleteSkillAssignment = /* GraphQL */ `
     deleteSkillAssignment(input: $input, condition: $condition) {
       id
       characterId
-      skillId
       skill {
         id
         descriptions {

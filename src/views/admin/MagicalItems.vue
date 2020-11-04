@@ -4,7 +4,8 @@
 
 <script lang="ts">
 import MagicalItemAdmin from "@/components/admin/MagicalItemAdmin.vue";
-import { Component, Vue } from "vue-property-decorator";
+import TitleComponent from "@/mixins/TitleComponent";
+import { Component } from "vue-property-decorator";
 
 @Component({
   name: "magical-items",
@@ -12,5 +13,7 @@ import { Component, Vue } from "vue-property-decorator";
     "magical-item-admin": MagicalItemAdmin,
   },
 })
-export default class MagicalItems extends Vue {}
+export default class MagicalItems extends TitleComponent {
+  title = this.$t("magical-items");
+}
 </script>

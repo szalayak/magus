@@ -121,6 +121,24 @@
           />
         </v-col>
       </v-row>
+      <v-subheader class="pl-0">{{ $t("combat-value-modifiers") }}</v-subheader>
+      <v-row dense>
+        <v-col cols="12" xs="12" sm="6">
+          <v-text-field
+            v-model.number="character.combatValueModifiersPerLevel"
+            :label="$t('combat-value-modifiers-per-level')"
+            :disabled="!edit"
+            type="number"
+          />
+        </v-col>
+        <v-col cols="12" xs="12" sm="6">
+          <v-text-field
+            v-model="character.mandatoryCombatValueModifierDistribution"
+            :label="$t('mandatory-combat-value-modifier-distribution')"
+            :disabled="!edit"
+          />
+        </v-col>
+      </v-row>
     </template>
   </character-info-card>
 </template>

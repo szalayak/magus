@@ -15,6 +15,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
 import CharacterList from "./CharacterList.vue";
+import TitleComponent from "@/mixins/TitleComponent";
 
 type Form = Vue & { validate: () => boolean };
 
@@ -24,7 +25,8 @@ type Form = Vue & { validate: () => boolean };
     "character-list": CharacterList,
   },
 })
-export default class NonPlayerCharactersAsDM extends Vue {
+export default class NonPlayerCharactersAsDM extends TitleComponent {
+  title = this.$t("non-player-characters");
   messages: string[] = [];
   notification = false;
   createDialog = false;

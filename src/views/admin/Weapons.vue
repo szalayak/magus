@@ -4,7 +4,8 @@
 
 <script lang="ts">
 import WeaponAdmin from "@/components/admin/WeaponAdmin.vue";
-import { Component, Vue } from "vue-property-decorator";
+import TitleComponent from "@/mixins/TitleComponent";
+import { Component } from "vue-property-decorator";
 
 @Component({
   name: "weapons",
@@ -12,5 +13,7 @@ import { Component, Vue } from "vue-property-decorator";
     "weapon-admin": WeaponAdmin,
   },
 })
-export default class Weapons extends Vue {}
+export default class Weapons extends TitleComponent {
+  title = this.$t("weapons");
+}
 </script>

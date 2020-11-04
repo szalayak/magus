@@ -80,7 +80,6 @@ export default class MagicalItemAdmin extends Vue {
 
   get headers() {
     return [
-      { text: this.$t("id"), value: "id" },
       { text: this.$t("title"), value: "description.title" },
       { text: this.$t("can-be-made-by"), value: "class" },
       { text: this.$t("mana-cost"), value: "manaCost" },

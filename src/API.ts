@@ -467,10 +467,11 @@ export type CreateCharacterInput = {
   combatValueModifiersPerLevel?: number | null,
   mandatoryCombatValueModifierDistribution?: string | null,
   wallet?: WalletInput | null,
+  skillPoints?: SkillPointsInput | null,
   languages?: Array< LanguageAbilityInput > | null,
   inventory?: Array< InventoryItemInput > | null,
   poisons?: Array< PoisonInput > | null,
-  notes?: Array< string | null > | null,
+  notes?: string | null,
   characterClassId?: string | null,
   characterRaceId?: string | null,
   characterPersonalityId?: string | null,
@@ -580,6 +581,14 @@ export type WalletInput = {
   misc?: string | null,
 };
 
+export type SkillPointsInput = {
+  base?: number | null,
+  current?: number | null,
+  perLevel?: number | null,
+  intelligence?: number | null,
+  dexterity?: number | null,
+};
+
 export type LanguageAbilityInput = {
   language?: string | null,
   level?: LanguageLevel | null,
@@ -661,10 +670,11 @@ export type UpdateCharacterInput = {
   combatValueModifiersPerLevel?: number | null,
   mandatoryCombatValueModifierDistribution?: string | null,
   wallet?: WalletInput | null,
+  skillPoints?: SkillPointsInput | null,
   languages?: Array< LanguageAbilityInput > | null,
   inventory?: Array< InventoryItemInput > | null,
   poisons?: Array< PoisonInput > | null,
-  notes?: Array< string | null > | null,
+  notes?: string | null,
   characterClassId?: string | null,
   characterRaceId?: string | null,
   characterPersonalityId?: string | null,
@@ -684,6 +694,10 @@ export type CreateWeaponAssignmentInput = {
   inHand?: boolean | null,
   breakWeapon?: Mastery | null,
   disarm?: Mastery | null,
+  arrowCount?: number | null,
+  specialProjectileCount?: number | null,
+  aim?: Mastery | null,
+  horseback?: Mastery | null,
   weaponAssignmentWeaponId?: string | null,
 };
 
@@ -693,6 +707,10 @@ export type ModelWeaponAssignmentConditionInput = {
   inHand?: ModelBooleanInput | null,
   breakWeapon?: ModelMasteryInput | null,
   disarm?: ModelMasteryInput | null,
+  arrowCount?: ModelIntInput | null,
+  specialProjectileCount?: ModelIntInput | null,
+  aim?: ModelMasteryInput | null,
+  horseback?: ModelMasteryInput | null,
   and?: Array< ModelWeaponAssignmentConditionInput | null > | null,
   or?: Array< ModelWeaponAssignmentConditionInput | null > | null,
   not?: ModelWeaponAssignmentConditionInput | null,
@@ -710,6 +728,10 @@ export type UpdateWeaponAssignmentInput = {
   inHand?: boolean | null,
   breakWeapon?: Mastery | null,
   disarm?: Mastery | null,
+  arrowCount?: number | null,
+  specialProjectileCount?: number | null,
+  aim?: Mastery | null,
+  horseback?: Mastery | null,
   weaponAssignmentWeaponId?: string | null,
 };
 
@@ -720,15 +742,14 @@ export type DeleteWeaponAssignmentInput = {
 export type CreateSkillAssignmentInput = {
   id?: string | null,
   characterId: string,
-  skillId: string,
   mastery?: Mastery | null,
   percentageValue?: number | null,
   skillPointsUsed?: number | null,
+  skillAssignmentSkillId?: string | null,
 };
 
 export type ModelSkillAssignmentConditionInput = {
   characterId?: ModelIDInput | null,
-  skillId?: ModelIDInput | null,
   mastery?: ModelMasteryInput | null,
   percentageValue?: ModelIntInput | null,
   skillPointsUsed?: ModelIntInput | null,
@@ -740,10 +761,10 @@ export type ModelSkillAssignmentConditionInput = {
 export type UpdateSkillAssignmentInput = {
   id: string,
   characterId?: string | null,
-  skillId?: string | null,
   mastery?: Mastery | null,
   percentageValue?: number | null,
   skillPointsUsed?: number | null,
+  skillAssignmentSkillId?: string | null,
 };
 
 export type DeleteSkillAssignmentInput = {
@@ -960,6 +981,10 @@ export type ModelWeaponAssignmentFilterInput = {
   inHand?: ModelBooleanInput | null,
   breakWeapon?: ModelMasteryInput | null,
   disarm?: ModelMasteryInput | null,
+  arrowCount?: ModelIntInput | null,
+  specialProjectileCount?: ModelIntInput | null,
+  aim?: ModelMasteryInput | null,
+  horseback?: ModelMasteryInput | null,
   and?: Array< ModelWeaponAssignmentFilterInput | null > | null,
   or?: Array< ModelWeaponAssignmentFilterInput | null > | null,
   not?: ModelWeaponAssignmentFilterInput | null,
@@ -968,7 +993,6 @@ export type ModelWeaponAssignmentFilterInput = {
 export type ModelSkillAssignmentFilterInput = {
   id?: ModelIDInput | null,
   characterId?: ModelIDInput | null,
-  skillId?: ModelIDInput | null,
   mastery?: ModelMasteryInput | null,
   percentageValue?: ModelIntInput | null,
   skillPointsUsed?: ModelIntInput | null,
@@ -2222,6 +2246,14 @@ export type CreateCharacterMutation = {
       gemstones: string | null,
       misc: string | null,
     } | null,
+    skillPoints:  {
+      __typename: "SkillPoints",
+      base: number | null,
+      current: number | null,
+      perLevel: number | null,
+      intelligence: number | null,
+      dexterity: number | null,
+    } | null,
     languages:  Array< {
       __typename: "LanguageAbility",
       language: string | null,
@@ -2238,7 +2270,7 @@ export type CreateCharacterMutation = {
       name: string,
       amount: number,
     } > | null,
-    notes: Array< string | null > | null,
+    notes: string | null,
     armour:  {
       __typename: "Armour",
       id: string,
@@ -2332,6 +2364,10 @@ export type CreateCharacterMutation = {
         inHand: boolean | null,
         breakWeapon: Mastery | null,
         disarm: Mastery | null,
+        arrowCount: number | null,
+        specialProjectileCount: number | null,
+        aim: Mastery | null,
+        horseback: Mastery | null,
         createdAt: string,
         updatedAt: string,
         owner: string | null,
@@ -2344,7 +2380,6 @@ export type CreateCharacterMutation = {
         __typename: "SkillAssignment",
         id: string,
         characterId: string,
-        skillId: string,
         skill:  {
           __typename: "Skill",
           id: string,
@@ -2747,6 +2782,14 @@ export type UpdateCharacterMutation = {
       gemstones: string | null,
       misc: string | null,
     } | null,
+    skillPoints:  {
+      __typename: "SkillPoints",
+      base: number | null,
+      current: number | null,
+      perLevel: number | null,
+      intelligence: number | null,
+      dexterity: number | null,
+    } | null,
     languages:  Array< {
       __typename: "LanguageAbility",
       language: string | null,
@@ -2763,7 +2806,7 @@ export type UpdateCharacterMutation = {
       name: string,
       amount: number,
     } > | null,
-    notes: Array< string | null > | null,
+    notes: string | null,
     armour:  {
       __typename: "Armour",
       id: string,
@@ -2857,6 +2900,10 @@ export type UpdateCharacterMutation = {
         inHand: boolean | null,
         breakWeapon: Mastery | null,
         disarm: Mastery | null,
+        arrowCount: number | null,
+        specialProjectileCount: number | null,
+        aim: Mastery | null,
+        horseback: Mastery | null,
         createdAt: string,
         updatedAt: string,
         owner: string | null,
@@ -2869,7 +2916,6 @@ export type UpdateCharacterMutation = {
         __typename: "SkillAssignment",
         id: string,
         characterId: string,
-        skillId: string,
         skill:  {
           __typename: "Skill",
           id: string,
@@ -3272,6 +3318,14 @@ export type DeleteCharacterMutation = {
       gemstones: string | null,
       misc: string | null,
     } | null,
+    skillPoints:  {
+      __typename: "SkillPoints",
+      base: number | null,
+      current: number | null,
+      perLevel: number | null,
+      intelligence: number | null,
+      dexterity: number | null,
+    } | null,
     languages:  Array< {
       __typename: "LanguageAbility",
       language: string | null,
@@ -3288,7 +3342,7 @@ export type DeleteCharacterMutation = {
       name: string,
       amount: number,
     } > | null,
-    notes: Array< string | null > | null,
+    notes: string | null,
     armour:  {
       __typename: "Armour",
       id: string,
@@ -3382,6 +3436,10 @@ export type DeleteCharacterMutation = {
         inHand: boolean | null,
         breakWeapon: Mastery | null,
         disarm: Mastery | null,
+        arrowCount: number | null,
+        specialProjectileCount: number | null,
+        aim: Mastery | null,
+        horseback: Mastery | null,
         createdAt: string,
         updatedAt: string,
         owner: string | null,
@@ -3394,7 +3452,6 @@ export type DeleteCharacterMutation = {
         __typename: "SkillAssignment",
         id: string,
         characterId: string,
-        skillId: string,
         skill:  {
           __typename: "Skill",
           id: string,
@@ -3620,6 +3677,10 @@ export type CreateWeaponAssignmentMutation = {
     inHand: boolean | null,
     breakWeapon: Mastery | null,
     disarm: Mastery | null,
+    arrowCount: number | null,
+    specialProjectileCount: number | null,
+    aim: Mastery | null,
+    horseback: Mastery | null,
     createdAt: string,
     updatedAt: string,
     owner: string | null,
@@ -3684,6 +3745,10 @@ export type UpdateWeaponAssignmentMutation = {
     inHand: boolean | null,
     breakWeapon: Mastery | null,
     disarm: Mastery | null,
+    arrowCount: number | null,
+    specialProjectileCount: number | null,
+    aim: Mastery | null,
+    horseback: Mastery | null,
     createdAt: string,
     updatedAt: string,
     owner: string | null,
@@ -3748,6 +3813,10 @@ export type DeleteWeaponAssignmentMutation = {
     inHand: boolean | null,
     breakWeapon: Mastery | null,
     disarm: Mastery | null,
+    arrowCount: number | null,
+    specialProjectileCount: number | null,
+    aim: Mastery | null,
+    horseback: Mastery | null,
     createdAt: string,
     updatedAt: string,
     owner: string | null,
@@ -3764,7 +3833,6 @@ export type CreateSkillAssignmentMutation = {
     __typename: "SkillAssignment",
     id: string,
     characterId: string,
-    skillId: string,
     skill:  {
       __typename: "Skill",
       id: string,
@@ -3813,7 +3881,6 @@ export type UpdateSkillAssignmentMutation = {
     __typename: "SkillAssignment",
     id: string,
     characterId: string,
-    skillId: string,
     skill:  {
       __typename: "Skill",
       id: string,
@@ -3862,7 +3929,6 @@ export type DeleteSkillAssignmentMutation = {
     __typename: "SkillAssignment",
     id: string,
     characterId: string,
-    skillId: string,
     skill:  {
       __typename: "Skill",
       id: string,
@@ -5310,6 +5376,14 @@ export type GetCharacterQuery = {
       gemstones: string | null,
       misc: string | null,
     } | null,
+    skillPoints:  {
+      __typename: "SkillPoints",
+      base: number | null,
+      current: number | null,
+      perLevel: number | null,
+      intelligence: number | null,
+      dexterity: number | null,
+    } | null,
     languages:  Array< {
       __typename: "LanguageAbility",
       language: string | null,
@@ -5326,7 +5400,7 @@ export type GetCharacterQuery = {
       name: string,
       amount: number,
     } > | null,
-    notes: Array< string | null > | null,
+    notes: string | null,
     armour:  {
       __typename: "Armour",
       id: string,
@@ -5420,6 +5494,10 @@ export type GetCharacterQuery = {
         inHand: boolean | null,
         breakWeapon: Mastery | null,
         disarm: Mastery | null,
+        arrowCount: number | null,
+        specialProjectileCount: number | null,
+        aim: Mastery | null,
+        horseback: Mastery | null,
         createdAt: string,
         updatedAt: string,
         owner: string | null,
@@ -5432,7 +5510,6 @@ export type GetCharacterQuery = {
         __typename: "SkillAssignment",
         id: string,
         characterId: string,
-        skillId: string,
         skill:  {
           __typename: "Skill",
           id: string,
@@ -5838,6 +5915,14 @@ export type ListCharactersQuery = {
         gemstones: string | null,
         misc: string | null,
       } | null,
+      skillPoints:  {
+        __typename: "SkillPoints",
+        base: number | null,
+        current: number | null,
+        perLevel: number | null,
+        intelligence: number | null,
+        dexterity: number | null,
+      } | null,
       languages:  Array< {
         __typename: "LanguageAbility",
         language: string | null,
@@ -5854,7 +5939,7 @@ export type ListCharactersQuery = {
         name: string,
         amount: number,
       } > | null,
-      notes: Array< string | null > | null,
+      notes: string | null,
       armour:  {
         __typename: "Armour",
         id: string,
@@ -5922,6 +6007,10 @@ export type ListCharactersQuery = {
           inHand: boolean | null,
           breakWeapon: Mastery | null,
           disarm: Mastery | null,
+          arrowCount: number | null,
+          specialProjectileCount: number | null,
+          aim: Mastery | null,
+          horseback: Mastery | null,
           createdAt: string,
           updatedAt: string,
           owner: string | null,
@@ -5934,7 +6023,6 @@ export type ListCharactersQuery = {
           __typename: "SkillAssignment",
           id: string,
           characterId: string,
-          skillId: string,
           skill:  {
             __typename: "Skill",
             id: string,
@@ -6092,6 +6180,10 @@ export type GetWeaponAssignmentQuery = {
     inHand: boolean | null,
     breakWeapon: Mastery | null,
     disarm: Mastery | null,
+    arrowCount: number | null,
+    specialProjectileCount: number | null,
+    aim: Mastery | null,
+    horseback: Mastery | null,
     createdAt: string,
     updatedAt: string,
     owner: string | null,
@@ -6159,6 +6251,10 @@ export type ListWeaponAssignmentsQuery = {
       inHand: boolean | null,
       breakWeapon: Mastery | null,
       disarm: Mastery | null,
+      arrowCount: number | null,
+      specialProjectileCount: number | null,
+      aim: Mastery | null,
+      horseback: Mastery | null,
       createdAt: string,
       updatedAt: string,
       owner: string | null,
@@ -6176,7 +6272,6 @@ export type GetSkillAssignmentQuery = {
     __typename: "SkillAssignment",
     id: string,
     characterId: string,
-    skillId: string,
     skill:  {
       __typename: "Skill",
       id: string,
@@ -6228,7 +6323,6 @@ export type ListSkillAssignmentsQuery = {
       __typename: "SkillAssignment",
       id: string,
       characterId: string,
-      skillId: string,
       skill:  {
         __typename: "Skill",
         id: string,
@@ -6908,6 +7002,14 @@ export type ListCharactersByOwnerQuery = {
         gemstones: string | null,
         misc: string | null,
       } | null,
+      skillPoints:  {
+        __typename: "SkillPoints",
+        base: number | null,
+        current: number | null,
+        perLevel: number | null,
+        intelligence: number | null,
+        dexterity: number | null,
+      } | null,
       languages:  Array< {
         __typename: "LanguageAbility",
         language: string | null,
@@ -6924,7 +7026,7 @@ export type ListCharactersByOwnerQuery = {
         name: string,
         amount: number,
       } > | null,
-      notes: Array< string | null > | null,
+      notes: string | null,
       armour:  {
         __typename: "Armour",
         id: string,
@@ -6992,6 +7094,10 @@ export type ListCharactersByOwnerQuery = {
           inHand: boolean | null,
           breakWeapon: Mastery | null,
           disarm: Mastery | null,
+          arrowCount: number | null,
+          specialProjectileCount: number | null,
+          aim: Mastery | null,
+          horseback: Mastery | null,
           createdAt: string,
           updatedAt: string,
           owner: string | null,
@@ -7004,7 +7110,6 @@ export type ListCharactersByOwnerQuery = {
           __typename: "SkillAssignment",
           id: string,
           characterId: string,
-          skillId: string,
           skill:  {
             __typename: "Skill",
             id: string,
@@ -7345,6 +7450,14 @@ export type ListCharactersByDungeonMasterQuery = {
         gemstones: string | null,
         misc: string | null,
       } | null,
+      skillPoints:  {
+        __typename: "SkillPoints",
+        base: number | null,
+        current: number | null,
+        perLevel: number | null,
+        intelligence: number | null,
+        dexterity: number | null,
+      } | null,
       languages:  Array< {
         __typename: "LanguageAbility",
         language: string | null,
@@ -7361,7 +7474,7 @@ export type ListCharactersByDungeonMasterQuery = {
         name: string,
         amount: number,
       } > | null,
-      notes: Array< string | null > | null,
+      notes: string | null,
       armour:  {
         __typename: "Armour",
         id: string,
@@ -7429,6 +7542,10 @@ export type ListCharactersByDungeonMasterQuery = {
           inHand: boolean | null,
           breakWeapon: Mastery | null,
           disarm: Mastery | null,
+          arrowCount: number | null,
+          specialProjectileCount: number | null,
+          aim: Mastery | null,
+          horseback: Mastery | null,
           createdAt: string,
           updatedAt: string,
           owner: string | null,
@@ -7441,7 +7558,6 @@ export type ListCharactersByDungeonMasterQuery = {
           __typename: "SkillAssignment",
           id: string,
           characterId: string,
-          skillId: string,
           skill:  {
             __typename: "Skill",
             id: string,
@@ -8362,8 +8478,8 @@ export type OnDeleteThrowSubscription = {
 };
 
 export type OnCreateCharacterSubscriptionVariables = {
-  owner: string,
-  dungeonMaster: string,
+  owner?: string | null,
+  dungeonMaster?: string | null,
 };
 
 export type OnCreateCharacterSubscription = {
@@ -8596,6 +8712,14 @@ export type OnCreateCharacterSubscription = {
       gemstones: string | null,
       misc: string | null,
     } | null,
+    skillPoints:  {
+      __typename: "SkillPoints",
+      base: number | null,
+      current: number | null,
+      perLevel: number | null,
+      intelligence: number | null,
+      dexterity: number | null,
+    } | null,
     languages:  Array< {
       __typename: "LanguageAbility",
       language: string | null,
@@ -8612,7 +8736,7 @@ export type OnCreateCharacterSubscription = {
       name: string,
       amount: number,
     } > | null,
-    notes: Array< string | null > | null,
+    notes: string | null,
     armour:  {
       __typename: "Armour",
       id: string,
@@ -8706,6 +8830,10 @@ export type OnCreateCharacterSubscription = {
         inHand: boolean | null,
         breakWeapon: Mastery | null,
         disarm: Mastery | null,
+        arrowCount: number | null,
+        specialProjectileCount: number | null,
+        aim: Mastery | null,
+        horseback: Mastery | null,
         createdAt: string,
         updatedAt: string,
         owner: string | null,
@@ -8718,7 +8846,6 @@ export type OnCreateCharacterSubscription = {
         __typename: "SkillAssignment",
         id: string,
         characterId: string,
-        skillId: string,
         skill:  {
           __typename: "Skill",
           id: string,
@@ -8887,8 +9014,8 @@ export type OnCreateCharacterSubscription = {
 };
 
 export type OnUpdateCharacterSubscriptionVariables = {
-  owner: string,
-  dungeonMaster: string,
+  owner?: string | null,
+  dungeonMaster?: string | null,
 };
 
 export type OnUpdateCharacterSubscription = {
@@ -9121,6 +9248,14 @@ export type OnUpdateCharacterSubscription = {
       gemstones: string | null,
       misc: string | null,
     } | null,
+    skillPoints:  {
+      __typename: "SkillPoints",
+      base: number | null,
+      current: number | null,
+      perLevel: number | null,
+      intelligence: number | null,
+      dexterity: number | null,
+    } | null,
     languages:  Array< {
       __typename: "LanguageAbility",
       language: string | null,
@@ -9137,7 +9272,7 @@ export type OnUpdateCharacterSubscription = {
       name: string,
       amount: number,
     } > | null,
-    notes: Array< string | null > | null,
+    notes: string | null,
     armour:  {
       __typename: "Armour",
       id: string,
@@ -9231,6 +9366,10 @@ export type OnUpdateCharacterSubscription = {
         inHand: boolean | null,
         breakWeapon: Mastery | null,
         disarm: Mastery | null,
+        arrowCount: number | null,
+        specialProjectileCount: number | null,
+        aim: Mastery | null,
+        horseback: Mastery | null,
         createdAt: string,
         updatedAt: string,
         owner: string | null,
@@ -9243,7 +9382,6 @@ export type OnUpdateCharacterSubscription = {
         __typename: "SkillAssignment",
         id: string,
         characterId: string,
-        skillId: string,
         skill:  {
           __typename: "Skill",
           id: string,
@@ -9412,8 +9550,8 @@ export type OnUpdateCharacterSubscription = {
 };
 
 export type OnDeleteCharacterSubscriptionVariables = {
-  owner: string,
-  dungeonMaster: string,
+  owner?: string | null,
+  dungeonMaster?: string | null,
 };
 
 export type OnDeleteCharacterSubscription = {
@@ -9646,6 +9784,14 @@ export type OnDeleteCharacterSubscription = {
       gemstones: string | null,
       misc: string | null,
     } | null,
+    skillPoints:  {
+      __typename: "SkillPoints",
+      base: number | null,
+      current: number | null,
+      perLevel: number | null,
+      intelligence: number | null,
+      dexterity: number | null,
+    } | null,
     languages:  Array< {
       __typename: "LanguageAbility",
       language: string | null,
@@ -9662,7 +9808,7 @@ export type OnDeleteCharacterSubscription = {
       name: string,
       amount: number,
     } > | null,
-    notes: Array< string | null > | null,
+    notes: string | null,
     armour:  {
       __typename: "Armour",
       id: string,
@@ -9756,6 +9902,10 @@ export type OnDeleteCharacterSubscription = {
         inHand: boolean | null,
         breakWeapon: Mastery | null,
         disarm: Mastery | null,
+        arrowCount: number | null,
+        specialProjectileCount: number | null,
+        aim: Mastery | null,
+        horseback: Mastery | null,
         createdAt: string,
         updatedAt: string,
         owner: string | null,
@@ -9768,7 +9918,6 @@ export type OnDeleteCharacterSubscription = {
         __typename: "SkillAssignment",
         id: string,
         characterId: string,
-        skillId: string,
         skill:  {
           __typename: "Skill",
           id: string,
@@ -9993,6 +10142,10 @@ export type OnCreateWeaponAssignmentSubscription = {
     inHand: boolean | null,
     breakWeapon: Mastery | null,
     disarm: Mastery | null,
+    arrowCount: number | null,
+    specialProjectileCount: number | null,
+    aim: Mastery | null,
+    horseback: Mastery | null,
     createdAt: string,
     updatedAt: string,
     owner: string | null,
@@ -10056,6 +10209,10 @@ export type OnUpdateWeaponAssignmentSubscription = {
     inHand: boolean | null,
     breakWeapon: Mastery | null,
     disarm: Mastery | null,
+    arrowCount: number | null,
+    specialProjectileCount: number | null,
+    aim: Mastery | null,
+    horseback: Mastery | null,
     createdAt: string,
     updatedAt: string,
     owner: string | null,
@@ -10119,6 +10276,10 @@ export type OnDeleteWeaponAssignmentSubscription = {
     inHand: boolean | null,
     breakWeapon: Mastery | null,
     disarm: Mastery | null,
+    arrowCount: number | null,
+    specialProjectileCount: number | null,
+    aim: Mastery | null,
+    horseback: Mastery | null,
     createdAt: string,
     updatedAt: string,
     owner: string | null,
@@ -10134,7 +10295,6 @@ export type OnCreateSkillAssignmentSubscription = {
     __typename: "SkillAssignment",
     id: string,
     characterId: string,
-    skillId: string,
     skill:  {
       __typename: "Skill",
       id: string,
@@ -10182,7 +10342,6 @@ export type OnUpdateSkillAssignmentSubscription = {
     __typename: "SkillAssignment",
     id: string,
     characterId: string,
-    skillId: string,
     skill:  {
       __typename: "Skill",
       id: string,
@@ -10230,7 +10389,6 @@ export type OnDeleteSkillAssignmentSubscription = {
     __typename: "SkillAssignment",
     id: string,
     characterId: string,
-    skillId: string,
     skill:  {
       __typename: "Skill",
       id: string,

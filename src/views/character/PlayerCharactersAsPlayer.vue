@@ -162,6 +162,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
 import CharacterList from "./CharacterList.vue";
+import TitleComponent from "@/mixins/TitleComponent";
 
 type Form = Vue & { validate: () => boolean };
 
@@ -171,7 +172,8 @@ type Form = Vue & { validate: () => boolean };
     "character-list": CharacterList,
   },
 })
-export default class PlayerCharactersAsPlayer extends Vue {
+export default class PlayerCharactersAsPlayer extends TitleComponent {
+  title = this.$t("my-characters");
   messages: string[] = [];
   notification = false;
   createDialog = false;

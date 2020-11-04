@@ -102,7 +102,6 @@ export default class ShieldAdmin extends Vue {
 
   get headers() {
     return [
-      { text: this.$t("id"), value: "id" },
       { text: this.$t("title"), value: "description.title" },
       {
         text: this.$t("movement-prevention-value"),
