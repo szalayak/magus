@@ -229,7 +229,6 @@ export default class AdminTable extends AdminTableProps {
       .catch((error: GraphQLResult<Editable>) => {
         this.messages = error.errors?.map(err => err.message) || [];
         this.notification = true;
-        console.log(this.messages);
       });
   }
   close() {
@@ -263,7 +262,7 @@ export default class AdminTable extends AdminTableProps {
   }
   editItem(item: Editable) {
     this.editedIndex = this.items.indexOf(item);
-    this.editedItem = Object.assign({}, item);
+    this.editedItem = JSON.parse(JSON.stringify(item));
     this.dialog = true;
   }
   deleteItem(item: Editable) {

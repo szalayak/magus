@@ -4,7 +4,8 @@
 
 <script lang="ts">
 import ShieldAdmin from "@/components/admin/ShieldAdmin.vue";
-import { Component, Vue } from "vue-property-decorator";
+import TitleComponent from "@/mixins/TitleComponent";
+import { Component } from "vue-property-decorator";
 
 @Component({
   name: "shields",
@@ -12,5 +13,7 @@ import { Component, Vue } from "vue-property-decorator";
     "shield-admin": ShieldAdmin,
   },
 })
-export default class Shields extends Vue {}
+export default class Shields extends TitleComponent {
+  title = this.$t("shields");
+}
 </script>

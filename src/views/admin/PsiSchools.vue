@@ -4,7 +4,8 @@
 
 <script lang="ts">
 import PsiSchoolAdmin from "@/components/admin/PsiSchoolAdmin.vue";
-import { Component, Vue } from "vue-property-decorator";
+import TitleComponent from "@/mixins/TitleComponent";
+import { Component } from "vue-property-decorator";
 
 @Component({
   name: "psi-schools",
@@ -12,5 +13,7 @@ import { Component, Vue } from "vue-property-decorator";
     "psi-school-admin": PsiSchoolAdmin,
   },
 })
-export default class PsiSchools extends Vue {}
+export default class PsiSchools extends TitleComponent {
+  title = this.$t("psi-schools");
+}
 </script>

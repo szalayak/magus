@@ -774,6 +774,13 @@ export const getCharacter = /* GraphQL */ `
         gemstones
         misc
       }
+      skillPoints {
+        base
+        current
+        perLevel
+        intelligence
+        dexterity
+      }
       languages {
         language
         level
@@ -868,6 +875,10 @@ export const getCharacter = /* GraphQL */ `
           inHand
           breakWeapon
           disarm
+          arrowCount
+          specialProjectileCount
+          aim
+          horseback
           createdAt
           updatedAt
           owner
@@ -878,7 +889,6 @@ export const getCharacter = /* GraphQL */ `
         items {
           id
           characterId
-          skillId
           skill {
             id
             descriptions {
@@ -1230,6 +1240,13 @@ export const listCharacters = /* GraphQL */ `
           gemstones
           misc
         }
+        skillPoints {
+          base
+          current
+          perLevel
+          intelligence
+          dexterity
+        }
         languages {
           language
           level
@@ -1302,6 +1319,10 @@ export const listCharacters = /* GraphQL */ `
             inHand
             breakWeapon
             disarm
+            arrowCount
+            specialProjectileCount
+            aim
+            horseback
             createdAt
             updatedAt
             owner
@@ -1312,7 +1333,6 @@ export const listCharacters = /* GraphQL */ `
           items {
             id
             characterId
-            skillId
             skill {
               id
               percentageSkill
@@ -1450,6 +1470,10 @@ export const getWeaponAssignment = /* GraphQL */ `
       inHand
       breakWeapon
       disarm
+      arrowCount
+      specialProjectileCount
+      aim
+      horseback
       createdAt
       updatedAt
       owner
@@ -1512,6 +1536,10 @@ export const listWeaponAssignments = /* GraphQL */ `
         inHand
         breakWeapon
         disarm
+        arrowCount
+        specialProjectileCount
+        aim
+        horseback
         createdAt
         updatedAt
         owner
@@ -1525,7 +1553,6 @@ export const getSkillAssignment = /* GraphQL */ `
     getSkillAssignment(id: $id) {
       id
       characterId
-      skillId
       skill {
         id
         descriptions {
@@ -1574,7 +1601,6 @@ export const listSkillAssignments = /* GraphQL */ `
       items {
         id
         characterId
-        skillId
         skill {
           id
           descriptions {
@@ -2185,6 +2211,13 @@ export const listCharactersByOwner = /* GraphQL */ `
           gemstones
           misc
         }
+        skillPoints {
+          base
+          current
+          perLevel
+          intelligence
+          dexterity
+        }
         languages {
           language
           level
@@ -2257,6 +2290,10 @@ export const listCharactersByOwner = /* GraphQL */ `
             inHand
             breakWeapon
             disarm
+            arrowCount
+            specialProjectileCount
+            aim
+            horseback
             createdAt
             updatedAt
             owner
@@ -2267,7 +2304,6 @@ export const listCharactersByOwner = /* GraphQL */ `
           items {
             id
             characterId
-            skillId
             skill {
               id
               percentageSkill
@@ -2571,6 +2607,13 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
           gemstones
           misc
         }
+        skillPoints {
+          base
+          current
+          perLevel
+          intelligence
+          dexterity
+        }
         languages {
           language
           level
@@ -2643,6 +2686,10 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
             inHand
             breakWeapon
             disarm
+            arrowCount
+            specialProjectileCount
+            aim
+            horseback
             createdAt
             updatedAt
             owner
@@ -2653,7 +2700,6 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
           items {
             id
             characterId
-            skillId
             skill {
               id
               percentageSkill

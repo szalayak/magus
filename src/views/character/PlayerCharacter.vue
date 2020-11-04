@@ -77,14 +77,13 @@
         <weapon-assignments :id="id" :editable="false" />
       </v-col>
       <v-col v-show="page === 2" cols="12">
-        <v-card>
-          <v-card-title>Ranged Weapons</v-card-title>
-        </v-card>
+        <ranged-weapon-assignments :id="id" :editable="false" />
       </v-col>
-      <v-col v-show="page === 2" cols="12">
-        <v-card>
-          <v-card-title>Skills</v-card-title>
-        </v-card>
+      <v-col v-show="page === 2" cols="12" xs="12" sm="9" lg="10">
+        <skill-assignments :id="id" :editable="false" />
+      </v-col>
+      <v-col v-show="page === 2" cols="12" xs="12" sm="3" lg="2">
+        <skill-points :id="id" :editable="editable" />
       </v-col>
       <v-col v-show="page === 3" cols="12" sm="12" md="3" lg="2">
         <v-card>
@@ -92,13 +91,11 @@
         </v-card>
       </v-col>
       <v-col v-show="page === 3" cols="12" sm="12" md="3" lg="2">
-        <v-card>
-          <v-card-title>Languages</v-card-title>
-        </v-card>
+        <languages :id="id" :editable="false" />
       </v-col>
       <v-col v-show="page === 3" cols="12" sm="12" md="3" lg="2">
         <v-card>
-          <v-card-title>Wallet</v-card-title>
+          <wallet :id="id" :editable="editable" />
         </v-card>
       </v-col>
       <v-col v-show="page === 3" cols="12" sm="12" md="3" lg="2">
@@ -122,9 +119,7 @@
         </v-card>
       </v-col>
       <v-col v-show="page === 3" cols="12" sm="12" md="3" lg="2">
-        <v-card>
-          <v-card-title>Notes</v-card-title>
-        </v-card>
+        <notes :id="id" :editable="editable" />
       </v-col>
     </v-row>
     <v-snackbar
@@ -162,6 +157,12 @@ import CombatValuesCard from "@/components/character/CombatValuesCard.vue";
 import ArmourCard from "@/components/character/ArmourCard.vue";
 import ShieldCard from "@/components/character/ShieldCard.vue";
 import WeaponAssignmentCard from "@/components/character/WeaponAssignmentCard.vue";
+import RangedWeaponAssignmentCard from "@/components/character/RangedWeaponAssignmentCard.vue";
+import SkillAssignmentCard from "@/components/character/SkillAssignmentCard.vue";
+import SkillPointsCard from "@/components/character/SkillPointsCard.vue";
+import LanguageCard from "@/components/character/LanguageCard.vue";
+import WalletCard from "@/components/character/WalletCard.vue";
+import NotesCard from "@/components/character/NotesCard.vue";
 
 @Component({
   name: "player-character",
@@ -181,6 +182,12 @@ import WeaponAssignmentCard from "@/components/character/WeaponAssignmentCard.vu
     armour: ArmourCard,
     shield: ShieldCard,
     "weapon-assignments": WeaponAssignmentCard,
+    "ranged-weapon-assignments": RangedWeaponAssignmentCard,
+    "skill-assignments": SkillAssignmentCard,
+    "skill-points": SkillPointsCard,
+    languages: LanguageCard,
+    wallet: WalletCard,
+    notes: NotesCard,
   },
 })
 export default class PlayerCharacter extends Vue {
@@ -215,7 +222,9 @@ export default class PlayerCharacter extends Vue {
   }
 
   mounted() {
-    this.$store.dispatch("character/loadItem", this.id);
+    this.$store
+      .dispatch("character/loadItem", this.id)
+      .then(() => (document.title = this.character.name));
   }
 
   created() {
@@ -227,6 +236,7 @@ export default class PlayerCharacter extends Vue {
       this.$store.dispatch("shield/load"),
       this.$store.dispatch("armour/load"),
       this.$store.dispatch("weapon/load"),
+      this.$store.dispatch("skill/load"),
     ]).catch((error: GraphQLResult<Character>) => {
       this.messages = error.errors?.map(err => err.message) || [];
       this.notification = true;

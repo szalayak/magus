@@ -44,7 +44,6 @@ export default class RaceAdmin extends Vue {
 
   get headers() {
     return [
-      { text: this.$t("id"), value: "id" },
       { text: this.$t("title"), value: "description.title" },
       { text: this.$t("playable"), value: "playable" },
       { text: this.$t("actions"), value: "actions", sortable: false },

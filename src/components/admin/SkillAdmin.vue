@@ -82,7 +82,6 @@ export default class SkillAdmin extends Vue {
 
   get headers() {
     return [
-      { text: this.$t("id"), value: "id" },
       { text: this.$t("skill-group"), value: "skillGroup" },
       { text: this.$t("title"), value: "description.title" },
       { text: this.$t("percentage-skill"), value: "percentageSkill" },

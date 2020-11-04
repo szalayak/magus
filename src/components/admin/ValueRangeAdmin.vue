@@ -56,7 +56,6 @@ export default class ValueRangeAdmin extends Vue {
 
   get headers() {
     return [
-      { text: this.$t("id"), value: "id" },
       { text: this.$t("type"), value: "type" },
       { text: this.$t("title"), value: "description.title" },
       { text: this.$t("actions"), value: "actions", sortable: false },

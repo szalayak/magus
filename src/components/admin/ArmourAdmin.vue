@@ -71,7 +71,6 @@ export default class ArmourAdmin extends Vue {
 
   get headers() {
     return [
-      { text: this.$t("id"), value: "id" },
       { text: this.$t("title"), value: "description.title" },
       {
         text: this.$t("movement-prevention-value"),

@@ -144,3 +144,11 @@ export interface Wallet {
   gemstones?: string;
   misc?: string;
 }
+
+export interface SkillPoints {
+  base?: number;
+  current?: number;
+  perLevel?: number;
+  intelligence?: number;
+  dexterity?: number;
+}

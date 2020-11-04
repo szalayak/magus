@@ -750,7 +750,7 @@ export const onDeleteThrow = /* GraphQL */ `
   }
 `;
 export const onCreateCharacter = /* GraphQL */ `
-  subscription OnCreateCharacter($owner: String!, $dungeonMaster: String!) {
+  subscription OnCreateCharacter($owner: String, $dungeonMaster: String) {
     onCreateCharacter(owner: $owner, dungeonMaster: $dungeonMaster) {
       id
       name
@@ -949,6 +949,13 @@ export const onCreateCharacter = /* GraphQL */ `
         gemstones
         misc
       }
+      skillPoints {
+        base
+        current
+        perLevel
+        intelligence
+        dexterity
+      }
       languages {
         language
         level
@@ -1043,6 +1050,10 @@ export const onCreateCharacter = /* GraphQL */ `
           inHand
           breakWeapon
           disarm
+          arrowCount
+          specialProjectileCount
+          aim
+          horseback
           createdAt
           updatedAt
           owner
@@ -1053,7 +1064,6 @@ export const onCreateCharacter = /* GraphQL */ `
         items {
           id
           characterId
-          skillId
           skill {
             id
             descriptions {
@@ -1201,7 +1211,7 @@ export const onCreateCharacter = /* GraphQL */ `
   }
 `;
 export const onUpdateCharacter = /* GraphQL */ `
-  subscription OnUpdateCharacter($owner: String!, $dungeonMaster: String!) {
+  subscription OnUpdateCharacter($owner: String, $dungeonMaster: String) {
     onUpdateCharacter(owner: $owner, dungeonMaster: $dungeonMaster) {
       id
       name
@@ -1400,6 +1410,13 @@ export const onUpdateCharacter = /* GraphQL */ `
         gemstones
         misc
       }
+      skillPoints {
+        base
+        current
+        perLevel
+        intelligence
+        dexterity
+      }
       languages {
         language
         level
@@ -1494,6 +1511,10 @@ export const onUpdateCharacter = /* GraphQL */ `
           inHand
           breakWeapon
           disarm
+          arrowCount
+          specialProjectileCount
+          aim
+          horseback
           createdAt
           updatedAt
           owner
@@ -1504,7 +1525,6 @@ export const onUpdateCharacter = /* GraphQL */ `
         items {
           id
           characterId
-          skillId
           skill {
             id
             descriptions {
@@ -1652,7 +1672,7 @@ export const onUpdateCharacter = /* GraphQL */ `
   }
 `;
 export const onDeleteCharacter = /* GraphQL */ `
-  subscription OnDeleteCharacter($owner: String!, $dungeonMaster: String!) {
+  subscription OnDeleteCharacter($owner: String, $dungeonMaster: String) {
     onDeleteCharacter(owner: $owner, dungeonMaster: $dungeonMaster) {
       id
       name
@@ -1851,6 +1871,13 @@ export const onDeleteCharacter = /* GraphQL */ `
         gemstones
         misc
       }
+      skillPoints {
+        base
+        current
+        perLevel
+        intelligence
+        dexterity
+      }
       languages {
         language
         level
@@ -1945,6 +1972,10 @@ export const onDeleteCharacter = /* GraphQL */ `
           inHand
           breakWeapon
           disarm
+          arrowCount
+          specialProjectileCount
+          aim
+          horseback
           createdAt
           updatedAt
           owner
@@ -1955,7 +1986,6 @@ export const onDeleteCharacter = /* GraphQL */ `
         items {
           id
           characterId
-          skillId
           skill {
             id
             descriptions {
@@ -2149,6 +2179,10 @@ export const onCreateWeaponAssignment = /* GraphQL */ `
       inHand
       breakWeapon
       disarm
+      arrowCount
+      specialProjectileCount
+      aim
+      horseback
       createdAt
       updatedAt
       owner
@@ -2202,6 +2236,10 @@ export const onUpdateWeaponAssignment = /* GraphQL */ `
       inHand
       breakWeapon
       disarm
+      arrowCount
+      specialProjectileCount
+      aim
+      horseback
       createdAt
       updatedAt
       owner
@@ -2255,6 +2293,10 @@ export const onDeleteWeaponAssignment = /* GraphQL */ `
       inHand
       breakWeapon
       disarm
+      arrowCount
+      specialProjectileCount
+      aim
+      horseback
       createdAt
       updatedAt
       owner
@@ -2266,7 +2308,6 @@ export const onCreateSkillAssignment = /* GraphQL */ `
     onCreateSkillAssignment(owner: $owner) {
       id
       characterId
-      skillId
       skill {
         id
         descriptions {
@@ -2306,7 +2347,6 @@ export const onUpdateSkillAssignment = /* GraphQL */ `
     onUpdateSkillAssignment(owner: $owner) {
       id
       characterId
-      skillId
       skill {
         id
         descriptions {
@@ -2346,7 +2386,6 @@ export const onDeleteSkillAssignment = /* GraphQL */ `
     onDeleteSkillAssignment(owner: $owner) {
       id
       characterId
-      skillId
       skill {
         id
         descriptions {

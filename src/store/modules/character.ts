@@ -1,6 +1,7 @@
 import {
   CompanionType,
   CreateCharacterMutation,
+  CreateSkillAssignmentMutation,
   CreateWeaponAssignmentMutation,
   GetCharacterQuery,
   ListCharactersByDungeonMasterQuery,
@@ -8,14 +9,18 @@ import {
   ListCharactersQuery,
   Mastery,
   UpdateCharacterMutation,
+  UpdateSkillAssignmentMutation,
   UpdateWeaponAssignmentMutation,
 } from "@/API";
 import {
   createCharacter,
+  createSkillAssignment,
   createWeaponAssignment,
   deleteCharacter,
+  deleteSkillAssignment,
   deleteWeaponAssignment,
   updateCharacter,
+  updateSkillAssignment,
   updateWeaponAssignment,
 } from "@/graphql/mutations";
 import {
@@ -24,6 +29,7 @@ import {
   listCharactersByDungeonMaster,
   listCharactersByOwner,
 } from "@/graphql/queries";
+import { purgeUndefined } from "@/utils/mapping";
 import { API } from "aws-amplify";
 import { Module } from "vuex";
 import { RootState } from "..";
@@ -39,6 +45,7 @@ import {
   MagicalAbility,
   MutablePointValue,
   Poison,
+  SkillPoints,
   SpellResistance,
   ThrowScenario,
   Wallet,
@@ -55,22 +62,27 @@ import { Weapon } from "./weapon";
 
 export interface WeaponAssignment extends Identifiable {
   characterId: string;
-  custom?: boolean;
   weapon?: Weapon;
   mastery?: Mastery;
   inHand?: boolean;
   breakWeapon?: Mastery;
   disarm?: Mastery;
+  arrowCount?: number;
+  specialProjectileCount?: number;
+  aim?: Mastery;
+  horseback?: Mastery;
 }
 
 export interface SkillAssignment extends Identifiable {
-  skill: Skill;
+  characterId: string;
+  skill?: Skill;
   mastery?: Mastery;
   percentageValue?: number;
   skillPointsUsed?: number;
 }
 
 export interface CharacterCompanion extends Identifiable {
+  characterId: string;
   name: string;
   type?: CompanionType;
   health?: HealthInformation;
@@ -85,6 +97,7 @@ export interface CharacterCompanion extends Identifiable {
 }
 
 export interface MagicalItemAssignment extends Identifiable {
+  characterId: string;
   magicalItem?: MagicalItem;
   location?: string;
 }
@@ -118,10 +131,11 @@ export interface CharacterCore extends Identifiable {
   combatValueModifiersPerLevel?: number;
   mandatoryCombatValueModifierDistribution?: string;
   wallet?: Wallet;
+  skillPoints: SkillPoints;
   languages?: LanguageAbility[];
   inventory?: InventoryItem[];
   poisons?: Poison[];
-  notes?: string[];
+  notes?: string;
   armour?: Armour;
   shield?: Shield;
   createdAt?: string;
@@ -328,6 +342,26 @@ const character: Module<CharacterState, RootState> = {
         mergeTransient(state, character);
       }
     },
+    mergeSkillAssignment(state, assignment: SkillAssignment) {
+      const character = findPersistent(state, assignment.characterId);
+      if (character) {
+        if (!character.skills) character.skills = [assignment];
+        else {
+          const existing = character.skills?.find(s => s.id === assignment.id);
+          if (existing) Object.assign(existing, assignment);
+          else character.skills?.push(assignment);
+        }
+        mergeTransient(state, character);
+      }
+    },
+    removeSkillAssignment(state, assignment: SkillAssignment) {
+      const character = findPersistent(state, assignment.characterId);
+      const existing = character?.skills?.find(w => w.id === assignment.id);
+      if (character && existing) {
+        character?.skills?.splice(character.skills.indexOf(existing), 1);
+        mergeTransient(state, character);
+      }
+    },
   },
   actions: {
     async load(context) {
@@ -477,6 +511,10 @@ const character: Module<CharacterState, RootState> = {
             inHand: assignment.inHand,
             breakWeapon: assignment.breakWeapon,
             disarm: assignment.disarm,
+            arrowCount: assignment.arrowCount,
+            specialProjectileCount: assignment.specialProjectileCount,
+            aim: assignment.aim,
+            horseback: assignment.horseback,
           },
         },
       })) as { data: CreateWeaponAssignmentMutation };
@@ -509,6 +547,54 @@ const character: Module<CharacterState, RootState> = {
         },
       });
       context.commit("removeWeaponAssignment", assignment);
+    },
+
+    async createSkillAssignment(context, assignment: SkillAssignment) {
+      const {
+        data: { createSkillAssignment: createdAssignment },
+      } = (await API.graphql({
+        query: createSkillAssignment,
+        variables: {
+          input: {
+            characterId: assignment.characterId,
+            skillAssignmentSkillId: assignment.skill?.id,
+            mastery: assignment.mastery,
+            percentageValue: assignment.percentageValue,
+            skillPointsUsed: assignment.skillPointsUsed,
+          },
+        },
+      })) as { data: CreateSkillAssignmentMutation };
+      context.commit("mergeSkillAssignment", createdAssignment);
+    },
+
+    async updateSkillAssignment(context, assignment: SkillAssignment) {
+      const {
+        data: { updateSkillAssignment: updatedAssignment },
+      } = (await API.graphql({
+        query: updateSkillAssignment,
+        variables: {
+          input: {
+            id: assignment.id,
+            skillAssignmentSkillId: assignment.skill?.id,
+            mastery: assignment.mastery,
+            percentageValue: assignment.percentageValue,
+            skillPointsUsed: assignment.skillPointsUsed,
+          },
+        },
+      })) as { data: UpdateSkillAssignmentMutation };
+      context.commit("mergeSkillAssignment", updatedAssignment);
+    },
+
+    async deleteSkillAssignment(context, assignment: SkillAssignment) {
+      await API.graphql({
+        query: deleteSkillAssignment,
+        variables: {
+          input: {
+            id: assignment.id,
+          },
+        },
+      });
+      context.commit("removeSkillAssignment", assignment);
     },
   },
 };

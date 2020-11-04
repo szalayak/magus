@@ -8,10 +8,10 @@
 </template>
 <script lang="ts">
 import { Character } from "@/store/modules/character";
-import Vue from "vue";
 import Component from "vue-class-component";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
 import CharacterList from "./CharacterList.vue";
+import TitleComponent from "@/mixins/TitleComponent";
 
 @Component({
   name: "player-characters-as-dm",
@@ -19,7 +19,8 @@ import CharacterList from "./CharacterList.vue";
     "character-list": CharacterList,
   },
 })
-export default class PlayerCharactersAsDM extends Vue {
+export default class PlayerCharactersAsDM extends TitleComponent {
+  title = this.$t("player-characters");
   messages: string[] = [];
   notification = false;
 

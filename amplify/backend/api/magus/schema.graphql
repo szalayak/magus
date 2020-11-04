@@ -57,7 +57,12 @@ type ThrowScenario {
 
 type ValueRangeValue
   @model
-  @auth(rules: [{ allow: private }])
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["Editor", "Admin"] }
+    ]
+  )
   @key(
     name: "byType"
     fields: ["type", "id"]
@@ -70,7 +75,12 @@ type ValueRangeValue
 
 type Class
   @model(queries: { list: "listClasses", get: "getClass" })
-  @auth(rules: [{ allow: private }])
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["Editor", "Admin"] }
+    ]
+  )
   @key(
     name: "classesByMainClass"
     fields: ["mainClassId"]
@@ -84,20 +94,41 @@ type Class
   magicUser: Boolean
 }
 
-type Race @model @auth(rules: [{ allow: private }]) {
+type Race
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["Editor", "Admin"] }
+    ]
+  ) {
   id: ID!
   descriptions: [Description!]!
   playable: Boolean
 }
 
-type PsiSchool @model @auth(rules: [{ allow: private }]) {
+type PsiSchool
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["Editor", "Admin"] }
+    ]
+  ) {
   id: ID!
   descriptions: [Description!]!
   basePsiPoints: Int!
   psiPointsPerLevel: Int!
 }
 
-type Armour @model @auth(rules: [{ allow: private }]) {
+type Armour
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["Editor", "Admin"] }
+    ]
+  ) {
   id: ID!
   descriptions: [Description!]!
   weight: String
@@ -106,7 +137,14 @@ type Armour @model @auth(rules: [{ allow: private }]) {
   price: Int
 }
 
-type Shield @model @auth(rules: [{ allow: private }]) {
+type Shield
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["Editor", "Admin"] }
+    ]
+  ) {
   id: ID!
   descriptions: [Description!]!
   combatValues: CombatValues
@@ -114,10 +152,17 @@ type Shield @model @auth(rules: [{ allow: private }]) {
   weight: String
   price: Int
   damage: ThrowScenario
-  attacksPerTurn: Float!  
+  attacksPerTurn: Float!
 }
 
-type Weapon @model @auth(rules: [{ allow: private }]) {
+type Weapon
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["Editor", "Admin"] }
+    ]
+  ) {
   id: ID!
   descriptions: [Description!]!
   weaponTypeId: ID!
@@ -132,7 +177,14 @@ type Weapon @model @auth(rules: [{ allow: private }]) {
   ranged: Boolean
 }
 
-type Skill @model @auth(rules: [{ allow: private }]) {
+type Skill
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["Editor", "Admin"] }
+    ]
+  ) {
   id: ID!
   descriptions: [Description!]!
   percentageSkill: Boolean
@@ -143,7 +195,14 @@ type Skill @model @auth(rules: [{ allow: private }]) {
   masterCost: Int
 }
 
-type MagicalItem @model @auth(rules: [{ allow: private }]) {
+type MagicalItem
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["Editor", "Admin"] }
+    ]
+  ) {
   id: ID!
   descriptions: [Description!]!
   class: Class! @connection
@@ -279,14 +338,27 @@ type Wallet {
   misc: String
 }
 
+type SkillPoints{
+  base: Int
+  current: Int
+  perLevel: Int
+  intelligence: Int
+  dexterity: Int
+}
+
 type Character
   @model
   @key(name: "byOwner", fields: ["owner"], queryField: "listCharactersByOwner")
-  @key(name: "byDungeonMaster", fields: ["dungeonMaster"], queryField: "listCharactersByDungeonMaster")
+  @key(
+    name: "byDungeonMaster"
+    fields: ["dungeonMaster"]
+    queryField: "listCharactersByDungeonMaster"
+  )
   @auth(
     rules: [
       { allow: owner }
       { allow: owner, ownerField: "dungeonMaster", operations: [read] }
+      { allow: groups, groups: ["Admin"] }
     ]
   ) {
   id: ID!
@@ -317,10 +389,11 @@ type Character
   combatValueModifiersPerLevel: Int
   mandatoryCombatValueModifierDistribution: String
   wallet: Wallet
+  skillPoints: SkillPoints
   languages: [LanguageAbility!]
   inventory: [InventoryItem!]
   poisons: [Poison!]
-  notes: [String]
+  notes: String
   armour: Armour @connection
   shield: Shield @connection
   weapons: [WeaponAssignment!]
@@ -343,6 +416,10 @@ type WeaponAssignment
   inHand: Boolean
   breakWeapon: Mastery
   disarm: Mastery
+  arrowCount: Int
+  specialProjectileCount: Int
+  aim: Mastery
+  horseback: Mastery
 }
 
 type SkillAssignment
@@ -350,9 +427,8 @@ type SkillAssignment
   @key(name: "byCharacter", fields: ["characterId"])
   @auth(rules: [{ allow: owner }]) {
   id: ID!
-  characterId: ID!  
-  skillId: ID!
-  skill: Skill @connection(fields: ["skillId"])
+  characterId: ID!
+  skill: Skill @connection
   mastery: Mastery
   percentageValue: Int
   skillPointsUsed: Int

@@ -3,8 +3,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
 import RaceAdmin from "@/components/admin/RaceAdmin.vue";
+import TitleComponent from "@/mixins/TitleComponent";
 
 @Component({
   name: "races",
@@ -12,5 +13,7 @@ import RaceAdmin from "@/components/admin/RaceAdmin.vue";
     "race-admin": RaceAdmin,
   },
 })
-export default class Races extends Vue {}
+export default class Races extends TitleComponent {
+  title = this.$t("races");
+}
 </script>

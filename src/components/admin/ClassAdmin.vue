@@ -65,7 +65,6 @@ export default class ClassAdmin extends Vue {
 
   get headers() {
     return [
-      { text: this.$t("id"), value: "id" },
       { text: this.$t("main-class"), value: "mainClass" },
       { text: this.$t("title"), value: "description.title" },
       { text: this.$t("magic-user"), value: "magicUser" },

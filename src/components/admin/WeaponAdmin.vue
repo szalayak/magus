@@ -128,7 +128,6 @@ export default class WeaponAdmin extends Vue {
 
   get headers() {
     return [
-      { text: this.$t("id"), value: "id" },
       { text: this.$t("title"), value: "description.title" },
       { text: this.$t("weapon-type"), value: "weaponType" },
       { text: this.$t("ranged"), value: "ranged" },

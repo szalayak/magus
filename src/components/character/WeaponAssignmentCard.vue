@@ -1,5 +1,89 @@
 <template>
   <character-info-card :id="id" :editable="editable" :title="$t('weapons')">
+    <template v-slot:toolbar="{}">
+      <v-dialog scrollable v-model="dialog" max-width="500px">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn color="primary" text v-bind="attrs" v-on="on">
+            {{ $t("new-weapon") }}
+          </v-btn>
+        </template>
+        <v-card>
+          <v-card-title>{{ formTitle }}</v-card-title>
+          <v-card-text>
+            <v-form ref="form" v-model="valid">
+              <v-container>
+                <v-row dense>
+                  <v-col cols="12">
+                    <v-select
+                      v-model="editedItem.weapon"
+                      :items="weapons"
+                      item-text="description.title"
+                      item-value="id"
+                      :label="$t('weapon')"
+                      return-object
+                    ></v-select>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-select
+                      v-model="editedItem.mastery"
+                      :items="masteryLevels"
+                      :label="$t('mastery')"
+                    ></v-select>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-select
+                      v-model="editedItem.breakWeapon"
+                      :items="masteryLevels"
+                      :label="$t('break-weapon')"
+                    ></v-select>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-select
+                      v-model="editedItem.disarm"
+                      :items="masteryLevels"
+                      :label="$t('disarm')"
+                    ></v-select>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-checkbox
+                      v-model="editedItem.inHand"
+                      :label="$t('in-hand')"
+                    />
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-form>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="error" text @click="close">
+              {{ $t("cancel") }}
+            </v-btn>
+            <v-btn color="primary" text @click="save">
+              {{ $t("save") }}
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <v-dialog v-model="dialogDelete" max-width="500px">
+        <v-card>
+          <v-card-title class="headline">{{
+            $t("confirm-delete-message")
+          }}</v-card-title>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="error" text @click="closeDelete">{{
+              $t("cancel")
+            }}</v-btn>
+            <v-btn color="primary" text @click="deleteItemConfirm">{{
+              $t("ok")
+            }}</v-btn>
+            <v-spacer></v-spacer>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </template>
     <template v-slot:fields="{}">
       <v-data-table
         width="auto"
@@ -9,91 +93,9 @@
         :sort-by="sortBy"
       >
         <template v-slot:top>
-          <v-toolbar flat>
-            <v-spacer></v-spacer>
-            <v-dialog scrollable v-model="dialog" max-width="500px">
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn color="primary" text v-bind="attrs" v-on="on">
-                  {{ $t("new-weapon") }}
-                </v-btn>
-              </template>
-              <v-card>
-                <v-card-title>{{ formTitle }}</v-card-title>
-                <v-card-text>
-                  <v-form ref="form" v-model="valid">
-                    <v-container>
-                      <v-row dense>
-                        <v-col cols="12">
-                          <v-select
-                            v-model="editedItem.weapon"
-                            :items="weapons"
-                            item-text="description.title"
-                            item-value="id"
-                            :label="$t('weapon')"
-                            return-object
-                          ></v-select>
-                        </v-col>
-                        <v-col cols="12">
-                          <v-select
-                            v-model="editedItem.mastery"
-                            :items="masteryLevels"
-                            :label="$t('mastery')"
-                          ></v-select>
-                        </v-col>
-                        <v-col cols="12">
-                          <v-select
-                            v-model="editedItem.breakWeapon"
-                            :items="masteryLevels"
-                            :label="$t('break-weapon')"
-                          ></v-select>
-                        </v-col>
-                        <v-col cols="12">
-                          <v-select
-                            v-model="editedItem.disarm"
-                            :items="masteryLevels"
-                            :label="$t('disarm')"
-                          ></v-select>
-                        </v-col>
-                        <v-col cols="12">
-                          <v-checkbox
-                            v-model="editedItem.inHand"
-                            :label="$t('in-hand')"
-                          />
-                        </v-col>
-                      </v-row>
-                    </v-container>
-                  </v-form>
-                </v-card-text>
-
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="error" text @click="close">
-                    {{ $t("cancel") }}
-                  </v-btn>
-                  <v-btn color="primary" text @click="save">
-                    {{ $t("save") }}
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-            <v-dialog v-model="dialogDelete" max-width="500px">
-              <v-card>
-                <v-card-title class="headline">{{
-                  $t("confirm-delete-message")
-                }}</v-card-title>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="error" text @click="closeDelete">{{
-                    $t("cancel")
-                  }}</v-btn>
-                  <v-btn color="primary" text @click="deleteItemConfirm">{{
-                    $t("ok")
-                  }}</v-btn>
-                  <v-spacer></v-spacer>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-toolbar>
+          <v-alert v-if="notification" dense outlined type="error">
+            {{ messages }}
+          </v-alert>
         </template>
         <template v-slot:[`item.mastery`]="{ item }">
           {{ masteryToString(item.mastery) }}
@@ -183,10 +185,10 @@ export default class WeaponAssignmentCard extends CharacterInfo {
   }
 
   get weapons() {
-    return localise(
+    return (localise(
       this.$store.getters["weapon/list"] || [],
       this.$i18n.locale
-    );
+    ) as Weapon[]).filter(w => !w.ranged);
   }
 
   get assignments() {
@@ -274,6 +276,10 @@ export default class WeaponAssignmentCard extends CharacterInfo {
           : `character/updateWeaponAssignment`,
         this.editedItem
       )
+      .then(() => {
+        this.messages = [];
+        this.notification = false;
+      })
       .catch((error: GraphQLResult<WeaponAssignment>) => {
         this.messages = error.errors?.map(err => err.message) || [];
         this.notification = true;
