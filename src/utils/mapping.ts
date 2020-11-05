@@ -11,11 +11,14 @@ export const purgeUndefined = (obj: unknown) => {
       if (attr === null) {
         result[key] = attr;
       } else {
-        result[key] = purgeUndefined(attr as LooseObject);
+        const purged = purgeUndefined(attr as LooseObject);
+        result[key] = Object.keys(purged).every(p => purged[p] === null)
+          ? null
+          : purged;
       }
     } else if (Array.isArray(attr)) {
       const ma = (attr as Array<LooseObject>).map(a => purgeUndefined(a));
-      result[key] = ma.filter(a => !!a);
+      result[key] = ma.every(a => a === null) ? null : ma;
     } else {
       if (typeof attr !== "undefined") {
         result[key] = attr;

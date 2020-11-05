@@ -240,5 +240,16 @@
   "mithril":"Mithril",
   "gemstones":"Gemstones",
   "other":"Other",
-  "report-bug":"Report Bug"
+  "report-bug":"Report Bug",
+  "inventory":"Inventory",
+  "new-inventory-item":"New Inventory Item",
+  "edit-inventory-item":"Edit Inventory Item",
+  "item":"Item",
+  "amount":"Amount",
+  "location":"Location",
+  "poisons":"Poisons",
+  "poison":"Poison",
+  "new-poison":"New Poison",
+  "edit-poison":"Edit Poison",
+  "magical-item":"Magical Item"
 }

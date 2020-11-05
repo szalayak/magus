@@ -1,10 +1,10 @@
 <template>
-  <character-info-card :id="id" :editable="false" :title="$t('languages')">
+  <character-info-card :id="id" :editable="false" :title="$t('inventory')">
     <template v-slot:toolbar="{}">
       <v-dialog scrollable v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on, attrs }">
           <v-btn color="primary" text v-bind="attrs" v-on="on">
-            {{ $t("new-language") }}
+            {{ $t("new-inventory-item") }}
           </v-btn>
         </template>
         <v-card>
@@ -15,16 +15,21 @@
                 <v-row dense>
                   <v-col cols="12">
                     <v-text-field
-                      v-model="editedItem.language"
-                      :label="$t('language')"
+                      v-model="editedItem.name"
+                      :label="$t('item')"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12">
-                    <v-select
-                      v-model="editedItem.level"
-                      :items="languageLevels"
-                      :label="$t('level')"
-                    ></v-select>
+                    <v-text-field
+                      v-model="editedItem.amount"
+                      :label="$t('amount')"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-text-field
+                      v-model="editedItem.location"
+                      :label="$t('location')"
+                    ></v-text-field>
                   </v-col>
                 </v-row>
               </v-container>
@@ -64,18 +69,13 @@
         width="auto"
         height="auto"
         :headers="headers"
-        :items="languages"
+        :items="items"
         :sort-by="sortBy"
-        disable-pagination
-        hide-default-footer
       >
         <template v-slot:top>
           <v-alert v-if="notification" dense outlined type="error">
             {{ messages }}
           </v-alert>
-        </template>
-        <template v-slot:[`item.level`]="{ item }">
-          {{ levelToString(item.level) }}
         </template>
         <template v-slot:[`item.actions`]="{ item }">
           <v-icon small class="mr-2" @click="editItem(item)">
@@ -93,19 +93,18 @@
 import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
-import { DropdownValueList, LanguageAbility } from "@/store/types";
-import { LanguageLevel } from "@/API";
+import { InventoryItem } from "@/store/types";
 
 @Component({
-  name: "language-card",
+  name: "inventory-card",
   components: {
     "character-info-card": CharacterInfoCard,
   },
 })
-export default class LanguageCard extends CharacterInfo {
+export default class InventoryCard extends CharacterInfo {
   valid = true;
   dialog = false;
-  sortBy = ["skill.description.title"];
+  sortBy = ["name"];
   editedIndex = -1;
   dialogDelete = false;
   editedItem = this.defaultItem();
@@ -114,21 +113,15 @@ export default class LanguageCard extends CharacterInfo {
 
   get headers() {
     return [
-      { text: this.$t("language"), value: "language" },
-      { text: this.$t("level"), value: "level" },
+      { text: this.$t("item"), value: "name" },
+      { text: this.$t("amount"), value: "amount" },
+      { text: this.$t("location"), value: "location" },
       { text: this.$t("actions"), value: "actions", sortable: false },
     ];
   }
 
-  get languages() {
-    return this.character.languages || [];
-  }
-
-  get languageLevels(): DropdownValueList[] {
-    return Object.keys(LanguageLevel).map(m => ({
-      value: m.toString(),
-      text: this.$t(m).toString(),
-    }));
+  get items() {
+    return this.character.inventory || [];
   }
 
   get isNewItem() {
@@ -137,16 +130,12 @@ export default class LanguageCard extends CharacterInfo {
 
   get formTitle() {
     return this.editedIndex === -1
-      ? this.$t("new-language")
-      : this.$t("edit-language");
+      ? this.$t("new-inventory-item")
+      : this.$t("edit-inventory-item");
   }
 
-  defaultItem(): LanguageAbility {
+  defaultItem(): InventoryItem {
     return {};
-  }
-
-  levelToString(languageLevel: LanguageLevel) {
-    return this.$t(languageLevel).toString();
   }
 
   close() {
@@ -154,13 +143,13 @@ export default class LanguageCard extends CharacterInfo {
   }
   save() {
     if (this.isNewItem)
-      this.character.languages
-        ? this.character.languages.push(this.editedItem)
-        : (this.character.languages = [this.editedItem]);
+      this.character.inventory
+        ? this.character.inventory.push(this.editedItem)
+        : (this.character.inventory = [this.editedItem]);
     else {
       Object.assign(
-        this.character.languages
-          ? this.character.languages[this.editedIndex]
+        this.character.inventory
+          ? this.character.inventory[this.editedIndex]
           : {},
         this.editedItem
       );
@@ -170,7 +159,7 @@ export default class LanguageCard extends CharacterInfo {
   }
 
   deleteItemConfirm() {
-    this.character.languages?.splice(this.editedIndex, 1);
+    this.character.inventory?.splice(this.editedIndex, 1);
     this.$store.dispatch("character/update", this.character);
     this.closeDelete();
   }
@@ -181,13 +170,13 @@ export default class LanguageCard extends CharacterInfo {
       this.editedIndex = -1;
     });
   }
-  editItem(item: LanguageAbility) {
-    this.editedIndex = this.languages.indexOf(item);
+  editItem(item: InventoryItem) {
+    this.editedIndex = this.items.indexOf(item);
     this.editedItem = Object.assign({}, item);
     this.dialog = true;
   }
-  deleteItem(item: LanguageAbility) {
-    this.editedIndex = this.languages.indexOf(item);
+  deleteItem(item: InventoryItem) {
+    this.editedIndex = this.items.indexOf(item);
     this.editedItem = Object.assign({}, item);
     this.dialogDelete = true;
   }

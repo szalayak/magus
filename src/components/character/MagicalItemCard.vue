@@ -1,10 +1,10 @@
 <template>
-  <character-info-card :id="id" :editable="false" :title="$t('skills')">
+  <character-info-card :id="id" :editable="false" :title="$t('magical-items')">
     <template v-slot:toolbar="{}">
       <v-dialog scrollable v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn v-if="editable" color="primary" text v-bind="attrs" v-on="on">
-            {{ $t("new-skill") }}
+          <v-btn color="primary" text v-bind="attrs" v-on="on">
+            {{ $t("new") }}
           </v-btn>
         </template>
         <v-card>
@@ -15,37 +15,18 @@
                 <v-row dense>
                   <v-col cols="12">
                     <v-select
-                      v-model="editedItem.skill"
-                      :items="skills"
+                      v-model="editedItem.magicalItem"
+                      :items="magicalItems"
                       item-text="description.title"
                       item-value="id"
-                      :label="$t('skill')"
+                      :label="$t('magical-item')"
                       return-object
                     ></v-select>
                   </v-col>
                   <v-col cols="12">
-                    <v-select
-                      v-model="editedItem.mastery"
-                      v-if="
-                        editedItem.skill && !editedItem.skill.percentageSkill
-                      "
-                      :items="masteryLevels"
-                      :label="$t('mastery')"
-                    ></v-select>
-                  </v-col>
-                  <v-col cols="12">
                     <v-text-field
-                      v-model.number="editedItem.percentageValue"
-                      v-if="
-                        editedItem.skill && editedItem.skill.percentageSkill
-                      "
-                      :label="$t('percentage')"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-text-field
-                      v-model.number="editedItem.skillPointsUsed"
-                      :label="$t('skill-points-used')"
+                      v-model="editedItem.location"
+                      :label="$t('location')"
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -89,19 +70,18 @@
         :headers="headers"
         :items="assignments"
         :sort-by="sortBy"
+        disable-pagination
+        hide-default-footer
       >
         <template v-slot:top>
           <v-alert v-if="notification" dense outlined type="error">
             {{ messages }}
           </v-alert>
         </template>
-        <template v-slot:[`item.mastery`]="{ item }">
-          {{ masteryToString(item) }}
+        <template v-slot:[`item.magicalItem`]="{ item }">
+          {{ magicalItemToString(item.magicalItem) }}
         </template>
-        <template v-slot:[`item.skill`]="{ item }">
-          {{ skillToString(item.skill) }}
-        </template>
-        <template v-if="editable" v-slot:[`item.actions`]="{ item }">
+        <template v-slot:[`item.actions`]="{ item }">
           <v-icon small class="mr-2" @click="editItem(item)">
             mdi-pencil
           </v-icon>
@@ -117,24 +97,24 @@
 import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
-import { DropdownValueList, ThrowScenario } from "@/store/types";
-import { getThrowScenarioString } from "@/utils/throwScenario";
 import { localise, localiseItem } from "@/utils/localise";
-import { Mastery } from "@/API";
-import { SkillAssignment, WeaponAssignment } from "@/store/modules/character";
+import {
+  MagicalItemAssignment,
+  WeaponAssignment,
+} from "@/store/modules/character";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
-import { Skill } from "@/store/modules/skill";
+import { MagicalItem } from "@/store/modules/magicalItem";
 
 @Component({
-  name: "skill-assignment-card",
+  name: "magical-item-card",
   components: {
     "character-info-card": CharacterInfoCard,
   },
 })
-export default class SkillAssignmentCard extends CharacterInfo {
+export default class MagicalItemAssignmentCard extends CharacterInfo {
   valid = true;
   dialog = false;
-  sortBy = ["skill.description.title"];
+  sortBy = ["magicalItem.description.title"];
   editedIndex = -1;
   dialogDelete = false;
   editedItem = this.defaultItem();
@@ -142,41 +122,22 @@ export default class SkillAssignmentCard extends CharacterInfo {
   messages: string[] = [];
 
   get headers() {
-    const headers = [
-      { text: this.$t("skill"), value: "skill" },
-      {
-        text: `${this.$t("mastery")}/${this.$t("percentage")}`,
-        value: "mastery",
-      },
-      { text: this.$t("skill-points-used"), value: "skillPointsUsed" },
+    return [
+      { text: this.$t("magical-item"), value: "magicalItem" },
+      { text: this.$t("location"), value: "location" },
+      { text: this.$t("actions"), value: "actions", sortable: false },
     ];
-    return this.editable
-      ? [
-          ...headers,
-          { text: this.$t("actions"), value: "actions", sortable: false },
-        ]
-      : headers;
   }
 
-  get skills() {
-    return localise(this.$store.getters["skill/list"] || [], this.$i18n.locale);
+  get magicalItems() {
+    return localise(
+      this.$store.getters["magicalItem/list"] || [],
+      this.$i18n.locale
+    );
   }
 
   get assignments() {
-    return this.character.skills || [];
-  }
-
-  get masteryLevels(): DropdownValueList[] {
-    return [
-      {
-        text: this.$t("none").toString(),
-        value: null,
-      },
-      ...Object.keys(Mastery).map(m => ({
-        value: m.toString(),
-        text: this.$t(m).toString(),
-      })),
-    ];
+    return this.character.magicalItems || [];
   }
 
   get isNewItem() {
@@ -185,28 +146,18 @@ export default class SkillAssignmentCard extends CharacterInfo {
 
   get formTitle() {
     return this.editedIndex === -1
-      ? this.$t("new-skill")
-      : this.$t("edit-skill");
+      ? this.$t("new-magical-item")
+      : this.$t("edit-magical-item");
   }
 
-  skillToString(skill: Skill) {
-    return localiseItem(skill, this.$i18n.locale).description?.title;
+  magicalItemToString(magicalItem: MagicalItem) {
+    return localiseItem(magicalItem, this.$i18n.locale).description?.title;
   }
 
-  defaultItem(): SkillAssignment {
+  defaultItem(): MagicalItemAssignment {
     return {
       characterId: this.character.id || "",
     };
-  }
-
-  damageToString(damage: ThrowScenario) {
-    return damage ? getThrowScenarioString(damage, this.$i18n) : "";
-  }
-
-  masteryToString(assignment: SkillAssignment) {
-    return assignment.skill?.percentageSkill
-      ? `${assignment.percentageValue || 0}%`
-      : this.$t(assignment.mastery || "");
   }
 
   close() {
@@ -216,8 +167,8 @@ export default class SkillAssignmentCard extends CharacterInfo {
     this.$store
       .dispatch(
         this.isNewItem
-          ? `character/createSkillAssignment`
-          : `character/updateSkillAssignment`,
+          ? `character/createMagicalItemAssignment`
+          : `character/updateMagicalItemAssignment`,
         this.editedItem
       )
       .then(() => {
@@ -232,7 +183,10 @@ export default class SkillAssignmentCard extends CharacterInfo {
   }
 
   deleteItemConfirm() {
-    this.$store.dispatch(`character/deleteSkillAssignment`, this.editedItem);
+    this.$store.dispatch(
+      `character/deleteMagicalItemAssignment`,
+      this.editedItem
+    );
     this.closeDelete();
   }
   closeDelete() {
@@ -242,12 +196,12 @@ export default class SkillAssignmentCard extends CharacterInfo {
       this.editedIndex = -1;
     });
   }
-  editItem(item: SkillAssignment) {
+  editItem(item: MagicalItemAssignment) {
     this.editedIndex = this.assignments.indexOf(item);
     this.editedItem = Object.assign({}, item);
     this.dialog = true;
   }
-  deleteItem(item: SkillAssignment) {
+  deleteItem(item: MagicalItemAssignment) {
     this.editedIndex = this.assignments.indexOf(item);
     this.editedItem = Object.assign({}, item);
     this.dialogDelete = true;
