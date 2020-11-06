@@ -74,51 +74,39 @@
         <shield :id="id" :editable="editable" />
       </v-col>
       <v-col v-show="page === 2" cols="12">
-        <weapon-assignments :id="id" :editable="false" />
+        <weapon-assignments :id="id" :editable="editable" />
       </v-col>
       <v-col v-show="page === 2" cols="12">
-        <ranged-weapon-assignments :id="id" :editable="false" />
+        <ranged-weapon-assignments :id="id" :editable="editable" />
       </v-col>
       <v-col v-show="page === 2" cols="12" xs="12" sm="9" lg="10">
-        <skill-assignments :id="id" :editable="false" />
+        <skill-assignments :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 2" cols="12" xs="12" sm="3" lg="2">
+      <v-col v-show="page === 2" cols="12" xs="12" sm="6" md="3" lg="2">
         <skill-points :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 3" cols="12" sm="12" md="3" lg="2">
-        <v-card>
-          <v-card-title>Magical Items</v-card-title>
-        </v-card>
+      <v-col v-show="page === 3" cols="12" xs="12" sm="6" md="3">
+        <magical-item-assignments :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 3" cols="12" sm="12" md="3" lg="2">
-        <languages :id="id" :editable="false" />
+      <v-col v-show="page === 3" cols="12" xs="12" sm="6" md="3" lg="2">
+        <languages :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 3" cols="12" sm="12" md="3" lg="2">
-        <v-card>
-          <wallet :id="id" :editable="editable" />
-        </v-card>
+      <v-col v-show="page === 3" cols="12" xs="12" sm="6" md="3" lg="2">
+        <wallet :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 3" cols="12" sm="12" md="3" lg="2">
-        <v-card>
-          <v-card-title>Inventory</v-card-title>
-        </v-card>
+      <v-col v-show="page === 3" cols="12" xs="12" sm="6" md="3">
+        <inventory :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 3" cols="12" sm="12" md="3" lg="2">
-        <v-card>
-          <v-card-title>Animals</v-card-title>
-        </v-card>
+      <v-col v-show="page === 3" cols="12" xs="12" sm="6" md="3" lg="2">
+        <poisons :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 3" cols="12" sm="12" md="3" lg="2">
-        <v-card>
-          <v-card-title>Companions</v-card-title>
-        </v-card>
+      <v-col v-show="page === 3" cols="12">
+        <animals :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 3" cols="12" sm="12" md="3" lg="2">
-        <v-card>
-          <v-card-title>Poisons</v-card-title>
-        </v-card>
+      <v-col v-show="page === 3" cols="12">
+        <servants :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 3" cols="12" sm="12" md="3" lg="2">
+      <v-col v-show="page === 3" cols="12">
         <notes :id="id" :editable="editable" />
       </v-col>
     </v-row>
@@ -163,6 +151,11 @@ import SkillPointsCard from "@/components/character/SkillPointsCard.vue";
 import LanguageCard from "@/components/character/LanguageCard.vue";
 import WalletCard from "@/components/character/WalletCard.vue";
 import NotesCard from "@/components/character/NotesCard.vue";
+import InventoryCard from "@/components/character/InventoryCard.vue";
+import PoisonCard from "@/components/character/PoisonCard.vue";
+import MagicalItemAssignmentCard from "@/components/character/MagicalItemCard.vue";
+import AnimalsCard from "@/components/character/AnimalsCard.vue";
+import ServantsCard from "@/components/character/ServantsCard.vue";
 
 @Component({
   name: "player-character",
@@ -188,6 +181,11 @@ import NotesCard from "@/components/character/NotesCard.vue";
     languages: LanguageCard,
     wallet: WalletCard,
     notes: NotesCard,
+    inventory: InventoryCard,
+    poisons: PoisonCard,
+    "magical-item-assignments": MagicalItemAssignmentCard,
+    animals: AnimalsCard,
+    servants: ServantsCard,
   },
 })
 export default class PlayerCharacter extends Vue {
@@ -200,10 +198,12 @@ export default class PlayerCharacter extends Vue {
   }
 
   set page(page) {
-    this.$router.push({
-      name: this.$route.name || undefined,
-      params: { ...this.$route.params, page: (page + 1).toString() },
-    });
+    if (page) {
+      this.$router.push({
+        name: this.$route.name || undefined,
+        params: { ...this.$route.params, page: (page + 1).toString() },
+      });
+    }
   }
 
   get editable(): boolean {
@@ -237,6 +237,7 @@ export default class PlayerCharacter extends Vue {
       this.$store.dispatch("armour/load"),
       this.$store.dispatch("weapon/load"),
       this.$store.dispatch("skill/load"),
+      this.$store.dispatch("magicalItem/load"),
     ]).catch((error: GraphQLResult<Character>) => {
       this.messages = error.errors?.map(err => err.message) || [];
       this.notification = true;

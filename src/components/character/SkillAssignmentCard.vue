@@ -1,9 +1,9 @@
 <template>
-  <character-info-card :id="id" :editable="editable" :title="$t('skills')">
+  <character-info-card :id="id" :editable="false" :title="$t('skills')">
     <template v-slot:toolbar="{}">
       <v-dialog scrollable v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn color="primary" text v-bind="attrs" v-on="on">
+          <v-btn v-if="editable" color="primary" text v-bind="attrs" v-on="on">
             {{ $t("new-skill") }}
           </v-btn>
         </template>
@@ -101,7 +101,7 @@
         <template v-slot:[`item.skill`]="{ item }">
           {{ skillToString(item.skill) }}
         </template>
-        <template v-slot:[`item.actions`]="{ item }">
+        <template v-if="editable" v-slot:[`item.actions`]="{ item }">
           <v-icon small class="mr-2" @click="editItem(item)">
             mdi-pencil
           </v-icon>
@@ -121,7 +121,7 @@ import { DropdownValueList, ThrowScenario } from "@/store/types";
 import { getThrowScenarioString } from "@/utils/throwScenario";
 import { localise, localiseItem } from "@/utils/localise";
 import { Mastery } from "@/API";
-import { SkillAssignment, WeaponAssignment } from "@/store/modules/character";
+import { SkillAssignment } from "@/store/modules/character";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
 import { Skill } from "@/store/modules/skill";
 
@@ -142,15 +142,20 @@ export default class SkillAssignmentCard extends CharacterInfo {
   messages: string[] = [];
 
   get headers() {
-    return [
+    const headers = [
       { text: this.$t("skill"), value: "skill" },
       {
         text: `${this.$t("mastery")}/${this.$t("percentage")}`,
         value: "mastery",
       },
       { text: this.$t("skill-points-used"), value: "skillPointsUsed" },
-      { text: this.$t("actions"), value: "actions", sortable: false },
     ];
+    return this.editable
+      ? [
+          ...headers,
+          { text: this.$t("actions"), value: "actions", sortable: false },
+        ]
+      : headers;
   }
 
   get skills() {
@@ -213,13 +218,13 @@ export default class SkillAssignmentCard extends CharacterInfo {
         this.isNewItem
           ? `character/createSkillAssignment`
           : `character/updateSkillAssignment`,
-        this.editedItem
+        { ...this.editedItem, characterId: this.character.id }
       )
       .then(() => {
         this.messages = [];
         this.notification = false;
       })
-      .catch((error: GraphQLResult<WeaponAssignment>) => {
+      .catch((error: GraphQLResult<SkillAssignment>) => {
         this.messages = error.errors?.map(err => err.message) || [];
         this.notification = true;
       });

@@ -1,10 +1,10 @@
 <template>
-  <character-info-card :id="id" :editable="false" :title="$t('languages')">
+  <character-info-card :id="id" :editable="false" :title="$t('magical-items')">
     <template v-slot:toolbar="{}">
       <v-dialog scrollable v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on, attrs }">
           <v-btn v-if="editable" color="primary" text v-bind="attrs" v-on="on">
-            {{ $t("new-language") }}
+            {{ $t("new") }}
           </v-btn>
         </template>
         <v-card>
@@ -14,22 +14,26 @@
               <v-container>
                 <v-row dense>
                   <v-col cols="12">
-                    <v-text-field
-                      v-model="editedItem.language"
-                      :label="$t('language')"
-                    ></v-text-field>
+                    <v-select
+                      v-model="editedItem.magicalItem"
+                      :items="magicalItems"
+                      item-text="description.title"
+                      item-value="id"
+                      :label="$t('magical-item')"
+                      return-object
+                    ></v-select>
                   </v-col>
                   <v-col cols="12">
-                    <v-select
-                      v-model="editedItem.level"
-                      :items="languageLevels"
-                      :label="$t('level')"
-                    ></v-select>
+                    <v-text-field
+                      v-model="editedItem.location"
+                      :label="$t('location')"
+                    ></v-text-field>
                   </v-col>
                 </v-row>
               </v-container>
             </v-form>
           </v-card-text>
+
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="error" text @click="close">
@@ -64,7 +68,7 @@
         width="auto"
         height="auto"
         :headers="headers"
-        :items="languages"
+        :items="assignments"
         :sort-by="sortBy"
         disable-pagination
         hide-default-footer
@@ -74,8 +78,8 @@
             {{ messages }}
           </v-alert>
         </template>
-        <template v-slot:[`item.level`]="{ item }">
-          {{ levelToString(item.level) }}
+        <template v-slot:[`item.magicalItem`]="{ item }">
+          {{ magicalItemToString(item.magicalItem) }}
         </template>
         <template v-if="editable" v-slot:[`item.actions`]="{ item }">
           <v-icon small class="mr-2" @click="editItem(item)">
@@ -93,19 +97,24 @@
 import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
-import { DropdownValueList, LanguageAbility } from "@/store/types";
-import { LanguageLevel } from "@/API";
+import { localise, localiseItem } from "@/utils/localise";
+import {
+  MagicalItemAssignment,
+  WeaponAssignment,
+} from "@/store/modules/character";
+import { GraphQLResult } from "@aws-amplify/api-graphql";
+import { MagicalItem } from "@/store/modules/magicalItem";
 
 @Component({
-  name: "language-card",
+  name: "magical-item-card",
   components: {
     "character-info-card": CharacterInfoCard,
   },
 })
-export default class LanguageCard extends CharacterInfo {
+export default class MagicalItemAssignmentCard extends CharacterInfo {
   valid = true;
   dialog = false;
-  sortBy = ["skill.description.title"];
+  sortBy = ["magicalItem.description.title"];
   editedIndex = -1;
   dialogDelete = false;
   editedItem = this.defaultItem();
@@ -114,8 +123,8 @@ export default class LanguageCard extends CharacterInfo {
 
   get headers() {
     const headers = [
-      { text: this.$t("language"), value: "language" },
-      { text: this.$t("level"), value: "level" },
+      { text: this.$t("magical-item"), value: "magicalItem" },
+      { text: this.$t("location"), value: "location" },
     ];
     return this.editable
       ? [
@@ -125,15 +134,15 @@ export default class LanguageCard extends CharacterInfo {
       : headers;
   }
 
-  get languages() {
-    return this.character.languages || [];
+  get magicalItems() {
+    return localise(
+      this.$store.getters["magicalItem/list"] || [],
+      this.$i18n.locale
+    );
   }
 
-  get languageLevels(): DropdownValueList[] {
-    return Object.keys(LanguageLevel).map(m => ({
-      value: m.toString(),
-      text: this.$t(m).toString(),
-    }));
+  get assignments() {
+    return this.character.magicalItems || [];
   }
 
   get isNewItem() {
@@ -142,41 +151,47 @@ export default class LanguageCard extends CharacterInfo {
 
   get formTitle() {
     return this.editedIndex === -1
-      ? this.$t("new-language")
-      : this.$t("edit-language");
+      ? this.$t("new-magical-item")
+      : this.$t("edit-magical-item");
   }
 
-  defaultItem(): LanguageAbility {
-    return {};
+  magicalItemToString(magicalItem: MagicalItem) {
+    return localiseItem(magicalItem, this.$i18n.locale).description?.title;
   }
 
-  levelToString(languageLevel: LanguageLevel) {
-    return this.$t(languageLevel).toString();
+  defaultItem(): MagicalItemAssignment {
+    return {
+      characterId: this.character.id || "",
+    };
   }
 
   close() {
     this.dialog = false;
   }
   save() {
-    if (this.isNewItem)
-      this.character.languages
-        ? this.character.languages.push(this.editedItem)
-        : (this.character.languages = [this.editedItem]);
-    else {
-      Object.assign(
-        this.character.languages
-          ? this.character.languages[this.editedIndex]
-          : {},
+    this.$store
+      .dispatch(
+        this.isNewItem
+          ? `character/createMagicalItemAssignment`
+          : `character/updateMagicalItemAssignment`,
         this.editedItem
-      );
-    }
-    this.$store.dispatch("character/update", this.character);
+      )
+      .then(() => {
+        this.messages = [];
+        this.notification = false;
+      })
+      .catch((error: GraphQLResult<WeaponAssignment>) => {
+        this.messages = error.errors?.map(err => err.message) || [];
+        this.notification = true;
+      });
     this.dialog = false;
   }
 
   deleteItemConfirm() {
-    this.character.languages?.splice(this.editedIndex, 1);
-    this.$store.dispatch("character/update", this.character);
+    this.$store.dispatch(
+      `character/deleteMagicalItemAssignment`,
+      this.editedItem
+    );
     this.closeDelete();
   }
   closeDelete() {
@@ -186,13 +201,13 @@ export default class LanguageCard extends CharacterInfo {
       this.editedIndex = -1;
     });
   }
-  editItem(item: LanguageAbility) {
-    this.editedIndex = this.languages.indexOf(item);
+  editItem(item: MagicalItemAssignment) {
+    this.editedIndex = this.assignments.indexOf(item);
     this.editedItem = Object.assign({}, item);
     this.dialog = true;
   }
-  deleteItem(item: LanguageAbility) {
-    this.editedIndex = this.languages.indexOf(item);
+  deleteItem(item: MagicalItemAssignment) {
+    this.editedIndex = this.assignments.indexOf(item);
     this.editedItem = Object.assign({}, item);
     this.dialogDelete = true;
   }

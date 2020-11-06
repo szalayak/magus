@@ -1,5 +1,5 @@
 <template>
-  <character-info-card :id="id" :editable="editable" :title="$t('wallet')">
+  <character-info-card :id="id" :editable="false" :title="$t('wallet')">
     <template v-slot:fields="{ edit }">
       <v-row dense>
         <v-col cols="12" xs="12" sm="6" md="4">

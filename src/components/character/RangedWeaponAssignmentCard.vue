@@ -1,13 +1,9 @@
 <template>
-  <character-info-card
-    :id="id"
-    :editable="editable"
-    :title="$t('ranged-weapons')"
-  >
+  <character-info-card :id="id" :editable="false" :title="$t('ranged-weapons')">
     <template v-slot:toolbar>
       <v-dialog scrollable v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn color="primary" text v-bind="attrs" v-on="on">
+          <v-btn v-if="editable" color="primary" text v-bind="attrs" v-on="on">
             {{ $t("new-weapon") }}
           </v-btn>
         </template>
@@ -126,10 +122,10 @@
           {{ masteryToString(item.horseback) }}
         </template>
         <template v-slot:[`item.actions`]="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item)">
+          <v-icon v-if="editable" small class="mr-2" @click="editItem(item)">
             mdi-pencil
           </v-icon>
-          <v-icon small @click="deleteItem(item)">
+          <v-icon v-if="editable" small @click="deleteItem(item)">
             mdi-delete
           </v-icon>
         </template>
@@ -265,7 +261,7 @@ export default class RangedWeaponAssignmentCard extends CharacterInfo {
         this.isNewItem
           ? `character/createWeaponAssignment`
           : `character/updateWeaponAssignment`,
-        this.editedItem
+        { ...this.editedItem, characterId: this.character.id }
       )
       .then(() => {
         this.messages = [];
