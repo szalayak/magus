@@ -3,7 +3,7 @@
     <template v-slot:toolbar="{}">
       <v-dialog scrollable v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn color="primary" text v-bind="attrs" v-on="on">
+          <v-btn v-if="editable" color="primary" text v-bind="attrs" v-on="on">
             {{ $t("new") }}
           </v-btn>
         </template>
@@ -81,7 +81,7 @@
         <template v-slot:[`item.magicalItem`]="{ item }">
           {{ magicalItemToString(item.magicalItem) }}
         </template>
-        <template v-slot:[`item.actions`]="{ item }">
+        <template v-if="editable" v-slot:[`item.actions`]="{ item }">
           <v-icon small class="mr-2" @click="editItem(item)">
             mdi-pencil
           </v-icon>
@@ -122,11 +122,16 @@ export default class MagicalItemAssignmentCard extends CharacterInfo {
   messages: string[] = [];
 
   get headers() {
-    return [
+    const headers = [
       { text: this.$t("magical-item"), value: "magicalItem" },
       { text: this.$t("location"), value: "location" },
-      { text: this.$t("actions"), value: "actions", sortable: false },
     ];
+    return this.editable
+      ? [
+          ...headers,
+          { text: this.$t("actions"), value: "actions", sortable: false },
+        ]
+      : headers;
   }
 
   get magicalItems() {

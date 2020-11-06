@@ -100,18 +100,14 @@
       <v-col v-show="page === 3" cols="12" xs="12" sm="6" md="3" lg="2">
         <poisons :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 3" cols="12" xs="12" sm="6" md="3" lg="2">
+      <v-col v-show="page === 3" cols="12">
+        <animals :id="id" :editable="editable" />
+      </v-col>
+      <v-col v-show="page === 3" cols="12">
+        <servants :id="id" :editable="editable" />
+      </v-col>
+      <v-col v-show="page === 3" cols="12">
         <notes :id="id" :editable="editable" />
-      </v-col>
-      <v-col v-show="page === 3" cols="12" xs="12" sm="6" md="3" lg="2">
-        <v-card>
-          <v-card-title>Animals</v-card-title>
-        </v-card>
-      </v-col>
-      <v-col v-show="page === 3" cols="12" xs="12" sm="6" md="3" lg="2">
-        <v-card>
-          <v-card-title>Companions</v-card-title>
-        </v-card>
       </v-col>
     </v-row>
     <v-snackbar
@@ -158,6 +154,8 @@ import NotesCard from "@/components/character/NotesCard.vue";
 import InventoryCard from "@/components/character/InventoryCard.vue";
 import PoisonCard from "@/components/character/PoisonCard.vue";
 import MagicalItemAssignmentCard from "@/components/character/MagicalItemCard.vue";
+import AnimalsCard from "@/components/character/AnimalsCard.vue";
+import ServantsCard from "@/components/character/ServantsCard.vue";
 
 @Component({
   name: "player-character",
@@ -186,6 +184,8 @@ import MagicalItemAssignmentCard from "@/components/character/MagicalItemCard.vu
     inventory: InventoryCard,
     poisons: PoisonCard,
     "magical-item-assignments": MagicalItemAssignmentCard,
+    animals: AnimalsCard,
+    servants: ServantsCard,
   },
 })
 export default class PlayerCharacter extends Vue {
@@ -198,10 +198,12 @@ export default class PlayerCharacter extends Vue {
   }
 
   set page(page) {
-    this.$router.push({
-      name: this.$route.name || undefined,
-      params: { ...this.$route.params, page: (page + 1).toString() },
-    });
+    if (page) {
+      this.$router.push({
+        name: this.$route.name || undefined,
+        params: { ...this.$route.params, page: (page + 1).toString() },
+      });
+    }
   }
 
   get editable(): boolean {

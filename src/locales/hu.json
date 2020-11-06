@@ -251,5 +251,20 @@
   "poison": "Méreg",
   "new-poison": "Új méreg",
   "edit-poison": "Méreg szerkesztése",
-  "magical-item": "Varázstárgy"
+  "magical-item": "Varázstárgy",
+  "MOUNT": "Hátas",
+  "ANIMAL": "Egyéb Állat",
+  "SERVANT": "Csatlós",
+  "special-ability": "Különleges Képesség",
+  "vp": "Ép",
+  "hp": "Fp",
+  "max-load": "Max. teher",
+  "max-distance": "Max. Távolság",
+  "bad-habit": "Rossz szokás",
+  "new-animal": "Új állat",
+  "edit-animal": "Állat szerkesztése",
+  "mounts-and-other-animals": "Hátas és egyéb állat",
+  "servants-and-companions": "Csatlósok, kísérők, szolgák",
+  "new-servant": "Új csatlós",
+  "edit-servant": "Csatlós szerkesztése"
 }

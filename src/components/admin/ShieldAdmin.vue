@@ -41,7 +41,10 @@
       <v-row dense>
         <v-subheader class="pl-1">{{ $t("combat-values") }}</v-subheader>
       </v-row>
-      <combat-value-editor v-bind.sync="editedItem.combatValues" />
+      <combat-value-editor
+        v-bind.sync="editedItem.combatValues"
+        :melee="true"
+      />
       <v-row dense>
         <v-subheader class="pl-1">{{ $t("damage") }}</v-subheader>
       </v-row>

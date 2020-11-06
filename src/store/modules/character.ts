@@ -1,5 +1,6 @@
 import {
   CompanionType,
+  CreateCharacterCompanionMutation,
   CreateCharacterMutation,
   CreateMagicalItemAssignmentMutation,
   CreateSkillAssignmentMutation,
@@ -9,6 +10,7 @@ import {
   ListCharactersByOwnerQuery,
   ListCharactersQuery,
   Mastery,
+  UpdateCharacterCompanionMutation,
   UpdateCharacterMutation,
   UpdateMagicalItemAssignmentMutation,
   UpdateSkillAssignmentMutation,
@@ -16,14 +18,17 @@ import {
 } from "@/API";
 import {
   createCharacter,
+  createCharacterCompanion,
   createMagicalItemAssignment,
   createSkillAssignment,
   createWeaponAssignment,
   deleteCharacter,
+  deleteCharacterCompanion,
   deleteMagicalItemAssignment,
   deleteSkillAssignment,
   deleteWeaponAssignment,
   updateCharacter,
+  updateCharacterCompanion,
   updateMagicalItemAssignment,
   updateSkillAssignment,
   updateWeaponAssignment,
@@ -394,6 +399,31 @@ const character: Module<CharacterState, RootState> = {
         mergeTransient(state, character);
       }
     },
+    mergeCharacterCompanion(state, assignment: CharacterCompanion) {
+      const character = findPersistent(state, assignment.characterId);
+      if (character) {
+        if (!character.companions) character.companions = [assignment];
+        else {
+          const existing = character.companions?.find(
+            i => i.id === assignment.id
+          );
+          if (existing) Object.assign(existing, assignment);
+          else character.companions?.push(assignment);
+        }
+        mergeTransient(state, character);
+      }
+    },
+    removeCharacterCompanion(state, assignment: CharacterCompanion) {
+      const character = findPersistent(state, assignment.characterId);
+      const existing = character?.companions?.find(i => i.id === assignment.id);
+      if (character && existing) {
+        character?.companions?.splice(
+          character.companions.indexOf(existing),
+          1
+        );
+        mergeTransient(state, character);
+      }
+    },
   },
   actions: {
     async load(context) {
@@ -432,52 +462,54 @@ const character: Module<CharacterState, RootState> = {
       context.commit("mergeQueryResult", result.listCharactersByDungeonMaster);
     },
     async create(context, item: Character) {
+      const character = item;
       const {
         data: { createCharacter: newItem },
       } = (await API.graphql({
         query: createCharacter,
         variables: {
           input: {
-            name: item.name,
-            playerCharacter: item.playerCharacter,
-            startDate: item.startDate,
-            dungeonMaster: item.dungeonMaster,
-            basicInfo: item.basicInfo,
-            abilities: item.abilities,
-            health: item.health,
-            characterClassId: item.class?.id,
-            subclass: item.subclass,
-            specialisation: item.specialisation,
-            characterRaceId: item.race?.id,
-            characterPersonalityId: item.personality?.id,
-            level: item.level,
-            psiUser: item.psiUser,
-            characterPsiSchoolId: item.psiSchool?.id,
-            psiLevel: item.psiLevel,
-            psiPoints: item.psiPoints,
-            spellResistance: item.spellResistance,
-            magicUser: item.class?.magicUser || item.magicUser,
-            magicalAbility: item.magicalAbility,
-            baseCombatValues: item.baseCombatValues,
-            spentCombatValueModifiers: item.spentCombatValueModifiers,
-            otherCombatValueModifiers: item.otherCombatValueModifiers,
-            combatValueModifiersPerLevel: item.combatValueModifiersPerLevel,
+            name: character.name,
+            playerCharacter: character.playerCharacter,
+            startDate: character.startDate,
+            dungeonMaster: character.dungeonMaster,
+            basicInfo: character.basicInfo,
+            abilities: character.abilities,
+            health: character.health,
+            characterClassId: character.class?.id,
+            subclass: character.subclass,
+            specialisation: character.specialisation,
+            characterRaceId: character.race?.id,
+            characterPersonalityId: character.personality?.id,
+            level: character.level,
+            psiUser: character.psiUser,
+            characterPsiSchoolId: character.psiSchool?.id,
+            psiLevel: character.psiLevel,
+            psiPoints: character.psiPoints,
+            spellResistance: character.spellResistance,
+            magicUser: character.magicUser,
+            magicalAbility: character.magicalAbility,
+            baseCombatValues: character.baseCombatValues,
+            spentCombatValueModifiers: character.spentCombatValueModifiers,
+            otherCombatValueModifiers: character.otherCombatValueModifiers,
+            combatValueModifiersPerLevel:
+              character.combatValueModifiersPerLevel,
             mandatoryCombatValueModifierDistribution:
-              item.mandatoryCombatValueModifierDistribution,
-            wallet: item.wallet,
-            languages: item.languages,
-            inventory: item.inventory,
-            poisons: item.poisons,
-            notes: item.notes,
-            characterArmourId: item.armour?.id,
-            characterShieldId: item.shield?.id,
+              character.mandatoryCombatValueModifierDistribution,
+            wallet: character.wallet,
+            languages: character.languages,
+            inventory: character.inventory,
+            poisons: character.poisons,
+            notes: character.notes,
+            characterArmourId: character.armour?.id,
+            characterShieldId: character.shield?.id,
           },
         },
       })) as { data: CreateCharacterMutation };
       context.commit("add", newItem);
     },
     async update(context, item: Character) {
-      const character = (purgeUndefined(item) as unknown) as Character; // get rid of null values generated by bindings
+      const character = item;
       const {
         data: { updateCharacter: updatedItem },
       } = (await API.graphql({
@@ -682,6 +714,81 @@ const character: Module<CharacterState, RootState> = {
         },
       });
       context.commit("removeMagicalItemAssignment", assignment);
+    },
+
+    async createCharacterCompanion(context, assignment: CharacterCompanion) {
+      const companion = assignment;
+      const {
+        data: { createCharacterCompanion: createdAssignment },
+      } = (await API.graphql({
+        query: createCharacterCompanion,
+        variables: {
+          input: {
+            characterId: companion.characterId,
+            name: companion.name,
+            type: companion.type,
+            health: companion.health,
+            combatValues: companion.combatValues,
+            damage: companion.damage,
+            characterCompanionWeaponId: companion.weapon?.id,
+            attacksPerTurn: companion.attacksPerTurn,
+            maxDistance: companion.maxDistance,
+            maxLoad: companion.maxLoad,
+            badHabit: companion.badHabit,
+            specialAbilities: companion.specialAbilities,
+          },
+        },
+      })) as { data: CreateCharacterCompanionMutation };
+      context.commit("mergeCharacterCompanion", createdAssignment);
+    },
+
+    async updateCharacterCompanion(context, assignment: CharacterCompanion) {
+      const companion = assignment;
+      const {
+        data: { updateCharacterCompanion: updatedAssignment },
+      } = (await API.graphql({
+        query: updateCharacterCompanion,
+        variables: {
+          input: {
+            id: companion.id,
+            name: companion.name,
+            type: companion.type,
+            health: companion.health,
+            combatValues: companion.combatValues,
+            damage: companion.damage,
+            characterCompanionWeaponId: companion.weapon?.id,
+            attacksPerTurn: companion.attacksPerTurn,
+            maxDistance: companion.maxDistance,
+            maxLoad: companion.maxLoad,
+            badHabit: companion.badHabit,
+            specialAbilities: companion.specialAbilities,
+          },
+        },
+      })) as { data: UpdateCharacterCompanionMutation };
+      context.commit("mergeCharacterCompanion", updatedAssignment);
+    },
+
+    async deleteCharacterCompanion(context, assignment: CharacterCompanion) {
+      await API.graphql({
+        query: deleteCharacterCompanion,
+        variables: {
+          input: {
+            id: assignment.id,
+            name: assignment.name,
+            type: assignment.type,
+            health: assignment.health,
+            combatValues: assignment.combatValues,
+            damage: assignment.damage,
+            characterCompanionWeaponId: assignment.weapon?.id,
+            attacksPerTurn: assignment.attacksPerTurn,
+            maxDistance: assignment.maxDistance,
+            maxLoad: assignment.maxLoad,
+            badHabit: assignment.badHabit,
+            specialAbilities: assignment.specialAbilities,
+          },
+        },
+      });
+      context.commit("removeCharacterCompanion", assignment);
     },
   },
 };

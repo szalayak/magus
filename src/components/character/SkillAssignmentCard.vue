@@ -121,7 +121,7 @@ import { DropdownValueList, ThrowScenario } from "@/store/types";
 import { getThrowScenarioString } from "@/utils/throwScenario";
 import { localise, localiseItem } from "@/utils/localise";
 import { Mastery } from "@/API";
-import { SkillAssignment, WeaponAssignment } from "@/store/modules/character";
+import { SkillAssignment } from "@/store/modules/character";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
 import { Skill } from "@/store/modules/skill";
 
@@ -218,13 +218,13 @@ export default class SkillAssignmentCard extends CharacterInfo {
         this.isNewItem
           ? `character/createSkillAssignment`
           : `character/updateSkillAssignment`,
-        this.editedItem
+        { ...this.editedItem, characterId: this.character.id }
       )
       .then(() => {
         this.messages = [];
         this.notification = false;
       })
-      .catch((error: GraphQLResult<WeaponAssignment>) => {
+      .catch((error: GraphQLResult<SkillAssignment>) => {
         this.messages = error.errors?.map(err => err.message) || [];
         this.notification = true;
       });

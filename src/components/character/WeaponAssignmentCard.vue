@@ -274,7 +274,7 @@ export default class WeaponAssignmentCard extends CharacterInfo {
         this.isNewItem
           ? `character/createWeaponAssignment`
           : `character/updateWeaponAssignment`,
-        this.editedItem
+        { ...this.editedItem, characterId: this.character.id }
       )
       .then(() => {
         this.messages = [];

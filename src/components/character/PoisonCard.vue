@@ -3,7 +3,7 @@
     <template v-slot:toolbar="{}">
       <v-dialog scrollable v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn color="primary" text v-bind="attrs" v-on="on">
+          <v-btn v-if="editable" color="primary" text v-bind="attrs" v-on="on">
             {{ $t("new-poison") }}
           </v-btn>
         </template>
@@ -74,7 +74,7 @@
             {{ messages }}
           </v-alert>
         </template>
-        <template v-slot:[`item.actions`]="{ item }">
+        <template v-if="editable" v-slot:[`item.actions`]="{ item }">
           <v-icon small class="mr-2" @click="editItem(item)">
             mdi-pencil
           </v-icon>
@@ -109,11 +109,16 @@ export default class PoisonCard extends CharacterInfo {
   messages: string[] = [];
 
   get headers() {
-    return [
+    const headers = [
       { text: this.$t("poison"), value: "name" },
       { text: this.$t("amount"), value: "amount" },
-      { text: this.$t("actions"), value: "actions", sortable: false },
     ];
+    return this.editable
+      ? [
+          ...headers,
+          { text: this.$t("actions"), value: "actions", sortable: false },
+        ]
+      : headers;
   }
 
   get poisons() {

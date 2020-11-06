@@ -47,6 +47,7 @@
       <combat-value-editor
         v-bind.sync="editedItem.combatValues"
         :ranged="editedItem.ranged"
+        :melee="!editedItem.ranged"
       />
       <v-row dense>
         <v-subheader class="pl-1">{{ $t("damage") }}</v-subheader>
