@@ -6,6 +6,10 @@
         @click="navDrawerOpen = !navDrawerOpen"
       ></v-app-bar-nav-icon>
 
+      <v-avatar width="32px" height="32px" tile>
+        <img :src="require('@/assets/favicon-32x32.png')" alt="logo" />
+      </v-avatar>
+
       <v-toolbar-title>M.A.G.U.S</v-toolbar-title>
 
       <v-spacer></v-spacer>
