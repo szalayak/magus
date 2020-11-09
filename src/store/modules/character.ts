@@ -39,7 +39,6 @@ import {
   listCharactersByDungeonMaster,
   listCharactersByOwner,
 } from "@/graphql/queries";
-import { purgeUndefined } from "@/utils/mapping";
 import { API } from "aws-amplify";
 import { Module } from "vuex";
 import { RootState } from "..";

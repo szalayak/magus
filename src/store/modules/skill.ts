@@ -61,10 +61,12 @@ const skill: Module<SkillState, RootState> = {
   },
   actions: {
     async load(context) {
-      const { data: result } = (await API.graphql({ query: listSkills })) as {
-        data: ListSkillsQuery;
-      };
-      context.commit("set", result);
+      if (!context.getters.list) {
+        const { data: result } = (await API.graphql({ query: listSkills })) as {
+          data: ListSkillsQuery;
+        };
+        context.commit("set", result);
+      }
     },
     async create(context, item: Skill) {
       const {

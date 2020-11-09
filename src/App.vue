@@ -13,7 +13,7 @@
         <template v-slot:activator="{ on, attrs }">
           <v-btn :icon="$vuetify.breakpoint.xs" text v-bind="attrs" v-on="on"
             ><div class="d-none d-sm-flex">{{ $t("throw-dice") }}</div>
-            <v-icon class="ml-2">mdi-dice-5</v-icon></v-btn
+            <v-icon class="ml-sm-2">mdi-dice-5</v-icon></v-btn
           >
         </template>
         <v-list>
@@ -30,7 +30,7 @@
         <template v-slot:activator="{ on, attrs }">
           <v-btn :icon="$vuetify.breakpoint.xs" text v-bind="attrs" v-on="on">
             <div class="d-none d-sm-flex">{{ app.user.attributes.name }}</div>
-            <v-icon class="ml-2">mdi-account</v-icon>
+            <v-icon class="ml-sm-2">mdi-account</v-icon>
           </v-btn>
         </template>
         <v-list>

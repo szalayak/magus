@@ -60,10 +60,14 @@ const armour: Module<ArmourState, RootState> = {
   },
   actions: {
     async load(context) {
-      const { data: result } = (await API.graphql({ query: listArmours })) as {
-        data: ListArmoursQuery;
-      };
-      context.commit("set", result);
+      if (!context.getters.list) {
+        const { data: result } = (await API.graphql({
+          query: listArmours,
+        })) as {
+          data: ListArmoursQuery;
+        };
+        context.commit("set", result);
+      }
     },
     async create(context, item: Armour) {
       const {

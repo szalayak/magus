@@ -270,7 +270,7 @@ export default class AdminTable extends AdminTableProps {
     this.editedItem = Object.assign({}, item);
     this.dialogDelete = true;
   }
-  mounted() {
+  created() {
     this.refresh();
   }
 }

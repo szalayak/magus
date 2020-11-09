@@ -1,5 +1,20 @@
 <template>
   <character-info-card :id="id" :editable="editable" :title="$t('abilities')">
+    <!-- <template v-slot:toolbar>
+      <v-dialog v-model="testDialog" max-width="500px">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn color="primary" text v-bind="attrs" v-on="on">Test</v-btn>
+        </template>
+        <v-card>
+          <v-card-title>Test</v-card-title>
+          <v-card-text>
+            <v-list>
+              <v-list-item>{{ $t("strength") }}</v-list-item>
+            </v-list>
+          </v-card-text>
+        </v-card>
+      </v-dialog>
+    </template> -->
     <template v-slot:fields="{ edit }">
       <v-row dense>
         <v-col cols="6">
@@ -116,6 +131,8 @@ import { movementPreventionValueTotal } from "@/utils/character";
   },
 })
 export default class AbilitiesCard extends CharacterInfo {
+  testDialog = false;
+
   get agilityInArmour() {
     return this.character.abilities?.agility
       ? this.character.abilities.agility -

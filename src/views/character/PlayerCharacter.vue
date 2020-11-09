@@ -198,7 +198,7 @@ export default class PlayerCharacter extends Vue {
   }
 
   set page(page) {
-    if (page) {
+    if (page !== undefined) {
       this.$router.push({
         name: this.$route.name || undefined,
         params: { ...this.$route.params, page: (page + 1).toString() },

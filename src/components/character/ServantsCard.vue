@@ -7,8 +7,15 @@
     <template v-slot:toolbar="{}">
       <v-dialog scrollable v-model="dialog" max-width="800px">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn v-if="editable" color="primary" text v-bind="attrs" v-on="on">
-            {{ $t("new-servant") }}
+          <v-btn
+            v-if="editable"
+            color="primary"
+            text
+            v-bind="attrs"
+            v-on="on"
+            icon
+          >
+            <v-icon>mdi-plus</v-icon>
           </v-btn>
         </template>
         <v-card>

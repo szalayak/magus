@@ -58,10 +58,12 @@ const race: Module<RaceState, RootState> = {
   },
   actions: {
     async load(context) {
-      const { data: result } = (await API.graphql({ query: listRaces })) as {
-        data: ListRacesQuery;
-      };
-      context.commit("set", result);
+      if (!context.getters.list) {
+        const { data: result } = (await API.graphql({ query: listRaces })) as {
+          data: ListRacesQuery;
+        };
+        context.commit("set", result);
+      }
     },
     async create(context, item: Race) {
       const {

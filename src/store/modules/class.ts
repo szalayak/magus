@@ -62,10 +62,14 @@ const classModule: Module<ClassState, RootState> = {
   },
   actions: {
     async load(context) {
-      const { data: result } = (await API.graphql({ query: listClasses })) as {
-        data: ListClassesQuery;
-      };
-      context.commit("set", result);
+      if (!context.getters.list) {
+        const { data: result } = (await API.graphql({
+          query: listClasses,
+        })) as {
+          data: ListClassesQuery;
+        };
+        context.commit("set", result);
+      }
     },
     async create(context, item: Class) {
       const {

@@ -62,10 +62,14 @@ const shield: Module<ShieldState, RootState> = {
   },
   actions: {
     async load(context) {
-      const { data: result } = (await API.graphql({ query: listShields })) as {
-        data: ListShieldsQuery;
-      };
-      context.commit("set", result);
+      if (!context.getters.list) {
+        const { data: result } = (await API.graphql({
+          query: listShields,
+        })) as {
+          data: ListShieldsQuery;
+        };
+        context.commit("set", result);
+      }
     },
     async create(context, item: Shield) {
       const {
