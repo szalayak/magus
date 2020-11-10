@@ -18,7 +18,7 @@
             md="4"
             lg="3"
           >
-            <v-card :to="characterToLink(item)" outlined>
+            <v-card>
               <v-card-title>
                 {{ item.name }}
               </v-card-title>
@@ -31,6 +31,36 @@
                   <v-btn :to="characterPageToLink(item, 3)">3</v-btn>
                   <v-btn :to="characterPageToLink(item, 4)">4</v-btn>
                 </v-btn-toggle>
+                <v-spacer />
+                <v-dialog
+                  v-if="editable"
+                  v-model="deleteDialog"
+                  max-width="500px"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn color="error" icon text v-on="on" v-bind="attrs"
+                      ><v-icon>mdi-delete</v-icon></v-btn
+                    >
+                  </template>
+                  <v-card>
+                    <v-card-title class="headline">{{
+                      $t("confirm-delete-message")
+                    }}</v-card-title>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn color="error" text @click="closeDelete">{{
+                        $t("cancel")
+                      }}</v-btn>
+                      <v-btn
+                        color="primary"
+                        text
+                        @click="deleteItemConfirm(item.id)"
+                        >{{ $t("ok") }}</v-btn
+                      >
+                      <v-spacer></v-spacer>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -39,8 +69,9 @@
     </v-data-iterator>
     <v-snackbar
       v-for="message in messages"
-      v-model="notification"
+      :value="notification"
       :key="message"
+      @input="$emit('update:notification', $event)"
     >
       {{ message }}
 
@@ -60,6 +91,7 @@ import { Prop } from "vue-property-decorator";
 import { Race } from "@/store/modules/race";
 import { Class } from "@/store/modules/class";
 import { localiseItem } from "@/utils/localise";
+import { LooseObject } from "@/store/types";
 
 type Form = Vue & { validate: () => boolean };
 
@@ -78,6 +110,11 @@ export default class CharacterList extends Vue {
 
   @Prop({ type: Boolean, required: false })
   notification!: boolean;
+
+  @Prop({ type: Boolean, required: false })
+  editable!: boolean;
+
+  deleteDialog = false;
 
   raceToString(race: Race): string {
     return localiseItem(race, this.$i18n.locale)?.description?.title || "";
@@ -108,6 +145,24 @@ export default class CharacterList extends Vue {
 
   characterPageToLink(character: Character, page: number) {
     return `${this.characterToLink(character)}/${page}`;
+  }
+
+  closeDelete() {
+    this.deleteDialog = false;
+  }
+
+  async deleteItemConfirm(id: string) {
+    try {
+      await this.$store.dispatch(`character/delete`, id);
+    } catch (error) {
+      const messages =
+        typeof error === "string"
+          ? [error]
+          : error.errors?.map((err: LooseObject) => err.message) || [];
+      this.$emit("update:messages", messages);
+      this.$emit("update:notification", true);
+    }
+    this.closeDelete();
   }
 }
 </script>

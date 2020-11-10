@@ -7,8 +7,8 @@ interface HasTitle {
 
 @Component
 export default class TitleComponent extends Vue {
-  getTitle() {
-    const { title } = this.$data as HasTitle;
+  get computedTitle() {
+    const { title } = this as HasTitle;
     if (title) {
       return typeof title === "function" ? title.call(this) : title;
     } else {
@@ -17,6 +17,6 @@ export default class TitleComponent extends Vue {
   }
 
   created() {
-    document.title = this.getTitle();
+    document.title = this.computedTitle;
   }
 }

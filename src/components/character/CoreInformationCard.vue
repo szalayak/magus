@@ -127,12 +127,12 @@ import { Class } from "@/store/modules/class";
 import { ValueRange } from "@/store/modules/valueRange";
 
 @Component({
-  name: "core-information",
+  name: "core-information-card",
   components: {
     "character-info-card": CharacterInfoCard,
   },
 })
-export default class CoreInformation extends CharacterInfo {
+export default class CoreInformationCard extends CharacterInfo {
   get races(): Race[] {
     return localise(
       this.$store.getters["race/getPlayableRaces"],

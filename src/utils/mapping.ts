@@ -1,6 +1,4 @@
-interface LooseObject {
-  [key: string]: unknown;
-}
+import { LooseObject } from "@/store/types";
 
 export const purgeUndefined = (obj: unknown) => {
   const input = obj as LooseObject;

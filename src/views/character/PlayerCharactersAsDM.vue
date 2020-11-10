@@ -10,7 +10,7 @@
 import { Character } from "@/store/modules/character";
 import Component from "vue-class-component";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
-import CharacterList from "./CharacterList.vue";
+import CharacterList from "@/components/CharacterList.vue";
 import TitleComponent from "@/mixins/TitleComponent";
 
 @Component({
@@ -28,7 +28,7 @@ export default class PlayerCharactersAsDM extends TitleComponent {
     return this.$store.getters["character/playerCharactersAsDM"];
   }
 
-  mounted() {
+  created() {
     this.$store
       .dispatch(
         "character/loadByDungeonMaster",

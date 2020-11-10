@@ -162,7 +162,13 @@
         :sort-by="sortBy"
       >
         <template v-slot:top>
-          <v-alert v-if="notification" dense outlined type="error">
+          <v-alert
+            v-model="notification"
+            dense
+            outlined
+            type="error"
+            dismissible
+          >
             {{ messages }}
           </v-alert>
         </template>
@@ -342,6 +348,9 @@ export default class AnimalsCard extends CharacterInfo {
         offence: undefined,
         defence: undefined,
       };
+    }
+    if (!this.editedItem.health) {
+      this.editedItem.health = { vitality: {}, hitPoints: {} };
     }
     this.dialog = true;
   }

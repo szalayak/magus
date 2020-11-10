@@ -4,6 +4,7 @@
     :messages="messages"
     :notification="notification"
     :title="$t('non-player-characters')"
+    :editable="true"
   >
     <template v-slot:toolbar-buttons>
       <v-dialog v-model="createDialog" persistent max-width="50%">
@@ -22,10 +23,12 @@
           </v-toolbar>
           <v-card-text>
             <v-form ref="create" v-model="createValid">
-              <v-row>
-                <v-subheader>{{ $t("general-properties") }}</v-subheader>
+              <v-row dense>
+                <v-subheader class="pl-1">{{
+                  $t("general-properties")
+                }}</v-subheader>
               </v-row>
-              <v-row>
+              <v-row dense>
                 <v-col cols="12" md="6" lg="4">
                   <v-text-field
                     v-model="editedItem.name"
@@ -35,10 +38,12 @@
                   ></v-text-field>
                 </v-col>
               </v-row>
-              <v-row>
-                <v-subheader>{{ $t("race-and-class") }} </v-subheader>
+              <v-row dense>
+                <v-subheader class="pl-1"
+                  >{{ $t("race-and-class") }}
+                </v-subheader>
               </v-row>
-              <v-row>
+              <v-row dense>
                 <v-col cols="12" sm="12" md="6" lg="3">
                   <v-select
                     v-model="editedItem.race"
@@ -75,10 +80,10 @@
                   />
                 </v-col>
               </v-row>
-              <v-row>
-                <v-subheader>{{ $t("level") }}</v-subheader>
+              <v-row dense>
+                <v-subheader class="pl-1">{{ $t("level") }}</v-subheader>
               </v-row>
-              <v-row>
+              <v-row dense>
                 <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model.number="editedItem.level.currentLevel"
@@ -113,7 +118,7 @@ import { localise } from "@/utils/localise";
 import Vue from "vue";
 import Component from "vue-class-component";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
-import CharacterList from "./CharacterList.vue";
+import CharacterList from "@/components/CharacterList.vue";
 import TitleComponent from "@/mixins/TitleComponent";
 
 type Form = Vue & { validate: () => boolean };
@@ -161,16 +166,14 @@ export default class NonPlayerCharactersAsDM extends TitleComponent {
     }
   }
 
-  mounted() {
+  created() {
     this.$store
       .dispatch("character/loadByOwner", this.$store.state.app.user.username)
       .catch((error: GraphQLResult<Character>) => {
         this.messages = error.errors?.map(err => err.message) || [];
         this.notification = true;
       });
-  }
 
-  created() {
     Promise.all([
       this.$store.dispatch("race/load"),
       this.$store.dispatch("class/load"),

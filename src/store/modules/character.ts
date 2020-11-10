@@ -556,6 +556,29 @@ const character: Module<CharacterState, RootState> = {
       context.commit("merge", updatedItem);
     },
     async delete(context, id: string) {
+      const character = findPersistent(context.state, id);
+      const weapons =
+        character?.weapons?.map(w =>
+          context.dispatch("deleteWeaponAssignment", w)
+        ) || [];
+      const skills =
+        character?.skills?.map(s =>
+          context.dispatch("deleteSkillAssignment", s)
+        ) || [];
+      const magicalItems =
+        character?.magicalItems?.map(m =>
+          context.dispatch("deleteMagicalItemAssignment", m)
+        ) || [];
+      const companions =
+        character?.companions?.map(c =>
+          context.dispatch("deleteCompanionAssignment", c)
+        ) || [];
+      await Promise.all([
+        ...weapons,
+        ...skills,
+        ...magicalItems,
+        ...companions,
+      ]);
       await API.graphql({
         query: deleteCharacter,
         variables: { input: { id } },
@@ -773,17 +796,6 @@ const character: Module<CharacterState, RootState> = {
         variables: {
           input: {
             id: assignment.id,
-            name: assignment.name,
-            type: assignment.type,
-            health: assignment.health,
-            combatValues: assignment.combatValues,
-            damage: assignment.damage,
-            characterCompanionWeaponId: assignment.weapon?.id,
-            attacksPerTurn: assignment.attacksPerTurn,
-            maxDistance: assignment.maxDistance,
-            maxLoad: assignment.maxLoad,
-            badHabit: assignment.badHabit,
-            specialAbilities: assignment.specialAbilities,
           },
         },
       });

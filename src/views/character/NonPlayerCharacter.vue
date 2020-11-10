@@ -120,16 +120,13 @@
   </v-container>
 </template>
 <script lang="ts">
-import { Character } from "@/store/modules/character";
-import Vue from "vue";
 import Component from "vue-class-component";
-import Appearance from "@/components/character/Appearance.vue";
-import Properties from "@/components/character/Properties.vue";
-import LikesAndDislikes from "@/components/character/LikesAndDislikes.vue";
-import Connections from "@/components/character/Connections.vue";
-import { GraphQLResult } from "@aws-amplify/api-graphql";
-import CoreInformation from "@/components/character/CoreInformation.vue";
-import AbilitiesCard from "@/components/character/Abilities.vue";
+import AppearanceCard from "@/components/character/AppearanceCard.vue";
+import PropertiesCard from "@/components/character/PropertiesCard.vue";
+import LikesAndDislikesCard from "@/components/character/LikesAndDislikesCard.vue";
+import ConnectionsCard from "@/components/character/ConnectionsCard.vue";
+import CoreInformationCard from "@/components/character/CoreInformationCard.vue";
+import AbilitiesCard from "@/components/character/AbilitiesCard.vue";
 import HealthCard from "@/components/character/HealthCard.vue";
 import PsiCard from "@/components/character/PsiCard.vue";
 import MagicalAbilityCard from "@/components/character/MagicalAbilityCard.vue";
@@ -148,15 +145,16 @@ import PoisonCard from "@/components/character/PoisonCard.vue";
 import MagicalItemAssignmentCard from "@/components/character/MagicalItemCard.vue";
 import AnimalsCard from "@/components/character/AnimalsCard.vue";
 import ServantsCard from "@/components/character/ServantsCard.vue";
+import CharacterPage from "./CharacterPage";
 
 @Component({
   name: "non-player-character",
   components: {
-    appearance: Appearance,
-    properties: Properties,
-    "likes-and-dislikes": LikesAndDislikes,
-    connections: Connections,
-    "core-information": CoreInformation,
+    appearance: AppearanceCard,
+    properties: PropertiesCard,
+    "likes-and-dislikes": LikesAndDislikesCard,
+    connections: ConnectionsCard,
+    "core-information": CoreInformationCard,
     abilities: AbilitiesCard,
     health: HealthCard,
     psi: PsiCard,
@@ -178,60 +176,5 @@ import ServantsCard from "@/components/character/ServantsCard.vue";
     servants: ServantsCard,
   },
 })
-export default class NonPlayerCharacter extends Vue {
-  id = this.$route.params.id;
-  messages: string[] = [];
-  notification = false;
-
-  get page() {
-    return this.$route.params.page ? parseInt(this.$route.params.page) - 1 : 0;
-  }
-
-  set page(page) {
-    if (page !== undefined) {
-      this.$router.push({
-        name: this.$route.name || undefined,
-        params: { ...this.$route.params, page: (page + 1).toString() },
-      });
-    }
-  }
-
-  get editable(): boolean {
-    return (
-      this.character.owner === this.$store.getters["currentUser"] ||
-      this.$store.getters["isCurrentUserAdmin"]
-    );
-  }
-
-  get character(): Character {
-    return (
-      this.$store.getters["character/listTransient"].find(
-        (char: Character) => char.id === this.id
-      ) || {}
-    );
-  }
-
-  mounted() {
-    this.$store
-      .dispatch("character/loadItem", this.id)
-      .then(() => (document.title = this.character.name));
-  }
-
-  created() {
-    Promise.all([
-      this.$store.dispatch("race/load"),
-      this.$store.dispatch("class/load"),
-      this.$store.dispatch("valueRange/load"),
-      this.$store.dispatch("psiSchool/load"),
-      this.$store.dispatch("shield/load"),
-      this.$store.dispatch("armour/load"),
-      this.$store.dispatch("weapon/load"),
-      this.$store.dispatch("skill/load"),
-      this.$store.dispatch("magicalItem/load"),
-    ]).catch((error: GraphQLResult<Character>) => {
-      this.messages = error.errors?.map(err => err.message) || [];
-      this.notification = true;
-    });
-  }
-}
+export default class NonPlayerCharacter extends CharacterPage {}
 </script>

@@ -81,7 +81,7 @@ import NavigationDrawer from "./components/NavigationDrawer.vue";
 import { mapActions, mapGetters, mapMutations, mapState } from "vuex";
 import { DiceObject, getDice, throwDice } from "./utils/dice";
 import { Auth } from "aws-amplify";
-import UserAttributes from "./views/UserAttributes.vue";
+import UserAttributes from "@/components/UserAttributes.vue";
 
 export default Vue.extend({
   name: "App",

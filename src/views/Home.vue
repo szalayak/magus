@@ -10,7 +10,7 @@
 <script lang="ts">
 import { Component } from "vue-property-decorator";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
-import CharacterList from "@/views/character/CharacterList.vue";
+import CharacterList from "@/components/CharacterList.vue";
 import { Character } from "@/store/modules/character";
 import TitleComponent from "@/mixins/TitleComponent";
 import { mixins } from "vue-class-component";
@@ -29,7 +29,7 @@ export default class Home extends mixins(TitleComponent) {
     return this.$store.getters["character/playerCharactersAsPlayer"];
   }
 
-  mounted() {
+  created() {
     this.$store
       .dispatch("character/loadByOwner", this.$store.state.app.user.username)
       .catch((error: GraphQLResult<Character>) => {

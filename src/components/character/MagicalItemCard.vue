@@ -81,7 +81,13 @@
         hide-default-footer
       >
         <template v-slot:top>
-          <v-alert v-if="notification" dense outlined type="error">
+          <v-alert
+            v-model="notification"
+            dense
+            outlined
+            type="error"
+            dismissible
+          >
             {{ messages }}
           </v-alert>
         </template>

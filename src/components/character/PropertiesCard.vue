@@ -27,12 +27,12 @@ import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
 
 @Component({
-  name: "properties",
+  name: "properties-card",
   components: {
     "character-info-card": CharacterInfoCard,
   },
 })
-export default class Properties extends CharacterInfo {
+export default class PropertiesCard extends CharacterInfo {
   get basicInfo() {
     if (!this.character.basicInfo) this.character.basicInfo = {};
     return this.character.basicInfo || {};

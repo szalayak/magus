@@ -80,12 +80,12 @@ import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
 
 @Component({
-  name: "appearance",
+  name: "appearance-card",
   components: {
     "character-info-card": CharacterInfoCard,
   },
 })
-export default class Appearance extends CharacterInfo {
+export default class AppearanceCard extends CharacterInfo {
   get sexes(): DropdownValueList[] {
     return Object.keys(Sex).map(sex => ({
       value: sex.toString(),

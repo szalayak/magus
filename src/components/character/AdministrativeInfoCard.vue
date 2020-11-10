@@ -51,12 +51,12 @@ import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
 
 @Component({
-  name: "administrative-info",
+  name: "administrative-info-card",
   components: {
     "character-info-card": CharacterInfoCard,
   },
 })
-export default class AdministrativeInfo extends CharacterInfo {
+export default class AdministrativeInfoCard extends CharacterInfo {
   startDatePicker = false;
 }
 </script>

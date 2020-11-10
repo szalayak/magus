@@ -1,30 +1,34 @@
 <template>
-  <character-info-card
-    :id="id"
-    :editable="editable"
-    :title="$t('likes-and-dislikes')"
-  >
+  <character-info-card :id="id" :editable="editable" :title="$t('connections')">
     <template v-slot:fields="{ edit }">
       <v-row dense>
         <v-col cols="12">
-          <v-textarea
-            v-model="basicInfo.likes"
-            :label="$t('likes')"
+          <v-text-field
+            v-model="basicInfo.family"
+            :label="$t('family')"
             :disabled="!edit"
           />
         </v-col>
         <v-col cols="12">
           <v-textarea
-            v-model="basicInfo.dislikes"
-            :label="$t('dislikes')"
+            v-model="basicInfo.companions"
+            :label="$t('companions')"
             :disabled="!edit"
           />
         </v-col>
         <v-col cols="12">
           <v-textarea
-            v-model="basicInfo.fears"
-            :label="$t('fears')"
+            v-model="basicInfo.enemies"
+            :label="$t('enemies')"
             :disabled="!edit"
+          />
+        </v-col>
+        <v-col cols="12">
+          <v-text-field
+            v-model.number="basicInfo.fame"
+            :label="$t('fame')"
+            :disabled="!edit"
+            type="number"
           />
         </v-col>
       </v-row>
@@ -38,12 +42,12 @@ import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
 
 @Component({
-  name: "likes-and-dislikes",
+  name: "connections-card",
   components: {
     "character-info-card": CharacterInfoCard,
   },
 })
-export default class LikesAndDislikes extends CharacterInfo {
+export default class ConnectionsCard extends CharacterInfo {
   get basicInfo() {
     if (!this.character.basicInfo) this.character.basicInfo = {};
     return this.character.basicInfo || {};
