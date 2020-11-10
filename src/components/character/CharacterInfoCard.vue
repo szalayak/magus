@@ -1,7 +1,7 @@
 <template>
   <v-hover v-slot="{ hover }">
     <v-card>
-      <v-app-bar color="white" flat>
+      <v-toolbar flat>
         <v-toolbar-title>{{ title }}</v-toolbar-title>
         <v-spacer></v-spacer>
         <slot name="toolbar" :edit="edit" />
@@ -11,9 +11,9 @@
         <v-btn icon @click="show = !show">
           <v-icon>{{ show ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
         </v-btn>
-      </v-app-bar>
+      </v-toolbar>
       <v-card-text v-show="show">
-        <v-alert v-if="error" dense outlined type="error">
+        <v-alert v-model="error" dense outlined type="error" dismissible>
           {{ messages }}
         </v-alert>
         <v-form :valid="valid" ref="data">
@@ -34,6 +34,7 @@
 </template>
 <script lang="ts">
 import CharacterInfo from "@/components/character/CharacterInfo";
+import { LooseObject } from "@/store/types";
 import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
 
@@ -55,10 +56,18 @@ export default class CharacterInfoCard extends CharacterInfo {
   valid = true;
   show = true;
 
-  save() {
+  async save() {
     if ((this.$refs.data as Form).validate()) {
-      this.$store.dispatch("character/update", this.character);
-      this.edit = false;
+      try {
+        await this.$store.dispatch("character/update", this.character);
+        this.edit = false;
+      } catch (error) {
+        this.messages =
+          typeof error === "string"
+            ? [error]
+            : error.errors?.map((err: LooseObject) => err.message) || [];
+        this.error = true;
+      }
     }
   }
 

@@ -9,4 +9,12 @@ export const characterRoutes: Array<RouteConfigSingleView> = [
         /* webpackChunkName: "player-character" */ "../views/character/PlayerCharacter.vue"
       ),
   },
+  {
+    path: "/non-player-characters/:id/:page?",
+    name: "Non-Player Character",
+    component: () =>
+      import(
+        /* webpackChunkName: "player-character" */ "../views/character/NonPlayerCharacter.vue"
+      ),
+  },
 ];

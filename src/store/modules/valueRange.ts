@@ -99,21 +99,29 @@ const race: Module<ValueRangeState, RootState> = {
   },
   actions: {
     async load(context) {
-      const { data: result } = (await API.graphql({
-        query: listValueRangeValues,
-      })) as {
-        data: ListValueRangeValuesQuery;
-      };
-      context.commit("set", result);
+      if (!context.getters.list) {
+        const { data: result } = (await API.graphql({
+          query: listValueRangeValues,
+        })) as {
+          data: ListValueRangeValuesQuery;
+        };
+        context.commit("set", result);
+      }
     },
     async loadByType(context, type: ValueRangeType) {
-      const { data: result } = (await API.graphql({
-        query: listValueRangeValuesByType,
-        variables: { type },
-      })) as {
-        data: ListValueRangeValuesByTypeQuery;
-      };
-      context.commit("merge", result);
+      if (
+        !context.getters.list ||
+        context.getters.list.filter((v: ValueRange) => v.type === type).length <
+          1
+      ) {
+        const { data: result } = (await API.graphql({
+          query: listValueRangeValuesByType,
+          variables: { type },
+        })) as {
+          data: ListValueRangeValuesByTypeQuery;
+        };
+        context.commit("merge", result);
+      }
     },
     async create(context, item: ValueRange) {
       const {

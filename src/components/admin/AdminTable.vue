@@ -3,7 +3,7 @@
     <v-data-table
       width="auto"
       height="auto"
-      :headers="headers"
+      :headers="computedHeaders"
       :items="items"
       :sort-by="sortBy"
       class="elevation-1"
@@ -12,15 +12,31 @@
         <v-toolbar flat>
           <v-toolbar-title>{{ $t(title) }}</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-dialog scrollable v-model="dialog" max-width="800px">
+          <v-dialog scrollable v-model="dialog" max-width="1200px">
             <template v-slot:activator="{ on, attrs }">
-              <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
+              <v-btn
+                v-if="!readonly"
+                color="primary"
+                dark
+                class="mb-2"
+                v-bind="attrs"
+                v-on="on"
+              >
                 {{ $t(newText) }}
               </v-btn>
             </template>
             <v-card>
               <v-toolbar dark color="primary">
                 <v-toolbar-title>{{ formTitle }}</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-select
+                  outlined
+                  single-line
+                  hide-details
+                  v-model="editedItem.locale"
+                  :items="locales"
+                  @input="changeEditedLocale"
+                />
               </v-toolbar>
               <v-card-text>
                 <v-form v-model="valid">
@@ -51,54 +67,20 @@
                       :editedItem="editedItem"
                     ></slot>
                     <v-row dense>
-                      <!-- <v-subheader>{{ $t("descriptions") }}</v-subheader> -->
-                      <v-expansion-panels accordion flat>
-                        <v-expansion-panel>
-                          <v-expansion-panel-header class="pl-1">{{
-                            $t("descriptions")
-                          }}</v-expansion-panel-header>
-                          <v-expansion-panel-content>
-                            <v-data-iterator
-                              :items="editedItem.descriptions"
-                              item-key="id"
-                              hide-default-footer
-                            >
-                              <template>
-                                <v-row dense>
-                                  <v-col
-                                    v-for="description in editedItem.descriptions"
-                                    cols="12"
-                                    sm="12"
-                                    md="6"
-                                    :key="`input-${description.locale}`"
-                                  >
-                                    <v-row dense>
-                                      <v-subheader>{{
-                                        $t(description.locale)
-                                      }}</v-subheader>
-                                    </v-row>
-                                    <v-row dense>
-                                      <v-col cols="12">
-                                        <v-text-field
-                                          v-model="description.title"
-                                          :label="$t('title')"
-                                          required
-                                        ></v-text-field>
-                                      </v-col>
-                                      <v-col cols="12">
-                                        <v-textarea
-                                          v-model="description.description"
-                                          :label="$t('description')"
-                                        ></v-textarea>
-                                      </v-col>
-                                    </v-row>
-                                  </v-col>
-                                </v-row>
-                              </template>
-                            </v-data-iterator>
-                          </v-expansion-panel-content>
-                        </v-expansion-panel>
-                      </v-expansion-panels>
+                      <v-subheader class="pl-1">{{
+                        $t("description")
+                      }}</v-subheader>
+                    </v-row>
+                    <v-row dense>
+                      <v-col cols="12" sm="12" md="6">
+                        <v-textarea
+                          v-model="editedItem.description.description"
+                          :label="$t('description')"
+                        />
+                      </v-col>
+                      <v-col cols="12" sm="12" md="6">
+                        <div v-html="markdownDescription" />
+                      </v-col>
                     </v-row>
                   </v-container>
                 </v-form>
@@ -134,7 +116,7 @@
           </v-dialog>
         </v-toolbar>
       </template>
-      <template v-slot:[`item.actions`]="{ item }">
+      <template v-if="!readonly" v-slot:[`item.actions`]="{ item }">
         <v-icon small class="mr-2" @click="editItem(item)">
           mdi-pencil
         </v-icon>
@@ -171,22 +153,23 @@
 </template>
 
 <script lang="ts">
-import { Editable } from "@/store/types";
-import { localise, mergeDescriptions } from "@/utils/localise";
+import { DropdownValueList, Editable, LooseObject } from "@/store/types";
+import { localise, localiseItem, mergeDescriptions } from "@/utils/localise";
 import Vue from "vue";
 import Component from "vue-class-component";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
+import { Locale } from "@/API";
+import marked from "marked";
 
 const AdminTableProps = Vue.extend({
   props: {
-    defaultItem: Object,
+    defaultItem: Object || Function,
     headers: Array,
     module: String,
     newText: String,
     editText: String,
     title: String,
     customColumns: Array,
-    localiseDependencies: Function,
   },
 });
 
@@ -201,10 +184,37 @@ export default class AdminTable extends AdminTableProps {
   sortBy = ["description.title"];
   messages: string[] = [];
   notification = false;
+
   editedItem = mergeDescriptions(
-    this.defaultItem,
+    typeof this.defaultItem === "function"
+      ? this.defaultItem()
+      : this.defaultItem,
     this.$i18n.locale
   ) as Editable;
+
+  get markdownDescription() {
+    return marked(this.editedItem.description?.description || "");
+  }
+
+  get locales(): DropdownValueList[] {
+    return Object.keys(Locale).map(locale => ({
+      value: locale,
+      text: this.$i18n.t(locale),
+    })) as DropdownValueList[];
+  }
+
+  get readonly() {
+    return !(
+      this.$store.getters["isCurrentUserAdmin"] ||
+      this.$store.getters["isCurrentUserEditor"]
+    );
+  }
+
+  get computedHeaders() {
+    return this.readonly
+      ? this.headers.filter(h => (h as LooseObject).value !== "actions")
+      : this.headers;
+  }
 
   get items(): Editable[] {
     return localise(
@@ -221,6 +231,10 @@ export default class AdminTable extends AdminTableProps {
     return this.editedIndex === -1
       ? this.$t(this.newText)
       : this.$t(this.editText);
+  }
+
+  changeEditedLocale(locale: Locale) {
+    this.editedItem = localiseItem(this.editedItem, locale);
   }
 
   refresh() {
@@ -270,7 +284,7 @@ export default class AdminTable extends AdminTableProps {
     this.editedItem = Object.assign({}, item);
     this.dialogDelete = true;
   }
-  mounted() {
+  created() {
     this.refresh();
   }
 }

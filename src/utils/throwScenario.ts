@@ -13,3 +13,12 @@ export const getThrowScenarioString = (
     scenario.modifier ? "+" + scenario.modifier : ""
   }`;
 };
+
+// export const parseThrowScenarioString = (value: string): ThrowScenario => {
+//   const iterationCount = parseInt(value.match(/^[0-9]+/g)?.join("") || "1");
+//   // const dice = "D" + value.match(/[A-Z][0-9]+/g)?.join("");
+//   // const modifier = parseInt(value.match(/(?<=\+)[0-9]+/g)?.join("") || "0");
+//   return {
+//     iterationCount,
+//   };
+// };

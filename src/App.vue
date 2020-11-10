@@ -6,6 +6,10 @@
         @click="navDrawerOpen = !navDrawerOpen"
       ></v-app-bar-nav-icon>
 
+      <v-avatar width="32px" height="32px" tile>
+        <img :src="require('@/assets/favicon-32x32.png')" alt="logo" />
+      </v-avatar>
+
       <v-toolbar-title>M.A.G.U.S</v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -13,7 +17,7 @@
         <template v-slot:activator="{ on, attrs }">
           <v-btn :icon="$vuetify.breakpoint.xs" text v-bind="attrs" v-on="on"
             ><div class="d-none d-sm-flex">{{ $t("throw-dice") }}</div>
-            <v-icon class="ml-2">mdi-dice-5</v-icon></v-btn
+            <v-icon class="ml-sm-2">mdi-dice-5</v-icon></v-btn
           >
         </template>
         <v-list>
@@ -30,7 +34,7 @@
         <template v-slot:activator="{ on, attrs }">
           <v-btn :icon="$vuetify.breakpoint.xs" text v-bind="attrs" v-on="on">
             <div class="d-none d-sm-flex">{{ app.user.attributes.name }}</div>
-            <v-icon class="ml-2">mdi-account</v-icon>
+            <v-icon class="ml-sm-2">mdi-account</v-icon>
           </v-btn>
         </template>
         <v-list>
@@ -77,7 +81,7 @@ import NavigationDrawer from "./components/NavigationDrawer.vue";
 import { mapActions, mapGetters, mapMutations, mapState } from "vuex";
 import { DiceObject, getDice, throwDice } from "./utils/dice";
 import { Auth } from "aws-amplify";
-import UserAttributes from "./views/UserAttributes.vue";
+import UserAttributes from "@/components/UserAttributes.vue";
 
 export default Vue.extend({
   name: "App",

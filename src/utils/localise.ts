@@ -1,13 +1,16 @@
 import { Locale } from "@/API";
 import { Describable, Description } from "@/store/types";
 
-export const localiseItem = (
-  obj: Describable,
-  locale: string
-): Describable => ({
-  ...obj,
-  description: obj.descriptions?.find(d => d.locale === locale),
-});
+export const localiseItem = (obj: Describable, locale: string): Describable => {
+  const res = {
+    ...obj,
+    description: obj.descriptions?.find(d => d.locale === locale),
+    locale: locale as Locale,
+  };
+  if (res.description)
+    res.description.description = res.description.description || "";
+  return res;
+};
 
 export const localise = (
   objects: Describable[],
@@ -22,7 +25,9 @@ export const getDescriptionsForLocales = (
   localesIn?: string[]
 ): Description[] => {
   const locales = localesIn || Object.keys(Locale);
-  return locales.map(l => ({ locale: l, title: "" } as Description));
+  return locales.map(
+    l => ({ locale: l, title: "", description: "" } as Description)
+  );
 };
 
 export const mergeDescriptions = (

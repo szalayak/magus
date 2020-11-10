@@ -1,5 +1,9 @@
 import { Dice, LanguageLevel, Locale, Sex } from "@/API";
 
+export interface LooseObject {
+  [key: string]: unknown;
+}
+
 export interface DropdownValueList {
   value?: string | null;
   text?: string;
@@ -14,6 +18,7 @@ export interface Description {
 export interface Describable {
   descriptions?: Description[];
   description?: Description;
+  locale?: Locale;
 }
 
 export interface Identifiable {

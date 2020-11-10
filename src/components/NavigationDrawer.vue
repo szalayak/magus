@@ -43,8 +43,8 @@
         {{ $t(dungeonMasterAreaRoute.title) }}
       </v-list-item-title>
     </v-list-item>
-    <template v-if="isCurrentUserAdmin || isCurrentUserEditor">
-      <v-subheader>{{ $t("administration") }}</v-subheader>
+    <template>
+      <v-subheader>{{ $t("encyclopedia") }}</v-subheader>
       <v-list-item
         v-for="adminRoute in adminRoutes"
         :key="adminRoute.name"

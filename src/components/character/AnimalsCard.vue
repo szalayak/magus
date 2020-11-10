@@ -7,8 +7,15 @@
     <template v-slot:toolbar="{}">
       <v-dialog scrollable v-model="dialog" max-width="800px">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn v-if="editable" color="primary" text v-bind="attrs" v-on="on">
-            {{ $t("new-animal") }}
+          <v-btn
+            v-if="editable"
+            color="primary"
+            text
+            v-bind="attrs"
+            v-on="on"
+            icon
+          >
+            <v-icon>mdi-plus</v-icon>
           </v-btn>
         </template>
         <v-card>
@@ -155,7 +162,13 @@
         :sort-by="sortBy"
       >
         <template v-slot:top>
-          <v-alert v-if="notification" dense outlined type="error">
+          <v-alert
+            v-model="notification"
+            dense
+            outlined
+            type="error"
+            dismissible
+          >
             {{ messages }}
           </v-alert>
         </template>
@@ -335,6 +348,9 @@ export default class AnimalsCard extends CharacterInfo {
         offence: undefined,
         defence: undefined,
       };
+    }
+    if (!this.editedItem.health) {
+      this.editedItem.health = { vitality: {}, hitPoints: {} };
     }
     this.dialog = true;
   }

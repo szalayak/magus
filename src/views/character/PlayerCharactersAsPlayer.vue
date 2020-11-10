@@ -1,9 +1,10 @@
 <template>
   <character-list
     :characters="characters"
-    :messages="messages"
-    :notification="notification"
+    :messages.sync="messages"
+    :notification.sync="notification"
     :title="$t('my-characters')"
+    :editable="true"
   >
     <template v-slot:toolbar-buttons>
       <v-dialog v-model="createDialog" persistent max-width="50%">
@@ -161,7 +162,7 @@ import { localise } from "@/utils/localise";
 import Vue from "vue";
 import Component from "vue-class-component";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
-import CharacterList from "./CharacterList.vue";
+import CharacterList from "@/components/CharacterList.vue";
 import TitleComponent from "@/mixins/TitleComponent";
 
 type Form = Vue & { validate: () => boolean };
@@ -212,16 +213,13 @@ export default class PlayerCharactersAsPlayer extends TitleComponent {
     }
   }
 
-  mounted() {
+  created() {
     this.$store
       .dispatch("character/loadByOwner", this.$store.state.app.user.username)
       .catch((error: GraphQLResult<Character>) => {
         this.messages = error.errors?.map(err => err.message) || [];
         this.notification = true;
       });
-  }
-
-  created() {
     Promise.all([
       this.$store.dispatch("race/load"),
       this.$store.dispatch("class/load"),
