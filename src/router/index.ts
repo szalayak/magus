@@ -33,6 +33,14 @@ const routes: Array<RouteConfig> = [
   ...playerAreaRoutes,
   ...dungeonMasterAreaRoutes,
   ...characterRoutes,
+  {
+    path: "/admin/seed-default-values",
+    name: "Seed Default Values",
+    component: () =>
+      import(
+        /* webpackChunkName: "seed-default-values" */ "../views/admin/SeedDefaultValues.vue"
+      ),
+  },
 ];
 
 const router = new VueRouter({

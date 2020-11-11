@@ -267,5 +267,9 @@
   "servants-and-companions": "Csatlósok, kísérők, szolgák",
   "new-servant": "Új csatlós",
   "edit-servant": "Csatlós szerkesztése",
-  "encyclopedia":"Enciklopédia"
+  "encyclopedia":"Enciklopédia",
+  "seed-default-values":"Alapértelmezett értékek",
+  "select-all":"Mind",
+  "select-none":"Egyik sem",
+  "delete-existing-values":"Korábbi értékeke törlése"
 }

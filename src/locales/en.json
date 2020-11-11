@@ -267,5 +267,9 @@
   "servants-and-companions": "Servants and Companions",
   "new-servant": "New Servant",
   "edit-servant": "Edit Servant",
-  "encyclopedia": "Encyclopedia"
+  "encyclopedia": "Encyclopedia",
+  "seed-default-values":"Seed Default Values",
+  "select-all":"All",
+  "select-none":"None",
+  "delete-existing-values":"Delete Existing Values"
 }

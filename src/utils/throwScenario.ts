@@ -1,3 +1,4 @@
+import { Dice } from "@/API";
 import { ThrowScenario } from "@/store/types";
 import VueI18n from "vue-i18n";
 
@@ -14,11 +15,19 @@ export const getThrowScenarioString = (
   }`;
 };
 
-// export const parseThrowScenarioString = (value: string): ThrowScenario => {
-//   const iterationCount = parseInt(value.match(/^[0-9]+/g)?.join("") || "1");
-//   // const dice = "D" + value.match(/[A-Z][0-9]+/g)?.join("");
-//   // const modifier = parseInt(value.match(/(?<=\+)[0-9]+/g)?.join("") || "0");
-//   return {
-//     iterationCount,
-//   };
-// };
+export const parseThrowScenarioString = (value: string): ThrowScenario => {
+  const iterationCount = value.match(/^[0-9]+/g)?.join("") || "";
+  const dice = value
+    .match(/[A-Z][0-9]+/g)
+    ?.join("")
+    .replace(/[A-Z]/g, "D") as Dice;
+  const modifier = value
+    .match(/\+[0-9]+/g)
+    ?.join("")
+    .slice(1);
+  return {
+    iterationCount: iterationCount ? parseInt(iterationCount) : undefined,
+    dice,
+    modifier: modifier ? parseInt(modifier) : undefined,
+  };
+};
