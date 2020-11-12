@@ -24,6 +24,28 @@
         <v-list-item-content>
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item-content>
+        <v-spacer />
+        <v-list-item-action>
+          <v-dialog scrollable v-model="item.dialog" max-width="800px">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn icon text v-on="on" v-bind="attrs"
+                ><v-icon>mdi-information</v-icon></v-btn
+              >
+            </template>
+            <v-card>
+              <v-card-title>{{ item.title }}</v-card-title>
+              <v-card-text>
+                <div v-html="fixture(item.fixture)" />
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer />
+                <v-btn text @click="item.dialog = false">{{
+                  $t("close")
+                }}</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-list-item-action>
       </v-list-item>
     </v-list>
   </v-container>
@@ -31,21 +53,39 @@
 <script lang="ts">
 import TitleComponent from "@/mixins/TitleComponent";
 import Component from "vue-class-component";
-import { loadDataForModule, ModuleResults } from "@/utils/csv";
+import VueI18n from "vue-i18n";
+import fixtures from "@/fixtures/index";
+import JSONFormatter from "json-formatter-js";
+
+interface Fixture {
+  id: string;
+  fixture: string;
+  selected: boolean;
+  title: string | VueI18n.TranslateResult;
+  module: string;
+  dialog: boolean;
+}
 
 @Component({ name: "seed-default-values" })
 export default class SeedDefaultValues extends TitleComponent {
   title = this.$t("seed-default-values");
   deleteBeforeInsert = false;
-  items = [
+  items: Fixture[] = [
     {
       id: "weapons",
+      fixture: "weapons",
       selected: false,
       title: this.$t("weapons"),
       module: "weapon",
+      dialog: false,
     },
   ];
-  fixtures: ModuleResults = {};
+
+  fixture(fixture: string) {
+    return new JSONFormatter(fixtures[fixture], 2, {
+      hoverPreviewEnabled: true,
+    }).render().outerHTML;
+  }
 
   selectAll() {
     this.items.forEach(i => (i.selected = true));
@@ -57,17 +97,6 @@ export default class SeedDefaultValues extends TitleComponent {
 
   async created() {
     this.items.forEach(i => this.$store.dispatch(`${i.module}/load`));
-    try {
-      const results = await Promise.all(
-        this.items.map(i => {
-          return [i.module, loadDataForModule(i.module)];
-        })
-      );
-      this.fixtures = Object.fromEntries(results);
-      console.log(this.fixtures);
-    } catch (e) {
-      console.log(e);
-    }
   }
 }
 </script>
