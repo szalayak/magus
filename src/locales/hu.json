@@ -267,9 +267,15 @@
   "servants-and-companions": "Csatlósok, kísérők, szolgák",
   "new-servant": "Új csatlós",
   "edit-servant": "Csatlós szerkesztése",
-  "encyclopedia":"Enciklopédia",
-  "seed-default-values":"Alapértelmezett értékek",
-  "select-all":"Mind",
-  "select-none":"Egyik sem",
-  "delete-existing-values":"Korábbi értékeke törlése"
+  "encyclopedia": "Enciklopédia",
+  "seed-default-values": "Alapértelmezett értékek",
+  "select-all": "Mind",
+  "select-none": "Egyik sem",
+  "delete-existing-values": "Korábbi értékek törlése",
+  "update-existing-values": "Korábbi értékek módosítása",
+  "insert-values-only": "Csak új értékek hozzáadása",
+  "start": "Indítás",
+  "search":"Keresés",
+  "delete":"Törlés",
+  "upload":"Betöltés"
 }

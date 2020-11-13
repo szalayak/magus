@@ -14,6 +14,8 @@ import TitleComponent from "@/mixins/TitleComponent";
   },
 })
 export default class Races extends TitleComponent {
-  title = this.$t("races");
+  get title() {
+    return this.$t("races");
+  }
 }
 </script>

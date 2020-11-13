@@ -271,5 +271,11 @@
   "seed-default-values":"Seed Default Values",
   "select-all":"All",
   "select-none":"None",
-  "delete-existing-values":"Delete Existing Values"
+  "delete-existing-values":"Delete Existing Values",
+  "update-existing-values":"Update Existing Values",
+  "insert-values-only":"Only Insert New Values",
+  "start":"Start",
+  "search":"Search",
+  "delete":"Delete",
+  "upload":"Upload"
 }

@@ -1,0 +1,158 @@
+[
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Vágófegyver",
+    "id": "WT1",
+    "type": "WEAPON_TYPE"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Zúzófegyver",
+    "id": "WT2",
+    "type": "WEAPON_TYPE"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Szálfegyver",
+    "id": "WT3",
+    "type": "WEAPON_TYPE"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Célzófegyver",
+    "id": "WT4",
+    "type": "WEAPON_TYPE"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Egyéb",
+    "id": "WT5",
+    "type": "WEAPON_TYPE"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Harcos",
+    "id": "MC1",
+    "type": "MAIN_CLASS"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Szerencsevadász",
+    "id": "MC2",
+    "type": "MAIN_CLASS"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Harcművész",
+    "id": "MC3",
+    "type": "MAIN_CLASS"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Pap",
+    "id": "MC4",
+    "type": "MAIN_CLASS"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Varázshasználó",
+    "id": "MC5",
+    "type": "MAIN_CLASS"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Élet",
+    "id": "P1",
+    "type": "PERSONALITY"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Rend",
+    "id": "P2",
+    "type": "PERSONALITY"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Káosz",
+    "id": "P3",
+    "type": "PERSONALITY"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Halál",
+    "id": "P4",
+    "type": "PERSONALITY"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Élet, Rend",
+    "id": "P5",
+    "type": "PERSONALITY"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Rend, Élet",
+    "id": "P6",
+    "type": "PERSONALITY"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Élet, Káosz",
+    "id": "P7",
+    "type": "PERSONALITY"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Káosz, Élet",
+    "id": "P8",
+    "type": "PERSONALITY"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Rend, Halál",
+    "id": "P9",
+    "type": "PERSONALITY"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Halál, Rend",
+    "id": "P10",
+    "type": "PERSONALITY"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Káosz, Halál",
+    "id": "P11",
+    "type": "PERSONALITY"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Halál, Káosz",
+    "id": "P12",
+    "type": "PERSONALITY"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Harci",
+    "id": "SG1",
+    "type": "SKILL_GROUP"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Világi",
+    "id": "SG2",
+    "type": "SKILL_GROUP"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Alvilági",
+    "id": "SG3",
+    "type": "SKILL_GROUP"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Tudományos",
+    "id": "SG4",
+    "type": "SKILL_GROUP"
+  }
+]

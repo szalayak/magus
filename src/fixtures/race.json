@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "descriptions.locale": "hu",
+        "descriptions.title": "Ember",
+        "playable": true
+    },
+    {
+        "id": 2,
+        "descriptions.locale": "hu",
+        "descriptions.title": "Elf",
+        "playable": true
+    },
+    {
+        "id": 3,
+        "descriptions.locale": "hu",
+        "descriptions.title": "Félelf",
+        "playable": true
+    },
+    {
+        "id": 4,
+        "descriptions.locale": "hu",
+        "descriptions.title": "Törpe",
+        "playable": true
+    },
+    {
+        "id": 5,
+        "descriptions.locale": "hu",
+        "descriptions.title": "Udvari Ork",
+        "playable": true
+    },
+    {
+        "id": 6,
+        "descriptions.locale": "hu",
+        "descriptions.title": "Amund",
+        "playable": true
+    },
+    {
+        "id": 7,
+        "descriptions.locale": "hu",
+        "descriptions.title": "Dzsenn",
+        "playable": true
+    },
+    {
+        "id": 8,
+        "descriptions.locale": "hu",
+        "descriptions.title": "Khál",
+        "playable": true
+    },
+    {
+        "id": 9,
+        "descriptions.locale": "hu",
+        "descriptions.title": "Wier",
+        "playable": true
+    }
+]

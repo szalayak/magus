@@ -34,6 +34,7 @@ export const mergeDescriptions = (
   obj: Describable,
   locale: string
 ): Describable => {
+  obj.locale = locale as Locale;
   if (obj.description) {
     const d = obj.descriptions?.find(d => d?.locale === locale);
     if (d) {
