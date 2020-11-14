@@ -35,6 +35,14 @@
           />
         </v-col>
         <v-col cols="12">
+          <v-select
+            v-model="character.shieldMastery"
+            :items="masteryLevels"
+            :label="$t('mastery')"
+            :disabled="!edit"
+          />
+        </v-col>
+        <v-col cols="12">
           <v-text-field :label="$t('weight')" :value="shield.weight" disabled />
         </v-col>
         <v-col cols="12">

@@ -31,3 +31,20 @@ export const applyMasterSkillToCombatValues = (
     aiming: (aiming || 0) + 5,
   };
 };
+
+export const applyUnskilledPenaltyToCombatValues = (
+  combatValues?: CombatValues
+): CombatValues => {
+  let { initiation, offence, defence, aiming } = combatValues || {};
+  initiation = (initiation || 0) - 10;
+  offence = (offence || 0) - 25;
+  defence = (defence || 0) - 20;
+  aiming = (aiming || 0) - 30;
+
+  return {
+    initiation: initiation > 0 ? initiation : 0,
+    offence: offence > 0 ? initiation : 0,
+    defence: defence > 0 ? defence : 0,
+    aiming: aiming > 0 ? aiming : 0,
+  };
+};

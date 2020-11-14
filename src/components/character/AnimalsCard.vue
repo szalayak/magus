@@ -21,7 +21,7 @@
         <v-card>
           <v-card-title>{{ formTitle }}</v-card-title>
           <v-card-text>
-            <v-form ref="form" v-model="valid">
+            <v-form :disabled="!editable" ref="form" v-model="valid">
               <v-row dense>
                 <v-subheader class="pl-1">{{
                   $t("general-properties")
@@ -120,6 +120,12 @@
                     :label="$t('special-abilities')"
                   />
                 </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="editedItem.notes"
+                    :label="$t('notes')"
+                  />
+                </v-col>
               </v-row>
             </v-form>
           </v-card-text>
@@ -129,7 +135,7 @@
             <v-btn color="error" text @click="close">
               {{ $t("cancel") }}
             </v-btn>
-            <v-btn color="primary" text @click="save">
+            <v-btn v-if="editable" color="primary" text @click="save">
               {{ $t("save") }}
             </v-btn>
           </v-card-actions>
@@ -171,6 +177,9 @@
           >
             {{ messages }}
           </v-alert>
+        </template>
+        <template v-slot:[`item.name`]="{ item }">
+          <a @click="editItem(item)">{{ item.name }}</a>
         </template>
         <template v-slot:[`item.type`]="{ item }">
           {{ typeToString(item.type) }}
@@ -242,6 +251,7 @@ export default class AnimalsCard extends CharacterInfo {
       { text: this.$t("max-load"), value: "maxLoad" },
       { text: this.$t("bad-habit"), value: "badHabit" },
       { text: this.$t("special-abilities"), value: "specialAbilities" },
+      { text: this.$t("notes"), value: "notes" },
     ];
     return this.editable
       ? [

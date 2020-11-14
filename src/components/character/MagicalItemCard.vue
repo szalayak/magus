@@ -17,7 +17,7 @@
         <v-card>
           <v-card-title>{{ formTitle }}</v-card-title>
           <v-card-text>
-            <v-form ref="form" v-model="valid">
+            <v-form :disabled="!editable" ref="form" v-model="valid">
               <v-container>
                 <v-row dense>
                   <v-col cols="12">
@@ -36,6 +36,12 @@
                       :label="$t('location')"
                     ></v-text-field>
                   </v-col>
+                  <v-col cols="12">
+                    <v-text-field
+                      v-model="editedItem.notes"
+                      :label="$t('notes')"
+                    />
+                  </v-col>
                 </v-row>
               </v-container>
             </v-form>
@@ -46,7 +52,7 @@
             <v-btn color="error" text @click="close">
               {{ $t("cancel") }}
             </v-btn>
-            <v-btn color="primary" text @click="save">
+            <v-btn v-if="editable" color="primary" text @click="save">
               {{ $t("save") }}
             </v-btn>
           </v-card-actions>
@@ -92,7 +98,9 @@
           </v-alert>
         </template>
         <template v-slot:[`item.magicalItem`]="{ item }">
-          {{ magicalItemToString(item.magicalItem) }}
+          <a @click="editItem(item)">{{
+            magicalItemToString(item.magicalItem)
+          }}</a>
         </template>
         <template v-if="editable" v-slot:[`item.actions`]="{ item }">
           <v-icon small class="mr-2" @click="editItem(item)">
@@ -138,6 +146,7 @@ export default class MagicalItemAssignmentCard extends CharacterInfo {
     const headers = [
       { text: this.$t("magical-item"), value: "magicalItem" },
       { text: this.$t("location"), value: "location" },
+      { text: this.$t("notes"), value: "notes" },
     ];
     return this.editable
       ? [

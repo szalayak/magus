@@ -1,146 +1,154 @@
 [
-    {
-      "id": 1,
-      "descriptions.locale": "hu",
-      "descriptions.title": "Harcos",
-      "mainClass.id": "MC1",
-      "playable": true,
-      "magicUser": null
-    },
-    {
-      "id": 2,
-      "descriptions.locale": "hu",
-      "descriptions.title": "Gladiátor",
-      "mainClass.id": "MC1",
-      "playable": true,
-      "magicUser": null
-    },
-    {
-      "id": 3,
-      "descriptions.locale": "hu",
-      "descriptions.title": "Fejvadász",
-      "mainClass.id": "MC1",
-      "playable": true,
-      "magicUser": null
-    },
-    {
-      "id": 4,
-      "descriptions.locale": "hu",
-      "descriptions.title": "Lovag",
-      "mainClass.id": "MC1",
-      "playable": true,
-      "magicUser": null
-    },
-    {
-      "id": 5,
-      "descriptions.locale": "hu",
-      "descriptions.title": "Keleti Barbár",
-      "mainClass.id": "MC1",
-      "playable": true,
-      "magicUser": null
-    },
-    {
-      "id": 6,
-      "descriptions.locale": "hu",
-      "descriptions.title": "Bajvívó",
-      "mainClass.id": "MC1",
-      "playable": true,
-      "magicUser": null
-    },
-    {
-      "id": 7,
-      "descriptions.locale": "hu",
-      "descriptions.title": "Tolvaj",
-      "mainClass.id": "MC2",
-      "playable": true,
-      "magicUser": null
-    },
-    {
-      "id": 8,
-      "descriptions.locale": "hu",
-      "descriptions.title": "Bárd",
-      "mainClass.id": "MC2",
-      "playable": true,
-      "magicUser": null
-    },
-    {
-      "id": 9,
-      "descriptions.locale": "hu",
-      "descriptions.title": "Harcművész",
-      "mainClass.id": "MC3",
-      "playable": true,
-      "magicUser": null
-    },
-    {
-      "id": 10,
-      "descriptions.locale": "hu",
-      "descriptions.title": "Kardművész",
-      "mainClass.id": "MC3",
-      "playable": true,
-      "magicUser": null
-    },
-    {
-      "id": 11,
-      "descriptions.locale": "hu",
-      "descriptions.title": "Pap",
-      "mainClass.id": "MC4",
-      "playable": true,
-      "magicUser": true
-    },
-    {
-      "id": 12,
-      "descriptions.locale": "hu",
-      "descriptions.title": "Paplovag",
-      "mainClass.id": "MC4",
-      "playable": true,
-      "magicUser": true
-    },
-    {
-      "id": 13,
-      "descriptions.locale": "hu",
-      "descriptions.title": "Szerzetes",
-      "mainClass.id": "MC4",
-      "playable": true,
-      "magicUser": true
-    },
-    {
-      "id": 14,
-      "descriptions.locale": "hu",
-      "descriptions.title": "Boszorkány",
-      "mainClass.id": "MC5",
-      "playable": true,
-      "magicUser": true
-    },
-    {
-      "id": 15,
-      "descriptions.locale": "hu",
-      "descriptions.title": "Boszorkánymester",
-      "mainClass.id": "MC5",
-      "playable": true,
-      "magicUser": true
-    },
-    {
-      "id": 16,
-      "descriptions.locale": "hu",
-      "descriptions.title": "Tűzvarázsló",
-      "mainClass.id": "MC5",
-      "playable": true,
-      "magicUser": true
-    },
-    {
-      "id": 17,
-      "descriptions.locale": "hu",
-      "descriptions.title": "Varázsló",
-      "mainClass.id": "MC5",
-      "playable": true,
-      "magicUser": true
-    },
-    {
-      "id": 18,
-      "descriptions.locale": "hu",
-      "descriptions.title": "Nomád Sámán",
-      "mainClass.id": "MC5",
-      "playable": true,
-      "magicUser": true
-    }
-  ]
+  {
+    "id": "MC1-001",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Harcos",
+    "mainClass.id": "MC1",
+    "playable": true,
+    "magicUser": null
+  },
+  {
+    "id": "MC1-002",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Gladiátor",
+    "mainClass.id": "MC1",
+    "playable": true,
+    "magicUser": null
+  },
+  {
+    "id": "MC1-003",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Fejvadász",
+    "mainClass.id": "MC1",
+    "playable": true,
+    "magicUser": null
+  },
+  {
+    "id": "MC1-004",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Lovag",
+    "mainClass.id": "MC1",
+    "playable": true,
+    "magicUser": null
+  },
+  {
+    "id": "MC1-005",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Keleti Barbár",
+    "mainClass.id": "MC1",
+    "playable": true,
+    "magicUser": null
+  },
+  {
+    "id": "MC1-006",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Bajvívó",
+    "mainClass.id": "MC1",
+    "playable": true,
+    "magicUser": null
+  },
+  {
+    "id": "MC1-007",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Amazon",
+    "mainClass.id": "MC1",
+    "playable": true,
+    "magicUser": null
+  },
+  {
+    "id": "MC2-001",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Tolvaj",
+    "mainClass.id": "MC2",
+    "playable": true,
+    "magicUser": null
+  },
+  {
+    "id": "MC2-002",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Bárd",
+    "mainClass.id": "MC2",
+    "playable": true,
+    "magicUser": null
+  },
+  {
+    "id": "MC3-001",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Harcművész",
+    "mainClass.id": "MC3",
+    "playable": true,
+    "magicUser": null
+  },
+  {
+    "id": "MC3-002",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Kardművész",
+    "mainClass.id": "MC3",
+    "playable": true,
+    "magicUser": null
+  },
+  {
+    "id": "MC4-001",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Pap",
+    "mainClass.id": "MC4",
+    "playable": true,
+    "magicUser": true
+  },
+  {
+    "id": "MC4-002",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Paplovag",
+    "mainClass.id": "MC4",
+    "playable": true,
+    "magicUser": true
+  },
+  {
+    "id": "MC4-003",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Szerzetes",
+    "mainClass.id": "MC4",
+    "playable": true,
+    "magicUser": true
+  },
+  {
+    "id": "MC5-001",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Boszorkány",
+    "mainClass.id": "MC5",
+    "playable": true,
+    "magicUser": true
+  },
+  {
+    "id": "MC5-002",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Boszorkánymester",
+    "mainClass.id": "MC5",
+    "playable": true,
+    "magicUser": true
+  },
+  {
+    "id": "MC5-003",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Tűzvarázsló",
+    "mainClass.id": "MC5",
+    "playable": true,
+    "magicUser": true
+  },
+  {
+    "id": "MC5-004",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Varázsló",
+    "mainClass.id": "MC5",
+    "playable": true,
+    "magicUser": true
+  },
+  {
+    "id": "MC5-005",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Nomád Sámán",
+    "mainClass.id": "MC5",
+    "playable": true,
+    "magicUser": true
+  }
+]

@@ -136,20 +136,14 @@ export default class AbilitiesCard extends CharacterInfo {
   get agilityInArmour() {
     return this.character.abilities?.agility
       ? this.character.abilities.agility -
-          movementPreventionValueTotal(
-            this.character.armour,
-            this.character.shield
-          )
+          movementPreventionValueTotal(this.character)
       : 0;
   }
 
   get dexterityInArmour() {
     return this.character.abilities?.dexterity
       ? this.character.abilities.dexterity -
-          movementPreventionValueTotal(
-            this.character.armour,
-            this.character.shield
-          )
+          movementPreventionValueTotal(this.character)
       : 0;
   }
 

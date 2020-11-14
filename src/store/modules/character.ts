@@ -39,7 +39,8 @@ import {
   listCharactersByDungeonMaster,
   listCharactersByOwner,
 } from "@/graphql/queries";
-import { API } from "aws-amplify";
+import { onUpdateCharacter } from "@/graphql/subscriptions";
+import { API, graphqlOperation } from "aws-amplify";
 import { Module } from "vuex";
 import { RootState } from "..";
 import {
@@ -51,6 +52,7 @@ import {
   Identifiable,
   InventoryItem,
   LanguageAbility,
+  LooseObject,
   MagicalAbility,
   MutablePointValue,
   Poison,
@@ -68,6 +70,7 @@ import { Shield } from "./shield";
 import { Skill } from "./skill";
 import { ValueRange } from "./valueRange";
 import { Weapon } from "./weapon";
+import { Observable, Subscription } from "rxjs";
 
 export interface WeaponAssignment extends Identifiable {
   characterId: string;
@@ -80,6 +83,7 @@ export interface WeaponAssignment extends Identifiable {
   specialProjectileCount?: number;
   aim?: Mastery;
   horseback?: Mastery;
+  notes?: string;
 }
 
 export interface SkillAssignment extends Identifiable {
@@ -88,6 +92,7 @@ export interface SkillAssignment extends Identifiable {
   mastery?: Mastery;
   percentageValue?: number;
   skillPointsUsed?: number;
+  notes?: string;
 }
 
 export interface CharacterCompanion extends Identifiable {
@@ -103,12 +108,14 @@ export interface CharacterCompanion extends Identifiable {
   maxLoad?: string;
   badHabit?: string;
   specialAbilities?: string;
+  notes?: string;
 }
 
 export interface MagicalItemAssignment extends Identifiable {
   characterId: string;
   magicalItem?: MagicalItem;
   location?: string;
+  notes?: string;
 }
 
 export interface CharacterCore extends Identifiable {
@@ -146,7 +153,9 @@ export interface CharacterCore extends Identifiable {
   poisons?: Poison[];
   notes?: string;
   armour?: Armour;
+  armourMastery?: Mastery;
   shield?: Shield;
+  shieldMastery?: Mastery;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -198,6 +207,7 @@ interface CharacterQueryResult extends CharacterCore {
 export interface CharacterState {
   result: CharacterResults;
   transient: Character[];
+  subscription?: Subscription;
 }
 
 const mapCharacterResult = (item: CharacterQueryResult): Character => {
@@ -423,6 +433,9 @@ const character: Module<CharacterState, RootState> = {
         mergeTransient(state, character);
       }
     },
+    setSubscription(state, subscription: Subscription) {
+      state.subscription = subscription;
+    },
   },
   actions: {
     async load(context) {
@@ -502,6 +515,8 @@ const character: Module<CharacterState, RootState> = {
             notes: character.notes,
             characterArmourId: character.armour?.id,
             characterShieldId: character.shield?.id,
+            armourMastery: character.armourMastery,
+            shieldMastery: character.shieldMastery,
           },
         },
       })) as { data: CreateCharacterMutation };
@@ -550,6 +565,8 @@ const character: Module<CharacterState, RootState> = {
             notes: character.notes,
             characterArmourId: character.armour?.id,
             characterShieldId: character.shield?.id,
+            armourMastery: character.armourMastery,
+            shieldMastery: character.shieldMastery,
           },
         },
       })) as { data: UpdateCharacterMutation };
@@ -603,6 +620,7 @@ const character: Module<CharacterState, RootState> = {
             specialProjectileCount: assignment.specialProjectileCount,
             aim: assignment.aim,
             horseback: assignment.horseback,
+            notes: assignment.notes,
           },
         },
       })) as { data: CreateWeaponAssignmentMutation };
@@ -620,6 +638,11 @@ const character: Module<CharacterState, RootState> = {
             inHand: assignment.inHand,
             breakWeapon: assignment.breakWeapon,
             disarm: assignment.disarm,
+            arrowCount: assignment.arrowCount,
+            specialProjectileCount: assignment.specialProjectileCount,
+            aim: assignment.aim,
+            horseback: assignment.horseback,
+            notes: assignment.notes,
           },
         },
       })) as { data: UpdateWeaponAssignmentMutation };
@@ -649,6 +672,7 @@ const character: Module<CharacterState, RootState> = {
             mastery: assignment.mastery,
             percentageValue: assignment.percentageValue,
             skillPointsUsed: assignment.skillPointsUsed,
+            notes: assignment.notes,
           },
         },
       })) as { data: CreateSkillAssignmentMutation };
@@ -667,6 +691,7 @@ const character: Module<CharacterState, RootState> = {
             mastery: assignment.mastery,
             percentageValue: assignment.percentageValue,
             skillPointsUsed: assignment.skillPointsUsed,
+            notes: assignment.notes,
           },
         },
       })) as { data: UpdateSkillAssignmentMutation };
@@ -698,6 +723,7 @@ const character: Module<CharacterState, RootState> = {
             characterId: assignment.characterId,
             magicalItemId: assignment.magicalItem?.id,
             location: assignment.location,
+            notes: assignment.notes,
           },
         },
       })) as { data: CreateMagicalItemAssignmentMutation };
@@ -717,6 +743,7 @@ const character: Module<CharacterState, RootState> = {
             id: assignment.id,
             magicalItemId: assignment.magicalItem?.id,
             location: assignment.location,
+            notes: assignment.notes,
           },
         },
       })) as { data: UpdateMagicalItemAssignmentMutation };
@@ -758,6 +785,7 @@ const character: Module<CharacterState, RootState> = {
             maxLoad: companion.maxLoad,
             badHabit: companion.badHabit,
             specialAbilities: companion.specialAbilities,
+            notes: assignment.notes,
           },
         },
       })) as { data: CreateCharacterCompanionMutation };
@@ -784,6 +812,7 @@ const character: Module<CharacterState, RootState> = {
             maxLoad: companion.maxLoad,
             badHabit: companion.badHabit,
             specialAbilities: companion.specialAbilities,
+            notes: assignment.notes,
           },
         },
       })) as { data: UpdateCharacterCompanionMutation };
@@ -800,6 +829,25 @@ const character: Module<CharacterState, RootState> = {
         },
       });
       context.commit("removeCharacterCompanion", assignment);
+    },
+
+    async subscribeToUpdate(context) {
+      if (!context.state.subscription) {
+        const observable = (await API.graphql(
+          graphqlOperation(onUpdateCharacter)
+        )) as Observable<LooseObject>;
+        const subscription = observable.subscribe({
+          next: characterData => {
+            console.log(characterData);
+            const queryResult = ((characterData.value as LooseObject)
+              .data as LooseObject).onUpdateCharacter as CharacterQueryResult;
+            console.log({ queryResult });
+            mergePersistent(context.state, queryResult);
+          },
+        });
+        context.commit("setSubscription", subscription);
+        console.log(subscription);
+      }
     },
   },
 };

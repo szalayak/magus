@@ -1077,6 +1077,7 @@ export const createCharacter = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      armourMastery
       shield {
         id
         descriptions {
@@ -1102,6 +1103,7 @@ export const createCharacter = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      shieldMastery
       weapons {
         items {
           id
@@ -1147,6 +1149,7 @@ export const createCharacter = /* GraphQL */ `
           specialProjectileCount
           aim
           horseback
+          notes
           createdAt
           updatedAt
           owner
@@ -1180,6 +1183,7 @@ export const createCharacter = /* GraphQL */ `
           mastery
           percentageValue
           skillPointsUsed
+          notes
           createdAt
           updatedAt
           owner
@@ -1260,6 +1264,7 @@ export const createCharacter = /* GraphQL */ `
           maxLoad
           badHabit
           specialAbilities
+          notes
           createdAt
           updatedAt
           owner
@@ -1292,6 +1297,7 @@ export const createCharacter = /* GraphQL */ `
             updatedAt
           }
           location
+          notes
           createdAt
           updatedAt
           owner
@@ -1541,6 +1547,7 @@ export const updateCharacter = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      armourMastery
       shield {
         id
         descriptions {
@@ -1566,6 +1573,7 @@ export const updateCharacter = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      shieldMastery
       weapons {
         items {
           id
@@ -1611,6 +1619,7 @@ export const updateCharacter = /* GraphQL */ `
           specialProjectileCount
           aim
           horseback
+          notes
           createdAt
           updatedAt
           owner
@@ -1644,6 +1653,7 @@ export const updateCharacter = /* GraphQL */ `
           mastery
           percentageValue
           skillPointsUsed
+          notes
           createdAt
           updatedAt
           owner
@@ -1724,6 +1734,7 @@ export const updateCharacter = /* GraphQL */ `
           maxLoad
           badHabit
           specialAbilities
+          notes
           createdAt
           updatedAt
           owner
@@ -1756,6 +1767,7 @@ export const updateCharacter = /* GraphQL */ `
             updatedAt
           }
           location
+          notes
           createdAt
           updatedAt
           owner
@@ -2005,6 +2017,7 @@ export const deleteCharacter = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      armourMastery
       shield {
         id
         descriptions {
@@ -2030,6 +2043,7 @@ export const deleteCharacter = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      shieldMastery
       weapons {
         items {
           id
@@ -2075,6 +2089,7 @@ export const deleteCharacter = /* GraphQL */ `
           specialProjectileCount
           aim
           horseback
+          notes
           createdAt
           updatedAt
           owner
@@ -2108,6 +2123,7 @@ export const deleteCharacter = /* GraphQL */ `
           mastery
           percentageValue
           skillPointsUsed
+          notes
           createdAt
           updatedAt
           owner
@@ -2188,6 +2204,7 @@ export const deleteCharacter = /* GraphQL */ `
           maxLoad
           badHabit
           specialAbilities
+          notes
           createdAt
           updatedAt
           owner
@@ -2220,6 +2237,7 @@ export const deleteCharacter = /* GraphQL */ `
             updatedAt
           }
           location
+          notes
           createdAt
           updatedAt
           owner
@@ -2285,6 +2303,7 @@ export const createWeaponAssignment = /* GraphQL */ `
       specialProjectileCount
       aim
       horseback
+      notes
       createdAt
       updatedAt
       owner
@@ -2345,6 +2364,7 @@ export const updateWeaponAssignment = /* GraphQL */ `
       specialProjectileCount
       aim
       horseback
+      notes
       createdAt
       updatedAt
       owner
@@ -2405,6 +2425,7 @@ export const deleteWeaponAssignment = /* GraphQL */ `
       specialProjectileCount
       aim
       horseback
+      notes
       createdAt
       updatedAt
       owner
@@ -2447,6 +2468,7 @@ export const createSkillAssignment = /* GraphQL */ `
       mastery
       percentageValue
       skillPointsUsed
+      notes
       createdAt
       updatedAt
       owner
@@ -2489,6 +2511,7 @@ export const updateSkillAssignment = /* GraphQL */ `
       mastery
       percentageValue
       skillPointsUsed
+      notes
       createdAt
       updatedAt
       owner
@@ -2531,6 +2554,7 @@ export const deleteSkillAssignment = /* GraphQL */ `
       mastery
       percentageValue
       skillPointsUsed
+      notes
       createdAt
       updatedAt
       owner
@@ -2620,6 +2644,7 @@ export const createCharacterCompanion = /* GraphQL */ `
       maxLoad
       badHabit
       specialAbilities
+      notes
       createdAt
       updatedAt
       owner
@@ -2709,6 +2734,7 @@ export const updateCharacterCompanion = /* GraphQL */ `
       maxLoad
       badHabit
       specialAbilities
+      notes
       createdAt
       updatedAt
       owner
@@ -2798,6 +2824,7 @@ export const deleteCharacterCompanion = /* GraphQL */ `
       maxLoad
       badHabit
       specialAbilities
+      notes
       createdAt
       updatedAt
       owner
@@ -2850,6 +2877,7 @@ export const createMagicalItemAssignment = /* GraphQL */ `
         updatedAt
       }
       location
+      notes
       createdAt
       updatedAt
       owner
@@ -2902,6 +2930,7 @@ export const updateMagicalItemAssignment = /* GraphQL */ `
         updatedAt
       }
       location
+      notes
       createdAt
       updatedAt
       owner
@@ -2954,6 +2983,7 @@ export const deleteMagicalItemAssignment = /* GraphQL */ `
         updatedAt
       }
       location
+      notes
       createdAt
       updatedAt
       owner

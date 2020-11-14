@@ -1,0 +1,38 @@
+[
+  {
+    "id": "S001",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Kis pajzs",
+    "attacksPerTurn": 1,
+    "damage": "K6",
+    "combatValues.initiation": 1,
+    "combatValues.defence": 20,
+    "movementPreventionValue": 0,
+    "weight": "1kg",
+    "price": 600
+  },
+  {
+    "id": "S002",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Közepes pajzs",
+    "attacksPerTurn": 1,
+    "damage": "K6",
+    "combatValues.initiation": 0,
+    "combatValues.defence": 35,
+    "movementPreventionValue": 1,
+    "weight": "3kg",
+    "price": 1600
+  },
+  {
+    "id": "S003",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Nagy pajzs",
+    "attacksPerTurn": "1/2",
+    "damage": "K6",
+    "combatValues.initiation": 0,
+    "combatValues.defence": 50,
+    "movementPreventionValue": 5,
+    "weight": "6kg",
+    "price": 6000
+  }
+]

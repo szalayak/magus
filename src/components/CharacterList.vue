@@ -20,9 +20,10 @@
           >
             <v-card>
               <v-card-title>
-                {{ item.name }}
+                <a :href="characterToLink(item)">{{ item.name }}</a>
               </v-card-title>
               <v-card-subtitle>{{ characterToString(item) }}</v-card-subtitle>
+              <v-card-text> {{ `${$t("owner")}: ${item.owner}` }}</v-card-text>
               <v-card-actions>
                 <v-subheader class="pl-2">{{ $t("page") }}</v-subheader>
                 <v-btn-toggle dense tile color="primary" group>

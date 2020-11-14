@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": "WT1-001",
     "descriptions.locale": "hu",
     "descriptions.title": "Shadleki buzogány",
     "weaponType.id": "WT1",
@@ -16,7 +16,7 @@
     "ranged": false
   },
   {
-    "id": 2,
+    "id": "WT1-002",
     "descriptions.locale": "hu",
     "descriptions.title": "Egykezes csatabárd",
     "weaponType.id": "WT1",
@@ -32,7 +32,7 @@
     "ranged": false
   },
   {
-    "id": 3,
+    "id": "WT1-003",
     "descriptions.locale": "hu",
     "descriptions.title": "Kétkezes csatabárd",
     "weaponType.id": "WT1",
@@ -48,7 +48,7 @@
     "ranged": false
   },
   {
-    "id": 4,
+    "id": "WT1-004",
     "descriptions.locale": "hu",
     "descriptions.title": "Csatacsákány",
     "weaponType.id": "WT1",
@@ -64,7 +64,7 @@
     "ranged": false
   },
   {
-    "id": 5,
+    "id": "WT1-005",
     "descriptions.locale": "hu",
     "descriptions.title": "Hajítóbárd",
     "weaponType.id": "WT1",
@@ -80,7 +80,7 @@
     "ranged": false
   },
   {
-    "id": 6,
+    "id": "WT1-006",
     "descriptions.locale": "hu",
     "descriptions.title": "Rövid kard",
     "weaponType.id": "WT1",
@@ -96,7 +96,7 @@
     "ranged": false
   },
   {
-    "id": 7,
+    "id": "WT1-007",
     "descriptions.locale": "hu",
     "descriptions.title": "Hosszú kard",
     "weaponType.id": "WT1",
@@ -112,7 +112,7 @@
     "ranged": false
   },
   {
-    "id": 8,
+    "id": "WT1-008",
     "descriptions.locale": "hu",
     "descriptions.title": "Másfélkezes kard",
     "weaponType.id": "WT1",
@@ -128,7 +128,7 @@
     "ranged": false
   },
   {
-    "id": 9,
+    "id": "WT1-009",
     "descriptions.locale": "hu",
     "descriptions.title": "Lovagi kard",
     "weaponType.id": "WT1",
@@ -144,7 +144,7 @@
     "ranged": false
   },
   {
-    "id": 10,
+    "id": "WT1-010",
     "descriptions.locale": "hu",
     "descriptions.title": "Pallos",
     "weaponType.id": "WT1",
@@ -160,7 +160,7 @@
     "ranged": false
   },
   {
-    "id": 11,
+    "id": "WT1-011",
     "descriptions.locale": "hu",
     "descriptions.title": "Szablya",
     "weaponType.id": "WT1",
@@ -176,7 +176,7 @@
     "ranged": false
   },
   {
-    "id": 12,
+    "id": "WT1-012",
     "descriptions.locale": "hu",
     "descriptions.title": "Dzsenn szablya",
     "weaponType.id": "WT1",
@@ -192,7 +192,7 @@
     "ranged": false
   },
   {
-    "id": 13,
+    "id": "WT1-013",
     "descriptions.locale": "hu",
     "descriptions.title": "Jatagán",
     "weaponType.id": "WT1",
@@ -208,7 +208,7 @@
     "ranged": false
   },
   {
-    "id": 14,
+    "id": "WT1-014",
     "descriptions.locale": "hu",
     "descriptions.title": "Handzsár",
     "weaponType.id": "WT1",
@@ -224,7 +224,7 @@
     "ranged": false
   },
   {
-    "id": 15,
+    "id": "WT1-015",
     "descriptions.locale": "hu",
     "descriptions.title": "Fejvadászkard",
     "weaponType.id": "WT1",
@@ -240,7 +240,7 @@
     "ranged": false
   },
   {
-    "id": 16,
+    "id": "WT1-016",
     "descriptions.locale": "hu",
     "descriptions.title": "Slan kard",
     "weaponType.id": "WT1",
@@ -256,7 +256,7 @@
     "ranged": false
   },
   {
-    "id": 17,
+    "id": "WT1-017",
     "descriptions.locale": "hu",
     "descriptions.title": "Kígyókard",
     "weaponType.id": "WT1",
@@ -272,7 +272,7 @@
     "ranged": false
   },
   {
-    "id": 18,
+    "id": "WT1-018",
     "descriptions.locale": "hu",
     "descriptions.title": "Kés",
     "weaponType.id": "WT1",
@@ -288,7 +288,7 @@
     "ranged": false
   },
   {
-    "id": 19,
+    "id": "WT1-019",
     "descriptions.locale": "hu",
     "descriptions.title": "Mara-sequor",
     "weaponType.id": "WT1",
@@ -304,7 +304,7 @@
     "ranged": false
   },
   {
-    "id": 20,
+    "id": "WT1-020",
     "descriptions.locale": "hu",
     "descriptions.title": "Ramiera",
     "weaponType.id": "WT1",
@@ -320,7 +320,7 @@
     "ranged": false
   },
   {
-    "id": 21,
+    "id": "WT1-021",
     "descriptions.locale": "hu",
     "descriptions.title": "Sequor",
     "weaponType.id": "WT1",
@@ -336,7 +336,7 @@
     "ranged": false
   },
   {
-    "id": 22,
+    "id": "WT1-022",
     "descriptions.locale": "hu",
     "descriptions.title": "Slan csillag",
     "weaponType.id": "WT1",
@@ -352,7 +352,7 @@
     "ranged": false
   },
   {
-    "id": 23,
+    "id": "WT1-023",
     "descriptions.locale": "hu",
     "descriptions.title": "Tőr",
     "weaponType.id": "WT1",
@@ -368,7 +368,7 @@
     "ranged": false
   },
   {
-    "id": 24,
+    "id": "WT1-024",
     "descriptions.locale": "hu",
     "descriptions.title": "Dobótőr",
     "weaponType.id": "WT1",
@@ -384,7 +384,7 @@
     "ranged": false
   },
   {
-    "id": 25,
+    "id": "WT1-025",
     "descriptions.locale": "hu",
     "descriptions.title": "Slan tőr",
     "weaponType.id": "WT1",
@@ -400,7 +400,7 @@
     "ranged": false
   },
   {
-    "id": 26,
+    "id": "WT1-026",
     "descriptions.locale": "hu",
     "descriptions.title": "Tőrkard",
     "weaponType.id": "WT1",
@@ -416,7 +416,7 @@
     "ranged": false
   },
   {
-    "id": 27,
+    "id": "WT2-001",
     "descriptions.locale": "hu",
     "descriptions.title": "Hosszú bot",
     "weaponType.id": "WT2",
@@ -432,7 +432,7 @@
     "ranged": false
   },
   {
-    "id": 28,
+    "id": "WT2-002",
     "descriptions.locale": "hu",
     "descriptions.title": "Rövid bot",
     "weaponType.id": "WT2",
@@ -448,7 +448,7 @@
     "ranged": false
   },
   {
-    "id": 29,
+    "id": "WT2-003",
     "descriptions.locale": "hu",
     "descriptions.title": "Furkósbot",
     "weaponType.id": "WT2",
@@ -464,7 +464,7 @@
     "ranged": false
   },
   {
-    "id": 30,
+    "id": "WT2-004",
     "descriptions.locale": "hu",
     "descriptions.title": "Egykezes buzogány",
     "weaponType.id": "WT2",
@@ -480,7 +480,7 @@
     "ranged": false
   },
   {
-    "id": 31,
+    "id": "WT2-005",
     "descriptions.locale": "hu",
     "descriptions.title": "Kétkezes buzogány",
     "weaponType.id": "WT2",
@@ -496,7 +496,7 @@
     "ranged": false
   },
   {
-    "id": 32,
+    "id": "WT2-006",
     "descriptions.locale": "hu",
     "descriptions.title": "Tüskés buzogány",
     "weaponType.id": "WT2",
@@ -512,7 +512,7 @@
     "ranged": false
   },
   {
-    "id": 33,
+    "id": "WT2-007",
     "descriptions.locale": "hu",
     "descriptions.title": "Tollas buzogány",
     "weaponType.id": "WT2",
@@ -528,7 +528,7 @@
     "ranged": false
   },
   {
-    "id": 34,
+    "id": "WT2-008",
     "descriptions.locale": "hu",
     "descriptions.title": "Láncos buzogány",
     "weaponType.id": "WT2",
@@ -544,7 +544,7 @@
     "ranged": false
   },
   {
-    "id": 35,
+    "id": "WT2-009",
     "descriptions.locale": "hu",
     "descriptions.title": "Cséphadaró",
     "weaponType.id": "WT2",
@@ -560,7 +560,7 @@
     "ranged": false
   },
   {
-    "id": 36,
+    "id": "WT2-010",
     "descriptions.locale": "hu",
     "descriptions.title": "Harcikalapács",
     "weaponType.id": "WT2",
@@ -576,7 +576,7 @@
     "ranged": false
   },
   {
-    "id": 37,
+    "id": "WT3-001",
     "descriptions.locale": "hu",
     "descriptions.title": "Alabárd",
     "weaponType.id": "WT3",
@@ -592,7 +592,7 @@
     "ranged": false
   },
   {
-    "id": 38,
+    "id": "WT3-002",
     "descriptions.locale": "hu",
     "descriptions.title": "Dárda",
     "weaponType.id": "WT3",
@@ -608,7 +608,7 @@
     "ranged": false
   },
   {
-    "id": 39,
+    "id": "WT3-003",
     "descriptions.locale": "hu",
     "descriptions.title": "Könnyű kopja",
     "weaponType.id": "WT3",
@@ -624,7 +624,7 @@
     "ranged": false
   },
   {
-    "id": 40,
+    "id": "WT3-004",
     "descriptions.locale": "hu",
     "descriptions.title": "Lovas kopja",
     "weaponType.id": "WT3",
@@ -640,7 +640,7 @@
     "ranged": false
   },
   {
-    "id": 41,
+    "id": "WT3-005",
     "descriptions.locale": "hu",
     "descriptions.title": "Nehézlovas kopja",
     "weaponType.id": "WT3",
@@ -656,7 +656,7 @@
     "ranged": false
   },
   {
-    "id": 42,
+    "id": "WT3-006",
     "descriptions.locale": "hu",
     "descriptions.title": "Lándzsa",
     "weaponType.id": "WT3",
@@ -672,7 +672,7 @@
     "ranged": false
   },
   {
-    "id": 43,
+    "id": "WT3-007",
     "descriptions.locale": "hu",
     "descriptions.title": "Szigony",
     "weaponType.id": "WT3",
@@ -688,7 +688,7 @@
     "ranged": false
   },
   {
-    "id": 44,
+    "id": "WT4-001",
     "descriptions.locale": "hu",
     "descriptions.title": "Fúvócső",
     "weaponType.id": "WT4",
@@ -700,11 +700,11 @@
     "combatValues.aiming": 7,
     "weight": "0.2kg",
     "price": 600,
-    "attackRange": null,
+    "attackRange": 30,
     "ranged": true
   },
   {
-    "id": 45,
+    "id": "WT4-002",
     "descriptions.locale": "hu",
     "descriptions.title": "Rövid íj",
     "weaponType.id": "WT4",
@@ -716,11 +716,11 @@
     "combatValues.aiming": 4,
     "weight": "0.6kg",
     "price": 3000,
-    "attackRange": null,
+    "attackRange": 90,
     "ranged": true
   },
   {
-    "id": 46,
+    "id": "WT4-003",
     "descriptions.locale": "hu",
     "descriptions.title": "Hosszú íj",
     "weaponType.id": "WT4",
@@ -732,11 +732,11 @@
     "combatValues.aiming": 6,
     "weight": "0.7kg",
     "price": 3500,
-    "attackRange": null,
+    "attackRange": 110,
     "ranged": true
   },
   {
-    "id": 47,
+    "id": "WT4-004",
     "descriptions.locale": "hu",
     "descriptions.title": "Visszacsapó íj",
     "weaponType.id": "WT4",
@@ -748,11 +748,11 @@
     "combatValues.aiming": 8,
     "weight": "0.8kg",
     "price": 25000,
-    "attackRange": null,
+    "attackRange": 180,
     "ranged": true
   },
   {
-    "id": 48,
+    "id": "WT4-005",
     "descriptions.locale": "hu",
     "descriptions.title": "Elf íj",
     "weaponType.id": "WT4",
@@ -764,11 +764,11 @@
     "combatValues.aiming": 10,
     "weight": "0.7kg",
     "price": 120000,
-    "attackRange": null,
+    "attackRange": 120,
     "ranged": true
   },
   {
-    "id": 49,
+    "id": "WT4-006",
     "descriptions.locale": "hu",
     "descriptions.title": "Aquir nyílpuska",
     "weaponType.id": "WT4",
@@ -780,11 +780,11 @@
     "combatValues.aiming": 18,
     "weight": "2kg",
     "price": 1000000,
-    "attackRange": null,
+    "attackRange": 35,
     "ranged": true
   },
   {
-    "id": 50,
+    "id": "WT4-007",
     "descriptions.locale": "hu",
     "descriptions.title": "Kézi nyílpuska",
     "weaponType.id": "WT4",
@@ -796,11 +796,11 @@
     "combatValues.aiming": 14,
     "weight": "2kg",
     "price": 20000,
-    "attackRange": null,
+    "attackRange": 30,
     "ranged": true
   },
   {
-    "id": 51,
+    "id": "WT4-008",
     "descriptions.locale": "hu",
     "descriptions.title": "Kahrei nyílpuska",
     "weaponType.id": "WT4",
@@ -812,11 +812,11 @@
     "combatValues.aiming": 13,
     "weight": "3kg",
     "price": 80000,
-    "attackRange": null,
+    "attackRange": 30,
     "ranged": true
   },
   {
-    "id": 52,
+    "id": "WT4-009",
     "descriptions.locale": "hu",
     "descriptions.title": "Könnyű nyílpuska",
     "weaponType.id": "WT4",
@@ -828,11 +828,11 @@
     "combatValues.aiming": 16,
     "weight": "3.5kg",
     "price": 8000,
-    "attackRange": null,
+    "attackRange": 50,
     "ranged": true
   },
   {
-    "id": 53,
+    "id": "WT4-010",
     "descriptions.locale": "hu",
     "descriptions.title": "Nehéz nyílpuska",
     "weaponType.id": "WT4",
@@ -844,11 +844,11 @@
     "combatValues.aiming": 15,
     "weight": "6kg",
     "price": 12000,
-    "attackRange": null,
+    "attackRange": 60,
     "ranged": true
   },
   {
-    "id": 54,
+    "id": "WT4-011",
     "descriptions.locale": "hu",
     "descriptions.title": "Shadoni páncéltörő nyílpuska",
     "weaponType.id": "WT4",
@@ -860,11 +860,11 @@
     "combatValues.aiming": 17,
     "weight": "8kg",
     "price": 40000,
-    "attackRange": null,
+    "attackRange": 80,
     "ranged": true
   },
   {
-    "id": 55,
+    "id": "WT4-012",
     "descriptions.locale": "hu",
     "descriptions.title": "Parittya",
     "weaponType.id": "WT4",
@@ -876,11 +876,11 @@
     "combatValues.aiming": 1,
     "weight": "0.1kg",
     "price": 30,
-    "attackRange": null,
+    "attackRange": 100,
     "ranged": true
   },
   {
-    "id": 56,
+    "id": "WT5-001",
     "descriptions.locale": "hu",
     "descriptions.title": "Bola",
     "weaponType.id": "WT5",
@@ -896,7 +896,7 @@
     "ranged": false
   },
   {
-    "id": 57,
+    "id": "WT5-002",
     "descriptions.locale": "hu",
     "descriptions.title": "Dobóháló",
     "weaponType.id": "WT5",
@@ -912,7 +912,7 @@
     "ranged": false
   },
   {
-    "id": 58,
+    "id": "WT5-003",
     "descriptions.locale": "hu",
     "descriptions.title": "Garott",
     "weaponType.id": "WT5",
@@ -928,7 +928,7 @@
     "ranged": false
   },
   {
-    "id": 59,
+    "id": "WT5-004",
     "descriptions.locale": "hu",
     "descriptions.title": "Hárítótőr",
     "weaponType.id": "WT5",
@@ -944,7 +944,7 @@
     "ranged": false
   },
   {
-    "id": 60,
+    "id": "WT5-005",
     "descriptions.locale": "hu",
     "descriptions.title": "Korbács",
     "weaponType.id": "WT5",
@@ -960,7 +960,7 @@
     "ranged": false
   },
   {
-    "id": 61,
+    "id": "WT5-006",
     "descriptions.locale": "hu",
     "descriptions.title": "Lasszó",
     "weaponType.id": "WT5",
@@ -976,7 +976,7 @@
     "ranged": false
   },
   {
-    "id": 62,
+    "id": "WT5-007",
     "descriptions.locale": "hu",
     "descriptions.title": "Ostor",
     "weaponType.id": "WT5",
@@ -992,7 +992,7 @@
     "ranged": false
   },
   {
-    "id": 63,
+    "id": "WT5-008",
     "descriptions.locale": "hu",
     "descriptions.title": "Ököl",
     "weaponType.id": "WT5",
@@ -1008,7 +1008,7 @@
     "ranged": false
   },
   {
-    "id": 64,
+    "id": "WT5-009",
     "descriptions.locale": "hu",
     "descriptions.title": "Vasököl",
     "weaponType.id": "WT5",

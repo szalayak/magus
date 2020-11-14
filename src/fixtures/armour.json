@@ -1,0 +1,263 @@
+[
+  {
+    "id": "A001",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Teljes vértezet",
+    "weight": "35kg",
+    "price": 200000,
+    "movementPreventionValue": 8,
+    "damageReductionValue": 6
+  },
+  {
+    "id": "A002",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Bronz teljes vértezet",
+    "weight": "40kg",
+    "price": 160000,
+    "movementPreventionValue": 8,
+    "damageReductionValue": 5
+  },
+  {
+    "id": "A003",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Abbitacél teljes vértezet",
+    "weight": "15kg",
+    "price": 500000,
+    "movementPreventionValue": 6,
+    "damageReductionValue": 7
+  },
+  {
+    "id": "A004",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Mithrill teljes vértezet",
+    "weight": "10kg",
+    "price": 20000000,
+    "movementPreventionValue": 4,
+    "damageReductionValue": 8
+  },
+  {
+    "id": "A005",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Félvértezet",
+    "weight": "30kg",
+    "price": 120000,
+    "movementPreventionValue": 6,
+    "damageReductionValue": 5
+  },
+  {
+    "id": "A006",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Bronz félvértezet",
+    "weight": "35kg",
+    "price": 100000,
+    "movementPreventionValue": 6,
+    "damageReductionValue": 4
+  },
+  {
+    "id": "A007",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Abbitacél félvértezet",
+    "weight": "12kg",
+    "price": 300000,
+    "movementPreventionValue": 4,
+    "damageReductionValue": 6
+  },
+  {
+    "id": "A008",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Mithrill félvértezet",
+    "weight": "8kg",
+    "price": 12000000,
+    "movementPreventionValue": 3,
+    "damageReductionValue": 7
+  },
+  {
+    "id": "A009",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Mellvért",
+    "weight": "18kg",
+    "price": 80000,
+    "movementPreventionValue": 4,
+    "damageReductionValue": 4
+  },
+  {
+    "id": "A010",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Bronz mellvért",
+    "weight": "20kg",
+    "price": 60000,
+    "movementPreventionValue": 4,
+    "damageReductionValue": 3
+  },
+  {
+    "id": "A011",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Abbitacél mellvért",
+    "weight": "8kg",
+    "price": 200000,
+    "movementPreventionValue": 2,
+    "damageReductionValue": 5
+  },
+  {
+    "id": "A012",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Mithrill mellvért",
+    "weight": "6kg",
+    "price": 8000000,
+    "movementPreventionValue": 1,
+    "damageReductionValue": 6
+  },
+  {
+    "id": "A013",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Lemezvértezet",
+    "weight": "16kg",
+    "price": 40000,
+    "movementPreventionValue": 3,
+    "damageReductionValue": 3
+  },
+  {
+    "id": "A014",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Bronz lemezvértezet",
+    "weight": "18kg",
+    "price": 30000,
+    "movementPreventionValue": 3,
+    "damageReductionValue": 2
+  },
+  {
+    "id": "A015",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Abbitacél lemezvértezet",
+    "weight": "7kg",
+    "price": 100000,
+    "movementPreventionValue": 2,
+    "damageReductionValue": 4
+  },
+  {
+    "id": "A016",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Mithrill lemezvértezet",
+    "weight": "5kg",
+    "price": 4000000,
+    "movementPreventionValue": 1,
+    "damageReductionValue": 5
+  },
+  {
+    "id": "A017",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Pikkelyvért",
+    "weight": "16kg",
+    "price": 20000,
+    "movementPreventionValue": 2,
+    "damageReductionValue": 3
+  },
+  {
+    "id": "A018",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Bronz pikkelyvért",
+    "weight": "18kg",
+    "price": 16000,
+    "movementPreventionValue": 2,
+    "damageReductionValue": 2
+  },
+  {
+    "id": "A019",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Abbitacél pikkelyvért",
+    "weight": "7kg",
+    "price": 50000,
+    "movementPreventionValue": 1,
+    "damageReductionValue": 4
+  },
+  {
+    "id": "A020",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Mithrill pikkelyvért",
+    "weight": "5kg",
+    "price": 2000000,
+    "movementPreventionValue": 0,
+    "damageReductionValue": 5
+  },
+  {
+    "id": "A021",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Sodronying",
+    "weight": "20kg",
+    "price": 12000,
+    "movementPreventionValue": 1,
+    "damageReductionValue": 3
+  },
+  {
+    "id": "A022",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Abbitacél sodronying",
+    "weight": "12kg",
+    "price": 30000,
+    "movementPreventionValue": 0,
+    "damageReductionValue": 4
+  },
+  {
+    "id": "A023",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Mithrill sodronying",
+    "weight": "10kg",
+    "price": 1200000,
+    "movementPreventionValue": 0,
+    "damageReductionValue": 5
+  },
+  {
+    "id": "A024",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Láncing",
+    "weight": "20kg",
+    "price": 10000,
+    "movementPreventionValue": 1,
+    "damageReductionValue": 2
+  },
+  {
+    "id": "A025",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Brigantin",
+    "weight": "15kg",
+    "price": 4000,
+    "movementPreventionValue": 2,
+    "damageReductionValue": 3
+  },
+  {
+    "id": "A026",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Gyűrűsvért",
+    "weight": "12kg",
+    "price": 2000,
+    "movementPreventionValue": 1,
+    "damageReductionValue": 1
+  },
+  {
+    "id": "A027",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Keményített bőr",
+    "weight": "7kg",
+    "price": 500,
+    "movementPreventionValue": 2,
+    "damageReductionValue": 2
+  },
+  {
+    "id": "A028",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Kivert bőr",
+    "weight": "8kg",
+    "price": 400,
+    "movementPreventionValue": 0,
+    "damageReductionValue": 1
+  },
+  {
+    "id": "A029",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Posztó",
+    "weight": "5kg",
+    "price": 100,
+    "movementPreventionValue": 0,
+    "damageReductionValue": 1
+  }
+]

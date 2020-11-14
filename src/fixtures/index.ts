@@ -2,6 +2,11 @@ import * as weapon from "./weapon.json";
 import * as valueRange from "./valueRange.json";
 import * as race from "./race.json";
 import * as cls from "./class.json";
+import * as psiSchool from "./psiSchool.json";
+import * as armour from "./armour.json";
+import * as shield from "./shield.json";
+import * as skill from "./skill.json";
+import * as magicalItem from "./magicalItem.json";
 import { Editable, LooseObject } from "@/store/types";
 import { parseThrowScenarioString } from "@/utils/throwScenario";
 
@@ -53,10 +58,15 @@ export interface Fixtures {
 }
 
 const fixtures: Fixtures = {
-  weapons: mapFlatObject((weapon as unknown) as JsonData),
   valueRanges: mapFlatObject((valueRange as unknown) as JsonData),
   races: mapFlatObject((race as unknown) as JsonData),
   classes: mapFlatObject((cls as unknown) as JsonData),
+  psiSchools: mapFlatObject((psiSchool as unknown) as JsonData),
+  armours: mapFlatObject((armour as unknown) as JsonData),
+  shields: mapFlatObject((shield as unknown) as JsonData),
+  skills: mapFlatObject((skill as unknown) as JsonData),
+  weapons: mapFlatObject((weapon as unknown) as JsonData),
+  magicalItems: mapFlatObject((magicalItem as unknown) as JsonData),
 };
 
 export default fixtures;

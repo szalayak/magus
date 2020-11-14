@@ -17,7 +17,7 @@
         <v-card>
           <v-card-title>{{ formTitle }}</v-card-title>
           <v-card-text>
-            <v-form ref="form" v-model="valid">
+            <v-form :disabled="!editable" ref="form" v-model="valid">
               <v-container>
                 <v-row dense>
                   <v-col cols="12">
@@ -55,6 +55,12 @@
                       :label="$t('skill-points-used')"
                     ></v-text-field>
                   </v-col>
+                  <v-col cols="12">
+                    <v-text-field
+                      v-model="editedItem.notes"
+                      :label="$t('notes')"
+                    />
+                  </v-col>
                 </v-row>
               </v-container>
             </v-form>
@@ -81,9 +87,13 @@
             <v-btn color="error" text @click="closeDelete">{{
               $t("cancel")
             }}</v-btn>
-            <v-btn color="primary" text @click="deleteItemConfirm">{{
-              $t("ok")
-            }}</v-btn>
+            <v-btn
+              v-if="editable"
+              color="primary"
+              text
+              @click="deleteItemConfirm"
+              >{{ $t("ok") }}</v-btn
+            >
             <v-spacer></v-spacer>
           </v-card-actions>
         </v-card>
@@ -112,7 +122,7 @@
           {{ masteryToString(item) }}
         </template>
         <template v-slot:[`item.skill`]="{ item }">
-          {{ skillToString(item.skill) }}
+          <a @click="editItem(item)">{{ skillToString(item.skill) }}</a>
         </template>
         <template v-if="editable" v-slot:[`item.actions`]="{ item }">
           <v-icon small class="mr-2" @click="editItem(item)">
@@ -162,6 +172,7 @@ export default class SkillAssignmentCard extends CharacterInfo {
         value: "mastery",
       },
       { text: this.$t("skill-points-used"), value: "skillPointsUsed" },
+      { text: this.$t("notes"), value: "notes" },
     ];
     return this.editable
       ? [
@@ -177,19 +188,6 @@ export default class SkillAssignmentCard extends CharacterInfo {
 
   get assignments() {
     return this.character.skills || [];
-  }
-
-  get masteryLevels(): DropdownValueList[] {
-    return [
-      {
-        text: this.$t("none").toString(),
-        value: null,
-      },
-      ...Object.keys(Mastery).map(m => ({
-        value: m.toString(),
-        text: this.$t(m).toString(),
-      })),
-    ];
   }
 
   get isNewItem() {

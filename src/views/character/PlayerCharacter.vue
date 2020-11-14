@@ -85,19 +85,19 @@
       <v-col v-show="page === 2" cols="12" xs="12" sm="6" md="3" lg="2">
         <skill-points :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 3" cols="12" xs="12" sm="6" md="3">
+      <v-col v-show="page === 3" cols="12" xs="12" sm="6" md="4">
         <magical-item-assignments :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 3" cols="12" xs="12" sm="6" md="3" lg="2">
+      <v-col v-show="page === 3" cols="12" xs="12" sm="6" md="4">
         <languages :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 3" cols="12" xs="12" sm="6" md="3" lg="2">
+      <v-col v-show="page === 3" cols="12" xs="12" sm="6" md="4">
         <wallet :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 3" cols="12" xs="12" sm="6" md="3">
+      <v-col v-show="page === 3" cols="12" xs="12" sm="6" md="6">
         <inventory :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 3" cols="12" xs="12" sm="6" md="3" lg="2">
+      <v-col v-show="page === 3" cols="12" xs="12" sm="6" md="6">
         <poisons :id="id" :editable="editable" />
       </v-col>
       <v-col v-show="page === 3" cols="12">

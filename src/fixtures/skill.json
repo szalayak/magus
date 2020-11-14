@@ -1,0 +1,848 @@
+[
+  {
+    "id": "SG1-001",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Ökölharc",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 3,
+    "masterCost": 15
+  },
+  {
+    "id": "SG1-002",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Birkózás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 8,
+    "masterCost": 15
+  },
+  {
+    "id": "SG1-003",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Fegyverhasználat",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 3,
+    "masterCost": 30
+  },
+  {
+    "id": "SG1-004",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Pajzs használat",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 5,
+    "masterCost": 30
+  },
+  {
+    "id": "SG1-005",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Fegyverdobás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 4,
+    "masterCost": 40
+  },
+  {
+    "id": "SG1-006",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Fegyvertörés",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 5,
+    "masterCost": 20
+  },
+  {
+    "id": "SG1-007",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Lefegyverzés",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 7,
+    "masterCost": 18
+  },
+  {
+    "id": "SG1-008",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Nehézvért viselet",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 3,
+    "masterCost": 27
+  },
+  {
+    "id": "SG1-009",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Kétkezes harc",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 15,
+    "masterCost": 25
+  },
+  {
+    "id": "SG1-010",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Vakharc",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 10,
+    "masterCost": 30
+  },
+  {
+    "id": "SG1-011",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Fegyverismeret",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 10,
+    "masterCost": 20
+  },
+  {
+    "id": "SG1-012",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Hadvezetés",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 9,
+    "masterCost": 20
+  },
+  {
+    "id": "SG1-013",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Hárítófegyver-használat",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 8,
+    "masterCost": 15
+  },
+  {
+    "id": "SG1-014",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Földharc",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 5,
+    "masterCost": 12
+  },
+  {
+    "id": "SG1-015",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Belharc",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 3,
+    "masterCost": 10
+  },
+  {
+    "id": "SG1-016",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Közös harcmodor",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 7,
+    "masterCost": 30
+  },
+  {
+    "id": "SG1-017",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Ikerharc",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 12,
+    "masterCost": 45
+  },
+  {
+    "id": "SG1-018",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Harci láz",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 8,
+    "masterCost": 15
+  },
+  {
+    "id": "SG1-019",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Hadrend",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 3,
+    "masterCost": 20
+  },
+  {
+    "id": "SG1-020",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Hadvezetés",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 5,
+    "masterCost": 20
+  },
+  {
+    "id": "SG1-021",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Harc helyhez kötve",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 4,
+    "masterCost": 12
+  },
+  {
+    "id": "SG1-022",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Kínokozás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 9,
+    "masterCost": 20
+  },
+  {
+    "id": "SG1-023",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Pusztítás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 15,
+    "masterCost": 30
+  },
+  {
+    "id": "SG1-024",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Kiegészítő támadás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 7,
+    "masterCost": 15
+  },
+  {
+    "id": "SG1-025",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Különleges fegyver használata",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 15,
+    "masterCost": 30
+  },
+  {
+    "id": "SG1-026",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Lovas íjászat",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 15,
+    "masterCost": 30
+  },
+  {
+    "id": "SG1-027",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Célzás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG1",
+    "basicCost": 20,
+    "masterCost": 35
+  },
+  {
+    "id": "SG4-001",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Írás/olvasás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 5,
+    "masterCost": 25
+  },
+  {
+    "id": "SG4-002",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Nyelvtudás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 5,
+    "masterCost": 20
+  },
+  {
+    "id": "SG4-003",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Ősi nyelv ismerete",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 10,
+    "masterCost": 60
+  },
+  {
+    "id": "SG4-004",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Időjóslás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 3,
+    "masterCost": 15
+  },
+  {
+    "id": "SG4-005",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Térképészet",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 10,
+    "masterCost": 17
+  },
+  {
+    "id": "SG4-006",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Heraldika",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 5,
+    "masterCost": 15
+  },
+  {
+    "id": "SG4-007",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Legendaismeret",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 10,
+    "masterCost": 50
+  },
+  {
+    "id": "SG4-008",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Történelemismeret",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 5,
+    "masterCost": 20
+  },
+  {
+    "id": "SG4-009",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Vallásismeret",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 5,
+    "masterCost": 25
+  },
+  {
+    "id": "SG4-010",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Építészet",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 5,
+    "masterCost": 20
+  },
+  {
+    "id": "SG4-011",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Méregkeverés/semlegesítés",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 15,
+    "masterCost": 60
+  },
+  {
+    "id": "SG4-012",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Herbalizmus",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 5,
+    "masterCost": 35
+  },
+  {
+    "id": "SG4-013",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Sebgyógyítás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 15,
+    "masterCost": 30
+  },
+  {
+    "id": "SG4-014",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Pszi",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 10,
+    "masterCost": 55
+  },
+  {
+    "id": "SG4-015",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Alkímia",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 10,
+    "masterCost": 40
+  },
+  {
+    "id": "SG4-016",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Élettan",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 15,
+    "masterCost": 45
+  },
+  {
+    "id": "SG4-017",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Mágiahasználat",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 15,
+    "masterCost": 45
+  },
+  {
+    "id": "SG4-018",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Demonológia",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 20,
+    "masterCost": 55
+  },
+  {
+    "id": "SG4-019",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Rúnamágia",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 18,
+    "masterCost": 45
+  },
+  {
+    "id": "SG4-020",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Drágakőmágia",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": null,
+    "masterCost": 52
+  },
+  {
+    "id": "SG4-021",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Emberismeret",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 7,
+    "masterCost": 22
+  },
+  {
+    "id": "SG4-022",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Mágiaismeret",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 5,
+    "masterCost": 25
+  },
+  {
+    "id": "SG4-023",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Mechanika",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 8,
+    "masterCost": 25
+  },
+  {
+    "id": "SG2-001",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Idomítás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 8,
+    "masterCost": 20
+  },
+  {
+    "id": "SG2-002",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Etikett",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 8,
+    "masterCost": 15
+  },
+  {
+    "id": "SG2-003",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Nyomolvasás/eltüntetés",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 10,
+    "masterCost": 45
+  },
+  {
+    "id": "SG2-004",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Erdőjárás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 5,
+    "masterCost": 14
+  },
+  {
+    "id": "SG2-005",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Vadászat/halászat",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 8,
+    "masterCost": 15
+  },
+  {
+    "id": "SG2-006",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Lovaglás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 1,
+    "masterCost": 15
+  },
+  {
+    "id": "SG2-007",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Kocsihajtás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 2,
+    "masterCost": 15
+  },
+  {
+    "id": "SG2-008",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Úszás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 2,
+    "masterCost": 10
+  },
+  {
+    "id": "SG2-009",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Szexuális kultúra",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 5,
+    "masterCost": 30
+  },
+  {
+    "id": "SG2-010",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Hajózás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 15,
+    "masterCost": 40
+  },
+  {
+    "id": "SG2-011",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Éneklés/zenélés",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 5,
+    "masterCost": 30
+  },
+  {
+    "id": "SG2-012",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Tánc",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 5,
+    "masterCost": 30
+  },
+  {
+    "id": "SG2-013",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Hangutánzás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 3,
+    "masterCost": 16
+  },
+  {
+    "id": "SG2-014",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Értékbecslés",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 5,
+    "masterCost": 11
+  },
+  {
+    "id": "SG2-015",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Csapdaállítás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 10,
+    "masterCost": 20
+  },
+  {
+    "id": "SG2-016",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Csomózás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 7,
+    "masterCost": 24
+  },
+  {
+    "id": "SG2-017",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Zsonglőrködés",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 3,
+    "masterCost": 10
+  },
+  {
+    "id": "SG2-018",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Futás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 9,
+    "masterCost": 24
+  },
+  {
+    "id": "SG2-019",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Szakma",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 2,
+    "masterCost": 15
+  },
+  {
+    "id": "SG2-020",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Szájról olvasás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 7,
+    "masterCost": 10
+  },
+  {
+    "id": "SG2-021",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Mellébeszélés",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 3,
+    "masterCost": 9
+  },
+  {
+    "id": "SG2-022",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Kínzás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 2,
+    "masterCost": 15
+  },
+  {
+    "id": "SG2-023",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Kínzás elviselése",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 5,
+    "masterCost": 12
+  },
+  {
+    "id": "SG2-024",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Helyismeret",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 1,
+    "masterCost": 8
+  },
+  {
+    "id": "SG2-025",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Festészet, rajzolás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 3,
+    "masterCost": 18
+  },
+  {
+    "id": "SG2-026",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Mászás",
+    "percentageSkill": true,
+    "skillGroup.id": "SG2",
+    "basicCost": null,
+    "masterCost": null
+  },
+  {
+    "id": "SG2-027",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Esés",
+    "percentageSkill": true,
+    "skillGroup.id": "SG2",
+    "basicCost": null,
+    "masterCost": null
+  },
+  {
+    "id": "SG2-028",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Ugrás",
+    "percentageSkill": true,
+    "skillGroup.id": "SG2",
+    "basicCost": null,
+    "masterCost": null
+  },
+  {
+    "id": "SG2-029",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Éberség/észlelés",
+    "percentageSkill": true,
+    "skillGroup.id": "SG2",
+    "basicCost": null,
+    "masterCost": null
+  },
+  {
+    "id": "SG2-030",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Állatismeret",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 1,
+    "masterCost": 6
+  },
+  {
+    "id": "SG3-001",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Kocsmai verekedés",
+    "percentageSkill": null,
+    "skillGroup.id": "SG3",
+    "basicCost": 3,
+    "masterCost": 15
+  },
+  {
+    "id": "SG3-002",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Hátbaszúrás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG3",
+    "basicCost": 10,
+    "masterCost": 25
+  },
+  {
+    "id": "SG3-003",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Hamiskártya",
+    "percentageSkill": null,
+    "skillGroup.id": "SG3",
+    "basicCost": 10,
+    "masterCost": 20
+  },
+  {
+    "id": "SG3-004",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Kötelékből szabadulás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG3",
+    "basicCost": 8,
+    "masterCost": 16
+  },
+  {
+    "id": "SG3-005",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Álcázás/álruha",
+    "percentageSkill": null,
+    "skillGroup.id": "SG3",
+    "basicCost": 12,
+    "masterCost": 24
+  },
+  {
+    "id": "SG3-006",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Hamisítás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG3",
+    "basicCost": 11,
+    "masterCost": 24
+  },
+  {
+    "id": "SG3-007",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Lopózás",
+    "percentageSkill": true,
+    "skillGroup.id": "SG3",
+    "basicCost": null,
+    "masterCost": null
+  },
+  {
+    "id": "SG3-008",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Rejtőzködés",
+    "percentageSkill": true,
+    "skillGroup.id": "SG3",
+    "basicCost": null,
+    "masterCost": null
+  },
+  {
+    "id": "SG3-009",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Kötéltánc",
+    "percentageSkill": true,
+    "skillGroup.id": "SG3",
+    "basicCost": null,
+    "masterCost": null
+  },
+  {
+    "id": "SG3-010",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Zsebmetszés",
+    "percentageSkill": true,
+    "skillGroup.id": "SG3",
+    "basicCost": null,
+    "masterCost": null
+  },
+  {
+    "id": "SG3-011",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Csapdafelfedezés",
+    "percentageSkill": true,
+    "skillGroup.id": "SG3",
+    "basicCost": null,
+    "masterCost": null
+  },
+  {
+    "id": "SG3-012",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Zárnyitás",
+    "percentageSkill": true,
+    "skillGroup.id": "SG3",
+    "basicCost": null,
+    "masterCost": null
+  },
+  {
+    "id": "SG3-013",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Titkosajtó keresés",
+    "percentageSkill": true,
+    "skillGroup.id": "SG3",
+    "basicCost": null,
+    "masterCost": null
+  },
+  {
+    "id": "SG3-014",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Követés/lerázás",
+    "percentageSkill": true,
+    "skillGroup.id": "SG3",
+    "basicCost": null,
+    "masterCost": null
+  }
+]

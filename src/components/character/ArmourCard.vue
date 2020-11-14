@@ -28,6 +28,14 @@
           />
         </v-col>
         <v-col cols="12">
+          <v-select
+            v-model="character.armourMastery"
+            :items="masteryLevels"
+            :label="$t('mastery')"
+            :disabled="!edit"
+          />
+        </v-col>
+        <v-col cols="12">
           <v-text-field :label="$t('weight')" :value="armour.weight" disabled />
         </v-col>
         <v-col cols="12">
