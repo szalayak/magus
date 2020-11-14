@@ -20,7 +20,7 @@
           >
             <v-card>
               <v-card-title>
-                <a :href="characterToLink(item)">{{ item.name }}</a>
+                <a :href="characterPageToLink(item, 1)">{{ item.name }}</a>
               </v-card-title>
               <v-card-subtitle>{{ characterToString(item) }}</v-card-subtitle>
               <v-card-text> {{ `${$t("owner")}: ${item.owner}` }}</v-card-text>
