@@ -20,7 +20,9 @@
           >
             <v-card>
               <v-card-title>
-                <a :href="characterPageToLink(item, 1)">{{ item.name }}</a>
+                <router-link :to="characterToLink(item)">{{
+                  item.name
+                }}</router-link>
               </v-card-title>
               <v-card-subtitle>{{ characterToString(item) }}</v-card-subtitle>
               <v-card-text> {{ `${$t("owner")}: ${item.owner}` }}</v-card-text>
