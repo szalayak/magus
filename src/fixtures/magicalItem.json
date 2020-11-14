@@ -1,0 +1,442 @@
+[
+  {
+    "id": "MI-001",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Gyógyital",
+    "manaCost": null,
+    "duration": "",
+    "price": null
+  },
+  {
+    "id": "MI-002",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Istenek italai",
+    "manaCost": null,
+    "duration": "K6*10p",
+    "price": 4000
+  },
+  {
+    "id": "MI-003",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Szerelmi bájital",
+    "manaCost": 45,
+    "duration": "K6 nap",
+    "price": 5000
+  },
+  {
+    "id": "MI-004",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Gondolatolvasás itala",
+    "manaCost": 60,
+    "duration": "K6*10p",
+    "price": 5000
+  },
+  {
+    "id": "MI-005",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Kicsinyítés itala",
+    "manaCost": 80,
+    "duration": "K6*10p",
+    "price": 1000
+  },
+  {
+    "id": "MI-006",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Akaratátvitel itala",
+    "manaCost": 100,
+    "duration": "K6*10p",
+    "price": 4000
+  },
+  {
+    "id": "MI-007",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Sárkánylehelet itala",
+    "manaCost": null,
+    "duration": "K6*10p",
+    "price": null
+  },
+  {
+    "id": "MI-008",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Repülés itala",
+    "manaCost": 100,
+    "duration": "K6*10p",
+    "price": 2000
+  },
+  {
+    "id": "MI-009",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Láthatatlanság itala",
+    "manaCost": 100,
+    "duration": "K6*10p",
+    "price": 3000
+  },
+  {
+    "id": "MI-010",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Átváltozás itala",
+    "manaCost": 120,
+    "duration": "K6*10p",
+    "price": 10000
+  },
+  {
+    "id": "MI-011",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Szellemi frissesség itala",
+    "manaCost": 60,
+    "duration": "",
+    "price": 2000
+  },
+  {
+    "id": "MI-012",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Mérgektől óvó amulett",
+    "manaCost": null,
+    "duration": "",
+    "price": 200
+  },
+  {
+    "id": "MI-013",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Észrevétlenség amulettje",
+    "manaCost": 100,
+    "duration": "",
+    "price": 400
+  },
+  {
+    "id": "MI-014",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Érzelmek amulettje",
+    "manaCost": 80,
+    "duration": "",
+    "price": 200
+  },
+  {
+    "id": "MI-015",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Tudatvédő amulett",
+    "manaCost": 90,
+    "duration": "",
+    "price": 200
+  },
+  {
+    "id": "MI-016",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Szerencse amulett",
+    "manaCost": 120,
+    "duration": "",
+    "price": 200
+  },
+  {
+    "id": "MI-017",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Igazság amulettje",
+    "manaCost": 60,
+    "duration": "",
+    "price": 200
+  },
+  {
+    "id": "MI-018",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Hatalom amulettje",
+    "manaCost": null,
+    "duration": "",
+    "price": 200
+  },
+  {
+    "id": "MI-019",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Varázstekercs",
+    "manaCost": null,
+    "duration": "",
+    "price": 200
+  },
+  {
+    "id": "MI-020",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Rúnakard",
+    "manaCost": null,
+    "duration": "",
+    "price": 5000
+  },
+  {
+    "id": "MI-021",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Rúnapáncél",
+    "manaCost": null,
+    "duration": "",
+    "price": 5000
+  },
+  {
+    "id": "MI-022",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Fürkész",
+    "manaCost": 130,
+    "duration": "",
+    "price": 5000
+  },
+  {
+    "id": "MI-023",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Sárkánybot",
+    "manaCost": 93,
+    "duration": "",
+    "price": 4000
+  },
+  {
+    "id": "MI-024",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Varázstörés botja",
+    "manaCost": 133,
+    "duration": "",
+    "price": 1000
+  },
+  {
+    "id": "MI-025",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Barátság botja",
+    "manaCost": 98,
+    "duration": "",
+    "price": 800
+  },
+  {
+    "id": "MI-026",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Fegyver bot",
+    "manaCost": 108,
+    "duration": "",
+    "price": 3000
+  },
+  {
+    "id": "MI-027",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Telekinézis botja",
+    "manaCost": 73,
+    "duration": "",
+    "price": 3000
+  },
+  {
+    "id": "MI-028",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Rémület botja",
+    "manaCost": 73,
+    "duration": "",
+    "price": 5000
+  },
+  {
+    "id": "MI-029",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Nekromanták botja",
+    "manaCost": 90,
+    "duration": "",
+    "price": 5000
+  },
+  {
+    "id": "MI-030",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Fény botja",
+    "manaCost": 84,
+    "duration": "",
+    "price": 5000
+  },
+  {
+    "id": "MI-031",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Kígyóbot",
+    "manaCost": 58,
+    "duration": "",
+    "price": 6000
+  },
+  {
+    "id": "MI-032",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Vándorbot",
+    "manaCost": 63,
+    "duration": "",
+    "price": 500
+  },
+  {
+    "id": "MI-033",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Átváltoztatás botja",
+    "manaCost": 133,
+    "duration": "",
+    "price": 3000
+  },
+  {
+    "id": "MI-034",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Illúzió pálca",
+    "manaCost": 113,
+    "duration": "",
+    "price": 2000
+  },
+  {
+    "id": "MI-035",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Utazás pálcája",
+    "manaCost": 103,
+    "duration": "",
+    "price": 200
+  },
+  {
+    "id": "MI-036",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Tűzíj",
+    "manaCost": 53,
+    "duration": "",
+    "price": 8000
+  },
+  {
+    "id": "MI-037",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Mély tarisznya",
+    "manaCost": 51,
+    "duration": "",
+    "price": 4000
+  },
+  {
+    "id": "MI-038",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Védőköpeny",
+    "manaCost": null,
+    "duration": "",
+    "price": 4000
+  },
+  {
+    "id": "MI-039",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Rúnapajzs",
+    "manaCost": null,
+    "duration": "",
+    "price": 6000
+  },
+  {
+    "id": "MI-040",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Lopakodó lábbeli",
+    "manaCost": 73,
+    "duration": "",
+    "price": 2000
+  },
+  {
+    "id": "MI-041",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Ugrás lábbelije",
+    "manaCost": 43,
+    "duration": "",
+    "price": 2000
+  },
+  {
+    "id": "MI-042",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Rohanó lábbeli",
+    "manaCost": 53,
+    "duration": "",
+    "price": 2000
+  },
+  {
+    "id": "MI-043",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Repülő szőnyeg",
+    "manaCost": 98,
+    "duration": "",
+    "price": 3000
+  },
+  {
+    "id": "MI-044",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Feneketlen korsó",
+    "manaCost": 83,
+    "duration": "",
+    "price": 3000
+  },
+  {
+    "id": "MI-045",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Láthatatlanság köpenye",
+    "manaCost": 70,
+    "duration": "",
+    "price": 4000
+  },
+  {
+    "id": "MI-046",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Rejtőzés köpenye",
+    "manaCost": 45,
+    "duration": "",
+    "price": 4000
+  },
+  {
+    "id": "MI-047",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Meleg zeke",
+    "manaCost": 45,
+    "duration": "",
+    "price": 3000
+  },
+  {
+    "id": "MI-048",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Hősök zászlaja",
+    "manaCost": 113,
+    "duration": "",
+    "price": 10000
+  },
+  {
+    "id": "MI-049",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Fürge ujjak kesztyűje",
+    "manaCost": 83,
+    "duration": "",
+    "price": 2000
+  },
+  {
+    "id": "MI-050",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Erő kesztyűje",
+    "manaCost": 73,
+    "duration": "",
+    "price": 3000
+  },
+  {
+    "id": "MI-051",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Acélos akarat medálja",
+    "manaCost": 73,
+    "duration": "",
+    "price": 7000
+  },
+  {
+    "id": "MI-052",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Kiegyensúlyozottság medálja",
+    "manaCost": 73,
+    "duration": "",
+    "price": 7000
+  },
+  {
+    "id": "MI-053",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Nyelvek sisakja",
+    "manaCost": 113,
+    "duration": "",
+    "price": 5000
+  },
+  {
+    "id": "MI-054",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Harci nyereg",
+    "manaCost": 43,
+    "duration": "",
+    "price": 6000
+  },
+  {
+    "id": "MI-055",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Mászókesztyű",
+    "manaCost": 48,
+    "duration": "",
+    "price": 3000
+  }
+]

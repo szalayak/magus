@@ -58,6 +58,14 @@
         </v-list-item-title>
       </v-list-item>
     </template>
+    <v-list-item v-if="isCurrentUserAdmin" to="/admin/seed-default-values">
+      <v-list-item-icon>
+        <v-icon>mdi-database-sync</v-icon>
+      </v-list-item-icon>
+      <v-list-item-title>
+        {{ $t("seed-default-values") }}
+      </v-list-item-title>
+    </v-list-item>
   </v-list>
 </template>
 <script lang="ts">

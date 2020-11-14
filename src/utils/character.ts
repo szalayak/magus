@@ -4,7 +4,10 @@ import { Character } from "@/store/modules/character";
 import { Shield } from "@/store/modules/shield";
 import { Weapon } from "@/store/modules/weapon";
 import { CombatValues } from "@/store/types";
-import { applyMasterSkillToCombatValues } from "./combatValues";
+import {
+  applyMasterSkillToCombatValues,
+  applyUnskilledPenaltyToCombatValues,
+} from "./combatValues";
 
 const calculateCombatValueTotal = (
   base?: number,
@@ -30,13 +33,26 @@ const calculateCombatValueAbilityModifier = (
   return values.reduce((acc, value) => acc + value);
 };
 
-export const movementPreventionValueTotal = (
-  armour?: Armour,
-  shield?: Shield
-): number => {
+type MovementPreventionFunction = (params: {
+  armour?: Armour;
+  armourMastery?: Mastery;
+  shield?: Shield;
+  shieldMastery?: Mastery;
+}) => number;
+
+export const movementPreventionValueTotal: MovementPreventionFunction = ({
+  armour,
+  armourMastery,
+  shield,
+  shieldMastery,
+}) => {
   return (
-    (armour?.movementPreventionValue || 0) +
-    (shield?.movementPreventionValue || 0)
+    (armourMastery === Mastery.MASTER
+      ? 0
+      : armour?.movementPreventionValue || 0) +
+    (shieldMastery === Mastery.MASTER
+      ? 0
+      : shield?.movementPreventionValue || 0)
   );
 };
 
@@ -44,7 +60,7 @@ const calculateInitiationAbilityModifier = (
   character: Character,
   inArmour = false
 ): number => {
-  const mpv = movementPreventionValueTotal(character.armour, character.shield);
+  const mpv = movementPreventionValueTotal(character);
   return calculateCombatValueAbilityModifier([
     { value: character.abilities?.agility, modifier: inArmour ? mpv : 0 },
     { value: character.abilities?.dexterity, modifier: inArmour ? mpv : 0 },
@@ -67,7 +83,7 @@ const calculateStrengthAbilityModifier = (
   character: Character,
   inArmour?: boolean
 ): number => {
-  const mpv = movementPreventionValueTotal(character.armour, character.shield);
+  const mpv = movementPreventionValueTotal(character);
   return calculateCombatValueAbilityModifier([
     { value: character.abilities?.strength },
     { value: character.abilities?.agility, modifier: inArmour ? mpv : 0 },
@@ -91,7 +107,7 @@ const calculateDefenceAbilityModifier = (
   character: Character,
   inArmour?: boolean
 ): number => {
-  const mpv = movementPreventionValueTotal(character.armour, character.shield);
+  const mpv = movementPreventionValueTotal(character);
   return calculateCombatValueAbilityModifier([
     { value: character.abilities?.agility, modifier: inArmour ? mpv : 0 },
     { value: character.abilities?.dexterity, modifier: inArmour ? mpv : 0 },
@@ -118,7 +134,7 @@ const calculateAimingAbilityModifier = (
   character: Character,
   inArmour?: boolean
 ): number => {
-  const mpv = movementPreventionValueTotal(character.armour, character.shield);
+  const mpv = movementPreventionValueTotal(character);
   return calculateCombatValueAbilityModifier([
     { value: character.abilities?.dexterity, modifier: inArmour ? mpv : 0 },
   ]);
@@ -139,7 +155,7 @@ export const aimingTotal = (
 export const isCharacterMovementRestricted = (
   character: Character
 ): boolean => {
-  return movementPreventionValueTotal(character.armour, character.shield) > 0;
+  return movementPreventionValueTotal(character) > 0;
 };
 
 type CombatValuesWithWeaponInput = {
@@ -176,7 +192,8 @@ export const combatValuesWithWeapon = ({
     ),
   };
 
-  return mastery === Mastery.MASTER
-    ? applyMasterSkillToCombatValues(base)
-    : base;
+  if (!mastery) return applyUnskilledPenaltyToCombatValues(base);
+  else if (mastery === Mastery.MASTER)
+    return applyMasterSkillToCombatValues(base);
+  else return base;
 };

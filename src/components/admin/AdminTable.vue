@@ -6,11 +6,21 @@
       :headers="computedHeaders"
       :items="items"
       :sort-by="sortBy"
-      class="elevation-1"
+      :search="search"
+      multi-sort
     >
       <template v-slot:top>
         <v-toolbar flat>
           <v-toolbar-title>{{ $t(title) }}</v-toolbar-title>
+          <v-text-field
+            v-model="search"
+            single-line
+            hide-details
+            clearable
+            prepend-icon="mdi-magnify"
+            :label="$t('search')"
+            class="mx-4"
+          ></v-text-field>
           <v-spacer></v-spacer>
           <v-dialog scrollable v-model="dialog" max-width="1200px">
             <template v-slot:activator="{ on, attrs }">
@@ -30,7 +40,6 @@
                 <v-toolbar-title>{{ formTitle }}</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-select
-                  outlined
                   single-line
                   hide-details
                   v-model="editedItem.locale"
@@ -39,7 +48,7 @@
                 />
               </v-toolbar>
               <v-card-text>
-                <v-form v-model="valid">
+                <v-form :disabled="readonly" ref="input" v-model="valid">
                   <v-container>
                     <v-row dense>
                       <v-subheader class="pl-1">{{
@@ -58,6 +67,7 @@
                       <v-col cols="12" xs="12" sm="6">
                         <v-text-field
                           v-model="editedItem.description.title"
+                          :rules="[v => !!v || $t('field-is-mandatory')]"
                           :label="$t('title')"
                         ></v-text-field>
                       </v-col>
@@ -66,19 +76,19 @@
                       name="editable-fields"
                       :editedItem="editedItem"
                     ></slot>
-                    <v-row dense>
+                    <v-row v-if="readonly" dense>
                       <v-subheader class="pl-1">{{
                         $t("description")
                       }}</v-subheader>
                     </v-row>
                     <v-row dense>
-                      <v-col cols="12" sm="12" md="6">
+                      <v-col v-if="!readonly" cols="12" sm="12" md="6">
                         <v-textarea
                           v-model="editedItem.description.description"
                           :label="$t('description')"
                         />
                       </v-col>
-                      <v-col cols="12" sm="12" md="6">
+                      <v-col cols="12" sm="12" :md="readonly ? '12' : '6'">
                         <div v-html="markdownDescription" />
                       </v-col>
                     </v-row>
@@ -91,7 +101,7 @@
                 <v-btn color="error" text @click="close">
                   {{ $t("cancel") }}
                 </v-btn>
-                <v-btn color="primary" text @click="save">
+                <v-btn v-if="!readonly" color="primary" text @click="save">
                   {{ $t("save") }}
                 </v-btn>
               </v-card-actions>
@@ -128,6 +138,9 @@
         <v-btn color="primary" @click="refresh">
           {{ $t("refresh") }}
         </v-btn>
+      </template>
+      <template v-slot:[`item.description.title`]="{ item }">
+        <a @click="editItem(item)">{{ item.description.title }}</a>
       </template>
       <template
         v-for="customColumn in customColumns"
@@ -173,6 +186,8 @@ const AdminTableProps = Vue.extend({
   },
 });
 
+type Form = Vue & { validate: () => boolean };
+
 @Component({
   name: "admin-table",
 })
@@ -184,6 +199,7 @@ export default class AdminTable extends AdminTableProps {
   sortBy = ["description.title"];
   messages: string[] = [];
   notification = false;
+  search = "";
 
   editedItem = mergeDescriptions(
     typeof this.defaultItem === "function"
@@ -245,27 +261,8 @@ export default class AdminTable extends AdminTableProps {
         this.notification = true;
       });
   }
-  close() {
-    this.dialog = false;
-  }
-  save() {
-    this.$store
-      .dispatch(
-        this.isNewItem ? `${this.module}/create` : `${this.module}/update`,
-        mergeDescriptions(this.editedItem, this.$i18n.locale)
-      )
-      .catch((error: GraphQLResult<Editable>) => {
-        this.messages = error.errors?.map(err => err.message) || [];
-        this.notification = true;
-      });
-    this.dialog = false;
-  }
-  deleteItemConfirm() {
-    this.$store.dispatch(`${this.module}/delete`, this.editedItem.id);
-    this.closeDelete();
-  }
-  closeDelete() {
-    this.dialogDelete = false;
+
+  resetEditedItem() {
     this.$nextTick(() => {
       this.editedItem = Object.assign(
         {},
@@ -273,6 +270,34 @@ export default class AdminTable extends AdminTableProps {
       );
       this.editedIndex = -1;
     });
+  }
+
+  close() {
+    this.dialog = false;
+    this.resetEditedItem();
+  }
+  save() {
+    if ((this.$refs.input as Form).validate()) {
+      this.$store
+        .dispatch(
+          this.isNewItem ? `${this.module}/create` : `${this.module}/update`,
+          mergeDescriptions(this.editedItem, this.$i18n.locale)
+        )
+        .catch((error: GraphQLResult<Editable>) => {
+          this.messages = error.errors?.map(err => err.message) || [];
+          this.notification = true;
+        });
+      this.dialog = false;
+      this.resetEditedItem();
+    }
+  }
+  deleteItemConfirm() {
+    this.$store.dispatch(`${this.module}/delete`, this.editedItem.id);
+    this.closeDelete();
+  }
+  closeDelete() {
+    this.dialogDelete = false;
+    this.resetEditedItem();
   }
   editItem(item: Editable) {
     this.editedIndex = this.items.indexOf(item);

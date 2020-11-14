@@ -1,0 +1,44 @@
+[
+  {
+    "id": "PS001",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Pyarroni (Af)",
+    "basePsiPoints": 4,
+    "psiPointsPerLevel": 3
+  },
+  {
+    "id": "PS002",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Pyarroni (Mf)",
+    "basePsiPoints": 5,
+    "psiPointsPerLevel": 4
+  },
+  {
+    "id": "PS003",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Slan út",
+    "basePsiPoints": 6,
+    "psiPointsPerLevel": 5
+  },
+  {
+    "id": "PS004",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Kyr metódus",
+    "basePsiPoints": 7,
+    "psiPointsPerLevel": 6
+  },
+  {
+    "id": "PS005",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Papi",
+    "basePsiPoints": 5,
+    "psiPointsPerLevel": 4
+  },
+  {
+    "id": "PS006",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Szerzetesi",
+    "basePsiPoints": 7,
+    "psiPointsPerLevel": 6
+  }
+]

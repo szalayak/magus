@@ -17,7 +17,7 @@
         <v-card>
           <v-card-title>{{ formTitle }}</v-card-title>
           <v-card-text>
-            <v-form ref="form" v-model="valid">
+            <v-form :disabled="!editable" ref="form" v-model="valid">
               <v-container>
                 <v-row dense>
                   <v-col cols="12">
@@ -57,6 +57,12 @@
                       :label="$t('in-hand')"
                     />
                   </v-col>
+                  <v-col cols="12">
+                    <v-text-field
+                      v-model="editedItem.notes"
+                      :label="$t('notes')"
+                    />
+                  </v-col>
                 </v-row>
               </v-container>
             </v-form>
@@ -67,7 +73,7 @@
             <v-btn color="error" text @click="close">
               {{ $t("cancel") }}
             </v-btn>
-            <v-btn color="primary" text @click="save">
+            <v-btn v-if="editable" color="primary" text @click="save">
               {{ $t("save") }}
             </v-btn>
           </v-card-actions>
@@ -114,7 +120,7 @@
           {{ masteryToString(item.mastery) }}
         </template>
         <template v-slot:[`item.weapon`]="{ item }">
-          {{ weaponToString(item.weapon) }}
+          <a @click="editItem(item)">{{ weaponToString(item.weapon) }}</a>
         </template>
         <template v-slot:[`item.weapon.damage`]="{ item }">
           {{ damageToString(item.weapon.damage) }}
@@ -188,7 +194,8 @@ export default class RangedWeaponAssignmentCard extends CharacterInfo {
       { text: this.$t("damage"), value: "weapon.damage" },
       { text: this.$t("in-hand"), value: "inHand" },
       { text: this.$t("aim"), value: "aim" },
-      { text: this.$t("horseback-archery"), value: "horsebac" },
+      { text: this.$t("horseback-archery"), value: "horseback" },
+      { text: this.$t("notes"), value: "notes" },
       { text: this.$t("actions"), value: "actions", sortable: false },
     ];
   }
@@ -204,19 +211,6 @@ export default class RangedWeaponAssignmentCard extends CharacterInfo {
     return this.character.weapons
       ? this.character.weapons.filter(w => w.weapon?.ranged)
       : [];
-  }
-
-  get masteryLevels(): DropdownValueList[] {
-    return [
-      {
-        text: this.$t("none").toString(),
-        value: null,
-      },
-      ...Object.keys(Mastery).map(m => ({
-        value: m.toString(),
-        text: this.$t(m).toString(),
-      })),
-    ];
   }
 
   get isNewItem() {

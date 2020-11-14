@@ -205,10 +205,10 @@ type MagicalItem
   ) {
   id: ID!
   descriptions: [Description!]!
-  class: Class! @connection
-  manaCost: Int!
-  duration: String!
-  price: Int!
+  class: Class @connection
+  manaCost: Int
+  duration: String
+  price: Int
 }
 
 type Throw
@@ -395,7 +395,9 @@ type Character
   poisons: [Poison!]
   notes: String
   armour: Armour @connection
+  armourMastery: Mastery
   shield: Shield @connection
+  shieldMastery: Mastery
   weapons: [WeaponAssignment!]
     @connection(keyName: "byCharacter", fields: ["id"])
   skills: [SkillAssignment!] @connection(keyName: "byCharacter", fields: ["id"])
@@ -420,6 +422,7 @@ type WeaponAssignment
   specialProjectileCount: Int
   aim: Mastery
   horseback: Mastery
+  notes: String
 }
 
 type SkillAssignment
@@ -432,6 +435,7 @@ type SkillAssignment
   mastery: Mastery
   percentageValue: Int
   skillPointsUsed: Int
+  notes: String
 }
 
 enum CompanionType {
@@ -457,6 +461,7 @@ type CharacterCompanion
   maxLoad: String
   badHabit: String
   specialAbilities: String
+  notes: String
 }
 
 type MagicalItemAssignment
@@ -468,4 +473,5 @@ type MagicalItemAssignment
   magicalItemId: ID!
   magicalItem: MagicalItem! @connection(fields: ["magicalItemId"])
   location: String
+  notes: String
 }
