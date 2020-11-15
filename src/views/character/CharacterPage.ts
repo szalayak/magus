@@ -2,6 +2,7 @@ import Vue from "vue";
 import { Character } from "@/store/modules/character";
 import { LooseObject } from "@/store/types";
 import Component from "vue-class-component";
+import { listUsers } from "@/utils/users";
 
 @Component
 export default class CharacterPage extends Vue {
@@ -65,5 +66,12 @@ export default class CharacterPage extends Vue {
       this.notification = true;
     }
     this.$store.dispatch("character/subscribeToUpdate");
+
+    try {
+      const users = await listUsers();
+      console.log(users);
+    } catch (err) {
+      console.error(err);
+    }
   }
 }

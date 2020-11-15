@@ -12,13 +12,6 @@ Amplify.configure(awsExports);
 
 Vue.config.productionTip = false;
 
-// router.beforeEach((to, from, next) => {
-//   if (to.path.match(/admin/g))
-//     if (!store.state.app.isAdmin) next(from.path);
-//     else next();
-//   else next();
-// });
-
 new Vue({
   router,
   store,

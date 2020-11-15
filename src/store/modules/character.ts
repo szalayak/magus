@@ -838,15 +838,12 @@ const character: Module<CharacterState, RootState> = {
         )) as Observable<LooseObject>;
         const subscription = observable.subscribe({
           next: characterData => {
-            console.log(characterData);
             const queryResult = ((characterData.value as LooseObject)
               .data as LooseObject).onUpdateCharacter as CharacterQueryResult;
-            console.log({ queryResult });
             mergePersistent(context.state, queryResult);
           },
         });
         context.commit("setSubscription", subscription);
-        console.log(subscription);
       }
     },
   },
