@@ -9,6 +9,8 @@ export const localiseItem = (obj: Describable, locale: string): Describable => {
   };
   if (res.description)
     res.description.description = res.description.description || "";
+  else
+    res.description = { locale: locale as Locale, title: "", description: "" };
   return res;
 };
 
