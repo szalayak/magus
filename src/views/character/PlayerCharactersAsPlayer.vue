@@ -63,10 +63,17 @@
                   </v-menu>
                 </v-col>
                 <v-col cols="12" sm="12" md="6" lg="4">
-                  <v-text-field
+                  <v-select
                     v-model="editedItem.dungeonMaster"
                     :label="$t('dungeon-master')"
+                    :items="users"
+                    item-value="username"
+                    item-text="name"
                   />
+                  <!-- <v-text-field
+                    v-model="editedItem.dungeonMaster"
+                    :label="$t('dungeon-master')"
+                  /> -->
                 </v-col>
               </v-row>
               <v-row>
@@ -164,6 +171,7 @@ import Component from "vue-class-component";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
 import CharacterList from "@/components/CharacterList.vue";
 import TitleComponent from "@/mixins/TitleComponent";
+import { User } from "@/store";
 
 type Form = Vue & { validate: () => boolean };
 
@@ -185,6 +193,10 @@ export default class PlayerCharactersAsPlayer extends TitleComponent {
     level: { currentLevel: 1, currentExperience: 0 },
     playerCharacter: true,
   };
+
+  get users(): User[] {
+    return this.$store.getters["getUsers"];
+  }
 
   get characters(): Character[] {
     return this.$store.getters["character/playerCharactersAsPlayer"];
@@ -220,6 +232,10 @@ export default class PlayerCharactersAsPlayer extends TitleComponent {
         this.messages = error.errors?.map(err => err.message) || [];
         this.notification = true;
       });
+    this.$store.dispatch("loadUsers").catch((error: GraphQLResult<unknown>) => {
+      this.messages = error.errors?.map(err => err.message) || [];
+      this.notification = true;
+    });
     Promise.all([
       this.$store.dispatch("race/load"),
       this.$store.dispatch("class/load"),

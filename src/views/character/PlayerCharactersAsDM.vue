@@ -38,6 +38,10 @@ export default class PlayerCharactersAsDM extends TitleComponent {
         this.messages = error.errors?.map(err => err.message) || [];
         this.notification = true;
       });
+    this.$store.dispatch("loadUsers").catch((error: GraphQLResult<unknown>) => {
+      this.messages = error.errors?.map(err => err.message) || [];
+      this.notification = true;
+    });
   }
 }
 </script>

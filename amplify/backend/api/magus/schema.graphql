@@ -477,9 +477,9 @@ type MagicalItemAssignment
 }
 
 type Query {
-  me: User @function(name: "GraphQLResolverFunction")
-  users: [User] @function(name: "GraphQLResolverFunction")
-  echo(msg: String): String @function(name: "GraphQLResolverFunction")
+  me: User @function(name: "GraphQLResolverFunction-${env}")
+  users: [User] @function(name: "GraphQLResolverFunction-${env}")
+  echo(msg: String): String @function(name: "GraphQLResolverFunction-${env}")
 }
 type User {
   Username: String!

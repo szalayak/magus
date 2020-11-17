@@ -25,7 +25,11 @@
                 }}</router-link>
               </v-card-title>
               <v-card-subtitle>{{ characterToString(item) }}</v-card-subtitle>
-              <v-card-text> {{ `${$t("owner")}: ${item.owner}` }}</v-card-text>
+              <v-card-text>
+                {{
+                  `${$t("owner")}: ${ownerToString(item.owner)}`
+                }}</v-card-text
+              >
               <v-card-actions>
                 <v-subheader class="pl-2">{{ $t("page") }}</v-subheader>
                 <v-btn-toggle dense tile color="primary" group>
@@ -95,7 +99,7 @@ import { Race } from "@/store/modules/race";
 import { Class } from "@/store/modules/class";
 import { localiseItem } from "@/utils/localise";
 import { LooseObject } from "@/store/types";
-import { listUsers } from "@/utils/users";
+import { User } from "@/store";
 
 type Form = Vue & { validate: () => boolean };
 
@@ -120,12 +124,20 @@ export default class CharacterList extends Vue {
 
   deleteDialog = false;
 
+  get users() {
+    return this.$store.getters["getUsers"];
+  }
+
   raceToString(race: Race): string {
     return localiseItem(race, this.$i18n.locale)?.description?.title || "";
   }
 
   classToString(cl: Class): string {
     return localiseItem(cl, this.$i18n.locale)?.description?.title || "";
+  }
+
+  ownerToString(owner: string): string {
+    return this.users.find((u: User) => u.username === owner)?.name || owner;
   }
 
   characterToString(character: Character) {
@@ -167,15 +179,6 @@ export default class CharacterList extends Vue {
       this.$emit("update:notification", true);
     }
     this.closeDelete();
-  }
-
-  async created() {
-    try {
-      const users = await listUsers();
-      console.log(users);
-    } catch (err) {
-      console.error(err);
-    }
   }
 }
 </script>

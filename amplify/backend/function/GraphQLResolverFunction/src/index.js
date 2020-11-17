@@ -4,13 +4,14 @@
 	REGION
 Amplify Params - DO NOT EDIT */
 
-import { CognitoIdentityServiceProvider } from "aws-sdk";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { CognitoIdentityServiceProvider } = require("aws-sdk");
 const cognitoIdentityServiceProvider = new CognitoIdentityServiceProvider();
 
 /**
  * Get user pool information from environment variables.
  */
-const COGNITO_USERPOOL_ID = process.env.AUTH_MYRESOURCENAME_USERPOOLID;
+const COGNITO_USERPOOL_ID = process.env.AUTH_MAGUSA74E493A_USERPOOLID;
 if (!COGNITO_USERPOOL_ID) {
   throw new Error(
     `Function requires environment variable: 'COGNITO_USERPOOL_ID'`
@@ -31,12 +32,26 @@ const resolvers = {
         UserPoolId: COGNITO_USERPOOL_ID /* required */,
       };
       try {
-        const {
-          data: { Users: users },
-        } = await cognitoIdentityServiceProvider.listUsers(params).promise();
-        return users;
+        const result = await cognitoIdentityServiceProvider
+          .listUsers(params)
+          .promise();
+        if (result.Users) {
+          return await Promise.all(
+            result.Users.map(async user => {
+              return await cognitoIdentityServiceProvider
+                .adminGetUser({
+                  UserPoolId: params.UserPoolId,
+                  Username: user.Username,
+                })
+                .promise();
+            })
+          );
+        } else {
+          return [];
+        }
       } catch (e) {
-        throw new Error(typeof e === "string" ? e : e.message);
+        console.log(e);
+        throw new Error(e);
       }
     },
     me: async ctx => {
@@ -51,7 +66,7 @@ const resolvers = {
           .adminGetUser(params)
           .promise();
       } catch (e) {
-        throw new Error(`NOT FOUND`);
+        throw new Error(e);
       }
     },
   },
@@ -67,7 +82,7 @@ const resolvers = {
 //   "request": { /* AppSync request object. Contains things like headers. */ },
 //   "prev": { /* If using the built-in pipeline resolver support, this contains the object returned by the previous function. */ },
 // }
-export async function handler(event) {
+exports.handler = async event => {
   const typeHandler = resolvers[event.typeName];
   if (typeHandler) {
     const resolver = typeHandler[event.fieldName];
@@ -76,4 +91,4 @@ export async function handler(event) {
     }
   }
   throw new Error("Resolver not found.");
-}
+};

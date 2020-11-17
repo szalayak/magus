@@ -12,11 +12,13 @@ import skill, { SkillState } from "./modules/skill";
 import valueRange, { ValueRangeState } from "./modules/valueRange";
 import weapon, { WeaponState } from "./modules/weapon";
 import character, { CharacterState } from "./modules/character";
+import { listUsers } from "@/utils/users";
 
 Vue.use(Vuex);
 
 export interface User {
   username?: string;
+  name?: string | null;
   signInUserSession?: {
     accessToken?: {
       payload?: { [key: string]: unknown };
@@ -30,6 +32,7 @@ export interface User {
 export interface AppState {
   user?: User;
   authState?: AuthState;
+  users: User[];
 }
 
 export interface RootState {
@@ -59,6 +62,7 @@ export default new Vuex.Store<RootState>({
     app: {
       user: {},
       authState: AuthState.Loading,
+      users: [],
     } as AppState,
   } as RootState,
   getters: {
@@ -74,6 +78,9 @@ export default new Vuex.Store<RootState>({
     isLoggedIn(state) {
       return state.app.authState === "signedin";
     },
+    getUsers(state) {
+      return state.app.users || [];
+    },
   },
   mutations: {
     setAuthState(state, authState: AuthState) {
@@ -82,11 +89,20 @@ export default new Vuex.Store<RootState>({
     setUser(state, user?: User) {
       state.app.user = user;
     },
+    setUsers(state, users: User[]) {
+      state.app.users = users;
+    },
   },
   actions: {
     async logout(context) {
       await Auth.signOut();
       context.commit("setUser");
+    },
+    async loadUsers(context) {
+      if (context.state.app.users?.length < 1) {
+        const results = await listUsers();
+        context.commit("setUsers", results);
+      }
     },
   },
   modules: {
