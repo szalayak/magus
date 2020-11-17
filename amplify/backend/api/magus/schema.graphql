@@ -338,7 +338,7 @@ type Wallet {
   misc: String
 }
 
-type SkillPoints{
+type SkillPoints {
   base: Int
   current: Int
   perLevel: Int
@@ -474,4 +474,38 @@ type MagicalItemAssignment
   magicalItem: MagicalItem! @connection(fields: ["magicalItemId"])
   location: String
   notes: String
+}
+
+type Query {
+  me: User @function(name: "GraphQLResolverFunction")
+  users: [User] @function(name: "GraphQLResolverFunction")
+  echo(msg: String): String @function(name: "GraphQLResolverFunction")
+}
+type User {
+  Username: String!
+  UserAttributes: [Value]
+  UserCreateDate: String
+  UserLastModifiedDate: String
+  Enabled: Boolean
+  UserStatus: UserStatus
+  MFAOptions: [MFAOption]
+  PreferredMfaSetting: String
+  UserMFASettingList: String
+}
+type Value {
+  Name: String!
+  Value: String
+}
+type MFAOption {
+  DeliveryMedium: String
+  AttributeName: String
+}
+enum UserStatus {
+  UNCONFIRMED
+  CONFIRMED
+  ARCHIVED
+  COMPROMISED
+  UNKNOWN
+  RESET_REQUIRED
+  FORCE_CHANGE_PASSWORD
 }

@@ -95,6 +95,7 @@ import { Race } from "@/store/modules/race";
 import { Class } from "@/store/modules/class";
 import { localiseItem } from "@/utils/localise";
 import { LooseObject } from "@/store/types";
+import { listUsers } from "@/utils/users";
 
 type Form = Vue & { validate: () => boolean };
 
@@ -166,6 +167,15 @@ export default class CharacterList extends Vue {
       this.$emit("update:notification", true);
     }
     this.closeDelete();
+  }
+
+  async created() {
+    try {
+      const users = await listUsers();
+      console.log(users);
+    } catch (err) {
+      console.error(err);
+    }
   }
 }
 </script>

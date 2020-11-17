@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "auth": {
+      "magusa74e493a": [
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}
