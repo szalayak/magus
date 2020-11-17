@@ -2,6 +2,53 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const me = /* GraphQL */ `
+  query Me {
+    me {
+      Username
+      UserAttributes {
+        Name
+        Value
+      }
+      UserCreateDate
+      UserLastModifiedDate
+      Enabled
+      UserStatus
+      MFAOptions {
+        DeliveryMedium
+        AttributeName
+      }
+      PreferredMfaSetting
+      UserMFASettingList
+    }
+  }
+`;
+export const users = /* GraphQL */ `
+  query Users {
+    users {
+      Username
+      UserAttributes {
+        Name
+        Value
+      }
+      UserCreateDate
+      UserLastModifiedDate
+      Enabled
+      UserStatus
+      MFAOptions {
+        DeliveryMedium
+        AttributeName
+      }
+      PreferredMfaSetting
+      UserMFASettingList
+    }
+  }
+`;
+export const echo = /* GraphQL */ `
+  query Echo($msg: String) {
+    echo(msg: $msg)
+  }
+`;
 export const getValueRangeValue = /* GraphQL */ `
   query GetValueRangeValue($id: ID!) {
     getValueRangeValue(id: $id) {

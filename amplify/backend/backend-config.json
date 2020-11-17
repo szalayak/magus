@@ -39,5 +39,21 @@
         }
       }
     }
+  },
+  "function": {
+    "GraphQLResolverFunction": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "magusa74e493a",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ]
+    }
   }
 }
