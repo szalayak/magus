@@ -232,10 +232,6 @@ export default class PlayerCharactersAsPlayer extends TitleComponent {
         this.messages = error.errors?.map(err => err.message) || [];
         this.notification = true;
       });
-    this.$store.dispatch("loadUsers").catch((error: GraphQLResult<unknown>) => {
-      this.messages = error.errors?.map(err => err.message) || [];
-      this.notification = true;
-    });
     Promise.all([
       this.$store.dispatch("race/load"),
       this.$store.dispatch("class/load"),
@@ -243,6 +239,13 @@ export default class PlayerCharactersAsPlayer extends TitleComponent {
       this.messages = error.errors?.map(err => err.message) || [];
       this.notification = true;
     });
+    this.$store
+      .dispatch("loadUsers")
+      .then(() => this.$forceUpdate())
+      .catch((error: GraphQLResult<unknown>) => {
+        this.messages = error.errors?.map(err => err.message) || [];
+        this.notification = true;
+      });
   }
 }
 </script>
