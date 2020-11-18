@@ -1,0 +1,184 @@
+[
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Vágófegyver",
+    "descriptions.description": "",
+    "id": "WT1",
+    "type": "WEAPON_TYPE"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Zúzófegyver",
+    "descriptions.description": "",
+    "id": "WT2",
+    "type": "WEAPON_TYPE"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Szálfegyver",
+    "descriptions.description": "",
+    "id": "WT3",
+    "type": "WEAPON_TYPE"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Célzófegyver",
+    "descriptions.description": "",
+    "id": "WT4",
+    "type": "WEAPON_TYPE"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Egyéb",
+    "descriptions.description": "",
+    "id": "WT5",
+    "type": "WEAPON_TYPE"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Harcos",
+    "descriptions.description": "",
+    "id": "MC1",
+    "type": "MAIN_CLASS"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Szerencsevadász",
+    "descriptions.description": "",
+    "id": "MC2",
+    "type": "MAIN_CLASS"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Harcművész",
+    "descriptions.description": "",
+    "id": "MC3",
+    "type": "MAIN_CLASS"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Pap",
+    "descriptions.description": "",
+    "id": "MC4",
+    "type": "MAIN_CLASS"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Varázshasználó",
+    "descriptions.description": "",
+    "id": "MC5",
+    "type": "MAIN_CLASS"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Élet",
+    "descriptions.description": "# ÉLET - Unikornis\n\\\nAz Élet jellemnek nagy becsben tartanak minden élőlényt, s ha tehetik, megakadályozzák az erőszakos halált. Őrizkednek má­sok szabadságának korlátozásától, elutasítanak mindenfajta, fe­nyegetéssel, erőszakkal járó tettet - ám fegyvert ragadnak, ha az Élet szabadságát veszélyben ér­zik, s ilyenkor nem riadnak vissza a véron­tástól sem.",
+    "id": "P01",
+    "type": "PERSONALITY"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Rend",
+    "descriptions.description": "",
+    "id": "P02",
+    "type": "PERSONALITY"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Káosz",
+    "descriptions.description": "",
+    "id": "P03",
+    "type": "PERSONALITY"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Halál",
+    "descriptions.description": "",
+    "id": "P04",
+    "type": "PERSONALITY"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Élet, Rend",
+    "descriptions.description": "",
+    "id": "P05",
+    "type": "PERSONALITY"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Rend, Élet",
+    "descriptions.description": "",
+    "id": "P06",
+    "type": "PERSONALITY"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Élet, Káosz",
+    "descriptions.description": "",
+    "id": "P07",
+    "type": "PERSONALITY"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Káosz, Élet",
+    "descriptions.description": "",
+    "id": "P08",
+    "type": "PERSONALITY"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Rend, Halál",
+    "descriptions.description": "",
+    "id": "P09",
+    "type": "PERSONALITY"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Halál, Rend",
+    "descriptions.description": "",
+    "id": "P10",
+    "type": "PERSONALITY"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Káosz, Halál",
+    "descriptions.description": "",
+    "id": "P11",
+    "type": "PERSONALITY"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Halál, Káosz",
+    "descriptions.description": "",
+    "id": "P12",
+    "type": "PERSONALITY"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Harci",
+    "descriptions.description": "",
+    "id": "SG1",
+    "type": "SKILL_GROUP"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Világi",
+    "descriptions.description": "",
+    "id": "SG2",
+    "type": "SKILL_GROUP"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Alvilági",
+    "descriptions.description": "",
+    "id": "SG3",
+    "type": "SKILL_GROUP"
+  },
+  {
+    "descriptions.locale": "hu",
+    "descriptions.title": "Tudományos",
+    "descriptions.description": "",
+    "id": "SG4",
+    "type": "SKILL_GROUP"
+  }
+]
