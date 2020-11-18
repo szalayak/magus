@@ -35,9 +35,12 @@
           </v-menu>
         </v-col>
         <v-col cols="12">
-          <v-text-field
+          <v-select
             v-model="character.dungeonMaster"
             :label="$t('dungeon-master')"
+            :items="users"
+            item-value="username"
+            item-text="name"
             :disabled="!edit"
           />
         </v-col>
@@ -49,6 +52,7 @@
 import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
+import { User } from "@/store";
 
 @Component({
   name: "administrative-info-card",
@@ -58,5 +62,13 @@ import CharacterInfoCard from "./CharacterInfoCard.vue";
 })
 export default class AdministrativeInfoCard extends CharacterInfo {
   startDatePicker = false;
+
+  get users(): User[] {
+    return this.$store.getters["getUsers"];
+  }
+
+  async created() {
+    this.$store.dispatch("loadUsers");
+  }
 }
 </script>
