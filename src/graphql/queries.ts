@@ -652,6 +652,7 @@ export const getCharacter = /* GraphQL */ `
         dislikes
         fears
         companions
+        enemies
         fame
         religion
         country
@@ -1124,6 +1125,7 @@ export const listCharacters = /* GraphQL */ `
           dislikes
           fears
           companions
+          enemies
           fame
           religion
           country
@@ -2109,6 +2111,7 @@ export const listCharactersByOwner = /* GraphQL */ `
           dislikes
           fears
           companions
+          enemies
           fame
           religion
           country
@@ -2511,6 +2514,7 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
           dislikes
           fears
           companions
+          enemies
           fame
           religion
           country
