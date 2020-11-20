@@ -873,6 +873,7 @@ export const createCharacter = /* GraphQL */ `
         dislikes
         fears
         companions
+        enemies
         fame
         religion
         country
@@ -1343,6 +1344,7 @@ export const updateCharacter = /* GraphQL */ `
         dislikes
         fears
         companions
+        enemies
         fame
         religion
         country
@@ -1813,6 +1815,7 @@ export const deleteCharacter = /* GraphQL */ `
         dislikes
         fears
         companions
+        enemies
         fame
         religion
         country
