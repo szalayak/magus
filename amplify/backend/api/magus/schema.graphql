@@ -252,6 +252,7 @@ type CharacterBasicInfo {
   dislikes: String
   fears: String
   companions: String
+  enemies: String
   fame: Int
   religion: String
   country: String

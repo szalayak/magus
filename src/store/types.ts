@@ -64,6 +64,7 @@ export interface CharacterBasicInfo {
   dislikes?: string;
   fears?: string;
   companions?: string;
+  enemies?: string;
   fame?: number;
   religion?: string;
   country?: string;
