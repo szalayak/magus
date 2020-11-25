@@ -159,7 +159,7 @@
 import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
-import { DropdownValueList, ThrowScenario } from "@/store/types";
+import { ThrowScenario } from "@/store/types";
 import { getThrowScenarioString } from "@/utils/throwScenario";
 import { localise, localiseItem } from "@/utils/localise";
 import { Weapon } from "@/store/modules/weapon";
