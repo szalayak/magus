@@ -16,11 +16,20 @@ export const localiseItem = (obj: Describable, locale: string): Describable => {
 
 export const localise = (
   objects: Describable[],
-  locale: string
+  locale: string,
+  sorted = true
 ): Describable[] => {
-  return objects
+  const localised = objects
     ? objects.map((obj: Describable) => localiseItem(obj, locale))
     : [];
+  if (!sorted) return localised;
+  return localised.sort((a, b) => {
+    if (a.description?.title && b.description?.title) {
+      if (a.description?.title < b.description?.title) return -1;
+      if (b.description?.title > a.description?.title) return 1;
+    }
+    return 0;
+  });
 };
 
 export const getDescriptionsForLocales = (

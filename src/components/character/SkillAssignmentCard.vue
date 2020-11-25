@@ -1,6 +1,13 @@
 <template>
   <character-info-card :id="id" :editable="false" :title="$t('skills')">
     <template v-slot:toolbar="{}">
+      <v-text-field
+        v-model="search"
+        append-icon-inner="mdi-magnify"
+        :label="$t('search')"
+        single-line
+        hide-details
+      ></v-text-field>
       <v-dialog scrollable v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on, attrs }">
           <v-btn
@@ -106,6 +113,7 @@
         :headers="headers"
         :items="assignments"
         :sort-by="sortBy"
+        :search="search"
       >
         <template v-slot:top>
           <v-alert
@@ -121,8 +129,8 @@
         <template v-slot:[`item.mastery`]="{ item }">
           {{ masteryToString(item) }}
         </template>
-        <template v-slot:[`item.skill`]="{ item }">
-          <a @click="editItem(item)">{{ skillToString(item.skill) }}</a>
+        <template v-slot:[`item.skill.description.title`]="{ item }">
+          <a @click="editItem(item)">{{ item.skill.description.title }}</a>
         </template>
         <template v-if="editable" v-slot:[`item.actions`]="{ item }">
           <v-icon small class="mr-2" @click="editItem(item)">
@@ -140,7 +148,7 @@
 import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
-import { ThrowScenario } from "@/store/types";
+import { Describable, ThrowScenario } from "@/store/types";
 import { getThrowScenarioString } from "@/utils/throwScenario";
 import { localise, localiseItem } from "@/utils/localise";
 import { SkillAssignment } from "@/store/modules/character";
@@ -156,16 +164,17 @@ import { Skill } from "@/store/modules/skill";
 export default class SkillAssignmentCard extends CharacterInfo {
   valid = true;
   dialog = false;
-  sortBy = ["skill.description.title"];
+  sortBy = [];
   editedIndex = -1;
   dialogDelete = false;
   editedItem = this.defaultItem();
   notification = false;
   messages: string[] = [];
+  search = "";
 
   get headers() {
     const headers = [
-      { text: this.$t("skill"), value: "skill" },
+      { text: this.$t("skill"), value: "skill.description.title" },
       {
         text: `${this.$t("mastery")}/${this.$t("percentage")}`,
         value: "mastery",
@@ -185,8 +194,11 @@ export default class SkillAssignmentCard extends CharacterInfo {
     return localise(this.$store.getters["skill/list"] || [], this.$i18n.locale);
   }
 
-  get assignments() {
-    return this.character.skills || [];
+  get assignments(): Skill[] {
+    return (this.character.skills || []).map(s => ({
+      ...s,
+      skill: localiseItem(s.skill as Describable, this.$i18n.locale),
+    }));
   }
 
   get isNewItem() {
