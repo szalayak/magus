@@ -140,10 +140,9 @@
 import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
-import { DropdownValueList, ThrowScenario } from "@/store/types";
+import { ThrowScenario } from "@/store/types";
 import { getThrowScenarioString } from "@/utils/throwScenario";
 import { localise, localiseItem } from "@/utils/localise";
-import { Mastery } from "@/API";
 import { SkillAssignment } from "@/store/modules/character";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
 import { Skill } from "@/store/modules/skill";
@@ -222,6 +221,7 @@ export default class SkillAssignmentCard extends CharacterInfo {
 
   close() {
     this.dialog = false;
+    this.resetEditedItem();
   }
   save() {
     this.$store
@@ -240,6 +240,7 @@ export default class SkillAssignmentCard extends CharacterInfo {
         this.notification = true;
       });
     this.dialog = false;
+    this.resetEditedItem();
   }
 
   deleteItemConfirm() {
@@ -248,10 +249,7 @@ export default class SkillAssignmentCard extends CharacterInfo {
   }
   closeDelete() {
     this.dialogDelete = false;
-    this.$nextTick(() => {
-      this.editedItem = this.defaultItem();
-      this.editedIndex = -1;
-    });
+    this.resetEditedItem();
   }
   editItem(item: SkillAssignment) {
     this.editedIndex = this.assignments.indexOf(item);
@@ -262,6 +260,13 @@ export default class SkillAssignmentCard extends CharacterInfo {
     this.editedIndex = this.assignments.indexOf(item);
     this.editedItem = Object.assign({}, item);
     this.dialogDelete = true;
+  }
+
+  resetEditedItem() {
+    this.$nextTick(() => {
+      this.editedItem = this.defaultItem();
+      this.editedIndex = -1;
+    });
   }
 }
 </script>

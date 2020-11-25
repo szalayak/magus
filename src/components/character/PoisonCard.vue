@@ -154,6 +154,7 @@ export default class PoisonCard extends CharacterInfo {
 
   close() {
     this.dialog = false;
+    this.resetEditedItem();
   }
   save() {
     if (this.isNewItem)
@@ -168,6 +169,7 @@ export default class PoisonCard extends CharacterInfo {
     }
     this.$store.dispatch("character/update", this.character);
     this.dialog = false;
+    this.resetEditedItem();
   }
 
   deleteItemConfirm() {
@@ -177,10 +179,7 @@ export default class PoisonCard extends CharacterInfo {
   }
   closeDelete() {
     this.dialogDelete = false;
-    this.$nextTick(() => {
-      this.editedItem = this.defaultItem();
-      this.editedIndex = -1;
-    });
+    this.resetEditedItem();
   }
   editItem(item: Poison) {
     this.editedIndex = this.poisons.indexOf(item);
@@ -191,6 +190,13 @@ export default class PoisonCard extends CharacterInfo {
     this.editedIndex = this.poisons.indexOf(item);
     this.editedItem = Object.assign({}, item);
     this.dialogDelete = true;
+  }
+
+  resetEditedItem() {
+    this.$nextTick(() => {
+      this.editedItem = this.defaultItem();
+      this.editedIndex = -1;
+    });
   }
 }
 </script>

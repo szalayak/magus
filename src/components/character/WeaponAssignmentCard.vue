@@ -274,6 +274,7 @@ export default class WeaponAssignmentCard extends CharacterInfo {
   }
   close() {
     this.dialog = false;
+    this.resetEditedItem();
   }
   save() {
     this.$store
@@ -292,6 +293,7 @@ export default class WeaponAssignmentCard extends CharacterInfo {
         this.notification = true;
       });
     this.dialog = false;
+    this.resetEditedItem();
   }
 
   deleteItemConfirm() {
@@ -300,10 +302,7 @@ export default class WeaponAssignmentCard extends CharacterInfo {
   }
   closeDelete() {
     this.dialogDelete = false;
-    this.$nextTick(() => {
-      this.editedItem = this.defaultItem();
-      this.editedIndex = -1;
-    });
+    this.resetEditedItem();
   }
   editItem(item: WeaponAssignment) {
     this.editedIndex = this.assignments.indexOf(item);
@@ -314,6 +313,13 @@ export default class WeaponAssignmentCard extends CharacterInfo {
     this.editedIndex = this.assignments.indexOf(item);
     this.editedItem = Object.assign({}, item);
     this.dialogDelete = true;
+  }
+
+  resetEditedItem() {
+    this.$nextTick(() => {
+      this.editedItem = this.defaultItem();
+      this.editedIndex = -1;
+    });
   }
 }
 </script>
