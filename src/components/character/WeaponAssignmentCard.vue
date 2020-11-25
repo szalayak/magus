@@ -4,7 +4,7 @@
       <v-dialog scrollable v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on, attrs }">
           <v-btn
-            v-if="editable"
+            v-show="editable"
             color="primary"
             text
             v-bind="attrs"
@@ -159,7 +159,7 @@
 import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
-import { DropdownValueList, ThrowScenario } from "@/store/types";
+import { ThrowScenario } from "@/store/types";
 import { getThrowScenarioString } from "@/utils/throwScenario";
 import { localise, localiseItem } from "@/utils/localise";
 import { Weapon } from "@/store/modules/weapon";
@@ -274,6 +274,7 @@ export default class WeaponAssignmentCard extends CharacterInfo {
   }
   close() {
     this.dialog = false;
+    this.resetEditedItem();
   }
   save() {
     this.$store
@@ -292,6 +293,7 @@ export default class WeaponAssignmentCard extends CharacterInfo {
         this.notification = true;
       });
     this.dialog = false;
+    this.resetEditedItem();
   }
 
   deleteItemConfirm() {
@@ -300,10 +302,7 @@ export default class WeaponAssignmentCard extends CharacterInfo {
   }
   closeDelete() {
     this.dialogDelete = false;
-    this.$nextTick(() => {
-      this.editedItem = this.defaultItem();
-      this.editedIndex = -1;
-    });
+    this.resetEditedItem();
   }
   editItem(item: WeaponAssignment) {
     this.editedIndex = this.assignments.indexOf(item);
@@ -314,6 +313,13 @@ export default class WeaponAssignmentCard extends CharacterInfo {
     this.editedIndex = this.assignments.indexOf(item);
     this.editedItem = Object.assign({}, item);
     this.dialogDelete = true;
+  }
+
+  resetEditedItem() {
+    this.$nextTick(() => {
+      this.editedItem = this.defaultItem();
+      this.editedIndex = -1;
+    });
   }
 }
 </script>

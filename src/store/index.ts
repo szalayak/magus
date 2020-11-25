@@ -60,7 +60,7 @@ const isUserInGroup = (user?: User, group?: string) => {
 export default new Vuex.Store<RootState>({
   state: {
     app: {
-      user: {},
+      user: { username: undefined },
       authState: AuthState.Loading,
       users: [],
     } as AppState,

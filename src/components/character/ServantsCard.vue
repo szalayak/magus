@@ -8,7 +8,7 @@
       <v-dialog scrollable v-model="dialog" max-width="800px">
         <template v-slot:activator="{ on, attrs }">
           <v-btn
-            v-if="editable"
+            v-show="editable"
             color="primary"
             text
             v-bind="attrs"
@@ -375,6 +375,7 @@ export default class ServantsCard extends CharacterInfo {
 
   close() {
     this.dialog = false;
+    this.resetEditedItem();
   }
   save() {
     if ((this.$refs.form as Form).validate()) {
@@ -394,6 +395,7 @@ export default class ServantsCard extends CharacterInfo {
           this.notification = true;
         });
       this.dialog = false;
+      this.resetEditedItem();
     }
   }
 
@@ -403,10 +405,7 @@ export default class ServantsCard extends CharacterInfo {
   }
   closeDelete() {
     this.dialogDelete = false;
-    this.$nextTick(() => {
-      this.editedItem = this.defaultItem();
-      this.editedIndex = -1;
-    });
+    this.resetEditedItem();
   }
   editItem(item: CharacterCompanion) {
     this.editedIndex = this.assignments.indexOf(item);
@@ -425,6 +424,13 @@ export default class ServantsCard extends CharacterInfo {
     this.editedIndex = this.assignments.indexOf(item);
     this.editedItem = Object.assign({}, item);
     this.dialogDelete = true;
+  }
+
+  resetEditedItem() {
+    this.$nextTick(() => {
+      this.editedItem = this.defaultItem();
+      this.editedIndex = -1;
+    });
   }
 }
 </script>

@@ -4,7 +4,7 @@
       <v-dialog scrollable v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on, attrs }">
           <v-btn
-            v-if="editable"
+            v-show="editable"
             color="primary"
             text
             v-bind="attrs"
@@ -169,6 +169,7 @@ export default class LanguageCard extends CharacterInfo {
 
   close() {
     this.dialog = false;
+    this.resetEditedItem();
   }
   save() {
     if (this.isNewItem)
@@ -185,6 +186,7 @@ export default class LanguageCard extends CharacterInfo {
     }
     this.$store.dispatch("character/update", this.character);
     this.dialog = false;
+    this.resetEditedItem();
   }
 
   deleteItemConfirm() {
@@ -194,10 +196,7 @@ export default class LanguageCard extends CharacterInfo {
   }
   closeDelete() {
     this.dialogDelete = false;
-    this.$nextTick(() => {
-      this.editedItem = this.defaultItem();
-      this.editedIndex = -1;
-    });
+    this.resetEditedItem();
   }
   editItem(item: LanguageAbility) {
     this.editedIndex = this.languages.indexOf(item);
@@ -208,6 +207,13 @@ export default class LanguageCard extends CharacterInfo {
     this.editedIndex = this.languages.indexOf(item);
     this.editedItem = Object.assign({}, item);
     this.dialogDelete = true;
+  }
+
+  resetEditedItem() {
+    this.$nextTick(() => {
+      this.editedItem = this.defaultItem();
+      this.editedIndex = -1;
+    });
   }
 }
 </script>
