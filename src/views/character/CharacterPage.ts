@@ -23,10 +23,6 @@ export default class CharacterPage extends Vue {
   }
 
   get editable(): boolean {
-    console.log({
-      ownner: this.character.owner,
-      user: this.$store.getters["currentUser"],
-    });
     return (
       this.character.owner === this.$store.getters["currentUser"] ||
       this.$store.getters["isCurrentUserAdmin"]

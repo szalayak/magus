@@ -8,7 +8,7 @@
       <v-dialog scrollable v-model="dialog" max-width="800px">
         <template v-slot:activator="{ on, attrs }">
           <v-btn
-            v-if="editable"
+            v-show="editable"
             color="primary"
             text
             v-bind="attrs"
