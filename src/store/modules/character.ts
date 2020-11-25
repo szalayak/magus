@@ -517,6 +517,7 @@ const character: Module<CharacterState, RootState> = {
             characterShieldId: character.shield?.id,
             armourMastery: character.armourMastery,
             shieldMastery: character.shieldMastery,
+            skillPoints: character.skillPoints,
           },
         },
       })) as { data: CreateCharacterMutation };
@@ -567,6 +568,7 @@ const character: Module<CharacterState, RootState> = {
             characterShieldId: character.shield?.id,
             armourMastery: character.armourMastery,
             shieldMastery: character.shieldMastery,
+            skillPoints: character.skillPoints,
           },
         },
       })) as { data: UpdateCharacterMutation };
