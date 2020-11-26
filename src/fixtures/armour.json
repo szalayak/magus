@@ -259,5 +259,12 @@
     "price": 100,
     "movementPreventionValue": 0,
     "damageReductionValue": 1
+  },
+  {
+    "id": "A030",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Kardművész vért",
+    "movementPreventionValue": 1,
+    "damageReductionValue": 4
   }
 ]
