@@ -1327,6 +1327,7 @@ export const createCharacter = /* GraphQL */ `
           aim
           horseback
           notes
+          owner
           createdAt
           updatedAt
         }
@@ -1536,6 +1537,7 @@ export const createCharacter = /* GraphQL */ `
           percentageValue
           skillPointsUsed
           notes
+          owner
           createdAt
           updatedAt
         }
@@ -1792,6 +1794,7 @@ export const createCharacter = /* GraphQL */ `
           badHabit
           specialAbilities
           notes
+          owner
           createdAt
           updatedAt
         }
@@ -2000,6 +2003,7 @@ export const createCharacter = /* GraphQL */ `
           }
           location
           notes
+          owner
           createdAt
           updatedAt
         }
@@ -2498,6 +2502,7 @@ export const updateCharacter = /* GraphQL */ `
           aim
           horseback
           notes
+          owner
           createdAt
           updatedAt
         }
@@ -2707,6 +2712,7 @@ export const updateCharacter = /* GraphQL */ `
           percentageValue
           skillPointsUsed
           notes
+          owner
           createdAt
           updatedAt
         }
@@ -2963,6 +2969,7 @@ export const updateCharacter = /* GraphQL */ `
           badHabit
           specialAbilities
           notes
+          owner
           createdAt
           updatedAt
         }
@@ -3171,6 +3178,7 @@ export const updateCharacter = /* GraphQL */ `
           }
           location
           notes
+          owner
           createdAt
           updatedAt
         }
@@ -3669,6 +3677,7 @@ export const deleteCharacter = /* GraphQL */ `
           aim
           horseback
           notes
+          owner
           createdAt
           updatedAt
         }
@@ -3878,6 +3887,7 @@ export const deleteCharacter = /* GraphQL */ `
           percentageValue
           skillPointsUsed
           notes
+          owner
           createdAt
           updatedAt
         }
@@ -4134,6 +4144,7 @@ export const deleteCharacter = /* GraphQL */ `
           badHabit
           specialAbilities
           notes
+          owner
           createdAt
           updatedAt
         }
@@ -4342,6 +4353,7 @@ export const deleteCharacter = /* GraphQL */ `
           }
           location
           notes
+          owner
           createdAt
           updatedAt
         }
@@ -4665,6 +4677,7 @@ export const createWeaponAssignment = /* GraphQL */ `
             aim
             horseback
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -4707,6 +4720,7 @@ export const createWeaponAssignment = /* GraphQL */ `
             percentageValue
             skillPointsUsed
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -4772,6 +4786,7 @@ export const createWeaponAssignment = /* GraphQL */ `
             badHabit
             specialAbilities
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -4812,6 +4827,7 @@ export const createWeaponAssignment = /* GraphQL */ `
             }
             location
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -4867,6 +4883,7 @@ export const createWeaponAssignment = /* GraphQL */ `
       aim
       horseback
       notes
+      owner
       createdAt
       updatedAt
     }
@@ -5185,6 +5202,7 @@ export const updateWeaponAssignment = /* GraphQL */ `
             aim
             horseback
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -5227,6 +5245,7 @@ export const updateWeaponAssignment = /* GraphQL */ `
             percentageValue
             skillPointsUsed
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -5292,6 +5311,7 @@ export const updateWeaponAssignment = /* GraphQL */ `
             badHabit
             specialAbilities
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -5332,6 +5352,7 @@ export const updateWeaponAssignment = /* GraphQL */ `
             }
             location
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -5387,6 +5408,7 @@ export const updateWeaponAssignment = /* GraphQL */ `
       aim
       horseback
       notes
+      owner
       createdAt
       updatedAt
     }
@@ -5705,6 +5727,7 @@ export const deleteWeaponAssignment = /* GraphQL */ `
             aim
             horseback
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -5747,6 +5770,7 @@ export const deleteWeaponAssignment = /* GraphQL */ `
             percentageValue
             skillPointsUsed
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -5812,6 +5836,7 @@ export const deleteWeaponAssignment = /* GraphQL */ `
             badHabit
             specialAbilities
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -5852,6 +5877,7 @@ export const deleteWeaponAssignment = /* GraphQL */ `
             }
             location
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -5907,6 +5933,7 @@ export const deleteWeaponAssignment = /* GraphQL */ `
       aim
       horseback
       notes
+      owner
       createdAt
       updatedAt
     }
@@ -6225,6 +6252,7 @@ export const createSkillAssignment = /* GraphQL */ `
             aim
             horseback
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -6267,6 +6295,7 @@ export const createSkillAssignment = /* GraphQL */ `
             percentageValue
             skillPointsUsed
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -6332,6 +6361,7 @@ export const createSkillAssignment = /* GraphQL */ `
             badHabit
             specialAbilities
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -6372,6 +6402,7 @@ export const createSkillAssignment = /* GraphQL */ `
             }
             location
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -6409,6 +6440,7 @@ export const createSkillAssignment = /* GraphQL */ `
       percentageValue
       skillPointsUsed
       notes
+      owner
       createdAt
       updatedAt
     }
@@ -6727,6 +6759,7 @@ export const updateSkillAssignment = /* GraphQL */ `
             aim
             horseback
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -6769,6 +6802,7 @@ export const updateSkillAssignment = /* GraphQL */ `
             percentageValue
             skillPointsUsed
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -6834,6 +6868,7 @@ export const updateSkillAssignment = /* GraphQL */ `
             badHabit
             specialAbilities
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -6874,6 +6909,7 @@ export const updateSkillAssignment = /* GraphQL */ `
             }
             location
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -6911,6 +6947,7 @@ export const updateSkillAssignment = /* GraphQL */ `
       percentageValue
       skillPointsUsed
       notes
+      owner
       createdAt
       updatedAt
     }
@@ -7229,6 +7266,7 @@ export const deleteSkillAssignment = /* GraphQL */ `
             aim
             horseback
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -7271,6 +7309,7 @@ export const deleteSkillAssignment = /* GraphQL */ `
             percentageValue
             skillPointsUsed
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -7336,6 +7375,7 @@ export const deleteSkillAssignment = /* GraphQL */ `
             badHabit
             specialAbilities
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -7376,6 +7416,7 @@ export const deleteSkillAssignment = /* GraphQL */ `
             }
             location
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -7413,6 +7454,7 @@ export const deleteSkillAssignment = /* GraphQL */ `
       percentageValue
       skillPointsUsed
       notes
+      owner
       createdAt
       updatedAt
     }
@@ -7731,6 +7773,7 @@ export const createCharacterCompanion = /* GraphQL */ `
             aim
             horseback
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -7773,6 +7816,7 @@ export const createCharacterCompanion = /* GraphQL */ `
             percentageValue
             skillPointsUsed
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -7838,6 +7882,7 @@ export const createCharacterCompanion = /* GraphQL */ `
             badHabit
             specialAbilities
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -7878,6 +7923,7 @@ export const createCharacterCompanion = /* GraphQL */ `
             }
             location
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -7962,6 +8008,7 @@ export const createCharacterCompanion = /* GraphQL */ `
       badHabit
       specialAbilities
       notes
+      owner
       createdAt
       updatedAt
     }
@@ -8280,6 +8327,7 @@ export const updateCharacterCompanion = /* GraphQL */ `
             aim
             horseback
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -8322,6 +8370,7 @@ export const updateCharacterCompanion = /* GraphQL */ `
             percentageValue
             skillPointsUsed
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -8387,6 +8436,7 @@ export const updateCharacterCompanion = /* GraphQL */ `
             badHabit
             specialAbilities
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -8427,6 +8477,7 @@ export const updateCharacterCompanion = /* GraphQL */ `
             }
             location
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -8511,6 +8562,7 @@ export const updateCharacterCompanion = /* GraphQL */ `
       badHabit
       specialAbilities
       notes
+      owner
       createdAt
       updatedAt
     }
@@ -8829,6 +8881,7 @@ export const deleteCharacterCompanion = /* GraphQL */ `
             aim
             horseback
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -8871,6 +8924,7 @@ export const deleteCharacterCompanion = /* GraphQL */ `
             percentageValue
             skillPointsUsed
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -8936,6 +8990,7 @@ export const deleteCharacterCompanion = /* GraphQL */ `
             badHabit
             specialAbilities
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -8976,6 +9031,7 @@ export const deleteCharacterCompanion = /* GraphQL */ `
             }
             location
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -9060,6 +9116,7 @@ export const deleteCharacterCompanion = /* GraphQL */ `
       badHabit
       specialAbilities
       notes
+      owner
       createdAt
       updatedAt
     }
@@ -9378,6 +9435,7 @@ export const createMagicalItemAssignment = /* GraphQL */ `
             aim
             horseback
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -9420,6 +9478,7 @@ export const createMagicalItemAssignment = /* GraphQL */ `
             percentageValue
             skillPointsUsed
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -9485,6 +9544,7 @@ export const createMagicalItemAssignment = /* GraphQL */ `
             badHabit
             specialAbilities
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -9525,6 +9585,7 @@ export const createMagicalItemAssignment = /* GraphQL */ `
             }
             location
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -9572,6 +9633,7 @@ export const createMagicalItemAssignment = /* GraphQL */ `
       }
       location
       notes
+      owner
       createdAt
       updatedAt
     }
@@ -9890,6 +9952,7 @@ export const updateMagicalItemAssignment = /* GraphQL */ `
             aim
             horseback
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -9932,6 +9995,7 @@ export const updateMagicalItemAssignment = /* GraphQL */ `
             percentageValue
             skillPointsUsed
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -9997,6 +10061,7 @@ export const updateMagicalItemAssignment = /* GraphQL */ `
             badHabit
             specialAbilities
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -10037,6 +10102,7 @@ export const updateMagicalItemAssignment = /* GraphQL */ `
             }
             location
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -10084,6 +10150,7 @@ export const updateMagicalItemAssignment = /* GraphQL */ `
       }
       location
       notes
+      owner
       createdAt
       updatedAt
     }
@@ -10402,6 +10469,7 @@ export const deleteMagicalItemAssignment = /* GraphQL */ `
             aim
             horseback
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -10444,6 +10512,7 @@ export const deleteMagicalItemAssignment = /* GraphQL */ `
             percentageValue
             skillPointsUsed
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -10509,6 +10578,7 @@ export const deleteMagicalItemAssignment = /* GraphQL */ `
             badHabit
             specialAbilities
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -10549,6 +10619,7 @@ export const deleteMagicalItemAssignment = /* GraphQL */ `
             }
             location
             notes
+            owner
             createdAt
             updatedAt
           }
@@ -10596,6 +10667,7 @@ export const deleteMagicalItemAssignment = /* GraphQL */ `
       }
       location
       notes
+      owner
       createdAt
       updatedAt
     }

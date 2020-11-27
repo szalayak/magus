@@ -416,6 +416,7 @@ type WeaponAssignment
       { allow: owner }
       { allow: groups, groups: ["Admin"] }
       { allow: groups, groups: ["DungeonMaster"], operations: [read] }
+      { allow: private, operations: [read] }
     ]
   ) {
   id: ID!
@@ -442,6 +443,7 @@ type SkillAssignment
       { allow: owner }
       { allow: groups, groups: ["Admin"] }
       { allow: groups, groups: ["DungeonMaster"], operations: [read] }
+      { allow: private, operations: [read] }
     ]
   ) {
   id: ID!
@@ -469,6 +471,7 @@ type CharacterCompanion
       { allow: owner }
       { allow: groups, groups: ["Admin"] }
       { allow: groups, groups: ["DungeonMaster"], operations: [read] }
+      { allow: private, operations: [read] }
     ]
   ) {
   id: ID!
@@ -497,6 +500,7 @@ type MagicalItemAssignment
       { allow: owner }
       { allow: groups, groups: ["Admin"] }
       { allow: groups, groups: ["DungeonMaster"], operations: [read] }
+      { allow: private, operations: [read] }
     ]
   ) {
   id: ID!
