@@ -419,7 +419,6 @@ type WeaponAssignment
   ) {
   id: ID!
   characterId: ID!
-  character: Character @connection(fields: ["characterId"])
   weapon: Weapon @connection
   mastery: Mastery
   inHand: Boolean
@@ -444,7 +443,6 @@ type SkillAssignment
   ) {
   id: ID!
   characterId: ID!
-  character: Character @connection(fields: ["characterId"])
   skill: Skill @connection
   mastery: Mastery
   percentageValue: Int
@@ -470,7 +468,6 @@ type CharacterCompanion
   ) {
   id: ID!
   characterId: ID!
-  character: Character @connection(fields: ["characterId"])
   name: String!
   type: CompanionType!
   health: HealthInformation
@@ -497,7 +494,6 @@ type MagicalItemAssignment
   ) {
   id: ID!
   characterId: ID!
-  character: Character @connection(fields: ["characterId"])
   magicalItemId: ID!
   magicalItem: MagicalItem! @connection(fields: ["magicalItemId"])
   location: String
