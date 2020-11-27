@@ -411,9 +411,15 @@ type Character
 type WeaponAssignment
   @model
   @key(name: "byCharacter", fields: ["characterId"])
-  @auth(rules: [{ allow: owner }]) {
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["Admin", "DungeonMaster"] }
+    ]
+  ) {
   id: ID!
   characterId: ID!
+  character: Character @connection(fields: ["characterId"])
   weapon: Weapon @connection
   mastery: Mastery
   inHand: Boolean
@@ -429,9 +435,15 @@ type WeaponAssignment
 type SkillAssignment
   @model
   @key(name: "byCharacter", fields: ["characterId"])
-  @auth(rules: [{ allow: owner }]) {
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["Admin", "DungeonMaster"] }
+    ]
+  ) {
   id: ID!
   characterId: ID!
+  character: Character @connection(fields: ["characterId"])
   skill: Skill @connection
   mastery: Mastery
   percentageValue: Int
@@ -448,9 +460,15 @@ enum CompanionType {
 type CharacterCompanion
   @model
   @key(name: "byCharacter", fields: ["characterId"])
-  @auth(rules: [{ allow: owner }]) {
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["Admin", "DungeonMaster"] }
+    ]
+  )  {
   id: ID!
   characterId: ID!
+  character: Character @connection(fields: ["characterId"])
   name: String!
   type: CompanionType!
   health: HealthInformation
@@ -468,9 +486,15 @@ type CharacterCompanion
 type MagicalItemAssignment
   @model
   @key(name: "byCharacter", fields: ["characterId"])
-  @auth(rules: [{ allow: owner }]) {
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["Admin", "DungeonMaster"] }
+    ]
+  )  {
   id: ID!
   characterId: ID!
+  character: Character @connection(fields: ["characterId"])
   magicalItemId: ID!
   magicalItem: MagicalItem! @connection(fields: ["magicalItemId"])
   location: String

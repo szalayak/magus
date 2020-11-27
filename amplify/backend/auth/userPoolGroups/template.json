@@ -149,6 +149,60 @@
         },
      
     
+        "DungeonMasterGroup": {
+          "Type" : "AWS::Cognito::UserPoolGroup",
+          "Properties" : {
+              "GroupName" : "DungeonMaster",
+              "Precedence" : 3,
+              
+              "RoleArn" : {
+                "Fn::GetAtt": [
+                    "DungeonMasterGroupRole",
+                    "Arn"
+                ]
+              },
+              
+              "UserPoolId" : {
+                "Ref": "authmagusa74e493aUserPoolId"
+              } 
+            }
+        },
+        
+        "DungeonMasterGroupRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "RoleName":{
+                    "Fn::Join": [
+                        "",
+                        [
+                          {
+                            "Ref": "authmagusa74e493aUserPoolId"
+                          },
+                          "-DungeonMasterGroupRole"
+                        ]
+                    ]
+                },
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Sid": "",
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Federated": "cognito-identity.amazonaws.com"
+                            },
+                            "Action": "sts:AssumeRoleWithWebIdentity",
+                            "Condition": {
+                              "StringEquals": {"cognito-identity.amazonaws.com:aud": {"Ref":"authmagusa74e493aIdentityPoolId"}},
+                              "ForAnyValue:StringLike": {"cognito-identity.amazonaws.com:amr": "authenticated"}
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+     
+    
     
         "LambdaExecutionRole": {
             "Type": "AWS::IAM::Role",
@@ -364,6 +418,17 @@
             "Value": {
                 "Fn::GetAtt": [
                     "EditorGroupRole",
+                    "Arn"
+                ]
+            }
+         
+        },
+        
+      
+        "DungeonMasterGroupRole": {
+            "Value": {
+                "Fn::GetAtt": [
+                    "DungeonMasterGroupRole",
                     "Arn"
                 ]
             }

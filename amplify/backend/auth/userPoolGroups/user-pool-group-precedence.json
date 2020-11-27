@@ -6,5 +6,9 @@
     {
         "groupName": "Editor",
         "precedence": 2
+    },
+    {
+        "groupName": "DungeonMaster",
+        "precedence": 3
     }
 ]
