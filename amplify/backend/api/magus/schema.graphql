@@ -409,13 +409,11 @@ type Character
 }
 
 type WeaponAssignment
-  @model(subscriptions: { level: public })
+  @model
   @key(name: "byCharacter", fields: ["characterId"])
   @auth(
     rules: [
       { allow: owner }
-      { allow: groups, groups: ["Admin"] }
-      { allow: groups, groups: ["DungeonMaster"], operations: [read] }
       { allow: private, operations: [read] }
     ]
   ) {
@@ -436,13 +434,11 @@ type WeaponAssignment
 }
 
 type SkillAssignment
-  @model(subscriptions: { level: public })
+  @model
   @key(name: "byCharacter", fields: ["characterId"])
   @auth(
     rules: [
       { allow: owner }
-      { allow: groups, groups: ["Admin"] }
-      { allow: groups, groups: ["DungeonMaster"], operations: [read] }
       { allow: private, operations: [read] }
     ]
   ) {
@@ -464,13 +460,11 @@ enum CompanionType {
 }
 
 type CharacterCompanion
-  @model(subscriptions: { level: public })
+  @model
   @key(name: "byCharacter", fields: ["characterId"])
   @auth(
     rules: [
       { allow: owner }
-      { allow: groups, groups: ["Admin"] }
-      { allow: groups, groups: ["DungeonMaster"], operations: [read] }
       { allow: private, operations: [read] }
     ]
   ) {
@@ -493,13 +487,11 @@ type CharacterCompanion
 }
 
 type MagicalItemAssignment
-  @model(subscriptions: { level: public })
+  @model
   @key(name: "byCharacter", fields: ["characterId"])
   @auth(
     rules: [
       { allow: owner }
-      { allow: groups, groups: ["Admin"] }
-      { allow: groups, groups: ["DungeonMaster"], operations: [read] }
       { allow: private, operations: [read] }
     ]
   ) {
