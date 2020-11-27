@@ -431,6 +431,7 @@ type WeaponAssignment
   aim: Mastery
   horseback: Mastery
   notes: String
+  owner: String
 }
 
 type SkillAssignment
@@ -451,6 +452,7 @@ type SkillAssignment
   percentageValue: Int
   skillPointsUsed: Int
   notes: String
+  owner: String
 }
 
 enum CompanionType {
@@ -484,6 +486,7 @@ type CharacterCompanion
   badHabit: String
   specialAbilities: String
   notes: String
+  owner: String
 }
 
 type MagicalItemAssignment
@@ -503,6 +506,7 @@ type MagicalItemAssignment
   magicalItem: MagicalItem! @connection(fields: ["magicalItemId"])
   location: String
   notes: String
+  owner: String
 }
 
 type Query {
