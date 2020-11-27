@@ -1016,6 +1016,182 @@ export const onCreateCharacter = /* GraphQL */ `
         items {
           id
           characterId
+          character {
+            id
+            name
+            playerCharacter
+            startDate
+            dungeonMaster
+            owner
+            basicInfo {
+              sex
+              height
+              weight
+              hair
+              eyes
+              age
+              visibleAge
+              identifier
+              family
+              attire
+              personalityTraits
+              specialAbilities
+              likes
+              dislikes
+              fears
+              companions
+              enemies
+              fame
+              religion
+              country
+              school
+            }
+            abilities {
+              strength
+              agility
+              dexterity
+              stamina
+              health
+              beauty
+              intelligence
+              willpower
+              astral
+            }
+            health {
+              baseVitality
+              vitalityModifier
+              baseHitPoints
+              hitPointModifier
+            }
+            class {
+              id
+              mainClassId
+              magicUser
+              createdAt
+              updatedAt
+            }
+            subclass
+            specialisation
+            race {
+              id
+              playable
+              createdAt
+              updatedAt
+            }
+            personality {
+              id
+              type
+              createdAt
+              updatedAt
+            }
+            level {
+              currentLevel
+              currentExperience
+              experienceForNextLevel
+            }
+            psiUser
+            psiSchool {
+              id
+              basePsiPoints
+              psiPointsPerLevel
+              createdAt
+              updatedAt
+            }
+            psiLevel
+            psiPoints {
+              current
+              max
+            }
+            magicUser
+            magicalAbility {
+              notes
+              manaPointsPerLevel
+              modifiers
+              manaPointsStoredElsehwere
+              rechargingMethod
+            }
+            baseCombatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            spentCombatValueModifiers {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            otherCombatValueModifiers {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            combatValueModifiersPerLevel
+            mandatoryCombatValueModifierDistribution
+            wallet {
+              money
+              mithrill
+              gemstones
+              misc
+            }
+            skillPoints {
+              base
+              current
+              perLevel
+              intelligence
+              dexterity
+            }
+            languages {
+              language
+              level
+            }
+            inventory {
+              name
+              amount
+              location
+            }
+            poisons {
+              name
+              amount
+            }
+            notes
+            armour {
+              id
+              weight
+              movementPreventionValue
+              damageReductionValue
+              price
+              createdAt
+              updatedAt
+            }
+            armourMastery
+            shield {
+              id
+              movementPreventionValue
+              weight
+              price
+              attacksPerTurn
+              createdAt
+              updatedAt
+            }
+            shieldMastery
+            weapons {
+              nextToken
+            }
+            skills {
+              nextToken
+            }
+            companions {
+              nextToken
+            }
+            magicalItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           weapon {
             id
             descriptions {
@@ -1068,6 +1244,182 @@ export const onCreateCharacter = /* GraphQL */ `
         items {
           id
           characterId
+          character {
+            id
+            name
+            playerCharacter
+            startDate
+            dungeonMaster
+            owner
+            basicInfo {
+              sex
+              height
+              weight
+              hair
+              eyes
+              age
+              visibleAge
+              identifier
+              family
+              attire
+              personalityTraits
+              specialAbilities
+              likes
+              dislikes
+              fears
+              companions
+              enemies
+              fame
+              religion
+              country
+              school
+            }
+            abilities {
+              strength
+              agility
+              dexterity
+              stamina
+              health
+              beauty
+              intelligence
+              willpower
+              astral
+            }
+            health {
+              baseVitality
+              vitalityModifier
+              baseHitPoints
+              hitPointModifier
+            }
+            class {
+              id
+              mainClassId
+              magicUser
+              createdAt
+              updatedAt
+            }
+            subclass
+            specialisation
+            race {
+              id
+              playable
+              createdAt
+              updatedAt
+            }
+            personality {
+              id
+              type
+              createdAt
+              updatedAt
+            }
+            level {
+              currentLevel
+              currentExperience
+              experienceForNextLevel
+            }
+            psiUser
+            psiSchool {
+              id
+              basePsiPoints
+              psiPointsPerLevel
+              createdAt
+              updatedAt
+            }
+            psiLevel
+            psiPoints {
+              current
+              max
+            }
+            magicUser
+            magicalAbility {
+              notes
+              manaPointsPerLevel
+              modifiers
+              manaPointsStoredElsehwere
+              rechargingMethod
+            }
+            baseCombatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            spentCombatValueModifiers {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            otherCombatValueModifiers {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            combatValueModifiersPerLevel
+            mandatoryCombatValueModifierDistribution
+            wallet {
+              money
+              mithrill
+              gemstones
+              misc
+            }
+            skillPoints {
+              base
+              current
+              perLevel
+              intelligence
+              dexterity
+            }
+            languages {
+              language
+              level
+            }
+            inventory {
+              name
+              amount
+              location
+            }
+            poisons {
+              name
+              amount
+            }
+            notes
+            armour {
+              id
+              weight
+              movementPreventionValue
+              damageReductionValue
+              price
+              createdAt
+              updatedAt
+            }
+            armourMastery
+            shield {
+              id
+              movementPreventionValue
+              weight
+              price
+              attacksPerTurn
+              createdAt
+              updatedAt
+            }
+            shieldMastery
+            weapons {
+              nextToken
+            }
+            skills {
+              nextToken
+            }
+            companions {
+              nextToken
+            }
+            magicalItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           skill {
             id
             descriptions {
@@ -1102,6 +1454,182 @@ export const onCreateCharacter = /* GraphQL */ `
         items {
           id
           characterId
+          character {
+            id
+            name
+            playerCharacter
+            startDate
+            dungeonMaster
+            owner
+            basicInfo {
+              sex
+              height
+              weight
+              hair
+              eyes
+              age
+              visibleAge
+              identifier
+              family
+              attire
+              personalityTraits
+              specialAbilities
+              likes
+              dislikes
+              fears
+              companions
+              enemies
+              fame
+              religion
+              country
+              school
+            }
+            abilities {
+              strength
+              agility
+              dexterity
+              stamina
+              health
+              beauty
+              intelligence
+              willpower
+              astral
+            }
+            health {
+              baseVitality
+              vitalityModifier
+              baseHitPoints
+              hitPointModifier
+            }
+            class {
+              id
+              mainClassId
+              magicUser
+              createdAt
+              updatedAt
+            }
+            subclass
+            specialisation
+            race {
+              id
+              playable
+              createdAt
+              updatedAt
+            }
+            personality {
+              id
+              type
+              createdAt
+              updatedAt
+            }
+            level {
+              currentLevel
+              currentExperience
+              experienceForNextLevel
+            }
+            psiUser
+            psiSchool {
+              id
+              basePsiPoints
+              psiPointsPerLevel
+              createdAt
+              updatedAt
+            }
+            psiLevel
+            psiPoints {
+              current
+              max
+            }
+            magicUser
+            magicalAbility {
+              notes
+              manaPointsPerLevel
+              modifiers
+              manaPointsStoredElsehwere
+              rechargingMethod
+            }
+            baseCombatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            spentCombatValueModifiers {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            otherCombatValueModifiers {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            combatValueModifiersPerLevel
+            mandatoryCombatValueModifierDistribution
+            wallet {
+              money
+              mithrill
+              gemstones
+              misc
+            }
+            skillPoints {
+              base
+              current
+              perLevel
+              intelligence
+              dexterity
+            }
+            languages {
+              language
+              level
+            }
+            inventory {
+              name
+              amount
+              location
+            }
+            poisons {
+              name
+              amount
+            }
+            notes
+            armour {
+              id
+              weight
+              movementPreventionValue
+              damageReductionValue
+              price
+              createdAt
+              updatedAt
+            }
+            armourMastery
+            shield {
+              id
+              movementPreventionValue
+              weight
+              price
+              attacksPerTurn
+              createdAt
+              updatedAt
+            }
+            shieldMastery
+            weapons {
+              nextToken
+            }
+            skills {
+              nextToken
+            }
+            companions {
+              nextToken
+            }
+            magicalItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           name
           type
           health {
@@ -1183,6 +1711,182 @@ export const onCreateCharacter = /* GraphQL */ `
         items {
           id
           characterId
+          character {
+            id
+            name
+            playerCharacter
+            startDate
+            dungeonMaster
+            owner
+            basicInfo {
+              sex
+              height
+              weight
+              hair
+              eyes
+              age
+              visibleAge
+              identifier
+              family
+              attire
+              personalityTraits
+              specialAbilities
+              likes
+              dislikes
+              fears
+              companions
+              enemies
+              fame
+              religion
+              country
+              school
+            }
+            abilities {
+              strength
+              agility
+              dexterity
+              stamina
+              health
+              beauty
+              intelligence
+              willpower
+              astral
+            }
+            health {
+              baseVitality
+              vitalityModifier
+              baseHitPoints
+              hitPointModifier
+            }
+            class {
+              id
+              mainClassId
+              magicUser
+              createdAt
+              updatedAt
+            }
+            subclass
+            specialisation
+            race {
+              id
+              playable
+              createdAt
+              updatedAt
+            }
+            personality {
+              id
+              type
+              createdAt
+              updatedAt
+            }
+            level {
+              currentLevel
+              currentExperience
+              experienceForNextLevel
+            }
+            psiUser
+            psiSchool {
+              id
+              basePsiPoints
+              psiPointsPerLevel
+              createdAt
+              updatedAt
+            }
+            psiLevel
+            psiPoints {
+              current
+              max
+            }
+            magicUser
+            magicalAbility {
+              notes
+              manaPointsPerLevel
+              modifiers
+              manaPointsStoredElsehwere
+              rechargingMethod
+            }
+            baseCombatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            spentCombatValueModifiers {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            otherCombatValueModifiers {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            combatValueModifiersPerLevel
+            mandatoryCombatValueModifierDistribution
+            wallet {
+              money
+              mithrill
+              gemstones
+              misc
+            }
+            skillPoints {
+              base
+              current
+              perLevel
+              intelligence
+              dexterity
+            }
+            languages {
+              language
+              level
+            }
+            inventory {
+              name
+              amount
+              location
+            }
+            poisons {
+              name
+              amount
+            }
+            notes
+            armour {
+              id
+              weight
+              movementPreventionValue
+              damageReductionValue
+              price
+              createdAt
+              updatedAt
+            }
+            armourMastery
+            shield {
+              id
+              movementPreventionValue
+              weight
+              price
+              attacksPerTurn
+              createdAt
+              updatedAt
+            }
+            shieldMastery
+            weapons {
+              nextToken
+            }
+            skills {
+              nextToken
+            }
+            companions {
+              nextToken
+            }
+            magicalItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           magicalItemId
           magicalItem {
             id
@@ -1484,6 +2188,182 @@ export const onUpdateCharacter = /* GraphQL */ `
         items {
           id
           characterId
+          character {
+            id
+            name
+            playerCharacter
+            startDate
+            dungeonMaster
+            owner
+            basicInfo {
+              sex
+              height
+              weight
+              hair
+              eyes
+              age
+              visibleAge
+              identifier
+              family
+              attire
+              personalityTraits
+              specialAbilities
+              likes
+              dislikes
+              fears
+              companions
+              enemies
+              fame
+              religion
+              country
+              school
+            }
+            abilities {
+              strength
+              agility
+              dexterity
+              stamina
+              health
+              beauty
+              intelligence
+              willpower
+              astral
+            }
+            health {
+              baseVitality
+              vitalityModifier
+              baseHitPoints
+              hitPointModifier
+            }
+            class {
+              id
+              mainClassId
+              magicUser
+              createdAt
+              updatedAt
+            }
+            subclass
+            specialisation
+            race {
+              id
+              playable
+              createdAt
+              updatedAt
+            }
+            personality {
+              id
+              type
+              createdAt
+              updatedAt
+            }
+            level {
+              currentLevel
+              currentExperience
+              experienceForNextLevel
+            }
+            psiUser
+            psiSchool {
+              id
+              basePsiPoints
+              psiPointsPerLevel
+              createdAt
+              updatedAt
+            }
+            psiLevel
+            psiPoints {
+              current
+              max
+            }
+            magicUser
+            magicalAbility {
+              notes
+              manaPointsPerLevel
+              modifiers
+              manaPointsStoredElsehwere
+              rechargingMethod
+            }
+            baseCombatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            spentCombatValueModifiers {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            otherCombatValueModifiers {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            combatValueModifiersPerLevel
+            mandatoryCombatValueModifierDistribution
+            wallet {
+              money
+              mithrill
+              gemstones
+              misc
+            }
+            skillPoints {
+              base
+              current
+              perLevel
+              intelligence
+              dexterity
+            }
+            languages {
+              language
+              level
+            }
+            inventory {
+              name
+              amount
+              location
+            }
+            poisons {
+              name
+              amount
+            }
+            notes
+            armour {
+              id
+              weight
+              movementPreventionValue
+              damageReductionValue
+              price
+              createdAt
+              updatedAt
+            }
+            armourMastery
+            shield {
+              id
+              movementPreventionValue
+              weight
+              price
+              attacksPerTurn
+              createdAt
+              updatedAt
+            }
+            shieldMastery
+            weapons {
+              nextToken
+            }
+            skills {
+              nextToken
+            }
+            companions {
+              nextToken
+            }
+            magicalItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           weapon {
             id
             descriptions {
@@ -1536,6 +2416,182 @@ export const onUpdateCharacter = /* GraphQL */ `
         items {
           id
           characterId
+          character {
+            id
+            name
+            playerCharacter
+            startDate
+            dungeonMaster
+            owner
+            basicInfo {
+              sex
+              height
+              weight
+              hair
+              eyes
+              age
+              visibleAge
+              identifier
+              family
+              attire
+              personalityTraits
+              specialAbilities
+              likes
+              dislikes
+              fears
+              companions
+              enemies
+              fame
+              religion
+              country
+              school
+            }
+            abilities {
+              strength
+              agility
+              dexterity
+              stamina
+              health
+              beauty
+              intelligence
+              willpower
+              astral
+            }
+            health {
+              baseVitality
+              vitalityModifier
+              baseHitPoints
+              hitPointModifier
+            }
+            class {
+              id
+              mainClassId
+              magicUser
+              createdAt
+              updatedAt
+            }
+            subclass
+            specialisation
+            race {
+              id
+              playable
+              createdAt
+              updatedAt
+            }
+            personality {
+              id
+              type
+              createdAt
+              updatedAt
+            }
+            level {
+              currentLevel
+              currentExperience
+              experienceForNextLevel
+            }
+            psiUser
+            psiSchool {
+              id
+              basePsiPoints
+              psiPointsPerLevel
+              createdAt
+              updatedAt
+            }
+            psiLevel
+            psiPoints {
+              current
+              max
+            }
+            magicUser
+            magicalAbility {
+              notes
+              manaPointsPerLevel
+              modifiers
+              manaPointsStoredElsehwere
+              rechargingMethod
+            }
+            baseCombatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            spentCombatValueModifiers {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            otherCombatValueModifiers {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            combatValueModifiersPerLevel
+            mandatoryCombatValueModifierDistribution
+            wallet {
+              money
+              mithrill
+              gemstones
+              misc
+            }
+            skillPoints {
+              base
+              current
+              perLevel
+              intelligence
+              dexterity
+            }
+            languages {
+              language
+              level
+            }
+            inventory {
+              name
+              amount
+              location
+            }
+            poisons {
+              name
+              amount
+            }
+            notes
+            armour {
+              id
+              weight
+              movementPreventionValue
+              damageReductionValue
+              price
+              createdAt
+              updatedAt
+            }
+            armourMastery
+            shield {
+              id
+              movementPreventionValue
+              weight
+              price
+              attacksPerTurn
+              createdAt
+              updatedAt
+            }
+            shieldMastery
+            weapons {
+              nextToken
+            }
+            skills {
+              nextToken
+            }
+            companions {
+              nextToken
+            }
+            magicalItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           skill {
             id
             descriptions {
@@ -1570,6 +2626,182 @@ export const onUpdateCharacter = /* GraphQL */ `
         items {
           id
           characterId
+          character {
+            id
+            name
+            playerCharacter
+            startDate
+            dungeonMaster
+            owner
+            basicInfo {
+              sex
+              height
+              weight
+              hair
+              eyes
+              age
+              visibleAge
+              identifier
+              family
+              attire
+              personalityTraits
+              specialAbilities
+              likes
+              dislikes
+              fears
+              companions
+              enemies
+              fame
+              religion
+              country
+              school
+            }
+            abilities {
+              strength
+              agility
+              dexterity
+              stamina
+              health
+              beauty
+              intelligence
+              willpower
+              astral
+            }
+            health {
+              baseVitality
+              vitalityModifier
+              baseHitPoints
+              hitPointModifier
+            }
+            class {
+              id
+              mainClassId
+              magicUser
+              createdAt
+              updatedAt
+            }
+            subclass
+            specialisation
+            race {
+              id
+              playable
+              createdAt
+              updatedAt
+            }
+            personality {
+              id
+              type
+              createdAt
+              updatedAt
+            }
+            level {
+              currentLevel
+              currentExperience
+              experienceForNextLevel
+            }
+            psiUser
+            psiSchool {
+              id
+              basePsiPoints
+              psiPointsPerLevel
+              createdAt
+              updatedAt
+            }
+            psiLevel
+            psiPoints {
+              current
+              max
+            }
+            magicUser
+            magicalAbility {
+              notes
+              manaPointsPerLevel
+              modifiers
+              manaPointsStoredElsehwere
+              rechargingMethod
+            }
+            baseCombatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            spentCombatValueModifiers {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            otherCombatValueModifiers {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            combatValueModifiersPerLevel
+            mandatoryCombatValueModifierDistribution
+            wallet {
+              money
+              mithrill
+              gemstones
+              misc
+            }
+            skillPoints {
+              base
+              current
+              perLevel
+              intelligence
+              dexterity
+            }
+            languages {
+              language
+              level
+            }
+            inventory {
+              name
+              amount
+              location
+            }
+            poisons {
+              name
+              amount
+            }
+            notes
+            armour {
+              id
+              weight
+              movementPreventionValue
+              damageReductionValue
+              price
+              createdAt
+              updatedAt
+            }
+            armourMastery
+            shield {
+              id
+              movementPreventionValue
+              weight
+              price
+              attacksPerTurn
+              createdAt
+              updatedAt
+            }
+            shieldMastery
+            weapons {
+              nextToken
+            }
+            skills {
+              nextToken
+            }
+            companions {
+              nextToken
+            }
+            magicalItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           name
           type
           health {
@@ -1651,6 +2883,182 @@ export const onUpdateCharacter = /* GraphQL */ `
         items {
           id
           characterId
+          character {
+            id
+            name
+            playerCharacter
+            startDate
+            dungeonMaster
+            owner
+            basicInfo {
+              sex
+              height
+              weight
+              hair
+              eyes
+              age
+              visibleAge
+              identifier
+              family
+              attire
+              personalityTraits
+              specialAbilities
+              likes
+              dislikes
+              fears
+              companions
+              enemies
+              fame
+              religion
+              country
+              school
+            }
+            abilities {
+              strength
+              agility
+              dexterity
+              stamina
+              health
+              beauty
+              intelligence
+              willpower
+              astral
+            }
+            health {
+              baseVitality
+              vitalityModifier
+              baseHitPoints
+              hitPointModifier
+            }
+            class {
+              id
+              mainClassId
+              magicUser
+              createdAt
+              updatedAt
+            }
+            subclass
+            specialisation
+            race {
+              id
+              playable
+              createdAt
+              updatedAt
+            }
+            personality {
+              id
+              type
+              createdAt
+              updatedAt
+            }
+            level {
+              currentLevel
+              currentExperience
+              experienceForNextLevel
+            }
+            psiUser
+            psiSchool {
+              id
+              basePsiPoints
+              psiPointsPerLevel
+              createdAt
+              updatedAt
+            }
+            psiLevel
+            psiPoints {
+              current
+              max
+            }
+            magicUser
+            magicalAbility {
+              notes
+              manaPointsPerLevel
+              modifiers
+              manaPointsStoredElsehwere
+              rechargingMethod
+            }
+            baseCombatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            spentCombatValueModifiers {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            otherCombatValueModifiers {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            combatValueModifiersPerLevel
+            mandatoryCombatValueModifierDistribution
+            wallet {
+              money
+              mithrill
+              gemstones
+              misc
+            }
+            skillPoints {
+              base
+              current
+              perLevel
+              intelligence
+              dexterity
+            }
+            languages {
+              language
+              level
+            }
+            inventory {
+              name
+              amount
+              location
+            }
+            poisons {
+              name
+              amount
+            }
+            notes
+            armour {
+              id
+              weight
+              movementPreventionValue
+              damageReductionValue
+              price
+              createdAt
+              updatedAt
+            }
+            armourMastery
+            shield {
+              id
+              movementPreventionValue
+              weight
+              price
+              attacksPerTurn
+              createdAt
+              updatedAt
+            }
+            shieldMastery
+            weapons {
+              nextToken
+            }
+            skills {
+              nextToken
+            }
+            companions {
+              nextToken
+            }
+            magicalItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           magicalItemId
           magicalItem {
             id
@@ -1952,6 +3360,182 @@ export const onDeleteCharacter = /* GraphQL */ `
         items {
           id
           characterId
+          character {
+            id
+            name
+            playerCharacter
+            startDate
+            dungeonMaster
+            owner
+            basicInfo {
+              sex
+              height
+              weight
+              hair
+              eyes
+              age
+              visibleAge
+              identifier
+              family
+              attire
+              personalityTraits
+              specialAbilities
+              likes
+              dislikes
+              fears
+              companions
+              enemies
+              fame
+              religion
+              country
+              school
+            }
+            abilities {
+              strength
+              agility
+              dexterity
+              stamina
+              health
+              beauty
+              intelligence
+              willpower
+              astral
+            }
+            health {
+              baseVitality
+              vitalityModifier
+              baseHitPoints
+              hitPointModifier
+            }
+            class {
+              id
+              mainClassId
+              magicUser
+              createdAt
+              updatedAt
+            }
+            subclass
+            specialisation
+            race {
+              id
+              playable
+              createdAt
+              updatedAt
+            }
+            personality {
+              id
+              type
+              createdAt
+              updatedAt
+            }
+            level {
+              currentLevel
+              currentExperience
+              experienceForNextLevel
+            }
+            psiUser
+            psiSchool {
+              id
+              basePsiPoints
+              psiPointsPerLevel
+              createdAt
+              updatedAt
+            }
+            psiLevel
+            psiPoints {
+              current
+              max
+            }
+            magicUser
+            magicalAbility {
+              notes
+              manaPointsPerLevel
+              modifiers
+              manaPointsStoredElsehwere
+              rechargingMethod
+            }
+            baseCombatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            spentCombatValueModifiers {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            otherCombatValueModifiers {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            combatValueModifiersPerLevel
+            mandatoryCombatValueModifierDistribution
+            wallet {
+              money
+              mithrill
+              gemstones
+              misc
+            }
+            skillPoints {
+              base
+              current
+              perLevel
+              intelligence
+              dexterity
+            }
+            languages {
+              language
+              level
+            }
+            inventory {
+              name
+              amount
+              location
+            }
+            poisons {
+              name
+              amount
+            }
+            notes
+            armour {
+              id
+              weight
+              movementPreventionValue
+              damageReductionValue
+              price
+              createdAt
+              updatedAt
+            }
+            armourMastery
+            shield {
+              id
+              movementPreventionValue
+              weight
+              price
+              attacksPerTurn
+              createdAt
+              updatedAt
+            }
+            shieldMastery
+            weapons {
+              nextToken
+            }
+            skills {
+              nextToken
+            }
+            companions {
+              nextToken
+            }
+            magicalItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           weapon {
             id
             descriptions {
@@ -2004,6 +3588,182 @@ export const onDeleteCharacter = /* GraphQL */ `
         items {
           id
           characterId
+          character {
+            id
+            name
+            playerCharacter
+            startDate
+            dungeonMaster
+            owner
+            basicInfo {
+              sex
+              height
+              weight
+              hair
+              eyes
+              age
+              visibleAge
+              identifier
+              family
+              attire
+              personalityTraits
+              specialAbilities
+              likes
+              dislikes
+              fears
+              companions
+              enemies
+              fame
+              religion
+              country
+              school
+            }
+            abilities {
+              strength
+              agility
+              dexterity
+              stamina
+              health
+              beauty
+              intelligence
+              willpower
+              astral
+            }
+            health {
+              baseVitality
+              vitalityModifier
+              baseHitPoints
+              hitPointModifier
+            }
+            class {
+              id
+              mainClassId
+              magicUser
+              createdAt
+              updatedAt
+            }
+            subclass
+            specialisation
+            race {
+              id
+              playable
+              createdAt
+              updatedAt
+            }
+            personality {
+              id
+              type
+              createdAt
+              updatedAt
+            }
+            level {
+              currentLevel
+              currentExperience
+              experienceForNextLevel
+            }
+            psiUser
+            psiSchool {
+              id
+              basePsiPoints
+              psiPointsPerLevel
+              createdAt
+              updatedAt
+            }
+            psiLevel
+            psiPoints {
+              current
+              max
+            }
+            magicUser
+            magicalAbility {
+              notes
+              manaPointsPerLevel
+              modifiers
+              manaPointsStoredElsehwere
+              rechargingMethod
+            }
+            baseCombatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            spentCombatValueModifiers {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            otherCombatValueModifiers {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            combatValueModifiersPerLevel
+            mandatoryCombatValueModifierDistribution
+            wallet {
+              money
+              mithrill
+              gemstones
+              misc
+            }
+            skillPoints {
+              base
+              current
+              perLevel
+              intelligence
+              dexterity
+            }
+            languages {
+              language
+              level
+            }
+            inventory {
+              name
+              amount
+              location
+            }
+            poisons {
+              name
+              amount
+            }
+            notes
+            armour {
+              id
+              weight
+              movementPreventionValue
+              damageReductionValue
+              price
+              createdAt
+              updatedAt
+            }
+            armourMastery
+            shield {
+              id
+              movementPreventionValue
+              weight
+              price
+              attacksPerTurn
+              createdAt
+              updatedAt
+            }
+            shieldMastery
+            weapons {
+              nextToken
+            }
+            skills {
+              nextToken
+            }
+            companions {
+              nextToken
+            }
+            magicalItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           skill {
             id
             descriptions {
@@ -2038,6 +3798,182 @@ export const onDeleteCharacter = /* GraphQL */ `
         items {
           id
           characterId
+          character {
+            id
+            name
+            playerCharacter
+            startDate
+            dungeonMaster
+            owner
+            basicInfo {
+              sex
+              height
+              weight
+              hair
+              eyes
+              age
+              visibleAge
+              identifier
+              family
+              attire
+              personalityTraits
+              specialAbilities
+              likes
+              dislikes
+              fears
+              companions
+              enemies
+              fame
+              religion
+              country
+              school
+            }
+            abilities {
+              strength
+              agility
+              dexterity
+              stamina
+              health
+              beauty
+              intelligence
+              willpower
+              astral
+            }
+            health {
+              baseVitality
+              vitalityModifier
+              baseHitPoints
+              hitPointModifier
+            }
+            class {
+              id
+              mainClassId
+              magicUser
+              createdAt
+              updatedAt
+            }
+            subclass
+            specialisation
+            race {
+              id
+              playable
+              createdAt
+              updatedAt
+            }
+            personality {
+              id
+              type
+              createdAt
+              updatedAt
+            }
+            level {
+              currentLevel
+              currentExperience
+              experienceForNextLevel
+            }
+            psiUser
+            psiSchool {
+              id
+              basePsiPoints
+              psiPointsPerLevel
+              createdAt
+              updatedAt
+            }
+            psiLevel
+            psiPoints {
+              current
+              max
+            }
+            magicUser
+            magicalAbility {
+              notes
+              manaPointsPerLevel
+              modifiers
+              manaPointsStoredElsehwere
+              rechargingMethod
+            }
+            baseCombatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            spentCombatValueModifiers {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            otherCombatValueModifiers {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            combatValueModifiersPerLevel
+            mandatoryCombatValueModifierDistribution
+            wallet {
+              money
+              mithrill
+              gemstones
+              misc
+            }
+            skillPoints {
+              base
+              current
+              perLevel
+              intelligence
+              dexterity
+            }
+            languages {
+              language
+              level
+            }
+            inventory {
+              name
+              amount
+              location
+            }
+            poisons {
+              name
+              amount
+            }
+            notes
+            armour {
+              id
+              weight
+              movementPreventionValue
+              damageReductionValue
+              price
+              createdAt
+              updatedAt
+            }
+            armourMastery
+            shield {
+              id
+              movementPreventionValue
+              weight
+              price
+              attacksPerTurn
+              createdAt
+              updatedAt
+            }
+            shieldMastery
+            weapons {
+              nextToken
+            }
+            skills {
+              nextToken
+            }
+            companions {
+              nextToken
+            }
+            magicalItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           name
           type
           health {
@@ -2119,6 +4055,182 @@ export const onDeleteCharacter = /* GraphQL */ `
         items {
           id
           characterId
+          character {
+            id
+            name
+            playerCharacter
+            startDate
+            dungeonMaster
+            owner
+            basicInfo {
+              sex
+              height
+              weight
+              hair
+              eyes
+              age
+              visibleAge
+              identifier
+              family
+              attire
+              personalityTraits
+              specialAbilities
+              likes
+              dislikes
+              fears
+              companions
+              enemies
+              fame
+              religion
+              country
+              school
+            }
+            abilities {
+              strength
+              agility
+              dexterity
+              stamina
+              health
+              beauty
+              intelligence
+              willpower
+              astral
+            }
+            health {
+              baseVitality
+              vitalityModifier
+              baseHitPoints
+              hitPointModifier
+            }
+            class {
+              id
+              mainClassId
+              magicUser
+              createdAt
+              updatedAt
+            }
+            subclass
+            specialisation
+            race {
+              id
+              playable
+              createdAt
+              updatedAt
+            }
+            personality {
+              id
+              type
+              createdAt
+              updatedAt
+            }
+            level {
+              currentLevel
+              currentExperience
+              experienceForNextLevel
+            }
+            psiUser
+            psiSchool {
+              id
+              basePsiPoints
+              psiPointsPerLevel
+              createdAt
+              updatedAt
+            }
+            psiLevel
+            psiPoints {
+              current
+              max
+            }
+            magicUser
+            magicalAbility {
+              notes
+              manaPointsPerLevel
+              modifiers
+              manaPointsStoredElsehwere
+              rechargingMethod
+            }
+            baseCombatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            spentCombatValueModifiers {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            otherCombatValueModifiers {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            combatValueModifiersPerLevel
+            mandatoryCombatValueModifierDistribution
+            wallet {
+              money
+              mithrill
+              gemstones
+              misc
+            }
+            skillPoints {
+              base
+              current
+              perLevel
+              intelligence
+              dexterity
+            }
+            languages {
+              language
+              level
+            }
+            inventory {
+              name
+              amount
+              location
+            }
+            poisons {
+              name
+              amount
+            }
+            notes
+            armour {
+              id
+              weight
+              movementPreventionValue
+              damageReductionValue
+              price
+              createdAt
+              updatedAt
+            }
+            armourMastery
+            shield {
+              id
+              movementPreventionValue
+              weight
+              price
+              attacksPerTurn
+              createdAt
+              updatedAt
+            }
+            shieldMastery
+            weapons {
+              nextToken
+            }
+            skills {
+              nextToken
+            }
+            companions {
+              nextToken
+            }
+            magicalItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           magicalItemId
           magicalItem {
             id
@@ -2158,6 +4270,470 @@ export const onCreateWeaponAssignment = /* GraphQL */ `
     onCreateWeaponAssignment(owner: $owner) {
       id
       characterId
+      character {
+        id
+        name
+        playerCharacter
+        startDate
+        dungeonMaster
+        owner
+        basicInfo {
+          image {
+            bucket
+            region
+            key
+          }
+          sex
+          height
+          weight
+          hair
+          eyes
+          age
+          visibleAge
+          identifier
+          family
+          attire
+          personalityTraits
+          specialAbilities
+          likes
+          dislikes
+          fears
+          companions
+          enemies
+          fame
+          religion
+          country
+          school
+          holySymbol {
+            bucket
+            region
+            key
+          }
+          coatOfArms {
+            bucket
+            region
+            key
+          }
+        }
+        abilities {
+          strength
+          agility
+          dexterity
+          stamina
+          health
+          beauty
+          intelligence
+          willpower
+          astral
+        }
+        health {
+          vitality {
+            current
+            max
+          }
+          baseVitality
+          vitalityModifier
+          hitPoints {
+            current
+            max
+          }
+          baseHitPoints
+          hitPointModifier
+          hitPointsPerLevel {
+            dice
+            iterationCount
+            modifier
+          }
+        }
+        class {
+          id
+          mainClassId
+          mainClass {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            createdAt
+            updatedAt
+          }
+          descriptions {
+            locale
+            title
+            description
+          }
+          magicUser
+          createdAt
+          updatedAt
+        }
+        subclass
+        specialisation
+        race {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          playable
+          createdAt
+          updatedAt
+        }
+        personality {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          createdAt
+          updatedAt
+        }
+        level {
+          currentLevel
+          currentExperience
+          experienceForNextLevel
+        }
+        psiUser
+        psiSchool {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          basePsiPoints
+          psiPointsPerLevel
+          createdAt
+          updatedAt
+        }
+        psiLevel
+        psiPoints {
+          current
+          max
+        }
+        spellResistance {
+          astral {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+          mental {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+        }
+        magicUser
+        magicalAbility {
+          notes
+          manaPoints {
+            current
+            max
+          }
+          manaPointsPerLevel
+          modifiers
+          manaPointsStoredElsehwere
+          rechargingMethod
+        }
+        baseCombatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        spentCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        otherCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        combatValueModifiersPerLevel
+        mandatoryCombatValueModifierDistribution
+        wallet {
+          money
+          mithrill
+          gemstones
+          misc
+        }
+        skillPoints {
+          base
+          current
+          perLevel
+          intelligence
+          dexterity
+        }
+        languages {
+          language
+          level
+        }
+        inventory {
+          name
+          amount
+          location
+        }
+        poisons {
+          name
+          amount
+        }
+        notes
+        armour {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          weight
+          movementPreventionValue
+          damageReductionValue
+          price
+          createdAt
+          updatedAt
+        }
+        armourMastery
+        shield {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          combatValues {
+            initiation
+            offence
+            defence
+            aiming
+          }
+          movementPreventionValue
+          weight
+          price
+          damage {
+            dice
+            iterationCount
+            modifier
+          }
+          attacksPerTurn
+          createdAt
+          updatedAt
+        }
+        shieldMastery
+        weapons {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            mastery
+            inHand
+            breakWeapon
+            disarm
+            arrowCount
+            specialProjectileCount
+            aim
+            horseback
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        skills {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            skill {
+              id
+              percentageSkill
+              skillGroupId
+              basicCost
+              masterCost
+              createdAt
+              updatedAt
+            }
+            mastery
+            percentageValue
+            skillPointsUsed
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        companions {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            name
+            type
+            health {
+              baseVitality
+              vitalityModifier
+              baseHitPoints
+              hitPointModifier
+            }
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              dice
+              iterationCount
+              modifier
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            maxDistance
+            maxLoad
+            badHabit
+            specialAbilities
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        magicalItems {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            magicalItemId
+            magicalItem {
+              id
+              manaCost
+              duration
+              price
+              createdAt
+              updatedAt
+            }
+            location
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       weapon {
         id
         descriptions {
@@ -2216,6 +4792,470 @@ export const onUpdateWeaponAssignment = /* GraphQL */ `
     onUpdateWeaponAssignment(owner: $owner) {
       id
       characterId
+      character {
+        id
+        name
+        playerCharacter
+        startDate
+        dungeonMaster
+        owner
+        basicInfo {
+          image {
+            bucket
+            region
+            key
+          }
+          sex
+          height
+          weight
+          hair
+          eyes
+          age
+          visibleAge
+          identifier
+          family
+          attire
+          personalityTraits
+          specialAbilities
+          likes
+          dislikes
+          fears
+          companions
+          enemies
+          fame
+          religion
+          country
+          school
+          holySymbol {
+            bucket
+            region
+            key
+          }
+          coatOfArms {
+            bucket
+            region
+            key
+          }
+        }
+        abilities {
+          strength
+          agility
+          dexterity
+          stamina
+          health
+          beauty
+          intelligence
+          willpower
+          astral
+        }
+        health {
+          vitality {
+            current
+            max
+          }
+          baseVitality
+          vitalityModifier
+          hitPoints {
+            current
+            max
+          }
+          baseHitPoints
+          hitPointModifier
+          hitPointsPerLevel {
+            dice
+            iterationCount
+            modifier
+          }
+        }
+        class {
+          id
+          mainClassId
+          mainClass {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            createdAt
+            updatedAt
+          }
+          descriptions {
+            locale
+            title
+            description
+          }
+          magicUser
+          createdAt
+          updatedAt
+        }
+        subclass
+        specialisation
+        race {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          playable
+          createdAt
+          updatedAt
+        }
+        personality {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          createdAt
+          updatedAt
+        }
+        level {
+          currentLevel
+          currentExperience
+          experienceForNextLevel
+        }
+        psiUser
+        psiSchool {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          basePsiPoints
+          psiPointsPerLevel
+          createdAt
+          updatedAt
+        }
+        psiLevel
+        psiPoints {
+          current
+          max
+        }
+        spellResistance {
+          astral {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+          mental {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+        }
+        magicUser
+        magicalAbility {
+          notes
+          manaPoints {
+            current
+            max
+          }
+          manaPointsPerLevel
+          modifiers
+          manaPointsStoredElsehwere
+          rechargingMethod
+        }
+        baseCombatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        spentCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        otherCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        combatValueModifiersPerLevel
+        mandatoryCombatValueModifierDistribution
+        wallet {
+          money
+          mithrill
+          gemstones
+          misc
+        }
+        skillPoints {
+          base
+          current
+          perLevel
+          intelligence
+          dexterity
+        }
+        languages {
+          language
+          level
+        }
+        inventory {
+          name
+          amount
+          location
+        }
+        poisons {
+          name
+          amount
+        }
+        notes
+        armour {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          weight
+          movementPreventionValue
+          damageReductionValue
+          price
+          createdAt
+          updatedAt
+        }
+        armourMastery
+        shield {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          combatValues {
+            initiation
+            offence
+            defence
+            aiming
+          }
+          movementPreventionValue
+          weight
+          price
+          damage {
+            dice
+            iterationCount
+            modifier
+          }
+          attacksPerTurn
+          createdAt
+          updatedAt
+        }
+        shieldMastery
+        weapons {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            mastery
+            inHand
+            breakWeapon
+            disarm
+            arrowCount
+            specialProjectileCount
+            aim
+            horseback
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        skills {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            skill {
+              id
+              percentageSkill
+              skillGroupId
+              basicCost
+              masterCost
+              createdAt
+              updatedAt
+            }
+            mastery
+            percentageValue
+            skillPointsUsed
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        companions {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            name
+            type
+            health {
+              baseVitality
+              vitalityModifier
+              baseHitPoints
+              hitPointModifier
+            }
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              dice
+              iterationCount
+              modifier
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            maxDistance
+            maxLoad
+            badHabit
+            specialAbilities
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        magicalItems {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            magicalItemId
+            magicalItem {
+              id
+              manaCost
+              duration
+              price
+              createdAt
+              updatedAt
+            }
+            location
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       weapon {
         id
         descriptions {
@@ -2274,6 +5314,470 @@ export const onDeleteWeaponAssignment = /* GraphQL */ `
     onDeleteWeaponAssignment(owner: $owner) {
       id
       characterId
+      character {
+        id
+        name
+        playerCharacter
+        startDate
+        dungeonMaster
+        owner
+        basicInfo {
+          image {
+            bucket
+            region
+            key
+          }
+          sex
+          height
+          weight
+          hair
+          eyes
+          age
+          visibleAge
+          identifier
+          family
+          attire
+          personalityTraits
+          specialAbilities
+          likes
+          dislikes
+          fears
+          companions
+          enemies
+          fame
+          religion
+          country
+          school
+          holySymbol {
+            bucket
+            region
+            key
+          }
+          coatOfArms {
+            bucket
+            region
+            key
+          }
+        }
+        abilities {
+          strength
+          agility
+          dexterity
+          stamina
+          health
+          beauty
+          intelligence
+          willpower
+          astral
+        }
+        health {
+          vitality {
+            current
+            max
+          }
+          baseVitality
+          vitalityModifier
+          hitPoints {
+            current
+            max
+          }
+          baseHitPoints
+          hitPointModifier
+          hitPointsPerLevel {
+            dice
+            iterationCount
+            modifier
+          }
+        }
+        class {
+          id
+          mainClassId
+          mainClass {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            createdAt
+            updatedAt
+          }
+          descriptions {
+            locale
+            title
+            description
+          }
+          magicUser
+          createdAt
+          updatedAt
+        }
+        subclass
+        specialisation
+        race {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          playable
+          createdAt
+          updatedAt
+        }
+        personality {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          createdAt
+          updatedAt
+        }
+        level {
+          currentLevel
+          currentExperience
+          experienceForNextLevel
+        }
+        psiUser
+        psiSchool {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          basePsiPoints
+          psiPointsPerLevel
+          createdAt
+          updatedAt
+        }
+        psiLevel
+        psiPoints {
+          current
+          max
+        }
+        spellResistance {
+          astral {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+          mental {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+        }
+        magicUser
+        magicalAbility {
+          notes
+          manaPoints {
+            current
+            max
+          }
+          manaPointsPerLevel
+          modifiers
+          manaPointsStoredElsehwere
+          rechargingMethod
+        }
+        baseCombatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        spentCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        otherCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        combatValueModifiersPerLevel
+        mandatoryCombatValueModifierDistribution
+        wallet {
+          money
+          mithrill
+          gemstones
+          misc
+        }
+        skillPoints {
+          base
+          current
+          perLevel
+          intelligence
+          dexterity
+        }
+        languages {
+          language
+          level
+        }
+        inventory {
+          name
+          amount
+          location
+        }
+        poisons {
+          name
+          amount
+        }
+        notes
+        armour {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          weight
+          movementPreventionValue
+          damageReductionValue
+          price
+          createdAt
+          updatedAt
+        }
+        armourMastery
+        shield {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          combatValues {
+            initiation
+            offence
+            defence
+            aiming
+          }
+          movementPreventionValue
+          weight
+          price
+          damage {
+            dice
+            iterationCount
+            modifier
+          }
+          attacksPerTurn
+          createdAt
+          updatedAt
+        }
+        shieldMastery
+        weapons {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            mastery
+            inHand
+            breakWeapon
+            disarm
+            arrowCount
+            specialProjectileCount
+            aim
+            horseback
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        skills {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            skill {
+              id
+              percentageSkill
+              skillGroupId
+              basicCost
+              masterCost
+              createdAt
+              updatedAt
+            }
+            mastery
+            percentageValue
+            skillPointsUsed
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        companions {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            name
+            type
+            health {
+              baseVitality
+              vitalityModifier
+              baseHitPoints
+              hitPointModifier
+            }
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              dice
+              iterationCount
+              modifier
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            maxDistance
+            maxLoad
+            badHabit
+            specialAbilities
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        magicalItems {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            magicalItemId
+            magicalItem {
+              id
+              manaCost
+              duration
+              price
+              createdAt
+              updatedAt
+            }
+            location
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       weapon {
         id
         descriptions {
@@ -2332,6 +5836,470 @@ export const onCreateSkillAssignment = /* GraphQL */ `
     onCreateSkillAssignment(owner: $owner) {
       id
       characterId
+      character {
+        id
+        name
+        playerCharacter
+        startDate
+        dungeonMaster
+        owner
+        basicInfo {
+          image {
+            bucket
+            region
+            key
+          }
+          sex
+          height
+          weight
+          hair
+          eyes
+          age
+          visibleAge
+          identifier
+          family
+          attire
+          personalityTraits
+          specialAbilities
+          likes
+          dislikes
+          fears
+          companions
+          enemies
+          fame
+          religion
+          country
+          school
+          holySymbol {
+            bucket
+            region
+            key
+          }
+          coatOfArms {
+            bucket
+            region
+            key
+          }
+        }
+        abilities {
+          strength
+          agility
+          dexterity
+          stamina
+          health
+          beauty
+          intelligence
+          willpower
+          astral
+        }
+        health {
+          vitality {
+            current
+            max
+          }
+          baseVitality
+          vitalityModifier
+          hitPoints {
+            current
+            max
+          }
+          baseHitPoints
+          hitPointModifier
+          hitPointsPerLevel {
+            dice
+            iterationCount
+            modifier
+          }
+        }
+        class {
+          id
+          mainClassId
+          mainClass {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            createdAt
+            updatedAt
+          }
+          descriptions {
+            locale
+            title
+            description
+          }
+          magicUser
+          createdAt
+          updatedAt
+        }
+        subclass
+        specialisation
+        race {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          playable
+          createdAt
+          updatedAt
+        }
+        personality {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          createdAt
+          updatedAt
+        }
+        level {
+          currentLevel
+          currentExperience
+          experienceForNextLevel
+        }
+        psiUser
+        psiSchool {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          basePsiPoints
+          psiPointsPerLevel
+          createdAt
+          updatedAt
+        }
+        psiLevel
+        psiPoints {
+          current
+          max
+        }
+        spellResistance {
+          astral {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+          mental {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+        }
+        magicUser
+        magicalAbility {
+          notes
+          manaPoints {
+            current
+            max
+          }
+          manaPointsPerLevel
+          modifiers
+          manaPointsStoredElsehwere
+          rechargingMethod
+        }
+        baseCombatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        spentCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        otherCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        combatValueModifiersPerLevel
+        mandatoryCombatValueModifierDistribution
+        wallet {
+          money
+          mithrill
+          gemstones
+          misc
+        }
+        skillPoints {
+          base
+          current
+          perLevel
+          intelligence
+          dexterity
+        }
+        languages {
+          language
+          level
+        }
+        inventory {
+          name
+          amount
+          location
+        }
+        poisons {
+          name
+          amount
+        }
+        notes
+        armour {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          weight
+          movementPreventionValue
+          damageReductionValue
+          price
+          createdAt
+          updatedAt
+        }
+        armourMastery
+        shield {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          combatValues {
+            initiation
+            offence
+            defence
+            aiming
+          }
+          movementPreventionValue
+          weight
+          price
+          damage {
+            dice
+            iterationCount
+            modifier
+          }
+          attacksPerTurn
+          createdAt
+          updatedAt
+        }
+        shieldMastery
+        weapons {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            mastery
+            inHand
+            breakWeapon
+            disarm
+            arrowCount
+            specialProjectileCount
+            aim
+            horseback
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        skills {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            skill {
+              id
+              percentageSkill
+              skillGroupId
+              basicCost
+              masterCost
+              createdAt
+              updatedAt
+            }
+            mastery
+            percentageValue
+            skillPointsUsed
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        companions {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            name
+            type
+            health {
+              baseVitality
+              vitalityModifier
+              baseHitPoints
+              hitPointModifier
+            }
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              dice
+              iterationCount
+              modifier
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            maxDistance
+            maxLoad
+            badHabit
+            specialAbilities
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        magicalItems {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            magicalItemId
+            magicalItem {
+              id
+              manaCost
+              duration
+              price
+              createdAt
+              updatedAt
+            }
+            location
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       skill {
         id
         descriptions {
@@ -2372,6 +6340,470 @@ export const onUpdateSkillAssignment = /* GraphQL */ `
     onUpdateSkillAssignment(owner: $owner) {
       id
       characterId
+      character {
+        id
+        name
+        playerCharacter
+        startDate
+        dungeonMaster
+        owner
+        basicInfo {
+          image {
+            bucket
+            region
+            key
+          }
+          sex
+          height
+          weight
+          hair
+          eyes
+          age
+          visibleAge
+          identifier
+          family
+          attire
+          personalityTraits
+          specialAbilities
+          likes
+          dislikes
+          fears
+          companions
+          enemies
+          fame
+          religion
+          country
+          school
+          holySymbol {
+            bucket
+            region
+            key
+          }
+          coatOfArms {
+            bucket
+            region
+            key
+          }
+        }
+        abilities {
+          strength
+          agility
+          dexterity
+          stamina
+          health
+          beauty
+          intelligence
+          willpower
+          astral
+        }
+        health {
+          vitality {
+            current
+            max
+          }
+          baseVitality
+          vitalityModifier
+          hitPoints {
+            current
+            max
+          }
+          baseHitPoints
+          hitPointModifier
+          hitPointsPerLevel {
+            dice
+            iterationCount
+            modifier
+          }
+        }
+        class {
+          id
+          mainClassId
+          mainClass {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            createdAt
+            updatedAt
+          }
+          descriptions {
+            locale
+            title
+            description
+          }
+          magicUser
+          createdAt
+          updatedAt
+        }
+        subclass
+        specialisation
+        race {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          playable
+          createdAt
+          updatedAt
+        }
+        personality {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          createdAt
+          updatedAt
+        }
+        level {
+          currentLevel
+          currentExperience
+          experienceForNextLevel
+        }
+        psiUser
+        psiSchool {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          basePsiPoints
+          psiPointsPerLevel
+          createdAt
+          updatedAt
+        }
+        psiLevel
+        psiPoints {
+          current
+          max
+        }
+        spellResistance {
+          astral {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+          mental {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+        }
+        magicUser
+        magicalAbility {
+          notes
+          manaPoints {
+            current
+            max
+          }
+          manaPointsPerLevel
+          modifiers
+          manaPointsStoredElsehwere
+          rechargingMethod
+        }
+        baseCombatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        spentCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        otherCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        combatValueModifiersPerLevel
+        mandatoryCombatValueModifierDistribution
+        wallet {
+          money
+          mithrill
+          gemstones
+          misc
+        }
+        skillPoints {
+          base
+          current
+          perLevel
+          intelligence
+          dexterity
+        }
+        languages {
+          language
+          level
+        }
+        inventory {
+          name
+          amount
+          location
+        }
+        poisons {
+          name
+          amount
+        }
+        notes
+        armour {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          weight
+          movementPreventionValue
+          damageReductionValue
+          price
+          createdAt
+          updatedAt
+        }
+        armourMastery
+        shield {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          combatValues {
+            initiation
+            offence
+            defence
+            aiming
+          }
+          movementPreventionValue
+          weight
+          price
+          damage {
+            dice
+            iterationCount
+            modifier
+          }
+          attacksPerTurn
+          createdAt
+          updatedAt
+        }
+        shieldMastery
+        weapons {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            mastery
+            inHand
+            breakWeapon
+            disarm
+            arrowCount
+            specialProjectileCount
+            aim
+            horseback
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        skills {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            skill {
+              id
+              percentageSkill
+              skillGroupId
+              basicCost
+              masterCost
+              createdAt
+              updatedAt
+            }
+            mastery
+            percentageValue
+            skillPointsUsed
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        companions {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            name
+            type
+            health {
+              baseVitality
+              vitalityModifier
+              baseHitPoints
+              hitPointModifier
+            }
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              dice
+              iterationCount
+              modifier
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            maxDistance
+            maxLoad
+            badHabit
+            specialAbilities
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        magicalItems {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            magicalItemId
+            magicalItem {
+              id
+              manaCost
+              duration
+              price
+              createdAt
+              updatedAt
+            }
+            location
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       skill {
         id
         descriptions {
@@ -2412,6 +6844,470 @@ export const onDeleteSkillAssignment = /* GraphQL */ `
     onDeleteSkillAssignment(owner: $owner) {
       id
       characterId
+      character {
+        id
+        name
+        playerCharacter
+        startDate
+        dungeonMaster
+        owner
+        basicInfo {
+          image {
+            bucket
+            region
+            key
+          }
+          sex
+          height
+          weight
+          hair
+          eyes
+          age
+          visibleAge
+          identifier
+          family
+          attire
+          personalityTraits
+          specialAbilities
+          likes
+          dislikes
+          fears
+          companions
+          enemies
+          fame
+          religion
+          country
+          school
+          holySymbol {
+            bucket
+            region
+            key
+          }
+          coatOfArms {
+            bucket
+            region
+            key
+          }
+        }
+        abilities {
+          strength
+          agility
+          dexterity
+          stamina
+          health
+          beauty
+          intelligence
+          willpower
+          astral
+        }
+        health {
+          vitality {
+            current
+            max
+          }
+          baseVitality
+          vitalityModifier
+          hitPoints {
+            current
+            max
+          }
+          baseHitPoints
+          hitPointModifier
+          hitPointsPerLevel {
+            dice
+            iterationCount
+            modifier
+          }
+        }
+        class {
+          id
+          mainClassId
+          mainClass {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            createdAt
+            updatedAt
+          }
+          descriptions {
+            locale
+            title
+            description
+          }
+          magicUser
+          createdAt
+          updatedAt
+        }
+        subclass
+        specialisation
+        race {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          playable
+          createdAt
+          updatedAt
+        }
+        personality {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          createdAt
+          updatedAt
+        }
+        level {
+          currentLevel
+          currentExperience
+          experienceForNextLevel
+        }
+        psiUser
+        psiSchool {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          basePsiPoints
+          psiPointsPerLevel
+          createdAt
+          updatedAt
+        }
+        psiLevel
+        psiPoints {
+          current
+          max
+        }
+        spellResistance {
+          astral {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+          mental {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+        }
+        magicUser
+        magicalAbility {
+          notes
+          manaPoints {
+            current
+            max
+          }
+          manaPointsPerLevel
+          modifiers
+          manaPointsStoredElsehwere
+          rechargingMethod
+        }
+        baseCombatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        spentCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        otherCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        combatValueModifiersPerLevel
+        mandatoryCombatValueModifierDistribution
+        wallet {
+          money
+          mithrill
+          gemstones
+          misc
+        }
+        skillPoints {
+          base
+          current
+          perLevel
+          intelligence
+          dexterity
+        }
+        languages {
+          language
+          level
+        }
+        inventory {
+          name
+          amount
+          location
+        }
+        poisons {
+          name
+          amount
+        }
+        notes
+        armour {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          weight
+          movementPreventionValue
+          damageReductionValue
+          price
+          createdAt
+          updatedAt
+        }
+        armourMastery
+        shield {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          combatValues {
+            initiation
+            offence
+            defence
+            aiming
+          }
+          movementPreventionValue
+          weight
+          price
+          damage {
+            dice
+            iterationCount
+            modifier
+          }
+          attacksPerTurn
+          createdAt
+          updatedAt
+        }
+        shieldMastery
+        weapons {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            mastery
+            inHand
+            breakWeapon
+            disarm
+            arrowCount
+            specialProjectileCount
+            aim
+            horseback
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        skills {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            skill {
+              id
+              percentageSkill
+              skillGroupId
+              basicCost
+              masterCost
+              createdAt
+              updatedAt
+            }
+            mastery
+            percentageValue
+            skillPointsUsed
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        companions {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            name
+            type
+            health {
+              baseVitality
+              vitalityModifier
+              baseHitPoints
+              hitPointModifier
+            }
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              dice
+              iterationCount
+              modifier
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            maxDistance
+            maxLoad
+            badHabit
+            specialAbilities
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        magicalItems {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            magicalItemId
+            magicalItem {
+              id
+              manaCost
+              duration
+              price
+              createdAt
+              updatedAt
+            }
+            location
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       skill {
         id
         descriptions {
@@ -2452,6 +7348,470 @@ export const onCreateCharacterCompanion = /* GraphQL */ `
     onCreateCharacterCompanion(owner: $owner) {
       id
       characterId
+      character {
+        id
+        name
+        playerCharacter
+        startDate
+        dungeonMaster
+        owner
+        basicInfo {
+          image {
+            bucket
+            region
+            key
+          }
+          sex
+          height
+          weight
+          hair
+          eyes
+          age
+          visibleAge
+          identifier
+          family
+          attire
+          personalityTraits
+          specialAbilities
+          likes
+          dislikes
+          fears
+          companions
+          enemies
+          fame
+          religion
+          country
+          school
+          holySymbol {
+            bucket
+            region
+            key
+          }
+          coatOfArms {
+            bucket
+            region
+            key
+          }
+        }
+        abilities {
+          strength
+          agility
+          dexterity
+          stamina
+          health
+          beauty
+          intelligence
+          willpower
+          astral
+        }
+        health {
+          vitality {
+            current
+            max
+          }
+          baseVitality
+          vitalityModifier
+          hitPoints {
+            current
+            max
+          }
+          baseHitPoints
+          hitPointModifier
+          hitPointsPerLevel {
+            dice
+            iterationCount
+            modifier
+          }
+        }
+        class {
+          id
+          mainClassId
+          mainClass {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            createdAt
+            updatedAt
+          }
+          descriptions {
+            locale
+            title
+            description
+          }
+          magicUser
+          createdAt
+          updatedAt
+        }
+        subclass
+        specialisation
+        race {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          playable
+          createdAt
+          updatedAt
+        }
+        personality {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          createdAt
+          updatedAt
+        }
+        level {
+          currentLevel
+          currentExperience
+          experienceForNextLevel
+        }
+        psiUser
+        psiSchool {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          basePsiPoints
+          psiPointsPerLevel
+          createdAt
+          updatedAt
+        }
+        psiLevel
+        psiPoints {
+          current
+          max
+        }
+        spellResistance {
+          astral {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+          mental {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+        }
+        magicUser
+        magicalAbility {
+          notes
+          manaPoints {
+            current
+            max
+          }
+          manaPointsPerLevel
+          modifiers
+          manaPointsStoredElsehwere
+          rechargingMethod
+        }
+        baseCombatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        spentCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        otherCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        combatValueModifiersPerLevel
+        mandatoryCombatValueModifierDistribution
+        wallet {
+          money
+          mithrill
+          gemstones
+          misc
+        }
+        skillPoints {
+          base
+          current
+          perLevel
+          intelligence
+          dexterity
+        }
+        languages {
+          language
+          level
+        }
+        inventory {
+          name
+          amount
+          location
+        }
+        poisons {
+          name
+          amount
+        }
+        notes
+        armour {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          weight
+          movementPreventionValue
+          damageReductionValue
+          price
+          createdAt
+          updatedAt
+        }
+        armourMastery
+        shield {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          combatValues {
+            initiation
+            offence
+            defence
+            aiming
+          }
+          movementPreventionValue
+          weight
+          price
+          damage {
+            dice
+            iterationCount
+            modifier
+          }
+          attacksPerTurn
+          createdAt
+          updatedAt
+        }
+        shieldMastery
+        weapons {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            mastery
+            inHand
+            breakWeapon
+            disarm
+            arrowCount
+            specialProjectileCount
+            aim
+            horseback
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        skills {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            skill {
+              id
+              percentageSkill
+              skillGroupId
+              basicCost
+              masterCost
+              createdAt
+              updatedAt
+            }
+            mastery
+            percentageValue
+            skillPointsUsed
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        companions {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            name
+            type
+            health {
+              baseVitality
+              vitalityModifier
+              baseHitPoints
+              hitPointModifier
+            }
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              dice
+              iterationCount
+              modifier
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            maxDistance
+            maxLoad
+            badHabit
+            specialAbilities
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        magicalItems {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            magicalItemId
+            magicalItem {
+              id
+              manaCost
+              duration
+              price
+              createdAt
+              updatedAt
+            }
+            location
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       name
       type
       health {
@@ -2539,6 +7899,470 @@ export const onUpdateCharacterCompanion = /* GraphQL */ `
     onUpdateCharacterCompanion(owner: $owner) {
       id
       characterId
+      character {
+        id
+        name
+        playerCharacter
+        startDate
+        dungeonMaster
+        owner
+        basicInfo {
+          image {
+            bucket
+            region
+            key
+          }
+          sex
+          height
+          weight
+          hair
+          eyes
+          age
+          visibleAge
+          identifier
+          family
+          attire
+          personalityTraits
+          specialAbilities
+          likes
+          dislikes
+          fears
+          companions
+          enemies
+          fame
+          religion
+          country
+          school
+          holySymbol {
+            bucket
+            region
+            key
+          }
+          coatOfArms {
+            bucket
+            region
+            key
+          }
+        }
+        abilities {
+          strength
+          agility
+          dexterity
+          stamina
+          health
+          beauty
+          intelligence
+          willpower
+          astral
+        }
+        health {
+          vitality {
+            current
+            max
+          }
+          baseVitality
+          vitalityModifier
+          hitPoints {
+            current
+            max
+          }
+          baseHitPoints
+          hitPointModifier
+          hitPointsPerLevel {
+            dice
+            iterationCount
+            modifier
+          }
+        }
+        class {
+          id
+          mainClassId
+          mainClass {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            createdAt
+            updatedAt
+          }
+          descriptions {
+            locale
+            title
+            description
+          }
+          magicUser
+          createdAt
+          updatedAt
+        }
+        subclass
+        specialisation
+        race {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          playable
+          createdAt
+          updatedAt
+        }
+        personality {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          createdAt
+          updatedAt
+        }
+        level {
+          currentLevel
+          currentExperience
+          experienceForNextLevel
+        }
+        psiUser
+        psiSchool {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          basePsiPoints
+          psiPointsPerLevel
+          createdAt
+          updatedAt
+        }
+        psiLevel
+        psiPoints {
+          current
+          max
+        }
+        spellResistance {
+          astral {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+          mental {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+        }
+        magicUser
+        magicalAbility {
+          notes
+          manaPoints {
+            current
+            max
+          }
+          manaPointsPerLevel
+          modifiers
+          manaPointsStoredElsehwere
+          rechargingMethod
+        }
+        baseCombatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        spentCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        otherCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        combatValueModifiersPerLevel
+        mandatoryCombatValueModifierDistribution
+        wallet {
+          money
+          mithrill
+          gemstones
+          misc
+        }
+        skillPoints {
+          base
+          current
+          perLevel
+          intelligence
+          dexterity
+        }
+        languages {
+          language
+          level
+        }
+        inventory {
+          name
+          amount
+          location
+        }
+        poisons {
+          name
+          amount
+        }
+        notes
+        armour {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          weight
+          movementPreventionValue
+          damageReductionValue
+          price
+          createdAt
+          updatedAt
+        }
+        armourMastery
+        shield {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          combatValues {
+            initiation
+            offence
+            defence
+            aiming
+          }
+          movementPreventionValue
+          weight
+          price
+          damage {
+            dice
+            iterationCount
+            modifier
+          }
+          attacksPerTurn
+          createdAt
+          updatedAt
+        }
+        shieldMastery
+        weapons {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            mastery
+            inHand
+            breakWeapon
+            disarm
+            arrowCount
+            specialProjectileCount
+            aim
+            horseback
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        skills {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            skill {
+              id
+              percentageSkill
+              skillGroupId
+              basicCost
+              masterCost
+              createdAt
+              updatedAt
+            }
+            mastery
+            percentageValue
+            skillPointsUsed
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        companions {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            name
+            type
+            health {
+              baseVitality
+              vitalityModifier
+              baseHitPoints
+              hitPointModifier
+            }
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              dice
+              iterationCount
+              modifier
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            maxDistance
+            maxLoad
+            badHabit
+            specialAbilities
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        magicalItems {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            magicalItemId
+            magicalItem {
+              id
+              manaCost
+              duration
+              price
+              createdAt
+              updatedAt
+            }
+            location
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       name
       type
       health {
@@ -2626,6 +8450,470 @@ export const onDeleteCharacterCompanion = /* GraphQL */ `
     onDeleteCharacterCompanion(owner: $owner) {
       id
       characterId
+      character {
+        id
+        name
+        playerCharacter
+        startDate
+        dungeonMaster
+        owner
+        basicInfo {
+          image {
+            bucket
+            region
+            key
+          }
+          sex
+          height
+          weight
+          hair
+          eyes
+          age
+          visibleAge
+          identifier
+          family
+          attire
+          personalityTraits
+          specialAbilities
+          likes
+          dislikes
+          fears
+          companions
+          enemies
+          fame
+          religion
+          country
+          school
+          holySymbol {
+            bucket
+            region
+            key
+          }
+          coatOfArms {
+            bucket
+            region
+            key
+          }
+        }
+        abilities {
+          strength
+          agility
+          dexterity
+          stamina
+          health
+          beauty
+          intelligence
+          willpower
+          astral
+        }
+        health {
+          vitality {
+            current
+            max
+          }
+          baseVitality
+          vitalityModifier
+          hitPoints {
+            current
+            max
+          }
+          baseHitPoints
+          hitPointModifier
+          hitPointsPerLevel {
+            dice
+            iterationCount
+            modifier
+          }
+        }
+        class {
+          id
+          mainClassId
+          mainClass {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            createdAt
+            updatedAt
+          }
+          descriptions {
+            locale
+            title
+            description
+          }
+          magicUser
+          createdAt
+          updatedAt
+        }
+        subclass
+        specialisation
+        race {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          playable
+          createdAt
+          updatedAt
+        }
+        personality {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          createdAt
+          updatedAt
+        }
+        level {
+          currentLevel
+          currentExperience
+          experienceForNextLevel
+        }
+        psiUser
+        psiSchool {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          basePsiPoints
+          psiPointsPerLevel
+          createdAt
+          updatedAt
+        }
+        psiLevel
+        psiPoints {
+          current
+          max
+        }
+        spellResistance {
+          astral {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+          mental {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+        }
+        magicUser
+        magicalAbility {
+          notes
+          manaPoints {
+            current
+            max
+          }
+          manaPointsPerLevel
+          modifiers
+          manaPointsStoredElsehwere
+          rechargingMethod
+        }
+        baseCombatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        spentCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        otherCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        combatValueModifiersPerLevel
+        mandatoryCombatValueModifierDistribution
+        wallet {
+          money
+          mithrill
+          gemstones
+          misc
+        }
+        skillPoints {
+          base
+          current
+          perLevel
+          intelligence
+          dexterity
+        }
+        languages {
+          language
+          level
+        }
+        inventory {
+          name
+          amount
+          location
+        }
+        poisons {
+          name
+          amount
+        }
+        notes
+        armour {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          weight
+          movementPreventionValue
+          damageReductionValue
+          price
+          createdAt
+          updatedAt
+        }
+        armourMastery
+        shield {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          combatValues {
+            initiation
+            offence
+            defence
+            aiming
+          }
+          movementPreventionValue
+          weight
+          price
+          damage {
+            dice
+            iterationCount
+            modifier
+          }
+          attacksPerTurn
+          createdAt
+          updatedAt
+        }
+        shieldMastery
+        weapons {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            mastery
+            inHand
+            breakWeapon
+            disarm
+            arrowCount
+            specialProjectileCount
+            aim
+            horseback
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        skills {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            skill {
+              id
+              percentageSkill
+              skillGroupId
+              basicCost
+              masterCost
+              createdAt
+              updatedAt
+            }
+            mastery
+            percentageValue
+            skillPointsUsed
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        companions {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            name
+            type
+            health {
+              baseVitality
+              vitalityModifier
+              baseHitPoints
+              hitPointModifier
+            }
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              dice
+              iterationCount
+              modifier
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            maxDistance
+            maxLoad
+            badHabit
+            specialAbilities
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        magicalItems {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            magicalItemId
+            magicalItem {
+              id
+              manaCost
+              duration
+              price
+              createdAt
+              updatedAt
+            }
+            location
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       name
       type
       health {
@@ -2713,6 +9001,470 @@ export const onCreateMagicalItemAssignment = /* GraphQL */ `
     onCreateMagicalItemAssignment(owner: $owner) {
       id
       characterId
+      character {
+        id
+        name
+        playerCharacter
+        startDate
+        dungeonMaster
+        owner
+        basicInfo {
+          image {
+            bucket
+            region
+            key
+          }
+          sex
+          height
+          weight
+          hair
+          eyes
+          age
+          visibleAge
+          identifier
+          family
+          attire
+          personalityTraits
+          specialAbilities
+          likes
+          dislikes
+          fears
+          companions
+          enemies
+          fame
+          religion
+          country
+          school
+          holySymbol {
+            bucket
+            region
+            key
+          }
+          coatOfArms {
+            bucket
+            region
+            key
+          }
+        }
+        abilities {
+          strength
+          agility
+          dexterity
+          stamina
+          health
+          beauty
+          intelligence
+          willpower
+          astral
+        }
+        health {
+          vitality {
+            current
+            max
+          }
+          baseVitality
+          vitalityModifier
+          hitPoints {
+            current
+            max
+          }
+          baseHitPoints
+          hitPointModifier
+          hitPointsPerLevel {
+            dice
+            iterationCount
+            modifier
+          }
+        }
+        class {
+          id
+          mainClassId
+          mainClass {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            createdAt
+            updatedAt
+          }
+          descriptions {
+            locale
+            title
+            description
+          }
+          magicUser
+          createdAt
+          updatedAt
+        }
+        subclass
+        specialisation
+        race {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          playable
+          createdAt
+          updatedAt
+        }
+        personality {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          createdAt
+          updatedAt
+        }
+        level {
+          currentLevel
+          currentExperience
+          experienceForNextLevel
+        }
+        psiUser
+        psiSchool {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          basePsiPoints
+          psiPointsPerLevel
+          createdAt
+          updatedAt
+        }
+        psiLevel
+        psiPoints {
+          current
+          max
+        }
+        spellResistance {
+          astral {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+          mental {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+        }
+        magicUser
+        magicalAbility {
+          notes
+          manaPoints {
+            current
+            max
+          }
+          manaPointsPerLevel
+          modifiers
+          manaPointsStoredElsehwere
+          rechargingMethod
+        }
+        baseCombatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        spentCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        otherCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        combatValueModifiersPerLevel
+        mandatoryCombatValueModifierDistribution
+        wallet {
+          money
+          mithrill
+          gemstones
+          misc
+        }
+        skillPoints {
+          base
+          current
+          perLevel
+          intelligence
+          dexterity
+        }
+        languages {
+          language
+          level
+        }
+        inventory {
+          name
+          amount
+          location
+        }
+        poisons {
+          name
+          amount
+        }
+        notes
+        armour {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          weight
+          movementPreventionValue
+          damageReductionValue
+          price
+          createdAt
+          updatedAt
+        }
+        armourMastery
+        shield {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          combatValues {
+            initiation
+            offence
+            defence
+            aiming
+          }
+          movementPreventionValue
+          weight
+          price
+          damage {
+            dice
+            iterationCount
+            modifier
+          }
+          attacksPerTurn
+          createdAt
+          updatedAt
+        }
+        shieldMastery
+        weapons {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            mastery
+            inHand
+            breakWeapon
+            disarm
+            arrowCount
+            specialProjectileCount
+            aim
+            horseback
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        skills {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            skill {
+              id
+              percentageSkill
+              skillGroupId
+              basicCost
+              masterCost
+              createdAt
+              updatedAt
+            }
+            mastery
+            percentageValue
+            skillPointsUsed
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        companions {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            name
+            type
+            health {
+              baseVitality
+              vitalityModifier
+              baseHitPoints
+              hitPointModifier
+            }
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              dice
+              iterationCount
+              modifier
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            maxDistance
+            maxLoad
+            badHabit
+            specialAbilities
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        magicalItems {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            magicalItemId
+            magicalItem {
+              id
+              manaCost
+              duration
+              price
+              createdAt
+              updatedAt
+            }
+            location
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       magicalItemId
       magicalItem {
         id
@@ -2763,6 +9515,470 @@ export const onUpdateMagicalItemAssignment = /* GraphQL */ `
     onUpdateMagicalItemAssignment(owner: $owner) {
       id
       characterId
+      character {
+        id
+        name
+        playerCharacter
+        startDate
+        dungeonMaster
+        owner
+        basicInfo {
+          image {
+            bucket
+            region
+            key
+          }
+          sex
+          height
+          weight
+          hair
+          eyes
+          age
+          visibleAge
+          identifier
+          family
+          attire
+          personalityTraits
+          specialAbilities
+          likes
+          dislikes
+          fears
+          companions
+          enemies
+          fame
+          religion
+          country
+          school
+          holySymbol {
+            bucket
+            region
+            key
+          }
+          coatOfArms {
+            bucket
+            region
+            key
+          }
+        }
+        abilities {
+          strength
+          agility
+          dexterity
+          stamina
+          health
+          beauty
+          intelligence
+          willpower
+          astral
+        }
+        health {
+          vitality {
+            current
+            max
+          }
+          baseVitality
+          vitalityModifier
+          hitPoints {
+            current
+            max
+          }
+          baseHitPoints
+          hitPointModifier
+          hitPointsPerLevel {
+            dice
+            iterationCount
+            modifier
+          }
+        }
+        class {
+          id
+          mainClassId
+          mainClass {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            createdAt
+            updatedAt
+          }
+          descriptions {
+            locale
+            title
+            description
+          }
+          magicUser
+          createdAt
+          updatedAt
+        }
+        subclass
+        specialisation
+        race {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          playable
+          createdAt
+          updatedAt
+        }
+        personality {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          createdAt
+          updatedAt
+        }
+        level {
+          currentLevel
+          currentExperience
+          experienceForNextLevel
+        }
+        psiUser
+        psiSchool {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          basePsiPoints
+          psiPointsPerLevel
+          createdAt
+          updatedAt
+        }
+        psiLevel
+        psiPoints {
+          current
+          max
+        }
+        spellResistance {
+          astral {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+          mental {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+        }
+        magicUser
+        magicalAbility {
+          notes
+          manaPoints {
+            current
+            max
+          }
+          manaPointsPerLevel
+          modifiers
+          manaPointsStoredElsehwere
+          rechargingMethod
+        }
+        baseCombatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        spentCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        otherCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        combatValueModifiersPerLevel
+        mandatoryCombatValueModifierDistribution
+        wallet {
+          money
+          mithrill
+          gemstones
+          misc
+        }
+        skillPoints {
+          base
+          current
+          perLevel
+          intelligence
+          dexterity
+        }
+        languages {
+          language
+          level
+        }
+        inventory {
+          name
+          amount
+          location
+        }
+        poisons {
+          name
+          amount
+        }
+        notes
+        armour {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          weight
+          movementPreventionValue
+          damageReductionValue
+          price
+          createdAt
+          updatedAt
+        }
+        armourMastery
+        shield {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          combatValues {
+            initiation
+            offence
+            defence
+            aiming
+          }
+          movementPreventionValue
+          weight
+          price
+          damage {
+            dice
+            iterationCount
+            modifier
+          }
+          attacksPerTurn
+          createdAt
+          updatedAt
+        }
+        shieldMastery
+        weapons {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            mastery
+            inHand
+            breakWeapon
+            disarm
+            arrowCount
+            specialProjectileCount
+            aim
+            horseback
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        skills {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            skill {
+              id
+              percentageSkill
+              skillGroupId
+              basicCost
+              masterCost
+              createdAt
+              updatedAt
+            }
+            mastery
+            percentageValue
+            skillPointsUsed
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        companions {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            name
+            type
+            health {
+              baseVitality
+              vitalityModifier
+              baseHitPoints
+              hitPointModifier
+            }
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              dice
+              iterationCount
+              modifier
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            maxDistance
+            maxLoad
+            badHabit
+            specialAbilities
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        magicalItems {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            magicalItemId
+            magicalItem {
+              id
+              manaCost
+              duration
+              price
+              createdAt
+              updatedAt
+            }
+            location
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       magicalItemId
       magicalItem {
         id
@@ -2813,6 +10029,470 @@ export const onDeleteMagicalItemAssignment = /* GraphQL */ `
     onDeleteMagicalItemAssignment(owner: $owner) {
       id
       characterId
+      character {
+        id
+        name
+        playerCharacter
+        startDate
+        dungeonMaster
+        owner
+        basicInfo {
+          image {
+            bucket
+            region
+            key
+          }
+          sex
+          height
+          weight
+          hair
+          eyes
+          age
+          visibleAge
+          identifier
+          family
+          attire
+          personalityTraits
+          specialAbilities
+          likes
+          dislikes
+          fears
+          companions
+          enemies
+          fame
+          religion
+          country
+          school
+          holySymbol {
+            bucket
+            region
+            key
+          }
+          coatOfArms {
+            bucket
+            region
+            key
+          }
+        }
+        abilities {
+          strength
+          agility
+          dexterity
+          stamina
+          health
+          beauty
+          intelligence
+          willpower
+          astral
+        }
+        health {
+          vitality {
+            current
+            max
+          }
+          baseVitality
+          vitalityModifier
+          hitPoints {
+            current
+            max
+          }
+          baseHitPoints
+          hitPointModifier
+          hitPointsPerLevel {
+            dice
+            iterationCount
+            modifier
+          }
+        }
+        class {
+          id
+          mainClassId
+          mainClass {
+            id
+            type
+            descriptions {
+              locale
+              title
+              description
+            }
+            createdAt
+            updatedAt
+          }
+          descriptions {
+            locale
+            title
+            description
+          }
+          magicUser
+          createdAt
+          updatedAt
+        }
+        subclass
+        specialisation
+        race {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          playable
+          createdAt
+          updatedAt
+        }
+        personality {
+          id
+          type
+          descriptions {
+            locale
+            title
+            description
+          }
+          createdAt
+          updatedAt
+        }
+        level {
+          currentLevel
+          currentExperience
+          experienceForNextLevel
+        }
+        psiUser
+        psiSchool {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          basePsiPoints
+          psiPointsPerLevel
+          createdAt
+          updatedAt
+        }
+        psiLevel
+        psiPoints {
+          current
+          max
+        }
+        spellResistance {
+          astral {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+          mental {
+            staticShield
+            dynamicShield
+            innate
+            magical
+            modifier
+          }
+        }
+        magicUser
+        magicalAbility {
+          notes
+          manaPoints {
+            current
+            max
+          }
+          manaPointsPerLevel
+          modifiers
+          manaPointsStoredElsehwere
+          rechargingMethod
+        }
+        baseCombatValues {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        spentCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        otherCombatValueModifiers {
+          initiation
+          offence
+          defence
+          aiming
+        }
+        combatValueModifiersPerLevel
+        mandatoryCombatValueModifierDistribution
+        wallet {
+          money
+          mithrill
+          gemstones
+          misc
+        }
+        skillPoints {
+          base
+          current
+          perLevel
+          intelligence
+          dexterity
+        }
+        languages {
+          language
+          level
+        }
+        inventory {
+          name
+          amount
+          location
+        }
+        poisons {
+          name
+          amount
+        }
+        notes
+        armour {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          weight
+          movementPreventionValue
+          damageReductionValue
+          price
+          createdAt
+          updatedAt
+        }
+        armourMastery
+        shield {
+          id
+          descriptions {
+            locale
+            title
+            description
+          }
+          combatValues {
+            initiation
+            offence
+            defence
+            aiming
+          }
+          movementPreventionValue
+          weight
+          price
+          damage {
+            dice
+            iterationCount
+            modifier
+          }
+          attacksPerTurn
+          createdAt
+          updatedAt
+        }
+        shieldMastery
+        weapons {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            mastery
+            inHand
+            breakWeapon
+            disarm
+            arrowCount
+            specialProjectileCount
+            aim
+            horseback
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        skills {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            skill {
+              id
+              percentageSkill
+              skillGroupId
+              basicCost
+              masterCost
+              createdAt
+              updatedAt
+            }
+            mastery
+            percentageValue
+            skillPointsUsed
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        companions {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            name
+            type
+            health {
+              baseVitality
+              vitalityModifier
+              baseHitPoints
+              hitPointModifier
+            }
+            combatValues {
+              initiation
+              offence
+              defence
+              aiming
+            }
+            damage {
+              dice
+              iterationCount
+              modifier
+            }
+            weapon {
+              id
+              weaponTypeId
+              weight
+              price
+              attackRange
+              attacksPerTurn
+              ranged
+              createdAt
+              updatedAt
+            }
+            attacksPerTurn
+            maxDistance
+            maxLoad
+            badHabit
+            specialAbilities
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        magicalItems {
+          items {
+            id
+            characterId
+            character {
+              id
+              name
+              playerCharacter
+              startDate
+              dungeonMaster
+              owner
+              subclass
+              specialisation
+              psiUser
+              psiLevel
+              magicUser
+              combatValueModifiersPerLevel
+              mandatoryCombatValueModifierDistribution
+              notes
+              armourMastery
+              shieldMastery
+              createdAt
+              updatedAt
+            }
+            magicalItemId
+            magicalItem {
+              id
+              manaCost
+              duration
+              price
+              createdAt
+              updatedAt
+            }
+            location
+            notes
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       magicalItemId
       magicalItem {
         id
