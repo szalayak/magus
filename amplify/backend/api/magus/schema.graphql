@@ -411,9 +411,15 @@ type Character
 type WeaponAssignment
   @model
   @key(name: "byCharacter", fields: ["characterId"])
-  @auth(rules: [{ allow: owner }]) {
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: private, operations: [read] }
+    ]
+  ) {
   id: ID!
   characterId: ID!
+  character: Character @connection(fields: ["characterId"])
   weapon: Weapon @connection
   mastery: Mastery
   inHand: Boolean
@@ -424,19 +430,27 @@ type WeaponAssignment
   aim: Mastery
   horseback: Mastery
   notes: String
+  owner: String
 }
 
 type SkillAssignment
   @model
   @key(name: "byCharacter", fields: ["characterId"])
-  @auth(rules: [{ allow: owner }]) {
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: private, operations: [read] }
+    ]
+  ) {
   id: ID!
   characterId: ID!
+  character: Character @connection(fields: ["characterId"])
   skill: Skill @connection
   mastery: Mastery
   percentageValue: Int
   skillPointsUsed: Int
   notes: String
+  owner: String
 }
 
 enum CompanionType {
@@ -448,9 +462,15 @@ enum CompanionType {
 type CharacterCompanion
   @model
   @key(name: "byCharacter", fields: ["characterId"])
-  @auth(rules: [{ allow: owner }]) {
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: private, operations: [read] }
+    ]
+  ) {
   id: ID!
   characterId: ID!
+  character: Character @connection(fields: ["characterId"])
   name: String!
   type: CompanionType!
   health: HealthInformation
@@ -463,18 +483,26 @@ type CharacterCompanion
   badHabit: String
   specialAbilities: String
   notes: String
+  owner: String
 }
 
 type MagicalItemAssignment
   @model
   @key(name: "byCharacter", fields: ["characterId"])
-  @auth(rules: [{ allow: owner }]) {
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: private, operations: [read] }
+    ]
+  ) {
   id: ID!
   characterId: ID!
+  character: Character @connection(fields: ["characterId"])
   magicalItemId: ID!
   magicalItem: MagicalItem! @connection(fields: ["magicalItemId"])
   location: String
   notes: String
+  owner: String
 }
 
 type Query {
