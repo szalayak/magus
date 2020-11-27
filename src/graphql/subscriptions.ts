@@ -4266,7 +4266,7 @@ export const onDeleteCharacter = /* GraphQL */ `
   }
 `;
 export const onCreateWeaponAssignment = /* GraphQL */ `
-  subscription OnCreateWeaponAssignment($owner: String!) {
+  subscription OnCreateWeaponAssignment($owner: String) {
     onCreateWeaponAssignment(owner: $owner) {
       id
       characterId
@@ -4788,7 +4788,7 @@ export const onCreateWeaponAssignment = /* GraphQL */ `
   }
 `;
 export const onUpdateWeaponAssignment = /* GraphQL */ `
-  subscription OnUpdateWeaponAssignment($owner: String!) {
+  subscription OnUpdateWeaponAssignment($owner: String) {
     onUpdateWeaponAssignment(owner: $owner) {
       id
       characterId
@@ -5310,7 +5310,7 @@ export const onUpdateWeaponAssignment = /* GraphQL */ `
   }
 `;
 export const onDeleteWeaponAssignment = /* GraphQL */ `
-  subscription OnDeleteWeaponAssignment($owner: String!) {
+  subscription OnDeleteWeaponAssignment($owner: String) {
     onDeleteWeaponAssignment(owner: $owner) {
       id
       characterId
@@ -5832,7 +5832,7 @@ export const onDeleteWeaponAssignment = /* GraphQL */ `
   }
 `;
 export const onCreateSkillAssignment = /* GraphQL */ `
-  subscription OnCreateSkillAssignment($owner: String!) {
+  subscription OnCreateSkillAssignment($owner: String) {
     onCreateSkillAssignment(owner: $owner) {
       id
       characterId
@@ -6336,7 +6336,7 @@ export const onCreateSkillAssignment = /* GraphQL */ `
   }
 `;
 export const onUpdateSkillAssignment = /* GraphQL */ `
-  subscription OnUpdateSkillAssignment($owner: String!) {
+  subscription OnUpdateSkillAssignment($owner: String) {
     onUpdateSkillAssignment(owner: $owner) {
       id
       characterId
@@ -6840,7 +6840,7 @@ export const onUpdateSkillAssignment = /* GraphQL */ `
   }
 `;
 export const onDeleteSkillAssignment = /* GraphQL */ `
-  subscription OnDeleteSkillAssignment($owner: String!) {
+  subscription OnDeleteSkillAssignment($owner: String) {
     onDeleteSkillAssignment(owner: $owner) {
       id
       characterId
@@ -7344,7 +7344,7 @@ export const onDeleteSkillAssignment = /* GraphQL */ `
   }
 `;
 export const onCreateCharacterCompanion = /* GraphQL */ `
-  subscription OnCreateCharacterCompanion($owner: String!) {
+  subscription OnCreateCharacterCompanion($owner: String) {
     onCreateCharacterCompanion(owner: $owner) {
       id
       characterId
@@ -7895,7 +7895,7 @@ export const onCreateCharacterCompanion = /* GraphQL */ `
   }
 `;
 export const onUpdateCharacterCompanion = /* GraphQL */ `
-  subscription OnUpdateCharacterCompanion($owner: String!) {
+  subscription OnUpdateCharacterCompanion($owner: String) {
     onUpdateCharacterCompanion(owner: $owner) {
       id
       characterId
@@ -8446,7 +8446,7 @@ export const onUpdateCharacterCompanion = /* GraphQL */ `
   }
 `;
 export const onDeleteCharacterCompanion = /* GraphQL */ `
-  subscription OnDeleteCharacterCompanion($owner: String!) {
+  subscription OnDeleteCharacterCompanion($owner: String) {
     onDeleteCharacterCompanion(owner: $owner) {
       id
       characterId
@@ -8997,7 +8997,7 @@ export const onDeleteCharacterCompanion = /* GraphQL */ `
   }
 `;
 export const onCreateMagicalItemAssignment = /* GraphQL */ `
-  subscription OnCreateMagicalItemAssignment($owner: String!) {
+  subscription OnCreateMagicalItemAssignment($owner: String) {
     onCreateMagicalItemAssignment(owner: $owner) {
       id
       characterId
@@ -9511,7 +9511,7 @@ export const onCreateMagicalItemAssignment = /* GraphQL */ `
   }
 `;
 export const onUpdateMagicalItemAssignment = /* GraphQL */ `
-  subscription OnUpdateMagicalItemAssignment($owner: String!) {
+  subscription OnUpdateMagicalItemAssignment($owner: String) {
     onUpdateMagicalItemAssignment(owner: $owner) {
       id
       characterId
@@ -10025,7 +10025,7 @@ export const onUpdateMagicalItemAssignment = /* GraphQL */ `
   }
 `;
 export const onDeleteMagicalItemAssignment = /* GraphQL */ `
-  subscription OnDeleteMagicalItemAssignment($owner: String!) {
+  subscription OnDeleteMagicalItemAssignment($owner: String) {
     onDeleteMagicalItemAssignment(owner: $owner) {
       id
       characterId

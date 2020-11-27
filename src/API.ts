@@ -26014,7 +26014,7 @@ export type OnDeleteCharacterSubscription = {
 };
 
 export type OnCreateWeaponAssignmentSubscriptionVariables = {
-  owner: string,
+  owner?: string | null,
 };
 
 export type OnCreateWeaponAssignmentSubscription = {
@@ -26606,7 +26606,7 @@ export type OnCreateWeaponAssignmentSubscription = {
 };
 
 export type OnUpdateWeaponAssignmentSubscriptionVariables = {
-  owner: string,
+  owner?: string | null,
 };
 
 export type OnUpdateWeaponAssignmentSubscription = {
@@ -27198,7 +27198,7 @@ export type OnUpdateWeaponAssignmentSubscription = {
 };
 
 export type OnDeleteWeaponAssignmentSubscriptionVariables = {
-  owner: string,
+  owner?: string | null,
 };
 
 export type OnDeleteWeaponAssignmentSubscription = {
@@ -27790,7 +27790,7 @@ export type OnDeleteWeaponAssignmentSubscription = {
 };
 
 export type OnCreateSkillAssignmentSubscriptionVariables = {
-  owner: string,
+  owner?: string | null,
 };
 
 export type OnCreateSkillAssignmentSubscription = {
@@ -28362,7 +28362,7 @@ export type OnCreateSkillAssignmentSubscription = {
 };
 
 export type OnUpdateSkillAssignmentSubscriptionVariables = {
-  owner: string,
+  owner?: string | null,
 };
 
 export type OnUpdateSkillAssignmentSubscription = {
@@ -28934,7 +28934,7 @@ export type OnUpdateSkillAssignmentSubscription = {
 };
 
 export type OnDeleteSkillAssignmentSubscriptionVariables = {
-  owner: string,
+  owner?: string | null,
 };
 
 export type OnDeleteSkillAssignmentSubscription = {
@@ -29506,7 +29506,7 @@ export type OnDeleteSkillAssignmentSubscription = {
 };
 
 export type OnCreateCharacterCompanionSubscriptionVariables = {
-  owner: string,
+  owner?: string | null,
 };
 
 export type OnCreateCharacterCompanionSubscription = {
@@ -30133,7 +30133,7 @@ export type OnCreateCharacterCompanionSubscription = {
 };
 
 export type OnUpdateCharacterCompanionSubscriptionVariables = {
-  owner: string,
+  owner?: string | null,
 };
 
 export type OnUpdateCharacterCompanionSubscription = {
@@ -30760,7 +30760,7 @@ export type OnUpdateCharacterCompanionSubscription = {
 };
 
 export type OnDeleteCharacterCompanionSubscriptionVariables = {
-  owner: string,
+  owner?: string | null,
 };
 
 export type OnDeleteCharacterCompanionSubscription = {
@@ -31387,7 +31387,7 @@ export type OnDeleteCharacterCompanionSubscription = {
 };
 
 export type OnCreateMagicalItemAssignmentSubscriptionVariables = {
-  owner: string,
+  owner?: string | null,
 };
 
 export type OnCreateMagicalItemAssignmentSubscription = {
@@ -31971,7 +31971,7 @@ export type OnCreateMagicalItemAssignmentSubscription = {
 };
 
 export type OnUpdateMagicalItemAssignmentSubscriptionVariables = {
-  owner: string,
+  owner?: string | null,
 };
 
 export type OnUpdateMagicalItemAssignmentSubscription = {
@@ -32555,7 +32555,7 @@ export type OnUpdateMagicalItemAssignmentSubscription = {
 };
 
 export type OnDeleteMagicalItemAssignmentSubscriptionVariables = {
-  owner: string,
+  owner?: string | null,
 };
 
 export type OnDeleteMagicalItemAssignmentSubscription = {
