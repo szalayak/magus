@@ -1236,7 +1236,6 @@ export const onCreateCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -1446,7 +1445,6 @@ export const onCreateCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -1703,7 +1701,6 @@ export const onCreateCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -1912,7 +1909,6 @@ export const onCreateCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -2408,7 +2404,6 @@ export const onUpdateCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -2618,7 +2613,6 @@ export const onUpdateCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -2875,7 +2869,6 @@ export const onUpdateCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -3084,7 +3077,6 @@ export const onUpdateCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -3580,7 +3572,6 @@ export const onDeleteCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -3790,7 +3781,6 @@ export const onDeleteCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -4047,7 +4037,6 @@ export const onDeleteCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -4256,7 +4245,6 @@ export const onDeleteCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -4266,8 +4254,8 @@ export const onDeleteCharacter = /* GraphQL */ `
   }
 `;
 export const onCreateWeaponAssignment = /* GraphQL */ `
-  subscription OnCreateWeaponAssignment($owner: String) {
-    onCreateWeaponAssignment(owner: $owner) {
+  subscription OnCreateWeaponAssignment {
+    onCreateWeaponAssignment {
       id
       characterId
       character {
@@ -4577,7 +4565,6 @@ export const onCreateWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -4620,7 +4607,6 @@ export const onCreateWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -4686,7 +4672,6 @@ export const onCreateWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -4727,7 +4712,6 @@ export const onCreateWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -4783,13 +4767,12 @@ export const onCreateWeaponAssignment = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onUpdateWeaponAssignment = /* GraphQL */ `
-  subscription OnUpdateWeaponAssignment($owner: String) {
-    onUpdateWeaponAssignment(owner: $owner) {
+  subscription OnUpdateWeaponAssignment {
+    onUpdateWeaponAssignment {
       id
       characterId
       character {
@@ -5099,7 +5082,6 @@ export const onUpdateWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -5142,7 +5124,6 @@ export const onUpdateWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -5208,7 +5189,6 @@ export const onUpdateWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -5249,7 +5229,6 @@ export const onUpdateWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -5305,13 +5284,12 @@ export const onUpdateWeaponAssignment = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onDeleteWeaponAssignment = /* GraphQL */ `
-  subscription OnDeleteWeaponAssignment($owner: String) {
-    onDeleteWeaponAssignment(owner: $owner) {
+  subscription OnDeleteWeaponAssignment {
+    onDeleteWeaponAssignment {
       id
       characterId
       character {
@@ -5621,7 +5599,6 @@ export const onDeleteWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -5664,7 +5641,6 @@ export const onDeleteWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -5730,7 +5706,6 @@ export const onDeleteWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -5771,7 +5746,6 @@ export const onDeleteWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -5827,13 +5801,12 @@ export const onDeleteWeaponAssignment = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onCreateSkillAssignment = /* GraphQL */ `
-  subscription OnCreateSkillAssignment($owner: String) {
-    onCreateSkillAssignment(owner: $owner) {
+  subscription OnCreateSkillAssignment {
+    onCreateSkillAssignment {
       id
       characterId
       character {
@@ -6143,7 +6116,6 @@ export const onCreateSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -6186,7 +6158,6 @@ export const onCreateSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -6252,7 +6223,6 @@ export const onCreateSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -6293,7 +6263,6 @@ export const onCreateSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -6331,13 +6300,12 @@ export const onCreateSkillAssignment = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onUpdateSkillAssignment = /* GraphQL */ `
-  subscription OnUpdateSkillAssignment($owner: String) {
-    onUpdateSkillAssignment(owner: $owner) {
+  subscription OnUpdateSkillAssignment {
+    onUpdateSkillAssignment {
       id
       characterId
       character {
@@ -6647,7 +6615,6 @@ export const onUpdateSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -6690,7 +6657,6 @@ export const onUpdateSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -6756,7 +6722,6 @@ export const onUpdateSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -6797,7 +6762,6 @@ export const onUpdateSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -6835,13 +6799,12 @@ export const onUpdateSkillAssignment = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onDeleteSkillAssignment = /* GraphQL */ `
-  subscription OnDeleteSkillAssignment($owner: String) {
-    onDeleteSkillAssignment(owner: $owner) {
+  subscription OnDeleteSkillAssignment {
+    onDeleteSkillAssignment {
       id
       characterId
       character {
@@ -7151,7 +7114,6 @@ export const onDeleteSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -7194,7 +7156,6 @@ export const onDeleteSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -7260,7 +7221,6 @@ export const onDeleteSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -7301,7 +7261,6 @@ export const onDeleteSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -7339,13 +7298,12 @@ export const onDeleteSkillAssignment = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onCreateCharacterCompanion = /* GraphQL */ `
-  subscription OnCreateCharacterCompanion($owner: String) {
-    onCreateCharacterCompanion(owner: $owner) {
+  subscription OnCreateCharacterCompanion {
+    onCreateCharacterCompanion {
       id
       characterId
       character {
@@ -7655,7 +7613,6 @@ export const onCreateCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -7698,7 +7655,6 @@ export const onCreateCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -7764,7 +7720,6 @@ export const onCreateCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -7805,7 +7760,6 @@ export const onCreateCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -7890,13 +7844,12 @@ export const onCreateCharacterCompanion = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onUpdateCharacterCompanion = /* GraphQL */ `
-  subscription OnUpdateCharacterCompanion($owner: String) {
-    onUpdateCharacterCompanion(owner: $owner) {
+  subscription OnUpdateCharacterCompanion {
+    onUpdateCharacterCompanion {
       id
       characterId
       character {
@@ -8206,7 +8159,6 @@ export const onUpdateCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -8249,7 +8201,6 @@ export const onUpdateCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -8315,7 +8266,6 @@ export const onUpdateCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -8356,7 +8306,6 @@ export const onUpdateCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -8441,13 +8390,12 @@ export const onUpdateCharacterCompanion = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onDeleteCharacterCompanion = /* GraphQL */ `
-  subscription OnDeleteCharacterCompanion($owner: String) {
-    onDeleteCharacterCompanion(owner: $owner) {
+  subscription OnDeleteCharacterCompanion {
+    onDeleteCharacterCompanion {
       id
       characterId
       character {
@@ -8757,7 +8705,6 @@ export const onDeleteCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -8800,7 +8747,6 @@ export const onDeleteCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -8866,7 +8812,6 @@ export const onDeleteCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -8907,7 +8852,6 @@ export const onDeleteCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -8992,13 +8936,12 @@ export const onDeleteCharacterCompanion = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onCreateMagicalItemAssignment = /* GraphQL */ `
-  subscription OnCreateMagicalItemAssignment($owner: String) {
-    onCreateMagicalItemAssignment(owner: $owner) {
+  subscription OnCreateMagicalItemAssignment {
+    onCreateMagicalItemAssignment {
       id
       characterId
       character {
@@ -9308,7 +9251,6 @@ export const onCreateMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -9351,7 +9293,6 @@ export const onCreateMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -9417,7 +9358,6 @@ export const onCreateMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -9458,7 +9398,6 @@ export const onCreateMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -9506,13 +9445,12 @@ export const onCreateMagicalItemAssignment = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onUpdateMagicalItemAssignment = /* GraphQL */ `
-  subscription OnUpdateMagicalItemAssignment($owner: String) {
-    onUpdateMagicalItemAssignment(owner: $owner) {
+  subscription OnUpdateMagicalItemAssignment {
+    onUpdateMagicalItemAssignment {
       id
       characterId
       character {
@@ -9822,7 +9760,6 @@ export const onUpdateMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -9865,7 +9802,6 @@ export const onUpdateMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -9931,7 +9867,6 @@ export const onUpdateMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -9972,7 +9907,6 @@ export const onUpdateMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -10020,13 +9954,12 @@ export const onUpdateMagicalItemAssignment = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onDeleteMagicalItemAssignment = /* GraphQL */ `
-  subscription OnDeleteMagicalItemAssignment($owner: String) {
-    onDeleteMagicalItemAssignment(owner: $owner) {
+  subscription OnDeleteMagicalItemAssignment {
+    onDeleteMagicalItemAssignment {
       id
       characterId
       character {
@@ -10336,7 +10269,6 @@ export const onDeleteMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -10379,7 +10311,6 @@ export const onDeleteMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -10445,7 +10376,6 @@ export const onDeleteMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -10486,7 +10416,6 @@ export const onDeleteMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -10534,7 +10463,6 @@ export const onDeleteMagicalItemAssignment = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;

@@ -409,7 +409,7 @@ type Character
 }
 
 type WeaponAssignment
-  @model
+  @model(subscriptions: { level: public })
   @key(name: "byCharacter", fields: ["characterId"])
   @auth(
     rules: [
@@ -434,7 +434,7 @@ type WeaponAssignment
 }
 
 type SkillAssignment
-  @model
+  @model(subscriptions: { level: public })
   @key(name: "byCharacter", fields: ["characterId"])
   @auth(
     rules: [
@@ -460,7 +460,7 @@ enum CompanionType {
 }
 
 type CharacterCompanion
-  @model
+  @model(subscriptions: { level: public })
   @key(name: "byCharacter", fields: ["characterId"])
   @auth(
     rules: [
@@ -487,7 +487,7 @@ type CharacterCompanion
 }
 
 type MagicalItemAssignment
-  @model
+  @model(subscriptions: { level: public })
   @key(name: "byCharacter", fields: ["characterId"])
   @auth(
     rules: [

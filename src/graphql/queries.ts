@@ -1108,7 +1108,6 @@ export const getCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -1318,7 +1317,6 @@ export const getCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -1575,7 +1573,6 @@ export const getCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -1784,7 +1781,6 @@ export const getCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -2107,7 +2103,6 @@ export const listCharacters = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -2150,7 +2145,6 @@ export const listCharacters = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -2216,7 +2210,6 @@ export const listCharacters = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -2257,7 +2250,6 @@ export const listCharacters = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -2580,7 +2572,6 @@ export const getWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -2623,7 +2614,6 @@ export const getWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -2689,7 +2679,6 @@ export const getWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -2730,7 +2719,6 @@ export const getWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -2786,7 +2774,6 @@ export const getWeaponAssignment = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -3075,7 +3062,6 @@ export const listWeaponAssignments = /* GraphQL */ `
               notes
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -3089,7 +3075,6 @@ export const listWeaponAssignments = /* GraphQL */ `
               notes
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -3107,7 +3092,6 @@ export const listWeaponAssignments = /* GraphQL */ `
               notes
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -3120,7 +3104,6 @@ export const listWeaponAssignments = /* GraphQL */ `
               notes
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -3176,7 +3159,6 @@ export const listWeaponAssignments = /* GraphQL */ `
         notes
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -3494,7 +3476,6 @@ export const getSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -3537,7 +3518,6 @@ export const getSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -3603,7 +3583,6 @@ export const getSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -3644,7 +3623,6 @@ export const getSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -3682,7 +3660,6 @@ export const getSkillAssignment = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -3971,7 +3948,6 @@ export const listSkillAssignments = /* GraphQL */ `
               notes
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -3985,7 +3961,6 @@ export const listSkillAssignments = /* GraphQL */ `
               notes
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -4003,7 +3978,6 @@ export const listSkillAssignments = /* GraphQL */ `
               notes
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -4016,7 +3990,6 @@ export const listSkillAssignments = /* GraphQL */ `
               notes
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -4054,7 +4027,6 @@ export const listSkillAssignments = /* GraphQL */ `
         notes
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -4372,7 +4344,6 @@ export const getCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -4415,7 +4386,6 @@ export const getCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -4481,7 +4451,6 @@ export const getCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -4522,7 +4491,6 @@ export const getCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -4607,7 +4575,6 @@ export const getCharacterCompanion = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -4896,7 +4863,6 @@ export const listCharacterCompanions = /* GraphQL */ `
               notes
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -4910,7 +4876,6 @@ export const listCharacterCompanions = /* GraphQL */ `
               notes
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -4928,7 +4893,6 @@ export const listCharacterCompanions = /* GraphQL */ `
               notes
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -4941,7 +4905,6 @@ export const listCharacterCompanions = /* GraphQL */ `
               notes
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -5026,7 +4989,6 @@ export const listCharacterCompanions = /* GraphQL */ `
         notes
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -5344,7 +5306,6 @@ export const getMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -5387,7 +5348,6 @@ export const getMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -5453,7 +5413,6 @@ export const getMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -5494,7 +5453,6 @@ export const getMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -5542,7 +5500,6 @@ export const getMagicalItemAssignment = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -5831,7 +5788,6 @@ export const listMagicalItemAssignments = /* GraphQL */ `
               notes
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -5845,7 +5801,6 @@ export const listMagicalItemAssignments = /* GraphQL */ `
               notes
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -5863,7 +5818,6 @@ export const listMagicalItemAssignments = /* GraphQL */ `
               notes
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -5876,7 +5830,6 @@ export const listMagicalItemAssignments = /* GraphQL */ `
               notes
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -5919,7 +5872,6 @@ export const listMagicalItemAssignments = /* GraphQL */ `
         notes
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -6321,7 +6273,6 @@ export const listCharactersByOwner = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -6364,7 +6315,6 @@ export const listCharactersByOwner = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -6430,7 +6380,6 @@ export const listCharactersByOwner = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -6471,7 +6420,6 @@ export const listCharactersByOwner = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -6804,7 +6752,6 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -6847,7 +6794,6 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -6913,7 +6859,6 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -6954,7 +6899,6 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }

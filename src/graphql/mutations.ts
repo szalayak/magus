@@ -1329,7 +1329,6 @@ export const createCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -1539,7 +1538,6 @@ export const createCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -1796,7 +1794,6 @@ export const createCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -2005,7 +2002,6 @@ export const createCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -2504,7 +2500,6 @@ export const updateCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -2714,7 +2709,6 @@ export const updateCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -2971,7 +2965,6 @@ export const updateCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -3180,7 +3173,6 @@ export const updateCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -3679,7 +3671,6 @@ export const deleteCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -3889,7 +3880,6 @@ export const deleteCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -4146,7 +4136,6 @@ export const deleteCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -4355,7 +4344,6 @@ export const deleteCharacter = /* GraphQL */ `
           notes
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -4679,7 +4667,6 @@ export const createWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -4722,7 +4709,6 @@ export const createWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -4788,7 +4774,6 @@ export const createWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -4829,7 +4814,6 @@ export const createWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -4885,7 +4869,6 @@ export const createWeaponAssignment = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -5204,7 +5187,6 @@ export const updateWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -5247,7 +5229,6 @@ export const updateWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -5313,7 +5294,6 @@ export const updateWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -5354,7 +5334,6 @@ export const updateWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -5410,7 +5389,6 @@ export const updateWeaponAssignment = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -5729,7 +5707,6 @@ export const deleteWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -5772,7 +5749,6 @@ export const deleteWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -5838,7 +5814,6 @@ export const deleteWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -5879,7 +5854,6 @@ export const deleteWeaponAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -5935,7 +5909,6 @@ export const deleteWeaponAssignment = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -6254,7 +6227,6 @@ export const createSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -6297,7 +6269,6 @@ export const createSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -6363,7 +6334,6 @@ export const createSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -6404,7 +6374,6 @@ export const createSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -6442,7 +6411,6 @@ export const createSkillAssignment = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -6761,7 +6729,6 @@ export const updateSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -6804,7 +6771,6 @@ export const updateSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -6870,7 +6836,6 @@ export const updateSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -6911,7 +6876,6 @@ export const updateSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -6949,7 +6913,6 @@ export const updateSkillAssignment = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -7268,7 +7231,6 @@ export const deleteSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -7311,7 +7273,6 @@ export const deleteSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -7377,7 +7338,6 @@ export const deleteSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -7418,7 +7378,6 @@ export const deleteSkillAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -7456,7 +7415,6 @@ export const deleteSkillAssignment = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -7775,7 +7733,6 @@ export const createCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -7818,7 +7775,6 @@ export const createCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -7884,7 +7840,6 @@ export const createCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -7925,7 +7880,6 @@ export const createCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -8010,7 +7964,6 @@ export const createCharacterCompanion = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -8329,7 +8282,6 @@ export const updateCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -8372,7 +8324,6 @@ export const updateCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -8438,7 +8389,6 @@ export const updateCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -8479,7 +8429,6 @@ export const updateCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -8564,7 +8513,6 @@ export const updateCharacterCompanion = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -8883,7 +8831,6 @@ export const deleteCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -8926,7 +8873,6 @@ export const deleteCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -8992,7 +8938,6 @@ export const deleteCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -9033,7 +8978,6 @@ export const deleteCharacterCompanion = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -9118,7 +9062,6 @@ export const deleteCharacterCompanion = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -9437,7 +9380,6 @@ export const createMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -9480,7 +9422,6 @@ export const createMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -9546,7 +9487,6 @@ export const createMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -9587,7 +9527,6 @@ export const createMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -9635,7 +9574,6 @@ export const createMagicalItemAssignment = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -9954,7 +9892,6 @@ export const updateMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -9997,7 +9934,6 @@ export const updateMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -10063,7 +9999,6 @@ export const updateMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -10104,7 +10039,6 @@ export const updateMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -10152,7 +10086,6 @@ export const updateMagicalItemAssignment = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -10471,7 +10404,6 @@ export const deleteMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -10514,7 +10446,6 @@ export const deleteMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -10580,7 +10511,6 @@ export const deleteMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -10621,7 +10551,6 @@ export const deleteMagicalItemAssignment = /* GraphQL */ `
             notes
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -10669,7 +10598,6 @@ export const deleteMagicalItemAssignment = /* GraphQL */ `
       notes
       createdAt
       updatedAt
-      owner
     }
   }
 `;
