@@ -465,7 +465,7 @@ type CharacterCompanion
       { allow: owner }
       { allow: groups, groups: ["Admin", "DungeonMaster"] }
     ]
-  )  {
+  ) {
   id: ID!
   characterId: ID!
   character: Character @connection(fields: ["characterId"])
@@ -491,7 +491,7 @@ type MagicalItemAssignment
       { allow: owner }
       { allow: groups, groups: ["Admin", "DungeonMaster"] }
     ]
-  )  {
+  ) {
   id: ID!
   characterId: ID!
   character: Character @connection(fields: ["characterId"])
