@@ -2,32 +2,31 @@ import Vue from "vue";
 import Vuex from "vuex";
 import { AuthState } from "@aws-amplify/ui-components";
 import { Auth } from "aws-amplify";
-import armour, { ArmourState } from "./modules/armour";
-import classModule, { ClassState } from "./modules/class";
-import magicalItem, { MagicalItemState } from "./modules/magicalItem";
-import psiSchool, { PsiSchoolState } from "./modules/psiSchool";
-import race, { RaceState } from "./modules/race";
-import shield, { ShieldState } from "./modules/shield";
-import skill, { SkillState } from "./modules/skill";
-import valueRange, { ValueRangeState } from "./modules/valueRange";
-import weapon, { WeaponState } from "./modules/weapon";
+import {
+  valueRangeModule,
+  ValueRangeState,
+  classModule,
+  ClassState,
+  armourModule,
+  ArmourState,
+  MagicalItemState,
+  magicalItemModule,
+  psiSchoolModule,
+  raceModule,
+  shieldModule,
+  skillModule,
+  weaponModule,
+  PsiSchoolState,
+  RaceState,
+  ShieldState,
+  SkillState,
+  WeaponState,
+} from "./modules";
 import character, { CharacterState } from "./modules/character";
 import { listUsers } from "@/utils/users";
+import { User } from "./types";
 
 Vue.use(Vuex);
-
-export interface User {
-  username?: string;
-  name?: string | null;
-  signInUserSession?: {
-    accessToken?: {
-      payload?: { [key: string]: unknown };
-      [key: string]: unknown;
-    };
-    [key: string]: unknown;
-  };
-  [key: string]: unknown;
-}
 
 export interface AppState {
   user?: User;
@@ -40,7 +39,7 @@ export interface RootState {
   armour?: ArmourState;
   class?: ClassState;
   magicalItem?: MagicalItemState;
-  psiSchool: PsiSchoolState;
+  psiSchool?: PsiSchoolState;
   race?: RaceState;
   shield?: ShieldState;
   skill?: SkillState;
@@ -57,14 +56,14 @@ const isUserInGroup = (user?: User, group?: string) => {
   return groups ? !!groups.find(g => g === group) : false;
 };
 
-export default new Vuex.Store<RootState>({
-  state: {
+const store = new Vuex.Store<RootState>({
+  state: (): RootState => ({
     app: {
       user: { username: undefined },
       authState: AuthState.Loading,
       users: [],
     } as AppState,
-  } as RootState,
+  }),
   getters: {
     currentUser(state) {
       return state.app?.user?.username;
@@ -89,32 +88,33 @@ export default new Vuex.Store<RootState>({
     setUser(state, user?: User) {
       state.app.user = user;
     },
-    setUsers(state, users: User[]) {
-      state.app.users = users;
-    },
   },
   actions: {
     async logout(context) {
       await Auth.signOut();
       context.commit("setUser");
     },
-    async loadUsers(context) {
-      if (context.state.app.users?.length < 1) {
+    async loadUsers({ state }) {
+      if (state.app.users?.length < 1) {
         const results = await listUsers();
-        context.commit("setUsers", results);
+        state.app.users = results;
       }
     },
   },
   modules: {
-    armour,
+    armour: armourModule,
     class: classModule,
-    magicalItem,
-    psiSchool,
-    race,
-    shield,
-    skill,
-    valueRange,
-    weapon,
+    magicalItem: magicalItemModule,
+    psiSchool: psiSchoolModule,
+    race: raceModule,
+    shield: shieldModule,
+    skill: skillModule,
+    valueRange: valueRangeModule,
+    weapon: weaponModule,
     character,
   },
 });
+
+export * from "./types";
+export * from "./modules";
+export default store;

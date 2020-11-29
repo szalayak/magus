@@ -1,5 +1,18 @@
 import { Dice, LanguageLevel, Locale, Sex } from "@/API";
 
+export interface User {
+  username?: string;
+  name?: string | null;
+  signInUserSession?: {
+    accessToken?: {
+      payload?: { [key: string]: unknown };
+      [key: string]: unknown;
+    };
+    [key: string]: unknown;
+  };
+  [key: string]: unknown;
+}
+
 export interface LooseObject {
   [key: string]: unknown;
 }
@@ -26,6 +39,18 @@ export interface Identifiable {
 }
 
 export interface Editable extends Identifiable, Describable {}
+
+export interface PageableState {
+  items: Identifiable[];
+  nextToken?: string;
+}
+
+export interface ActionProps {
+  loadFunction: () => Promise<PageableState>;
+  createFunction: (item: Identifiable) => Promise<Identifiable>;
+  updateFunction: (item: Identifiable) => Promise<Identifiable>;
+  deleteFunction: (id: string) => Promise<void>;
+}
 
 export interface ThrowScenario {
   dice?: Dice;
