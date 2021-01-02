@@ -47,6 +47,7 @@ export interface PageableState {
 
 export interface ActionProps {
   loadFunction: () => Promise<PageableState>;
+  getFunction: (id: string) => Promise<Identifiable>;
   createFunction: (item: Identifiable) => Promise<Identifiable>;
   updateFunction: (item: Identifiable) => Promise<Identifiable>;
   deleteFunction: (id: string) => Promise<void>;

@@ -7,3 +7,4 @@ export * from "./race";
 export * from "./shield";
 export * from "./skill";
 export * from "./weapon";
+export * from "./character";

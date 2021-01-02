@@ -8,7 +8,7 @@ export const defaultGetters: GetterTree<PageableState, RootState> = {
   },
 };
 
-export enum defaultMutationKeys {
+export enum DefaultMutationKeys {
   SET = "set",
   MERGE = "merge",
   ADD = "add",
@@ -48,8 +48,9 @@ export const defaultMutations: MutationTree<PageableState> = {
   },
 };
 
-export enum defaultActionKeys {
+export enum DefaultActionKeys {
   LOAD = "load",
+  LOAD_ITEM = "loadItem",
   CREATE = "create",
   UPDATE = "update",
   DELETE = "delete",
@@ -57,6 +58,7 @@ export enum defaultActionKeys {
 
 export const defaultActions = ({
   loadFunction,
+  getFunction,
   createFunction,
   updateFunction,
   deleteFunction,
@@ -65,20 +67,24 @@ export const defaultActions = ({
     async load(context) {
       if (context.getters.list.length < 1) {
         const result = await loadFunction();
-        context.commit(defaultMutationKeys.SET, result);
+        context.commit(DefaultMutationKeys.SET, result);
       }
+    },
+    async loadItem(context, id: string) {
+      const result = await getFunction(id);
+      context.commit(DefaultMutationKeys.MERGE, result);
     },
     async create(context, item: Identifiable) {
       const result = await createFunction(item);
-      context.commit(defaultMutationKeys.ADD, result);
+      context.commit(DefaultMutationKeys.ADD, result);
     },
     async update(context, item: Identifiable) {
       const result = await updateFunction(item);
-      context.commit(defaultMutationKeys.CHANGE, result);
+      context.commit(DefaultMutationKeys.CHANGE, result);
     },
     async delete(context, id: string) {
       await deleteFunction(id);
-      context.commit(defaultMutationKeys.REMOVE, id);
+      context.commit(DefaultMutationKeys.REMOVE, id);
     },
   };
 };

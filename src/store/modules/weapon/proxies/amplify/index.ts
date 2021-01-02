@@ -1,17 +1,5 @@
-import {
-  createArmour,
-  updateArmour,
-  deleteArmour,
-  createWeapon,
-  updateWeapon,
-  deleteWeapon,
-} from "@/graphql/mutations";
-import {
-  getArmour,
-  getWeapon,
-  listArmours,
-  listWeapons,
-} from "@/graphql/queries";
+import { createWeapon, updateWeapon, deleteWeapon } from "@/graphql/mutations";
+import { getWeapon, listWeapons } from "@/graphql/queries";
 import { Weapon, LooseObject } from "@/store";
 import { createDefaultActions } from "@/store/amplify/utils";
 

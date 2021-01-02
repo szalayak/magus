@@ -2,7 +2,7 @@ import { RootState } from "@/store";
 import {
   defaultActions,
   defaultGetters,
-  defaultMutationKeys,
+  DefaultMutationKeys,
   defaultMutations,
 } from "@/store/utils";
 import { Module } from "vuex";
@@ -46,7 +46,7 @@ export const valueRangeModule: Module<ValueRangeState, RootState> = {
         1
       ) {
         const result = await proxy.loadByTypeFunction(type);
-        context.commit(defaultMutationKeys.MERGE, result);
+        context.commit(DefaultMutationKeys.MERGE, result);
       }
     },
   },

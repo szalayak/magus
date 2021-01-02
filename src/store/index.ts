@@ -21,8 +21,9 @@ import {
   ShieldState,
   SkillState,
   WeaponState,
+  characterModule,
+  CharacterState,
 } from "./modules";
-import character, { CharacterState } from "./modules/character";
 import { listUsers } from "@/utils/users";
 import { User } from "./types";
 
@@ -111,10 +112,11 @@ const store = new Vuex.Store<RootState>({
     skill: skillModule,
     valueRange: valueRangeModule,
     weapon: weaponModule,
-    character,
+    character: characterModule,
   },
 });
 
 export * from "./types";
 export * from "./modules";
+export * from "./utils";
 export default store;

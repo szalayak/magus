@@ -76,7 +76,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-magus-dev-183351-deployment",
-          "S3Key": "amplify-builds/GraphQLResolverFunction-4a2f656471447a4c7865-build.zip"
+          "S3Key": "amplify-builds/GraphQLResolverFunction-736137636c57544e554b-build.zip"
         }
       }
     },
