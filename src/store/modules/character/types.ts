@@ -30,8 +30,11 @@ import { CompanionType, Mastery } from "./proxies";
 
 export { CompanionType, Mastery } from "./proxies";
 
-export interface WeaponAssignment extends Identifiable {
+export interface Assignment extends Identifiable {
   characterId?: string;
+}
+
+export interface WeaponAssignment extends Assignment {
   weapon?: Weapon;
   mastery?: Mastery;
   inHand?: boolean;
@@ -44,8 +47,7 @@ export interface WeaponAssignment extends Identifiable {
   notes?: string;
 }
 
-export interface SkillAssignment extends Identifiable {
-  characterId?: string;
+export interface SkillAssignment extends Assignment {
   skill?: Skill;
   mastery?: Mastery;
   percentageValue?: number;
@@ -53,8 +55,7 @@ export interface SkillAssignment extends Identifiable {
   notes?: string;
 }
 
-export interface CharacterCompanion extends Identifiable {
-  characterId?: string;
+export interface CharacterCompanion extends Assignment {
   name?: string;
   type?: CompanionType;
   health?: HealthInformation;
@@ -69,8 +70,7 @@ export interface CharacterCompanion extends Identifiable {
   notes?: string;
 }
 
-export interface MagicalItemAssignment extends Identifiable {
-  characterId?: string;
+export interface MagicalItemAssignment extends Assignment {
   magicalItem?: MagicalItem;
   location?: string;
   notes?: string;
@@ -125,8 +125,8 @@ export interface Character extends CharacterCore {
   magicalItems?: MagicalItemAssignment[];
 }
 
-export interface CharacterResults {
-  items?: Character[];
+export interface CharacterResults extends PageableState {
+  items: CharacterQueryResult[];
   nextToken?: string;
 }
 
@@ -159,6 +159,5 @@ export interface CharacterQueryResult extends CharacterCore {
 
 export interface CharacterState extends PageableState {
   items: Character[];
-  transient?: Character[];
   subscription?: Subscription;
 }

@@ -31,7 +31,7 @@ export default class CharacterPage extends Vue {
 
   get character(): Character {
     return (
-      this.$store.getters["character/listTransient"].find(
+      this.$store.getters["character/list"].find(
         (char: Character) => char.id === this.id
       ) || {}
     );
@@ -43,7 +43,7 @@ export default class CharacterPage extends Vue {
       await this.$store.dispatch("character/loadItem", this.id);
 
       // set title
-      document.title = this.character.name;
+      document.title = this.character.name || "";
 
       // load all other necessary data
       await Promise.all([

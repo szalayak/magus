@@ -59,7 +59,7 @@ export default class CharacterInfoCard extends CharacterInfo {
   async save() {
     if ((this.$refs.data as Form).validate()) {
       try {
-        await this.$store.dispatch("character/update", this.character);
+        await this.$store.dispatch("character/save", this.character);
         this.edit = false;
       } catch (error) {
         this.messages =

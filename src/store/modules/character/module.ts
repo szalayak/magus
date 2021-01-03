@@ -1,23 +1,42 @@
 import { RootState } from "@/store";
 import {
   DefaultActionKeys,
-  defaultActions,
-  defaultGetters,
   DefaultMutationKeys,
   defaultMutations,
 } from "@/store";
+import { defaultActions, defaultGetters } from "@/store/utils";
 import { Module } from "vuex";
 import { Character, CharacterState } from ".";
 import proxy from "./proxies";
+import { Assignment, CharacterResults } from "./types";
+import {
+  createAssignmentActions,
+  findById,
+  mapCharacterResult,
+  removeAssignment,
+  updateAssignment,
+} from "./utils";
 
-// const weaponAssignmentActions = defaultActions(proxy.weaponAssignmentActions);
-// const skillAssignmentActions = defaultActions(proxy.skillAssignmentActions);
-// const magicalItemAssignmentActions = defaultActions(proxy.magicalItemAssignmentActions);
-// const characterCompanionActions = defaultActions(proxy.magicalItemAssignmentActions);
-
-const findById = (items: Character[], id: string) => {
-  return items.find((item: Character) => item.id === id);
-};
+const weaponAssignmentActions = createAssignmentActions({
+  actions: proxy.weaponAssignmentActions,
+  merge: "mergeWeaponAssignment",
+  remove: "removeWeaponAssignment",
+});
+const skillAssignmentActions = createAssignmentActions({
+  actions: proxy.skillAssignmentActions,
+  merge: "mergeSkillAssignment",
+  remove: "removeSkillAssignment",
+});
+const magicalItemAssignmentActions = createAssignmentActions({
+  actions: proxy.magicalItemAssignmentActions,
+  merge: "mergeMagicalItemAssignment",
+  remove: "removeMagicalItemAssignment",
+});
+const characterCompanionActions = createAssignmentActions({
+  actions: proxy.characterCompanionActions,
+  merge: "mergeCharacterCompanion",
+  remove: "removeCharacterCompanion",
+});
 
 export const characterModule: Module<CharacterState, RootState> = {
   namespaced: true,
@@ -65,34 +84,107 @@ export const characterModule: Module<CharacterState, RootState> = {
       });
     },
   },
-  mutations: { ...defaultMutations },
+  mutations: {
+    ...defaultMutations,
+    set(state, result: CharacterResults) {
+      const mappedResult: CharacterState = {
+        items: result.items.map(r => mapCharacterResult(r)),
+        nextToken: result.nextToken,
+      };
+      defaultMutations.set(state, mappedResult);
+    },
+    merge(state, result: CharacterResults) {
+      const mappedResult: CharacterState = {
+        items: result.items.map(r => mapCharacterResult(r)),
+        nextToken: result.nextToken,
+      };
+      defaultMutations.merge(state, mappedResult);
+    },
+    mergeWeaponAssignment({ items }, assignment: Assignment) {
+      const character = findById(items, assignment.characterId) as Character;
+      if (character) {
+        if (!character.weapons) character.weapons = [assignment];
+        else updateAssignment(character.weapons, assignment);
+      }
+    },
+    removeWeaponAssignment({ items }, { id, characterId }: Assignment) {
+      removeAssignment((findById(items, characterId) as Character).weapons, id);
+    },
+    mergeSkillAssignment({ items }, assignment: Assignment) {
+      const character = findById(items, assignment.characterId) as Character;
+      if (character) {
+        if (!character.skills) character.skills = [assignment];
+        else updateAssignment(character.skills, assignment);
+      }
+    },
+    removeSkillAssignment({ items }, { id, characterId }: Assignment) {
+      removeAssignment((findById(items, characterId) as Character).skills, id);
+    },
+    mergeMagicalItemAssignment({ items }, assignment: Assignment) {
+      const character = findById(items, assignment.characterId) as Character;
+      if (character) {
+        if (!character.magicalItems) character.magicalItems = [assignment];
+        else updateAssignment(character.magicalItems, assignment);
+      }
+    },
+    removeMagicalItemAssignment({ items }, { id, characterId }: Assignment) {
+      removeAssignment(
+        (findById(items, characterId) as Character).magicalItems,
+        id
+      );
+    },
+    mergeCharacterCompanion({ items }, assignment: Assignment) {
+      const character = findById(items, assignment.characterId) as Character;
+      if (character) {
+        if (!character.companions) character.companions = [assignment];
+        else updateAssignment(character.companions, assignment);
+      }
+    },
+    removeCharacterCompanionAssignment(
+      { items },
+      { id, characterId }: Assignment
+    ) {
+      removeAssignment(
+        (findById(items, characterId) as Character).companions,
+        id
+      );
+    },
+  },
   actions: {
     ...defaultActions(proxy.defaultActions),
-    // createWeaponAssignment: weaponAssignmentActions.create,
-    // updateWeaponAssignment: weaponAssignmentActions.update,
-    // deleteWeaponAssignment: weaponAssignmentActions.delete,
-    // createSkillAssignment: skillAssignmentActions.create,
-    // updateSkillAssignment: skillAssignmentActions.update,
-    // deleteSkillAssignment: skillAssignmentActions.delete,
-    // createMagicalItemAssignment: magicalItemAssignmentActions.create,
-    // updateMagicalItemAssignment: magicalItemAssignmentActions.update,
-    // deleteMagicalItemAssignment: magicalItemAssignmentActions.delete,
-    // createCharacterCompanion: characterCompanionActions.create,
-    // updateCharacterCompanion: characterCompanionActions.update,
-    // deleteCharacterCompanion: characterCompanionActions.delete,
+    createWeaponAssignment: weaponAssignmentActions.create,
+    updateWeaponAssignment: weaponAssignmentActions.update,
+    deleteWeaponAssignment: weaponAssignmentActions.delete,
+    createSkillAssignment: skillAssignmentActions.create,
+    updateSkillAssignment: skillAssignmentActions.update,
+    deleteSkillAssignment: skillAssignmentActions.delete,
+    createMagicalItemAssignment: magicalItemAssignmentActions.create,
+    updateMagicalItemAssignment: magicalItemAssignmentActions.update,
+    deleteMagicalItemAssignment: magicalItemAssignmentActions.delete,
+    createCharacterCompanion: characterCompanionActions.create,
+    updateCharacterCompanion: characterCompanionActions.update,
+    deleteCharacterCompanion: characterCompanionActions.delete,
+    async loadByOwner(context, owner: string) {
+      const result = await proxy.additionalActions.loadByOwner(owner);
+      context.commit(DefaultMutationKeys.MERGE, result);
+    },
+    async loadByDungeonMaster(context, dungeonMaster: string) {
+      const result = await proxy.additionalActions.loadByDungeonMaster(
+        dungeonMaster
+      );
+      context.commit(DefaultMutationKeys.MERGE, result);
+    },
     async revert(context, id: string) {
       context.dispatch(DefaultActionKeys.LOAD_ITEM, id);
     },
     async save(context, id: string) {
       const character = findById(context.getters.list, id);
       if (character) {
-        context.dispatch(
-          id ? DefaultActionKeys.UPDATE : DefaultActionKeys.CREATE
-        );
+        context.dispatch(DefaultActionKeys.UPDATE, character);
       }
     },
     async delete(context, id: string) {
-      const character = findById(context.getters.list, id);
+      const character = findById(context.getters.list, id) as Character;
       if (character) {
         const weapons =
           character?.weapons?.map(w =>
@@ -119,6 +211,19 @@ export const characterModule: Module<CharacterState, RootState> = {
 
         await proxy.defaultActions.deleteFunction(id);
         context.commit(DefaultMutationKeys.REMOVE, id);
+      }
+    },
+    async subscribeToUpdate(context) {
+      if (!context.state.subscription) {
+        const {
+          queryResult,
+          subscription,
+        } = await proxy.additionalActions.subscribeToUpdate();
+        context.state.subscription = subscription;
+        context.commit(
+          DefaultMutationKeys.CHANGE,
+          mapCharacterResult(queryResult)
+        );
       }
     },
   },

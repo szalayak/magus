@@ -22,7 +22,7 @@ export const defaultMutations: MutationTree<PageableState> = {
     state.nextToken = result.nextToken;
   },
   merge({ items }, result: PageableState) {
-    if (items.length < 1) items.concat(result.items);
+    if (items.length < 1) for (const item of result.items) items.push(item);
     else {
       result.items.forEach(newItem => {
         const item = items.find(i => i.id === newItem.id);
@@ -56,13 +56,16 @@ export enum DefaultActionKeys {
   DELETE = "delete",
 }
 
-export const defaultActions = ({
-  loadFunction,
-  getFunction,
-  createFunction,
-  updateFunction,
-  deleteFunction,
-}: ActionProps): ActionTree<PageableState, RootState> => {
+export const defaultActions = (
+  {
+    loadFunction,
+    getFunction,
+    createFunction,
+    updateFunction,
+    deleteFunction,
+  }: ActionProps,
+  additionalActions?: { [key: string]: Function }
+): ActionTree<PageableState, RootState> => {
   return {
     async load(context) {
       if (context.getters.list.length < 1) {
@@ -72,7 +75,7 @@ export const defaultActions = ({
     },
     async loadItem(context, id: string) {
       const result = await getFunction(id);
-      context.commit(DefaultMutationKeys.MERGE, result);
+      context.commit(DefaultMutationKeys.CHANGE, result);
     },
     async create(context, item: Identifiable) {
       const result = await createFunction(item);
@@ -86,5 +89,6 @@ export const defaultActions = ({
       await deleteFunction(id);
       context.commit(DefaultMutationKeys.REMOVE, id);
     },
+    ...additionalActions,
   };
 };

@@ -1,4 +1,8 @@
 import {
+  ListCharactersByDungeonMasterQuery,
+  ListCharactersByOwnerQuery,
+} from "@/API";
+import {
   createCharacter,
   updateCharacter,
   deleteCharacter,
@@ -23,19 +27,27 @@ import {
   getWeaponAssignment,
   listCharacterCompanions,
   listCharacters,
+  listCharactersByDungeonMaster,
+  listCharactersByOwner,
   listMagicalItemAssignments,
   listSkillAssignments,
   listWeaponAssignments,
 } from "@/graphql/queries";
+import { onUpdateCharacter } from "@/graphql/subscriptions";
 import { LooseObject } from "@/store";
+import { PageableResult } from "@/store/amplify";
 import { createDefaultActions } from "@/store/amplify/utils";
+import { API, graphqlOperation } from "aws-amplify";
 import { Character } from "../..";
 import {
   CharacterCompanion,
+  CharacterQueryResult,
+  CharacterResults,
   MagicalItemAssignment,
   SkillAssignment,
   WeaponAssignment,
 } from "../../types";
+import { Observable, Subscription } from "rxjs";
 
 const defaultActions = createDefaultActions({
   actions: {
@@ -172,14 +184,57 @@ const characterCompanionActions = createDefaultActions({
   }),
 });
 
+const loadByOwner = async (owner: string) => {
+  const result = (await API.graphql({
+    query: listCharactersByOwner,
+    variables: { owner },
+  })) as PageableResult;
+  console.log(result);
+  return Object.values(result.data)[0] as CharacterResults;
+};
+
+const loadByDungeonMaster = async (dungeonMaster: string) => {
+  const result = (await API.graphql({
+    query: listCharactersByDungeonMaster,
+    variables: {
+      dungeonMaster,
+    },
+  })) as PageableResult;
+  return Object.values(result.data)[0] as CharacterResults;
+};
+
+const subscribeToUpdate = async (): Promise<{
+  queryResult: CharacterQueryResult;
+  subscription: Subscription;
+}> => {
+  const observable = (await API.graphql(
+    graphqlOperation(onUpdateCharacter)
+  )) as Observable<LooseObject>;
+  return new Promise(resolve => {
+    const subscription = observable.subscribe({
+      next: characterData => {
+        const queryResult = ((characterData.value as LooseObject)
+          .data as LooseObject).onUpdateCharacter as CharacterQueryResult;
+        resolve({ queryResult, subscription });
+      },
+    });
+  });
+};
+
 const proxy = {
   defaultActions,
+  additionalActions: {
+    loadByOwner,
+    loadByDungeonMaster,
+    subscribeToUpdate,
+  },
   weaponAssignmentActions,
   skillAssignmentActions,
   magicalItemAssignmentActions,
   characterCompanionActions,
 };
 
+export type Proxy = typeof proxy;
 export default proxy;
 
 export * from "./types";

@@ -20,6 +20,7 @@ export const createDefaultActions = ({
     getFunction: async (id: string | number) => {
       const result = (await API.graphql({
         query: actions.read,
+        variables: { id },
       })) as IdentifiableResult;
       return Object.values(result.data)[0] as Identifiable;
     },
