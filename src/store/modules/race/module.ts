@@ -1,8 +1,8 @@
 import { RootState } from "@/store";
 import {
-  defaultActions,
-  defaultGetters,
-  defaultMutations,
+  createDefaultActions,
+  createDefaultMutations,
+  createGetters,
 } from "@/store/utils";
 import { Module } from "vuex";
 import proxy from "./proxies";
@@ -13,12 +13,13 @@ export const raceModule: Module<RaceState, RootState> = {
   state: () => ({
     items: [],
   }),
-  getters: {
-    ...defaultGetters,
-    getPlayableRaces({ items }): Race[] {
-      return items.filter(({ playable }) => playable);
+  getters: createGetters({
+    additionalGetters: {
+      getPlayableRaces({ items }): Race[] {
+        return items.filter(({ playable }: Race) => playable);
+      },
     },
-  },
-  mutations: defaultMutations,
-  actions: defaultActions(proxy.defaultActions),
+  }),
+  mutations: createDefaultMutations(),
+  actions: createDefaultActions(proxy.defaultActions),
 };

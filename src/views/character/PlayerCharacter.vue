@@ -11,7 +11,7 @@
         hide-details
         @input="search"
       /> -->
-      <v-btn-toggle dense tile color="primary" group v-model="page">
+      <v-btn-toggle dense tile color="primary" group v-model.number="page">
         <v-btn>1</v-btn>
         <v-btn>2</v-btn>
         <v-btn>3</v-btn>
@@ -123,6 +123,12 @@
         </v-btn>
       </template>
     </v-snackbar>
+    <!-- <v-bottom-navigation v-model.number="page">
+      <v-btn value="0">1</v-btn>
+      <v-btn value="1">2</v-btn>
+      <v-btn value="2">3</v-btn>
+      <v-btn value="3">4</v-btn></v-bottom-navigation
+    > -->
   </v-container>
 </template>
 <script lang="ts">
@@ -186,5 +192,7 @@ import ServantsCard from "@/components/character/ServantsCard.vue";
     servants: ServantsCard,
   },
 })
-export default class PlayerCharacter extends CharacterPage {}
+export default class PlayerCharacter extends CharacterPage {
+  tab = 0;
+}
 </script>

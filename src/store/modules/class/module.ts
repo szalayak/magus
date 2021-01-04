@@ -1,8 +1,8 @@
 import { RootState } from "@/store";
 import {
-  defaultActions,
-  defaultGetters,
-  defaultMutations,
+  createDefaultActions,
+  createDefaultMutations,
+  createGetters,
 } from "@/store/utils";
 import { Module } from "vuex";
 import proxy from "./proxies";
@@ -13,12 +13,13 @@ export const classModule: Module<ClassState, RootState> = {
   state: () => ({
     items: [],
   }),
-  getters: {
-    ...defaultGetters,
-    getMagicUserClasses({ items }): Class[] {
-      return items.filter(c => c?.magicUser);
+  getters: createGetters({
+    additionalGetters: {
+      getMagicUserClasses({ items }): Class[] {
+        return items.filter((c: Class) => c?.magicUser);
+      },
     },
-  },
-  mutations: defaultMutations,
-  actions: defaultActions(proxy.defaultActions),
+  }),
+  mutations: createDefaultMutations(),
+  actions: createDefaultActions(proxy.defaultActions),
 };

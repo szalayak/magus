@@ -59,7 +59,7 @@ export default class CharacterInfoCard extends CharacterInfo {
   async save() {
     if ((this.$refs.data as Form).validate()) {
       try {
-        await this.$store.dispatch("character/save", this.character);
+        await this.$store.dispatch("character/save", this.character.id);
         this.edit = false;
       } catch (error) {
         this.messages =
@@ -72,7 +72,7 @@ export default class CharacterInfoCard extends CharacterInfo {
   }
 
   cancel() {
-    this.$store.commit("character/revert", this.id);
+    this.$store.dispatch("character/revert", this.id);
     this.edit = false;
   }
 }

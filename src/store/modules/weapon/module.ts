@@ -1,8 +1,8 @@
 import { RootState } from "@/store";
 import {
-  defaultActions,
-  defaultGetters,
-  defaultMutations,
+  createDefaultActions,
+  createDefaultGetters,
+  createDefaultMutations,
 } from "@/store/utils";
 import { Module } from "vuex";
 import proxy from "./proxies";
@@ -13,7 +13,7 @@ export const weaponModule: Module<WeaponState, RootState> = {
   state: () => ({
     items: [],
   }),
-  getters: defaultGetters,
-  mutations: defaultMutations,
-  actions: defaultActions(proxy.defaultActions),
+  getters: createDefaultGetters(),
+  mutations: createDefaultMutations(),
+  actions: createDefaultActions(proxy.defaultActions),
 };

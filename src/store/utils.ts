@@ -1,4 +1,11 @@
-import { ActionTree, GetterTree, MutationTree } from "vuex";
+import {
+  Action,
+  ActionTree,
+  Getter,
+  GetterTree,
+  Mutation,
+  MutationTree,
+} from "vuex";
 import { RootState } from ".";
 import { ActionProps, Identifiable, PageableState } from "./types";
 
@@ -6,6 +13,19 @@ export const defaultGetters: GetterTree<PageableState, RootState> = {
   list({ items }) {
     return items;
   },
+};
+
+export const createDefaultGetters = () => defaultGetters;
+
+export const createGetters = ({
+  additionalGetters,
+}: {
+  additionalGetters?: { [key: string]: Getter<PageableState, RootState> };
+}): GetterTree<PageableState, RootState> => {
+  return {
+    ...createDefaultGetters(),
+    ...additionalGetters,
+  };
 };
 
 export enum DefaultMutationKeys {
@@ -36,18 +56,27 @@ export const defaultMutations: MutationTree<PageableState> = {
   },
   change({ items }, updateItem: Identifiable) {
     const oldState = items?.find(item => item?.id === updateItem.id);
-    if (oldState) {
-      items.splice(items.indexOf(oldState), 1, updateItem);
-    }
+    if (oldState) items.splice(items.indexOf(oldState), 1, updateItem);
+    else items.push(updateItem);
   },
   remove({ items }, id: string) {
     const oldState = items.find(item => item?.id === id);
-    if (oldState) {
-      items.splice(items.indexOf(oldState), 1);
-    }
+    if (oldState) items.splice(items.indexOf(oldState), 1);
   },
 };
 
+export const createDefaultMutations = () => defaultMutations;
+
+export const createMutations = ({
+  additionalMutations,
+}: {
+  additionalMutations?: { [key: string]: Mutation<PageableState> };
+}): MutationTree<PageableState> => {
+  return {
+    ...createDefaultMutations(),
+    ...additionalMutations,
+  };
+};
 export enum DefaultActionKeys {
   LOAD = "load",
   LOAD_ITEM = "loadItem",
@@ -56,16 +85,13 @@ export enum DefaultActionKeys {
   DELETE = "delete",
 }
 
-export const defaultActions = (
-  {
-    loadFunction,
-    getFunction,
-    createFunction,
-    updateFunction,
-    deleteFunction,
-  }: ActionProps,
-  additionalActions?: { [key: string]: Function }
-): ActionTree<PageableState, RootState> => {
+export const createDefaultActions = ({
+  loadFunction,
+  getFunction,
+  createFunction,
+  updateFunction,
+  deleteFunction,
+}: ActionProps): ActionTree<PageableState, RootState> => {
   return {
     async load(context) {
       if (context.getters.list.length < 1) {
@@ -75,11 +101,11 @@ export const defaultActions = (
     },
     async loadItem(context, id: string) {
       const result = await getFunction(id);
-      context.commit(DefaultMutationKeys.CHANGE, result);
+      context.commit(DefaultMutationKeys.MERGE, { items: [result] });
     },
     async create(context, item: Identifiable) {
       const result = await createFunction(item);
-      context.commit(DefaultMutationKeys.ADD, result);
+      context.commit(DefaultMutationKeys.MERGE, { items: [result] });
     },
     async update(context, item: Identifiable) {
       const result = await updateFunction(item);
@@ -89,6 +115,18 @@ export const defaultActions = (
       await deleteFunction(id);
       context.commit(DefaultMutationKeys.REMOVE, id);
     },
+  };
+};
+
+export const createActions = ({
+  defaultActions,
+  additionalActions,
+}: {
+  defaultActions: ActionProps;
+  additionalActions?: { [key: string]: Action<PageableState, RootState> };
+}): ActionTree<PageableState, RootState> => {
+  return {
+    ...createDefaultActions(defaultActions),
     ...additionalActions,
   };
 };
