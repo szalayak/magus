@@ -1,5 +1,87 @@
 <template>
-  <character-info-card :id="id" :editable="false" :title="$t('weapons')">
+  <character-assignment-card
+    :id="id"
+    :editable="editable"
+    :defaultItem="defaultItem"
+    :headers="headers"
+    primaryColumn="weapon.description.title"
+    createAction="createWeaponAssignment"
+    updateAction="updateWeaponAssignment"
+    deleteAction="deleteWeaponAssignment"
+    :sortBy="sortBy"
+    :newText="$t('new-weapon')"
+    :editText="$t('edit-weapon')"
+    :title="$t('weapons')"
+    :customColumns="customColumns"
+    :assignments="assignments"
+  >
+    <template v-slot:editable-fields="{ editedItem }">
+      <v-row dense>
+        <v-col cols="12">
+          <v-select
+            v-model="editedItem.weapon"
+            :items="weapons"
+            item-text="description.title"
+            item-value="id"
+            :label="$t('weapon')"
+            return-object
+          ></v-select>
+        </v-col>
+        <v-col cols="12">
+          <v-select
+            v-model="editedItem.mastery"
+            :items="masteryLevels"
+            :label="$t('mastery')"
+          ></v-select>
+        </v-col>
+        <v-col cols="12">
+          <v-select
+            v-model="editedItem.breakWeapon"
+            :items="masteryLevels"
+            :label="$t('break-weapon')"
+          ></v-select>
+        </v-col>
+        <v-col cols="12">
+          <v-select
+            v-model="editedItem.disarm"
+            :items="masteryLevels"
+            :label="$t('disarm')"
+          ></v-select>
+        </v-col>
+        <v-col cols="12">
+          <v-checkbox v-model="editedItem.inHand" :label="$t('in-hand')" />
+        </v-col>
+        <v-col cols="12">
+          <v-text-field v-model="editedItem.notes" :label="$t('notes')" />
+        </v-col>
+      </v-row>
+    </template>
+    <template v-slot:[`item.mastery`]="{ item }">
+      {{ masteryToString(item.mastery) }}
+    </template>
+    <template v-slot:[`item.weapon.damage`]="{ item }">
+      {{ damageToString(item.weapon.damage) }}
+    </template>
+    <template v-slot:[`item.weapon.combatValues.initiation`]="{ item }">
+      {{ initiation(item) }}
+    </template>
+    <template v-slot:[`item.weapon.combatValues.offence`]="{ item }">
+      {{ offence(item) }}
+    </template>
+    <template v-slot:[`item.weapon.combatValues.defence`]="{ item }">
+      {{ defence(item) }}
+    </template>
+    <template v-slot:[`item.inHand`]="{ item }">
+      <v-simple-checkbox disabled v-model="item.inHand" />
+    </template>
+    <template v-slot:[`item.breakWeapon`]="{ item }">
+      {{ masteryToString(item.breakWeapon) }}
+    </template>
+    <template v-slot:[`item.disarm`]="{ item }">
+      {{ masteryToString(item.disarm) }}
+    </template>
+  </character-assignment-card>
+  <!-- <character-info-card :id="id" :editable="false" :title="$t('weapons')">
     <template v-slot:toolbar="{}">
       <v-dialog scrollable v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on, attrs }">
@@ -153,25 +235,27 @@
         </template>
       </v-data-table>
     </template>
-  </character-info-card>
+  </character-info-card> -->
 </template>
 <script lang="ts">
 import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
-import CharacterInfoCard from "./CharacterInfoCard.vue";
-import { ThrowScenario } from "@/store/types";
+// import CharacterInfoCard from "./CharacterInfoCard.vue";
+import { Describable, ThrowScenario } from "@/store/types";
 import { getThrowScenarioString } from "@/utils/throwScenario";
 import { localise, localiseItem } from "@/utils/localise";
 import { Weapon } from "@/store/modules/weapon";
 import { Mastery } from "@/API";
 import { WeaponAssignment } from "@/store/modules/character";
 import { combatValuesWithWeapon } from "@/utils/character";
-import { GraphQLResult } from "@aws-amplify/api-graphql";
+// import { GraphQLResult } from "@aws-amplify/api-graphql";
+import CharacterAssignmentCard from "./CharacterAssignmentCard.vue";
 
 @Component({
   name: "weapon-assignment-card",
   components: {
-    "character-info-card": CharacterInfoCard,
+    // "character-info-card": CharacterInfoCard,
+    "character-assignment-card": CharacterAssignmentCard,
   },
 })
 export default class WeaponAssignmentCard extends CharacterInfo {
@@ -183,10 +267,20 @@ export default class WeaponAssignmentCard extends CharacterInfo {
   editedItem = this.defaultItem();
   notification = false;
   messages: string[] = [];
+  customColumns = [
+    "mastery",
+    "weapon.combatValues.initiation",
+    "weapon.combatValues.offence",
+    "weapon.combatValues.defence",
+    "weapon.damage",
+    "inHand",
+    "breakWeapon",
+    "disarm",
+  ];
 
   get headers() {
     return [
-      { text: this.$t("weapon"), value: "weapon" },
+      { text: this.$t("weapon"), value: "weapon.description.title" },
       { text: this.$t("mastery"), value: "mastery" },
       { text: this.$t("attacks-per-turn"), value: "weapon.attacksPerTurn" },
       {
@@ -212,20 +306,23 @@ export default class WeaponAssignmentCard extends CharacterInfo {
   }
 
   get assignments() {
-    return this.character.weapons
-      ? this.character.weapons.filter(w => !w.weapon?.ranged)
-      : [];
+    return (this.character.weapons?.filter(w => !w.weapon?.ranged) || []).map(
+      a => ({
+        ...a,
+        weapon: localiseItem(a.weapon as Describable, this.$i18n.locale),
+      })
+    );
   }
 
-  get isNewItem() {
-    return this.editedIndex === -1;
-  }
+  // get isNewItem() {
+  //   return this.editedIndex === -1;
+  // }
 
-  get formTitle() {
-    return this.editedIndex === -1
-      ? this.$t("new-weapon")
-      : this.$t("edit-weapon");
-  }
+  // get formTitle() {
+  //   return this.editedIndex === -1
+  //     ? this.$t("new-weapon")
+  //     : this.$t("edit-weapon");
+  // }
 
   defaultItem(): WeaponAssignment {
     return {
@@ -237,9 +334,9 @@ export default class WeaponAssignmentCard extends CharacterInfo {
     return damage ? getThrowScenarioString(damage, this.$i18n) : "";
   }
 
-  weaponToString(weapon: Weapon) {
-    return localiseItem(weapon, this.$i18n.locale).description?.title;
-  }
+  // weaponToString(weapon: Weapon) {
+  //   return localiseItem(weapon, this.$i18n.locale).description?.title;
+  // }
 
   masteryToString(mastery: Mastery) {
     return this.$t(mastery);
@@ -272,54 +369,54 @@ export default class WeaponAssignmentCard extends CharacterInfo {
       withShield: !!this.character.shield,
     }).defence;
   }
-  close() {
-    this.dialog = false;
-    this.resetEditedItem();
-  }
-  save() {
-    this.$store
-      .dispatch(
-        this.isNewItem
-          ? `character/createWeaponAssignment`
-          : `character/updateWeaponAssignment`,
-        { ...this.editedItem, characterId: this.character.id }
-      )
-      .then(() => {
-        this.messages = [];
-        this.notification = false;
-      })
-      .catch((error: GraphQLResult<WeaponAssignment>) => {
-        this.messages = error.errors?.map(err => err.message) || [];
-        this.notification = true;
-      });
-    this.dialog = false;
-    this.resetEditedItem();
-  }
+  // close() {
+  //   this.dialog = false;
+  //   this.resetEditedItem();
+  // }
+  // save() {
+  //   this.$store
+  //     .dispatch(
+  //       this.isNewItem
+  //         ? `character/createWeaponAssignment`
+  //         : `character/updateWeaponAssignment`,
+  //       { ...this.editedItem, characterId: this.character.id }
+  //     )
+  //     .then(() => {
+  //       this.messages = [];
+  //       this.notification = false;
+  //     })
+  //     .catch((error: GraphQLResult<WeaponAssignment>) => {
+  //       this.messages = error.errors?.map(err => err.message) || [];
+  //       this.notification = true;
+  //     });
+  //   this.dialog = false;
+  //   this.resetEditedItem();
+  // }
 
-  deleteItemConfirm() {
-    this.$store.dispatch(`character/deleteWeaponAssignment`, this.editedItem);
-    this.closeDelete();
-  }
-  closeDelete() {
-    this.dialogDelete = false;
-    this.resetEditedItem();
-  }
-  editItem(item: WeaponAssignment) {
-    this.editedIndex = this.assignments.indexOf(item);
-    this.editedItem = Object.assign({}, item);
-    this.dialog = true;
-  }
-  deleteItem(item: WeaponAssignment) {
-    this.editedIndex = this.assignments.indexOf(item);
-    this.editedItem = Object.assign({}, item);
-    this.dialogDelete = true;
-  }
+  // deleteItemConfirm() {
+  //   this.$store.dispatch(`character/deleteWeaponAssignment`, this.editedItem);
+  //   this.closeDelete();
+  // }
+  // closeDelete() {
+  //   this.dialogDelete = false;
+  //   this.resetEditedItem();
+  // }
+  // editItem(item: WeaponAssignment) {
+  //   this.editedIndex = this.assignments.indexOf(item);
+  //   this.editedItem = Object.assign({}, item);
+  //   this.dialog = true;
+  // }
+  // deleteItem(item: WeaponAssignment) {
+  //   this.editedIndex = this.assignments.indexOf(item);
+  //   this.editedItem = Object.assign({}, item);
+  //   this.dialogDelete = true;
+  // }
 
-  resetEditedItem() {
-    this.$nextTick(() => {
-      this.editedItem = this.defaultItem();
-      this.editedIndex = -1;
-    });
-  }
+  // resetEditedItem() {
+  //   this.$nextTick(() => {
+  //     this.editedItem = this.defaultItem();
+  //     this.editedIndex = -1;
+  //   });
+  // }
 }
 </script>
