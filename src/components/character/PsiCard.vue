@@ -15,6 +15,7 @@
         </v-col>
         <v-col cols="12" sm="12" md="6">
           <v-text-field
+            class="font-weight-bold"
             v-model.number="psiPoints.current"
             :label="$t('current')"
             type="number"

@@ -35,10 +35,9 @@
 <script lang="ts">
 import CharacterInfo from "@/components/character/CharacterInfo";
 import { LooseObject } from "@/store/types";
+import { Form } from "@/utils";
 import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
-
-type Form = Vue & { validate: () => boolean };
 
 @Component({
   name: "character-info-card",

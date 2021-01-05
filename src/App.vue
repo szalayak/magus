@@ -1,56 +1,13 @@
 <template>
   <v-app>
-    <v-app-bar clipped-left app color="primary" dark>
-      <v-app-bar-nav-icon
-        v-if="isLoggedIn"
-        @click="navDrawerOpen = !navDrawerOpen"
-      ></v-app-bar-nav-icon>
-
-      <v-avatar width="32px" height="32px" tile>
-        <img :src="require('@/assets/favicon-32x32.png')" alt="logo" />
-      </v-avatar>
-
-      <v-toolbar-title>M.A.G.U.S</v-toolbar-title>
-
-      <v-spacer></v-spacer>
-      <v-menu offset-y v-if="isLoggedIn">
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn :icon="$vuetify.breakpoint.xs" text v-bind="attrs" v-on="on"
-            ><div class="d-none d-sm-flex">{{ $t("throw-dice") }}</div>
-            <v-icon class="ml-sm-2">mdi-dice-5</v-icon></v-btn
-          >
-        </template>
-        <v-list>
-          <v-list-item
-            v-for="diceObject in dice()"
-            :key="diceObject.id"
-            @click="doThrow(diceObject)"
-          >
-            <v-list-item-title>{{ diceObject.title }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-      <v-menu offset-y v-if="isLoggedIn">
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn :icon="$vuetify.breakpoint.xs" text v-bind="attrs" v-on="on">
-            <div class="d-none d-sm-flex">{{ app.user.attributes.name }}</div>
-            <v-icon class="ml-sm-2">mdi-account</v-icon>
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item class="d-flex d-sm-none">
-            <v-list-item-title>{{
-              app.user.attributes.name
-            }}</v-list-item-title>
-          </v-list-item>
-          <v-list-item @click="logout()">
-            <v-list-item-title>{{ $t("sign-out") }}</v-list-item-title>
-          </v-list-item>
-          <user-attributes />
-        </v-list>
-      </v-menu>
-    </v-app-bar>
-    <v-navigation-drawer v-if="isLoggedIn" v-model="navDrawerOpen" clipped app>
+    <app-bar />
+    <v-navigation-drawer
+      v-if="isLoggedIn"
+      :value="isNavDrawerOpen"
+      @input="setNavDrawerOpen($event)"
+      clipped
+      app
+    >
       <navigation-drawer />
     </v-navigation-drawer>
     <v-main>
@@ -61,16 +18,8 @@
           /></amplify-authenticator>
         </v-row>
       </v-container>
-      <router-view v-if="isLoggedIn" />
+      <router-view v-if="isLoggedIn && userLoaded" />
     </v-main>
-    <v-snackbar v-model="throwResultNotification" timeout="-1">
-      {{ $t("result") }}: {{ throwResult }}
-      <template v-slot:action="{ attrs }">
-        <v-btn text v-bind="attrs" @click="throwResultNotification = false">
-          {{ $t("close") }}
-        </v-btn>
-      </template>
-    </v-snackbar>
   </v-app>
 </template>
 
@@ -78,15 +27,15 @@
 import Vue from "vue";
 import { onAuthUIStateChange } from "@aws-amplify/ui-components";
 import NavigationDrawer from "./components/NavigationDrawer.vue";
-import { mapActions, mapGetters, mapMutations, mapState } from "vuex";
-import { DiceObject, getDice, throwDice } from "./utils/dice";
+import { mapGetters, mapMutations, mapState } from "vuex";
 import { Auth } from "aws-amplify";
-import UserAttributes from "@/components/UserAttributes.vue";
+import AppBar from "./components/AppBar.vue";
 
 export default Vue.extend({
   name: "App",
   data() {
     return {
+      userLoaded: false,
       throwResult: 0,
       throwResultNotification: false,
       navDrawerOpen: !this.$vuetify.breakpoint.lgAndDown,
@@ -94,11 +43,15 @@ export default Vue.extend({
   },
   components: {
     "navigation-drawer": NavigationDrawer,
-    "user-attributes": UserAttributes,
+    "app-bar": AppBar,
   },
 
-  computed: { ...mapState(["app"]), ...mapGetters(["isLoggedIn"]) },
+  computed: {
+    ...mapState(["app"]),
+    ...mapGetters(["isLoggedIn", "isNavDrawerOpen"]),
+  },
   created() {
+    this.setNavDrawerOpen(!this.$vuetify.breakpoint.lgAndDown);
     onAuthUIStateChange((authState, authData) => {
       this.setAuthState(authState);
       this.setUser(authData);
@@ -112,6 +65,7 @@ export default Vue.extend({
             this.$root.$i18n.locale = locale;
             this.$vuetify.lang.current = locale;
           }
+          this.userLoaded = true;
         });
       }
     });
@@ -120,15 +74,12 @@ export default Vue.extend({
     return onAuthUIStateChange;
   },
   methods: {
-    ...mapMutations(["setAuthState", "setUser", "logoutUser"]),
-    ...mapActions(["logout"]),
-    doThrow(diceObject: DiceObject) {
-      this.throwResult = throwDice(diceObject.id);
-      this.throwResultNotification = true;
-    },
-    dice() {
-      return getDice(this.$i18n);
-    },
+    ...mapMutations([
+      "setAuthState",
+      "setUser",
+      "logoutUser",
+      "setNavDrawerOpen",
+    ]),
   },
 });
 </script>

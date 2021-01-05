@@ -33,6 +33,8 @@ export interface AppState {
   user?: User;
   authState?: AuthState;
   users: User[];
+  navDrawerOpen: boolean;
+  title: string;
 }
 
 export interface RootState {
@@ -63,6 +65,8 @@ const store = new Vuex.Store<RootState>({
       user: { username: undefined },
       authState: AuthState.Loading,
       users: [],
+      navDrawerOpen: false,
+      title: "M.A.G.U.S",
     } as AppState,
   }),
   getters: {
@@ -81,6 +85,12 @@ const store = new Vuex.Store<RootState>({
     getUsers(state) {
       return state.app.users || [];
     },
+    isNavDrawerOpen(state) {
+      return state.app.navDrawerOpen;
+    },
+    title(state) {
+      return state.app.title;
+    },
   },
   mutations: {
     setAuthState(state, authState: AuthState) {
@@ -88,6 +98,16 @@ const store = new Vuex.Store<RootState>({
     },
     setUser(state, user?: User) {
       state.app.user = user;
+    },
+    setNavDrawerOpen(state, open?: boolean) {
+      state.app.navDrawerOpen = !!open;
+    },
+    toggleNavDrawer(state) {
+      state.app.navDrawerOpen = !state.app.navDrawerOpen;
+    },
+    setAppTitle(state, title: string) {
+      state.app.title = title;
+      window.document.title = title;
     },
   },
   actions: {

@@ -65,7 +65,7 @@
             disabled
           />
         </v-col>
-        <v-col cols="6">
+        <v-col cols="12">
           <v-text-field
             v-model.number="abilities.stamina"
             :label="$t('stamina')"
@@ -73,7 +73,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="6">
+        <v-col cols="12">
           <v-text-field
             v-model.number="abilities.health"
             :label="$t('health')"
@@ -81,7 +81,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="6">
+        <v-col cols="12">
           <v-text-field
             v-model.number="abilities.beauty"
             :label="$t('beauty')"
@@ -89,7 +89,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="6">
+        <v-col cols="12">
           <v-text-field
             v-model.number="abilities.intelligence"
             :label="$t('intelligence')"
@@ -97,7 +97,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="6">
+        <v-col cols="12">
           <v-text-field
             v-model.number="abilities.willpower"
             :label="$t('willpower')"
@@ -105,7 +105,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="6">
+        <v-col cols="12">
           <v-text-field
             v-model.number="abilities.astral"
             :label="$t('astral')"

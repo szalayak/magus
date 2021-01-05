@@ -189,7 +189,6 @@ const loadByOwner = async (owner: string) => {
     query: listCharactersByOwner,
     variables: { owner },
   })) as PageableResult;
-  console.log(result);
   return Object.values(result.data)[0] as CharacterResults;
 };
 

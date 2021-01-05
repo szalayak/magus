@@ -16,6 +16,7 @@
         </v-col>
         <v-col cols="12" xs="12" sm="6">
           <v-text-field
+            class="font-weight-bold"
             v-model.number="skillPoints.current"
             type="number"
             :label="$t('current')"

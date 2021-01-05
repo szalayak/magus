@@ -101,8 +101,6 @@ import { localiseItem } from "@/utils/localise";
 import { LooseObject } from "@/store/types";
 import { User } from "@/store";
 
-type Form = Vue & { validate: () => boolean };
-
 @Component({
   name: "character-list",
 })

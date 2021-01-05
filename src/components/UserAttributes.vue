@@ -57,13 +57,12 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { CognitoUserAttribute } from "amazon-cognito-identity-js";
 import { Locale } from "@/API";
+import { Form } from "@/utils";
 
 interface Attribute {
   name: string;
   value?: string;
 }
-
-type Form = Vue & { validate: () => boolean };
 
 @Component({
   name: "user-attributes",

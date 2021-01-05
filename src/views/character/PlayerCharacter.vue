@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-toolbar flat>
+    <v-toolbar v-if="$vuetify.breakpoint.mdAndUp" flat>
       <v-toolbar-title>{{ character.name }}</v-toolbar-title>
       <v-spacer />
       <!-- <v-text-field
@@ -12,45 +12,47 @@
         @input="search"
       /> -->
       <v-btn-toggle dense tile color="primary" group v-model.number="page">
+        <v-btn>0</v-btn>
         <v-btn>1</v-btn>
         <v-btn>2</v-btn>
         <v-btn>3</v-btn>
         <v-btn>4</v-btn>
       </v-btn-toggle>
     </v-toolbar>
+    <character-overview v-if="page === 0" :id="id" />
     <v-row>
-      <v-col v-show="page === 0" cols="12" xs="12" lg="10">
+      <v-col v-if="page === 1" cols="12" xs="12" lg="10">
         <appearance :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 0" cols="12" xs="12" sm="6" lg="2">
+      <v-col v-if="page === 1" cols="12" xs="12" sm="6" lg="2">
         <administrative-info :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 0" cols="12" xs="12" sm="6" lg="4">
+      <v-col v-if="page === 1" cols="12" xs="12" sm="6" lg="4">
         <properties :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 0" cols="12" xs="12" sm="6" lg="4">
+      <v-col v-if="page === 1" cols="12" xs="12" sm="6" lg="4">
         <likes-and-dislikes :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 0" cols="12" xs="12" sm="6" lg="4">
+      <v-col v-if="page === 1" cols="12" xs="12" sm="6" lg="4">
         <connections :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 1" cols="12">
+      <v-col v-if="page === 2" cols="12">
         <core-information :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 1" cols="12" xs="12" sm="6" lg="4" xl="2">
+      <v-col v-if="page === 2" cols="12" xs="12" sm="6" lg="4" xl="2">
         <abilities :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 1" cols="12" xs="12" sm="6" lg="4" xl="2">
+      <v-col v-if="page === 2" cols="12" xs="12" sm="6" lg="4" xl="2">
         <health :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 1" cols="12" xs="12" sm="6" lg="4" xl="2">
+      <v-col v-if="page === 2" cols="12" xs="12" sm="6" lg="4" xl="2">
         <combat-values :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 1" cols="12" xs="12" sm="6" lg="4" xl="2">
+      <v-col v-if="page === 2" cols="12" xs="12" sm="6" lg="4" xl="2">
         <spell-resistance :id="id" :editable="editable" />
       </v-col>
       <v-col
-        v-show="page === 1 && character.psiUser"
+        v-if="page === 2 && character.psiUser"
         cols="12"
         xs="12"
         sm="6"
@@ -59,7 +61,7 @@
         <psi :id="id" :editable="editable" />
       </v-col>
       <v-col
-        v-show="page === 1 && character.magicUser"
+        v-if="page === 2 && character.magicUser"
         cols="12"
         xs="12"
         sm="3"
@@ -67,46 +69,46 @@
       >
         <magical-ability :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 1" cols="12" xs="12" sm="3" lg="2">
+      <v-col v-if="page === 2" cols="12" xs="12" sm="3" lg="2">
         <armour :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 1" cols="12" xs="12" sm="3" lg="2">
+      <v-col v-if="page === 2" cols="12" xs="12" sm="3" lg="2">
         <shield :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 2" cols="12">
+      <v-col v-if="page === 3" cols="12">
         <weapon-assignments :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 2" cols="12">
+      <v-col v-if="page === 3" cols="12">
         <ranged-weapon-assignments :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 2" cols="12" xs="12" sm="9" lg="10">
+      <v-col v-if="page === 3" cols="12" xs="12" sm="9" lg="10">
         <skill-assignments :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 2" cols="12" xs="12" sm="6" md="3" lg="2">
+      <v-col v-if="page === 3" cols="12" xs="12" sm="6" md="3" lg="2">
         <skill-points :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 3" cols="12" xs="12" sm="6" md="4">
+      <v-col v-if="page === 4" cols="12" xs="12" sm="6" md="4">
         <magical-item-assignments :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 3" cols="12" xs="12" sm="6" md="4">
+      <v-col v-if="page === 4" cols="12" xs="12" sm="6" md="4">
         <languages :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 3" cols="12" xs="12" sm="6" md="4">
+      <v-col v-if="page === 4" cols="12" xs="12" sm="6" md="4">
         <wallet :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 3" cols="12" xs="12" sm="6" md="6">
+      <v-col v-if="page === 4" cols="12" xs="12" sm="6" md="6">
         <inventory :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 3" cols="12" xs="12" sm="6" md="6">
+      <v-col v-if="page === 4" cols="12" xs="12" sm="6" md="6">
         <poisons :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 3" cols="12">
+      <v-col v-if="page === 4" cols="12">
         <animals :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 3" cols="12">
+      <v-col v-if="page === 4" cols="12">
         <servants :id="id" :editable="editable" />
       </v-col>
-      <v-col v-show="page === 3" cols="12">
+      <v-col v-if="page === 4" cols="12">
         <notes :id="id" :editable="editable" />
       </v-col>
     </v-row>
@@ -123,12 +125,20 @@
         </v-btn>
       </template>
     </v-snackbar>
-    <!-- <v-bottom-navigation v-model.number="page">
-      <v-btn value="0">1</v-btn>
-      <v-btn value="1">2</v-btn>
-      <v-btn value="2">3</v-btn>
-      <v-btn value="3">4</v-btn></v-bottom-navigation
-    > -->
+    <v-bottom-navigation
+      v-if="$vuetify.breakpoint.smAndDown"
+      v-model="page"
+      color="primary"
+      fixed
+      hide-on-scroll
+      grow
+    >
+      <v-btn><span>0</span></v-btn>
+      <v-btn><span>1</span></v-btn>
+      <v-btn><span>2</span></v-btn>
+      <v-btn><span>3</span></v-btn>
+      <v-btn><span>4</span></v-btn>
+    </v-bottom-navigation>
   </v-container>
 </template>
 <script lang="ts">
@@ -160,6 +170,7 @@ import PoisonCard from "@/components/character/PoisonCard.vue";
 import MagicalItemAssignmentCard from "@/components/character/MagicalItemCard.vue";
 import AnimalsCard from "@/components/character/AnimalsCard.vue";
 import ServantsCard from "@/components/character/ServantsCard.vue";
+import CharacterOverview from "@/components/character/CharacterOverview.vue";
 
 @Component({
   name: "player-character",
@@ -190,9 +201,8 @@ import ServantsCard from "@/components/character/ServantsCard.vue";
     "magical-item-assignments": MagicalItemAssignmentCard,
     animals: AnimalsCard,
     servants: ServantsCard,
+    "character-overview": CharacterOverview,
   },
 })
-export default class PlayerCharacter extends CharacterPage {
-  tab = 0;
-}
+export default class PlayerCharacter extends CharacterPage {}
 </script>

@@ -11,17 +11,18 @@
         </v-col>
         <v-col cols="6">
           <v-text-field
-            v-model.number="magicalAbility.manaPoints.max"
-            :label="$t('max')"
+            class="font-weight-bold"
+            v-model.number="magicalAbility.manaPoints.current"
             type="number"
+            :label="$t('current')"
             :disabled="!edit"
           />
         </v-col>
         <v-col cols="6">
           <v-text-field
-            v-model.number="magicalAbility.manaPoints.current"
+            v-model.number="magicalAbility.manaPoints.max"
+            :label="$t('max')"
             type="number"
-            :label="$t('current')"
             :disabled="!edit"
           />
         </v-col>
