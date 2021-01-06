@@ -278,5 +278,11 @@
   "search": "Search",
   "delete": "Delete",
   "upload": "Upload",
-  "owner": "Owner"
+  "owner": "Owner",
+  "no-weapons": "No Weapons",
+  "current-drv": "Current DRV",
+  "total-sr": "Total",
+  "psi-points": "Ψp",
+  "mp": "MP",
+  "quick-view": "Quick View"
 }

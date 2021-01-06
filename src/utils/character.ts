@@ -3,11 +3,16 @@ import { Armour } from "@/store/modules/armour";
 import { Character } from "@/store/modules/character";
 import { Shield } from "@/store/modules/shield";
 import { Weapon } from "@/store/modules/weapon";
-import { CombatValues } from "@/store/types";
+import { CombatValues, SpellResistanceValues } from "@/store/types";
 import {
   applyMasterSkillToCombatValues,
   applyUnskilledPenaltyToCombatValues,
 } from "./combatValues";
+
+export const abilityValueAbove10 = (ability?: number): number => {
+  const base = (ability || 0) - 10;
+  return base > 0 ? base : 0;
+};
 
 const calculateCombatValueTotal = (
   base?: number,
@@ -125,7 +130,7 @@ export const defenceTotal = (
     character.otherCombatValueModifiers?.defence,
     calculateDefenceAbilityModifier(character, inArmour)
   );
-  return withShield
+  return withShield && character.shieldInHand
     ? total + (character.shield?.combatValues?.defence || 0)
     : total;
 };
@@ -183,7 +188,7 @@ export const combatValuesWithWeapon = ({
       weapon?.combatValues?.offence
     ),
     defence: calculateCombatValueTotal(
-      defenceTotal(character, inArmour, withShield),
+      defenceTotal(character, inArmour, withShield && character.shieldInHand),
       weapon?.combatValues?.defence
     ),
     aiming: calculateCombatValueTotal(
@@ -196,4 +201,34 @@ export const combatValuesWithWeapon = ({
   else if (mastery === Mastery.MASTER)
     return applyMasterSkillToCombatValues(base);
   else return base;
+};
+
+export const calculateSpellResistanceTotal = (
+  values?: SpellResistanceValues
+): number => {
+  const staticShield = values?.staticShield || 0;
+  const dynamicShield = values?.dynamicShield || 0;
+  const innate = values?.innate || 0;
+  const magical = values?.magical || 0;
+
+  return staticShield + dynamicShield + innate + magical;
+};
+
+export const calculateInnateSpellResistance = (ability?: number): number => {
+  return abilityValueAbove10(ability);
+};
+
+export const characterToLink = (
+  character: Character,
+  page?: number,
+  selector?: string
+): string => {
+  const type = character.playerCharacter
+    ? "player-characters"
+    : "non-player-characters";
+  const link = `/${type}/${character.id}`;
+  if (page)
+    if (selector) return `${link}/${page.toString()}#${selector}`;
+    else return `${link}/${page.toString()}`;
+  else return link;
 };

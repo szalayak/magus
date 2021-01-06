@@ -93,7 +93,9 @@ const defaultActions = createDefaultActions({
     characterArmourId: item.armour?.id,
     characterShieldId: item.shield?.id,
     armourMastery: item.armourMastery,
+    armourCurrentDamageReductionValue: item.armourCurrentDamageReductionValue,
     shieldMastery: item.shieldMastery,
+    shieldInHand: item.shieldInHand,
     skillPoints: item.skillPoints,
   }),
 });

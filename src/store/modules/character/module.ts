@@ -197,6 +197,10 @@ export const characterModule: Module<CharacterState, RootState> = {
           context.dispatch(DefaultActionKeys.UPDATE, character);
         }
       },
+      async update(context, item: Character) {
+        const result = await proxy.defaultActions.updateFunction(item);
+        context.commit(DefaultMutationKeys.CHANGE, mapCharacterResult(result));
+      },
       async delete(context, id: string) {
         const character = findById(context.getters.list, id) as Character;
         if (character) {

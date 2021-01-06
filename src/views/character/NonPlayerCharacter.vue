@@ -11,15 +11,8 @@
         hide-details
         @input="search"
       /> -->
-      <v-btn-toggle
-        v-if="$vuetify.breakpoint.mdAndUp"
-        dense
-        tile
-        color="primary"
-        group
-        v-model="page"
-      >
-        <v-btn>0</v-btn>
+      <v-btn-toggle dense tile color="primary" group v-model.number="page">
+        <v-btn>{{ $t("quick-view") }}</v-btn>
         <v-btn>1</v-btn>
         <v-btn>2</v-btn>
         <v-btn>3</v-btn>
@@ -132,9 +125,8 @@
       color="primary"
       fixed
       hide-on-scroll
-      grow
     >
-      <v-btn><span>0</span></v-btn>
+      <v-btn><span></span><v-icon>mdi-eye</v-icon></v-btn>
       <v-btn><span>1</span></v-btn>
       <v-btn><span>2</span></v-btn>
       <v-btn><span>3</span></v-btn>

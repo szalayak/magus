@@ -278,5 +278,10 @@
   "search": "Keresés",
   "delete": "Törlés",
   "upload": "Betöltés",
-  "owner": "Tulajdonos"
+  "owner": "Tulajdonos",
+  "no-weapons": "Fegyver Nélkül",
+  "current-drv": "Akt. SFÉ",
+  "total-sr": "Teljes",
+  "mp": "Mp",
+  "quick-view": "Gyorsnézet"
 }

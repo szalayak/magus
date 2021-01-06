@@ -1079,6 +1079,7 @@ export const createCharacter = /* GraphQL */ `
         updatedAt
       }
       armourMastery
+      armourCurrentDamageReductionValue
       shield {
         id
         descriptions {
@@ -1105,6 +1106,7 @@ export const createCharacter = /* GraphQL */ `
         updatedAt
       }
       shieldMastery
+      shieldInHand
       weapons {
         items {
           id
@@ -1550,6 +1552,7 @@ export const updateCharacter = /* GraphQL */ `
         updatedAt
       }
       armourMastery
+      armourCurrentDamageReductionValue
       shield {
         id
         descriptions {
@@ -1576,6 +1579,7 @@ export const updateCharacter = /* GraphQL */ `
         updatedAt
       }
       shieldMastery
+      shieldInHand
       weapons {
         items {
           id
@@ -2021,6 +2025,7 @@ export const deleteCharacter = /* GraphQL */ `
         updatedAt
       }
       armourMastery
+      armourCurrentDamageReductionValue
       shield {
         id
         descriptions {
@@ -2047,6 +2052,7 @@ export const deleteCharacter = /* GraphQL */ `
         updatedAt
       }
       shieldMastery
+      shieldInHand
       weapons {
         items {
           id

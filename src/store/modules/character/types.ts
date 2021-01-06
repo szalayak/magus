@@ -112,8 +112,10 @@ export interface CharacterCore extends Identifiable {
   notes?: string;
   armour?: Armour;
   armourMastery?: Mastery;
+  armourCurrentDamageReductionValue?: number;
   shield?: Shield;
   shieldMastery?: Mastery;
+  shieldInHand?: boolean;
   createdAt?: string;
   updatedAt?: string;
 }

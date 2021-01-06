@@ -397,8 +397,10 @@ type Character
   notes: String
   armour: Armour @connection
   armourMastery: Mastery
+  armourCurrentDamageReductionValue: Int
   shield: Shield @connection
   shieldMastery: Mastery
+  shieldInHand: Boolean
   weapons: [WeaponAssignment!]
     @connection(keyName: "byCharacter", fields: ["id"])
   skills: [SkillAssignment!] @connection(keyName: "byCharacter", fields: ["id"])

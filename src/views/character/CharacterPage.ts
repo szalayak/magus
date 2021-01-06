@@ -17,7 +17,7 @@ export default class CharacterPage extends Vue {
     if (page !== undefined) {
       this.$router.push({
         name: this.$route.name || undefined,
-        params: { ...this.$route.params, page: (page).toString() },
+        params: { ...this.$route.params, page: page.toString() },
       });
     }
   }
@@ -41,6 +41,9 @@ export default class CharacterPage extends Vue {
     try {
       // load character
       await this.$store.dispatch("character/loadItem", this.id);
+
+      // nav to hash
+      if (this.$route.hash) this.$vuetify.goTo(this.$route.hash);
 
       // set title
       this.$store.commit("setAppTitle", this.character.name || "");

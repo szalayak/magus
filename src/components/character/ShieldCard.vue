@@ -14,6 +14,21 @@
           />
         </v-col>
         <v-col cols="12">
+          <v-select
+            v-model="character.shieldMastery"
+            :items="masteryLevels"
+            :label="$t('mastery')"
+            :disabled="!edit"
+          />
+        </v-col>
+        <v-col cols="12">
+          <v-checkbox
+            v-model="character.shieldInHand"
+            :label="$t('in-hand')"
+            :disabled="!edit"
+          />
+        </v-col>
+        <v-col cols="12">
           <v-text-field
             :label="$t('defence')"
             :value="combatValues.defence"
@@ -32,14 +47,6 @@
             :label="$t('damage')"
             :value="damage(shield.damage)"
             disabled
-          />
-        </v-col>
-        <v-col cols="12">
-          <v-select
-            v-model="character.shieldMastery"
-            :items="masteryLevels"
-            :label="$t('mastery')"
-            :disabled="!edit"
           />
         </v-col>
         <v-col cols="12">
@@ -78,10 +85,15 @@ export default class ShieldCard extends CharacterInfo {
   }
 
   get shields(): Shield[] {
-    return localise(
-      this.$store.getters["shield/list"],
-      this.$i18n.locale
-    ) as Shield[];
+    return [
+      {
+        id: null,
+        description: {
+          title: this.$t("none"),
+        },
+      },
+      ...localise(this.$store.getters["shield/list"], this.$i18n.locale),
+    ] as Shield[];
   }
   get shield(): Shield {
     if (!this.character.shield) this.character.shield = {};

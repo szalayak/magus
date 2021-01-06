@@ -100,6 +100,7 @@ import { Class } from "@/store/modules/class";
 import { localiseItem } from "@/utils/localise";
 import { LooseObject } from "@/store/types";
 import { User } from "@/store";
+import { characterToLink } from "@/utils";
 
 @Component({
   name: "character-list",
@@ -151,10 +152,7 @@ export default class CharacterList extends Vue {
   }
 
   characterToLink(character: Character) {
-    const type = character.playerCharacter
-      ? "player-characters"
-      : "non-player-characters";
-    return `/${type}/${character.id}`;
+    return characterToLink(character);
   }
 
   characterPageToLink(character: Character, page: number) {

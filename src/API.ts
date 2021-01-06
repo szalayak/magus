@@ -473,7 +473,9 @@ export type CreateCharacterInput = {
   poisons?: Array< PoisonInput > | null,
   notes?: string | null,
   armourMastery?: Mastery | null,
+  armourCurrentDamageReductionValue?: number | null,
   shieldMastery?: Mastery | null,
+  shieldInHand?: boolean | null,
   characterClassId?: string | null,
   characterRaceId?: string | null,
   characterPersonalityId?: string | null,
@@ -637,7 +639,9 @@ export type ModelCharacterConditionInput = {
   mandatoryCombatValueModifierDistribution?: ModelStringInput | null,
   notes?: ModelStringInput | null,
   armourMastery?: ModelMasteryInput | null,
+  armourCurrentDamageReductionValue?: ModelIntInput | null,
   shieldMastery?: ModelMasteryInput | null,
+  shieldInHand?: ModelBooleanInput | null,
   and?: Array< ModelCharacterConditionInput | null > | null,
   or?: Array< ModelCharacterConditionInput | null > | null,
   not?: ModelCharacterConditionInput | null,
@@ -686,7 +690,9 @@ export type UpdateCharacterInput = {
   poisons?: Array< PoisonInput > | null,
   notes?: string | null,
   armourMastery?: Mastery | null,
+  armourCurrentDamageReductionValue?: number | null,
   shieldMastery?: Mastery | null,
+  shieldInHand?: boolean | null,
   characterClassId?: string | null,
   characterRaceId?: string | null,
   characterPersonalityId?: string | null,
@@ -1008,7 +1014,9 @@ export type ModelCharacterFilterInput = {
   mandatoryCombatValueModifierDistribution?: ModelStringInput | null,
   notes?: ModelStringInput | null,
   armourMastery?: ModelMasteryInput | null,
+  armourCurrentDamageReductionValue?: ModelIntInput | null,
   shieldMastery?: ModelMasteryInput | null,
+  shieldInHand?: ModelBooleanInput | null,
   and?: Array< ModelCharacterFilterInput | null > | null,
   or?: Array< ModelCharacterFilterInput | null > | null,
   not?: ModelCharacterFilterInput | null,
@@ -2337,6 +2345,7 @@ export type CreateCharacterMutation = {
       updatedAt: string,
     } | null,
     armourMastery: Mastery | null,
+    armourCurrentDamageReductionValue: number | null,
     shield:  {
       __typename: "Shield",
       id: string,
@@ -2367,6 +2376,7 @@ export type CreateCharacterMutation = {
       updatedAt: string,
     } | null,
     shieldMastery: Mastery | null,
+    shieldInHand: boolean | null,
     weapons:  {
       __typename: "ModelWeaponAssignmentConnection",
       items:  Array< {
@@ -2880,6 +2890,7 @@ export type UpdateCharacterMutation = {
       updatedAt: string,
     } | null,
     armourMastery: Mastery | null,
+    armourCurrentDamageReductionValue: number | null,
     shield:  {
       __typename: "Shield",
       id: string,
@@ -2910,6 +2921,7 @@ export type UpdateCharacterMutation = {
       updatedAt: string,
     } | null,
     shieldMastery: Mastery | null,
+    shieldInHand: boolean | null,
     weapons:  {
       __typename: "ModelWeaponAssignmentConnection",
       items:  Array< {
@@ -3423,6 +3435,7 @@ export type DeleteCharacterMutation = {
       updatedAt: string,
     } | null,
     armourMastery: Mastery | null,
+    armourCurrentDamageReductionValue: number | null,
     shield:  {
       __typename: "Shield",
       id: string,
@@ -3453,6 +3466,7 @@ export type DeleteCharacterMutation = {
       updatedAt: string,
     } | null,
     shieldMastery: Mastery | null,
+    shieldInHand: boolean | null,
     weapons:  {
       __typename: "ModelWeaponAssignmentConnection",
       items:  Array< {
@@ -5554,6 +5568,7 @@ export type GetCharacterQuery = {
       updatedAt: string,
     } | null,
     armourMastery: Mastery | null,
+    armourCurrentDamageReductionValue: number | null,
     shield:  {
       __typename: "Shield",
       id: string,
@@ -5584,6 +5599,7 @@ export type GetCharacterQuery = {
       updatedAt: string,
     } | null,
     shieldMastery: Mastery | null,
+    shieldInHand: boolean | null,
     weapons:  {
       __typename: "ModelWeaponAssignmentConnection",
       items:  Array< {
@@ -6100,6 +6116,7 @@ export type ListCharactersQuery = {
         updatedAt: string,
       } | null,
       armourMastery: Mastery | null,
+      armourCurrentDamageReductionValue: number | null,
       shield:  {
         __typename: "Shield",
         id: string,
@@ -6130,6 +6147,7 @@ export type ListCharactersQuery = {
         updatedAt: string,
       } | null,
       shieldMastery: Mastery | null,
+      shieldInHand: boolean | null,
       weapons:  {
         __typename: "ModelWeaponAssignmentConnection",
         items:  Array< {
@@ -7202,6 +7220,7 @@ export type ListCharactersByOwnerQuery = {
         updatedAt: string,
       } | null,
       armourMastery: Mastery | null,
+      armourCurrentDamageReductionValue: number | null,
       shield:  {
         __typename: "Shield",
         id: string,
@@ -7232,6 +7251,7 @@ export type ListCharactersByOwnerQuery = {
         updatedAt: string,
       } | null,
       shieldMastery: Mastery | null,
+      shieldInHand: boolean | null,
       weapons:  {
         __typename: "ModelWeaponAssignmentConnection",
         items:  Array< {
@@ -7657,6 +7677,7 @@ export type ListCharactersByDungeonMasterQuery = {
         updatedAt: string,
       } | null,
       armourMastery: Mastery | null,
+      armourCurrentDamageReductionValue: number | null,
       shield:  {
         __typename: "Shield",
         id: string,
@@ -7687,6 +7708,7 @@ export type ListCharactersByDungeonMasterQuery = {
         updatedAt: string,
       } | null,
       shieldMastery: Mastery | null,
+      shieldInHand: boolean | null,
       weapons:  {
         __typename: "ModelWeaponAssignmentConnection",
         items:  Array< {
@@ -8926,6 +8948,7 @@ export type OnCreateCharacterSubscription = {
       updatedAt: string,
     } | null,
     armourMastery: Mastery | null,
+    armourCurrentDamageReductionValue: number | null,
     shield:  {
       __typename: "Shield",
       id: string,
@@ -8956,6 +8979,7 @@ export type OnCreateCharacterSubscription = {
       updatedAt: string,
     } | null,
     shieldMastery: Mastery | null,
+    shieldInHand: boolean | null,
     weapons:  {
       __typename: "ModelWeaponAssignmentConnection",
       items:  Array< {
@@ -9469,6 +9493,7 @@ export type OnUpdateCharacterSubscription = {
       updatedAt: string,
     } | null,
     armourMastery: Mastery | null,
+    armourCurrentDamageReductionValue: number | null,
     shield:  {
       __typename: "Shield",
       id: string,
@@ -9499,6 +9524,7 @@ export type OnUpdateCharacterSubscription = {
       updatedAt: string,
     } | null,
     shieldMastery: Mastery | null,
+    shieldInHand: boolean | null,
     weapons:  {
       __typename: "ModelWeaponAssignmentConnection",
       items:  Array< {
@@ -10012,6 +10038,7 @@ export type OnDeleteCharacterSubscription = {
       updatedAt: string,
     } | null,
     armourMastery: Mastery | null,
+    armourCurrentDamageReductionValue: number | null,
     shield:  {
       __typename: "Shield",
       id: string,
@@ -10042,6 +10069,7 @@ export type OnDeleteCharacterSubscription = {
       updatedAt: string,
     } | null,
     shieldMastery: Mastery | null,
+    shieldInHand: boolean | null,
     weapons:  {
       __typename: "ModelWeaponAssignmentConnection",
       items:  Array< {

@@ -78,7 +78,11 @@
 import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
-import { SpellResistance, SpellResistanceValues } from "@/store/types";
+import { SpellResistance } from "@/store/types";
+import {
+  calculateInnateSpellResistance,
+  calculateSpellResistanceTotal,
+} from "@/utils";
 
 @Component({
   name: "spell-resistance-card",
@@ -87,35 +91,25 @@ import { SpellResistance, SpellResistanceValues } from "@/store/types";
   },
 })
 export default class SpellResistanceCard extends CharacterInfo {
-  calculateTotal(values?: SpellResistanceValues): number {
-    const staticShield = values?.staticShield || 0;
-    const dynamicShield = values?.dynamicShield || 0;
-    const innate = values?.innate || 0;
-    const magical = values?.magical || 0;
-
-    return staticShield + dynamicShield + innate + magical;
-  }
-
-  calculateInnate(ability?: number): number {
-    const base = (ability || 0) - 10;
-    return base > 0 ? base : 0;
-  }
-
   get astralTotal() {
-    return this.calculateTotal(this.spellResistance.astral);
+    return calculateSpellResistanceTotal(this.spellResistance.astral);
   }
 
   get mentalTotal() {
-    return this.calculateTotal(this.spellResistance.mental);
+    return calculateSpellResistanceTotal(this.spellResistance.mental);
   }
 
   get spellResistance(): SpellResistance {
     const defaultValue = {
       astral: {
-        innate: this.calculateInnate(this.character.abilities?.astral),
+        innate: calculateInnateSpellResistance(
+          this.character.abilities?.astral
+        ),
       },
       mental: {
-        innate: this.calculateInnate(this.character.abilities?.willpower),
+        innate: calculateInnateSpellResistance(
+          this.character.abilities?.willpower
+        ),
       },
     };
     if (!this.character.spellResistance)
