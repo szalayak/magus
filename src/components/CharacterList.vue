@@ -33,6 +33,9 @@
               <v-card-actions>
                 <v-subheader class="pl-2">{{ $t("page") }}</v-subheader>
                 <v-btn-toggle dense tile color="primary" group>
+                  <v-btn :to="characterPageToLink(item, 0)"
+                    ><v-icon>mdi-eye</v-icon></v-btn
+                  >
                   <v-btn :to="characterPageToLink(item, 1)">1</v-btn>
                   <v-btn :to="characterPageToLink(item, 2)">2</v-btn>
                   <v-btn :to="characterPageToLink(item, 3)">3</v-btn>

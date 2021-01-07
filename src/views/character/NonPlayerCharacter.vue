@@ -2,6 +2,7 @@
   <v-container fluid>
     <v-toolbar v-if="$vuetify.breakpoint.mdAndUp" flat>
       <v-toolbar-title>{{ character.name }}</v-toolbar-title>
+      <v-btn text icon @click="refresh"><v-icon>mdi-refresh</v-icon></v-btn>
       <v-spacer />
       <!-- <v-text-field
         clearable

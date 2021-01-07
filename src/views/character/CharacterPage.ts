@@ -37,6 +37,19 @@ export default class CharacterPage extends Vue {
     );
   }
 
+  async refresh() {
+    try {
+      // load character
+      await this.$store.dispatch("character/loadItem", this.id);
+    } catch (error) {
+      this.messages =
+        typeof error === "string"
+          ? [error]
+          : error.errors?.map((err: LooseObject) => err.message) || [];
+      this.notification = true;
+    }
+  }
+
   async created() {
     try {
       // load character

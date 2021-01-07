@@ -204,21 +204,18 @@ const loadByDungeonMaster = async (dungeonMaster: string) => {
   return Object.values(result.data)[0] as CharacterResults;
 };
 
-const subscribeToUpdate = async (): Promise<{
-  queryResult: CharacterQueryResult;
-  subscription: Subscription;
-}> => {
+const subscribeToUpdate = async (
+  callback: (result: CharacterQueryResult, subscription: Subscription) => void
+): Promise<void> => {
   const observable = (await API.graphql(
     graphqlOperation(onUpdateCharacter)
   )) as Observable<LooseObject>;
-  return new Promise(resolve => {
-    const subscription = observable.subscribe({
-      next: characterData => {
-        const queryResult = ((characterData.value as LooseObject)
-          .data as LooseObject).onUpdateCharacter as CharacterQueryResult;
-        resolve({ queryResult, subscription });
-      },
-    });
+  const subscription = observable.subscribe({
+    next: characterData => {
+      const queryResult = ((characterData.value as LooseObject)
+        .data as LooseObject).onUpdateCharacter as CharacterQueryResult;
+      callback(queryResult, subscription);
+    },
   });
 };
 

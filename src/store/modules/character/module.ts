@@ -9,7 +9,7 @@ import {
 import { Module } from "vuex";
 import { Character, CharacterState } from ".";
 import proxy from "./proxies";
-import { Assignment, CharacterResults } from "./types";
+import { Assignment, CharacterQueryResult, CharacterResults } from "./types";
 import {
   createAssignmentActions,
   findById,
@@ -17,6 +17,7 @@ import {
   removeAssignment,
   updateAssignment,
 } from "./utils";
+import { Subscription } from "rxjs";
 
 const weaponAssignmentActions = createAssignmentActions({
   actions: proxy.weaponAssignmentActions,
@@ -234,15 +235,18 @@ export const characterModule: Module<CharacterState, RootState> = {
       async subscribeToUpdate(context) {
         const state = context.state as CharacterState;
         if (!state.subscription) {
-          const {
-            queryResult,
-            subscription,
-          } = await proxy.additionalActions.subscribeToUpdate();
-          state.subscription = subscription;
-          context.commit(
-            DefaultMutationKeys.CHANGE,
-            mapCharacterResult(queryResult)
-          );
+          const callback = (
+            result: CharacterQueryResult,
+            subscription: Subscription
+          ): void => {
+            state.subscription = subscription;
+            context.commit(
+              DefaultMutationKeys.CHANGE,
+              mapCharacterResult(result)
+            );
+          };
+
+          await proxy.additionalActions.subscribeToUpdate(callback);
         }
       },
     },
