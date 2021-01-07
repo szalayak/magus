@@ -291,5 +291,8 @@
   "trial": "Próba",
   "throw": "Dobás",
   "unskilled": "Képzetlen",
-  "dm-overview": "KM Áttekintés"
+  "dm-overview": "KM Áttekintés",
+  "pull-to-refresh": "Frissítés...",
+  "loading-indicator": "Frissítés...",
+  "error": "Hiba"
 }

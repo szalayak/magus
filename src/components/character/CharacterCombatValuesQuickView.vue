@@ -89,7 +89,7 @@
         <v-subheader class="pl-0">{{ $t("no-weapons") }}</v-subheader>
         <v-list-item class="ps-0">
           <v-row dense>
-            <v-col cols="3">
+            <v-col cols="2">
               <throw-scenario-trigger-field
                 throwScenarioString="D10"
                 :title="$t('initiation')"
@@ -105,7 +105,7 @@
                 "
               />
             </v-col>
-            <v-col cols="3">
+            <v-col cols="2">
               <throw-scenario-trigger-field
                 throwScenarioString="D100"
                 :title="$t('offence')"
@@ -121,7 +121,7 @@
                 "
               />
             </v-col>
-            <v-col cols="3">
+            <v-col cols="2">
               <strong>{{ $t("defence") }}:</strong>
               {{ combatValuesWithoutWeapon.defence }}
             </v-col>
@@ -149,7 +149,7 @@
           }}</v-subheader>
           <v-list-item class="ps-0" :key="weapon.id">
             <v-row dense>
-              <v-col cols="3">
+              <v-col cols="2">
                 <throw-scenario-trigger-field
                   throwScenarioString="D10"
                   :title="$t('initiation')"
@@ -166,7 +166,7 @@
                   "
                 />
               </v-col>
-              <v-col v-if="!weapon.weapon.ranged" cols="3">
+              <v-col v-if="!weapon.weapon.ranged" cols="2">
                 <throw-scenario-trigger-field
                   throwScenarioString="D100"
                   :title="$t('offence')"
@@ -183,11 +183,11 @@
                   "
                 />
               </v-col>
-              <v-col v-if="!weapon.weapon.ranged" cols="3">
+              <v-col v-if="!weapon.weapon.ranged" cols="2">
                 <strong>{{ $t("defence") }}:</strong>
                 {{ weapon.combatValues.defence }}
               </v-col>
-              <v-col v-if="weapon.weapon.ranged" cols="3">
+              <v-col v-if="weapon.weapon.ranged" cols="2">
                 <throw-scenario-trigger-field
                   throwScenarioString="D100"
                   :title="$t('aiming')"
@@ -204,8 +204,8 @@
                   "
                 />
               </v-col>
-              <v-col v-if="weapon.weapon.ranged" cols="3"></v-col>
-              <v-col cols="3">
+              <v-col v-if="weapon.weapon.ranged" cols="2"></v-col>
+              <v-col cols="4">
                 <throw-scenario-trigger-field
                   :throwScenarioString="damageToString(weapon.weapon.damage)"
                   :title="$t('damage')"

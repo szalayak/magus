@@ -10,3 +10,8 @@ declare module "vuetify/es5/services/goto" {
     options?: any
   ): any;
 }
+
+declare module "vue-pull-refresh" {
+  import VuePullRefresh from "vue-pull-refresh";
+  export default VuePullRefresh;
+}

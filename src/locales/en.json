@@ -291,6 +291,9 @@
   "current-mp": "Current Mp",
   "trial": "Trial",
   "throw": "Throw",
-  "unskilled":"Unskilled",
-  "dm-overview":"DM Overview"
+  "unskilled": "Unskilled",
+  "dm-overview": "DM Overview",
+  "pull-to-refresh": "Pull To Refresh...",
+  "loading-indicator": "Loading...",
+  "error": "Error"
 }

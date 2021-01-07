@@ -9,6 +9,13 @@ export default class CharacterPage extends Vue {
   messages: string[] = [];
   notification = false;
 
+  pullToRefreshConfig = {
+    loadingLabel: this.$t("loading-indicator"),
+    startLabel: this.$t("loading-indicator"),
+    readyLabel: this.$t("pull-to-refresh"),
+    errorLabel: this.$t("error"),
+  };
+
   get page() {
     return this.$route.params.page ? parseInt(this.$route.params.page) : 0;
   }

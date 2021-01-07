@@ -13,7 +13,15 @@
           <v-card-text
             ><v-row dense>
               <template v-for="character in playerCharacters">
-                <v-col cols="2" :key="character.id">
+                <v-col
+                  cols="12"
+                  xs="12"
+                  sm="6"
+                  md="4"
+                  lg="3"
+                  xl="2"
+                  :key="character.id"
+                >
                   <character-abilities-quick-view :character="character">
                     <template v-slot:title>
                       <router-link :to="characterToLink(character)">{{
@@ -31,7 +39,15 @@
           <v-card-text
             ><v-row dense>
               <template v-for="character in nonPlayerCharacters">
-                <v-col cols="2" :key="character.id">
+                <v-col
+                  cols="12"
+                  xs="12"
+                  sm="6"
+                  md="4"
+                  lg="3"
+                  xl="2"
+                  :key="character.id"
+                >
                   <character-abilities-quick-view :character="character">
                     <template v-slot:title>
                       <router-link :to="characterToLink(character)">{{
@@ -52,7 +68,15 @@
           <v-card-text
             ><v-row dense>
               <template v-for="character in playerCharacters">
-                <v-col cols="2" :key="character.id">
+                <v-col
+                  cols="12"
+                  xs="12"
+                  sm="6"
+                  md="4"
+                  lg="3"
+                  xl="2"
+                  :key="character.id"
+                >
                   <character-vitality-quick-view
                     :character="character"
                     @error="onError"
@@ -73,7 +97,15 @@
           <v-card-text
             ><v-row dense>
               <template v-for="character in nonPlayerCharacters">
-                <v-col cols="2" :key="character.id">
+                <v-col
+                  cols="12"
+                  xs="12"
+                  sm="6"
+                  md="4"
+                  lg="3"
+                  xl="2"
+                  :key="character.id"
+                >
                   <character-vitality-quick-view
                     :character="character"
                     @error="onError"
@@ -97,7 +129,15 @@
           <v-card-text
             ><v-row dense>
               <template v-for="character in playerCharacters">
-                <v-col cols="3" :key="character.id">
+                <v-col
+                  cols="12"
+                  xs="12"
+                  sm="6"
+                  md="4"
+                  lg="3"
+                  xl="2"
+                  :key="character.id"
+                >
                   <character-combat-values-quick-view :character="character">
                     <template v-slot:title>
                       <router-link :to="characterToLink(character)">{{
@@ -115,7 +155,15 @@
           <v-card-text
             ><v-row dense>
               <template v-for="character in nonPlayerCharacters">
-                <v-col cols="3" :key="character.id">
+                <v-col
+                  cols="12"
+                  xs="12"
+                  sm="6"
+                  md="4"
+                  lg="3"
+                  xl="2"
+                  :key="character.id"
+                >
                   <character-combat-values-quick-view :character="character">
                     <template v-slot:title>
                       <router-link :to="characterToLink(character)">{{
@@ -136,7 +184,15 @@
           <v-card-text
             ><v-row dense>
               <template v-for="character in playerCharacters">
-                <v-col cols="2" :key="character.id">
+                <v-col
+                  cols="12"
+                  xs="12"
+                  sm="6"
+                  md="4"
+                  lg="3"
+                  xl="2"
+                  :key="character.id"
+                >
                   <character-spell-resistance-quick-view :character="character">
                     <template v-slot:title>
                       <router-link :to="characterToLink(character)">{{
@@ -154,7 +210,15 @@
           <v-card-text
             ><v-row dense>
               <template v-for="character in nonPlayerCharacters">
-                <v-col cols="2" :key="character.id">
+                <v-col
+                  cols="12"
+                  xs="12"
+                  sm="6"
+                  md="4"
+                  lg="3"
+                  xl="2"
+                  :key="character.id"
+                >
                   <character-spell-resistance-quick-view :character="character">
                     <template v-slot:title>
                       <router-link :to="characterToLink(character)">{{
@@ -177,7 +241,15 @@
           <v-card-text
             ><v-row dense>
               <template v-for="character in playerCharacters">
-                <v-col cols="2" :key="character.id">
+                <v-col
+                  cols="12"
+                  xs="12"
+                  sm="6"
+                  md="4"
+                  lg="3"
+                  xl="2"
+                  :key="character.id"
+                >
                   <character-psi-mana-points-quick-view
                     :character="character"
                     @error="onError"
@@ -198,7 +270,15 @@
           <v-card-text
             ><v-row dense>
               <template v-for="character in nonPlayerCharacters">
-                <v-col cols="2" :key="character.id">
+                <v-col
+                  cols="12"
+                  xs="12"
+                  sm="6"
+                  md="4"
+                  lg="3"
+                  xl="2"
+                  :key="character.id"
+                >
                   <character-psi-mana-points-quick-view
                     :character="character"
                     @error="onError"
