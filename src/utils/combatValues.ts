@@ -20,30 +20,44 @@ export const combatValuesToString = (
   return `${initiationValueString}${offenceValueString}${defenceValueString}${aimingValueString}`;
 };
 
+export enum MasterSkillCombatValueModifiers {
+  initiation = 5,
+  offence = 10,
+  defence = 10,
+  aiming = 5,
+}
+
 export const applyMasterSkillToCombatValues = (
   combatValues?: CombatValues
 ): CombatValues => {
   const { initiation, offence, defence, aiming } = combatValues || {};
   return {
-    initiation: (initiation || 0) + 5,
-    offence: (offence || 0) + 10,
-    defence: (defence || 0) + 10,
-    aiming: (aiming || 0) + 5,
+    initiation: (initiation || 0) + MasterSkillCombatValueModifiers.initiation,
+    offence: (offence || 0) + MasterSkillCombatValueModifiers.offence,
+    defence: (defence || 0) + MasterSkillCombatValueModifiers.defence,
+    aiming: (aiming || 0) + MasterSkillCombatValueModifiers.aiming,
   };
 };
+
+export enum UnskilledCombatValueModifiers {
+  initiation = -10,
+  offence = -25,
+  defence = -20,
+  aiming = -30,
+}
 
 export const applyUnskilledPenaltyToCombatValues = (
   combatValues?: CombatValues
 ): CombatValues => {
   let { initiation, offence, defence, aiming } = combatValues || {};
-  initiation = (initiation || 0) - 10;
-  offence = (offence || 0) - 25;
-  defence = (defence || 0) - 20;
-  aiming = (aiming || 0) - 30;
+  initiation = (initiation || 0) + UnskilledCombatValueModifiers.initiation;
+  offence = (offence || 0) + UnskilledCombatValueModifiers.offence;
+  defence = (defence || 0) + UnskilledCombatValueModifiers.defence;
+  aiming = (aiming || 0) + UnskilledCombatValueModifiers.aiming;
 
   return {
     initiation: initiation > 0 ? initiation : 0,
-    offence: offence > 0 ? initiation : 0,
+    offence: offence > 0 ? offence : 0,
     defence: defence > 0 ? defence : 0,
     aiming: aiming > 0 ? aiming : 0,
   };

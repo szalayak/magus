@@ -287,5 +287,9 @@
   "current-vp": "Akt. Ép",
   "current-hp": "Akt. Fp",
   "current-psi-points": "Akt. Ψp",
-  "current-mp": "Akt. Mp"
+  "current-mp": "Akt. Mp",
+  "trial": "Próba",
+  "throw": "Dobás",
+  "unskilled": "Képzetlen",
+  "dm-overview": "KM Áttekintés"
 }

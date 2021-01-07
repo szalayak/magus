@@ -138,6 +138,7 @@ export default class NonPlayerCharactersAsDM extends TitleComponent {
     name: "",
     level: { currentLevel: 1 },
     playerCharacter: false,
+    dungeonMaster: this.$store.getters["currentUser"],
   };
 
   get characters(): Character[] {

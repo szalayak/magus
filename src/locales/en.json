@@ -288,5 +288,9 @@
   "current-vp": "Current VP",
   "current-hp": "Current HP",
   "current-psi-points": "Current Ψp",
-  "current-mp": "Current Mp"
+  "current-mp": "Current Mp",
+  "trial": "Trial",
+  "throw": "Throw",
+  "unskilled":"Unskilled",
+  "dm-overview":"DM Overview"
 }

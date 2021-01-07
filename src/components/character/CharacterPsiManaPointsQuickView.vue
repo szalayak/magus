@@ -1,0 +1,108 @@
+<template>
+  <v-card outlined>
+    <v-card-title
+      ><slot name="title"
+        ><router-link :to="characterToLink(character, 2, 'psi')">
+          {{ $t("psi") }}/{{ $t("mana-points") }}</router-link
+        ></slot
+      >
+    </v-card-title>
+    <v-card-text>
+      <v-row dense>
+        <v-col cols="4"> </v-col>
+        <v-col cols="4">
+          <strong>{{ $t("current") }}</strong>
+        </v-col>
+        <v-col cols="4">
+          <strong>{{ $t("max") }}</strong>
+        </v-col>
+        <template v-if="character.psiUser">
+          <v-col cols="4"
+            ><strong>{{ $t("psi-points") }}</strong></v-col
+          >
+          <v-col cols="4">
+            <quick-update-property-field
+              :value="psiPoints.current || 0"
+              :title="$t('current-psi-points')"
+              @save="onCurrentPsiPointsChanged"
+          /></v-col>
+          <v-col cols="4">{{ psiPoints.max }}</v-col>
+        </template>
+        <template v-if="character.magicUser">
+          <v-col cols="4"
+            ><strong>{{ $t("mp") }}</strong></v-col
+          >
+          <v-col cols="4">
+            <quick-update-property-field
+              :value="manaPoints.current || 0"
+              :title="$t('current-mp')"
+              @save="onCurrentManaPointsChanged"
+          /></v-col>
+          <v-col cols="4">{{ manaPoints.max }}</v-col>
+          <v-col cols="12">
+            <v-subheader class="pl-0"
+              ><strong>{{ $t("notes") }}</strong></v-subheader
+            >
+          </v-col>
+          <v-col cols="12">
+            {{ magicalAbility.notes }}
+          </v-col>
+        </template>
+      </v-row>
+    </v-card-text>
+  </v-card>
+</template>
+
+<script lang="ts">
+import { MagicalAbility, MutablePointValue } from "@/store";
+import Component from "vue-class-component";
+import CharacterQuickView from "./CharacterQuickView";
+import QuickUpdatePropertyField from "./QuickUpdatePropertyField.vue";
+@Component({
+  name: "character-psi-mana-points-quick-view",
+  components: {
+    "quick-update-property-field": QuickUpdatePropertyField,
+  },
+})
+export default class CharacterPsiManaPointsQuickView extends CharacterQuickView {
+  get psiPoints() {
+    return this.character.psiPoints || {};
+  }
+
+  get manaPoints() {
+    return this.character.magicalAbility?.manaPoints || {};
+  }
+
+  get magicalAbility() {
+    return this.character.magicalAbility || {};
+  }
+
+  async onCurrentPsiPointsChanged(newValue: number) {
+    const psiPoints: MutablePointValue = { ...this.character.psiPoints } || {};
+    psiPoints.current = newValue;
+    try {
+      await this.$store.dispatch("character/update", {
+        id: this.character.id,
+        psiPoints,
+      });
+    } catch (error) {
+      this.throwError(error);
+    }
+  }
+
+  async onCurrentManaPointsChanged(newValue: number) {
+    const magicalAbility: MagicalAbility = {
+      ...this.character.magicalAbility,
+    } || { manaPoints: {} };
+    if (magicalAbility.manaPoints) magicalAbility.manaPoints.current = newValue;
+    try {
+      await this.$store.dispatch("character/update", {
+        id: this.character.id,
+        magicalAbility,
+      });
+    } catch (error) {
+      this.throwError(error);
+    }
+  }
+}
+</script>

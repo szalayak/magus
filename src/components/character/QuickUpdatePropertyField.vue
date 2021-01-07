@@ -4,6 +4,8 @@
     @save="save"
     @open="open"
     large
+    :save-text="$t('save')"
+    :cancel-text="$t('cancel')"
     ><strong>{{ value }}</strong>
     <template v-slot:input>
       <div class="mt-4 title">
@@ -11,7 +13,7 @@
       </div>
       <v-text-field
         v-model.number="currentValue"
-        label="Edit"
+        :label="$t('edit')"
         single-line
         counter
       ></v-text-field>
