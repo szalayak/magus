@@ -283,5 +283,9 @@
   "current-drv": "Akt. SFÉ",
   "total-sr": "Teljes",
   "mp": "Mp",
-  "quick-view": "Gyorsnézet"
+  "quick-view": "Gyorsnézet",
+  "current-vp": "Akt. Ép",
+  "current-hp": "Akt. Fp",
+  "current-psi-points": "Akt. Ψp",
+  "current-mp": "Akt. Mp"
 }

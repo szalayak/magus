@@ -284,5 +284,9 @@
   "total-sr": "Total",
   "psi-points": "Ψp",
   "mp": "MP",
-  "quick-view": "Quick View"
+  "quick-view": "Quick View",
+  "current-vp": "Current VP",
+  "current-hp": "Current HP",
+  "current-psi-points": "Current Ψp",
+  "current-mp": "Current Mp"
 }

@@ -42,9 +42,6 @@ export default class CharacterPage extends Vue {
       // load character
       await this.$store.dispatch("character/loadItem", this.id);
 
-      // nav to hash
-      if (this.$route.hash) this.$vuetify.goTo(this.$route.hash);
-
       // set title
       this.$store.commit("setAppTitle", this.character.name || "");
 

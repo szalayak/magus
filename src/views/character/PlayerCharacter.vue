@@ -12,7 +12,7 @@
         @input="search"
       /> -->
       <v-btn-toggle dense tile color="primary" group v-model.number="page">
-        <v-btn>{{ $t("quick-view") }}</v-btn>
+        <v-btn><v-icon>mdi-eye</v-icon></v-btn>
         <v-btn>1</v-btn>
         <v-btn>2</v-btn>
         <v-btn>3</v-btn>
