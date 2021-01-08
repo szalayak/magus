@@ -295,5 +295,7 @@
   "dm-overview": "DM Overview",
   "pull-to-refresh": "Pull To Refresh...",
   "loading-indicator": "Loading...",
-  "error": "Error"
+  "error": "Error",
+  "throw-initiation": "Initiative",
+  "throw-attack": "Attack"
 }

@@ -7,6 +7,9 @@ export default class CharacterQuickView extends Vue {
   @Prop({ type: Object })
   character!: Character;
 
+  @Prop({ type: Object })
+  bus: Vue | undefined;
+
   characterToLink(character: Character, page: number, selector: string) {
     return characterToLink(character, page, selector);
   }

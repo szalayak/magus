@@ -1,5 +1,6 @@
 <template>
   <v-edit-dialog
+    v-if="dialog"
     @save="save"
     @open="open"
     :save-text="$t('throw-dice')"
@@ -20,7 +21,20 @@
       ></v-text-field>
     </template>
   </v-edit-dialog>
+  <div class="pointer" v-else @click="performThrow">
+    <template v-if="!!label"
+      ><strong>{{ label }}: </strong></template
+    >
+    <strong v-if="bold">{{ text || value }}</strong>
+    <template v-if="!bold">{{ text || value }}</template>
+  </div>
 </template>
+
+<style>
+.pointer {
+  cursor: pointer;
+}
+</style>
 
 <script lang="ts">
 import { Dice } from "@/API";
@@ -53,6 +67,9 @@ export default class ThrowScenarioTriggerField extends Vue {
   @Prop()
   label: string | undefined;
 
+  @Prop({ type: Boolean })
+  dialog: boolean | undefined;
+
   throwScenario: ThrowScenario = {};
   modifier: number | null = null;
 
@@ -69,6 +86,10 @@ export default class ThrowScenarioTriggerField extends Vue {
       ...executeThrowScenario(this.throwScenario),
       modifier: this.modifier,
     });
+  }
+  performThrow() {
+    this.throwScenario = parseThrowScenarioString(this.throwScenarioString);
+    this.$emit("save", executeThrowScenario(this.throwScenario));
   }
 }
 </script>

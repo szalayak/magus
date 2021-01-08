@@ -224,6 +224,7 @@
 </template>
 
 <script lang="ts">
+import { Dice } from "@/API";
 import {
   CombatValues,
   Mastery,
@@ -242,6 +243,8 @@ import {
   ThrowScenarioResult,
   MasterSkillCombatValueModifiers,
   UnskilledCombatValueModifiers,
+  executeThrowScenario,
+  parseThrowScenarioString,
 } from "@/utils";
 import Component from "vue-class-component";
 import CharacterQuickView from "./CharacterQuickView";
@@ -340,12 +343,44 @@ export default class CharacterCombatValuesQuickView extends CharacterQuickView {
     weapon?: WeaponAssignment
   ) {
     this.combatValueThrowResult = {
-      result: { ...result, total: result.total + (result.modifier || 0) },
+      result,
       name,
       value,
       id,
       weapon,
     };
+  }
+
+  created() {
+    if (this.bus) {
+      const weapon =
+        this.combatValuesWithWeapons.length > 0
+          ? this.combatValuesWithWeapons[0]
+          : undefined;
+      const combatValues = weapon
+        ? weapon.combatValues
+        : this.combatValuesWithoutWeapon;
+
+      this.bus.$on("initiation", () => {
+        this.combatValueThrowResult = {
+          result: executeThrowScenario(parseThrowScenarioString(Dice.D10)),
+          name: this.$t("initiation").toString(),
+          value: combatValues.initiation,
+          id: "initiation",
+          weapon,
+        };
+      });
+
+      this.bus.$on("offence", () => {
+        this.combatValueThrowResult = {
+          result: executeThrowScenario(parseThrowScenarioString(Dice.D100)),
+          name: this.$t("offence").toString(),
+          value: combatValues.offence,
+          id: "offence",
+          weapon,
+        };
+      });
+    }
   }
 }
 </script>

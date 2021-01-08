@@ -38,6 +38,7 @@
         <v-col cols="3">
           <throw-scenario-trigger-field
             bold
+            dialog
             throwScenarioString="D10"
             :title="$t('strength')"
             :value="abilities.strength || 0"
@@ -53,6 +54,7 @@
         <v-col cols="3">
           <throw-scenario-trigger-field
             bold
+            dialog
             throwScenarioString="D10"
             :title="$t('agility')"
             :value="agilityInArmour || 0"
@@ -67,6 +69,7 @@
         <v-col cols="3">
           <throw-scenario-trigger-field
             bold
+            dialog
             throwScenarioString="D10"
             :title="$t('dexterity')"
             :value="dexterityInArmour || 0"
@@ -83,6 +86,7 @@
         <v-col cols="8">
           <throw-scenario-trigger-field
             bold
+            dialog
             throwScenarioString="D10"
             :title="$t('stamina')"
             :value="abilities.stamina || 0"
@@ -95,6 +99,7 @@
         <v-col cols="8">
           <throw-scenario-trigger-field
             bold
+            dialog
             throwScenarioString="D10"
             :title="$t('health')"
             :value="abilities.health || 0"
@@ -107,6 +112,7 @@
         <v-col cols="8">
           <throw-scenario-trigger-field
             bold
+            dialog
             throwScenarioString="D10"
             :title="$t('beauty')"
             :value="abilities.beauty || 0"
@@ -119,6 +125,7 @@
         <v-col cols="8">
           <throw-scenario-trigger-field
             bold
+            dialog
             throwScenarioString="D10"
             :title="$t('intelligence')"
             :value="abilities.intelligence || 0"
@@ -137,6 +144,7 @@
         <v-col cols="8">
           <throw-scenario-trigger-field
             bold
+            dialog
             throwScenarioString="D10"
             :title="$t('willpower')"
             :value="abilities.willpower || 0"
@@ -151,6 +159,7 @@
         <v-col cols="8">
           <throw-scenario-trigger-field
             bold
+            dialog
             throwScenarioString="D10"
             :title="$t('astral')"
             :value="abilities.astral || 0"

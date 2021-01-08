@@ -294,5 +294,7 @@
   "dm-overview": "KM Áttekintés",
   "pull-to-refresh": "Frissítés...",
   "loading-indicator": "Frissítés...",
-  "error": "Hiba"
+  "error": "Hiba",
+  "throw-initiative": "Kezdeményezés",
+  "throw-attack": "Támadás"
 }

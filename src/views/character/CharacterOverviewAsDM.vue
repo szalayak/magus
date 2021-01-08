@@ -151,7 +151,15 @@
           </v-card-text>
         </v-card>
         <v-card flat>
-          <v-card-title>{{ $t("non-player-characters") }}</v-card-title>
+          <v-toolbar flat>
+            <v-card-title>{{ $t("non-player-characters") }}</v-card-title>
+            <v-btn color="primary" text @click="initiationForAllNPCs">{{
+              $t("throw-initiative")
+            }}</v-btn>
+            <v-btn color="primary" text @click="offenceForAllNPCs">{{
+              $t("throw-attack")
+            }}</v-btn>
+          </v-toolbar>
           <v-card-text
             ><v-row dense>
               <template v-for="character in nonPlayerCharacters">
@@ -164,7 +172,10 @@
                   xl="2"
                   :key="character.id"
                 >
-                  <character-combat-values-quick-view :character="character">
+                  <character-combat-values-quick-view
+                    :character="character"
+                    :bus="bus"
+                  >
                     <template v-slot:title>
                       <router-link :to="characterToLink(character)">{{
                         character.name
@@ -321,6 +332,7 @@ import TitleComponent from "@/mixins/TitleComponent";
 import { Character, LooseObject, User } from "@/store";
 import { characterToLink } from "@/utils";
 import Component from "vue-class-component";
+import Vue from "vue";
 @Component({
   name: "character-overview-as-dm",
   components: {
@@ -336,6 +348,7 @@ export default class CharacterOverviewAsDM extends TitleComponent {
   title = this.$t("dm-overview");
   messages: string[] = [];
   notification = false;
+  bus = new Vue();
 
   get playerCharacters(): Character[] {
     return this.$store.getters["character/playerCharactersAsDM"];
@@ -382,6 +395,14 @@ export default class CharacterOverviewAsDM extends TitleComponent {
   async created() {
     await this.refresh();
     this.$store.dispatch("character/subscribeToUpdate");
+  }
+
+  initiationForAllNPCs() {
+    this.bus.$emit("initiation");
+  }
+
+  offenceForAllNPCs() {
+    this.bus.$emit("offence");
   }
 }
 </script>
