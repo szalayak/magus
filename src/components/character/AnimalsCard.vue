@@ -216,8 +216,7 @@ import { CharacterCompanion } from "@/store/modules/character";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
 import CombatValueEditorVue from "../admin/CombatValueEditor.vue";
 import ThrowScenarioEditorVue from "../admin/ThrowScenarioEditor.vue";
-
-type Form = Vue & { validate: () => boolean };
+import { Form } from "@/utils";
 
 @Component({
   name: "animals-card",

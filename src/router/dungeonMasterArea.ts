@@ -21,4 +21,14 @@ export const dungeonMasterAreaRoutes: Array<NavItemConfig> = [
         /* webpackChunkName: "dm-area/non-player-characters" */ "../views/character/NonPlayerCharactersAsDM.vue"
       ),
   },
+  {
+    path: "/dm-area/dm-overview",
+    name: "DM Overview",
+    title: "dm-overview",
+    icon: "mdi-eye",
+    component: () =>
+      import(
+        /* webpackChunkName: "dm-area/non-player-characters" */ "../views/character/CharacterOverviewAsDM.vue"
+      ),
+  },
 ];

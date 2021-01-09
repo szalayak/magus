@@ -858,6 +858,7 @@ export const getCharacter = /* GraphQL */ `
         updatedAt
       }
       armourMastery
+      armourCurrentDamageReductionValue
       shield {
         id
         descriptions {
@@ -884,6 +885,7 @@ export const getCharacter = /* GraphQL */ `
         updatedAt
       }
       shieldMastery
+      shieldInHand
       weapons {
         items {
           id
@@ -899,6 +901,11 @@ export const getCharacter = /* GraphQL */ `
             weaponType {
               id
               type
+              descriptions {
+                locale
+                title
+                description
+              }
               createdAt
               updatedAt
             }
@@ -952,6 +959,11 @@ export const getCharacter = /* GraphQL */ `
             skillGroup {
               id
               type
+              descriptions {
+                locale
+                title
+                description
+              }
               createdAt
               updatedAt
             }
@@ -1017,6 +1029,11 @@ export const getCharacter = /* GraphQL */ `
             weaponType {
               id
               type
+              descriptions {
+                locale
+                title
+                description
+              }
               createdAt
               updatedAt
             }
@@ -1066,6 +1083,17 @@ export const getCharacter = /* GraphQL */ `
             class {
               id
               mainClassId
+              mainClass {
+                id
+                type
+                createdAt
+                updatedAt
+              }
+              descriptions {
+                locale
+                title
+                description
+              }
               magicUser
               createdAt
               updatedAt
@@ -1331,6 +1359,7 @@ export const listCharacters = /* GraphQL */ `
           updatedAt
         }
         armourMastery
+        armourCurrentDamageReductionValue
         shield {
           id
           descriptions {
@@ -1357,16 +1386,39 @@ export const listCharacters = /* GraphQL */ `
           updatedAt
         }
         shieldMastery
+        shieldInHand
         weapons {
           items {
             id
             characterId
             weapon {
               id
+              descriptions {
+                locale
+                title
+                description
+              }
               weaponTypeId
+              weaponType {
+                id
+                type
+                createdAt
+                updatedAt
+              }
               weight
               price
               attackRange
+              combatValues {
+                initiation
+                offence
+                defence
+                aiming
+              }
+              damage {
+                dice
+                iterationCount
+                modifier
+              }
               attacksPerTurn
               ranged
               createdAt
@@ -1393,8 +1445,19 @@ export const listCharacters = /* GraphQL */ `
             characterId
             skill {
               id
+              descriptions {
+                locale
+                title
+                description
+              }
               percentageSkill
               skillGroupId
+              skillGroup {
+                id
+                type
+                createdAt
+                updatedAt
+              }
               basicCost
               masterCost
               createdAt
@@ -1417,10 +1480,23 @@ export const listCharacters = /* GraphQL */ `
             name
             type
             health {
+              vitality {
+                current
+                max
+              }
               baseVitality
               vitalityModifier
+              hitPoints {
+                current
+                max
+              }
               baseHitPoints
               hitPointModifier
+              hitPointsPerLevel {
+                dice
+                iterationCount
+                modifier
+              }
             }
             combatValues {
               initiation
@@ -1435,10 +1511,32 @@ export const listCharacters = /* GraphQL */ `
             }
             weapon {
               id
+              descriptions {
+                locale
+                title
+                description
+              }
               weaponTypeId
+              weaponType {
+                id
+                type
+                createdAt
+                updatedAt
+              }
               weight
               price
               attackRange
+              combatValues {
+                initiation
+                offence
+                defence
+                aiming
+              }
+              damage {
+                dice
+                iterationCount
+                modifier
+              }
               attacksPerTurn
               ranged
               createdAt
@@ -1463,6 +1561,18 @@ export const listCharacters = /* GraphQL */ `
             magicalItemId
             magicalItem {
               id
+              descriptions {
+                locale
+                title
+                description
+              }
+              class {
+                id
+                mainClassId
+                magicUser
+                createdAt
+                updatedAt
+              }
               manaCost
               duration
               price
@@ -1965,6 +2075,11 @@ export const listMagicalItemAssignments = /* GraphQL */ `
             mainClass {
               id
               type
+              descriptions {
+                locale
+                title
+                description
+              }
               createdAt
               updatedAt
             }
@@ -2317,6 +2432,7 @@ export const listCharactersByOwner = /* GraphQL */ `
           updatedAt
         }
         armourMastery
+        armourCurrentDamageReductionValue
         shield {
           id
           descriptions {
@@ -2343,16 +2459,39 @@ export const listCharactersByOwner = /* GraphQL */ `
           updatedAt
         }
         shieldMastery
+        shieldInHand
         weapons {
           items {
             id
             characterId
             weapon {
               id
+              descriptions {
+                locale
+                title
+                description
+              }
               weaponTypeId
+              weaponType {
+                id
+                type
+                createdAt
+                updatedAt
+              }
               weight
               price
               attackRange
+              combatValues {
+                initiation
+                offence
+                defence
+                aiming
+              }
+              damage {
+                dice
+                iterationCount
+                modifier
+              }
               attacksPerTurn
               ranged
               createdAt
@@ -2379,8 +2518,19 @@ export const listCharactersByOwner = /* GraphQL */ `
             characterId
             skill {
               id
+              descriptions {
+                locale
+                title
+                description
+              }
               percentageSkill
               skillGroupId
+              skillGroup {
+                id
+                type
+                createdAt
+                updatedAt
+              }
               basicCost
               masterCost
               createdAt
@@ -2403,10 +2553,23 @@ export const listCharactersByOwner = /* GraphQL */ `
             name
             type
             health {
+              vitality {
+                current
+                max
+              }
               baseVitality
               vitalityModifier
+              hitPoints {
+                current
+                max
+              }
               baseHitPoints
               hitPointModifier
+              hitPointsPerLevel {
+                dice
+                iterationCount
+                modifier
+              }
             }
             combatValues {
               initiation
@@ -2421,10 +2584,32 @@ export const listCharactersByOwner = /* GraphQL */ `
             }
             weapon {
               id
+              descriptions {
+                locale
+                title
+                description
+              }
               weaponTypeId
+              weaponType {
+                id
+                type
+                createdAt
+                updatedAt
+              }
               weight
               price
               attackRange
+              combatValues {
+                initiation
+                offence
+                defence
+                aiming
+              }
+              damage {
+                dice
+                iterationCount
+                modifier
+              }
               attacksPerTurn
               ranged
               createdAt
@@ -2449,6 +2634,18 @@ export const listCharactersByOwner = /* GraphQL */ `
             magicalItemId
             magicalItem {
               id
+              descriptions {
+                locale
+                title
+                description
+              }
+              class {
+                id
+                mainClassId
+                magicUser
+                createdAt
+                updatedAt
+              }
               manaCost
               duration
               price
@@ -2720,6 +2917,7 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
           updatedAt
         }
         armourMastery
+        armourCurrentDamageReductionValue
         shield {
           id
           descriptions {
@@ -2746,16 +2944,39 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
           updatedAt
         }
         shieldMastery
+        shieldInHand
         weapons {
           items {
             id
             characterId
             weapon {
               id
+              descriptions {
+                locale
+                title
+                description
+              }
               weaponTypeId
+              weaponType {
+                id
+                type
+                createdAt
+                updatedAt
+              }
               weight
               price
               attackRange
+              combatValues {
+                initiation
+                offence
+                defence
+                aiming
+              }
+              damage {
+                dice
+                iterationCount
+                modifier
+              }
               attacksPerTurn
               ranged
               createdAt
@@ -2782,8 +3003,19 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
             characterId
             skill {
               id
+              descriptions {
+                locale
+                title
+                description
+              }
               percentageSkill
               skillGroupId
+              skillGroup {
+                id
+                type
+                createdAt
+                updatedAt
+              }
               basicCost
               masterCost
               createdAt
@@ -2806,10 +3038,23 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
             name
             type
             health {
+              vitality {
+                current
+                max
+              }
               baseVitality
               vitalityModifier
+              hitPoints {
+                current
+                max
+              }
               baseHitPoints
               hitPointModifier
+              hitPointsPerLevel {
+                dice
+                iterationCount
+                modifier
+              }
             }
             combatValues {
               initiation
@@ -2824,10 +3069,32 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
             }
             weapon {
               id
+              descriptions {
+                locale
+                title
+                description
+              }
               weaponTypeId
+              weaponType {
+                id
+                type
+                createdAt
+                updatedAt
+              }
               weight
               price
               attackRange
+              combatValues {
+                initiation
+                offence
+                defence
+                aiming
+              }
+              damage {
+                dice
+                iterationCount
+                modifier
+              }
               attacksPerTurn
               ranged
               createdAt
@@ -2852,6 +3119,18 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
             magicalItemId
             magicalItem {
               id
+              descriptions {
+                locale
+                title
+                description
+              }
+              class {
+                id
+                mainClassId
+                magicUser
+                createdAt
+                updatedAt
+              }
               manaCost
               duration
               price

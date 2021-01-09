@@ -986,6 +986,7 @@ export const onCreateCharacter = /* GraphQL */ `
         updatedAt
       }
       armourMastery
+      armourCurrentDamageReductionValue
       shield {
         id
         descriptions {
@@ -1012,6 +1013,7 @@ export const onCreateCharacter = /* GraphQL */ `
         updatedAt
       }
       shieldMastery
+      shieldInHand
       weapons {
         items {
           id
@@ -1027,6 +1029,11 @@ export const onCreateCharacter = /* GraphQL */ `
             weaponType {
               id
               type
+              descriptions {
+                locale
+                title
+                description
+              }
               createdAt
               updatedAt
             }
@@ -1080,6 +1087,11 @@ export const onCreateCharacter = /* GraphQL */ `
             skillGroup {
               id
               type
+              descriptions {
+                locale
+                title
+                description
+              }
               createdAt
               updatedAt
             }
@@ -1145,6 +1157,11 @@ export const onCreateCharacter = /* GraphQL */ `
             weaponType {
               id
               type
+              descriptions {
+                locale
+                title
+                description
+              }
               createdAt
               updatedAt
             }
@@ -1194,6 +1211,17 @@ export const onCreateCharacter = /* GraphQL */ `
             class {
               id
               mainClassId
+              mainClass {
+                id
+                type
+                createdAt
+                updatedAt
+              }
+              descriptions {
+                locale
+                title
+                description
+              }
               magicUser
               createdAt
               updatedAt
@@ -1454,6 +1482,7 @@ export const onUpdateCharacter = /* GraphQL */ `
         updatedAt
       }
       armourMastery
+      armourCurrentDamageReductionValue
       shield {
         id
         descriptions {
@@ -1480,6 +1509,7 @@ export const onUpdateCharacter = /* GraphQL */ `
         updatedAt
       }
       shieldMastery
+      shieldInHand
       weapons {
         items {
           id
@@ -1495,6 +1525,11 @@ export const onUpdateCharacter = /* GraphQL */ `
             weaponType {
               id
               type
+              descriptions {
+                locale
+                title
+                description
+              }
               createdAt
               updatedAt
             }
@@ -1548,6 +1583,11 @@ export const onUpdateCharacter = /* GraphQL */ `
             skillGroup {
               id
               type
+              descriptions {
+                locale
+                title
+                description
+              }
               createdAt
               updatedAt
             }
@@ -1613,6 +1653,11 @@ export const onUpdateCharacter = /* GraphQL */ `
             weaponType {
               id
               type
+              descriptions {
+                locale
+                title
+                description
+              }
               createdAt
               updatedAt
             }
@@ -1662,6 +1707,17 @@ export const onUpdateCharacter = /* GraphQL */ `
             class {
               id
               mainClassId
+              mainClass {
+                id
+                type
+                createdAt
+                updatedAt
+              }
+              descriptions {
+                locale
+                title
+                description
+              }
               magicUser
               createdAt
               updatedAt
@@ -1922,6 +1978,7 @@ export const onDeleteCharacter = /* GraphQL */ `
         updatedAt
       }
       armourMastery
+      armourCurrentDamageReductionValue
       shield {
         id
         descriptions {
@@ -1948,6 +2005,7 @@ export const onDeleteCharacter = /* GraphQL */ `
         updatedAt
       }
       shieldMastery
+      shieldInHand
       weapons {
         items {
           id
@@ -1963,6 +2021,11 @@ export const onDeleteCharacter = /* GraphQL */ `
             weaponType {
               id
               type
+              descriptions {
+                locale
+                title
+                description
+              }
               createdAt
               updatedAt
             }
@@ -2016,6 +2079,11 @@ export const onDeleteCharacter = /* GraphQL */ `
             skillGroup {
               id
               type
+              descriptions {
+                locale
+                title
+                description
+              }
               createdAt
               updatedAt
             }
@@ -2081,6 +2149,11 @@ export const onDeleteCharacter = /* GraphQL */ `
             weaponType {
               id
               type
+              descriptions {
+                locale
+                title
+                description
+              }
               createdAt
               updatedAt
             }
@@ -2130,6 +2203,17 @@ export const onDeleteCharacter = /* GraphQL */ `
             class {
               id
               mainClassId
+              mainClass {
+                id
+                type
+                createdAt
+                updatedAt
+              }
+              descriptions {
+                locale
+                title
+                description
+              }
               magicUser
               createdAt
               updatedAt

@@ -35,10 +35,9 @@
 <script lang="ts">
 import CharacterInfo from "@/components/character/CharacterInfo";
 import { LooseObject } from "@/store/types";
+import { Form } from "@/utils";
 import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
-
-type Form = Vue & { validate: () => boolean };
 
 @Component({
   name: "character-info-card",
@@ -59,7 +58,7 @@ export default class CharacterInfoCard extends CharacterInfo {
   async save() {
     if ((this.$refs.data as Form).validate()) {
       try {
-        await this.$store.dispatch("character/update", this.character);
+        await this.$store.dispatch("character/save", this.character.id);
         this.edit = false;
       } catch (error) {
         this.messages =
@@ -72,7 +71,7 @@ export default class CharacterInfoCard extends CharacterInfo {
   }
 
   cancel() {
-    this.$store.commit("character/revert", this.id);
+    this.$store.dispatch("character/revert", this.id);
     this.edit = false;
   }
 }

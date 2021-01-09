@@ -26,13 +26,13 @@ export default class CharacterInfo extends Vue {
 
   get character(): Character {
     return (
-      this.$store.getters["character/listTransient"].find(
+      this.$store.getters["character/list"].find(
         (char: Character) => char.id === this.id
       ) || {}
     );
   }
 
   set character(character: Character) {
-    this.$store.commit("race/mergeTransient", character);
+    this.$store.commit("character/change", character);
   }
 }

@@ -9,15 +9,22 @@ export default class CharacterPage extends Vue {
   messages: string[] = [];
   notification = false;
 
+  pullToRefreshConfig = {
+    loadingLabel: this.$t("loading-indicator"),
+    startLabel: this.$t("loading-indicator"),
+    readyLabel: this.$t("pull-to-refresh"),
+    errorLabel: this.$t("error"),
+  };
+
   get page() {
-    return this.$route.params.page ? parseInt(this.$route.params.page) - 1 : 0;
+    return this.$route.params.page ? parseInt(this.$route.params.page) : 0;
   }
 
   set page(page) {
     if (page !== undefined) {
       this.$router.push({
         name: this.$route.name || undefined,
-        params: { ...this.$route.params, page: (page + 1).toString() },
+        params: { ...this.$route.params, page: page.toString() },
       });
     }
   }
@@ -31,10 +38,23 @@ export default class CharacterPage extends Vue {
 
   get character(): Character {
     return (
-      this.$store.getters["character/listTransient"].find(
+      this.$store.getters["character/list"].find(
         (char: Character) => char.id === this.id
       ) || {}
     );
+  }
+
+  async refresh() {
+    try {
+      // load character
+      await this.$store.dispatch("character/loadItem", this.id);
+    } catch (error) {
+      this.messages =
+        typeof error === "string"
+          ? [error]
+          : error.errors?.map((err: LooseObject) => err.message) || [];
+      this.notification = true;
+    }
   }
 
   async created() {
@@ -43,7 +63,7 @@ export default class CharacterPage extends Vue {
       await this.$store.dispatch("character/loadItem", this.id);
 
       // set title
-      document.title = this.character.name;
+      this.$store.commit("setAppTitle", this.character.name || "");
 
       // load all other necessary data
       await Promise.all([

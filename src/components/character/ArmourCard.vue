@@ -28,6 +28,13 @@
           />
         </v-col>
         <v-col cols="12">
+          <v-text-field
+            :label="$t('current-drv')"
+            v-model="character.armourCurrentDamageReductionValue"
+            :disabled="!edit"
+          />
+        </v-col>
+        <v-col cols="12">
           <v-select
             v-model="character.armourMastery"
             :items="masteryLevels"
@@ -65,10 +72,15 @@ export default class ArmourCard extends CharacterInfo {
   }
 
   get armours(): Armour[] {
-    return localise(
-      this.$store.getters["armour/list"],
-      this.$i18n.locale
-    ) as Armour[];
+    return [
+      {
+        id: null,
+        description: {
+          title: this.$t("none"),
+        },
+      },
+      ...localise(this.$store.getters["armour/list"], this.$i18n.locale),
+    ] as Armour[];
   }
   get armour(): Armour {
     if (!this.character.armour) this.character.armour = {};

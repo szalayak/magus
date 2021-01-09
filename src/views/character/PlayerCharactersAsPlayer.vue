@@ -9,7 +9,7 @@
     <template v-slot:toolbar-buttons>
       <v-dialog v-model="createDialog" persistent max-width="50%">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn color="primary" v-bind="attrs" v-on="on">
+          <v-btn color="primary" v-bind="attrs" v-on="on" text>
             <v-icon>mdi-plus</v-icon>
             <div class="ml-2 d-none d-sm-flex">
               {{ $t("new-character") }}
@@ -70,10 +70,6 @@
                     item-value="username"
                     item-text="name"
                   />
-                  <!-- <v-text-field
-                    v-model="editedItem.dungeonMaster"
-                    :label="$t('dungeon-master')"
-                  /> -->
                 </v-col>
               </v-row>
               <v-row>
@@ -166,14 +162,12 @@ import { Character } from "@/store/modules/character";
 import { Class } from "@/store/modules/class";
 import { Race } from "@/store/modules/race";
 import { localise } from "@/utils/localise";
-import Vue from "vue";
 import Component from "vue-class-component";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
 import CharacterList from "@/components/CharacterList.vue";
 import TitleComponent from "@/mixins/TitleComponent";
 import { User } from "@/store";
-
-type Form = Vue & { validate: () => boolean };
+import { Form } from "@/utils";
 
 @Component({
   name: "player-characters-as-player",

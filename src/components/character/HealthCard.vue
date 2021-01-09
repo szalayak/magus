@@ -5,6 +5,7 @@
       <v-row dense>
         <v-col cols="6" md="4">
           <v-text-field
+            class="font-weight-bold"
             v-model.number="health.vitality.current"
             :label="$t('current')"
             type="number"
@@ -32,6 +33,7 @@
       <v-row dense>
         <v-col cols="6" md="4">
           <v-text-field
+            class="font-weight-bold"
             v-model.number="health.hitPoints.current"
             :label="$t('current')"
             type="number"

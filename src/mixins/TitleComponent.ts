@@ -16,7 +16,7 @@ export default class TitleComponent extends Vue {
     }
   }
 
-  created() {
-    document.title = this.computedTitle;
+  mounted() {
+    this.$store.commit("setAppTitle", this.computedTitle);
   }
 }
