@@ -4,6 +4,9 @@
   "DynamoDBEnableServerSideEncryption": false,
   "DynamoDBEnablePointInTimeRecovery": true,
   "AuthCognitoUserPoolId": {
-    "Fn::GetAtt": ["authmagusa74e493a", "Outputs.UserPoolId"]
+    "Fn::GetAtt": [
+      "authmagusa74e493a",
+      "Outputs.UserPoolId"
+    ]
   }
 }
