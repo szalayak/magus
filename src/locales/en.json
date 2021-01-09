@@ -297,5 +297,17 @@
   "loading-indicator": "Loading...",
   "error": "Error",
   "throw-initiation": "Initiative",
-  "throw-attack": "Attack"
+  "throw-attack": "Attack",
+  "ability-trial": "Ability Trial",
+  "strength-trial": "Strength Trial",
+  "agility-trial": "Agility Trial",
+  "dexterity-trial": "Dexterity Trial",
+  "stamina-trial": "Stamina Trial",
+  "health-trial": "Health Trial",
+  "beauty-trial": "Beauty Trial",
+  "intelligence-trial": "Intelligence Trial",
+  "willpower-trial": "Willpower Trial",
+  "astral-trial": "Astral Trial",
+  "percentage-skills": "Percentage Skills",
+  "skill-trial": "Skill Trial"
 }

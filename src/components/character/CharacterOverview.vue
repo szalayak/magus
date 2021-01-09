@@ -35,6 +35,11 @@
           @error="onError"
         />
       </v-col>
+      <v-col id="percentage-skills" cols="12" xs="12" md="6" lg="3" xl="2"
+        ><character-percentage-skills-quick-view
+          :character="character"
+          @error="onError"
+      /></v-col>
     </v-row>
     <v-snackbar
       v-for="message in messages"
@@ -57,6 +62,7 @@ import Component from "vue-class-component";
 import CharacterAbilitiesQuickView from "./CharacterAbilitiesQuickView.vue";
 import CharacterCombatValuesQuickView from "./CharacterCombatValuesQuickView.vue";
 import CharacterInfo from "./CharacterInfo";
+import CharacterPercentageSkillsQuickView from "./CharacterPercentageSkillsQuickView.vue";
 import CharacterPsiManaPointsQuickView from "./CharacterPsiManaPointsQuickView.vue";
 import CharacterSpellResistanceQuickView from "./CharacterSpellResistanceQuickView.vue";
 import CharacterVitalityQuickView from "./CharacterVitalityQuickView.vue";
@@ -68,6 +74,7 @@ import CharacterVitalityQuickView from "./CharacterVitalityQuickView.vue";
     "character-combat-values-quick-view": CharacterCombatValuesQuickView,
     "character-spell-resistance-quick-view": CharacterSpellResistanceQuickView,
     "character-psi-mana-points-quick-view": CharacterPsiManaPointsQuickView,
+    "character-percentage-skills-quick-view": CharacterPercentageSkillsQuickView,
   },
 })
 export default class CharacterOverview extends CharacterInfo {

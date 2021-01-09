@@ -9,7 +9,13 @@
       <v-tab key="abilities">{{ $t("abilities") }}</v-tab>
       <v-tab-item key="abilities">
         <v-card flat>
-          <v-card-title>{{ $t("player-characters") }}</v-card-title>
+          <v-toolbar flat>
+            <v-card-title>{{ $t("player-characters") }}</v-card-title>
+            <character-ability-selector
+              modifier-dialog
+              @select="abilityTrialForAllPCs"
+            />
+          </v-toolbar>
           <v-card-text
             ><v-row dense>
               <template v-for="character in playerCharacters">
@@ -22,7 +28,10 @@
                   xl="2"
                   :key="character.id"
                 >
-                  <character-abilities-quick-view :character="character">
+                  <character-abilities-quick-view
+                    :character="character"
+                    :bus="pcEvents"
+                  >
                     <template v-slot:title>
                       <router-link :to="characterToLink(character)">{{
                         `${character.name} (${ownerToString(character.owner)})`
@@ -35,7 +44,13 @@
           </v-card-text>
         </v-card>
         <v-card flat>
-          <v-card-title>{{ $t("non-player-characters") }}</v-card-title>
+          <v-toolbar flat>
+            <v-card-title>{{ $t("non-player-characters") }}</v-card-title>
+            <character-ability-selector
+              modifier-dialog
+              @select="abilityTrialForAllNPCs"
+            />
+          </v-toolbar>
           <v-card-text
             ><v-row dense>
               <template v-for="character in nonPlayerCharacters">
@@ -48,7 +63,10 @@
                   xl="2"
                   :key="character.id"
                 >
-                  <character-abilities-quick-view :character="character">
+                  <character-abilities-quick-view
+                    :character="character"
+                    :bus="npcEvents"
+                  >
                     <template v-slot:title>
                       <router-link :to="characterToLink(character)">{{
                         character.name
@@ -174,7 +192,7 @@
                 >
                   <character-combat-values-quick-view
                     :character="character"
-                    :bus="bus"
+                    :bus="npcEvents"
                   >
                     <template v-slot:title>
                       <router-link :to="characterToLink(character)">{{
@@ -252,6 +270,73 @@
           <v-card-text
             ><v-row dense>
               <template v-for="character in playerCharacters">
+                <template v-if="character.psiUser || character.magicUser">
+                  <v-col
+                    cols="12"
+                    xs="12"
+                    sm="6"
+                    md="4"
+                    lg="3"
+                    xl="2"
+                    :key="character.id"
+                  >
+                    <character-psi-mana-points-quick-view
+                      :character="character"
+                      @error="onError"
+                    >
+                      <template v-slot:title>
+                        <router-link :to="characterToLink(character)">{{
+                          `${character.name} (${ownerToString(
+                            character.owner
+                          )})`
+                        }}</router-link>
+                      </template>
+                    </character-psi-mana-points-quick-view>
+                  </v-col>
+                </template>
+              </template>
+            </v-row>
+          </v-card-text>
+        </v-card>
+        <v-card flat>
+          <v-card-title>{{ $t("non-player-characters") }}</v-card-title>
+          <v-card-text
+            ><v-row dense>
+              <template v-for="character in nonPlayerCharacters">
+                <template v-if="character.psiUser || character.magicUser">
+                  <v-col
+                    cols="12"
+                    xs="12"
+                    sm="6"
+                    md="4"
+                    lg="3"
+                    xl="2"
+                    :key="character.id"
+                  >
+                    <character-psi-mana-points-quick-view
+                      :character="character"
+                      @error="onError"
+                    >
+                      <template v-slot:title>
+                        <router-link :to="characterToLink(character)">{{
+                          character.name
+                        }}</router-link>
+                      </template>
+                    </character-psi-mana-points-quick-view>
+                  </v-col>
+                </template>
+              </template>
+            </v-row>
+          </v-card-text>
+        </v-card></v-tab-item
+      >
+      <v-tab key="percentage-skills">{{ $t("percentage-skills") }}</v-tab>
+      <v-tab-item key="percentage-skills">
+        <v-card flat>
+          <v-card-title>{{ $t("player-characters") }}</v-card-title>
+          <v-card-text
+            ><v-row dense>
+              <template v-for="character in playerCharacters">
                 <v-col
                   cols="12"
                   xs="12"
@@ -261,7 +346,7 @@
                   xl="2"
                   :key="character.id"
                 >
-                  <character-psi-mana-points-quick-view
+                  <character-percentage-skills-quick-view
                     :character="character"
                     @error="onError"
                   >
@@ -270,7 +355,7 @@
                         `${character.name} (${ownerToString(character.owner)})`
                       }}</router-link>
                     </template>
-                  </character-psi-mana-points-quick-view>
+                  </character-percentage-skills-quick-view>
                 </v-col>
               </template>
             </v-row>
@@ -290,7 +375,7 @@
                   xl="2"
                   :key="character.id"
                 >
-                  <character-psi-mana-points-quick-view
+                  <character-percentage-skills-quick-view
                     :character="character"
                     @error="onError"
                   >
@@ -299,13 +384,13 @@
                         character.name
                       }}</router-link>
                     </template>
-                  </character-psi-mana-points-quick-view>
+                  </character-percentage-skills-quick-view>
                 </v-col>
               </template>
             </v-row>
           </v-card-text>
-        </v-card></v-tab-item
-      >
+        </v-card>
+      </v-tab-item>
     </v-tabs>
     <v-snackbar
       v-for="message in messages"
@@ -333,6 +418,8 @@ import { Character, LooseObject, User } from "@/store";
 import { characterToLink } from "@/utils";
 import Component from "vue-class-component";
 import Vue from "vue";
+import CharacterAbilitySelector from "@/components/character/CharacterAbilitySelector.vue";
+import CharacterPercentageSkillsQuickView from "@/components/character/CharacterPercentageSkillsQuickView.vue";
 @Component({
   name: "character-overview-as-dm",
   components: {
@@ -341,6 +428,8 @@ import Vue from "vue";
     "character-combat-values-quick-view": CharacterCombatValuesQuickView,
     "character-spell-resistance-quick-view": CharacterSpellResistanceQuickView,
     "character-psi-mana-points-quick-view": CharacterPsiManaPointsQuickView,
+    "character-percentage-skills-quick-view": CharacterPercentageSkillsQuickView,
+    "character-ability-selector": CharacterAbilitySelector,
   },
 })
 export default class CharacterOverviewAsDM extends TitleComponent {
@@ -348,7 +437,8 @@ export default class CharacterOverviewAsDM extends TitleComponent {
   title = this.$t("dm-overview");
   messages: string[] = [];
   notification = false;
-  bus = new Vue();
+  npcEvents = new Vue();
+  pcEvents = new Vue();
 
   get playerCharacters(): Character[] {
     return this.$store.getters["character/playerCharactersAsDM"];
@@ -398,11 +488,31 @@ export default class CharacterOverviewAsDM extends TitleComponent {
   }
 
   initiationForAllNPCs() {
-    this.bus.$emit("initiation");
+    this.npcEvents.$emit("initiation");
   }
 
   offenceForAllNPCs() {
-    this.bus.$emit("offence");
+    this.npcEvents.$emit("offence");
+  }
+
+  abilityTrialForAllPCs({
+    modifier,
+    ability,
+  }: {
+    modifier: number;
+    ability: string;
+  }) {
+    this.pcEvents.$emit("ability-trial", ability, modifier);
+  }
+
+  abilityTrialForAllNPCs({
+    modifier,
+    ability,
+  }: {
+    modifier: number;
+    ability: string;
+  }) {
+    this.npcEvents.$emit("ability-trial", ability, modifier);
   }
 }
 </script>

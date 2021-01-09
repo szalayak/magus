@@ -16,14 +16,18 @@
         dismissible
         @input="abilityTrialResult = null"
       >
-        <strong>{{ $t("trial") }}: {{ abilityTrialResult.abilityName }}</strong>
+        <strong>{{ $t(`${abilityTrialResult.abilityName}-trial`) }}</strong>
         <v-row dense>
-          <v-col cols="6">{{ abilityTrialResult.abilityName }}:</v-col>
+          <v-col cols="6">{{ $t(abilityTrialResult.abilityName) }}:</v-col>
           <v-col cols="6">
-            {{
-              abilityTrialResult.abilityValue +
-                (abilityTrialResult.result.modifier || 0)
-            }}</v-col
+            {{ abilityTrialResult.abilityValue || 0
+            }}<template v-if="abilityTrialResult.result.modifier">
+              + ({{ abilityTrialResult.result.modifier }}) =
+              {{
+                (abilityTrialResult.abilityValue || 0) +
+                  abilityTrialResult.result.modifier
+              }}</template
+            ></v-col
           >
           <v-col cols="6">{{ $t("result") }}:</v-col>
           <v-col cols="6">{{
@@ -40,11 +44,9 @@
             bold
             dialog
             throwScenarioString="D10"
-            :title="$t('strength')"
+            :title="$t('strength-trial')"
             :value="abilities.strength || 0"
-            @save="
-              onTrialResult($event, $t('strength'), abilities.strength || 0)
-            "
+            @save="onTrialResult($event, 'strength', abilities.strength || 0)"
           />
         </v-col>
         <v-col cols="5">{{ $t("damage-bonus") }}: {{ damageBonus }}</v-col>
@@ -56,10 +58,10 @@
             bold
             dialog
             throwScenarioString="D10"
-            :title="$t('agility')"
+            :title="$t('agility-trial')"
             :value="agilityInArmour || 0"
             :text="abilities.agility"
-            @save="onTrialResult($event, $t('agility'), agilityInArmour || 0)"
+            @save="onTrialResult($event, 'agility', agilityInArmour || 0)"
           />
         </v-col>
         <v-col cols="5">{{ $t("in-armour") }}: {{ agilityInArmour }}</v-col>
@@ -71,12 +73,10 @@
             bold
             dialog
             throwScenarioString="D10"
-            :title="$t('dexterity')"
+            :title="$t('dexterity-trial')"
             :value="dexterityInArmour || 0"
             :text="abilities.dexterity"
-            @save="
-              onTrialResult($event, $t('dexterity'), dexterityInArmour || 0)
-            "
+            @save="onTrialResult($event, 'dexterity', dexterityInArmour || 0)"
           />
         </v-col>
         <v-col cols="5">{{ $t("in-armour") }}: {{ dexterityInArmour }}</v-col>
@@ -88,9 +88,9 @@
             bold
             dialog
             throwScenarioString="D10"
-            :title="$t('stamina')"
+            :title="$t('stamina-trial')"
             :value="abilities.stamina || 0"
-            @save="onTrialResult($event, $t('stamina'), abilities.stamina || 0)"
+            @save="onTrialResult($event, 'stamina', abilities.stamina || 0)"
           />
         </v-col>
         <v-col cols="4"
@@ -101,9 +101,9 @@
             bold
             dialog
             throwScenarioString="D10"
-            :title="$t('health')"
+            :title="$t('health-trial')"
             :value="abilities.health || 0"
-            @save="onTrialResult($event, $t('health'), abilities.health || 0)"
+            @save="onTrialResult($event, 'health', abilities.health || 0)"
           />
         </v-col>
         <v-col cols="4"
@@ -114,9 +114,9 @@
             bold
             dialog
             throwScenarioString="D10"
-            :title="$t('beauty')"
+            :title="$t('beauty-trial')"
             :value="abilities.beauty || 0"
-            @save="onTrialResult($event, $t('beauty'), abilities.beauty || 0)"
+            @save="onTrialResult($event, 'beauty', abilities.beauty || 0)"
           />
         </v-col>
         <v-col cols="4"
@@ -127,14 +127,10 @@
             bold
             dialog
             throwScenarioString="D10"
-            :title="$t('intelligence')"
+            :title="$t('intelligence-trial')"
             :value="abilities.intelligence || 0"
             @save="
-              onTrialResult(
-                $event,
-                $t('intelligence'),
-                abilities.intelligence || 0
-              )
+              onTrialResult($event, 'intelligence', abilities.intelligence || 0)
             "
           />
         </v-col>
@@ -146,11 +142,9 @@
             bold
             dialog
             throwScenarioString="D10"
-            :title="$t('willpower')"
+            :title="$t('willpower-trial')"
             :value="abilities.willpower || 0"
-            @save="
-              onTrialResult($event, $t('willpower'), abilities.willpower || 0)
-            "
+            @save="onTrialResult($event, 'willpower', abilities.willpower || 0)"
           />
         </v-col>
         <v-col cols="4"
@@ -161,9 +155,9 @@
             bold
             dialog
             throwScenarioString="D10"
-            :title="$t('astral')"
+            :title="$t('astral-trial')"
             :value="abilities.astral || 0"
-            @save="onTrialResult($event, $t('astral'), abilities.astral || 0)"
+            @save="onTrialResult($event, 'astral', abilities.astral || 0)"
           />
         </v-col>
       </v-row>
@@ -172,10 +166,13 @@
 </template>
 
 <script lang="ts">
+import { Dice } from "@/API";
 import {
   abilityTrial,
   AbilityTrialResult,
+  executeThrowScenario,
   movementPreventionValueTotal,
+  parseThrowScenarioString,
   ThrowScenarioResult,
 } from "@/utils";
 import Component from "vue-class-component";
@@ -232,6 +229,21 @@ export default class CharacterAbilitiesQuickView extends CharacterQuickView {
       abilityName,
       abilityValue,
     });
+  }
+
+  created() {
+    if (this.bus) {
+      this.bus.$on("ability-trial", (ability: string, modifier: number) => {
+        this.abilityTrialResult = abilityTrial({
+          result: {
+            ...executeThrowScenario(parseThrowScenarioString(Dice.D10)),
+            modifier,
+          },
+          abilityName: ability,
+          abilityValue: this.abilities[ability] || 0,
+        });
+      });
+    }
   }
 }
 </script>

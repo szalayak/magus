@@ -296,5 +296,17 @@
   "loading-indicator": "Frissítés...",
   "error": "Hiba",
   "throw-initiative": "Kezdeményezés",
-  "throw-attack": "Támadás"
+  "throw-attack": "Támadás",
+  "ability-trial": "Képességpróba",
+  "strength-trial": "Erőpróba",
+  "agility-trial": "Ügyességpróba",
+  "dexterity-trial": "Gyorsaságpróba",
+  "stamina-trial": "Állóképességpróba",
+  "health-trial": "Egészségpróba",
+  "beauty-trial": "Szépségpróba",
+  "intelligence-trial": "Intelligenciapróba",
+  "willpower-trial": "Akaraterőpróba",
+  "astral-trial": "Asztrálpróba",
+  "percentage-skills": "Százalékos Képzettségek",
+  "skill-trial": "Képzettségpróba"
 }

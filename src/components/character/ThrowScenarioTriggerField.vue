@@ -7,11 +7,13 @@
     :cancel-text="$t('cancel')"
     large
   >
-    <template v-if="!!label"
-      ><strong>{{ label }}: </strong></template
-    >
-    <strong v-if="bold">{{ text || value }}</strong>
-    <template v-if="!bold">{{ text || value }}</template>
+    <slot>
+      <template v-if="!!label"
+        ><strong>{{ label }}: </strong></template
+      >
+      <strong v-if="bold">{{ text || value }}</strong>
+      <template v-if="!bold">{{ text || value }}</template>
+    </slot>
     <template v-slot:input>
       <div class="mt-4 title">{{ title }}: {{ throwScenarioToString }}</div>
       <v-text-field
@@ -22,11 +24,13 @@
     </template>
   </v-edit-dialog>
   <div class="pointer" v-else @click="performThrow">
-    <template v-if="!!label"
-      ><strong>{{ label }}: </strong></template
-    >
-    <strong v-if="bold">{{ text || value }}</strong>
-    <template v-if="!bold">{{ text || value }}</template>
+    <slot>
+      <template v-if="!!label"
+        ><strong>{{ label }}: </strong></template
+      >
+      <strong v-if="bold">{{ text || value }}</strong>
+      <template v-if="!bold">{{ text || value }}</template>
+    </slot>
   </div>
 </template>
 

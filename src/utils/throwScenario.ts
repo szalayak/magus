@@ -1,5 +1,5 @@
 import { Dice } from "@/API";
-import { WeaponAssignment } from "@/store";
+import { SkillAssignment, WeaponAssignment } from "@/store";
 import { ThrowScenario } from "@/store/types";
 import VueI18n from "vue-i18n";
 import { abilityValueAbove10 } from "./character";
@@ -21,6 +21,12 @@ export interface AbilityTrialResult {
   result: ThrowScenarioResult;
   abilityName?: string;
   abilityValue: number;
+  success?: boolean;
+}
+
+export interface SkillTrialResult {
+  result: ThrowScenarioResult;
+  skill: SkillAssignment;
   success?: boolean;
 }
 
@@ -112,5 +118,20 @@ export const abilityTrial = ({
     abilityValue,
     success:
       result.total < abilityValueAbove10(abilityValue) + (result.modifier || 0),
+  };
+};
+
+export const skillTrial = ({
+  result,
+  skill,
+}: {
+  result: ThrowScenarioResult;
+  skill: SkillAssignment;
+}) => {
+  return {
+    result,
+    skill,
+    success:
+      result.total < (skill.percentageValue || 0) + (result.modifier || 0),
   };
 };
