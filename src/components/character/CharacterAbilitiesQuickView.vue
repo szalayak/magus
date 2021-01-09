@@ -37,7 +37,7 @@
       </v-alert>
       <v-row dense>
         <v-col cols="4"
-          ><strong>{{ $t("strength") }}: </strong></v-col
+          ><strong>{{ $t("strength") }}</strong></v-col
         >
         <v-col cols="3">
           <throw-scenario-trigger-field
@@ -51,7 +51,7 @@
         </v-col>
         <v-col cols="5">{{ $t("damage-bonus") }}: {{ damageBonus }}</v-col>
         <v-col cols="4"
-          ><strong>{{ $t("agility") }}: </strong></v-col
+          ><strong>{{ $t("agility") }}</strong></v-col
         >
         <v-col cols="3">
           <throw-scenario-trigger-field
@@ -66,7 +66,7 @@
         </v-col>
         <v-col cols="5">{{ $t("in-armour") }}: {{ agilityInArmour }}</v-col>
         <v-col cols="4"
-          ><strong>{{ $t("dexterity") }}: </strong></v-col
+          ><strong>{{ $t("dexterity") }}</strong></v-col
         >
         <v-col cols="3">
           <throw-scenario-trigger-field
@@ -81,7 +81,7 @@
         </v-col>
         <v-col cols="5">{{ $t("in-armour") }}: {{ dexterityInArmour }}</v-col>
         <v-col cols="4"
-          ><strong>{{ $t("stamina") }}: </strong></v-col
+          ><strong>{{ $t("stamina") }}</strong></v-col
         >
         <v-col cols="8">
           <throw-scenario-trigger-field
@@ -94,7 +94,7 @@
           />
         </v-col>
         <v-col cols="4"
-          ><strong>{{ $t("health") }}: </strong></v-col
+          ><strong>{{ $t("health") }}</strong></v-col
         >
         <v-col cols="8">
           <throw-scenario-trigger-field
@@ -107,7 +107,7 @@
           />
         </v-col>
         <v-col cols="4"
-          ><strong>{{ $t("beauty") }}: </strong></v-col
+          ><strong>{{ $t("beauty") }}</strong></v-col
         >
         <v-col cols="8">
           <throw-scenario-trigger-field
@@ -120,7 +120,7 @@
           />
         </v-col>
         <v-col cols="4"
-          ><strong>{{ $t("intelligence") }}: </strong></v-col
+          ><strong>{{ $t("intelligence") }}</strong></v-col
         >
         <v-col cols="8">
           <throw-scenario-trigger-field
@@ -135,7 +135,7 @@
           />
         </v-col>
         <v-col cols="4"
-          ><strong>{{ $t("willpower") }}: </strong></v-col
+          ><strong>{{ $t("willpower") }}</strong></v-col
         >
         <v-col cols="8">
           <throw-scenario-trigger-field
@@ -148,7 +148,7 @@
           />
         </v-col>
         <v-col cols="4"
-          ><strong>{{ $t("astral") }}: </strong></v-col
+          ><strong>{{ $t("astral") }}</strong></v-col
         >
         <v-col cols="8">
           <throw-scenario-trigger-field

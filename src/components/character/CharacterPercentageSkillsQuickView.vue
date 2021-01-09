@@ -2,7 +2,7 @@
   <v-card outlined>
     <v-card-title>
       <slot name="title">
-        <router-link :to="characterToLink(character, 3, 'percentage-skills')">{{
+        <router-link :to="characterToLink(character, 3, 'skills')">{{
           $t("percentage-skills")
         }}</router-link></slot
       ></v-card-title
@@ -41,7 +41,7 @@
       <v-row dense>
         <template v-for="skill in skills">
           <v-col :key="`${skill.id}-id`" cols="8">
-            <strong>{{ skill.skill.description.title }}:</strong></v-col
+            <strong>{{ skill.skill.description.title }}</strong></v-col
           ><v-col :key="`${skill.id}-value`" cols="4">
             <throw-scenario-trigger-field
               bold
@@ -66,7 +66,7 @@ import {
 } from "@/utils";
 import { SkillAssignment } from "@/store";
 @Component({
-  name: "character-abilities-quick-view",
+  name: "character-percentage-skills-quick-view",
   components: {
     "throw-scenario-trigger-field": ThrowScenarioTriggerField,
   },

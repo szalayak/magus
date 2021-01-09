@@ -391,6 +391,67 @@
           </v-card-text>
         </v-card>
       </v-tab-item>
+      <v-tab key="skills">{{ $t("skills") }}</v-tab>
+      <v-tab-item key="skills">
+        <v-card flat>
+          <v-card-title>{{ $t("player-characters") }}</v-card-title>
+          <v-card-text
+            ><v-row dense>
+              <template v-for="character in playerCharacters">
+                <v-col
+                  cols="12"
+                  xs="12"
+                  sm="6"
+                  md="4"
+                  lg="3"
+                  xl="2"
+                  :key="character.id"
+                >
+                  <character-skills-quick-view
+                    :character="character"
+                    @error="onError"
+                  >
+                    <template v-slot:title>
+                      <router-link :to="characterToLink(character)">{{
+                        `${character.name} (${ownerToString(character.owner)})`
+                      }}</router-link>
+                    </template>
+                  </character-skills-quick-view>
+                </v-col>
+              </template>
+            </v-row>
+          </v-card-text>
+        </v-card>
+        <v-card flat>
+          <v-card-title>{{ $t("non-player-characters") }}</v-card-title>
+          <v-card-text
+            ><v-row dense>
+              <template v-for="character in nonPlayerCharacters">
+                <v-col
+                  cols="12"
+                  xs="12"
+                  sm="6"
+                  md="4"
+                  lg="3"
+                  xl="2"
+                  :key="character.id"
+                >
+                  <character-skills-quick-view
+                    :character="character"
+                    @error="onError"
+                  >
+                    <template v-slot:title>
+                      <router-link :to="characterToLink(character)">{{
+                        character.name
+                      }}</router-link>
+                    </template>
+                  </character-skills-quick-view>
+                </v-col>
+              </template>
+            </v-row>
+          </v-card-text>
+        </v-card>
+      </v-tab-item>
     </v-tabs>
     <v-snackbar
       v-for="message in messages"
@@ -420,6 +481,7 @@ import Component from "vue-class-component";
 import Vue from "vue";
 import CharacterAbilitySelector from "@/components/character/CharacterAbilitySelector.vue";
 import CharacterPercentageSkillsQuickView from "@/components/character/CharacterPercentageSkillsQuickView.vue";
+import CharacterSkillsQuickView from "@/components/character/CharacterSkillsQuickView.vue";
 @Component({
   name: "character-overview-as-dm",
   components: {
@@ -429,6 +491,7 @@ import CharacterPercentageSkillsQuickView from "@/components/character/Character
     "character-spell-resistance-quick-view": CharacterSpellResistanceQuickView,
     "character-psi-mana-points-quick-view": CharacterPsiManaPointsQuickView,
     "character-percentage-skills-quick-view": CharacterPercentageSkillsQuickView,
+    "character-skills-quick-view": CharacterSkillsQuickView,
     "character-ability-selector": CharacterAbilitySelector,
   },
 })
