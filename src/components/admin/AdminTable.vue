@@ -11,7 +11,7 @@
     >
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>{{ $t(title) }}</v-toolbar-title>
+          <!-- <v-toolbar-title>{{ $t(title) }}</v-toolbar-title> -->
           <v-text-field
             v-model="search"
             single-line
@@ -27,7 +27,7 @@
               <v-btn
                 v-if="!readonly"
                 color="primary"
-                dark
+                text
                 class="mb-2"
                 v-bind="attrs"
                 v-on="on"
@@ -36,7 +36,7 @@
               </v-btn>
             </template>
             <v-card>
-              <v-toolbar dark color="primary">
+              <v-toolbar flat>
                 <v-toolbar-title>{{ formTitle }}</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-select
@@ -173,6 +173,7 @@ import Component from "vue-class-component";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
 import { Locale } from "@/API";
 import marked from "marked";
+import { Form } from "@/utils";
 
 const AdminTableProps = Vue.extend({
   props: {
@@ -185,8 +186,6 @@ const AdminTableProps = Vue.extend({
     customColumns: Array,
   },
 });
-
-type Form = Vue & { validate: () => boolean };
 
 @Component({
   name: "admin-table",

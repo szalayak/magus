@@ -16,7 +16,8 @@
             cols="12"
             sm="6"
             md="4"
-            lg="3"
+            lg="4"
+            xl="3"
           >
             <v-card>
               <v-card-title>
@@ -33,6 +34,9 @@
               <v-card-actions>
                 <v-subheader class="pl-2">{{ $t("page") }}</v-subheader>
                 <v-btn-toggle dense tile color="primary" group>
+                  <v-btn :to="characterPageToLink(item, 0)"
+                    ><v-icon>mdi-eye</v-icon></v-btn
+                  >
                   <v-btn :to="characterPageToLink(item, 1)">1</v-btn>
                   <v-btn :to="characterPageToLink(item, 2)">2</v-btn>
                   <v-btn :to="characterPageToLink(item, 3)">3</v-btn>
@@ -83,7 +87,11 @@
       {{ message }}
 
       <template v-slot:action="{ attrs }">
-        <v-btn text v-bind="attrs" @click="notification = false">
+        <v-btn
+          text
+          v-bind="attrs"
+          @click="$emit('update:notification', $event)"
+        >
           {{ $t("close") }}
         </v-btn>
       </template>
@@ -100,8 +108,7 @@ import { Class } from "@/store/modules/class";
 import { localiseItem } from "@/utils/localise";
 import { LooseObject } from "@/store/types";
 import { User } from "@/store";
-
-type Form = Vue & { validate: () => boolean };
+import { characterToLink } from "@/utils";
 
 @Component({
   name: "character-list",
@@ -153,10 +160,7 @@ export default class CharacterList extends Vue {
   }
 
   characterToLink(character: Character) {
-    const type = character.playerCharacter
-      ? "player-characters"
-      : "non-player-characters";
-    return `/${type}/${character.id}`;
+    return characterToLink(character);
   }
 
   characterPageToLink(character: Character, page: number) {

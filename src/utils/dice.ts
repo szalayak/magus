@@ -16,8 +16,12 @@ export const getDice = (i18n: VueI18n): DiceObject[] => {
 };
 
 export const throwDice = (dice: Dice): number => {
-  const maxValue =
-    dice === Dice.D1 ? 6 : parseInt(dice.match(/[0-9]/g)!.join(""));
+  const diceNumericValues = dice.match(/[0-9]/g);
+  const diceValue = diceNumericValues
+    ? parseInt(diceNumericValues.join(""))
+    : 0;
+
+  const maxValue = dice === Dice.D1 ? 6 : diceValue;
 
   const value = Math.floor(Math.random() * maxValue) + 1;
 

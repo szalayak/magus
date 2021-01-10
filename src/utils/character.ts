@@ -3,11 +3,16 @@ import { Armour } from "@/store/modules/armour";
 import { Character } from "@/store/modules/character";
 import { Shield } from "@/store/modules/shield";
 import { Weapon } from "@/store/modules/weapon";
-import { CombatValues } from "@/store/types";
+import { CombatValues, SpellResistanceValues } from "@/store/types";
 import {
   applyMasterSkillToCombatValues,
   applyUnskilledPenaltyToCombatValues,
 } from "./combatValues";
+
+export const abilityValueAbove10 = (ability?: number): number => {
+  const base = (ability || 0) - 10;
+  return base > 0 ? base : 0;
+};
 
 const calculateCombatValueTotal = (
   base?: number,
@@ -36,21 +41,25 @@ const calculateCombatValueAbilityModifier = (
 type MovementPreventionFunction = (params: {
   armour?: Armour;
   armourMastery?: Mastery;
+  armourActive?: boolean;
   shield?: Shield;
   shieldMastery?: Mastery;
+  shieldInHand?: boolean;
 }) => number;
 
 export const movementPreventionValueTotal: MovementPreventionFunction = ({
   armour,
   armourMastery,
+  armourActive,
   shield,
   shieldMastery,
+  shieldInHand,
 }) => {
   return (
-    (armourMastery === Mastery.MASTER
+    (!armour || !armourActive || armourMastery === Mastery.MASTER
       ? 0
       : armour?.movementPreventionValue || 0) +
-    (shieldMastery === Mastery.MASTER
+    (!shield || !shieldInHand || shieldMastery === Mastery.MASTER
       ? 0
       : shield?.movementPreventionValue || 0)
   );
@@ -58,97 +67,125 @@ export const movementPreventionValueTotal: MovementPreventionFunction = ({
 
 const calculateInitiationAbilityModifier = (
   character: Character,
-  inArmour = false
+  ignoreMovementPrevention?: boolean
 ): number => {
-  const mpv = movementPreventionValueTotal(character);
+  const mpv = ignoreMovementPrevention
+    ? 0
+    : movementPreventionValueTotal(character);
   return calculateCombatValueAbilityModifier([
-    { value: character.abilities?.agility, modifier: inArmour ? mpv : 0 },
-    { value: character.abilities?.dexterity, modifier: inArmour ? mpv : 0 },
+    {
+      value: character.abilities?.agility,
+      modifier: character.armour && character.armourActive ? mpv : 0,
+    },
+    {
+      value: character.abilities?.dexterity,
+      modifier: character.armour && character.armourActive ? mpv : 0,
+    },
   ]);
 };
 
 export const initiationTotal = (
   character: Character,
-  inArmour = false
+  ignoreMovementPrevention?: boolean
 ): number => {
   return calculateCombatValueTotal(
     character.baseCombatValues?.initiation,
     character.spentCombatValueModifiers?.initiation,
     character.otherCombatValueModifiers?.initiation,
-    calculateInitiationAbilityModifier(character, inArmour)
+    calculateInitiationAbilityModifier(character, ignoreMovementPrevention)
   );
 };
 
 const calculateStrengthAbilityModifier = (
   character: Character,
-  inArmour?: boolean
+  ignoreMovementPrevention?: boolean
 ): number => {
-  const mpv = movementPreventionValueTotal(character);
+  const mpv = ignoreMovementPrevention
+    ? 0
+    : movementPreventionValueTotal(character);
   return calculateCombatValueAbilityModifier([
     { value: character.abilities?.strength },
-    { value: character.abilities?.agility, modifier: inArmour ? mpv : 0 },
-    { value: character.abilities?.dexterity, modifier: inArmour ? mpv : 0 },
+    {
+      value: character.abilities?.agility,
+      modifier: character.armour && character.armourActive ? mpv : 0,
+    },
+    {
+      value: character.abilities?.dexterity,
+      modifier: character.armour && character.armourActive ? mpv : 0,
+    },
   ]);
 };
 
 export const offenceTotal = (
   character: Character,
-  inArmour?: boolean
+  ignoreMovementPrevention?: boolean
 ): number => {
   return calculateCombatValueTotal(
     character.baseCombatValues?.offence,
     character.spentCombatValueModifiers?.offence,
     character.otherCombatValueModifiers?.offence,
-    calculateStrengthAbilityModifier(character, inArmour)
+    calculateStrengthAbilityModifier(character, ignoreMovementPrevention)
   );
 };
 
 const calculateDefenceAbilityModifier = (
   character: Character,
-  inArmour?: boolean
+  ignoreMovementPrevention?: boolean
 ): number => {
-  const mpv = movementPreventionValueTotal(character);
+  const mpv = ignoreMovementPrevention
+    ? 0
+    : movementPreventionValueTotal(character);
   return calculateCombatValueAbilityModifier([
-    { value: character.abilities?.agility, modifier: inArmour ? mpv : 0 },
-    { value: character.abilities?.dexterity, modifier: inArmour ? mpv : 0 },
+    {
+      value: character.abilities?.agility,
+      modifier: character.armour && character.armourActive ? mpv : 0,
+    },
+    {
+      value: character.abilities?.dexterity,
+      modifier: character.armour && character.armourActive ? mpv : 0,
+    },
   ]);
 };
 
 export const defenceTotal = (
   character: Character,
-  inArmour?: boolean,
-  withShield?: boolean
+  ignoreMovementPrevention?: boolean
 ): number => {
   const total = calculateCombatValueTotal(
     character.baseCombatValues?.defence,
     character.spentCombatValueModifiers?.defence,
     character.otherCombatValueModifiers?.defence,
-    calculateDefenceAbilityModifier(character, inArmour)
+    calculateDefenceAbilityModifier(character, ignoreMovementPrevention)
   );
-  return withShield
+  return !!character.shield && character.shieldInHand
     ? total + (character.shield?.combatValues?.defence || 0)
     : total;
 };
 
 const calculateAimingAbilityModifier = (
   character: Character,
-  inArmour?: boolean
+  ignoreMovementPrevention?: boolean
 ): number => {
-  const mpv = movementPreventionValueTotal(character);
+  const mpv = ignoreMovementPrevention
+    ? 0
+    : movementPreventionValueTotal(character);
   return calculateCombatValueAbilityModifier([
-    { value: character.abilities?.dexterity, modifier: inArmour ? mpv : 0 },
+    {
+      value: character.abilities?.dexterity,
+      modifier: character.armour && character.armourActive ? mpv : 0,
+    },
   ]);
 };
 
 export const aimingTotal = (
   character: Character,
-  inArmour?: boolean
+  ignoreMovementPrevention?: boolean
 ): number => {
   return calculateCombatValueTotal(
     character.baseCombatValues?.aiming,
     character.spentCombatValueModifiers?.aiming,
     character.otherCombatValueModifiers?.aiming,
-    calculateAimingAbilityModifier(character, inArmour)
+    calculateAimingAbilityModifier(character, ignoreMovementPrevention)
   );
 };
 
@@ -162,32 +199,28 @@ type CombatValuesWithWeaponInput = {
   character: Character;
   weapon?: Weapon;
   mastery?: Mastery;
-  inArmour?: boolean;
-  withShield?: boolean;
 };
 
 export const combatValuesWithWeapon = ({
   character,
   weapon,
   mastery,
-  inArmour,
-  withShield,
 }: CombatValuesWithWeaponInput) => {
   const base: CombatValues = {
     initiation: calculateCombatValueTotal(
-      initiationTotal(character, inArmour),
+      initiationTotal(character),
       weapon?.combatValues?.initiation
     ),
     offence: calculateCombatValueTotal(
-      offenceTotal(character, inArmour),
+      offenceTotal(character),
       weapon?.combatValues?.offence
     ),
     defence: calculateCombatValueTotal(
-      defenceTotal(character, inArmour, withShield),
+      defenceTotal(character),
       weapon?.combatValues?.defence
     ),
     aiming: calculateCombatValueTotal(
-      aimingTotal(character, inArmour),
+      aimingTotal(character),
       weapon?.combatValues?.aiming
     ),
   };
@@ -196,4 +229,34 @@ export const combatValuesWithWeapon = ({
   else if (mastery === Mastery.MASTER)
     return applyMasterSkillToCombatValues(base);
   else return base;
+};
+
+export const calculateSpellResistanceTotal = (
+  values?: SpellResistanceValues
+): number => {
+  const staticShield = values?.staticShield || 0;
+  const dynamicShield = values?.dynamicShield || 0;
+  const innate = values?.innate || 0;
+  const magical = values?.magical || 0;
+
+  return staticShield + dynamicShield + innate + magical;
+};
+
+export const calculateInnateSpellResistance = (ability?: number): number => {
+  return abilityValueAbove10(ability);
+};
+
+export const characterToLink = (
+  character: Character,
+  page?: number,
+  selector?: string
+): string => {
+  const type = character.playerCharacter
+    ? "player-characters"
+    : "non-player-characters";
+  const link = `/${type}/${character.id}`;
+  if (page)
+    if (selector) return `${link}/${page.toString()}#${selector}`;
+    else return `${link}/${page.toString()}`;
+  else return link;
 };

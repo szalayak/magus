@@ -9,7 +9,7 @@
     <template v-slot:toolbar-buttons>
       <v-dialog v-model="createDialog" persistent max-width="50%">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn color="primary" v-bind="attrs" v-on="on">
+          <v-btn color="primary" v-bind="attrs" v-on="on" text>
             <v-icon>mdi-plus</v-icon>
             <div class="ml-2 d-none d-sm-flex">
               {{ $t("new-character") }}
@@ -115,13 +115,11 @@ import { Character } from "@/store/modules/character";
 import { Class } from "@/store/modules/class";
 import { Race } from "@/store/modules/race";
 import { localise } from "@/utils/localise";
-import Vue from "vue";
 import Component from "vue-class-component";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
 import CharacterList from "@/components/CharacterList.vue";
 import TitleComponent from "@/mixins/TitleComponent";
-
-type Form = Vue & { validate: () => boolean };
+import { Form } from "@/utils";
 
 @Component({
   name: "non-player-characters-as-dm",
@@ -140,6 +138,7 @@ export default class NonPlayerCharactersAsDM extends TitleComponent {
     name: "",
     level: { currentLevel: 1 },
     playerCharacter: false,
+    dungeonMaster: this.$store.getters["currentUser"],
   };
 
   get characters(): Character[] {

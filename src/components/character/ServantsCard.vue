@@ -243,8 +243,7 @@ import CombatValueEditorVue from "../admin/CombatValueEditor.vue";
 import ThrowScenarioEditorVue from "../admin/ThrowScenarioEditor.vue";
 import { localise, localiseItem } from "@/utils/localise";
 import { Weapon } from "@/store/modules/weapon";
-
-type Form = Vue & { validate: () => boolean };
+import { Form } from "@/utils";
 
 @Component({
   name: "servants-card",

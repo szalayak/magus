@@ -6,6 +6,7 @@ import { adminRoutes } from "./admin";
 import { characterRoutes } from "./character";
 import { dungeonMasterAreaRoutes } from "./dungeonMasterArea";
 import { playerAreaRoutes } from "./playerArea";
+import goTo from "vuetify/es5/services/goto";
 
 Vue.use(VueRouter);
 
@@ -46,6 +47,17 @@ const routes: Array<RouteConfig> = [
 const router = new VueRouter({
   mode: "hash",
   base: process.env.BASE_URL,
+  scrollBehavior: (to, _from, savedPosition) => {
+    let scrollTo: string | number = 0;
+
+    if (to.hash) {
+      scrollTo = to.hash;
+    } else if (savedPosition) {
+      scrollTo = savedPosition.y;
+    }
+
+    return goTo(scrollTo);
+  },
   routes,
 });
 

@@ -15,6 +15,7 @@
         </v-col>
         <v-col cols="12" sm="12" md="6">
           <v-text-field
+            class="font-weight-bold"
             v-model.number="psiPoints.current"
             :label="$t('current')"
             type="number"
@@ -64,10 +65,15 @@ import { MutablePointValue } from "@/store/types";
 })
 export default class PsiCard extends CharacterInfo {
   get psiSchools(): PsiSchool[] {
-    return localise(
-      this.$store.getters["psiSchool/list"],
-      this.$i18n.locale
-    ) as PsiSchool[];
+    return [
+      {
+        id: null,
+        description: {
+          title: this.$t("none"),
+        },
+      },
+      ...localise(this.$store.getters["psiSchool/list"], this.$i18n.locale),
+    ] as PsiSchool[];
   }
 
   get psiPointsPerLevel() {
