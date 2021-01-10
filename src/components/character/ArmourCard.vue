@@ -14,6 +14,21 @@
           />
         </v-col>
         <v-col cols="12">
+          <v-select
+            v-model="character.armourMastery"
+            :items="masteryLevels"
+            :label="$t('mastery')"
+            :disabled="!edit"
+          />
+        </v-col>
+        <v-col cols="12">
+          <v-checkbox
+            v-model="character.armourActive"
+            :label="$t('armour-active')"
+            :disabled="!edit"
+          />
+        </v-col>
+        <v-col cols="12">
           <v-text-field
             :label="$t('mpv')"
             :value="armour.movementPreventionValue"
@@ -31,14 +46,6 @@
           <v-text-field
             :label="$t('current-drv')"
             v-model="character.armourCurrentDamageReductionValue"
-            :disabled="!edit"
-          />
-        </v-col>
-        <v-col cols="12">
-          <v-select
-            v-model="character.armourMastery"
-            :items="masteryLevels"
-            :label="$t('mastery')"
             :disabled="!edit"
           />
         </v-col>

@@ -1,18 +1,10 @@
 <template>
   <vue-pull-refresh :on-refresh="refresh" :config="pullToRefreshConfig">
-    <v-container fluid>
+    <v-card flat>
       <v-toolbar v-if="$vuetify.breakpoint.mdAndUp" flat>
-        <v-toolbar-title>{{ character.name }}</v-toolbar-title>
+        <v-card-title class="pl-1">{{ character.name }}</v-card-title>
         <v-btn text icon @click="refresh"><v-icon>mdi-refresh</v-icon></v-btn>
         <v-spacer />
-        <!-- <v-text-field
-        clearable
-        prepend-inner-icon="mdi-magnify"
-        label="search"
-        single-line
-        hide-details
-        @input="search"
-      /> -->
         <v-btn-toggle dense tile color="primary" group v-model.number="page">
           <v-btn><v-icon>mdi-eye</v-icon></v-btn>
           <v-btn>1</v-btn>
@@ -21,210 +13,228 @@
           <v-btn>4</v-btn>
         </v-btn-toggle>
       </v-toolbar>
-      <character-overview v-if="page === 0" :id="id" />
-      <v-row>
-        <v-col id="appearance" v-if="page === 1" cols="12" xs="12" lg="10">
-          <appearance :id="id" :editable="editable" />
-        </v-col>
-        <v-col
-          id="administrative-info"
-          v-if="page === 1"
-          cols="12"
-          xs="12"
-          sm="6"
-          lg="2"
+      <v-card-text>
+        <character-overview v-if="page === 0" :id="id" />
+        <v-row>
+          <v-col id="appearance" v-if="page === 1" cols="12" xs="12" lg="10">
+            <appearance :id="id" :editable="editable" />
+          </v-col>
+          <v-col
+            id="administrative-info"
+            v-if="page === 1"
+            cols="12"
+            xs="12"
+            sm="6"
+            lg="2"
+          >
+            <administrative-info :id="id" :editable="editable" />
+          </v-col>
+          <v-col
+            id="properties"
+            v-if="page === 1"
+            cols="12"
+            xs="12"
+            sm="6"
+            lg="4"
+          >
+            <properties :id="id" :editable="editable" />
+          </v-col>
+          <v-col
+            id="likes-and-dislikes"
+            v-if="page === 1"
+            cols="12"
+            xs="12"
+            sm="6"
+            lg="4"
+          >
+            <likes-and-dislikes :id="id" :editable="editable" />
+          </v-col>
+          <v-col
+            id="connections"
+            v-if="page === 1"
+            cols="12"
+            xs="12"
+            sm="6"
+            lg="4"
+          >
+            <connections :id="id" :editable="editable" />
+          </v-col>
+          <v-col id="core-information" v-if="page === 2" cols="12">
+            <core-information :id="id" :editable="editable" />
+          </v-col>
+          <v-col
+            id="abilities"
+            v-if="page === 2"
+            cols="12"
+            xs="12"
+            sm="6"
+            lg="4"
+            xl="2"
+          >
+            <abilities :id="id" :editable="editable" />
+          </v-col>
+          <v-col
+            id="health"
+            v-if="page === 2"
+            cols="12"
+            xs="12"
+            sm="6"
+            lg="4"
+            xl="2"
+          >
+            <health :id="id" :editable="editable" />
+          </v-col>
+          <v-col
+            id="combat-values"
+            v-if="page === 2"
+            cols="12"
+            xs="12"
+            sm="6"
+            lg="4"
+            xl="2"
+          >
+            <combat-values :id="id" :editable="editable" />
+          </v-col>
+          <v-col
+            id="spell-resistance"
+            v-if="page === 2"
+            cols="12"
+            xs="12"
+            sm="6"
+            lg="4"
+            xl="2"
+          >
+            <spell-resistance :id="id" :editable="editable" />
+          </v-col>
+          <v-col
+            id="psi"
+            v-if="page === 2 && character.psiUser"
+            cols="12"
+            xs="12"
+            sm="6"
+            lg="2"
+          >
+            <psi :id="id" :editable="editable" />
+          </v-col>
+          <v-col
+            id="magical-ability"
+            v-if="page === 2 && character.magicUser"
+            cols="12"
+            xs="12"
+            sm="3"
+            lg="2"
+          >
+            <magical-ability :id="id" :editable="editable" />
+          </v-col>
+          <v-col id="armour" v-if="page === 2" cols="12" xs="12" sm="3" lg="2">
+            <armour :id="id" :editable="editable" />
+          </v-col>
+          <v-col id="shield" v-if="page === 2" cols="12" xs="12" sm="3" lg="2">
+            <shield :id="id" :editable="editable" />
+          </v-col>
+          <v-col id="weapon-assignments" v-if="page === 3" cols="12">
+            <weapon-assignments :id="id" :editable="editable" />
+          </v-col>
+          <v-col id="ranged-weapon-assignments" v-if="page === 3" cols="12">
+            <ranged-weapon-assignments :id="id" :editable="editable" />
+          </v-col>
+          <v-col
+            id="skill-assignments"
+            v-if="page === 3"
+            cols="12"
+            xs="12"
+            sm="9"
+            lg="10"
+          >
+            <skill-assignments :id="id" :editable="editable" />
+          </v-col>
+          <v-col
+            id="skill-points"
+            v-if="page === 3"
+            cols="12"
+            xs="12"
+            sm="6"
+            md="3"
+            lg="2"
+          >
+            <skill-points :id="id" :editable="editable" />
+          </v-col>
+          <v-col
+            id="magical-item-assignments"
+            v-if="page === 4"
+            cols="12"
+            xs="12"
+            sm="6"
+            md="4"
+          >
+            <magical-item-assignments :id="id" :editable="editable" />
+          </v-col>
+          <v-col
+            id="languages"
+            v-if="page === 4"
+            cols="12"
+            xs="12"
+            sm="6"
+            md="4"
+          >
+            <languages :id="id" :editable="editable" />
+          </v-col>
+          <v-col id="wallet" v-if="page === 4" cols="12" xs="12" sm="6" md="4">
+            <wallet :id="id" :editable="editable" />
+          </v-col>
+          <v-col
+            id="inventory"
+            v-if="page === 4"
+            cols="12"
+            xs="12"
+            sm="6"
+            md="6"
+          >
+            <inventory :id="id" :editable="editable" />
+          </v-col>
+          <v-col id="poisons" v-if="page === 4" cols="12" xs="12" sm="6" md="6">
+            <poisons :id="id" :editable="editable" />
+          </v-col>
+          <v-col id="animals" v-if="page === 4" cols="12">
+            <animals :id="id" :editable="editable" />
+          </v-col>
+          <v-col id="servants" v-if="page === 4" cols="12">
+            <servants :id="id" :editable="editable" />
+          </v-col>
+          <v-col id="notes" v-if="page === 4" cols="12">
+            <notes :id="id" :editable="editable" />
+          </v-col>
+        </v-row>
+        <v-snackbar
+          v-for="message in messages"
+          v-model="notification"
+          :key="message"
         >
-          <administrative-info :id="id" :editable="editable" />
-        </v-col>
-        <v-col
-          id="properties"
-          v-if="page === 1"
-          cols="12"
-          xs="12"
-          sm="6"
-          lg="4"
-        >
-          <properties :id="id" :editable="editable" />
-        </v-col>
-        <v-col
-          id="likes-and-dislikes"
-          v-if="page === 1"
-          cols="12"
-          xs="12"
-          sm="6"
-          lg="4"
-        >
-          <likes-and-dislikes :id="id" :editable="editable" />
-        </v-col>
-        <v-col
-          id="connections"
-          v-if="page === 1"
-          cols="12"
-          xs="12"
-          sm="6"
-          lg="4"
-        >
-          <connections :id="id" :editable="editable" />
-        </v-col>
-        <v-col id="core-information" v-if="page === 2" cols="12">
-          <core-information :id="id" :editable="editable" />
-        </v-col>
-        <v-col
-          id="abilities"
-          v-if="page === 2"
-          cols="12"
-          xs="12"
-          sm="6"
-          lg="4"
-          xl="2"
-        >
-          <abilities :id="id" :editable="editable" />
-        </v-col>
-        <v-col
-          id="health"
-          v-if="page === 2"
-          cols="12"
-          xs="12"
-          sm="6"
-          lg="4"
-          xl="2"
-        >
-          <health :id="id" :editable="editable" />
-        </v-col>
-        <v-col
-          id="combat-values"
-          v-if="page === 2"
-          cols="12"
-          xs="12"
-          sm="6"
-          lg="4"
-          xl="2"
-        >
-          <combat-values :id="id" :editable="editable" />
-        </v-col>
-        <v-col
-          id="spell-resistance"
-          v-if="page === 2"
-          cols="12"
-          xs="12"
-          sm="6"
-          lg="4"
-          xl="2"
-        >
-          <spell-resistance :id="id" :editable="editable" />
-        </v-col>
-        <v-col
-          id="psi"
-          v-if="page === 2 && character.psiUser"
-          cols="12"
-          xs="12"
-          sm="6"
-          lg="2"
-        >
-          <psi :id="id" :editable="editable" />
-        </v-col>
-        <v-col
-          id="magical-ability"
-          v-if="page === 2 && character.magicUser"
-          cols="12"
-          xs="12"
-          sm="3"
-          lg="2"
-        >
-          <magical-ability :id="id" :editable="editable" />
-        </v-col>
-        <v-col id="armour" v-if="page === 2" cols="12" xs="12" sm="3" lg="2">
-          <armour :id="id" :editable="editable" />
-        </v-col>
-        <v-col id="shield" v-if="page === 2" cols="12" xs="12" sm="3" lg="2">
-          <shield :id="id" :editable="editable" />
-        </v-col>
-        <v-col id="weapon-assignments" v-if="page === 3" cols="12">
-          <weapon-assignments :id="id" :editable="editable" />
-        </v-col>
-        <v-col id="ranged-weapon-assignments" v-if="page === 3" cols="12">
-          <ranged-weapon-assignments :id="id" :editable="editable" />
-        </v-col>
-        <v-col
-          id="skill-assignments"
-          v-if="page === 3"
-          cols="12"
-          xs="12"
-          sm="9"
-          lg="10"
-        >
-          <skill-assignments :id="id" :editable="editable" />
-        </v-col>
-        <v-col
-          id="skill-points"
-          v-if="page === 3"
-          cols="12"
-          xs="12"
-          sm="6"
-          md="3"
-          lg="2"
-        >
-          <skill-points :id="id" :editable="editable" />
-        </v-col>
-        <v-col
-          id="magical-item-assignments"
-          v-if="page === 4"
-          cols="12"
-          xs="12"
-          sm="6"
-          md="4"
-        >
-          <magical-item-assignments :id="id" :editable="editable" />
-        </v-col>
-        <v-col id="languages" v-if="page === 4" cols="12" xs="12" sm="6" md="4">
-          <languages :id="id" :editable="editable" />
-        </v-col>
-        <v-col id="wallet" v-if="page === 4" cols="12" xs="12" sm="6" md="4">
-          <wallet :id="id" :editable="editable" />
-        </v-col>
-        <v-col id="inventory" v-if="page === 4" cols="12" xs="12" sm="6" md="6">
-          <inventory :id="id" :editable="editable" />
-        </v-col>
-        <v-col id="poisons" v-if="page === 4" cols="12" xs="12" sm="6" md="6">
-          <poisons :id="id" :editable="editable" />
-        </v-col>
-        <v-col id="animals" v-if="page === 4" cols="12">
-          <animals :id="id" :editable="editable" />
-        </v-col>
-        <v-col id="servants" v-if="page === 4" cols="12">
-          <servants :id="id" :editable="editable" />
-        </v-col>
-        <v-col id="notes" v-if="page === 4" cols="12">
-          <notes :id="id" :editable="editable" />
-        </v-col>
-      </v-row>
-      <v-snackbar
-        v-for="message in messages"
-        v-model="notification"
-        :key="message"
-      >
-        {{ message }}
+          {{ message }}
 
-        <template v-slot:action="{ attrs }">
-          <v-btn text v-bind="attrs" @click="notification = false">
-            {{ $t("close") }}
-          </v-btn>
-        </template>
-      </v-snackbar>
-      <v-bottom-navigation
-        v-if="$vuetify.breakpoint.smAndDown"
-        v-model="page"
-        color="primary"
-        fixed
-        hide-on-scroll
-      >
-        <v-btn><span></span><v-icon>mdi-eye</v-icon></v-btn>
-        <v-btn><span>1</span></v-btn>
-        <v-btn><span>2</span></v-btn>
-        <v-btn><span>3</span></v-btn>
-        <v-btn><span>4</span></v-btn>
-      </v-bottom-navigation>
-    </v-container>
+          <template v-slot:action="{ attrs }">
+            <v-btn text v-bind="attrs" @click="notification = false">
+              {{ $t("close") }}
+            </v-btn>
+          </template>
+        </v-snackbar>
+      </v-card-text>
+      <v-card-actions>
+        <v-bottom-navigation
+          v-if="$vuetify.breakpoint.smAndDown"
+          app
+          v-model="page"
+          color="primary"
+          fixed
+        >
+          <v-btn><span></span><v-icon>mdi-eye</v-icon></v-btn>
+          <v-btn><span>1</span></v-btn>
+          <v-btn><span>2</span></v-btn>
+          <v-btn><span>3</span></v-btn>
+          <v-btn><span>4</span></v-btn>
+        </v-bottom-navigation>
+      </v-card-actions>
+    </v-card>
   </vue-pull-refresh>
 </template>
 <script lang="ts">

@@ -250,8 +250,6 @@ export default class WeaponAssignmentCard extends CharacterInfo {
       character: this.character,
       weapon: assignment.weapon,
       mastery: assignment.mastery,
-      inArmour: !!this.character.armour,
-      withShield: !!this.character.shield,
     }).initiation;
   }
   offence(assignment: WeaponAssignment) {
@@ -259,8 +257,6 @@ export default class WeaponAssignmentCard extends CharacterInfo {
       character: this.character,
       weapon: assignment.weapon,
       mastery: assignment.mastery,
-      inArmour: !!this.character.armour,
-      withShield: !!this.character.shield,
     }).offence;
   }
   defence(assignment: WeaponAssignment) {
@@ -268,8 +264,6 @@ export default class WeaponAssignmentCard extends CharacterInfo {
       character: this.character,
       weapon: assignment.weapon,
       mastery: assignment.mastery,
-      inArmour: !!this.character.armour,
-      withShield: !!this.character.shield,
     }).defence;
   }
   close() {

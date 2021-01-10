@@ -19,6 +19,26 @@
         </v-row>
       </v-container>
       <router-view v-if="isLoggedIn && userLoaded" />
+      <v-snackbar
+        :value="throwResultNotification"
+        timeout="-1"
+        v-if="$vuetify.breakpoint.mdAndUp"
+      >
+        {{ $t("result") }}: {{ throwResult }}
+        <template v-slot:action="{ attrs }">
+          <v-btn
+            text
+            v-bind="attrs"
+            @click="
+              $store.commit('setThrowResult', {
+                throwResultNotification: false,
+              })
+            "
+          >
+            {{ $t("close") }}
+          </v-btn>
+        </template>
+      </v-snackbar>
     </v-main>
   </v-app>
 </template>
@@ -36,8 +56,6 @@ export default Vue.extend({
   data() {
     return {
       userLoaded: false,
-      throwResult: 0,
-      throwResultNotification: false,
       navDrawerOpen: !this.$vuetify.breakpoint.lgAndDown,
     };
   },
@@ -48,7 +66,12 @@ export default Vue.extend({
 
   computed: {
     ...mapState(["app"]),
-    ...mapGetters(["isLoggedIn", "isNavDrawerOpen"]),
+    ...mapGetters([
+      "isLoggedIn",
+      "isNavDrawerOpen",
+      "throwResultNotification",
+      "throwResult",
+    ]),
   },
   created() {
     this.setNavDrawerOpen(!this.$vuetify.breakpoint.lgAndDown);

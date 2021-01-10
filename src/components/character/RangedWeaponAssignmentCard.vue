@@ -246,8 +246,6 @@ export default class RangedWeaponAssignmentCard extends CharacterInfo {
       character: this.character,
       weapon: assignment.weapon,
       mastery: assignment.mastery,
-      inArmour: !!this.character.armour,
-      withShield: !!this.character.shield,
     }).initiation;
   }
   aiming(assignment: WeaponAssignment) {
@@ -255,8 +253,6 @@ export default class RangedWeaponAssignmentCard extends CharacterInfo {
       character: this.character,
       weapon: assignment.weapon,
       mastery: assignment.mastery,
-      inArmour: !!this.character.armour,
-      withShield: !!this.character.shield,
     }).aiming;
   }
   close() {

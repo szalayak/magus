@@ -25,7 +25,7 @@ import {
   Wallet,
   Weapon,
 } from "@/store";
-import { Observable, Subscription } from "rxjs";
+import { Subscription } from "rxjs";
 import { CompanionType, Mastery } from "./proxies";
 
 export { CompanionType, Mastery } from "./proxies";
@@ -104,6 +104,8 @@ export interface CharacterCore extends Identifiable {
   otherCombatValueModifiers?: CombatValues;
   combatValueModifiersPerLevel?: number;
   mandatoryCombatValueModifierDistribution?: string;
+  attacksPerTurn?: number;
+  damage?: ThrowScenario;
   wallet?: Wallet;
   skillPoints?: SkillPoints;
   languages?: LanguageAbility[];
@@ -113,6 +115,7 @@ export interface CharacterCore extends Identifiable {
   armour?: Armour;
   armourMastery?: Mastery;
   armourCurrentDamageReductionValue?: number;
+  armourActive?: boolean;
   shield?: Shield;
   shieldMastery?: Mastery;
   shieldInHand?: boolean;

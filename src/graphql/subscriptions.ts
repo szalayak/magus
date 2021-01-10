@@ -944,6 +944,12 @@ export const onCreateCharacter = /* GraphQL */ `
       }
       combatValueModifiersPerLevel
       mandatoryCombatValueModifierDistribution
+      damage {
+        dice
+        iterationCount
+        modifier
+      }
+      attacksPerTurn
       wallet {
         money
         mithrill
@@ -987,6 +993,7 @@ export const onCreateCharacter = /* GraphQL */ `
       }
       armourMastery
       armourCurrentDamageReductionValue
+      armourActive
       shield {
         id
         descriptions {
@@ -1440,6 +1447,12 @@ export const onUpdateCharacter = /* GraphQL */ `
       }
       combatValueModifiersPerLevel
       mandatoryCombatValueModifierDistribution
+      damage {
+        dice
+        iterationCount
+        modifier
+      }
+      attacksPerTurn
       wallet {
         money
         mithrill
@@ -1483,6 +1496,7 @@ export const onUpdateCharacter = /* GraphQL */ `
       }
       armourMastery
       armourCurrentDamageReductionValue
+      armourActive
       shield {
         id
         descriptions {
@@ -1936,6 +1950,12 @@ export const onDeleteCharacter = /* GraphQL */ `
       }
       combatValueModifiersPerLevel
       mandatoryCombatValueModifierDistribution
+      damage {
+        dice
+        iterationCount
+        modifier
+      }
+      attacksPerTurn
       wallet {
         money
         mithrill
@@ -1979,6 +1999,7 @@ export const onDeleteCharacter = /* GraphQL */ `
       }
       armourMastery
       armourCurrentDamageReductionValue
+      armourActive
       shield {
         id
         descriptions {
