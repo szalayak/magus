@@ -466,6 +466,8 @@ export type CreateCharacterInput = {
   otherCombatValueModifiers?: CombatValuesInput | null,
   combatValueModifiersPerLevel?: number | null,
   mandatoryCombatValueModifierDistribution?: string | null,
+  damage?: ThrowScenarioInput | null,
+  attacksPerTurn?: number | null,
   wallet?: WalletInput | null,
   skillPoints?: SkillPointsInput | null,
   languages?: Array< LanguageAbilityInput > | null,
@@ -474,6 +476,7 @@ export type CreateCharacterInput = {
   notes?: string | null,
   armourMastery?: Mastery | null,
   armourCurrentDamageReductionValue?: number | null,
+  armourActive?: boolean | null,
   shieldMastery?: Mastery | null,
   shieldInHand?: boolean | null,
   characterClassId?: string | null,
@@ -637,9 +640,11 @@ export type ModelCharacterConditionInput = {
   magicUser?: ModelBooleanInput | null,
   combatValueModifiersPerLevel?: ModelIntInput | null,
   mandatoryCombatValueModifierDistribution?: ModelStringInput | null,
+  attacksPerTurn?: ModelFloatInput | null,
   notes?: ModelStringInput | null,
   armourMastery?: ModelMasteryInput | null,
   armourCurrentDamageReductionValue?: ModelIntInput | null,
+  armourActive?: ModelBooleanInput | null,
   shieldMastery?: ModelMasteryInput | null,
   shieldInHand?: ModelBooleanInput | null,
   and?: Array< ModelCharacterConditionInput | null > | null,
@@ -683,6 +688,8 @@ export type UpdateCharacterInput = {
   otherCombatValueModifiers?: CombatValuesInput | null,
   combatValueModifiersPerLevel?: number | null,
   mandatoryCombatValueModifierDistribution?: string | null,
+  damage?: ThrowScenarioInput | null,
+  attacksPerTurn?: number | null,
   wallet?: WalletInput | null,
   skillPoints?: SkillPointsInput | null,
   languages?: Array< LanguageAbilityInput > | null,
@@ -691,6 +698,7 @@ export type UpdateCharacterInput = {
   notes?: string | null,
   armourMastery?: Mastery | null,
   armourCurrentDamageReductionValue?: number | null,
+  armourActive?: boolean | null,
   shieldMastery?: Mastery | null,
   shieldInHand?: boolean | null,
   characterClassId?: string | null,
@@ -1012,9 +1020,11 @@ export type ModelCharacterFilterInput = {
   magicUser?: ModelBooleanInput | null,
   combatValueModifiersPerLevel?: ModelIntInput | null,
   mandatoryCombatValueModifierDistribution?: ModelStringInput | null,
+  attacksPerTurn?: ModelFloatInput | null,
   notes?: ModelStringInput | null,
   armourMastery?: ModelMasteryInput | null,
   armourCurrentDamageReductionValue?: ModelIntInput | null,
+  armourActive?: ModelBooleanInput | null,
   shieldMastery?: ModelMasteryInput | null,
   shieldInHand?: ModelBooleanInput | null,
   and?: Array< ModelCharacterFilterInput | null > | null,
@@ -2296,6 +2306,13 @@ export type CreateCharacterMutation = {
     } | null,
     combatValueModifiersPerLevel: number | null,
     mandatoryCombatValueModifierDistribution: string | null,
+    damage:  {
+      __typename: "ThrowScenario",
+      dice: Dice | null,
+      iterationCount: number | null,
+      modifier: number | null,
+    } | null,
+    attacksPerTurn: number | null,
     wallet:  {
       __typename: "Wallet",
       money: number | null,
@@ -2346,6 +2363,7 @@ export type CreateCharacterMutation = {
     } | null,
     armourMastery: Mastery | null,
     armourCurrentDamageReductionValue: number | null,
+    armourActive: boolean | null,
     shield:  {
       __typename: "Shield",
       id: string,
@@ -2872,6 +2890,13 @@ export type UpdateCharacterMutation = {
     } | null,
     combatValueModifiersPerLevel: number | null,
     mandatoryCombatValueModifierDistribution: string | null,
+    damage:  {
+      __typename: "ThrowScenario",
+      dice: Dice | null,
+      iterationCount: number | null,
+      modifier: number | null,
+    } | null,
+    attacksPerTurn: number | null,
     wallet:  {
       __typename: "Wallet",
       money: number | null,
@@ -2922,6 +2947,7 @@ export type UpdateCharacterMutation = {
     } | null,
     armourMastery: Mastery | null,
     armourCurrentDamageReductionValue: number | null,
+    armourActive: boolean | null,
     shield:  {
       __typename: "Shield",
       id: string,
@@ -3448,6 +3474,13 @@ export type DeleteCharacterMutation = {
     } | null,
     combatValueModifiersPerLevel: number | null,
     mandatoryCombatValueModifierDistribution: string | null,
+    damage:  {
+      __typename: "ThrowScenario",
+      dice: Dice | null,
+      iterationCount: number | null,
+      modifier: number | null,
+    } | null,
+    attacksPerTurn: number | null,
     wallet:  {
       __typename: "Wallet",
       money: number | null,
@@ -3498,6 +3531,7 @@ export type DeleteCharacterMutation = {
     } | null,
     armourMastery: Mastery | null,
     armourCurrentDamageReductionValue: number | null,
+    armourActive: boolean | null,
     shield:  {
       __typename: "Shield",
       id: string,
@@ -5612,6 +5646,13 @@ export type GetCharacterQuery = {
     } | null,
     combatValueModifiersPerLevel: number | null,
     mandatoryCombatValueModifierDistribution: string | null,
+    damage:  {
+      __typename: "ThrowScenario",
+      dice: Dice | null,
+      iterationCount: number | null,
+      modifier: number | null,
+    } | null,
+    attacksPerTurn: number | null,
     wallet:  {
       __typename: "Wallet",
       money: number | null,
@@ -5662,6 +5703,7 @@ export type GetCharacterQuery = {
     } | null,
     armourMastery: Mastery | null,
     armourCurrentDamageReductionValue: number | null,
+    armourActive: boolean | null,
     shield:  {
       __typename: "Shield",
       id: string,
@@ -6191,6 +6233,13 @@ export type ListCharactersQuery = {
       } | null,
       combatValueModifiersPerLevel: number | null,
       mandatoryCombatValueModifierDistribution: string | null,
+      damage:  {
+        __typename: "ThrowScenario",
+        dice: Dice | null,
+        iterationCount: number | null,
+        modifier: number | null,
+      } | null,
+      attacksPerTurn: number | null,
       wallet:  {
         __typename: "Wallet",
         money: number | null,
@@ -6241,6 +6290,7 @@ export type ListCharactersQuery = {
       } | null,
       armourMastery: Mastery | null,
       armourCurrentDamageReductionValue: number | null,
+      armourActive: boolean | null,
       shield:  {
         __typename: "Shield",
         id: string,
@@ -7396,6 +7446,13 @@ export type ListCharactersByOwnerQuery = {
       } | null,
       combatValueModifiersPerLevel: number | null,
       mandatoryCombatValueModifierDistribution: string | null,
+      damage:  {
+        __typename: "ThrowScenario",
+        dice: Dice | null,
+        iterationCount: number | null,
+        modifier: number | null,
+      } | null,
+      attacksPerTurn: number | null,
       wallet:  {
         __typename: "Wallet",
         money: number | null,
@@ -7446,6 +7503,7 @@ export type ListCharactersByOwnerQuery = {
       } | null,
       armourMastery: Mastery | null,
       armourCurrentDamageReductionValue: number | null,
+      armourActive: boolean | null,
       shield:  {
         __typename: "Shield",
         id: string,
@@ -7948,6 +8006,13 @@ export type ListCharactersByDungeonMasterQuery = {
       } | null,
       combatValueModifiersPerLevel: number | null,
       mandatoryCombatValueModifierDistribution: string | null,
+      damage:  {
+        __typename: "ThrowScenario",
+        dice: Dice | null,
+        iterationCount: number | null,
+        modifier: number | null,
+      } | null,
+      attacksPerTurn: number | null,
       wallet:  {
         __typename: "Wallet",
         money: number | null,
@@ -7998,6 +8063,7 @@ export type ListCharactersByDungeonMasterQuery = {
       } | null,
       armourMastery: Mastery | null,
       armourCurrentDamageReductionValue: number | null,
+      armourActive: boolean | null,
       shield:  {
         __typename: "Shield",
         id: string,
@@ -9314,6 +9380,13 @@ export type OnCreateCharacterSubscription = {
     } | null,
     combatValueModifiersPerLevel: number | null,
     mandatoryCombatValueModifierDistribution: string | null,
+    damage:  {
+      __typename: "ThrowScenario",
+      dice: Dice | null,
+      iterationCount: number | null,
+      modifier: number | null,
+    } | null,
+    attacksPerTurn: number | null,
     wallet:  {
       __typename: "Wallet",
       money: number | null,
@@ -9364,6 +9437,7 @@ export type OnCreateCharacterSubscription = {
     } | null,
     armourMastery: Mastery | null,
     armourCurrentDamageReductionValue: number | null,
+    armourActive: boolean | null,
     shield:  {
       __typename: "Shield",
       id: string,
@@ -9890,6 +9964,13 @@ export type OnUpdateCharacterSubscription = {
     } | null,
     combatValueModifiersPerLevel: number | null,
     mandatoryCombatValueModifierDistribution: string | null,
+    damage:  {
+      __typename: "ThrowScenario",
+      dice: Dice | null,
+      iterationCount: number | null,
+      modifier: number | null,
+    } | null,
+    attacksPerTurn: number | null,
     wallet:  {
       __typename: "Wallet",
       money: number | null,
@@ -9940,6 +10021,7 @@ export type OnUpdateCharacterSubscription = {
     } | null,
     armourMastery: Mastery | null,
     armourCurrentDamageReductionValue: number | null,
+    armourActive: boolean | null,
     shield:  {
       __typename: "Shield",
       id: string,
@@ -10466,6 +10548,13 @@ export type OnDeleteCharacterSubscription = {
     } | null,
     combatValueModifiersPerLevel: number | null,
     mandatoryCombatValueModifierDistribution: string | null,
+    damage:  {
+      __typename: "ThrowScenario",
+      dice: Dice | null,
+      iterationCount: number | null,
+      modifier: number | null,
+    } | null,
+    attacksPerTurn: number | null,
     wallet:  {
       __typename: "Wallet",
       money: number | null,
@@ -10516,6 +10605,7 @@ export type OnDeleteCharacterSubscription = {
     } | null,
     armourMastery: Mastery | null,
     armourCurrentDamageReductionValue: number | null,
+    armourActive: boolean | null,
     shield:  {
       __typename: "Shield",
       id: string,

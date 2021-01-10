@@ -1,8 +1,4 @@
 import {
-  ListCharactersByDungeonMasterQuery,
-  ListCharactersByOwnerQuery,
-} from "@/API";
-import {
   createCharacter,
   updateCharacter,
   deleteCharacter,
@@ -85,6 +81,8 @@ const defaultActions = createDefaultActions({
     combatValueModifiersPerLevel: item.combatValueModifiersPerLevel,
     mandatoryCombatValueModifierDistribution:
       item.mandatoryCombatValueModifierDistribution,
+    attacksPerTurn: item.attacksPerTurn,
+    damage: item.damage,
     wallet: item.wallet,
     languages: item.languages,
     inventory: item.inventory,
@@ -94,6 +92,7 @@ const defaultActions = createDefaultActions({
     characterShieldId: item.shield?.id,
     armourMastery: item.armourMastery,
     armourCurrentDamageReductionValue: item.armourCurrentDamageReductionValue,
+    armourActive: item.armourActive,
     shieldMastery: item.shieldMastery,
     shieldInHand: item.shieldInHand,
     skillPoints: item.skillPoints,

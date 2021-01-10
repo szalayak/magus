@@ -816,6 +816,12 @@ export const getCharacter = /* GraphQL */ `
       }
       combatValueModifiersPerLevel
       mandatoryCombatValueModifierDistribution
+      damage {
+        dice
+        iterationCount
+        modifier
+      }
+      attacksPerTurn
       wallet {
         money
         mithrill
@@ -859,6 +865,7 @@ export const getCharacter = /* GraphQL */ `
       }
       armourMastery
       armourCurrentDamageReductionValue
+      armourActive
       shield {
         id
         descriptions {
@@ -1317,6 +1324,12 @@ export const listCharacters = /* GraphQL */ `
         }
         combatValueModifiersPerLevel
         mandatoryCombatValueModifierDistribution
+        damage {
+          dice
+          iterationCount
+          modifier
+        }
+        attacksPerTurn
         wallet {
           money
           mithrill
@@ -1360,6 +1373,7 @@ export const listCharacters = /* GraphQL */ `
         }
         armourMastery
         armourCurrentDamageReductionValue
+        armourActive
         shield {
           id
           descriptions {
@@ -2390,6 +2404,12 @@ export const listCharactersByOwner = /* GraphQL */ `
         }
         combatValueModifiersPerLevel
         mandatoryCombatValueModifierDistribution
+        damage {
+          dice
+          iterationCount
+          modifier
+        }
+        attacksPerTurn
         wallet {
           money
           mithrill
@@ -2433,6 +2453,7 @@ export const listCharactersByOwner = /* GraphQL */ `
         }
         armourMastery
         armourCurrentDamageReductionValue
+        armourActive
         shield {
           id
           descriptions {
@@ -2875,6 +2896,12 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
         }
         combatValueModifiersPerLevel
         mandatoryCombatValueModifierDistribution
+        damage {
+          dice
+          iterationCount
+          modifier
+        }
+        attacksPerTurn
         wallet {
           money
           mithrill
@@ -2918,6 +2945,7 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
         }
         armourMastery
         armourCurrentDamageReductionValue
+        armourActive
         shield {
           id
           descriptions {

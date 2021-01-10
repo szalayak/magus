@@ -1,12 +1,22 @@
 <template>
   <v-card outlined>
-    <v-card-title
-      ><slot name="title"
-        ><router-link :to="characterToLink(character, 2, 'combat-values')">{{
-          $t("combat-values")
-        }}</router-link></slot
-      ></v-card-title
-    >
+    <v-toolbar class="pl-0" flat>
+      <v-card-title class="pl-0"
+        ><slot name="title"
+          ><router-link :to="characterToLink(character, 2, 'combat-values')">{{
+            $t("combat-values")
+          }}</router-link></slot
+        ></v-card-title
+      >
+      <v-spacer />
+      <v-switch
+        v-if="!!character.shield"
+        :input-value="character.shieldInHand"
+        class="pt-4 mt-2"
+        :label="$t('shield')"
+        @change="toggleShieldInHand"
+      />
+    </v-toolbar>
     <v-card-text>
       <v-alert
         dense
@@ -90,6 +100,10 @@
         <v-list-item class="ps-0">
           <v-row dense>
             <v-col cols="2">
+              <strong>{{ $t("attacks-per-turn") }}: </strong>
+              {{ character.attacksPerTurn }}
+            </v-col>
+            <v-col cols="2">
               <throw-scenario-trigger-field
                 throwScenarioString="D10"
                 :title="$t('initiation')"
@@ -125,7 +139,7 @@
               <strong>{{ $t("defence") }}:</strong>
               {{ combatValuesWithoutWeapon.defence }}
             </v-col>
-            <v-col cols="3">
+            <v-col cols="2">
               <throw-scenario-trigger-field
                 throwScenarioString="D100"
                 :title="$t('aiming')"
@@ -141,6 +155,14 @@
                 "
               />
             </v-col>
+            <v-col cols="2">
+              <throw-scenario-trigger-field
+                :throwScenarioString="damageToString(character.damage)"
+                :title="$t('damage')"
+                :value="damageToString(character.damage)"
+                :label="$t('damage')"
+                @save="onThrowResult($event, $t('damage'))"
+            /></v-col>
           </v-row>
         </v-list-item>
         <template v-for="weapon in combatValuesWithWeapons">
@@ -149,6 +171,10 @@
           }}</v-subheader>
           <v-list-item class="ps-0" :key="weapon.id">
             <v-row dense>
+              <v-col cols="2">
+                <strong>{{ $t("attacks-per-turn") }}:</strong>
+                {{ weapon.weapon.attacksPerTurn }}
+              </v-col>
               <v-col cols="2">
                 <throw-scenario-trigger-field
                   throwScenarioString="D10"
@@ -295,8 +321,6 @@ export default class CharacterCombatValuesQuickView extends CharacterQuickView {
           character: this.character,
           weapon: w.weapon,
           mastery: w.mastery,
-          inArmour: !!this.character.armour,
-          withShield: !!this.character.shield,
         }),
       };
     });
@@ -304,14 +328,10 @@ export default class CharacterCombatValuesQuickView extends CharacterQuickView {
 
   get combatValuesWithoutWeapon(): CombatValues {
     return {
-      initiation: initiationTotal(this.character, !!this.character.armour),
-      offence: offenceTotal(this.character, !!this.character.armour),
-      defence: defenceTotal(
-        this.character,
-        !!this.character.armour,
-        !!this.character.shield
-      ),
-      aiming: aimingTotal(this.character, !!this.character.armour),
+      initiation: initiationTotal(this.character),
+      offence: offenceTotal(this.character),
+      defence: defenceTotal(this.character),
+      aiming: aimingTotal(this.character),
     };
   }
 
@@ -349,6 +369,18 @@ export default class CharacterCombatValuesQuickView extends CharacterQuickView {
       id,
       weapon,
     };
+  }
+
+  async toggleShieldInHand() {
+    const shieldInHand = this.character.shieldInHand ? false : true;
+    try {
+      await this.$store.dispatch("character/update", {
+        id: this.character.id,
+        shieldInHand,
+      });
+    } catch (error) {
+      this.throwError(error);
+    }
   }
 
   created() {

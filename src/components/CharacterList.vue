@@ -16,7 +16,8 @@
             cols="12"
             sm="6"
             md="4"
-            lg="3"
+            lg="4"
+            xl="3"
           >
             <v-card>
               <v-card-title>
@@ -86,7 +87,11 @@
       {{ message }}
 
       <template v-slot:action="{ attrs }">
-        <v-btn text v-bind="attrs" @click="notification = false">
+        <v-btn
+          text
+          v-bind="attrs"
+          @click="$emit('update:notification', $event)"
+        >
           {{ $t("close") }}
         </v-btn>
       </template>

@@ -35,6 +35,8 @@ export interface AppState {
   users: User[];
   navDrawerOpen: boolean;
   title: string;
+  throwResult: number | null;
+  throwResultNotification: boolean;
 }
 
 export interface RootState {
@@ -67,6 +69,8 @@ const store = new Vuex.Store<RootState>({
       users: [],
       navDrawerOpen: false,
       title: "M.A.G.U.S",
+      throwResult: null,
+      throwResultNotification: false,
     } as AppState,
   }),
   getters: {
@@ -91,6 +95,12 @@ const store = new Vuex.Store<RootState>({
     title(state) {
       return state.app.title;
     },
+    throwResult(state) {
+      return state.app.throwResult;
+    },
+    throwResultNotification(state) {
+      return state.app.throwResultNotification;
+    },
   },
   mutations: {
     setAuthState(state, authState: AuthState) {
@@ -108,6 +118,13 @@ const store = new Vuex.Store<RootState>({
     setAppTitle(state, title: string) {
       state.app.title = title;
       window.document.title = title;
+    },
+    setThrowResult(
+      state,
+      result: { throwResultNotification: boolean; throwResult?: number }
+    ) {
+      state.app.throwResultNotification = result.throwResultNotification;
+      state.app.throwResult = result.throwResult || null;
     },
   },
   actions: {

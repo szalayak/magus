@@ -1,12 +1,22 @@
 <template>
   <v-card outlined>
-    <v-card-title
-      ><slot name="title"
-        ><router-link :to="characterToLink(character, 2, 'health')">{{
-          $t("vitality")
-        }}</router-link></slot
-      ></v-card-title
-    >
+    <v-toolbar class="pl-0" flat>
+      <v-card-title class="pl-0"
+        ><slot name="title"
+          ><router-link :to="characterToLink(character, 2, 'health')">{{
+            $t("vitality")
+          }}</router-link></slot
+        ></v-card-title
+      >
+      <v-spacer />
+      <v-switch
+        v-if="!!character.armour"
+        :input-value="character.armourActive"
+        class="pt-4 mt-2"
+        :label="$t('armour')"
+        @change="toggleArmourActive"
+      />
+    </v-toolbar>
     <v-card-text>
       <v-row dense>
         <v-col cols="4"></v-col>
@@ -42,19 +52,21 @@
         <v-col cols="4">
           {{ health.hitPoints.max || 0 }}
         </v-col>
-        <v-col cols="4"
-          ><strong>{{ $t("drv") }}: </strong></v-col
-        >
-        <v-col cols="4">
-          <strong>{{
-            character.armourCurrentDamageReductionValue ||
-              armour.damageReductionValue ||
-              0
-          }}</strong>
-        </v-col>
-        <v-col cols="4">
-          {{ armour.damageReductionValue || 0 }}
-        </v-col>
+        <template v-if="character.armour && character.armourActive">
+          <v-col cols="4"
+            ><strong>{{ $t("drv") }}: </strong></v-col
+          >
+          <v-col cols="4">
+            <strong>{{
+              character.armourCurrentDamageReductionValue ||
+                armour.damageReductionValue ||
+                0
+            }}</strong>
+          </v-col>
+          <v-col cols="4">
+            {{ armour.damageReductionValue || 0 }}
+          </v-col>
+        </template>
       </v-row>
     </v-card-text>
   </v-card>
@@ -102,6 +114,18 @@ export default class CharacterVitalityQuickView extends CharacterQuickView {
   async save(id?: string, health?: HealthInformation) {
     try {
       await this.$store.dispatch("character/update", { id, health });
+    } catch (error) {
+      this.throwError(error);
+    }
+  }
+
+  async toggleArmourActive() {
+    const armourActive = this.character.armourActive ? false : true;
+    try {
+      await this.$store.dispatch("character/update", {
+        id: this.character.id,
+        armourActive,
+      });
     } catch (error) {
       this.throwError(error);
     }
