@@ -7,6 +7,7 @@
         }}</router-link></slot
       ></v-card-title
     >
+    <v-card-subtitle><slot name="subtitle"></slot></v-card-subtitle>
     <v-card-text>
       <v-row dense>
         <template v-for="skill in skills">

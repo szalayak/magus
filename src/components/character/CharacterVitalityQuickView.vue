@@ -1,22 +1,13 @@
 <template>
   <v-card outlined>
-    <v-toolbar class="pl-0" flat>
-      <v-card-title class="pl-0"
-        ><slot name="title"
-          ><router-link :to="characterToLink(character, 2, 'health')">{{
-            $t("vitality")
-          }}</router-link></slot
-        ></v-card-title
-      >
-      <v-spacer />
-      <v-switch
-        v-if="!!character.armour"
-        :input-value="character.armourActive"
-        class="pt-4 mt-2"
-        :label="$t('armour')"
-        @change="toggleArmourActive"
-      />
-    </v-toolbar>
+    <v-card-title
+      ><slot name="title"
+        ><router-link :to="characterToLink(character, 2, 'health')">{{
+          $t("vitality")
+        }}</router-link></slot
+      ></v-card-title
+    >
+    <v-card-subtitle><slot name="subtitle"></slot></v-card-subtitle>
     <v-card-text>
       <v-row dense>
         <v-col cols="4"></v-col>
@@ -31,10 +22,14 @@
         >
         <v-col cols="4">
           <quick-update-property-field
+            v-if="isCurrentUser"
             :value="health.vitality.current || 0"
             :title="$t('current-vp')"
             @save="onCurrentVitalityChanged"
           />
+          <template v-else
+            ><strong>{{ health.vitality.current || 0 }}</strong></template
+          >
         </v-col>
         <v-col cols="4">
           {{ health.vitality.max || 0 }}
@@ -44,10 +39,14 @@
         >
         <v-col cols="4">
           <quick-update-property-field
+            v-if="isCurrentUser"
             :value="health.hitPoints.current || 0"
             :title="$t('current-hp')"
             @save="onCurrentHitPointsChanged"
           />
+          <template v-else
+            ><strong>{{ health.hitPoints.current || 0 }}</strong></template
+          >
         </v-col>
         <v-col cols="4">
           {{ health.hitPoints.max || 0 }}
@@ -69,6 +68,15 @@
         </template>
       </v-row>
     </v-card-text>
+    <v-card-actions v-if="isCurrentUser">
+      <v-switch
+        v-if="!!character.armour"
+        :input-value="character.armourActive"
+        class="pl-2"
+        :label="$t('armour')"
+        @change="toggleArmourActive"
+      />
+    </v-card-actions>
   </v-card>
 </template>
 

@@ -34,9 +34,12 @@
                   >
                     <template v-slot:title>
                       <router-link :to="characterToLink(character)">{{
-                        `${character.name} (${ownerToString(character.owner)})`
+                        character.name
                       }}</router-link>
                     </template>
+                    <template v-slot:subtitle>{{
+                      ownerToString(character.owner)
+                    }}</template>
                   </character-abilities-quick-view>
                 </v-col>
               </template>
@@ -101,9 +104,12 @@
                   >
                     <template v-slot:title>
                       <router-link :to="characterToLink(character)">{{
-                        `${character.name} (${ownerToString(character.owner)})`
+                        character.name
                       }}</router-link>
                     </template>
+                    <template v-slot:subtitle>{{
+                      ownerToString(character.owner)
+                    }}</template>
                   </character-vitality-quick-view>
                 </v-col>
               </template>
@@ -152,16 +158,18 @@
                   xs="12"
                   sm="6"
                   md="4"
-                  lg="3"
-                  xl="2"
+                  xl="3"
                   :key="character.id"
                 >
                   <character-combat-values-quick-view :character="character">
                     <template v-slot:title>
                       <router-link :to="characterToLink(character)">{{
-                        `${character.name} (${ownerToString(character.owner)})`
+                        character.name
                       }}</router-link>
                     </template>
+                    <template v-slot:subtitle>{{
+                      ownerToString(character.owner)
+                    }}</template>
                   </character-combat-values-quick-view>
                 </v-col>
               </template>
@@ -186,8 +194,7 @@
                   xs="12"
                   sm="6"
                   md="4"
-                  lg="3"
-                  xl="2"
+                  xl="3"
                   :key="character.id"
                 >
                   <character-combat-values-quick-view
@@ -225,9 +232,12 @@
                   <character-spell-resistance-quick-view :character="character">
                     <template v-slot:title>
                       <router-link :to="characterToLink(character)">{{
-                        `${character.name} (${ownerToString(character.owner)})`
+                        character.name
                       }}</router-link>
                     </template>
+                    <template v-slot:subtitle>{{
+                      ownerToString(character.owner)
+                    }}</template>
                   </character-spell-resistance-quick-view>
                 </v-col>
               </template>
@@ -286,11 +296,12 @@
                     >
                       <template v-slot:title>
                         <router-link :to="characterToLink(character)">{{
-                          `${character.name} (${ownerToString(
-                            character.owner
-                          )})`
+                          character.name
                         }}</router-link>
                       </template>
+                      <template v-slot:subtitle>{{
+                        ownerToString(character.owner)
+                      }}</template>
                     </character-psi-mana-points-quick-view>
                   </v-col>
                 </template>
@@ -352,9 +363,12 @@
                   >
                     <template v-slot:title>
                       <router-link :to="characterToLink(character)">{{
-                        `${character.name} (${ownerToString(character.owner)})`
+                        character.name
                       }}</router-link>
                     </template>
+                    <template v-slot:subtitle>{{
+                      ownerToString(character.owner)
+                    }}</template>
                   </character-percentage-skills-quick-view>
                 </v-col>
               </template>
@@ -413,9 +427,12 @@
                   >
                     <template v-slot:title>
                       <router-link :to="characterToLink(character)">{{
-                        `${character.name} (${ownerToString(character.owner)})`
+                        character.name
                       }}</router-link>
                     </template>
+                    <template v-slot:subtitle>{{
+                      ownerToString(character.owner)
+                    }}</template>
                   </character-skills-quick-view>
                 </v-col>
               </template>
