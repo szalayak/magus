@@ -7,6 +7,7 @@
         ></slot
       >
     </v-card-title>
+    <v-card-subtitle><slot name="subtitle"></slot></v-card-subtitle>
     <v-card-text>
       <v-row dense>
         <v-col cols="4"> </v-col>
@@ -22,10 +23,15 @@
           >
           <v-col cols="4">
             <quick-update-property-field
+              v-if="isCurrentUser"
               :value="psiPoints.current || 0"
               :title="$t('current-psi-points')"
               @save="onCurrentPsiPointsChanged"
-          /></v-col>
+            />
+            <template v-else
+              ><strong>{{ psiPoints.current || 0 }}</strong></template
+            ></v-col
+          >
           <v-col cols="4">{{ psiPoints.max }}</v-col>
         </template>
         <template v-if="character.magicUser">
@@ -34,10 +40,14 @@
           >
           <v-col cols="4">
             <quick-update-property-field
+              v-if="isCurrentUser"
               :value="manaPoints.current || 0"
               :title="$t('current-mp')"
               @save="onCurrentManaPointsChanged"
-          /></v-col>
+            /><template v-else
+              ><strong>{{ manaPoints.current || 0 }}</strong></template
+            ></v-col
+          >
           <v-col cols="4">{{ manaPoints.max }}</v-col>
           <v-col cols="12">
             <v-subheader class="pl-0"
