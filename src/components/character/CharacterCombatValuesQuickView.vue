@@ -1,22 +1,13 @@
 <template>
   <v-card outlined>
-    <v-toolbar class="pl-0" flat>
-      <v-card-title class="pl-0"
-        ><slot name="title"
-          ><router-link :to="characterToLink(character, 2, 'combat-values')">{{
-            $t("combat-values")
-          }}</router-link></slot
-        ></v-card-title
-      >
-      <v-spacer />
-      <v-switch
-        v-if="!!character.shield"
-        :input-value="character.shieldInHand"
-        class="pt-4 mt-2"
-        :label="$t('shield')"
-        @change="toggleShieldInHand"
-      />
-    </v-toolbar>
+    <v-card-title
+      ><slot name="title"
+        ><router-link :to="characterToLink(character, 2, 'combat-values')">{{
+          $t("combat-values")
+        }}</router-link></slot
+      ></v-card-title
+    >
+    <v-card-subtitle><slot name="subtitle"></slot></v-card-subtitle>
     <v-card-text>
       <v-alert
         dense
@@ -95,7 +86,7 @@
           </template>
         </v-row>
       </v-alert>
-      <v-list dense flat class="ps-0">
+      <v-list dense flat class="pa-0">
         <v-subheader class="pl-0">{{ $t("no-weapons") }}</v-subheader>
         <v-list-item class="ps-0">
           <v-row dense>
@@ -246,6 +237,15 @@
         </template>
       </v-list>
     </v-card-text>
+    <v-card-actions>
+      <v-switch
+        class="pl-2"
+        v-if="!!character.shield"
+        :input-value="character.shieldInHand"
+        :label="$t('shield')"
+        @change="toggleShieldInHand"
+      />
+    </v-card-actions>
   </v-card>
 </template>
 
