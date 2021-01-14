@@ -42,16 +42,13 @@
         </v-col>
       </v-row>
     </template>
-    <template v-slot:[`item.class`]="{ item }">
-      {{ classToString(item.class) }}
-    </template>
     <template v-slot:[`item.price`]="{ item }">
       {{ priceToString(item.price) }}
     </template>
   </admin-table>
 </template>
 <script lang="ts">
-import { localise, getDescriptionsForLocales } from "@/utils/localise";
+import { getDescriptionsForLocales } from "@/utils/localise";
 import Component from "vue-class-component";
 import Vue from "vue";
 import { MagicalItem } from "@/store/modules/magicalItem";
@@ -76,12 +73,12 @@ export default class MagicalItemAdmin extends Vue {
     description: { locale: this.$i18n.locale as Locale, title: "" },
     descriptions: getDescriptionsForLocales(),
   };
-  customColumns = ["price", "class"];
+  customColumns = ["price"];
 
   get headers() {
     return [
       { text: this.$t("title"), value: "description.title" },
-      { text: this.$t("can-be-made-by"), value: "class" },
+      { text: this.$t("can-be-made-by"), value: "class.description.title" },
       { text: this.$t("mana-cost"), value: "manaCost" },
       { text: this.$t("duration"), value: "duration" },
       { text: this.$t("price"), value: "price" },
@@ -90,13 +87,7 @@ export default class MagicalItemAdmin extends Vue {
   }
 
   get classes(): Class[] {
-    const classes = this.$store.getters["class/getMagicUserClasses"];
-    return localise(classes, this.$i18n.locale) as Class[];
-  }
-
-  classToString(classValue?: Class): string | undefined {
-    return this.classes.find(cl => cl.id === classValue?.id)?.description
-      ?.title;
+    return this.$store.getters["class/getMagicUserClasses"];
   }
 
   priceToString(price: number) {

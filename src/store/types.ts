@@ -197,3 +197,5 @@ export interface SkillPoints {
   intelligence?: number;
   dexterity?: number;
 }
+
+export type MappingFunction = (items: Identifiable[]) => Identifiable[];

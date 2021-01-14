@@ -10,8 +10,7 @@
       multi-sort
     >
       <template v-slot:top>
-        <v-toolbar flat>
-          <!-- <v-toolbar-title>{{ $t(title) }}</v-toolbar-title> -->
+        <v-toolbar id="admin-table-toolbar" flat>
           <v-text-field
             v-model="search"
             single-line
@@ -19,7 +18,7 @@
             clearable
             prepend-icon="mdi-magnify"
             :label="$t('search')"
-            class="mx-4"
+            class="mr-4"
           ></v-text-field>
           <v-spacer></v-spacer>
           <v-dialog scrollable v-model="dialog" max-width="1200px">
@@ -164,6 +163,12 @@
     </v-snackbar>
   </v-container>
 </template>
+
+<style>
+#admin-table-toolbar .v-toolbar__content {
+  padding: 0px !important;
+}
+</style>
 
 <script lang="ts">
 import { DropdownValueList, Editable, LooseObject } from "@/store/types";
