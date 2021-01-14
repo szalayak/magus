@@ -1,9 +1,12 @@
-import { Mastery } from "@/API";
-import { Armour } from "@/store/modules/armour";
-import { Character } from "@/store/modules/character";
-import { Shield } from "@/store/modules/shield";
-import { Weapon } from "@/store/modules/weapon";
-import { CombatValues, SpellResistanceValues } from "@/store/types";
+import {
+  Character,
+  Shield,
+  Weapon,
+  Armour,
+  CombatValues,
+  Mastery,
+  SpellResistanceValues,
+} from "@/store";
 import {
   applyMasterSkillToCombatValues,
   applyUnskilledPenaltyToCombatValues,

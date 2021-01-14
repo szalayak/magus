@@ -25,7 +25,6 @@
                   sm="6"
                   md="4"
                   lg="3"
-                  xl="2"
                   :key="character.id"
                 >
                   <character-abilities-quick-view
