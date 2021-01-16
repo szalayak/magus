@@ -56,6 +56,10 @@
             >
             = {{ combatValueThrowResult.result.total }}</v-col
           >
+          <template v-if="combatValueThrowResult.damageBonus > 0">
+            <v-col cols="6">{{ $t("damage-bonus") }}:</v-col>
+            <v-col cols="6">{{ combatValueThrowResult.damageBonus }}</v-col>
+          </template>
           <template
             v-if="combatValueThrowResult.weapon && combatValueThrowResult.id"
           >
@@ -246,161 +250,18 @@
                 :title="$t('damage')"
                 :value="damageToString(weapon.weapon.damage)"
                 @save="
-                  onThrowResult($event, $t('damage'), null, null, weapon)
+                  onThrowResult(
+                    $event,
+                    $t('damage'),
+                    null,
+                    null,
+                    weapon,
+                    damageBonus
+                  )
                 "/></strong
           ></v-col>
         </template>
       </v-row>
-      <!-- <v-list dense flat class="pa-0">
-        <v-subheader class="pl-0">{{ $t("no-weapons") }}</v-subheader>
-        <v-list-item class="ps-0">
-          <v-row dense>
-            <v-col cols="2">
-              <strong>{{ $t("attacks-per-turn") }}: </strong>
-              {{ character.attacksPerTurn }}
-            </v-col>
-            <v-col cols="2">
-              <throw-scenario-trigger-field
-                throwScenarioString="D10"
-                :title="$t('initiation')"
-                :value="combatValuesWithoutWeapon.initiation || 0"
-                :label="$t('initiation')"
-                @save="
-                  onThrowResult(
-                    $event,
-                    $t('initiation'),
-                    combatValuesWithoutWeapon.initiation || 0,
-                    'initiation'
-                  )
-                "
-              />
-            </v-col>
-            <v-col cols="2">
-              <throw-scenario-trigger-field
-                throwScenarioString="D100"
-                :title="$t('offence')"
-                :value="combatValuesWithoutWeapon.offence || 0"
-                :label="$t('offence')"
-                @save="
-                  onThrowResult(
-                    $event,
-                    $t('offence'),
-                    combatValuesWithoutWeapon.offence || 0,
-                    'offence'
-                  )
-                "
-              />
-            </v-col>
-            <v-col cols="2">
-              <strong>{{ $t("defence") }}:</strong>
-              {{ combatValuesWithoutWeapon.defence }}
-            </v-col>
-            <v-col cols="2">
-              <throw-scenario-trigger-field
-                throwScenarioString="D100"
-                :title="$t('aiming')"
-                :value="combatValuesWithoutWeapon.aiming || 0"
-                :label="$t('aiming')"
-                @save="
-                  onThrowResult(
-                    $event,
-                    $t('aiming'),
-                    combatValuesWithoutWeapon.aiming || 0,
-                    'aiming'
-                  )
-                "
-              />
-            </v-col>
-            <v-col cols="2">
-              <throw-scenario-trigger-field
-                :throwScenarioString="damageToString(character.damage)"
-                :title="$t('damage')"
-                :value="damageToString(character.damage)"
-                :label="$t('damage')"
-                @save="onThrowResult($event, $t('damage'))"
-            /></v-col>
-          </v-row>
-        </v-list-item>
-        <template v-for="weapon in combatValuesWithWeapons">
-          <v-subheader :key="weapon.id + '-subheader'" class="pl-0">{{
-            weapon.weapon.description.title
-          }}</v-subheader>
-          <v-list-item class="ps-0" :key="weapon.id">
-            <v-row dense>
-              <v-col cols="2">
-                <strong>{{ $t("attacks-per-turn") }}:</strong>
-                {{ weapon.weapon.attacksPerTurn }}
-              </v-col>
-              <v-col cols="2">
-                <throw-scenario-trigger-field
-                  throwScenarioString="D10"
-                  :title="$t('initiation')"
-                  :value="weapon.combatValues.initiation || 0"
-                  :label="$t('initiation')"
-                  @save="
-                    onThrowResult(
-                      $event,
-                      $t('initiation'),
-                      weapon.combatValues.initiation || 0,
-                      'initiation',
-                      weapon
-                    )
-                  "
-                />
-              </v-col>
-              <v-col v-if="!weapon.weapon.ranged" cols="2">
-                <throw-scenario-trigger-field
-                  throwScenarioString="D100"
-                  :title="$t('offence')"
-                  :value="weapon.combatValues.offence || 0"
-                  :label="$t('offence')"
-                  @save="
-                    onThrowResult(
-                      $event,
-                      $t('offence'),
-                      weapon.combatValues.offence || 0,
-                      'offence',
-                      weapon
-                    )
-                  "
-                />
-              </v-col>
-              <v-col v-if="!weapon.weapon.ranged" cols="2">
-                <strong>{{ $t("defence") }}:</strong>
-                {{ weapon.combatValues.defence }}
-              </v-col>
-              <v-col v-if="weapon.weapon.ranged" cols="2">
-                <throw-scenario-trigger-field
-                  throwScenarioString="D100"
-                  :title="$t('aiming')"
-                  :value="weapon.combatValues.aiming || 0"
-                  :label="$t('aiming')"
-                  @save="
-                    onThrowResult(
-                      $event,
-                      $t('aiming'),
-                      weapon.combatValues.aiming || 0,
-                      'aiming',
-                      weapon
-                    )
-                  "
-                />
-              </v-col>
-              <v-col v-if="weapon.weapon.ranged" cols="2"></v-col>
-              <v-col cols="4">
-                <throw-scenario-trigger-field
-                  :throwScenarioString="damageToString(weapon.weapon.damage)"
-                  :title="$t('damage')"
-                  :value="damageToString(weapon.weapon.damage)"
-                  :label="$t('damage')"
-                  @save="
-                    onThrowResult($event, $t('damage'), null, null, weapon)
-                  "
-              /></v-col>
-            </v-row>
-          </v-list-item>
-        </template>
-      </v-list> -->
     </v-card-text>
     <v-card-actions>
       <v-switch
@@ -448,6 +309,13 @@ import ThrowScenarioTriggerField from "./ThrowScenarioTriggerField.vue";
 })
 export default class CharacterCombatValuesQuickView extends CharacterQuickView {
   combatValueThrowResult: CombatValueThrowResult | null = null;
+
+  get damageBonus() {
+    return this.character.abilities?.strength &&
+      this.character.abilities?.strength > 16
+      ? this.character.abilities.strength - 16
+      : 0;
+  }
 
   get combatValueThrowStatus() {
     return { show: !!this.combatValueThrowResult };
@@ -525,14 +393,25 @@ export default class CharacterCombatValuesQuickView extends CharacterQuickView {
     name: string,
     value?: number,
     id?: string,
-    weapon?: WeaponAssignment
+    weapon?: WeaponAssignment,
+    damageBonus?: number
   ) {
+    const hasDamageBonus =
+      damageBonus && damageBonus > 0 && !weapon?.weapon?.ranged;
+    const damageBonusValue = hasDamageBonus ? damageBonus || 0 : 0;
     this.combatValueThrowResult = {
-      result,
+      result: hasDamageBonus
+        ? {
+            ...result,
+            total: result.total + damageBonusValue,
+            modifier: (result.modifier || 0) + damageBonusValue,
+          }
+        : result,
       name,
       value,
       id,
       weapon,
+      damageBonus: damageBonusValue,
     };
   }
 

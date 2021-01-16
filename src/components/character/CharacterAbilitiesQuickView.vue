@@ -37,10 +37,10 @@
         </v-row>
       </v-alert>
       <v-row dense>
-        <v-col cols="4"
+        <v-col cols="6"
           ><strong>{{ $t("strength") }}</strong></v-col
         >
-        <v-col cols="3">
+        <v-col cols="6">
           <throw-scenario-trigger-field
             bold
             dialog
@@ -50,41 +50,36 @@
             @save="onCheckResult($event, 'strength', abilities.strength || 0)"
           />
         </v-col>
-        <v-col cols="5">{{ $t("damage-bonus") }}: {{ damageBonus }}</v-col>
-        <v-col cols="4"
+        <v-col cols="6"
           ><strong>{{ $t("agility") }}</strong></v-col
         >
-        <v-col cols="3">
+        <v-col cols="6">
           <throw-scenario-trigger-field
             bold
             dialog
             throwScenarioString="D10"
             :title="$t('agility-check')"
             :value="agilityInArmour || 0"
-            :text="abilities.agility"
             @save="onCheckResult($event, 'agility', agilityInArmour || 0)"
           />
         </v-col>
-        <v-col cols="5">{{ $t("in-armour") }}: {{ agilityInArmour }}</v-col>
-        <v-col cols="4"
+        <v-col cols="6"
           ><strong>{{ $t("dexterity") }}</strong></v-col
         >
-        <v-col cols="3">
+        <v-col cols="6">
           <throw-scenario-trigger-field
             bold
             dialog
             throwScenarioString="D10"
             :title="$t('dexterity-check')"
             :value="dexterityInArmour || 0"
-            :text="abilities.dexterity"
             @save="onCheckResult($event, 'dexterity', dexterityInArmour || 0)"
           />
         </v-col>
-        <v-col cols="5">{{ $t("in-armour") }}: {{ dexterityInArmour }}</v-col>
-        <v-col cols="4"
+        <v-col cols="6"
           ><strong>{{ $t("stamina") }}</strong></v-col
         >
-        <v-col cols="8">
+        <v-col cols="6">
           <throw-scenario-trigger-field
             bold
             dialog
@@ -94,10 +89,10 @@
             @save="onCheckResult($event, 'stamina', abilities.stamina || 0)"
           />
         </v-col>
-        <v-col cols="4"
+        <v-col cols="6"
           ><strong>{{ $t("health") }}</strong></v-col
         >
-        <v-col cols="8">
+        <v-col cols="6">
           <throw-scenario-trigger-field
             bold
             dialog
@@ -107,10 +102,10 @@
             @save="onCheckResult($event, 'health', abilities.health || 0)"
           />
         </v-col>
-        <v-col cols="4"
+        <v-col cols="6"
           ><strong>{{ $t("beauty") }}</strong></v-col
         >
-        <v-col cols="8">
+        <v-col cols="6">
           <throw-scenario-trigger-field
             bold
             dialog
@@ -120,10 +115,10 @@
             @save="onCheckResult($event, 'beauty', abilities.beauty || 0)"
           />
         </v-col>
-        <v-col cols="4"
+        <v-col cols="6"
           ><strong>{{ $t("intelligence") }}</strong></v-col
         >
-        <v-col cols="8">
+        <v-col cols="6">
           <throw-scenario-trigger-field
             bold
             dialog
@@ -135,10 +130,10 @@
             "
           />
         </v-col>
-        <v-col cols="4"
+        <v-col cols="6"
           ><strong>{{ $t("willpower") }}</strong></v-col
         >
-        <v-col cols="8">
+        <v-col cols="6">
           <throw-scenario-trigger-field
             bold
             dialog
@@ -148,10 +143,10 @@
             @save="onCheckResult($event, 'willpower', abilities.willpower || 0)"
           />
         </v-col>
-        <v-col cols="4"
+        <v-col cols="6"
           ><strong>{{ $t("astral") }}</strong></v-col
         >
-        <v-col cols="8">
+        <v-col cols="6">
           <throw-scenario-trigger-field
             bold
             dialog
@@ -161,10 +156,10 @@
             @save="onCheckResult($event, 'astral', abilities.astral || 0)"
           />
         </v-col>
-        <v-col cols="4"
+        <v-col cols="6"
           ><strong>{{ $t("perception") }}</strong></v-col
         >
-        <v-col cols="8">
+        <v-col cols="6">
           <throw-scenario-trigger-field
             bold
             dialog
@@ -226,12 +221,6 @@ export default class CharacterAbilitiesQuickView extends CharacterQuickView {
   get dexterityInArmour() {
     return this.abilities.dexterity
       ? this.abilities.dexterity - movementPreventionValueTotal(this.character)
-      : 0;
-  }
-
-  get damageBonus() {
-    return this.abilities.strength && this.abilities.strength > 16
-      ? this.abilities.strength - 16
       : 0;
   }
 
