@@ -1,6 +1,6 @@
 <template>
   <v-row dense>
-    <v-col id="combat-values" cols="12" xs="12" md="6" xl="4">
+    <v-col id="combat-values" cols="12" xs="12" md="6" lg="4" xl="3">
       <character-combat-values-quick-view
         :character="character"
         @error="onError"
@@ -22,7 +22,7 @@
         @error="onError"
       />
     </v-col>
-    <v-col id="abilities" cols="12" xs="12" md="6" lg="3" xl="2">
+    <v-col id="abilities" cols="12" xs="12" md="6" lg="4" xl="3">
       <character-abilities-quick-view :character="character" @error="onError" />
     </v-col>
     <v-col id="spell-resistance" cols="12" xs="12" md="6" lg="3" xl="2">

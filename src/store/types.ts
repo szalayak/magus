@@ -115,6 +115,7 @@ export interface Abilities {
   intelligence?: number;
   willpower?: number;
   astral?: number;
+  perception?: number;
   [key: string]: number | undefined;
 }
 
@@ -128,6 +129,7 @@ export enum Ability {
   Intelligence = "intelligence",
   Willpower = "willpower",
   Astral = "astral",
+  Perception = "perception",
 }
 
 export interface MutablePointValue {

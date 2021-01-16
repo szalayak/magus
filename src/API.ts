@@ -537,6 +537,7 @@ export type AbilitiesInput = {
   intelligence?: number | null,
   willpower?: number | null,
   astral?: number | null,
+  perception?: number | null,
 };
 
 export type HealthInformationInput = {
@@ -2144,6 +2145,7 @@ export type CreateCharacterMutation = {
       intelligence: number | null,
       willpower: number | null,
       astral: number | null,
+      perception: number | null,
     } | null,
     health:  {
       __typename: "HealthInformation",
@@ -2728,6 +2730,7 @@ export type UpdateCharacterMutation = {
       intelligence: number | null,
       willpower: number | null,
       astral: number | null,
+      perception: number | null,
     } | null,
     health:  {
       __typename: "HealthInformation",
@@ -3312,6 +3315,7 @@ export type DeleteCharacterMutation = {
       intelligence: number | null,
       willpower: number | null,
       astral: number | null,
+      perception: number | null,
     } | null,
     health:  {
       __typename: "HealthInformation",
@@ -5484,6 +5488,7 @@ export type GetCharacterQuery = {
       intelligence: number | null,
       willpower: number | null,
       astral: number | null,
+      perception: number | null,
     } | null,
     health:  {
       __typename: "HealthInformation",
@@ -6071,6 +6076,7 @@ export type ListCharactersQuery = {
         intelligence: number | null,
         willpower: number | null,
         astral: number | null,
+        perception: number | null,
       } | null,
       health:  {
         __typename: "HealthInformation",
@@ -7284,6 +7290,7 @@ export type ListCharactersByOwnerQuery = {
         intelligence: number | null,
         willpower: number | null,
         astral: number | null,
+        perception: number | null,
       } | null,
       health:  {
         __typename: "HealthInformation",
@@ -7844,6 +7851,7 @@ export type ListCharactersByDungeonMasterQuery = {
         intelligence: number | null,
         willpower: number | null,
         astral: number | null,
+        perception: number | null,
       } | null,
       health:  {
         __typename: "HealthInformation",
@@ -9218,6 +9226,7 @@ export type OnCreateCharacterSubscription = {
       intelligence: number | null,
       willpower: number | null,
       astral: number | null,
+      perception: number | null,
     } | null,
     health:  {
       __typename: "HealthInformation",
@@ -9802,6 +9811,7 @@ export type OnUpdateCharacterSubscription = {
       intelligence: number | null,
       willpower: number | null,
       astral: number | null,
+      perception: number | null,
     } | null,
     health:  {
       __typename: "HealthInformation",
@@ -10386,6 +10396,7 @@ export type OnDeleteCharacterSubscription = {
       intelligence: number | null,
       willpower: number | null,
       astral: number | null,
+      perception: number | null,
     } | null,
     health:  {
       __typename: "HealthInformation",

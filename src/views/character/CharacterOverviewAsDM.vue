@@ -13,7 +13,7 @@
             <v-card-title>{{ $t("player-characters") }}</v-card-title>
             <character-ability-selector
               modifier-dialog
-              @select="abilityTrialForAllPCs"
+              @select="abilityCheckForAllPCs"
             />
           </v-toolbar>
           <v-card-text
@@ -50,7 +50,7 @@
             <v-card-title>{{ $t("non-player-characters") }}</v-card-title>
             <character-ability-selector
               modifier-dialog
-              @select="abilityTrialForAllNPCs"
+              @select="abilityCheckForAllNPCs"
             />
           </v-toolbar>
           <v-card-text
@@ -574,24 +574,24 @@ export default class CharacterOverviewAsDM extends TitleComponent {
     this.npcEvents.$emit("offence");
   }
 
-  abilityTrialForAllPCs({
+  abilityCheckForAllPCs({
     modifier,
     ability,
   }: {
     modifier: number;
     ability: string;
   }) {
-    this.pcEvents.$emit("ability-trial", ability, modifier);
+    this.pcEvents.$emit("ability-check", ability, modifier);
   }
 
-  abilityTrialForAllNPCs({
+  abilityCheckForAllNPCs({
     modifier,
     ability,
   }: {
     modifier: number;
     ability: string;
   }) {
-    this.npcEvents.$emit("ability-trial", ability, modifier);
+    this.npcEvents.$emit("ability-check", ability, modifier);
   }
 }
 </script>
