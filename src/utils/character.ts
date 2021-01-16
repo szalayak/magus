@@ -78,11 +78,11 @@ const calculateInitiationAbilityModifier = (
   return calculateCombatValueAbilityModifier([
     {
       value: character.abilities?.agility,
-      modifier: character.armour && character.armourActive ? mpv : 0,
+      modifier: mpv,
     },
     {
       value: character.abilities?.dexterity,
-      modifier: character.armour && character.armourActive ? mpv : 0,
+      modifier: mpv,
     },
   ]);
 };
@@ -110,11 +110,11 @@ const calculateStrengthAbilityModifier = (
     { value: character.abilities?.strength },
     {
       value: character.abilities?.agility,
-      modifier: character.armour && character.armourActive ? mpv : 0,
+      modifier: mpv,
     },
     {
       value: character.abilities?.dexterity,
-      modifier: character.armour && character.armourActive ? mpv : 0,
+      modifier: mpv,
     },
   ]);
 };
@@ -141,11 +141,11 @@ const calculateDefenceAbilityModifier = (
   return calculateCombatValueAbilityModifier([
     {
       value: character.abilities?.agility,
-      modifier: character.armour && character.armourActive ? mpv : 0,
+      modifier: mpv,
     },
     {
       value: character.abilities?.dexterity,
-      modifier: character.armour && character.armourActive ? mpv : 0,
+      modifier: mpv,
     },
   ]);
 };
@@ -175,7 +175,7 @@ const calculateAimingAbilityModifier = (
   return calculateCombatValueAbilityModifier([
     {
       value: character.abilities?.dexterity,
-      modifier: character.armour && character.armourActive ? mpv : 0,
+      modifier: mpv,
     },
   ]);
 };

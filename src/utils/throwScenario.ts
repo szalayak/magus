@@ -36,6 +36,7 @@ export interface CombatValueThrowResult {
   value?: number;
   id?: string;
   weapon?: WeaponAssignment;
+  damageBonus?: number;
 }
 
 export interface SpellResistanceThrowResult {

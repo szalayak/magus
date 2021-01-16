@@ -1,12 +1,12 @@
 <template>
   <v-row dense>
-    <v-col id="combat-values" cols="12" xs="12" md="6" lg="4" xl="3">
+    <v-col id="combat-values" cols="12" xs="12" sm="6" xl="3">
       <character-combat-values-quick-view
         :character="character"
         @error="onError"
       />
     </v-col>
-    <v-col id="vitality" cols="12" xs="12" md="6" lg="3" xl="2"
+    <v-col id="vitality" cols="12" xs="12" sm="6" lg="3" xl="2"
       ><character-vitality-quick-view :character="character" @error="onError"
     /></v-col>
     <v-col
@@ -22,10 +22,10 @@
         @error="onError"
       />
     </v-col>
-    <v-col id="abilities" cols="12" xs="12" md="6" lg="4" xl="3">
+    <v-col id="abilities" cols="12" xs="12" sm="6" lg="3">
       <character-abilities-quick-view :character="character" @error="onError" />
     </v-col>
-    <v-col id="spell-resistance" cols="12" xs="12" md="6" lg="3" xl="2">
+    <v-col id="spell-resistance" cols="12" xs="12" sm="6" lg="3" xl="2">
       <character-spell-resistance-quick-view
         :character="character"
         @error="onError"
@@ -43,7 +43,7 @@
         :character="character"
         @error="onError"
     /></v-col>
-    <v-col v-if="hasSkills" id="skills" cols="12" xs="12" md="6" lg="3" xl="2"
+    <v-col v-if="hasSkills" id="skills" cols="12" xs="12" sm="6" lg="3" xl="2"
       ><character-skills-quick-view :character="character" @error="onError"
     /></v-col>
     <v-snackbar
