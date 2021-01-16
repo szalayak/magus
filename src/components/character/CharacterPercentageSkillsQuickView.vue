@@ -11,31 +11,31 @@
     <v-card-text>
       <v-alert
         dense
-        v-if="skillTrialStatus.show"
+        v-if="skillCheckStatus.show"
         text
-        :color="skillTrialStatus.type"
+        :color="skillCheckStatus.type"
         dismissible
-        @input="skillTrialResult = null"
+        @input="skillCheckResult = null"
       >
-        <strong>{{ $t("skill-trial") }}</strong>
+        <strong>{{ $t("skill-check") }}</strong>
         <v-row dense>
           <v-col cols="6"
-            >{{ skillTrialResult.skill.skill.description.title }}:</v-col
+            >{{ skillCheckResult.skill.skill.description.title }}:</v-col
           >
           <v-col cols="6"
-            >{{ skillTrialResult.skill.percentageValue || 0 }}%<template
-              v-if="skillTrialResult.result.modifier"
+            >{{ skillCheckResult.skill.percentageValue || 0 }}%<template
+              v-if="skillCheckResult.result.modifier"
             >
-              + ({{ skillTrialResult.result.modifier }}%) =
+              + ({{ skillCheckResult.result.modifier }}%) =
               {{
-                (skillTrialResult.skill.percentageValue || 0) +
-                  skillTrialResult.result.modifier
+                (skillCheckResult.skill.percentageValue || 0) +
+                  skillCheckResult.result.modifier
               }}%</template
             ></v-col
           >
           <v-col cols="6">{{ $t("result") }}:</v-col>
           <v-col cols="6">{{
-            skillTrialResult.result.throwResults[0].result
+            skillCheckResult.result.throwResults[0].result
           }}</v-col>
         </v-row>
       </v-alert>
@@ -50,7 +50,7 @@
               throwScenarioString="D100"
               :title="skill.skill.description.title"
               :value="`${skill.percentageValue}%`"
-              @save="onTrialResult($event, skill)"/></v-col
+              @save="onCheckResult($event, skill)"/></v-col
         ></template> </v-row
     ></v-card-text>
   </v-card>
@@ -61,8 +61,8 @@ import ThrowScenarioTriggerField from "./ThrowScenarioTriggerField.vue";
 import CharacterQuickView from "./CharacterQuickView";
 import {
   localiseItem,
-  skillTrial,
-  SkillTrialResult,
+  skillCheck,
+  SkillCheckResult,
   ThrowScenarioResult,
 } from "@/utils";
 import { SkillAssignment } from "@/store";
@@ -73,13 +73,13 @@ import { SkillAssignment } from "@/store";
   },
 })
 export default class CharacterPercentageSkillsQuickView extends CharacterQuickView {
-  skillTrialResult: SkillTrialResult | null = null;
+  skillCheckResult: SkillCheckResult | null = null;
 
-  get skillTrialStatus() {
+  get skillCheckStatus() {
     return {
-      show: !!this.skillTrialResult,
+      show: !!this.skillCheckResult,
       type:
-        this.skillTrialResult && this.skillTrialResult.success
+        this.skillCheckResult && this.skillCheckResult.success
           ? "success"
           : "error",
     };
@@ -94,8 +94,8 @@ export default class CharacterPercentageSkillsQuickView extends CharacterQuickVi
       }));
   }
 
-  onTrialResult(result: ThrowScenarioResult, skill: SkillAssignment) {
-    this.skillTrialResult = skillTrial({ result, skill });
+  onCheckResult(result: ThrowScenarioResult, skill: SkillAssignment) {
+    this.skillCheckResult = skillCheck({ result, skill });
   }
 }
 </script>

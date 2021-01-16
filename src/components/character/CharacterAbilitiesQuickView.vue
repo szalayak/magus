@@ -11,154 +11,164 @@
     <v-card-text>
       <v-alert
         dense
-        v-if="abilityTrialStatus.show"
+        v-if="abilityCheckStatus.show"
         text
-        :color="abilityTrialStatus.type"
+        :color="abilityCheckStatus.type"
         dismissible
-        @input="abilityTrialResult = null"
+        @input="abilityCheckResult = null"
       >
-        <strong>{{ $t(`${abilityTrialResult.abilityName}-trial`) }}</strong>
+        <strong>{{ $t(`${abilityCheckResult.abilityName}-check`) }}</strong>
         <v-row dense>
-          <v-col cols="6">{{ $t(abilityTrialResult.abilityName) }}:</v-col>
+          <v-col cols="6">{{ $t(abilityCheckResult.abilityName) }}:</v-col>
           <v-col cols="6">
-            {{ abilityTrialResult.abilityValue || 0
-            }}<template v-if="abilityTrialResult.result.modifier">
-              + ({{ abilityTrialResult.result.modifier }}) =
+            {{ abilityCheckResult.abilityValue || 0
+            }}<template v-if="abilityCheckResult.result.modifier">
+              + ({{ abilityCheckResult.result.modifier }}) =
               {{
-                (abilityTrialResult.abilityValue || 0) +
-                  abilityTrialResult.result.modifier
+                (abilityCheckResult.abilityValue || 0) +
+                  abilityCheckResult.result.modifier
               }}</template
             ></v-col
           >
           <v-col cols="6">{{ $t("result") }}:</v-col>
           <v-col cols="6">{{
-            abilityTrialResult.result.throwResults[0].result
+            abilityCheckResult.result.throwResults[0].result
           }}</v-col>
         </v-row>
       </v-alert>
       <v-row dense>
-        <v-col cols="4"
+        <v-col cols="6"
           ><strong>{{ $t("strength") }}</strong></v-col
         >
-        <v-col cols="3">
+        <v-col cols="6">
           <throw-scenario-trigger-field
             bold
             dialog
             throwScenarioString="D10"
-            :title="$t('strength-trial')"
+            :title="$t('strength-check')"
             :value="abilities.strength || 0"
-            @save="onTrialResult($event, 'strength', abilities.strength || 0)"
+            @save="onCheckResult($event, 'strength', abilities.strength || 0)"
           />
         </v-col>
-        <v-col cols="5">{{ $t("damage-bonus") }}: {{ damageBonus }}</v-col>
-        <v-col cols="4"
+        <v-col cols="6"
           ><strong>{{ $t("agility") }}</strong></v-col
         >
-        <v-col cols="3">
+        <v-col cols="6">
           <throw-scenario-trigger-field
             bold
             dialog
             throwScenarioString="D10"
-            :title="$t('agility-trial')"
+            :title="$t('agility-check')"
             :value="agilityInArmour || 0"
-            :text="abilities.agility"
-            @save="onTrialResult($event, 'agility', agilityInArmour || 0)"
+            @save="onCheckResult($event, 'agility', agilityInArmour || 0)"
           />
         </v-col>
-        <v-col cols="5">{{ $t("in-armour") }}: {{ agilityInArmour }}</v-col>
-        <v-col cols="4"
+        <v-col cols="6"
           ><strong>{{ $t("dexterity") }}</strong></v-col
         >
-        <v-col cols="3">
+        <v-col cols="6">
           <throw-scenario-trigger-field
             bold
             dialog
             throwScenarioString="D10"
-            :title="$t('dexterity-trial')"
+            :title="$t('dexterity-check')"
             :value="dexterityInArmour || 0"
-            :text="abilities.dexterity"
-            @save="onTrialResult($event, 'dexterity', dexterityInArmour || 0)"
+            @save="onCheckResult($event, 'dexterity', dexterityInArmour || 0)"
           />
         </v-col>
-        <v-col cols="5">{{ $t("in-armour") }}: {{ dexterityInArmour }}</v-col>
-        <v-col cols="4"
+        <v-col cols="6"
           ><strong>{{ $t("stamina") }}</strong></v-col
         >
-        <v-col cols="8">
+        <v-col cols="6">
           <throw-scenario-trigger-field
             bold
             dialog
             throwScenarioString="D10"
-            :title="$t('stamina-trial')"
+            :title="$t('stamina-check')"
             :value="abilities.stamina || 0"
-            @save="onTrialResult($event, 'stamina', abilities.stamina || 0)"
+            @save="onCheckResult($event, 'stamina', abilities.stamina || 0)"
           />
         </v-col>
-        <v-col cols="4"
+        <v-col cols="6"
           ><strong>{{ $t("health") }}</strong></v-col
         >
-        <v-col cols="8">
+        <v-col cols="6">
           <throw-scenario-trigger-field
             bold
             dialog
             throwScenarioString="D10"
-            :title="$t('health-trial')"
+            :title="$t('health-check')"
             :value="abilities.health || 0"
-            @save="onTrialResult($event, 'health', abilities.health || 0)"
+            @save="onCheckResult($event, 'health', abilities.health || 0)"
           />
         </v-col>
-        <v-col cols="4"
+        <v-col cols="6"
           ><strong>{{ $t("beauty") }}</strong></v-col
         >
-        <v-col cols="8">
+        <v-col cols="6">
           <throw-scenario-trigger-field
             bold
             dialog
             throwScenarioString="D10"
-            :title="$t('beauty-trial')"
+            :title="$t('beauty-check')"
             :value="abilities.beauty || 0"
-            @save="onTrialResult($event, 'beauty', abilities.beauty || 0)"
+            @save="onCheckResult($event, 'beauty', abilities.beauty || 0)"
           />
         </v-col>
-        <v-col cols="4"
+        <v-col cols="6"
           ><strong>{{ $t("intelligence") }}</strong></v-col
         >
-        <v-col cols="8">
+        <v-col cols="6">
           <throw-scenario-trigger-field
             bold
             dialog
             throwScenarioString="D10"
-            :title="$t('intelligence-trial')"
+            :title="$t('intelligence-check')"
             :value="abilities.intelligence || 0"
             @save="
-              onTrialResult($event, 'intelligence', abilities.intelligence || 0)
+              onCheckResult($event, 'intelligence', abilities.intelligence || 0)
             "
           />
         </v-col>
-        <v-col cols="4"
+        <v-col cols="6"
           ><strong>{{ $t("willpower") }}</strong></v-col
         >
-        <v-col cols="8">
+        <v-col cols="6">
           <throw-scenario-trigger-field
             bold
             dialog
             throwScenarioString="D10"
-            :title="$t('willpower-trial')"
+            :title="$t('willpower-check')"
             :value="abilities.willpower || 0"
-            @save="onTrialResult($event, 'willpower', abilities.willpower || 0)"
+            @save="onCheckResult($event, 'willpower', abilities.willpower || 0)"
           />
         </v-col>
-        <v-col cols="4"
+        <v-col cols="6"
           ><strong>{{ $t("astral") }}</strong></v-col
         >
-        <v-col cols="8">
+        <v-col cols="6">
           <throw-scenario-trigger-field
             bold
             dialog
             throwScenarioString="D10"
-            :title="$t('astral-trial')"
+            :title="$t('astral-check')"
             :value="abilities.astral || 0"
-            @save="onTrialResult($event, 'astral', abilities.astral || 0)"
+            @save="onCheckResult($event, 'astral', abilities.astral || 0)"
+          />
+        </v-col>
+        <v-col cols="6"
+          ><strong>{{ $t("perception") }}</strong></v-col
+        >
+        <v-col cols="6">
+          <throw-scenario-trigger-field
+            bold
+            dialog
+            throwScenarioString="D10"
+            :title="$t('perception-check')"
+            :value="abilities.perception || 0"
+            @save="
+              onCheckResult($event, 'perception', abilities.perception || 0)
+            "
           />
         </v-col>
       </v-row>
@@ -169,8 +179,8 @@
 <script lang="ts">
 import { Dice } from "@/API";
 import {
-  abilityTrial,
-  AbilityTrialResult,
+  abilityCheck,
+  AbilityCheckResult,
   executeThrowScenario,
   movementPreventionValueTotal,
   parseThrowScenarioString,
@@ -186,17 +196,17 @@ import ThrowScenarioTriggerField from "./ThrowScenarioTriggerField.vue";
   },
 })
 export default class CharacterAbilitiesQuickView extends CharacterQuickView {
-  abilityTrialResult: AbilityTrialResult | null = null;
+  abilityCheckResult: AbilityCheckResult | null = null;
 
   get abilities() {
     return this.character.abilities || {};
   }
 
-  get abilityTrialStatus() {
+  get abilityCheckStatus() {
     return {
-      show: !!this.abilityTrialResult,
+      show: !!this.abilityCheckResult,
       type:
-        this.abilityTrialResult && this.abilityTrialResult.success
+        this.abilityCheckResult && this.abilityCheckResult.success
           ? "success"
           : "error",
     };
@@ -214,18 +224,12 @@ export default class CharacterAbilitiesQuickView extends CharacterQuickView {
       : 0;
   }
 
-  get damageBonus() {
-    return this.abilities.strength && this.abilities.strength > 16
-      ? this.abilities.strength - 16
-      : 0;
-  }
-
-  onTrialResult(
+  onCheckResult(
     result: ThrowScenarioResult,
     abilityName: string,
     abilityValue: number
   ) {
-    this.abilityTrialResult = abilityTrial({
+    this.abilityCheckResult = abilityCheck({
       result,
       abilityName,
       abilityValue,
@@ -234,8 +238,8 @@ export default class CharacterAbilitiesQuickView extends CharacterQuickView {
 
   created() {
     if (this.bus) {
-      this.bus.$on("ability-trial", (ability: string, modifier: number) => {
-        this.abilityTrialResult = abilityTrial({
+      this.bus.$on("ability-check", (ability: string, modifier: number) => {
+        this.abilityCheckResult = abilityCheck({
           result: {
             ...executeThrowScenario(parseThrowScenarioString(Dice.D10)),
             modifier,

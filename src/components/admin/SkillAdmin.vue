@@ -48,13 +48,10 @@
         disabled
       ></v-simple-checkbox>
     </template>
-    <template v-slot:[`item.skillGroup`]="{ item }">
-      {{ skillGroupToString(item.skillGroup) }}
-    </template>
   </admin-table>
 </template>
 <script lang="ts">
-import { localise, getDescriptionsForLocales } from "@/utils/localise";
+import { getDescriptionsForLocales } from "@/utils/localise";
 import Component from "vue-class-component";
 import Vue from "vue";
 import { Skill } from "@/store/modules/skill";
@@ -78,11 +75,11 @@ export default class SkillAdmin extends Vue {
     description: { locale: this.$i18n.locale as Locale, title: "" },
     descriptions: getDescriptionsForLocales(),
   };
-  customColumns = ["percentageSkill", "skillGroup"];
+  customColumns = ["percentageSkill"];
 
   get headers() {
     return [
-      { text: this.$t("skill-group"), value: "skillGroup" },
+      { text: this.$t("skill-group"), value: "skillGroup.description.title" },
       { text: this.$t("title"), value: "description.title" },
       { text: this.$t("percentage-skill"), value: "percentageSkill" },
       { text: this.$t("skill-basic-cost"), value: "basicCost" },
@@ -92,13 +89,7 @@ export default class SkillAdmin extends Vue {
   }
 
   get skillGroups(): ValueRange[] {
-    const mainClasses = this.$store.getters["valueRange/getSkillGroups"];
-    return localise(mainClasses, this.$i18n.locale) as ValueRange[];
-  }
-
-  skillGroupToString(skillGroup?: ValueRange): string | undefined {
-    return this.skillGroups.find(wt => wt.id === skillGroup?.id)?.description
-      ?.title;
+    return this.$store.getters["valueRange/getSkillGroups"];
   }
 
   created() {

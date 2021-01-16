@@ -1,5 +1,6 @@
 <template>
   <character-list
+    v-if="!loading"
     :characters="characters"
     :messages.sync="messages"
     :notification.sync="notification"
@@ -156,6 +157,7 @@
       </v-dialog>
     </template>
   </character-list>
+  <skeleton-cards v-else />
 </template>
 <script lang="ts">
 import { Character } from "@/store/modules/character";
@@ -166,13 +168,15 @@ import Component from "vue-class-component";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
 import CharacterList from "@/components/CharacterList.vue";
 import TitleComponent from "@/mixins/TitleComponent";
-import { User } from "@/store";
+import { LooseObject, User } from "@/store";
 import { Form } from "@/utils";
+import SkeletonCards from "@/components/SkeletonCards.vue";
 
 @Component({
   name: "player-characters-as-player",
   components: {
     "character-list": CharacterList,
+    "skeleton-cards": SkeletonCards,
   },
 })
 export default class PlayerCharactersAsPlayer extends TitleComponent {
@@ -187,6 +191,7 @@ export default class PlayerCharactersAsPlayer extends TitleComponent {
     level: { currentLevel: 1, currentExperience: 0 },
     playerCharacter: true,
   };
+  loading = false;
 
   get users(): User[] {
     return this.$store.getters["getUsers"];
@@ -219,27 +224,38 @@ export default class PlayerCharactersAsPlayer extends TitleComponent {
     }
   }
 
-  created() {
-    this.$store
-      .dispatch("character/loadByOwner", this.$store.state.app.user.username)
-      .catch((error: GraphQLResult<Character>) => {
-        this.messages = error.errors?.map(err => err.message) || [];
-        this.notification = true;
-      });
-    Promise.all([
-      this.$store.dispatch("race/load"),
-      this.$store.dispatch("class/load"),
-    ]).catch((error: GraphQLResult<Character>) => {
-      this.messages = error.errors?.map(err => err.message) || [];
+  async created() {
+    this.loading = true;
+    try {
+      await this.$store.dispatch(
+        "character/loadByOwner",
+        this.$store.state.app.user.username
+      );
+    } catch (error) {
+      this.messages =
+        error.errors?.map((err: LooseObject) => err.message) || [];
       this.notification = true;
-    });
-    this.$store
-      .dispatch("loadUsers")
-      .then(() => this.$forceUpdate())
-      .catch((error: GraphQLResult<unknown>) => {
-        this.messages = error.errors?.map(err => err.message) || [];
-        this.notification = true;
-      });
+    }
+    try {
+      await Promise.all([
+        this.$store.dispatch("race/load"),
+        this.$store.dispatch("class/load"),
+      ]);
+    } catch (error) {
+      this.messages =
+        error.errors?.map((err: LooseObject) => err.message) || [];
+      this.notification = true;
+    }
+
+    try {
+      await this.$store.dispatch("loadUsers");
+      this.$forceUpdate();
+    } catch (error) {
+      this.messages =
+        error.errors?.map((err: LooseObject) => err.message) || [];
+      this.notification = true;
+    }
+    this.loading = false;
   }
 }
 </script>

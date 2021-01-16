@@ -7,23 +7,30 @@ import {
   MutationTree,
 } from "vuex";
 import { RootState } from ".";
-import { ActionProps, Identifiable, PageableState } from "./types";
+import {
+  ActionProps,
+  Identifiable,
+  MappingFunction,
+  PageableState,
+} from "./types";
 
-export const defaultGetters: GetterTree<PageableState, RootState> = {
+export const createDefaultGetters = (
+  mappingFunction?: MappingFunction
+): GetterTree<PageableState, RootState> => ({
   list({ items }) {
-    return items;
+    return mappingFunction ? mappingFunction(items) : items;
   },
-};
-
-export const createDefaultGetters = () => defaultGetters;
+});
 
 export const createGetters = ({
   additionalGetters,
+  mappingFunction,
 }: {
   additionalGetters?: { [key: string]: Getter<PageableState, RootState> };
+  mappingFunction?: MappingFunction;
 }): GetterTree<PageableState, RootState> => {
   return {
-    ...createDefaultGetters(),
+    ...createDefaultGetters(mappingFunction),
     ...additionalGetters,
   };
 };

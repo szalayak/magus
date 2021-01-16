@@ -82,16 +82,12 @@
       v-for="message in messages"
       :value="notification"
       :key="message"
-      @input="$emit('update:notification', $event)"
+      @input="$emit('update:notification', false)"
     >
       {{ message }}
 
       <template v-slot:action="{ attrs }">
-        <v-btn
-          text
-          v-bind="attrs"
-          @click="$emit('update:notification', $event)"
-        >
+        <v-btn text v-bind="attrs" @click="$emit('update:notification', false)">
           {{ $t("close") }}
         </v-btn>
       </template>

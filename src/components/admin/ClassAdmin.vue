@@ -31,13 +31,10 @@
     <template v-slot:[`item.magicUser`]="{ item }">
       <v-simple-checkbox v-model="item.magicUser" disabled></v-simple-checkbox>
     </template>
-    <template v-slot:[`item.mainClass`]="{ item }">
-      {{ mainClassToString(item.mainClass) }}
-    </template>
   </admin-table>
 </template>
 <script lang="ts">
-import { localise, getDescriptionsForLocales } from "@/utils/localise";
+import { getDescriptionsForLocales } from "@/utils/localise";
 import Component from "vue-class-component";
 import Vue from "vue";
 import { Class } from "@/store/modules/class";
@@ -61,11 +58,11 @@ export default class ClassAdmin extends Vue {
     description: { locale: this.$i18n.locale as Locale, title: "" },
     descriptions: getDescriptionsForLocales(),
   };
-  customColumns = ["magicUser", "mainClass"];
+  customColumns = ["magicUser"];
 
   get headers() {
     return [
-      { text: this.$t("main-class"), value: "mainClass" },
+      { text: this.$t("main-class"), value: "mainClass.description.title" },
       { text: this.$t("title"), value: "description.title" },
       { text: this.$t("magic-user"), value: "magicUser" },
       { text: this.$t("actions"), value: "actions", sortable: false },
@@ -73,13 +70,7 @@ export default class ClassAdmin extends Vue {
   }
 
   get mainClasses(): ValueRange[] {
-    const mainClasses = this.$store.getters["valueRange/getMainClasses"];
-    return localise(mainClasses, this.$i18n.locale) as ValueRange[];
-  }
-
-  mainClassToString(mainClass?: ValueRange): string | undefined {
-    return this.mainClasses.find(wt => wt.id === mainClass?.id)?.description
-      ?.title;
+    return this.$store.getters["valueRange/getMainClasses"];
   }
 
   created() {
