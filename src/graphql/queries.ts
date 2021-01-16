@@ -678,6 +678,7 @@ export const getCharacter = /* GraphQL */ `
         intelligence
         willpower
         astral
+        perception
       }
       health {
         vitality {
@@ -1186,6 +1187,7 @@ export const listCharacters = /* GraphQL */ `
           intelligence
           willpower
           astral
+          perception
         }
         health {
           vitality {
@@ -2266,6 +2268,7 @@ export const listCharactersByOwner = /* GraphQL */ `
           intelligence
           willpower
           astral
+          perception
         }
         health {
           vitality {
@@ -2758,6 +2761,7 @@ export const listCharactersByDungeonMaster = /* GraphQL */ `
           intelligence
           willpower
           astral
+          perception
         }
         health {
           vitality {

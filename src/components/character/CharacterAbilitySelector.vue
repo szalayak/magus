@@ -2,7 +2,7 @@
   <v-menu v-model="menu" offset-y>
     <template v-slot:activator="{ on, attrs }">
       <v-btn color="primary" text v-bind="attrs" v-on="on">
-        <div>{{ $t("ability-trial") }}</div>
+        <div>{{ $t("ability-check") }}</div>
       </v-btn>
     </template>
     <v-list>

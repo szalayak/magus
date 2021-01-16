@@ -899,6 +899,7 @@ export const createCharacter = /* GraphQL */ `
         intelligence
         willpower
         astral
+        perception
       }
       health {
         vitality {
@@ -1405,6 +1406,7 @@ export const updateCharacter = /* GraphQL */ `
         intelligence
         willpower
         astral
+        perception
       }
       health {
         vitality {
@@ -1911,6 +1913,7 @@ export const deleteCharacter = /* GraphQL */ `
         intelligence
         willpower
         astral
+        perception
       }
       health {
         vitality {

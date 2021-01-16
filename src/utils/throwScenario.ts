@@ -17,14 +17,14 @@ export interface ThrowScenarioResult {
   total: number;
 }
 
-export interface AbilityTrialResult {
+export interface AbilityCheckResult {
   result: ThrowScenarioResult;
   abilityName?: string;
   abilityValue: number;
   success?: boolean;
 }
 
-export interface SkillTrialResult {
+export interface SkillCheckResult {
   result: ThrowScenarioResult;
   skill: SkillAssignment;
   success?: boolean;
@@ -103,7 +103,7 @@ export const executeThrowScenario = (
   };
 };
 
-export const abilityTrial = ({
+export const abilityCheck = ({
   result,
   abilityName,
   abilityValue,
@@ -111,7 +111,7 @@ export const abilityTrial = ({
   result: ThrowScenarioResult;
   abilityName?: string;
   abilityValue: number;
-}): AbilityTrialResult => {
+}): AbilityCheckResult => {
   return {
     result,
     abilityName,
@@ -121,7 +121,7 @@ export const abilityTrial = ({
   };
 };
 
-export const skillTrial = ({
+export const skillCheck = ({
   result,
   skill,
 }: {
