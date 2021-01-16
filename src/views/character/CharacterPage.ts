@@ -84,6 +84,7 @@ export default class CharacterPage extends Vue {
           : error.errors?.map((err: LooseObject) => err.message) || [];
       this.notification = true;
     }
-    this.$store.dispatch("character/subscribeToUpdate");
+    if (this.character.playerCharacter)
+      this.$store.dispatch("character/subscribeToUpdate", this.character);
   }
 }

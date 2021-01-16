@@ -563,7 +563,18 @@ export default class CharacterOverviewAsDM extends TitleComponent {
 
   async created() {
     await this.refresh();
-    this.$store.dispatch("character/subscribeToUpdate");
+    const owners = Array.from(
+      new Set(this.playerCharacters.map(character => character.owner))
+    );
+    const dungeonMaster = this.$store.getters["currentUser"];
+    Promise.all(
+      owners.map(owner => {
+        return this.$store.dispatch("character/subscribeToUpdate", {
+          owner,
+          dungeonMaster,
+        });
+      })
+    );
   }
 
   initiationForAllNPCs() {
