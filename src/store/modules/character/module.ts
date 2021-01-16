@@ -232,7 +232,7 @@ export const characterModule: Module<CharacterState, RootState> = {
           context.commit(DefaultMutationKeys.REMOVE, id);
         }
       },
-      async subscribeToUpdate(context) {
+      async subscribeToUpdate(context, item: Character) {
         const state = context.state as CharacterState;
         if (!state.subscription) {
           const callback = (
@@ -246,7 +246,7 @@ export const characterModule: Module<CharacterState, RootState> = {
             );
           };
 
-          await proxy.additionalActions.subscribeToUpdate(callback);
+          await proxy.additionalActions.subscribeToUpdate(callback, item);
         }
       },
     },

@@ -33,7 +33,7 @@ import { onUpdateCharacter } from "@/graphql/subscriptions";
 import { LooseObject } from "@/store";
 import { PageableResult } from "@/store/amplify";
 import { createDefaultActions } from "@/store/amplify/utils";
-import { API, graphqlOperation } from "aws-amplify";
+import { API } from "aws-amplify";
 import { Character } from "../..";
 import {
   CharacterCompanion,
@@ -204,11 +204,13 @@ const loadByDungeonMaster = async (dungeonMaster: string) => {
 };
 
 const subscribeToUpdate = async (
-  callback: (result: CharacterQueryResult, subscription: Subscription) => void
+  callback: (result: CharacterQueryResult, subscription: Subscription) => void,
+  { owner, dungeonMaster }: Character
 ): Promise<void> => {
-  const observable = (await API.graphql(
-    graphqlOperation(onUpdateCharacter)
-  )) as Observable<LooseObject>;
+  const observable = (await API.graphql({
+    query: onUpdateCharacter,
+    variables: { owner, dungeonMaster },
+  })) as Observable<LooseObject>;
   const subscription = observable.subscribe({
     next: characterData => {
       const queryResult = ((characterData.value as LooseObject)
