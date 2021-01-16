@@ -38,13 +38,21 @@
               <v-toolbar flat>
                 <v-toolbar-title>{{ formTitle }}</v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-select
-                  single-line
-                  hide-details
+                <v-btn-toggle
+                  dense
+                  tile
+                  color="primary"
+                  group
                   v-model="editedItem.locale"
-                  :items="locales"
-                  @input="changeEditedLocale"
-                />
+                  @change="changeEditedLocale"
+                >
+                  <v-btn
+                    v-for="locale in locales"
+                    :key="locale.value"
+                    :value="locale.value"
+                    >{{ locale.text }}</v-btn
+                  >
+                </v-btn-toggle>
               </v-toolbar>
               <v-card-text>
                 <v-form :disabled="readonly" ref="input" v-model="valid">
@@ -208,8 +216,7 @@ export default class AdminTable extends AdminTableProps {
   editedItem = mergeDescriptions(
     typeof this.defaultItem === "function"
       ? this.defaultItem()
-      : this.defaultItem,
-    this.$i18n.locale
+      : this.defaultItem
   ) as Editable;
 
   get markdownDescription() {
@@ -254,6 +261,7 @@ export default class AdminTable extends AdminTableProps {
   }
 
   changeEditedLocale(locale: Locale) {
+    console.log({ locale });
     this.editedItem = localiseItem(this.editedItem, locale);
   }
 
@@ -270,7 +278,7 @@ export default class AdminTable extends AdminTableProps {
     this.$nextTick(() => {
       this.editedItem = Object.assign(
         {},
-        mergeDescriptions(this.defaultItem, this.$i18n.locale) as Editable
+        mergeDescriptions(this.defaultItem) as Editable
       );
       this.editedIndex = -1;
     });
@@ -285,7 +293,7 @@ export default class AdminTable extends AdminTableProps {
       this.$store
         .dispatch(
           this.isNewItem ? `${this.module}/create` : `${this.module}/update`,
-          mergeDescriptions(this.editedItem, this.$i18n.locale)
+          mergeDescriptions(this.editedItem)
         )
         .catch((error: GraphQLResult<Editable>) => {
           this.messages = error.errors?.map(err => err.message) || [];

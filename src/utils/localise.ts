@@ -1,4 +1,5 @@
 import { Locale } from "@/API";
+import locale from "@/locale";
 import { Describable, Description } from "@/store/types";
 
 export const localiseItem = (obj: Describable, locale: string): Describable => {
@@ -41,20 +42,24 @@ export const getDescriptionsForLocales = (
   );
 };
 
-export const mergeDescriptions = (
-  obj: Describable,
-  locale: string
-): Describable => {
-  obj.locale = locale as Locale;
-  if (obj.description) {
-    const d = obj.descriptions?.find(d => d?.locale === locale);
+export const mergeDescriptions = (obj: Describable): Describable => {
+  const res: Describable = {
+    ...obj,
+    description: { ...obj.description } as Description,
+    descriptions: obj.descriptions?.map(d => ({ ...d })),
+    locale: locale as Locale,
+  };
+  if (res.description) {
+    const d = res.descriptions?.find(d => d?.locale === locale);
     if (d) {
-      obj.descriptions?.splice(
-        obj.descriptions?.indexOf(d),
+      res.descriptions?.splice(
+        res.descriptions?.indexOf(d),
         1,
-        obj.description
+        res.description
       );
+    } else {
+      res.descriptions?.push(res.description);
     }
   }
-  return obj;
+  return res;
 };
