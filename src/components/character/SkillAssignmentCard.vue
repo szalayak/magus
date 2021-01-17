@@ -115,17 +115,6 @@
         :sort-by="sortBy"
         :search="search"
       >
-        <template v-slot:top>
-          <v-alert
-            v-model="notification"
-            dense
-            outlined
-            type="error"
-            dismissible
-          >
-            {{ messages }}
-          </v-alert>
-        </template>
         <template v-slot:[`item.mastery`]="{ item }">
           {{ masteryToString(item) }}
         </template>
@@ -148,12 +137,10 @@
 import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
-import { Describable, ThrowScenario } from "@/store/types";
+import { ThrowScenario } from "@/store/types";
 import { getThrowScenarioString } from "@/utils/throwScenario";
-import { localise, localiseItem } from "@/utils/localise";
 import { SkillAssignment } from "@/store/modules/character";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
-import { Skill } from "@/store/modules/skill";
 
 @Component({
   name: "skill-assignment-card",
@@ -168,8 +155,6 @@ export default class SkillAssignmentCard extends CharacterInfo {
   editedIndex = -1;
   dialogDelete = false;
   editedItem = this.defaultItem();
-  notification = false;
-  messages: string[] = [];
   search = "";
 
   get headers() {
@@ -191,14 +176,11 @@ export default class SkillAssignmentCard extends CharacterInfo {
   }
 
   get skills() {
-    return localise(this.$store.getters["skill/list"] || [], this.$i18n.locale);
+    return this.$store.getters["skill/list"];
   }
 
-  get assignments(): Skill[] {
-    return (this.character.skills || []).map(s => ({
-      ...s,
-      skill: localiseItem(s.skill as Describable, this.$i18n.locale),
-    }));
+  get assignments(): SkillAssignment[] {
+    return this.character.skills || [];
   }
 
   get isNewItem() {
@@ -211,10 +193,6 @@ export default class SkillAssignmentCard extends CharacterInfo {
       : this.$t("edit-skill");
   }
 
-  skillToString(skill: Skill) {
-    return localiseItem(skill, this.$i18n.locale).description?.title;
-  }
-
   defaultItem(): SkillAssignment {
     return {
       characterId: this.character.id || "",
@@ -222,7 +200,7 @@ export default class SkillAssignmentCard extends CharacterInfo {
   }
 
   damageToString(damage: ThrowScenario) {
-    return damage ? getThrowScenarioString(damage, this.$i18n) : "";
+    return getThrowScenarioString(damage);
   }
 
   masteryToString(assignment: SkillAssignment) {
@@ -245,11 +223,9 @@ export default class SkillAssignmentCard extends CharacterInfo {
       )
       .then(() => {
         this.messages = [];
-        this.notification = false;
       })
       .catch((error: GraphQLResult<SkillAssignment>) => {
         this.messages = error.errors?.map(err => err.message) || [];
-        this.notification = true;
       });
     this.dialog = false;
     this.resetEditedItem();

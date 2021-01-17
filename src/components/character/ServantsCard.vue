@@ -356,8 +356,7 @@ export default class ServantsCard extends CharacterInfo {
   }
 
   damageToString(damage: ThrowScenario, weapon?: Weapon) {
-    const d = weapon?.damage || damage;
-    return d ? getThrowScenarioString(d, this.$i18n) : "";
+    return getThrowScenarioString(weapon?.damage || damage);
   }
 
   typeToString(type: CompanionType) {

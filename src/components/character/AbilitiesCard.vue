@@ -1,5 +1,14 @@
 <template>
-  <character-info-card :id="id" :editable="editable" :title="$t('abilities')">
+  <character-info-card
+    :id="id"
+    :editable="editable"
+    :title="$t('abilities')"
+    :error.sync="error"
+    :messages="messages"
+    :edit.sync="edit"
+    @save="save"
+    @cancel="cancel"
+  >
     <template v-slot:fields="{ edit }">
       <v-row dense>
         <v-col cols="6">
@@ -116,6 +125,21 @@ import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
 import { movementPreventionValueTotal } from "@/utils/character";
+import { Character } from "@/store";
+import { Prop } from "vue-property-decorator";
+
+const copyAbilities = (abilities?: Abilities) => ({
+  strength: abilities?.strength,
+  agility: abilities?.agility,
+  dexterity: abilities?.dexterity,
+  stamina: abilities?.stamina,
+  health: abilities?.health,
+  beauty: abilities?.beauty,
+  intelligence: abilities?.intelligence,
+  willpower: abilities?.willpower,
+  astral: abilities?.astral,
+  perception: abilities?.perception,
+});
 
 @Component({
   name: "abilities-card",
@@ -124,21 +148,10 @@ import { movementPreventionValueTotal } from "@/utils/character";
   },
 })
 export default class AbilitiesCard extends CharacterInfo {
-  testDialog = false;
+  @Prop({ type: Object })
+  character!: Character;
 
-  get agilityInArmour() {
-    return this.character.abilities?.agility
-      ? this.character.abilities.agility -
-          movementPreventionValueTotal(this.character)
-      : 0;
-  }
-
-  get dexterityInArmour() {
-    return this.character.abilities?.dexterity
-      ? this.character.abilities.dexterity -
-          movementPreventionValueTotal(this.character)
-      : 0;
-  }
+  abilities: Abilities = copyAbilities(this.character.abilities);
 
   get damageBonus() {
     return this.abilities.strength && this.abilities.strength > 16
@@ -146,13 +159,24 @@ export default class AbilitiesCard extends CharacterInfo {
       : 0;
   }
 
-  get abilities() {
-    if (!this.character.abilities) this.character.abilities = {};
-    return this.character.abilities || {};
+  get agilityInArmour() {
+    return this.abilities.agility
+      ? this.abilities.agility - movementPreventionValueTotal(this.character)
+      : 0;
   }
 
-  set abilities(abilities: Abilities) {
-    Object.assign(this.character.abilities, abilities);
+  get dexterityInArmour() {
+    return this.abilities.dexterity
+      ? this.abilities.dexterity - movementPreventionValueTotal(this.character)
+      : 0;
+  }
+
+  save() {
+    this.update({ id: this.character.id, abilities: this.abilities });
+  }
+
+  cancel() {
+    this.abilities = copyAbilities(this.character.abilities);
   }
 }
 </script>

@@ -76,17 +76,6 @@
         disable-pagination
         hide-default-footer
       >
-        <template v-slot:top>
-          <v-alert
-            v-model="notification"
-            dense
-            outlined
-            type="error"
-            dismissible
-          >
-            {{ messages }}
-          </v-alert>
-        </template>
         <template v-slot:[`item.level`]="{ item }">
           {{ levelToString(item.level) }}
         </template>
@@ -122,8 +111,6 @@ export default class LanguageCard extends CharacterInfo {
   editedIndex = -1;
   dialogDelete = false;
   editedItem = this.defaultItem();
-  notification = false;
-  messages: string[] = [];
 
   get headers() {
     const headers = [

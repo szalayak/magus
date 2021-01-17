@@ -39,7 +39,7 @@ export default class ThrowScenarioDialog extends Vue {
   @Prop({ type: Number })
   iterationCount!: number;
 
-  @Prop({ type: String })
+  @Prop({ type: Number })
   modifier!: number;
 
   @Prop({ type: String })

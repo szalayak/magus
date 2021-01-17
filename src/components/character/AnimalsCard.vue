@@ -3,6 +3,8 @@
     :id="id"
     :editable="false"
     :title="$t('mounts-and-other-animals')"
+    :error.sync="error"
+    :messages="messages"
   >
     <template v-slot:toolbar="{}">
       <v-dialog scrollable v-model="dialog" max-width="800px">
@@ -167,17 +169,6 @@
         :items="assignments"
         :sort-by="sortBy"
       >
-        <template v-slot:top>
-          <v-alert
-            v-model="notification"
-            dense
-            outlined
-            type="error"
-            dismissible
-          >
-            {{ messages }}
-          </v-alert>
-        </template>
         <template v-slot:[`item.name`]="{ item }">
           <a @click="editItem(item)">{{ item.name }}</a>
         </template>
@@ -233,8 +224,6 @@ export default class AnimalsCard extends CharacterInfo {
   editedIndex = -1;
   dialogDelete = false;
   editedItem = this.defaultItem();
-  notification = false;
-  messages: string[] = [];
 
   get headers() {
     const headers = [
@@ -302,7 +291,7 @@ export default class AnimalsCard extends CharacterInfo {
   }
 
   damageToString(damage: ThrowScenario) {
-    return damage ? getThrowScenarioString(damage, this.$i18n) : "";
+    return getThrowScenarioString(damage);
   }
 
   typeToString(type: CompanionType) {
@@ -328,11 +317,11 @@ export default class AnimalsCard extends CharacterInfo {
         )
         .then(() => {
           this.messages = [];
-          this.notification = false;
+          this.error = false;
         })
         .catch((error: GraphQLResult<CharacterCompanion>) => {
           this.messages = error.errors?.map(err => err.message) || [];
-          this.notification = true;
+          this.error = true;
         });
       this.dialog = false;
       this.resetEditedItem();

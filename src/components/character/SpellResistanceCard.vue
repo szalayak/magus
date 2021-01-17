@@ -3,6 +3,11 @@
     :id="id"
     :editable="editable"
     :title="$t('spell-resistance')"
+    :error.sync="error"
+    :messages="messages"
+    :edit.sync="edit"
+    @save="save"
+    @cancel="cancel"
   >
     <template v-slot:fields="{ edit }">
       <v-subheader class="pl-0">{{
@@ -84,6 +89,30 @@ import {
   calculateSpellResistanceTotal,
 } from "@/utils";
 
+const copySpellResistance = (
+  spellResistance?: SpellResistance,
+  astral?: number,
+  willpower?: number
+): SpellResistance => ({
+  astral: {
+    staticShield: spellResistance?.astral?.staticShield,
+    dynamicShield: spellResistance?.astral?.dynamicShield,
+    innate:
+      spellResistance?.astral?.innate || calculateInnateSpellResistance(astral),
+    magical: spellResistance?.astral?.magical,
+    modifier: spellResistance?.astral?.modifier,
+  },
+  mental: {
+    staticShield: spellResistance?.mental?.staticShield,
+    dynamicShield: spellResistance?.mental?.dynamicShield,
+    innate:
+      spellResistance?.mental?.innate ||
+      calculateInnateSpellResistance(willpower),
+    magical: spellResistance?.mental?.magical,
+    modifier: spellResistance?.mental?.modifier,
+  },
+});
+
 @Component({
   name: "spell-resistance-card",
   components: {
@@ -91,6 +120,12 @@ import {
   },
 })
 export default class SpellResistanceCard extends CharacterInfo {
+  spellResistance = copySpellResistance(
+    this.character.spellResistance,
+    this.character.abilities?.astral,
+    this.character.abilities?.willpower
+  );
+
   get astralTotal() {
     return calculateSpellResistanceTotal(this.spellResistance.astral);
   }
@@ -98,27 +133,19 @@ export default class SpellResistanceCard extends CharacterInfo {
   get mentalTotal() {
     return calculateSpellResistanceTotal(this.spellResistance.mental);
   }
-
-  get spellResistance(): SpellResistance {
-    const defaultValue = {
-      astral: {
-        innate: calculateInnateSpellResistance(
-          this.character.abilities?.astral
-        ),
-      },
-      mental: {
-        innate: calculateInnateSpellResistance(
-          this.character.abilities?.willpower
-        ),
-      },
-    };
-    if (!this.character.spellResistance)
-      this.character.spellResistance = defaultValue;
-    return this.character.spellResistance || defaultValue;
+  save() {
+    this.update({
+      id: this.character.id,
+      spellResistance: copySpellResistance(this.spellResistance),
+    });
   }
 
-  set spellResistance(spellResistance: SpellResistance) {
-    Object.assign(this.character.magicalAbility, spellResistance);
+  cancel() {
+    this.spellResistance = copySpellResistance(
+      this.character.spellResistance,
+      this.character.abilities?.astral,
+      this.character.abilities?.willpower
+    );
   }
 }
 </script>

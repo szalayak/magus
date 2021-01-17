@@ -126,11 +126,11 @@ export default class ShieldAdmin extends Vue {
   }
 
   damageToString(damage: ThrowScenario) {
-    return getThrowScenarioString(damage, this.$i18n);
+    return getThrowScenarioString(damage);
   }
 
   priceToString(price: number) {
-    return getPriceString(price, this.$i18n);
+    return getPriceString(price);
   }
 }
 </script>

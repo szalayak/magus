@@ -157,7 +157,7 @@ export default class CharacterSpellResistanceQuickView extends CharacterQuickVie
   }
 
   throwScenarioToString(damage: ThrowScenario) {
-    return damage ? getThrowScenarioString(damage, this.$i18n) : "";
+    return getThrowScenarioString(damage);
   }
 
   onThrowResult(result: ThrowScenarioResult, name: string, value?: number) {

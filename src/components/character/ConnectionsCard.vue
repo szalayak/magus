@@ -1,31 +1,40 @@
 <template>
-  <character-info-card :id="id" :editable="editable" :title="$t('connections')">
+  <character-info-card
+    :id="id"
+    :editable="editable"
+    :title="$t('connections')"
+    :error.sync="error"
+    :messages="messages"
+    :edit.sync="edit"
+    @save="save"
+    @cancel="cancel"
+  >
     <template v-slot:fields="{ edit }">
       <v-row dense>
         <v-col cols="12">
           <v-text-field
-            v-model="basicInfo.family"
+            v-model="connections.family"
             :label="$t('family')"
             :disabled="!edit"
           />
         </v-col>
         <v-col cols="12">
           <v-textarea
-            v-model="basicInfo.companions"
+            v-model="connections.companions"
             :label="$t('companions')"
             :disabled="!edit"
           />
         </v-col>
         <v-col cols="12">
           <v-textarea
-            v-model="basicInfo.enemies"
+            v-model="connections.enemies"
             :label="$t('enemies')"
             :disabled="!edit"
           />
         </v-col>
         <v-col cols="12">
           <v-text-field
-            v-model.number="basicInfo.fame"
+            v-model.number="connections.fame"
             :label="$t('fame')"
             :disabled="!edit"
             type="number"
@@ -41,6 +50,18 @@ import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
 
+type Connections = Pick<
+  CharacterBasicInfo,
+  "family" | "companions" | "enemies" | "fame"
+>;
+
+const copyConnections = (connections?: Connections): Connections => ({
+  family: connections?.family,
+  companions: connections?.companions,
+  enemies: connections?.enemies,
+  fame: connections?.fame,
+});
+
 @Component({
   name: "connections-card",
   components: {
@@ -48,13 +69,15 @@ import CharacterInfoCard from "./CharacterInfoCard.vue";
   },
 })
 export default class ConnectionsCard extends CharacterInfo {
-  get basicInfo() {
-    if (!this.character.basicInfo) this.character.basicInfo = {};
-    return this.character.basicInfo || {};
+  connections = copyConnections(this.character.basicInfo);
+
+  save() {
+    const basicInfo = { ...this.character.basicInfo, ...this.connections };
+    this.update({ id: this.character.id, basicInfo });
   }
 
-  set basicInfo(basicInfo: CharacterBasicInfo) {
-    Object.assign(this.character.basicInfo, basicInfo);
+  cancel() {
+    this.connections = copyConnections(this.character.basicInfo);
   }
 }
 </script>

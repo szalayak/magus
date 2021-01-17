@@ -5,7 +5,11 @@
         <v-toolbar-title>{{ title }}</v-toolbar-title>
         <v-spacer></v-spacer>
         <slot name="toolbar" :edit="edit" />
-        <v-btn icon @click="edit = true" v-if="editable && hover && !edit">
+        <v-btn
+          icon
+          @click="$emit('update:edit', true)"
+          v-if="editable && hover && !edit"
+        >
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
         <v-btn icon @click="show = !show">
@@ -13,7 +17,14 @@
         </v-btn>
       </v-toolbar>
       <v-card-text v-show="show">
-        <v-alert v-model="error" dense outlined type="error" dismissible>
+        <v-alert
+          :value="error"
+          dense
+          outlined
+          type="error"
+          dismissible
+          @input="$emit('update:error', false)"
+        >
           {{ messages }}
         </v-alert>
         <v-form :valid="valid" ref="data">
@@ -33,46 +44,53 @@
   </v-hover>
 </template>
 <script lang="ts">
-import CharacterInfo from "@/components/character/CharacterInfo";
-import { LooseObject } from "@/store/types";
 import { Form } from "@/utils";
 import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
+import Vue from "vue";
 
 @Component({
   name: "character-info-card",
 })
-export default class CharacterInfoCard extends CharacterInfo {
+export default class CharacterInfoCard extends Vue {
   @Prop({ type: String })
   title!: string;
 
   @Prop({ type: Boolean })
   editable!: boolean;
 
-  edit = false;
-  messages: string[] = [];
-  error = false;
+  @Prop({ type: Boolean })
+  error: boolean | undefined;
+
+  @Prop({ type: Array })
+  messages: string[] | undefined;
+
+  @Prop({ type: Boolean })
+  edit: boolean | undefined;
+
   valid = true;
   show = true;
 
   async save() {
     if ((this.$refs.data as Form).validate()) {
-      try {
-        await this.$store.dispatch("character/save", this.character.id);
-        this.edit = false;
-      } catch (error) {
-        this.messages =
-          typeof error === "string"
-            ? [error]
-            : error.errors?.map((err: LooseObject) => err.message) || [];
-        this.error = true;
-      }
+      this.$emit("save");
+      // try {
+      //   await this.$store.dispatch("character/save", this.character.id);
+      //   this.edit = false;
+      // } catch (error) {
+      //   this.messages =
+      //     typeof error === "string"
+      //       ? [error]
+      //       : error.errors?.map((err: LooseObject) => err.message) || [];
+      //   this.error = true;
+      // }
     }
   }
 
   cancel() {
-    this.$store.dispatch("character/revert", this.id);
-    this.edit = false;
+    this.$emit("cancel");
+    // this.$store.dispatch("character/revert", this.id);
+    this.$emit("update:edit", false);
   }
 }
 </script>

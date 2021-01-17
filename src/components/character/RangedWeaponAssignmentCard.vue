@@ -105,17 +105,6 @@
         :items="assignments"
         :sort-by="sortBy"
       >
-        <template v-slot:top>
-          <v-alert
-            v-model="notification"
-            dense
-            outlined
-            type="error"
-            dismissible
-          >
-            {{ messages }}
-          </v-alert>
-        </template>
         <template v-slot:[`item.mastery`]="{ item }">
           {{ masteryToString(item.mastery) }}
         </template>
@@ -158,7 +147,6 @@ import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
 import { ThrowScenario } from "@/store/types";
 import { getThrowScenarioString } from "@/utils/throwScenario";
-import { localise, localiseItem } from "@/utils/localise";
 import { Weapon } from "@/store/modules/weapon";
 import { Mastery } from "@/API";
 import { WeaponAssignment } from "@/store/modules/character";
@@ -178,8 +166,6 @@ export default class RangedWeaponAssignmentCard extends CharacterInfo {
   editedIndex = -1;
   dialogDelete = false;
   editedItem = this.defaultItem();
-  notification = false;
-  messages: string[] = [];
 
   get headers() {
     return [
@@ -201,16 +187,11 @@ export default class RangedWeaponAssignmentCard extends CharacterInfo {
   }
 
   get weapons() {
-    return (localise(
-      this.$store.getters["weapon/list"] || [],
-      this.$i18n.locale
-    ) as Weapon[]).filter(w => w.ranged);
+    return this.$store.getters["weapon/list"].filter((w: Weapon) => w.ranged);
   }
 
   get assignments() {
-    return this.character.weapons
-      ? this.character.weapons.filter(w => w.weapon?.ranged)
-      : [];
+    return this.character.weapons?.filter(w => w.weapon?.ranged) || [];
   }
 
   get isNewItem() {
@@ -230,11 +211,11 @@ export default class RangedWeaponAssignmentCard extends CharacterInfo {
   }
 
   damageToString(damage: ThrowScenario) {
-    return damage ? getThrowScenarioString(damage, this.$i18n) : "";
+    return getThrowScenarioString(damage);
   }
 
   weaponToString(weapon: Weapon) {
-    return localiseItem(weapon, this.$i18n.locale).description?.title;
+    return weapon?.description?.title;
   }
 
   masteryToString(mastery: Mastery) {
@@ -269,11 +250,9 @@ export default class RangedWeaponAssignmentCard extends CharacterInfo {
       )
       .then(() => {
         this.messages = [];
-        this.notification = false;
       })
       .catch((error: GraphQLResult<WeaponAssignment>) => {
         this.messages = error.errors?.map(err => err.message) || [];
-        this.notification = true;
       });
     this.dialog = false;
     this.resetEditedItem();

@@ -3,6 +3,11 @@
     :id="id"
     :editable="editable"
     :title="$t('combat-values')"
+    :error.sync="error"
+    :messages="messages"
+    :edit.sync="edit"
+    @save="save"
+    @cancel="cancel"
   >
     <template v-slot:fields="{ edit }">
       <v-subheader class="pl-0">{{
@@ -125,7 +130,7 @@
       <v-row dense>
         <v-col cols="12" xs="12" sm="6">
           <v-text-field
-            v-model.number="character.combatValueModifiersPerLevel"
+            v-model.number="combatValueModifiersPerLevel"
             :label="$t('combat-value-modifiers-per-level')"
             :disabled="!edit"
             type="number"
@@ -133,7 +138,7 @@
         </v-col>
         <v-col cols="12" xs="12" sm="6">
           <v-text-field
-            v-model="character.mandatoryCombatValueModifierDistribution"
+            v-model="mandatoryCombatValueModifierDistribution"
             :label="$t('mandatory-combat-value-modifier-distribution')"
             :disabled="!edit"
           />
@@ -143,7 +148,7 @@
       <v-row dense>
         <v-col cols="12" xs="12" sm="6">
           <v-text-field
-            v-model.number="character.attacksPerTurn"
+            v-model.number="attacksPerTurn"
             :disabled="!edit"
             :label="$t('attacks-per-turn')"
             type="number"
@@ -180,6 +185,20 @@ import {
 } from "@/utils/character";
 import ThrowScenarioDialog from "../ThrowScenarioDialog.vue";
 import { getThrowScenarioString } from "@/utils";
+import { Character } from "@/store";
+
+const copyCombatValues = (combatValues?: CombatValues): CombatValues => ({
+  initiation: combatValues?.initiation,
+  offence: combatValues?.offence,
+  defence: combatValues?.defence,
+  aiming: combatValues?.aiming,
+});
+
+const copyDamage = (damage?: ThrowScenario): ThrowScenario => ({
+  iterationCount: damage?.iterationCount,
+  dice: damage?.dice,
+  modifier: damage?.modifier,
+});
 
 @Component({
   name: "combat-values-card",
@@ -189,100 +208,100 @@ import { getThrowScenarioString } from "@/utils";
   },
 })
 export default class CombatValuesCard extends CharacterInfo {
+  base = copyCombatValues(this.character.baseCombatValues);
+  spent = copyCombatValues(this.character.spentCombatValueModifiers);
+  other = copyCombatValues(this.character.otherCombatValueModifiers);
+  damage = copyDamage(this.character.damage);
+  combatValueModifiersPerLevel = this.character.combatValueModifiersPerLevel;
+  attacksPerTurn = this.character.attacksPerTurn;
+  mandatoryCombatValueModifierDistribution = this.character
+    .mandatoryCombatValueModifierDistribution;
+
   get initiationString() {
-    const total = initiationTotal(this.character, true);
+    const total = initiationTotal(this.transientCharacter, true);
     if (isCharacterMovementRestricted(this.character))
       return `${total}, ${this.$t("in-armour")}:${initiationTotal(
-        this.character
+        this.transientCharacter
       )}`;
     return total;
   }
   get offenceString() {
-    const total = offenceTotal(this.character, true);
+    const total = offenceTotal(this.transientCharacter, true);
     if (isCharacterMovementRestricted(this.character))
       return `${total}, ${this.$t("in-armour")}:${offenceTotal(
-        this.character
+        this.transientCharacter
       )}`;
     return total;
   }
 
   get defenceString() {
-    const total = defenceTotal(this.character, true);
+    const total = defenceTotal(this.transientCharacter, true);
     if (isCharacterMovementRestricted(this.character))
       return `${total}, ${this.$t("in-armour")}:${defenceTotal(
-        this.character
+        this.transientCharacter
       )}`;
     return total;
   }
 
   get aimingString() {
-    const total = aimingTotal(this.character, true);
+    const total = aimingTotal(this.transientCharacter, true);
     if (isCharacterMovementRestricted(this.character))
-      return `${total}, ${this.$t("in-armour")}:${aimingTotal(this.character)}`;
+      return `${total}, ${this.$t("in-armour")}:${aimingTotal(
+        this.transientCharacter
+      )}`;
     return total;
   }
 
+  get transientCharacter(): Character {
+    return {
+      ...this.character,
+      baseCombatValues: this.base,
+      otherCombatValueModifiers: this.other,
+      spentCombatValueModifiers: this.spent,
+    };
+  }
+
   get initiationTotal() {
-    return initiationTotal(this.character);
+    return initiationTotal(this.transientCharacter);
   }
 
   get offenceTotal() {
-    return offenceTotal(this.character);
+    return offenceTotal(this.transientCharacter);
   }
 
   get defenceTotal() {
-    return defenceTotal(this.character);
+    return defenceTotal(this.transientCharacter);
   }
 
   get aimingTotal() {
-    return aimingTotal(this.character);
-  }
-
-  get base(): CombatValues {
-    if (!this.character.baseCombatValues) this.character.baseCombatValues = {};
-    return this.character.baseCombatValues || {};
-  }
-
-  set base(values: CombatValues) {
-    Object.assign(this.character.baseCombatValues, values);
-  }
-
-  get spent(): CombatValues {
-    if (!this.character.spentCombatValueModifiers)
-      this.character.spentCombatValueModifiers = {};
-    return this.character.spentCombatValueModifiers || {};
-  }
-
-  set spent(values: CombatValues) {
-    Object.assign(this.character.spentCombatValueModifiers, values);
-  }
-
-  get other(): CombatValues {
-    if (!this.character.otherCombatValueModifiers)
-      this.character.otherCombatValueModifiers = {};
-    return this.character.otherCombatValueModifiers || {};
-  }
-
-  set other(values: CombatValues) {
-    Object.assign(this.character.otherCombatValueModifiers, values);
-  }
-
-  get damage() {
-    if (!this.character.damage)
-      this.character.damage = {
-        iterationCount: 1,
-        dice: undefined,
-        modifier: undefined,
-      };
-    return this.character.damage || {};
-  }
-
-  set damage(values: ThrowScenario) {
-    Object.assign(this.character.damage, values);
+    return aimingTotal(this.transientCharacter);
   }
 
   throwScenarioToString(scenario: ThrowScenario) {
-    return getThrowScenarioString(scenario, this.$i18n);
+    return getThrowScenarioString(scenario);
+  }
+  save() {
+    this.update({
+      id: this.character.id,
+      baseCombatValues: this.base,
+      spentCombatValueModifiers: this.spent,
+      otherCombatValueModifiers: this.other,
+      attacksPerTurn: this.attacksPerTurn,
+      damage: this.damage,
+      combatValueModifiersPerLevel: this.combatValueModifiersPerLevel,
+      mandatoryCombatValueModifierDistribution: this
+        .mandatoryCombatValueModifierDistribution,
+    });
+  }
+
+  cancel() {
+    this.base = copyCombatValues(this.character.baseCombatValues);
+    this.spent = copyCombatValues(this.character.spentCombatValueModifiers);
+    this.other = copyCombatValues(this.character.otherCombatValueModifiers);
+    this.damage = copyDamage(this.character.damage);
+    this.combatValueModifiersPerLevel = this.character.combatValueModifiersPerLevel;
+    this.attacksPerTurn = this.character.attacksPerTurn;
+    this.mandatoryCombatValueModifierDistribution = this.character.mandatoryCombatValueModifierDistribution;
   }
 }
 </script>

@@ -3,26 +3,31 @@
     :id="id"
     :editable="editable"
     :title="$t('likes-and-dislikes')"
+    :error.sync="error"
+    :messages="messages"
+    :edit.sync="edit"
+    @save="save"
+    @cancel="cancel"
   >
     <template v-slot:fields="{ edit }">
       <v-row dense>
         <v-col cols="12">
           <v-textarea
-            v-model="basicInfo.likes"
+            v-model="properties.likes"
             :label="$t('likes')"
             :disabled="!edit"
           />
         </v-col>
         <v-col cols="12">
           <v-textarea
-            v-model="basicInfo.dislikes"
+            v-model="properties.dislikes"
             :label="$t('dislikes')"
             :disabled="!edit"
           />
         </v-col>
         <v-col cols="12">
           <v-textarea
-            v-model="basicInfo.fears"
+            v-model="properties.fears"
             :label="$t('fears')"
             :disabled="!edit"
           />
@@ -37,6 +42,14 @@ import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
 
+type Properties = Pick<CharacterBasicInfo, "likes" | "dislikes" | "fears">;
+
+const copyProperties = (properties?: Properties): Properties => ({
+  likes: properties?.likes,
+  dislikes: properties?.dislikes,
+  fears: properties?.fears,
+});
+
 @Component({
   name: "likes-and-dislikes-card",
   components: {
@@ -44,13 +57,15 @@ import CharacterInfoCard from "./CharacterInfoCard.vue";
   },
 })
 export default class LikesAndDislikesCard extends CharacterInfo {
-  get basicInfo() {
-    if (!this.character.basicInfo) this.character.basicInfo = {};
-    return this.character.basicInfo || {};
+  properties = copyProperties(this.character.basicInfo);
+
+  save() {
+    const basicInfo = { ...this.character.basicInfo, ...this.properties };
+    this.update({ id: this.character.id, basicInfo });
   }
 
-  set basicInfo(basicInfo: CharacterBasicInfo) {
-    Object.assign(this.character.basicInfo, basicInfo);
+  cancel() {
+    this.properties = copyProperties(this.character.basicInfo);
   }
 }
 </script>
