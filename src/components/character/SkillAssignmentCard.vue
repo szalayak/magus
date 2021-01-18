@@ -1,5 +1,11 @@
 <template>
-  <character-info-card :id="id" :editable="false" :title="$t('skills')">
+  <character-info-card
+    :id="id"
+    :editable="false"
+    :title="$t('skills')"
+    :error.sync="error"
+    :messages="messages"
+  >
     <template v-slot:toolbar="{}">
       <v-text-field
         v-model="search"
@@ -24,6 +30,9 @@
         <v-card>
           <v-card-title>{{ formTitle }}</v-card-title>
           <v-card-text>
+            <v-alert v-model="error" dense outlined type="error" dismissible>
+              {{ messages }}
+            </v-alert>
             <v-form :disabled="!editable" ref="form" v-model="valid">
               <v-container>
                 <v-row dense>
@@ -84,27 +93,11 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-      <v-dialog v-model="dialogDelete" max-width="500px">
-        <v-card>
-          <v-card-title class="headline">{{
-            $t("confirm-delete-message")
-          }}</v-card-title>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="error" text @click="closeDelete">{{
-              $t("cancel")
-            }}</v-btn>
-            <v-btn
-              v-if="editable"
-              color="primary"
-              text
-              @click="deleteItemConfirm"
-              >{{ $t("ok") }}</v-btn
-            >
-            <v-spacer></v-spacer>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+      <confirm-delete-dialog
+        :open.sync="dialogDelete"
+        @cancel="closeDelete"
+        @confirm="deleteItemConfirm"
+      />
     </template>
     <template v-slot:fields="{}">
       <v-data-table
@@ -141,11 +134,13 @@ import { ThrowScenario } from "@/store/types";
 import { getThrowScenarioString } from "@/utils/throwScenario";
 import { SkillAssignment } from "@/store/modules/character";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
+import ConfirmDeleteDialog from "../ConfirmDeleteDialog.vue";
 
 @Component({
   name: "skill-assignment-card",
   components: {
     "character-info-card": CharacterInfoCard,
+    "confirm-delete-dialog": ConfirmDeleteDialog,
   },
 })
 export default class SkillAssignmentCard extends CharacterInfo {

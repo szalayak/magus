@@ -174,10 +174,7 @@ export const characterModule: Module<CharacterState, RootState> = {
           else updateAssignment(character.companions, assignment);
         }
       },
-      removeCharacterCompanionAssignment(
-        { items },
-        { id, characterId }: Assignment
-      ) {
+      removeCharacterCompanion({ items }, { id, characterId }: Assignment) {
         removeAssignment(
           (findById(items, characterId) as Character).companions,
           id

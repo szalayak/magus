@@ -1,5 +1,11 @@
 <template>
-  <character-info-card :id="id" :editable="false" :title="$t('poisons')">
+  <character-info-card
+    :id="id"
+    :editable="false"
+    :title="$t('poisons')"
+    :error.sync="error"
+    :messages="messages"
+  >
     <template v-slot:toolbar="{}">
       <v-dialog scrollable v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on, attrs }">
@@ -16,6 +22,9 @@
         </template>
         <v-card>
           <v-card-title>{{ formTitle }}</v-card-title>
+          <v-alert v-model="error" dense outlined type="error" dismissible>
+            {{ messages }}
+          </v-alert>
           <v-card-text>
             <v-form ref="form" v-model="valid">
               <v-container>
@@ -48,50 +57,27 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-      <v-dialog v-model="dialogDelete" max-width="500px">
-        <v-card>
-          <v-card-title class="headline">{{
-            $t("confirm-delete-message")
-          }}</v-card-title>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="error" text @click="closeDelete">{{
-              $t("cancel")
-            }}</v-btn>
-            <v-btn color="primary" text @click="deleteItemConfirm">{{
-              $t("ok")
-            }}</v-btn>
-            <v-spacer></v-spacer>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+      <confirm-delete-dialog
+        :open.sync="dialogDelete"
+        @cancel="closeDelete"
+        @confirm="deleteItemConfirm"
+      />
     </template>
     <template v-slot:fields="{}">
       <v-data-table
         width="auto"
         height="auto"
         :headers="headers"
-        :items="poisons"
+        :items="assignments"
         :sort-by="sortBy"
         disable-pagination
         hide-default-footer
       >
-        <template v-slot:top>
-          <v-alert
-            v-model="notification"
-            dense
-            outlined
-            type="error"
-            dismissible
-          >
-            {{ messages }}
-          </v-alert>
-        </template>
         <template v-if="editable" v-slot:[`item.actions`]="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item)">
+          <v-icon small class="mr-2" @click="editItem(item, assignments)">
             mdi-pencil
           </v-icon>
-          <v-icon small @click="deleteItem(item)">
+          <v-icon small @click="deleteItem(item, assignments)">
             mdi-delete
           </v-icon>
         </template>
@@ -100,26 +86,21 @@
   </character-info-card>
 </template>
 <script lang="ts">
-import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
 import { Poison } from "@/store/types";
+import ConfirmDeleteDialog from "../ConfirmDeleteDialog.vue";
+import CharacterInfoList from "./CharacterInfoList";
 
 @Component({
   name: "poison-card",
   components: {
     "character-info-card": CharacterInfoCard,
+    "confirm-delete-dialog": ConfirmDeleteDialog,
   },
 })
-export default class PoisonCard extends CharacterInfo {
-  valid = true;
-  dialog = false;
+export default class PoisonCard extends CharacterInfoList {
   sortBy = ["name"];
-  editedIndex = -1;
-  dialogDelete = false;
-  editedItem = this.defaultItem();
-  notification = false;
-  messages: string[] = [];
 
   get headers() {
     const headers = [
@@ -134,12 +115,8 @@ export default class PoisonCard extends CharacterInfo {
       : headers;
   }
 
-  get poisons() {
+  get assignments() {
     return this.character.poisons || [];
-  }
-
-  get isNewItem() {
-    return this.editedIndex === -1;
   }
 
   get formTitle() {
@@ -152,51 +129,21 @@ export default class PoisonCard extends CharacterInfo {
     return {};
   }
 
-  close() {
-    this.dialog = false;
-    this.resetEditedItem();
-  }
-  save() {
-    if (this.isNewItem)
-      this.character.poisons
-        ? this.character.poisons.push(this.editedItem)
-        : (this.character.poisons = [this.editedItem]);
-    else {
-      Object.assign(
-        this.character.poisons ? this.character.poisons[this.editedIndex] : {},
-        this.editedItem
-      );
-    }
-    this.$store.dispatch("character/update", this.character);
-    this.dialog = false;
-    this.resetEditedItem();
+  async createFunction(item: Poison[]) {
+    const poisons = [...this.assignments, item];
+    return this.update({ id: this.character.id, poisons });
   }
 
-  deleteItemConfirm() {
-    this.character.poisons?.splice(this.editedIndex, 1);
-    this.$store.dispatch("character/update", this.character);
-    this.closeDelete();
-  }
-  closeDelete() {
-    this.dialogDelete = false;
-    this.resetEditedItem();
-  }
-  editItem(item: Poison) {
-    this.editedIndex = this.poisons.indexOf(item);
-    this.editedItem = Object.assign({}, item);
-    this.dialog = true;
-  }
-  deleteItem(item: Poison) {
-    this.editedIndex = this.poisons.indexOf(item);
-    this.editedItem = Object.assign({}, item);
-    this.dialogDelete = true;
+  async updateFunction(item: Poison) {
+    const poisons = [...this.assignments];
+    Object.assign(poisons[this.editedIndex], item);
+    return this.update({ id: this.character.id, poisons });
   }
 
-  resetEditedItem() {
-    this.$nextTick(() => {
-      this.editedItem = this.defaultItem();
-      this.editedIndex = -1;
-    });
+  async deleteFunction() {
+    const poisons = [...this.assignments];
+    poisons.splice(this.editedIndex, 1);
+    return this.update({ id: this.character.id, poisons });
   }
 }
 </script>

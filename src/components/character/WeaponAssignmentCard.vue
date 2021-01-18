@@ -1,5 +1,11 @@
 <template>
-  <character-info-card :id="id" :editable="false" :title="$t('weapons')">
+  <character-info-card
+    :id="id"
+    :editable="false"
+    :title="$t('weapons')"
+    :error.sync="error"
+    :messages="messages"
+  >
     <template v-slot:toolbar="{}">
       <v-dialog scrollable v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on, attrs }">
@@ -17,6 +23,9 @@
         <v-card>
           <v-card-title>{{ formTitle }}</v-card-title>
           <v-card-text>
+            <v-alert v-model="error" dense outlined type="error" dismissible>
+              {{ messages }}
+            </v-alert>
             <v-form :disabled="!editable" ref="form" v-model="valid">
               <v-container>
                 <v-row dense>
@@ -79,23 +88,11 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-      <v-dialog v-model="dialogDelete" max-width="500px">
-        <v-card>
-          <v-card-title class="headline">{{
-            $t("confirm-delete-message")
-          }}</v-card-title>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="error" text @click="closeDelete">{{
-              $t("cancel")
-            }}</v-btn>
-            <v-btn color="primary" text @click="deleteItemConfirm">{{
-              $t("ok")
-            }}</v-btn>
-            <v-spacer></v-spacer>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+      <confirm-delete-dialog
+        :open.sync="dialogDelete"
+        @cancel="closeDelete"
+        @confirm="deleteItemConfirm"
+      />
     </template>
     <template v-slot:fields="{}">
       <v-data-table
@@ -155,11 +152,13 @@ import { Mastery } from "@/API";
 import { WeaponAssignment } from "@/store/modules/character";
 import { combatValuesWithWeapon } from "@/utils/character";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
+import ConfirmDeleteDialog from "../ConfirmDeleteDialog.vue";
 
 @Component({
   name: "weapon-assignment-card",
   components: {
     "character-info-card": CharacterInfoCard,
+    "confirm-delete-dialog": ConfirmDeleteDialog,
   },
 })
 export default class WeaponAssignmentCard extends CharacterInfo {

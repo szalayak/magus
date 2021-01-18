@@ -23,6 +23,9 @@
         <v-card>
           <v-card-title>{{ formTitle }}</v-card-title>
           <v-card-text>
+            <v-alert v-model="error" dense outlined type="error" dismissible>
+              {{ messages }}
+            </v-alert>
             <v-form :disabled="!editable" ref="form" v-model="valid">
               <v-row dense>
                 <v-subheader class="pl-1">{{
@@ -143,23 +146,11 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-      <v-dialog v-model="dialogDelete" max-width="500px">
-        <v-card>
-          <v-card-title class="headline">{{
-            $t("confirm-delete-message")
-          }}</v-card-title>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="error" text @click="closeDelete">{{
-              $t("cancel")
-            }}</v-btn>
-            <v-btn color="primary" text @click="deleteItemConfirm">{{
-              $t("ok")
-            }}</v-btn>
-            <v-spacer></v-spacer>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+      <confirm-delete-dialog
+        :open.sync="dialogDelete"
+        @cancel="closeDelete"
+        @confirm="deleteItemConfirm"
+      />
     </template>
     <template v-slot:fields="{}">
       <v-data-table
@@ -185,10 +176,10 @@
           {{ mutablePointValueToString(item.health.hitPoints) }}
         </template>
         <template v-if="editable" v-slot:[`item.actions`]="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item)">
+          <v-icon small class="mr-2" @click="editItem(item, assignments)">
             mdi-pencil
           </v-icon>
-          <v-icon small @click="deleteItem(item)">
+          <v-icon small @click="deleteItem(item, assignments)">
             mdi-delete
           </v-icon>
         </template>
@@ -197,17 +188,16 @@
   </character-info-card>
 </template>
 <script lang="ts">
-import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
 import { MutablePointValue, ThrowScenario } from "@/store/types";
 import { getThrowScenarioString } from "@/utils/throwScenario";
 import { CompanionType } from "@/API";
 import { CharacterCompanion } from "@/store/modules/character";
-import { GraphQLResult } from "@aws-amplify/api-graphql";
 import CombatValueEditorVue from "../admin/CombatValueEditor.vue";
 import ThrowScenarioEditorVue from "../admin/ThrowScenarioEditor.vue";
-import { Form } from "@/utils";
+import ConfirmDeleteDialog from "../ConfirmDeleteDialog.vue";
+import CharacterInfoList from "./CharacterInfoList";
 
 @Component({
   name: "animals-card",
@@ -215,15 +205,11 @@ import { Form } from "@/utils";
     "character-info-card": CharacterInfoCard,
     "combat-value-editor": CombatValueEditorVue,
     "throw-scenario-editor": ThrowScenarioEditorVue,
+    "confirm-delete-dialog": ConfirmDeleteDialog,
   },
 })
-export default class AnimalsCard extends CharacterInfo {
-  valid = true;
-  dialog = false;
+export default class AnimalsCard extends CharacterInfoList {
   sortBy = ["name"];
-  editedIndex = -1;
-  dialogDelete = false;
-  editedItem = this.defaultItem();
 
   get headers() {
     const headers = [
@@ -256,10 +242,6 @@ export default class AnimalsCard extends CharacterInfo {
           c.type && [CompanionType.MOUNT, CompanionType.ANIMAL].includes(c.type)
       ) || []
     );
-  }
-
-  get isNewItem() {
-    return this.editedIndex === -1;
   }
 
   get formTitle() {
@@ -302,66 +284,16 @@ export default class AnimalsCard extends CharacterInfo {
     return `${value.current}/${value.max}`;
   }
 
-  close() {
-    this.dialog = false;
-    this.resetEditedItem();
-  }
-  save() {
-    if ((this.$refs.form as Form).validate()) {
-      this.$store
-        .dispatch(
-          this.isNewItem
-            ? `character/createCharacterCompanion`
-            : `character/updateCharacterCompanion`,
-          { ...this.editedItem, characterId: this.character.id }
-        )
-        .then(() => {
-          this.messages = [];
-          this.error = false;
-        })
-        .catch((error: GraphQLResult<CharacterCompanion>) => {
-          this.messages = error.errors?.map(err => err.message) || [];
-          this.error = true;
-        });
-      this.dialog = false;
-      this.resetEditedItem();
-    }
+  async createFunction(item: CharacterCompanion) {
+    return this.$store.dispatch("character/createCharacterCompanion", item);
   }
 
-  deleteItemConfirm() {
-    this.$store.dispatch(`character/deleteCharacterCompanion`, this.editedItem);
-    this.closeDelete();
-  }
-  closeDelete() {
-    this.dialogDelete = false;
-    this.resetEditedItem();
-  }
-  editItem(item: CharacterCompanion) {
-    this.editedIndex = this.assignments.indexOf(item);
-    this.editedItem = Object.assign({}, item);
-    if (!this.editedItem.combatValues) {
-      this.editedItem.combatValues = {
-        initiation: undefined,
-        offence: undefined,
-        defence: undefined,
-      };
-    }
-    if (!this.editedItem.health) {
-      this.editedItem.health = { vitality: {}, hitPoints: {} };
-    }
-    this.dialog = true;
-  }
-  deleteItem(item: CharacterCompanion) {
-    this.editedIndex = this.assignments.indexOf(item);
-    this.editedItem = Object.assign({}, item);
-    this.dialogDelete = true;
+  async updateFunction(item: CharacterCompanion) {
+    return this.$store.dispatch("character/updateCharacterCompanion", item);
   }
 
-  resetEditedItem() {
-    this.$nextTick(() => {
-      this.editedItem = this.defaultItem();
-      this.editedIndex = -1;
-    });
+  async deleteFunction(item: CharacterCompanion) {
+    return this.$store.dispatch("character/deleteCharacterCompanion", item);
   }
 }
 </script>

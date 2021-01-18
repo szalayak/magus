@@ -3,7 +3,6 @@ import { Character } from "@/store/modules/character";
 import { DropdownValueList, LooseObject } from "@/store/types";
 import Vue from "vue";
 import { Prop } from "vue-property-decorator";
-
 export default class CharacterInfo extends Vue {
   @Prop({ type: String, required: true })
   id!: string;
@@ -34,22 +33,11 @@ export default class CharacterInfo extends Vue {
     ];
   }
 
-  // get character(): Character {
-  //   return (
-  //     this.$store.getters["character/list"].find(
-  //       (char: Character) => char.id === this.id
-  //     ) || {}
-  //   );
-  // }
-
-  // set character(character: Character) {
-  //   this.$store.commit("character/change", character);
-  // }
-
   async update(item: LooseObject) {
     try {
       await this.$store.dispatch(`${this.module}/update`, item);
       this.edit = false;
+      this.error = false;
     } catch (error) {
       this.throwError(error);
     }

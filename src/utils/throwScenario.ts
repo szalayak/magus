@@ -2,7 +2,6 @@ import { Dice } from "@/API";
 import i18n from "@/i18n";
 import { SkillAssignment, WeaponAssignment } from "@/store";
 import { ThrowScenario } from "@/store/types";
-import VueI18n from "vue-i18n";
 import { abilityValueAbove10 } from "./character";
 import { throwDice } from "./dice";
 

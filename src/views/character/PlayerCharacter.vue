@@ -217,7 +217,7 @@
               :character="character"
             />
           </v-col>
-          <!-- <v-col
+          <v-col
             id="languages"
             v-if="page === 4"
             cols="12"
@@ -225,12 +225,12 @@
             sm="6"
             md="4"
           >
-            <languages :id="id" :editable="editable" />
-          </v-col> -->
+            <languages :id="id" :editable="editable" :character="character" />
+          </v-col>
           <v-col id="wallet" v-if="page === 4" cols="12" xs="12" sm="6" md="4">
             <wallet :id="id" :editable="editable" :character="character" />
           </v-col>
-          <!-- <v-col
+          <v-col
             id="inventory"
             v-if="page === 4"
             cols="12"
@@ -238,20 +238,20 @@
             sm="6"
             md="6"
           >
-            <inventory :id="id" :editable="editable" />
-          </v-col> -->
-          <!-- <v-col id="poisons" v-if="page === 4" cols="12" xs="12" sm="6" md="6">
-            <poisons :id="id" :editable="editable" />
-          </v-col> -->
+            <inventory :id="id" :editable="editable" :character="character" />
+          </v-col>
+          <v-col id="poisons" v-if="page === 4" cols="12" xs="12" sm="6" md="6">
+            <poisons :id="id" :editable="editable" :character="character" />
+          </v-col>
           <v-col id="animals" v-if="page === 4" cols="12">
             <animals :id="id" :editable="editable" :character="character" />
           </v-col>
           <v-col id="servants" v-if="page === 4" cols="12">
             <servants :id="id" :editable="editable" :character="character" />
           </v-col>
-          <!-- <v-col id="notes" v-if="page === 4" cols="12">
-            <notes :id="id" :editable="editable" />
-          </v-col> -->
+          <v-col id="notes" v-if="page === 4" cols="12">
+            <notes :id="id" :editable="editable" :character="character" />
+          </v-col>
         </v-row>
         <v-snackbar
           v-for="message in messages"
