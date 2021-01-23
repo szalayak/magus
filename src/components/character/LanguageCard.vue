@@ -73,6 +73,9 @@
         disable-pagination
         hide-default-footer
       >
+        <template v-slot:[`item.language`]="{ item }">
+          <a @click="editItem(item, assignments)">{{ item.language }}</a>
+        </template>
         <template v-slot:[`item.level`]="{ item }">
           {{ $t(item.level) }}
         </template>

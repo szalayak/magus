@@ -103,10 +103,12 @@
         :sort-by="sortBy"
       >
         <template v-slot:[`item.mastery`]="{ item }">
-          {{ masteryToString(item.mastery) }}
+          {{ $t(item.mastery) }}
         </template>
-        <template v-slot:[`item.weapon`]="{ item }">
-          <a @click="editItem(item)">{{ weaponToString(item.weapon) }}</a>
+        <template v-slot:[`item.weapon.description.title`]="{ item }">
+          <a @click="editItem(item, assignments)">{{
+            item.weapon.description.title
+          }}</a>
         </template>
         <template v-slot:[`item.weapon.damage`]="{ item }">
           {{ damageToString(item.weapon.damage) }}
@@ -124,16 +126,21 @@
           <v-simple-checkbox disabled v-model="item.inHand" />
         </template>
         <template v-slot:[`item.breakWeapon`]="{ item }">
-          {{ masteryToString(item.breakWeapon) }}
+          {{ $t(item.breakWeapon) }}
         </template>
         <template v-slot:[`item.disarm`]="{ item }">
-          {{ masteryToString(item.disarm) }}
+          {{ $t(item.disarm) }}
         </template>
         <template v-slot:[`item.actions`]="{ item }">
-          <v-icon v-if="editable" small class="mr-2" @click="editItem(item)">
+          <v-icon
+            v-if="editable"
+            small
+            class="mr-2"
+            @click="editItem(item, assignments)"
+          >
             mdi-pencil
           </v-icon>
-          <v-icon v-if="editable" small @click="deleteItem(item)">
+          <v-icon v-if="editable" small @click="deleteItem(item, assignments)">
             mdi-delete
           </v-icon>
         </template>
@@ -142,17 +149,15 @@
   </character-info-card>
 </template>
 <script lang="ts">
-import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
 import { ThrowScenario } from "@/store/types";
 import { getThrowScenarioString } from "@/utils/throwScenario";
 import { Weapon } from "@/store/modules/weapon";
-import { Mastery } from "@/API";
 import { WeaponAssignment } from "@/store/modules/character";
 import { combatValuesWithWeapon } from "@/utils/character";
-import { GraphQLResult } from "@aws-amplify/api-graphql";
 import ConfirmDeleteDialog from "../ConfirmDeleteDialog.vue";
+import CharacterInfoList from "./CharacterInfoList";
 
 @Component({
   name: "weapon-assignment-card",
@@ -161,17 +166,12 @@ import ConfirmDeleteDialog from "../ConfirmDeleteDialog.vue";
     "confirm-delete-dialog": ConfirmDeleteDialog,
   },
 })
-export default class WeaponAssignmentCard extends CharacterInfo {
-  valid = true;
-  dialog = false;
+export default class WeaponAssignmentCard extends CharacterInfoList {
   sortBy = ["weapon.description.title"];
-  editedIndex = -1;
-  dialogDelete = false;
-  editedItem = this.defaultItem();
 
   get headers() {
     return [
-      { text: this.$t("weapon"), value: "weapon" },
+      { text: this.$t("weapon"), value: "weapon.description.title" },
       { text: this.$t("mastery"), value: "mastery" },
       { text: this.$t("attacks-per-turn"), value: "weapon.attacksPerTurn" },
       {
@@ -197,10 +197,6 @@ export default class WeaponAssignmentCard extends CharacterInfo {
     return this.character.weapons?.filter(w => !w.weapon?.ranged) || [];
   }
 
-  get isNewItem() {
-    return this.editedIndex === -1;
-  }
-
   get formTitle() {
     return this.editedIndex === -1
       ? this.$t("new-weapon")
@@ -215,14 +211,6 @@ export default class WeaponAssignmentCard extends CharacterInfo {
 
   damageToString(damage: ThrowScenario) {
     return getThrowScenarioString(damage);
-  }
-
-  weaponToString(weapon: Weapon) {
-    return weapon?.description?.title;
-  }
-
-  masteryToString(mastery: Mastery) {
-    return this.$t(mastery);
   }
 
   initiation(assignment: WeaponAssignment) {
@@ -246,52 +234,17 @@ export default class WeaponAssignmentCard extends CharacterInfo {
       mastery: assignment.mastery,
     }).defence;
   }
-  close() {
-    this.dialog = false;
-    this.resetEditedItem();
-  }
-  save() {
-    this.$store
-      .dispatch(
-        this.isNewItem
-          ? `character/createWeaponAssignment`
-          : `character/updateWeaponAssignment`,
-        { ...this.editedItem, characterId: this.character.id }
-      )
-      .then(() => {
-        this.messages = [];
-      })
-      .catch((error: GraphQLResult<WeaponAssignment>) => {
-        this.messages = error.errors?.map(err => err.message) || [];
-      });
-    this.dialog = false;
-    this.resetEditedItem();
+
+  async createFunction(item: WeaponAssignment) {
+    return this.$store.dispatch("character/createWeaponAssignment", item);
   }
 
-  deleteItemConfirm() {
-    this.$store.dispatch(`character/deleteWeaponAssignment`, this.editedItem);
-    this.closeDelete();
-  }
-  closeDelete() {
-    this.dialogDelete = false;
-    this.resetEditedItem();
-  }
-  editItem(item: WeaponAssignment) {
-    this.editedIndex = this.assignments.indexOf(item);
-    this.editedItem = Object.assign({}, item);
-    this.dialog = true;
-  }
-  deleteItem(item: WeaponAssignment) {
-    this.editedIndex = this.assignments.indexOf(item);
-    this.editedItem = Object.assign({}, item);
-    this.dialogDelete = true;
+  async updateFunction(item: WeaponAssignment) {
+    return this.$store.dispatch("character/updateWeaponAssignment", item);
   }
 
-  resetEditedItem() {
-    this.$nextTick(() => {
-      this.editedItem = this.defaultItem();
-      this.editedIndex = -1;
-    });
+  async deleteFunction(item: WeaponAssignment) {
+    return this.$store.dispatch("character/deleteWeaponAssignment", item);
   }
 }
 </script>
