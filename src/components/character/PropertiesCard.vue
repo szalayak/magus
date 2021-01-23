@@ -1,17 +1,26 @@
 <template>
-  <character-info-card :id="id" :editable="editable" :title="$t('properties')">
+  <character-info-card
+    :id="id"
+    :editable="editable"
+    :title="$t('properties')"
+    :error.sync="error"
+    :messages="messages"
+    :edit.sync="edit"
+    @save="save"
+    @cancel="cancel"
+  >
     <template v-slot:fields="{ edit }">
       <v-row dense>
         <v-col cols="12">
           <v-textarea
-            v-model="basicInfo.personalityTraits"
+            v-model="properties.personalityTraits"
             :label="$t('personality-traits')"
             :disabled="!edit"
           />
         </v-col>
         <v-col cols="12">
           <v-textarea
-            v-model="basicInfo.specialAbilities"
+            v-model="properties.specialAbilities"
             :label="$t('special-abilities')"
             :disabled="!edit"
           />
@@ -26,6 +35,16 @@ import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
 
+type Properties = Pick<
+  CharacterBasicInfo,
+  "personalityTraits" | "specialAbilities"
+>;
+
+const copyProperties = (properties?: Properties): Properties => ({
+  personalityTraits: properties?.personalityTraits,
+  specialAbilities: properties?.specialAbilities,
+});
+
 @Component({
   name: "properties-card",
   components: {
@@ -33,13 +52,15 @@ import CharacterInfoCard from "./CharacterInfoCard.vue";
   },
 })
 export default class PropertiesCard extends CharacterInfo {
-  get basicInfo() {
-    if (!this.character.basicInfo) this.character.basicInfo = {};
-    return this.character.basicInfo || {};
+  properties = copyProperties(this.character.basicInfo);
+
+  save() {
+    const basicInfo = { ...this.character.basicInfo, ...this.properties };
+    this.update({ id: this.character.id, basicInfo });
   }
 
-  set basicInfo(basicInfo: CharacterBasicInfo) {
-    Object.assign(this.character.basicInfo, basicInfo);
+  cancel() {
+    this.properties = copyProperties(this.character.basicInfo);
   }
 }
 </script>

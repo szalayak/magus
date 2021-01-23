@@ -1,5 +1,11 @@
 <template>
-  <character-info-card :id="id" :editable="false" :title="$t('weapons')">
+  <character-info-card
+    :id="id"
+    :editable="false"
+    :title="$t('weapons')"
+    :error.sync="error"
+    :messages="messages"
+  >
     <template v-slot:toolbar="{}">
       <v-dialog scrollable v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on, attrs }">
@@ -17,6 +23,9 @@
         <v-card>
           <v-card-title>{{ formTitle }}</v-card-title>
           <v-card-text>
+            <v-alert v-model="error" dense outlined type="error" dismissible>
+              {{ messages }}
+            </v-alert>
             <v-form :disabled="!editable" ref="form" v-model="valid">
               <v-container>
                 <v-row dense>
@@ -79,23 +88,11 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-      <v-dialog v-model="dialogDelete" max-width="500px">
-        <v-card>
-          <v-card-title class="headline">{{
-            $t("confirm-delete-message")
-          }}</v-card-title>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="error" text @click="closeDelete">{{
-              $t("cancel")
-            }}</v-btn>
-            <v-btn color="primary" text @click="deleteItemConfirm">{{
-              $t("ok")
-            }}</v-btn>
-            <v-spacer></v-spacer>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+      <confirm-delete-dialog
+        :open.sync="dialogDelete"
+        @cancel="closeDelete"
+        @confirm="deleteItemConfirm"
+      />
     </template>
     <template v-slot:fields="{}">
       <v-data-table
@@ -105,17 +102,6 @@
         :items="assignments"
         :sort-by="sortBy"
       >
-        <template v-slot:top>
-          <v-alert
-            v-model="notification"
-            dense
-            outlined
-            type="error"
-            dismissible
-          >
-            {{ messages }}
-          </v-alert>
-        </template>
         <template v-slot:[`item.mastery`]="{ item }">
           {{ masteryToString(item.mastery) }}
         </template>
@@ -161,17 +147,18 @@ import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
 import { ThrowScenario } from "@/store/types";
 import { getThrowScenarioString } from "@/utils/throwScenario";
-import { localise, localiseItem } from "@/utils/localise";
 import { Weapon } from "@/store/modules/weapon";
 import { Mastery } from "@/API";
 import { WeaponAssignment } from "@/store/modules/character";
 import { combatValuesWithWeapon } from "@/utils/character";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
+import ConfirmDeleteDialog from "../ConfirmDeleteDialog.vue";
 
 @Component({
   name: "weapon-assignment-card",
   components: {
     "character-info-card": CharacterInfoCard,
+    "confirm-delete-dialog": ConfirmDeleteDialog,
   },
 })
 export default class WeaponAssignmentCard extends CharacterInfo {
@@ -181,8 +168,6 @@ export default class WeaponAssignmentCard extends CharacterInfo {
   editedIndex = -1;
   dialogDelete = false;
   editedItem = this.defaultItem();
-  notification = false;
-  messages: string[] = [];
 
   get headers() {
     return [
@@ -205,16 +190,11 @@ export default class WeaponAssignmentCard extends CharacterInfo {
   }
 
   get weapons() {
-    return (localise(
-      this.$store.getters["weapon/list"] || [],
-      this.$i18n.locale
-    ) as Weapon[]).filter(w => !w.ranged);
+    return this.$store.getters["weapon/list"].filter((w: Weapon) => !w.ranged);
   }
 
   get assignments() {
-    return this.character.weapons
-      ? this.character.weapons.filter(w => !w.weapon?.ranged)
-      : [];
+    return this.character.weapons?.filter(w => !w.weapon?.ranged) || [];
   }
 
   get isNewItem() {
@@ -234,11 +214,11 @@ export default class WeaponAssignmentCard extends CharacterInfo {
   }
 
   damageToString(damage: ThrowScenario) {
-    return damage ? getThrowScenarioString(damage, this.$i18n) : "";
+    return getThrowScenarioString(damage);
   }
 
   weaponToString(weapon: Weapon) {
-    return localiseItem(weapon, this.$i18n.locale).description?.title;
+    return weapon?.description?.title;
   }
 
   masteryToString(mastery: Mastery) {
@@ -280,11 +260,9 @@ export default class WeaponAssignmentCard extends CharacterInfo {
       )
       .then(() => {
         this.messages = [];
-        this.notification = false;
       })
       .catch((error: GraphQLResult<WeaponAssignment>) => {
         this.messages = error.errors?.map(err => err.message) || [];
-        this.notification = true;
       });
     this.dialog = false;
     this.resetEditedItem();

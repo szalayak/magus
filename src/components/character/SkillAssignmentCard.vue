@@ -1,5 +1,11 @@
 <template>
-  <character-info-card :id="id" :editable="false" :title="$t('skills')">
+  <character-info-card
+    :id="id"
+    :editable="false"
+    :title="$t('skills')"
+    :error.sync="error"
+    :messages="messages"
+  >
     <template v-slot:toolbar="{}">
       <v-text-field
         v-model="search"
@@ -24,6 +30,9 @@
         <v-card>
           <v-card-title>{{ formTitle }}</v-card-title>
           <v-card-text>
+            <v-alert v-model="error" dense outlined type="error" dismissible>
+              {{ messages }}
+            </v-alert>
             <v-form :disabled="!editable" ref="form" v-model="valid">
               <v-container>
                 <v-row dense>
@@ -84,27 +93,11 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-      <v-dialog v-model="dialogDelete" max-width="500px">
-        <v-card>
-          <v-card-title class="headline">{{
-            $t("confirm-delete-message")
-          }}</v-card-title>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="error" text @click="closeDelete">{{
-              $t("cancel")
-            }}</v-btn>
-            <v-btn
-              v-if="editable"
-              color="primary"
-              text
-              @click="deleteItemConfirm"
-              >{{ $t("ok") }}</v-btn
-            >
-            <v-spacer></v-spacer>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+      <confirm-delete-dialog
+        :open.sync="dialogDelete"
+        @cancel="closeDelete"
+        @confirm="deleteItemConfirm"
+      />
     </template>
     <template v-slot:fields="{}">
       <v-data-table
@@ -115,17 +108,6 @@
         :sort-by="sortBy"
         :search="search"
       >
-        <template v-slot:top>
-          <v-alert
-            v-model="notification"
-            dense
-            outlined
-            type="error"
-            dismissible
-          >
-            {{ messages }}
-          </v-alert>
-        </template>
         <template v-slot:[`item.mastery`]="{ item }">
           {{ masteryToString(item) }}
         </template>
@@ -148,17 +130,17 @@
 import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
-import { Describable, ThrowScenario } from "@/store/types";
+import { ThrowScenario } from "@/store/types";
 import { getThrowScenarioString } from "@/utils/throwScenario";
-import { localise, localiseItem } from "@/utils/localise";
 import { SkillAssignment } from "@/store/modules/character";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
-import { Skill } from "@/store/modules/skill";
+import ConfirmDeleteDialog from "../ConfirmDeleteDialog.vue";
 
 @Component({
   name: "skill-assignment-card",
   components: {
     "character-info-card": CharacterInfoCard,
+    "confirm-delete-dialog": ConfirmDeleteDialog,
   },
 })
 export default class SkillAssignmentCard extends CharacterInfo {
@@ -168,8 +150,6 @@ export default class SkillAssignmentCard extends CharacterInfo {
   editedIndex = -1;
   dialogDelete = false;
   editedItem = this.defaultItem();
-  notification = false;
-  messages: string[] = [];
   search = "";
 
   get headers() {
@@ -191,14 +171,11 @@ export default class SkillAssignmentCard extends CharacterInfo {
   }
 
   get skills() {
-    return localise(this.$store.getters["skill/list"] || [], this.$i18n.locale);
+    return this.$store.getters["skill/list"];
   }
 
-  get assignments(): Skill[] {
-    return (this.character.skills || []).map(s => ({
-      ...s,
-      skill: localiseItem(s.skill as Describable, this.$i18n.locale),
-    }));
+  get assignments(): SkillAssignment[] {
+    return this.character.skills || [];
   }
 
   get isNewItem() {
@@ -211,10 +188,6 @@ export default class SkillAssignmentCard extends CharacterInfo {
       : this.$t("edit-skill");
   }
 
-  skillToString(skill: Skill) {
-    return localiseItem(skill, this.$i18n.locale).description?.title;
-  }
-
   defaultItem(): SkillAssignment {
     return {
       characterId: this.character.id || "",
@@ -222,7 +195,7 @@ export default class SkillAssignmentCard extends CharacterInfo {
   }
 
   damageToString(damage: ThrowScenario) {
-    return damage ? getThrowScenarioString(damage, this.$i18n) : "";
+    return getThrowScenarioString(damage);
   }
 
   masteryToString(assignment: SkillAssignment) {
@@ -245,11 +218,9 @@ export default class SkillAssignmentCard extends CharacterInfo {
       )
       .then(() => {
         this.messages = [];
-        this.notification = false;
       })
       .catch((error: GraphQLResult<SkillAssignment>) => {
         this.messages = error.errors?.map(err => err.message) || [];
-        this.notification = true;
       });
     this.dialog = false;
     this.resetEditedItem();

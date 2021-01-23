@@ -1,7 +1,7 @@
 import { Dice } from "@/API";
+import i18n from "@/i18n";
 import { SkillAssignment, WeaponAssignment } from "@/store";
 import { ThrowScenario } from "@/store/types";
-import VueI18n from "vue-i18n";
 import { abilityValueAbove10 } from "./character";
 import { throwDice } from "./dice";
 
@@ -45,10 +45,7 @@ export interface SpellResistanceThrowResult {
   value?: number;
 }
 
-export const getThrowScenarioString = (
-  scenario: ThrowScenario,
-  i18n: VueI18n
-) => {
+export const getThrowScenarioString = (scenario: ThrowScenario = {}) => {
   const iterationCount =
     scenario.iterationCount && scenario.iterationCount > 1
       ? scenario.iterationCount.toString()

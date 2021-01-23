@@ -1,5 +1,13 @@
 <template>
-  <character-info-card :id="id" :editable="editable" :title="$t('wallet')">
+  <character-info-card
+    :id="id"
+    :editable="editable"
+    :title="$t('wallet')"
+    :messages="messages"
+    :edit.sync="edit"
+    @save="save"
+    @cancel="cancel"
+  >
     <template v-slot:fields="{ edit }">
       <v-row dense>
         <v-col cols="12" xs="12" sm="6" md="4">
@@ -42,7 +50,7 @@
         </v-col>
         <v-col cols="12" xs="12" sm="6" md="4">
           <v-text-field
-            v-model.number="wallet.other"
+            v-model="wallet.misc"
             :label="$t('other')"
             :disabled="!edit"
           />
@@ -58,6 +66,13 @@ import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
 import { convertFromCopper, convertToCopper } from "@/utils/price";
 
+const copyWallet = (wallet?: Wallet): Wallet => ({
+  money: wallet?.money,
+  mithrill: wallet?.mithrill,
+  gemstones: wallet?.gemstones,
+  misc: wallet?.misc,
+});
+
 @Component({
   name: "wallet",
   components: {
@@ -65,6 +80,8 @@ import { convertFromCopper, convertToCopper } from "@/utils/price";
   },
 })
 export default class WalletCard extends CharacterInfo {
+  wallet = copyWallet(this.character.wallet);
+
   get currency() {
     return convertFromCopper(this.wallet.money || 0);
   }
@@ -98,14 +115,12 @@ export default class WalletCard extends CharacterInfo {
     this.wallet.money = convertToCopper(currency);
   }
 
-  get wallet() {
-    if (!this.character.wallet) this.character.wallet = {};
-    return this.character.wallet || {};
+  save() {
+    this.update({ id: this.character.id, wallet: this.wallet });
   }
 
-  set wallet(wallet: Wallet) {
-    if (this.character.wallet) Object.assign(this.character.wallet, wallet);
-    else this.character.wallet = wallet;
+  cancel() {
+    this.wallet = copyWallet(this.wallet);
   }
 }
 </script>

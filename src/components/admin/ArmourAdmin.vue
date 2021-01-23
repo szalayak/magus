@@ -87,7 +87,7 @@ export default class ArmourAdmin extends Vue {
   }
 
   priceToString(price: number) {
-    return getPriceString(price, this.$i18n);
+    return getPriceString(price);
   }
 }
 </script>

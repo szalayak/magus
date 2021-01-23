@@ -1,10 +1,19 @@
 <template>
-  <character-info-card :id="id" :editable="editable" :title="$t('appearance')">
+  <character-info-card
+    :id="id"
+    :editable="editable"
+    :title="$t('appearance')"
+    :error.sync="error"
+    :messages="messages"
+    :edit.sync="edit"
+    @save="save"
+    @cancel="cancel"
+  >
     <template v-slot:fields="{ edit }">
       <v-row dense>
         <v-col cols="12" xs="12" sm="6" md="3" lg="1">
           <v-select
-            v-model="basicInfo.sex"
+            v-model="appearance.sex"
             :label="$t('sex')"
             :items="sexes"
             :disabled="!edit"
@@ -12,35 +21,35 @@
         </v-col>
         <v-col cols="12" xs="12" sm="6" md="3" lg="1">
           <v-text-field
-            v-model="basicInfo.eyes"
+            v-model="appearance.eyes"
             :label="$t('eyes')"
             :disabled="!edit"
           />
         </v-col>
         <v-col cols="12" xs="12" sm="6" md="3" lg="1">
           <v-text-field
-            v-model="basicInfo.hair"
+            v-model="appearance.hair"
             :label="$t('hair')"
             :disabled="!edit"
           />
         </v-col>
         <v-col cols="12" xs="12" sm="6" md="3" lg="1">
           <v-text-field
-            v-model="basicInfo.weight"
+            v-model="appearance.weight"
             :label="$t('weight')"
             :disabled="!edit"
           />
         </v-col>
         <v-col cols="12" xs="12" sm="6" md="3" lg="1">
           <v-text-field
-            v-model="basicInfo.height"
+            v-model="appearance.height"
             :label="$t('height')"
             :disabled="!edit"
           />
         </v-col>
         <v-col cols="12" xs="12" sm="6" md="3" lg="1">
           <v-text-field
-            v-model.number="basicInfo.age"
+            v-model.number="appearance.age"
             type="number"
             :label="$t('age')"
             :disabled="!edit"
@@ -48,7 +57,7 @@
         </v-col>
         <v-col cols="12" xs="12" sm="6" md="3" lg="2">
           <v-text-field
-            v-model.number="basicInfo.visibleAge"
+            v-model.number="appearance.visibleAge"
             type="number"
             :label="$t('visible-age')"
             :disabled="!edit"
@@ -56,14 +65,14 @@
         </v-col>
         <v-col cols="12" xs="12" sm="6" md="3" lg="4">
           <v-text-field
-            v-model="basicInfo.identifier"
+            v-model="appearance.identifier"
             :label="$t('identifier')"
             :disabled="!edit"
           />
         </v-col>
         <v-col cols="12">
           <v-text-field
-            v-model="basicInfo.attire"
+            v-model="appearance.attire"
             :label="$t('attire')"
             :disabled="!edit"
           />
@@ -79,6 +88,31 @@ import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
 
+type Appearance = Pick<
+  CharacterBasicInfo,
+  | "sex"
+  | "weight"
+  | "height"
+  | "hair"
+  | "eyes"
+  | "age"
+  | "visibleAge"
+  | "identifier"
+  | "attire"
+>;
+
+const copyAppearance = (appearance?: Appearance): Appearance => ({
+  sex: appearance?.sex,
+  height: appearance?.height,
+  weight: appearance?.weight,
+  hair: appearance?.hair,
+  eyes: appearance?.eyes,
+  age: appearance?.age,
+  visibleAge: appearance?.visibleAge,
+  identifier: appearance?.identifier,
+  attire: appearance?.attire,
+});
+
 @Component({
   name: "appearance-card",
   components: {
@@ -86,6 +120,8 @@ import CharacterInfoCard from "./CharacterInfoCard.vue";
   },
 })
 export default class AppearanceCard extends CharacterInfo {
+  appearance = copyAppearance(this.character.basicInfo);
+
   get sexes(): DropdownValueList[] {
     return Object.keys(Sex).map(sex => ({
       value: sex.toString(),
@@ -93,15 +129,13 @@ export default class AppearanceCard extends CharacterInfo {
     }));
   }
 
-  get basicInfo() {
-    if (!this.character.basicInfo) this.character.basicInfo = {};
-    return this.character.basicInfo || {};
+  save() {
+    const basicInfo = { ...this.character.basicInfo, ...this.appearance };
+    this.update({ id: this.character.id, basicInfo });
   }
 
-  set basicInfo(basicInfo: CharacterBasicInfo) {
-    if (this.character.basicInfo)
-      Object.assign(this.character.basicInfo, basicInfo);
-    else this.character.basicInfo = basicInfo;
+  cancel() {
+    this.appearance = copyAppearance(this.character.basicInfo);
   }
 }
 </script>

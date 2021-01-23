@@ -17,31 +17,47 @@
         <character-overview v-if="page === 0" :id="id" />
         <v-row>
           <v-col v-if="page === 1" cols="12">
-            <appearance :id="id" :editable="editable" />
+            <appearance :id="id" :editable="editable" :character="character" />
           </v-col>
           <v-col v-if="page === 1" cols="12" xs="12" sm="6" lg="4">
-            <properties :id="id" :editable="editable" />
+            <properties :id="id" :editable="editable" :character="character" />
           </v-col>
           <v-col v-if="page === 1" cols="12" xs="12" sm="6" lg="4">
-            <likes-and-dislikes :id="id" :editable="editable" />
+            <likes-and-dislikes
+              :id="id"
+              :editable="editable"
+              :character="character"
+            />
           </v-col>
           <v-col v-if="page === 1" cols="12" xs="12" sm="6" lg="4">
-            <connections :id="id" :editable="editable" />
+            <connections :id="id" :editable="editable" :character="character" />
           </v-col>
           <v-col v-if="page === 2" cols="12">
-            <core-information :id="id" :editable="editable" />
+            <core-information
+              :id="id"
+              :editable="editable"
+              :character="character"
+            />
           </v-col>
           <v-col v-if="page === 2" cols="12" xs="12" sm="6" lg="4" xl="2">
-            <abilities :id="id" :editable="editable" />
+            <abilities :id="id" :editable="editable" :character="character" />
           </v-col>
           <v-col v-if="page === 2" cols="12" xs="12" sm="6" lg="4" xl="2">
-            <health :id="id" :editable="editable" />
+            <health :id="id" :editable="editable" :character="character" />
           </v-col>
           <v-col v-if="page === 2" cols="12" xs="12" sm="6" lg="4" xl="2">
-            <combat-values :id="id" :editable="editable" />
+            <combat-values
+              :id="id"
+              :editable="editable"
+              :character="character"
+            />
           </v-col>
           <v-col v-if="page === 2" cols="12" xs="12" sm="6" lg="4" xl="2">
-            <spell-resistance :id="id" :editable="editable" />
+            <spell-resistance
+              :id="id"
+              :editable="editable"
+              :character="character"
+            />
           </v-col>
           <v-col
             v-if="page === 2 && character.psiUser"
@@ -50,7 +66,7 @@
             sm="6"
             lg="2"
           >
-            <psi :id="id" :editable="editable" />
+            <psi :id="id" :editable="editable" :character="character" />
           </v-col>
           <v-col
             v-if="page === 2 && character.magicUser"
@@ -59,46 +75,66 @@
             sm="3"
             lg="2"
           >
-            <magical-ability :id="id" :editable="editable" />
+            <magical-ability
+              :id="id"
+              :editable="editable"
+              :character="character"
+            />
           </v-col>
           <v-col v-if="page === 2" cols="12" xs="12" sm="3" lg="2">
-            <armour :id="id" :editable="editable" />
+            <armour :id="id" :editable="editable" :character="character" />
           </v-col>
           <v-col v-if="page === 2" cols="12" xs="12" sm="3" lg="2">
-            <shield :id="id" :editable="editable" />
+            <shield :id="id" :editable="editable" :character="character" />
           </v-col>
           <v-col v-if="page === 3" cols="12">
-            <weapon-assignments :id="id" :editable="editable" />
+            <weapon-assignments
+              :id="id"
+              :editable="editable"
+              :character="character"
+            />
           </v-col>
           <v-col v-if="page === 3" cols="12">
-            <ranged-weapon-assignments :id="id" :editable="editable" />
+            <ranged-weapon-assignments
+              :id="id"
+              :editable="editable"
+              :character="character"
+            />
           </v-col>
           <v-col v-if="page === 3" cols="12">
-            <skill-assignments :id="id" :editable="editable" />
+            <skill-assignments
+              :id="id"
+              :editable="editable"
+              :character="character"
+            />
           </v-col>
           <v-col v-if="page === 4" cols="12" xs="12" sm="6" md="4">
-            <magical-item-assignments :id="id" :editable="editable" />
+            <magical-item-assignments
+              :id="id"
+              :editable="editable"
+              :character="character"
+            />
           </v-col>
           <v-col v-if="page === 4" cols="12" xs="12" sm="6" md="4">
-            <wallet :id="id" :editable="editable" />
+            <wallet :id="id" :editable="editable" :character="character" />
           </v-col>
           <v-col v-if="page === 4" cols="12" xs="12" sm="6" md="4">
-            <inventory :id="id" :editable="editable" />
+            <inventory :id="id" :editable="editable" :character="character" />
           </v-col>
           <v-col v-if="page === 4" cols="12">
-            <animals :id="id" :editable="editable" />
+            <animals :id="id" :editable="editable" :character="character" />
           </v-col>
           <v-col v-if="page === 4" cols="12">
-            <servants :id="id" :editable="editable" />
+            <servants :id="id" :editable="editable" :character="character" />
           </v-col>
           <v-col v-if="page === 4" cols="12" xs="12" sm="6">
-            <languages :id="id" :editable="editable" />
+            <languages :id="id" :editable="editable" :character="character" />
           </v-col>
           <v-col v-if="page === 4" cols="12" xs="12" sm="6">
-            <poisons :id="id" :editable="editable" />
+            <poisons :id="id" :editable="editable" :character="character" />
           </v-col>
           <v-col v-if="page === 4" cols="12">
-            <notes :id="id" :editable="editable" />
+            <notes :id="id" :editable="editable" :character="character" />
           </v-col>
         </v-row>
         <v-snackbar
