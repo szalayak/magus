@@ -6,6 +6,7 @@ import {
   CombatValues,
   Mastery,
   SpellResistanceValues,
+  SpellResistance,
 } from "@/store";
 import {
   applyMasterSkillToCombatValues,
@@ -263,3 +264,27 @@ export const characterToLink = (
     else return `${link}/${page.toString()}`;
   else return link;
 };
+
+export const copySpellResistance = (
+  spellResistance?: SpellResistance,
+  astral?: number,
+  willpower?: number
+): SpellResistance => ({
+  astral: {
+    staticShield: spellResistance?.astral?.staticShield,
+    dynamicShield: spellResistance?.astral?.dynamicShield,
+    innate:
+      spellResistance?.astral?.innate || calculateInnateSpellResistance(astral),
+    magical: spellResistance?.astral?.magical,
+    modifier: spellResistance?.astral?.modifier,
+  },
+  mental: {
+    staticShield: spellResistance?.mental?.staticShield,
+    dynamicShield: spellResistance?.mental?.dynamicShield,
+    innate:
+      spellResistance?.mental?.innate ||
+      calculateInnateSpellResistance(willpower),
+    magical: spellResistance?.mental?.magical,
+    modifier: spellResistance?.mental?.modifier,
+  },
+});

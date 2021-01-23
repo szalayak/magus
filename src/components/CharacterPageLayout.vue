@@ -5,20 +5,24 @@
     :config="pullToRefreshConfig"
   >
     <v-card flat>
-      <v-toolbar v-if="$vuetify.breakpoint.mdAndUp" flat>
-        <v-card-title class="pl-1">{{ character.name }}</v-card-title>
-        <v-btn text icon @click="refresh"><v-icon>mdi-refresh</v-icon></v-btn>
-        <v-spacer />
-        <v-btn-toggle dense tile color="primary" group v-model="page">
-          <slot name="pages-top" :character="character">
-            <v-btn><v-icon>mdi-eye</v-icon></v-btn>
-            <v-btn>1</v-btn>
-            <v-btn>2</v-btn>
-            <v-btn>3</v-btn>
-            <v-btn>4</v-btn>
-          </slot>
-        </v-btn-toggle>
-      </v-toolbar>
+      <v-hover v-slot="{ hover }">
+        <v-toolbar v-if="$vuetify.breakpoint.mdAndUp" flat>
+          <v-card-title class="pl-1">{{ character.name }}</v-card-title>
+          <v-btn v-show="hover" text icon @click="refresh"
+            ><v-icon>mdi-refresh</v-icon></v-btn
+          >
+          <v-spacer />
+          <v-btn-toggle dense tile color="primary" group v-model="page">
+            <slot name="pages-top" :character="character">
+              <v-btn><v-icon>mdi-eye</v-icon></v-btn>
+              <v-btn>1</v-btn>
+              <v-btn>2</v-btn>
+              <v-btn>3</v-btn>
+              <v-btn>4</v-btn>
+            </slot>
+          </v-btn-toggle>
+        </v-toolbar>
+      </v-hover>
       <v-card-text class="pt-1">
         <slot :character="character"></slot>
         <v-snackbar

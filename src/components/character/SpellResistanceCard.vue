@@ -83,35 +83,7 @@
 import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
-import { SpellResistance } from "@/store/types";
-import {
-  calculateInnateSpellResistance,
-  calculateSpellResistanceTotal,
-} from "@/utils";
-
-const copySpellResistance = (
-  spellResistance?: SpellResistance,
-  astral?: number,
-  willpower?: number
-): SpellResistance => ({
-  astral: {
-    staticShield: spellResistance?.astral?.staticShield,
-    dynamicShield: spellResistance?.astral?.dynamicShield,
-    innate:
-      spellResistance?.astral?.innate || calculateInnateSpellResistance(astral),
-    magical: spellResistance?.astral?.magical,
-    modifier: spellResistance?.astral?.modifier,
-  },
-  mental: {
-    staticShield: spellResistance?.mental?.staticShield,
-    dynamicShield: spellResistance?.mental?.dynamicShield,
-    innate:
-      spellResistance?.mental?.innate ||
-      calculateInnateSpellResistance(willpower),
-    magical: spellResistance?.mental?.magical,
-    modifier: spellResistance?.mental?.modifier,
-  },
-});
+import { calculateSpellResistanceTotal, copySpellResistance } from "@/utils";
 
 @Component({
   name: "spell-resistance-card",
