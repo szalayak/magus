@@ -369,7 +369,7 @@ export default class CharacterCombatValuesQuickView extends CharacterQuickView {
   }
 
   damageToString(damage: ThrowScenario) {
-    return damage ? getThrowScenarioString(damage, this.$i18n) : "";
+    return getThrowScenarioString(damage);
   }
 
   masteryToString(mastery: Mastery) {

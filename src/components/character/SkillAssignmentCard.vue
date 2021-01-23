@@ -1,5 +1,11 @@
 <template>
-  <character-info-card :id="id" :editable="false" :title="$t('skills')">
+  <character-info-card
+    :id="id"
+    :editable="false"
+    :title="$t('skills')"
+    :error.sync="error"
+    :messages="messages"
+  >
     <template v-slot:toolbar="{}">
       <v-text-field
         v-model="search"
@@ -24,6 +30,9 @@
         <v-card>
           <v-card-title>{{ formTitle }}</v-card-title>
           <v-card-text>
+            <v-alert v-model="error" dense outlined type="error" dismissible>
+              {{ messages }}
+            </v-alert>
             <v-form :disabled="!editable" ref="form" v-model="valid">
               <v-container>
                 <v-row dense>
@@ -84,27 +93,11 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-      <v-dialog v-model="dialogDelete" max-width="500px">
-        <v-card>
-          <v-card-title class="headline">{{
-            $t("confirm-delete-message")
-          }}</v-card-title>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="error" text @click="closeDelete">{{
-              $t("cancel")
-            }}</v-btn>
-            <v-btn
-              v-if="editable"
-              color="primary"
-              text
-              @click="deleteItemConfirm"
-              >{{ $t("ok") }}</v-btn
-            >
-            <v-spacer></v-spacer>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+      <confirm-delete-dialog
+        :open.sync="dialogDelete"
+        @cancel="closeDelete"
+        @confirm="deleteItemConfirm"
+      />
     </template>
     <template v-slot:fields="{}">
       <v-data-table
@@ -114,29 +107,21 @@
         :items="assignments"
         :sort-by="sortBy"
         :search="search"
+        :items-per-page="skills.length"
       >
-        <template v-slot:top>
-          <v-alert
-            v-model="notification"
-            dense
-            outlined
-            type="error"
-            dismissible
-          >
-            {{ messages }}
-          </v-alert>
-        </template>
         <template v-slot:[`item.mastery`]="{ item }">
           {{ masteryToString(item) }}
         </template>
         <template v-slot:[`item.skill.description.title`]="{ item }">
-          <a @click="editItem(item)">{{ item.skill.description.title }}</a>
+          <a @click="editItem(item, assignments)">{{
+            item.skill.description.title
+          }}</a>
         </template>
         <template v-if="editable" v-slot:[`item.actions`]="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item)">
+          <v-icon small class="mr-2" @click="editItem(item, assignments)">
             mdi-pencil
           </v-icon>
-          <v-icon small @click="deleteItem(item)">
+          <v-icon small @click="deleteItem(item, assignments)">
             mdi-delete
           </v-icon>
         </template>
@@ -145,31 +130,21 @@
   </character-info-card>
 </template>
 <script lang="ts">
-import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
-import { Describable, ThrowScenario } from "@/store/types";
-import { getThrowScenarioString } from "@/utils/throwScenario";
-import { localise, localiseItem } from "@/utils/localise";
 import { SkillAssignment } from "@/store/modules/character";
-import { GraphQLResult } from "@aws-amplify/api-graphql";
-import { Skill } from "@/store/modules/skill";
+import ConfirmDeleteDialog from "../ConfirmDeleteDialog.vue";
+import CharacterInfoList from "./CharacterInfoList";
 
 @Component({
   name: "skill-assignment-card",
   components: {
     "character-info-card": CharacterInfoCard,
+    "confirm-delete-dialog": ConfirmDeleteDialog,
   },
 })
-export default class SkillAssignmentCard extends CharacterInfo {
-  valid = true;
-  dialog = false;
-  sortBy = [];
-  editedIndex = -1;
-  dialogDelete = false;
-  editedItem = this.defaultItem();
-  notification = false;
-  messages: string[] = [];
+export default class SkillAssignmentCard extends CharacterInfoList {
+  sortBy = ["skill.description.title"];
   search = "";
 
   get headers() {
@@ -191,18 +166,11 @@ export default class SkillAssignmentCard extends CharacterInfo {
   }
 
   get skills() {
-    return localise(this.$store.getters["skill/list"] || [], this.$i18n.locale);
+    return this.$store.getters["skill/list"];
   }
 
-  get assignments(): Skill[] {
-    return (this.character.skills || []).map(s => ({
-      ...s,
-      skill: localiseItem(s.skill as Describable, this.$i18n.locale),
-    }));
-  }
-
-  get isNewItem() {
-    return this.editedIndex === -1;
+  get assignments(): SkillAssignment[] {
+    return this.character.skills || [];
   }
 
   get formTitle() {
@@ -211,18 +179,10 @@ export default class SkillAssignmentCard extends CharacterInfo {
       : this.$t("edit-skill");
   }
 
-  skillToString(skill: Skill) {
-    return localiseItem(skill, this.$i18n.locale).description?.title;
-  }
-
   defaultItem(): SkillAssignment {
     return {
       characterId: this.character.id || "",
     };
-  }
-
-  damageToString(damage: ThrowScenario) {
-    return damage ? getThrowScenarioString(damage, this.$i18n) : "";
   }
 
   masteryToString(assignment: SkillAssignment) {
@@ -231,54 +191,16 @@ export default class SkillAssignmentCard extends CharacterInfo {
       : this.$t(assignment.mastery || "");
   }
 
-  close() {
-    this.dialog = false;
-    this.resetEditedItem();
-  }
-  save() {
-    this.$store
-      .dispatch(
-        this.isNewItem
-          ? `character/createSkillAssignment`
-          : `character/updateSkillAssignment`,
-        { ...this.editedItem, characterId: this.character.id }
-      )
-      .then(() => {
-        this.messages = [];
-        this.notification = false;
-      })
-      .catch((error: GraphQLResult<SkillAssignment>) => {
-        this.messages = error.errors?.map(err => err.message) || [];
-        this.notification = true;
-      });
-    this.dialog = false;
-    this.resetEditedItem();
+  async createFunction(item: SkillAssignment) {
+    return this.$store.dispatch("character/createSkillAssignment", item);
   }
 
-  deleteItemConfirm() {
-    this.$store.dispatch(`character/deleteSkillAssignment`, this.editedItem);
-    this.closeDelete();
-  }
-  closeDelete() {
-    this.dialogDelete = false;
-    this.resetEditedItem();
-  }
-  editItem(item: SkillAssignment) {
-    this.editedIndex = this.assignments.indexOf(item);
-    this.editedItem = Object.assign({}, item);
-    this.dialog = true;
-  }
-  deleteItem(item: SkillAssignment) {
-    this.editedIndex = this.assignments.indexOf(item);
-    this.editedItem = Object.assign({}, item);
-    this.dialogDelete = true;
+  async updateFunction(item: SkillAssignment) {
+    return this.$store.dispatch("character/updateSkillAssignment", item);
   }
 
-  resetEditedItem() {
-    this.$nextTick(() => {
-      this.editedItem = this.defaultItem();
-      this.editedIndex = -1;
-    });
+  async deleteFunction(item: SkillAssignment) {
+    return this.$store.dispatch("character/deleteSkillAssignment", item);
   }
 }
 </script>

@@ -3,12 +3,17 @@
     :id="id"
     :editable="editable"
     :title="$t('core-information')"
+    :error.sync="error"
+    :messages="messages"
+    :edit.sync="edit"
+    @save="save"
+    @cancel="cancel"
   >
     <template v-slot:fields="{ edit }">
       <v-row dense>
         <v-col cols="12" sm="12" md="1">
           <v-select
-            v-model="character.race"
+            v-model="coreInformation.race"
             :label="$t('race')"
             :items="races"
             item-value="id"
@@ -21,7 +26,7 @@
         </v-col>
         <v-col cols="12" sm="12" md="2">
           <v-select
-            v-model="character.class"
+            v-model="coreInformation.class"
             :label="$t('class')"
             :items="classes"
             item-value="id"
@@ -34,21 +39,21 @@
         </v-col>
         <v-col cols="12" sm="12" md="2">
           <v-text-field
-            v-model="character.subclass"
+            v-model="coreInformation.subclass"
             :label="$t('subclass')"
             :disabled="!edit"
           />
         </v-col>
         <v-col cols="12" sm="12" md="2">
           <v-text-field
-            v-model="character.specialisation"
+            v-model="coreInformation.specialisation"
             :label="$t('specialisation')"
             :disabled="!edit"
           />
         </v-col>
         <v-col cols="12" sm="12" md="1">
           <v-select
-            v-model="character.personality"
+            v-model="coreInformation.personality"
             :label="$t('personality')"
             :items="personalities"
             item-value="id"
@@ -60,14 +65,14 @@
         </v-col>
         <v-col cols="12" sm="12" md="2">
           <v-text-field
-            v-model="basicInfo.country"
+            v-model="country"
             :label="$t('country')"
             :disabled="!edit"
           />
         </v-col>
         <v-col cols="12" sm="12" md="2">
           <v-text-field
-            v-model="basicInfo.religion"
+            v-model="religion"
             :label="$t('religion')"
             :disabled="!edit"
           />
@@ -76,7 +81,7 @@
       <v-row dense>
         <v-col cols="12" sm="12" md="2">
           <v-text-field
-            v-model.number="level.currentLevel"
+            v-model.number="coreInformation.level.currentLevel"
             :label="$t('current-level')"
             :disabled="!edit"
             type="number"
@@ -84,7 +89,7 @@
         </v-col>
         <v-col cols="12" sm="12" md="2">
           <v-text-field
-            v-model.number="level.currentExperience"
+            v-model.number="coreInformation.level.currentExperience"
             :label="$t('current-experience')"
             :disabled="!edit"
             type="number"
@@ -92,7 +97,7 @@
         </v-col>
         <v-col cols="12" sm="12" md="2">
           <v-text-field
-            v-model.number="level.experienceForNextLevel"
+            v-model.number="coreInformation.level.experienceForNextLevel"
             :label="$t('experience-for-next-level')"
             :disabled="!edit"
             type="number"
@@ -100,14 +105,14 @@
         </v-col>
         <v-col cols="6" sm="12" md="2">
           <v-checkbox
-            v-model="character.magicUser"
+            v-model="coreInformation.magicUser"
             :label="$t('magic-user')"
             :disabled="!edit"
           />
         </v-col>
         <v-col cols="6" sm="12" md="2">
           <v-checkbox
-            v-model="character.psiUser"
+            v-model="coreInformation.psiUser"
             :label="$t('psi-user')"
             :disabled="!edit"
           />
@@ -117,7 +122,6 @@
   </character-info-card>
 </template>
 <script lang="ts">
-import { CharacterBasicInfo, CharacterLevel } from "@/store/types";
 import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
@@ -125,6 +129,34 @@ import { localise } from "@/utils/localise";
 import { Race } from "@/store/modules/race";
 import { Class } from "@/store/modules/class";
 import { ValueRange } from "@/store/modules/valueRange";
+import { Character } from "@/store";
+
+type CoreInformation = Pick<
+  Character,
+  | "race"
+  | "class"
+  | "subclass"
+  | "specialisation"
+  | "personality"
+  | "level"
+  | "magicUser"
+  | "psiUser"
+>;
+
+const copyCoreInformation = (character: Character) => ({
+  race: character.race,
+  class: character.class,
+  subclass: character.subclass,
+  specialisation: character.specialisation,
+  personality: character.personality,
+  level: {
+    currentLevel: character.level?.currentLevel,
+    currentExperience: character.level?.currentExperience,
+    experienceForNextLevel: character.level?.experienceForNextLevel,
+  },
+  magicUser: character.magicUser,
+  psiUser: character.psiUser,
+});
 
 @Component({
   name: "core-information-card",
@@ -133,6 +165,10 @@ import { ValueRange } from "@/store/modules/valueRange";
   },
 })
 export default class CoreInformationCard extends CharacterInfo {
+  coreInformation = copyCoreInformation(this.character);
+  country = this.character.basicInfo?.country;
+  religion = this.character.basicInfo?.religion;
+
   get races(): Race[] {
     return localise(
       this.$store.getters["race/getPlayableRaces"],
@@ -151,22 +187,19 @@ export default class CoreInformationCard extends CharacterInfo {
     );
   }
 
-  get basicInfo() {
-    if (!this.character.basicInfo) this.character.basicInfo = {};
-    return this.character.basicInfo || {};
+  save() {
+    const basicInfo = {
+      ...this.character.basicInfo,
+      country: this.country,
+      religion: this.religion,
+    };
+    this.update({ id: this.character.id, basicInfo, ...this.coreInformation });
   }
 
-  set basicInfo(basicInfo: CharacterBasicInfo) {
-    Object.assign(this.character.basicInfo, basicInfo);
-  }
-
-  get level() {
-    if (!this.character.level) this.character.level = { currentLevel: 1 };
-    return this.character.level || {};
-  }
-
-  set level(level: CharacterLevel) {
-    Object.assign(this.character.level, level);
+  cancel() {
+    this.coreInformation = copyCoreInformation(this.character);
+    this.country = this.character.basicInfo?.country;
+    this.religion = this.character.basicInfo?.religion;
   }
 }
 </script>

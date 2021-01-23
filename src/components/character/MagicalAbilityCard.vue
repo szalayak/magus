@@ -1,5 +1,14 @@
 <template>
-  <character-info-card :id="id" :editable="editable" :title="$t('mana-points')">
+  <character-info-card
+    :id="id"
+    :editable="editable"
+    :title="$t('mana-points')"
+    :error.sync="error"
+    :messages="messages"
+    :edit.sync="edit"
+    @save="save"
+    @cancel="cancel"
+  >
     <template v-slot:fields="{ edit }">
       <v-row dense>
         <v-col cols="12">
@@ -64,6 +73,20 @@ import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
 import { MagicalAbility } from "@/store/types";
 
+const copyMagicalAbility = (
+  magicalAbility?: MagicalAbility
+): MagicalAbility => ({
+  manaPoints: {
+    current: magicalAbility?.manaPoints?.current,
+    max: magicalAbility?.manaPoints?.max,
+  },
+  manaPointsPerLevel: magicalAbility?.manaPointsPerLevel,
+  modifiers: magicalAbility?.modifiers,
+  manaPointsStoredElsehwere: magicalAbility?.manaPointsStoredElsehwere,
+  rechargingMethod: magicalAbility?.rechargingMethod,
+  notes: magicalAbility?.notes,
+});
+
 @Component({
   name: "magical-ability-card",
   components: {
@@ -71,14 +94,14 @@ import { MagicalAbility } from "@/store/types";
   },
 })
 export default class MagicalAbilityCard extends CharacterInfo {
-  get magicalAbility() {
-    if (!this.character.magicalAbility)
-      this.character.magicalAbility = { manaPoints: {} };
-    return this.character.magicalAbility || { manaPoints: {} };
+  magicalAbility = copyMagicalAbility(this.character.magicalAbility);
+
+  save() {
+    this.update({ id: this.character.id, magicalAbility: this.magicalAbility });
   }
 
-  set magicalAbility(magicalAbility: MagicalAbility) {
-    Object.assign(this.character.magicalAbility, magicalAbility);
+  cancel() {
+    this.magicalAbility = copyMagicalAbility(this.character.magicalAbility);
   }
 }
 </script>

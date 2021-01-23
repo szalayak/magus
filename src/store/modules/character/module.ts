@@ -9,7 +9,14 @@ import {
 import { Module } from "vuex";
 import { Character, CharacterState } from ".";
 import proxy from "./proxies";
-import { Assignment, CharacterQueryResult, CharacterResults } from "./types";
+import {
+  Assignment,
+  CharacterQueryResult,
+  CharacterResults,
+  MagicalItemAssignment,
+  SkillAssignment,
+  WeaponAssignment,
+} from "./types";
 import {
   createAssignmentActions,
   findById,
@@ -18,6 +25,8 @@ import {
   updateAssignment,
 } from "./utils";
 import { Subscription } from "rxjs";
+import { localiseItem } from "@/utils";
+import i18n from "@/i18n";
 
 const weaponAssignmentActions = createAssignmentActions({
   actions: proxy.weaponAssignmentActions,
@@ -107,11 +116,15 @@ export const characterModule: Module<CharacterState, RootState> = {
         };
         defaultMutations.merge(state, mappedResult);
       },
-      mergeWeaponAssignment({ items }, assignment: Assignment) {
+      mergeWeaponAssignment({ items }, assignment: WeaponAssignment) {
         const character = findById(items, assignment.characterId) as Character;
         if (character) {
           if (!character.weapons) character.weapons = [assignment];
-          else updateAssignment(character.weapons, assignment);
+          else
+            updateAssignment(character.weapons, {
+              ...assignment,
+              weapon: localiseItem(assignment.weapon, i18n.locale),
+            } as WeaponAssignment);
         }
       },
       removeWeaponAssignment({ items }, { id, characterId }: Assignment) {
@@ -120,11 +133,15 @@ export const characterModule: Module<CharacterState, RootState> = {
           id
         );
       },
-      mergeSkillAssignment({ items }, assignment: Assignment) {
+      mergeSkillAssignment({ items }, assignment: SkillAssignment) {
         const character = findById(items, assignment.characterId) as Character;
         if (character) {
           if (!character.skills) character.skills = [assignment];
-          else updateAssignment(character.skills, assignment);
+          else
+            updateAssignment(character.skills, {
+              ...assignment,
+              skill: localiseItem(assignment.skill, i18n.locale),
+            } as SkillAssignment);
         }
       },
       removeSkillAssignment({ items }, { id, characterId }: Assignment) {
@@ -133,11 +150,15 @@ export const characterModule: Module<CharacterState, RootState> = {
           id
         );
       },
-      mergeMagicalItemAssignment({ items }, assignment: Assignment) {
+      mergeMagicalItemAssignment({ items }, assignment: MagicalItemAssignment) {
         const character = findById(items, assignment.characterId) as Character;
         if (character) {
           if (!character.magicalItems) character.magicalItems = [assignment];
-          else updateAssignment(character.magicalItems, assignment);
+          else
+            updateAssignment(character.magicalItems, {
+              ...assignment,
+              magicalItem: localiseItem(assignment.magicalItem, i18n.locale),
+            } as MagicalItemAssignment);
         }
       },
       removeMagicalItemAssignment({ items }, { id, characterId }: Assignment) {
@@ -153,10 +174,7 @@ export const characterModule: Module<CharacterState, RootState> = {
           else updateAssignment(character.companions, assignment);
         }
       },
-      removeCharacterCompanionAssignment(
-        { items },
-        { id, characterId }: Assignment
-      ) {
+      removeCharacterCompanion({ items }, { id, characterId }: Assignment) {
         removeAssignment(
           (findById(items, characterId) as Character).companions,
           id

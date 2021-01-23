@@ -1,5 +1,11 @@
 <template>
-  <character-info-card :id="id" :editable="false" :title="$t('weapons')">
+  <character-info-card
+    :id="id"
+    :editable="false"
+    :title="$t('weapons')"
+    :error.sync="error"
+    :messages="messages"
+  >
     <template v-slot:toolbar="{}">
       <v-dialog scrollable v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on, attrs }">
@@ -17,6 +23,9 @@
         <v-card>
           <v-card-title>{{ formTitle }}</v-card-title>
           <v-card-text>
+            <v-alert v-model="error" dense outlined type="error" dismissible>
+              {{ messages }}
+            </v-alert>
             <v-form :disabled="!editable" ref="form" v-model="valid">
               <v-container>
                 <v-row dense>
@@ -79,23 +88,11 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-      <v-dialog v-model="dialogDelete" max-width="500px">
-        <v-card>
-          <v-card-title class="headline">{{
-            $t("confirm-delete-message")
-          }}</v-card-title>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="error" text @click="closeDelete">{{
-              $t("cancel")
-            }}</v-btn>
-            <v-btn color="primary" text @click="deleteItemConfirm">{{
-              $t("ok")
-            }}</v-btn>
-            <v-spacer></v-spacer>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+      <confirm-delete-dialog
+        :open.sync="dialogDelete"
+        @cancel="closeDelete"
+        @confirm="deleteItemConfirm"
+      />
     </template>
     <template v-slot:fields="{}">
       <v-data-table
@@ -105,22 +102,13 @@
         :items="assignments"
         :sort-by="sortBy"
       >
-        <template v-slot:top>
-          <v-alert
-            v-model="notification"
-            dense
-            outlined
-            type="error"
-            dismissible
-          >
-            {{ messages }}
-          </v-alert>
-        </template>
         <template v-slot:[`item.mastery`]="{ item }">
-          {{ masteryToString(item.mastery) }}
+          {{ $t(item.mastery) }}
         </template>
-        <template v-slot:[`item.weapon`]="{ item }">
-          <a @click="editItem(item)">{{ weaponToString(item.weapon) }}</a>
+        <template v-slot:[`item.weapon.description.title`]="{ item }">
+          <a @click="editItem(item, assignments)">{{
+            item.weapon.description.title
+          }}</a>
         </template>
         <template v-slot:[`item.weapon.damage`]="{ item }">
           {{ damageToString(item.weapon.damage) }}
@@ -138,16 +126,21 @@
           <v-simple-checkbox disabled v-model="item.inHand" />
         </template>
         <template v-slot:[`item.breakWeapon`]="{ item }">
-          {{ masteryToString(item.breakWeapon) }}
+          {{ $t(item.breakWeapon) }}
         </template>
         <template v-slot:[`item.disarm`]="{ item }">
-          {{ masteryToString(item.disarm) }}
+          {{ $t(item.disarm) }}
         </template>
         <template v-slot:[`item.actions`]="{ item }">
-          <v-icon v-if="editable" small class="mr-2" @click="editItem(item)">
+          <v-icon
+            v-if="editable"
+            small
+            class="mr-2"
+            @click="editItem(item, assignments)"
+          >
             mdi-pencil
           </v-icon>
-          <v-icon v-if="editable" small @click="deleteItem(item)">
+          <v-icon v-if="editable" small @click="deleteItem(item, assignments)">
             mdi-delete
           </v-icon>
         </template>
@@ -156,37 +149,29 @@
   </character-info-card>
 </template>
 <script lang="ts">
-import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
 import { ThrowScenario } from "@/store/types";
 import { getThrowScenarioString } from "@/utils/throwScenario";
-import { localise, localiseItem } from "@/utils/localise";
 import { Weapon } from "@/store/modules/weapon";
-import { Mastery } from "@/API";
 import { WeaponAssignment } from "@/store/modules/character";
 import { combatValuesWithWeapon } from "@/utils/character";
-import { GraphQLResult } from "@aws-amplify/api-graphql";
+import ConfirmDeleteDialog from "../ConfirmDeleteDialog.vue";
+import CharacterInfoList from "./CharacterInfoList";
 
 @Component({
   name: "weapon-assignment-card",
   components: {
     "character-info-card": CharacterInfoCard,
+    "confirm-delete-dialog": ConfirmDeleteDialog,
   },
 })
-export default class WeaponAssignmentCard extends CharacterInfo {
-  valid = true;
-  dialog = false;
+export default class WeaponAssignmentCard extends CharacterInfoList {
   sortBy = ["weapon.description.title"];
-  editedIndex = -1;
-  dialogDelete = false;
-  editedItem = this.defaultItem();
-  notification = false;
-  messages: string[] = [];
 
   get headers() {
     return [
-      { text: this.$t("weapon"), value: "weapon" },
+      { text: this.$t("weapon"), value: "weapon.description.title" },
       { text: this.$t("mastery"), value: "mastery" },
       { text: this.$t("attacks-per-turn"), value: "weapon.attacksPerTurn" },
       {
@@ -205,20 +190,11 @@ export default class WeaponAssignmentCard extends CharacterInfo {
   }
 
   get weapons() {
-    return (localise(
-      this.$store.getters["weapon/list"] || [],
-      this.$i18n.locale
-    ) as Weapon[]).filter(w => !w.ranged);
+    return this.$store.getters["weapon/list"].filter((w: Weapon) => !w.ranged);
   }
 
   get assignments() {
-    return this.character.weapons
-      ? this.character.weapons.filter(w => !w.weapon?.ranged)
-      : [];
-  }
-
-  get isNewItem() {
-    return this.editedIndex === -1;
+    return this.character.weapons?.filter(w => !w.weapon?.ranged) || [];
   }
 
   get formTitle() {
@@ -234,15 +210,7 @@ export default class WeaponAssignmentCard extends CharacterInfo {
   }
 
   damageToString(damage: ThrowScenario) {
-    return damage ? getThrowScenarioString(damage, this.$i18n) : "";
-  }
-
-  weaponToString(weapon: Weapon) {
-    return localiseItem(weapon, this.$i18n.locale).description?.title;
-  }
-
-  masteryToString(mastery: Mastery) {
-    return this.$t(mastery);
+    return getThrowScenarioString(damage);
   }
 
   initiation(assignment: WeaponAssignment) {
@@ -266,54 +234,17 @@ export default class WeaponAssignmentCard extends CharacterInfo {
       mastery: assignment.mastery,
     }).defence;
   }
-  close() {
-    this.dialog = false;
-    this.resetEditedItem();
-  }
-  save() {
-    this.$store
-      .dispatch(
-        this.isNewItem
-          ? `character/createWeaponAssignment`
-          : `character/updateWeaponAssignment`,
-        { ...this.editedItem, characterId: this.character.id }
-      )
-      .then(() => {
-        this.messages = [];
-        this.notification = false;
-      })
-      .catch((error: GraphQLResult<WeaponAssignment>) => {
-        this.messages = error.errors?.map(err => err.message) || [];
-        this.notification = true;
-      });
-    this.dialog = false;
-    this.resetEditedItem();
+
+  async createFunction(item: WeaponAssignment) {
+    return this.$store.dispatch("character/createWeaponAssignment", item);
   }
 
-  deleteItemConfirm() {
-    this.$store.dispatch(`character/deleteWeaponAssignment`, this.editedItem);
-    this.closeDelete();
-  }
-  closeDelete() {
-    this.dialogDelete = false;
-    this.resetEditedItem();
-  }
-  editItem(item: WeaponAssignment) {
-    this.editedIndex = this.assignments.indexOf(item);
-    this.editedItem = Object.assign({}, item);
-    this.dialog = true;
-  }
-  deleteItem(item: WeaponAssignment) {
-    this.editedIndex = this.assignments.indexOf(item);
-    this.editedItem = Object.assign({}, item);
-    this.dialogDelete = true;
+  async updateFunction(item: WeaponAssignment) {
+    return this.$store.dispatch("character/updateWeaponAssignment", item);
   }
 
-  resetEditedItem() {
-    this.$nextTick(() => {
-      this.editedItem = this.defaultItem();
-      this.editedIndex = -1;
-    });
+  async deleteFunction(item: WeaponAssignment) {
+    return this.$store.dispatch("character/deleteWeaponAssignment", item);
   }
 }
 </script>

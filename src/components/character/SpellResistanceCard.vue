@@ -3,6 +3,11 @@
     :id="id"
     :editable="editable"
     :title="$t('spell-resistance')"
+    :error.sync="error"
+    :messages="messages"
+    :edit.sync="edit"
+    @save="save"
+    @cancel="cancel"
   >
     <template v-slot:fields="{ edit }">
       <v-subheader class="pl-0">{{
@@ -78,11 +83,7 @@
 import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
-import { SpellResistance } from "@/store/types";
-import {
-  calculateInnateSpellResistance,
-  calculateSpellResistanceTotal,
-} from "@/utils";
+import { calculateSpellResistanceTotal, copySpellResistance } from "@/utils";
 
 @Component({
   name: "spell-resistance-card",
@@ -91,6 +92,12 @@ import {
   },
 })
 export default class SpellResistanceCard extends CharacterInfo {
+  spellResistance = copySpellResistance(
+    this.character.spellResistance,
+    this.character.abilities?.astral,
+    this.character.abilities?.willpower
+  );
+
   get astralTotal() {
     return calculateSpellResistanceTotal(this.spellResistance.astral);
   }
@@ -98,27 +105,19 @@ export default class SpellResistanceCard extends CharacterInfo {
   get mentalTotal() {
     return calculateSpellResistanceTotal(this.spellResistance.mental);
   }
-
-  get spellResistance(): SpellResistance {
-    const defaultValue = {
-      astral: {
-        innate: calculateInnateSpellResistance(
-          this.character.abilities?.astral
-        ),
-      },
-      mental: {
-        innate: calculateInnateSpellResistance(
-          this.character.abilities?.willpower
-        ),
-      },
-    };
-    if (!this.character.spellResistance)
-      this.character.spellResistance = defaultValue;
-    return this.character.spellResistance || defaultValue;
+  save() {
+    this.update({
+      id: this.character.id,
+      spellResistance: copySpellResistance(this.spellResistance),
+    });
   }
 
-  set spellResistance(spellResistance: SpellResistance) {
-    Object.assign(this.character.magicalAbility, spellResistance);
+  cancel() {
+    this.spellResistance = copySpellResistance(
+      this.character.spellResistance,
+      this.character.abilities?.astral,
+      this.character.abilities?.willpower
+    );
   }
 }
 </script>

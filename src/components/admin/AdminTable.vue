@@ -261,7 +261,6 @@ export default class AdminTable extends AdminTableProps {
   }
 
   changeEditedLocale(locale: Locale) {
-    console.log({ locale });
     this.editedItem = localiseItem(this.editedItem, locale);
   }
 

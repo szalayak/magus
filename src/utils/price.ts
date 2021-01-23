@@ -1,4 +1,4 @@
-import VueI18n from "vue-i18n";
+import i18n from "@/i18n";
 
 export interface Currency {
   gold: number;
@@ -18,7 +18,7 @@ export const convertToCopper = ({ gold, silver, copper }: Currency): number => {
   return gold * 1000 + silver * 100 + copper;
 };
 
-export const getPriceString = (price: number, i18n: VueI18n): string => {
+export const getPriceString = (price = 0): string => {
   const { copper, silver, gold } = convertFromCopper(price);
   const sGold = gold > 0 ? `${gold.toString()}${i18n.t("gold-abbr")} ` : "";
   const sSilver =

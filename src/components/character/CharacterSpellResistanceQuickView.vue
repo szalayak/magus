@@ -21,8 +21,8 @@
           ><v-col cols="6"
             ><strong>{{ spellResistanceThrowResult.name }}:</strong></v-col
           ><v-col cols="6">{{
-            spellResistanceThrowResult.result.total +
-              spellResistanceThrowResult.value
+            spellResistanceThrowResult.value -
+              spellResistanceThrowResult.result.total
           }}</v-col
           ><v-col cols="6"
             >{{ $t("throw") }} ({{
@@ -100,8 +100,8 @@
 <script lang="ts">
 import { SpellResistance, ThrowScenario } from "@/store";
 import {
-  calculateInnateSpellResistance,
   calculateSpellResistanceTotal,
+  copySpellResistance,
   getThrowScenarioString,
   SpellResistanceThrowResult,
   ThrowScenarioResult,
@@ -140,29 +140,20 @@ export default class CharacterSpellResistanceQuickView extends CharacterQuickVie
   }
 
   get spellResistance(): SpellResistance {
-    return (
-      this.character.spellResistance || {
-        astral: {
-          innate: calculateInnateSpellResistance(
-            this.character.abilities?.astral
-          ),
-        },
-        mental: {
-          innate: calculateInnateSpellResistance(
-            this.character.abilities?.willpower
-          ),
-        },
-      }
+    return copySpellResistance(
+      this.character.spellResistance,
+      this.character.abilities?.astral,
+      this.character.abilities?.willpower
     );
   }
 
   throwScenarioToString(damage: ThrowScenario) {
-    return damage ? getThrowScenarioString(damage, this.$i18n) : "";
+    return getThrowScenarioString(damage);
   }
 
   onThrowResult(result: ThrowScenarioResult, name: string, value?: number) {
     this.spellResistanceThrowResult = {
-      result: { ...result, total: result.total + (result.modifier || 0) },
+      result: { ...result },
       name,
       value,
     };
