@@ -47,11 +47,11 @@ export interface SpellResistanceThrowResult {
 
 export const getThrowScenarioString = (scenario: ThrowScenario = {}) => {
   const iterationCount =
-    scenario.iterationCount && scenario.iterationCount > 1
+    scenario?.iterationCount && scenario?.iterationCount > 1
       ? scenario.iterationCount.toString()
       : "";
-  return `${iterationCount}${scenario.dice ? i18n.t(scenario.dice) : ""}${
-    scenario.modifier ? "+" + scenario.modifier : ""
+  return `${iterationCount}${scenario?.dice ? i18n.t(scenario.dice) : ""}${
+    scenario?.modifier ? "+" + scenario.modifier : ""
   }`;
 };
 

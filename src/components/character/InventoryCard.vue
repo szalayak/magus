@@ -76,6 +76,9 @@
         :items="assignments"
         :sort-by="sortBy"
       >
+        <template v-slot:[`item.name`]="{ item }">
+          <a @click="editItem(item, assignments)">{{ item.name }}</a>
+        </template>
         <template v-if="editable" v-slot:[`item.actions`]="{ item }">
           <v-icon small class="mr-2" @click="editItem(item, assignments)">
             mdi-pencil

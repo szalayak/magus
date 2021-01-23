@@ -17,6 +17,9 @@
         <v-card>
           <v-card-title>{{ formTitle }}</v-card-title>
           <v-card-text>
+            <v-alert v-model="error" dense outlined type="error" dismissible>
+              {{ messages }}
+            </v-alert>
             <v-form :disabled="!editable" ref="form" v-model="valid">
               <v-container>
                 <v-row dense>
@@ -86,27 +89,16 @@
         disable-pagination
         hide-default-footer
       >
-        <template v-slot:top>
-          <v-alert
-            v-model="notification"
-            dense
-            outlined
-            type="error"
-            dismissible
-          >
-            {{ messages }}
-          </v-alert>
-        </template>
-        <template v-slot:[`item.magicalItem`]="{ item }">
-          <a @click="editItem(item)">{{
-            magicalItemToString(item.magicalItem)
+        <template v-slot:[`item.magicalItem.description.title`]="{ item }">
+          <a @click="editItem(item, assignments)">{{
+            item.magicalItem.description.title
           }}</a>
         </template>
         <template v-if="editable" v-slot:[`item.actions`]="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item)">
+          <v-icon small class="mr-2" @click="editItem(item, assignments)">
             mdi-pencil
           </v-icon>
-          <v-icon small @click="deleteItem(item)">
+          <v-icon small @click="deleteItem(item, assignments)">
             mdi-delete
           </v-icon>
         </template>
@@ -115,16 +107,10 @@
   </character-info-card>
 </template>
 <script lang="ts">
-import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
-import { localise, localiseItem } from "@/utils/localise";
-import {
-  MagicalItemAssignment,
-  WeaponAssignment,
-} from "@/store/modules/character";
-import { GraphQLResult } from "@aws-amplify/api-graphql";
-import { MagicalItem } from "@/store/modules/magicalItem";
+import { MagicalItemAssignment } from "@/store/modules/character";
+import CharacterInfoList from "./CharacterInfoList";
 
 @Component({
   name: "magical-item-card",
@@ -132,19 +118,12 @@ import { MagicalItem } from "@/store/modules/magicalItem";
     "character-info-card": CharacterInfoCard,
   },
 })
-export default class MagicalItemAssignmentCard extends CharacterInfo {
-  valid = true;
-  dialog = false;
+export default class MagicalItemAssignmentCard extends CharacterInfoList {
   sortBy = ["magicalItem.description.title"];
-  editedIndex = -1;
-  dialogDelete = false;
-  editedItem = this.defaultItem();
-  notification = false;
-  messages: string[] = [];
 
   get headers() {
     const headers = [
-      { text: this.$t("magical-item"), value: "magicalItem" },
+      { text: this.$t("magical-item"), value: "magicalItem.description.title" },
       { text: this.$t("location"), value: "location" },
       { text: this.$t("notes"), value: "notes" },
     ];
@@ -157,18 +136,11 @@ export default class MagicalItemAssignmentCard extends CharacterInfo {
   }
 
   get magicalItems() {
-    return localise(
-      this.$store.getters["magicalItem/list"] || [],
-      this.$i18n.locale
-    );
+    return this.$store.getters["magicalItem/list"];
   }
 
   get assignments() {
     return this.character.magicalItems || [];
-  }
-
-  get isNewItem() {
-    return this.editedIndex === -1;
   }
 
   get formTitle() {
@@ -177,67 +149,22 @@ export default class MagicalItemAssignmentCard extends CharacterInfo {
       : this.$t("edit-magical-item");
   }
 
-  magicalItemToString(magicalItem: MagicalItem) {
-    return localiseItem(magicalItem, this.$i18n.locale).description?.title;
-  }
-
   defaultItem(): MagicalItemAssignment {
     return {
       characterId: this.character.id || "",
     };
   }
 
-  close() {
-    this.dialog = false;
-    this.resetEditedItem();
-  }
-  save() {
-    this.$store
-      .dispatch(
-        this.isNewItem
-          ? `character/createMagicalItemAssignment`
-          : `character/updateMagicalItemAssignment`,
-        this.editedItem
-      )
-      .then(() => {
-        this.messages = [];
-        this.notification = false;
-      })
-      .catch((error: GraphQLResult<WeaponAssignment>) => {
-        this.messages = error.errors?.map(err => err.message) || [];
-        this.notification = true;
-      });
-    this.dialog = false;
-    this.resetEditedItem();
+  async createFunction(item: MagicalItemAssignment) {
+    return this.$store.dispatch("character/createMagicalItemAssignment", item);
   }
 
-  deleteItemConfirm() {
-    this.$store.dispatch(
-      `character/deleteMagicalItemAssignment`,
-      this.editedItem
-    );
-    this.closeDelete();
-  }
-  closeDelete() {
-    this.dialogDelete = false;
-    this.resetEditedItem();
-  }
-  editItem(item: MagicalItemAssignment) {
-    this.editedIndex = this.assignments.indexOf(item);
-    this.editedItem = Object.assign({}, item);
-    this.dialog = true;
-  }
-  deleteItem(item: MagicalItemAssignment) {
-    this.editedIndex = this.assignments.indexOf(item);
-    this.editedItem = Object.assign({}, item);
-    this.dialogDelete = true;
+  async updateFunction(item: MagicalItemAssignment) {
+    return this.$store.dispatch("character/updateMagicalItemAssignment", item);
   }
 
-  resetEditedItem() {
-    this.$nextTick(() => {
-      this.editedItem = this.defaultItem();
-      this.editedIndex = -1;
-    });
+  async deleteFunction(item: MagicalItemAssignment) {
+    return this.$store.dispatch("character/deleteMagicalItemAssignment", item);
   }
 }
 </script>

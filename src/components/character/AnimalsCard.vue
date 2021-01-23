@@ -161,7 +161,7 @@
         :sort-by="sortBy"
       >
         <template v-slot:[`item.name`]="{ item }">
-          <a @click="editItem(item)">{{ item.name }}</a>
+          <a @click="editItem(item, assignments)">{{ item.name }}</a>
         </template>
         <template v-slot:[`item.type`]="{ item }">
           {{ typeToString(item.type) }}

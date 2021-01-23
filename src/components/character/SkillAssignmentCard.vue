@@ -107,18 +107,21 @@
         :items="assignments"
         :sort-by="sortBy"
         :search="search"
+        :items-per-page="skills.length"
       >
         <template v-slot:[`item.mastery`]="{ item }">
           {{ masteryToString(item) }}
         </template>
         <template v-slot:[`item.skill.description.title`]="{ item }">
-          <a @click="editItem(item)">{{ item.skill.description.title }}</a>
+          <a @click="editItem(item, assignments)">{{
+            item.skill.description.title
+          }}</a>
         </template>
         <template v-if="editable" v-slot:[`item.actions`]="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item)">
+          <v-icon small class="mr-2" @click="editItem(item, assignments)">
             mdi-pencil
           </v-icon>
-          <v-icon small @click="deleteItem(item)">
+          <v-icon small @click="deleteItem(item, assignments)">
             mdi-delete
           </v-icon>
         </template>
@@ -127,14 +130,11 @@
   </character-info-card>
 </template>
 <script lang="ts">
-import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
-import { ThrowScenario } from "@/store/types";
-import { getThrowScenarioString } from "@/utils/throwScenario";
 import { SkillAssignment } from "@/store/modules/character";
-import { GraphQLResult } from "@aws-amplify/api-graphql";
 import ConfirmDeleteDialog from "../ConfirmDeleteDialog.vue";
+import CharacterInfoList from "./CharacterInfoList";
 
 @Component({
   name: "skill-assignment-card",
@@ -143,13 +143,8 @@ import ConfirmDeleteDialog from "../ConfirmDeleteDialog.vue";
     "confirm-delete-dialog": ConfirmDeleteDialog,
   },
 })
-export default class SkillAssignmentCard extends CharacterInfo {
-  valid = true;
-  dialog = false;
-  sortBy = [];
-  editedIndex = -1;
-  dialogDelete = false;
-  editedItem = this.defaultItem();
+export default class SkillAssignmentCard extends CharacterInfoList {
+  sortBy = ["skill.description.title"];
   search = "";
 
   get headers() {
@@ -178,10 +173,6 @@ export default class SkillAssignmentCard extends CharacterInfo {
     return this.character.skills || [];
   }
 
-  get isNewItem() {
-    return this.editedIndex === -1;
-  }
-
   get formTitle() {
     return this.editedIndex === -1
       ? this.$t("new-skill")
@@ -194,62 +185,22 @@ export default class SkillAssignmentCard extends CharacterInfo {
     };
   }
 
-  damageToString(damage: ThrowScenario) {
-    return getThrowScenarioString(damage);
-  }
-
   masteryToString(assignment: SkillAssignment) {
     return assignment.skill?.percentageSkill
       ? `${assignment.percentageValue || 0}%`
       : this.$t(assignment.mastery || "");
   }
 
-  close() {
-    this.dialog = false;
-    this.resetEditedItem();
-  }
-  save() {
-    this.$store
-      .dispatch(
-        this.isNewItem
-          ? `character/createSkillAssignment`
-          : `character/updateSkillAssignment`,
-        { ...this.editedItem, characterId: this.character.id }
-      )
-      .then(() => {
-        this.messages = [];
-      })
-      .catch((error: GraphQLResult<SkillAssignment>) => {
-        this.messages = error.errors?.map(err => err.message) || [];
-      });
-    this.dialog = false;
-    this.resetEditedItem();
+  async createFunction(item: SkillAssignment) {
+    return this.$store.dispatch("character/createSkillAssignment", item);
   }
 
-  deleteItemConfirm() {
-    this.$store.dispatch(`character/deleteSkillAssignment`, this.editedItem);
-    this.closeDelete();
-  }
-  closeDelete() {
-    this.dialogDelete = false;
-    this.resetEditedItem();
-  }
-  editItem(item: SkillAssignment) {
-    this.editedIndex = this.assignments.indexOf(item);
-    this.editedItem = Object.assign({}, item);
-    this.dialog = true;
-  }
-  deleteItem(item: SkillAssignment) {
-    this.editedIndex = this.assignments.indexOf(item);
-    this.editedItem = Object.assign({}, item);
-    this.dialogDelete = true;
+  async updateFunction(item: SkillAssignment) {
+    return this.$store.dispatch("character/updateSkillAssignment", item);
   }
 
-  resetEditedItem() {
-    this.$nextTick(() => {
-      this.editedItem = this.defaultItem();
-      this.editedIndex = -1;
-    });
+  async deleteFunction(item: SkillAssignment) {
+    return this.$store.dispatch("character/deleteSkillAssignment", item);
   }
 }
 </script>
