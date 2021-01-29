@@ -1,6 +1,6 @@
 <template>
   <character-list
-    v-if="!loading"
+    :loading="loading"
     :characters="characters"
     :messages.sync="messages"
     :notification.sync="notification"
@@ -157,7 +157,6 @@
       </v-dialog>
     </template>
   </character-list>
-  <skeleton-cards v-else />
 </template>
 <script lang="ts">
 import { Character } from "@/store/modules/character";
@@ -170,16 +169,14 @@ import CharacterList from "@/components/CharacterList.vue";
 import TitleComponent from "@/mixins/TitleComponent";
 import { LooseObject, User } from "@/store";
 import { Form } from "@/utils";
-import SkeletonCards from "@/components/SkeletonCards.vue";
 
 @Component({
   name: "player-characters-as-player",
   components: {
     "character-list": CharacterList,
-    "skeleton-cards": SkeletonCards,
   },
 })
-export default class PlayerCharactersAsPlayer extends TitleComponent {
+export default class NavigationDrawerPlayerCharactersAsPlayer extends TitleComponent {
   title = this.$t("my-characters");
   messages: string[] = [];
   notification = false;

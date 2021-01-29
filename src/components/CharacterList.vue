@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container v-if="!loading" fluid>
     <v-data-iterator :items="characters" hide-default-footer>
       <template v-slot:header>
         <v-toolbar flat>
@@ -93,6 +93,7 @@
       </template>
     </v-snackbar>
   </v-container>
+  <skeleton-cards v-else />
 </template>
 <script lang="ts">
 import { Character } from "@/store/modules/character";
@@ -105,9 +106,13 @@ import { localiseItem } from "@/utils/localise";
 import { LooseObject } from "@/store/types";
 import { User } from "@/store";
 import { characterToLink } from "@/utils";
+import SkeletonCards from "@/components/SkeletonCards.vue";
 
 @Component({
   name: "character-list",
+  components: {
+    "skeleton-cards": SkeletonCards,
+  },
 })
 export default class CharacterList extends Vue {
   @Prop({ type: Array, required: true })
@@ -124,6 +129,9 @@ export default class CharacterList extends Vue {
 
   @Prop({ type: Boolean, required: false })
   editable!: boolean;
+
+  @Prop({ type: Boolean })
+  loading: boolean | undefined;
 
   deleteDialog = false;
 

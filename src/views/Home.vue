@@ -13,7 +13,7 @@ import PlayerCharactersAsPlayer from "./character/PlayerCharactersAsPlayer.vue";
     "player-characters-as-player": PlayerCharactersAsPlayer,
   },
 })
-export default class Home extends mixins(TitleComponent) {
+export default class NavigationDrawerHome extends mixins(TitleComponent) {
   title = this.$t("home");
 }
 </script>
