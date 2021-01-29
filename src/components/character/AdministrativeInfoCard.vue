@@ -3,6 +3,11 @@
     :id="id"
     :editable="editable"
     :title="$t('administrative-info')"
+    :error.sync="error"
+    :messages="messages"
+    :edit.sync="edit"
+    @save="save"
+    @cancel="cancel"
   >
     <template v-slot:fields="{ edit }">
       <v-row dense>
@@ -17,7 +22,7 @@
           >
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
-                v-model="character.startDate"
+                v-model="administrativeInfo.startDate"
                 :label="$t('start-date')"
                 prepend-inner-icon="mdi-calendar"
                 readonly
@@ -29,14 +34,14 @@
               ></v-text-field>
             </template>
             <v-date-picker
-              v-model="character.startDate"
+              v-model="administrativeInfo.startDate"
               @input="startDatePicker = false"
             ></v-date-picker>
           </v-menu>
         </v-col>
         <v-col cols="12">
           <v-select
-            v-model="character.dungeonMaster"
+            v-model="administrativeInfo.dungeonMaster"
             :label="$t('dungeon-master')"
             :items="users"
             item-value="username"
@@ -52,7 +57,16 @@
 import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
-import { User } from "@/store";
+import { Character, User } from "@/store";
+
+type AdministrativeInfo = Pick<Character, "startDate" | "dungeonMaster">;
+
+const copyAdministrativeInfo = (
+  info?: AdministrativeInfo
+): AdministrativeInfo => ({
+  startDate: info?.startDate,
+  dungeonMaster: info?.dungeonMaster,
+});
 
 @Component({
   name: "administrative-info-card",
@@ -62,6 +76,7 @@ import { User } from "@/store";
 })
 export default class AdministrativeInfoCard extends CharacterInfo {
   startDatePicker = false;
+  administrativeInfo = copyAdministrativeInfo(this.character);
 
   get users(): User[] {
     return this.$store.getters["getUsers"];
@@ -69,6 +84,14 @@ export default class AdministrativeInfoCard extends CharacterInfo {
 
   async created() {
     this.$store.dispatch("loadUsers");
+  }
+
+  save() {
+    this.update({ id: this.character.id, ...this.administrativeInfo });
+  }
+
+  cancel() {
+    this.administrativeInfo = copyAdministrativeInfo(this.character);
   }
 }
 </script>

@@ -91,7 +91,7 @@ export default class MagicalItemAdmin extends Vue {
   }
 
   priceToString(price: number) {
-    return getPriceString(price, this.$i18n);
+    return getPriceString(price);
   }
 
   created() {

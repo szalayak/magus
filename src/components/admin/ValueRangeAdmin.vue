@@ -51,7 +51,7 @@ export default class ValueRangeAdmin extends Vue {
   customColumns = ["type"];
 
   get valueRangeTypes() {
-    return getValueRangeTypes(this.$i18n);
+    return getValueRangeTypes();
   }
 
   get headers() {

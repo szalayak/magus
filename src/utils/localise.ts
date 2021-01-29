@@ -2,7 +2,10 @@ import { Locale } from "@/API";
 import locale from "@/locale";
 import { Describable, Description } from "@/store/types";
 
-export const localiseItem = (obj: Describable, locale: string): Describable => {
+export const localiseItem = (
+  obj: Describable = {},
+  locale: string
+): Describable => {
   const res = {
     ...obj,
     description: obj.descriptions?.find(d => d.locale === locale),

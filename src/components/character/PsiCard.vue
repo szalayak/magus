@@ -1,10 +1,19 @@
 <template>
-  <character-info-card :id="id" :editable="editable" :title="$t('psi')">
+  <character-info-card
+    :id="id"
+    :editable="editable"
+    :title="$t('psi')"
+    :error.sync="error"
+    :messages="messages"
+    :edit.sync="edit"
+    @save="save"
+    @cancel="cancel"
+  >
     <template v-slot:fields="{ edit }">
       <v-row dense>
         <v-col cols="12" sm="12">
           <v-select
-            v-model="character.psiSchool"
+            v-model="psi.psiSchool"
             :label="$t('school')"
             :items="psiSchools"
             item-value="id"
@@ -16,7 +25,7 @@
         <v-col cols="12" sm="12" md="6">
           <v-text-field
             class="font-weight-bold"
-            v-model.number="psiPoints.current"
+            v-model.number="psi.psiPoints.current"
             :label="$t('current')"
             type="number"
             :disabled="!edit"
@@ -24,7 +33,7 @@
         </v-col>
         <v-col cols="12" sm="12" md="6">
           <v-text-field
-            v-model.number="psiPoints.max"
+            v-model.number="psi.psiPoints.max"
             :label="$t('max')"
             type="number"
             :disabled="!edit"
@@ -32,7 +41,7 @@
         </v-col>
         <v-col cols="12" sm="12" md="6">
           <v-text-field
-            v-model.number="character.psiLevel"
+            v-model.number="psi.psiLevel"
             :label="$t('level')"
             type="number"
             :disabled="!edit"
@@ -53,9 +62,19 @@
 import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
-import { localise } from "@/utils/localise";
 import { PsiSchool } from "@/store/modules/psiSchool";
-import { MutablePointValue } from "@/store/types";
+import { Character } from "@/store";
+
+type Psi = Pick<Character, "psiSchool" | "psiPoints" | "psiLevel">;
+
+const copyPsi = (psi: Psi): Psi => ({
+  psiSchool: psi.psiSchool,
+  psiLevel: psi.psiLevel,
+  psiPoints: {
+    current: psi.psiPoints?.current,
+    max: psi.psiPoints?.max,
+  },
+});
 
 @Component({
   name: "psi-card",
@@ -64,6 +83,8 @@ import { MutablePointValue } from "@/store/types";
   },
 })
 export default class PsiCard extends CharacterInfo {
+  psi = copyPsi(this.character);
+
   get psiSchools(): PsiSchool[] {
     return [
       {
@@ -72,21 +93,20 @@ export default class PsiCard extends CharacterInfo {
           title: this.$t("none"),
         },
       },
-      ...localise(this.$store.getters["psiSchool/list"], this.$i18n.locale),
+      ...this.$store.getters["psiSchool/list"],
     ] as PsiSchool[];
   }
 
   get psiPointsPerLevel() {
-    return this.character.psiSchool?.psiPointsPerLevel;
+    return this.psi.psiSchool?.psiPointsPerLevel;
   }
 
-  get psiPoints(): MutablePointValue {
-    if (!this.character.psiPoints) this.character.psiPoints = {};
-    return this.character.psiPoints || {};
+  save() {
+    this.update({ id: this.character.id, ...this.psi });
   }
 
-  set psiPoints(psiPoints: MutablePointValue) {
-    Object.assign(this.character.psiPoints, psiPoints);
+  cancel() {
+    this.psi = copyPsi(this.character);
   }
 }
 </script>

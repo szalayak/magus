@@ -31,16 +31,14 @@ export default class CharacterPage extends Vue {
 
   get editable(): boolean {
     return (
-      this.character.owner === this.$store.getters["currentUser"] ||
+      this.character?.owner === this.$store.getters["currentUser"] ||
       this.$store.getters["isCurrentUserAdmin"]
     );
   }
 
-  get character(): Character {
-    return (
-      this.$store.getters["character/list"].find(
-        (char: Character) => char.id === this.id
-      ) || {}
+  get character(): Character | undefined {
+    return this.$store.getters["character/list"].find(
+      (char: Character) => char.id === this.id
     );
   }
 
@@ -63,7 +61,7 @@ export default class CharacterPage extends Vue {
       await this.$store.dispatch("character/loadItem", this.id);
 
       // set title
-      this.$store.commit("setAppTitle", this.character.name || "");
+      this.$store.commit("setAppTitle", this.character?.name || "");
 
       // load all other necessary data
       await Promise.all([
@@ -84,7 +82,7 @@ export default class CharacterPage extends Vue {
           : error.errors?.map((err: LooseObject) => err.message) || [];
       this.notification = true;
     }
-    if (this.character.playerCharacter)
+    if (this.character?.playerCharacter)
       this.$store.dispatch("character/subscribeToUpdate", this.character);
   }
 }

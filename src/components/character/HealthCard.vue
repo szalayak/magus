@@ -1,5 +1,14 @@
 <template>
-  <character-info-card :id="id" :editable="editable" :title="$t('vitality')">
+  <character-info-card
+    :id="id"
+    :editable="editable"
+    :title="$t('vitality')"
+    :error.sync="error"
+    :messages="messages"
+    :edit.sync="edit"
+    @save="save"
+    @cancel="cancel"
+  >
     <template v-slot:fields="{ edit }">
       <v-subheader class="pl-0">{{ $t("vitality") }}</v-subheader>
       <v-row dense>
@@ -84,6 +93,34 @@ import CharacterInfoCard from "./CharacterInfoCard.vue";
 import ThrowScenarioDialog from "../ThrowScenarioDialog.vue";
 import { getThrowScenarioString } from "@/utils/throwScenario";
 
+// vitality?: MutablePointValue;
+// baseVitality?: number;
+// vitalityModifier?: number;
+// hitPoints?: MutablePointValue;
+// baseHitPoints?: number;
+// hitPointModifier?: number;
+// hitPointsPerLevel?: ThrowScenario;
+
+const copyHealth = (health?: HealthInformation): HealthInformation => ({
+  vitality: {
+    current: health?.vitality?.current,
+    max: health?.vitality?.max,
+  },
+  baseVitality: health?.baseVitality,
+  vitalityModifier: health?.vitalityModifier,
+  hitPoints: {
+    current: health?.hitPoints?.current,
+    max: health?.hitPoints?.max,
+  },
+  baseHitPoints: health?.baseHitPoints,
+  hitPointModifier: health?.hitPointModifier,
+  hitPointsPerLevel: {
+    iterationCount: health?.hitPointsPerLevel?.iterationCount,
+    dice: health?.hitPointsPerLevel?.dice,
+    modifier: health?.hitPointsPerLevel?.modifier,
+  },
+});
+
 @Component({
   name: "health-card",
   components: {
@@ -92,26 +129,18 @@ import { getThrowScenarioString } from "@/utils/throwScenario";
   },
 })
 export default class HealthCard extends CharacterInfo {
-  get health() {
-    const defaultHealth = {
-      vitality: {},
-      hitPoints: {},
-      hitPointsPerLevel: {
-        dice: undefined,
-        iterationCount: 1,
-        modifier: undefined,
-      },
-    };
-    if (!this.character.health) this.character.health = defaultHealth;
-    return this.character.health || defaultHealth;
-  }
-
-  set health(health: HealthInformation) {
-    Object.assign(this.character.health, health);
-  }
+  health = copyHealth(this.character.health);
 
   throwScenarioToString(scenario: ThrowScenario) {
-    return getThrowScenarioString(scenario, this.$i18n);
+    return getThrowScenarioString(scenario);
+  }
+
+  save() {
+    this.update({ id: this.character.id, health: this.health });
+  }
+
+  cancel() {
+    this.health = copyHealth(this.character.health);
   }
 }
 </script>

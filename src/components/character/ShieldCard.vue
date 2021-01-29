@@ -1,10 +1,19 @@
 <template>
-  <character-info-card :id="id" :editable="editable" :title="$t('shield')">
+  <character-info-card
+    :id="id"
+    :editable="editable"
+    :title="$t('shield')"
+    :error.sync="error"
+    :messages="messages"
+    :edit.sync="edit"
+    @save="save"
+    @cancel="cancel"
+  >
     <template v-slot:fields="{ edit }">
       <v-row dense>
         <v-col cols="12">
           <v-select
-            v-model="shield"
+            v-model="shieldData.shield"
             :items="shields"
             item-text="description.title"
             item-value="id"
@@ -15,7 +24,7 @@
         </v-col>
         <v-col cols="12">
           <v-select
-            v-model="character.shieldMastery"
+            v-model="shieldData.shieldMastery"
             :items="masteryLevels"
             :label="$t('mastery')"
             :disabled="!edit"
@@ -23,7 +32,7 @@
         </v-col>
         <v-col cols="12">
           <v-checkbox
-            v-model="character.shieldInHand"
+            v-model="shieldData.shieldInHand"
             :label="$t('in-hand')"
             :disabled="!edit"
           />
@@ -63,11 +72,29 @@
 import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
-import { localise } from "@/utils/localise";
 import { getPriceString } from "@/utils/price";
 import { Shield } from "@/store/modules/shield";
 import { ThrowScenario } from "@/store/types";
 import { getThrowScenarioString } from "@/utils/throwScenario";
+import { Character } from "@/store";
+
+type ShieldData = Pick<Character, "shield" | "shieldMastery" | "shieldInHand">;
+
+const copyShieldData = (shieldData: ShieldData): ShieldData => ({
+  shield: {
+    id: shieldData.shield?.id,
+    description: shieldData.shield?.description,
+    descriptions: shieldData.shield?.descriptions,
+    combatValues: shieldData.shield?.combatValues,
+    damage: shieldData.shield?.damage,
+    movementPreventionValue: shieldData.shield?.movementPreventionValue,
+    attacksPerTurn: shieldData.shield?.attacksPerTurn,
+    price: shieldData.shield?.price,
+    weight: shieldData.shield?.weight,
+  },
+  shieldMastery: shieldData.shieldMastery,
+  shieldInHand: shieldData.shieldInHand,
+});
 
 @Component({
   name: "shield-card",
@@ -76,12 +103,14 @@ import { getThrowScenarioString } from "@/utils/throwScenario";
   },
 })
 export default class ShieldCard extends CharacterInfo {
+  shieldData = copyShieldData(this.character);
+
   damage(damage?: ThrowScenario) {
-    return getThrowScenarioString(damage || {}, this.$i18n);
+    return getThrowScenarioString(damage);
   }
 
   price(shield: Shield) {
-    return getPriceString(shield.price || 0, this.$i18n);
+    return getPriceString(shield.price);
   }
 
   get shields(): Shield[] {
@@ -92,20 +121,23 @@ export default class ShieldCard extends CharacterInfo {
           title: this.$t("none"),
         },
       },
-      ...localise(this.$store.getters["shield/list"], this.$i18n.locale),
+      ...this.$store.getters["shield/list"],
     ] as Shield[];
-  }
-  get shield(): Shield {
-    if (!this.character.shield) this.character.shield = {};
-    return this.character.shield || {};
-  }
-
-  set shield(shield: Shield) {
-    Object.assign(this.character.shield, shield);
   }
 
   get combatValues() {
-    return this.shield.combatValues || {};
+    return this.shieldData.shield?.combatValues || {};
+  }
+  get shield() {
+    return this.shieldData.shield || {};
+  }
+
+  save() {
+    this.update({ id: this.character.id, ...this.shieldData });
+  }
+
+  cancel() {
+    this.shieldData = copyShieldData(this.character);
   }
 }
 </script>

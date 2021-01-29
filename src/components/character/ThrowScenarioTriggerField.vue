@@ -78,7 +78,7 @@ export default class ThrowScenarioTriggerField extends Vue {
   modifier: number | null = null;
 
   get throwScenarioToString() {
-    return getThrowScenarioString(this.throwScenario, this.$i18n);
+    return getThrowScenarioString(this.throwScenario);
   }
 
   open() {

@@ -1,4 +1,6 @@
+import i18n from "@/i18n";
 import { ActionProps, Identifiable, PageableState, RootState } from "@/store";
+import { localiseItem } from "@/utils";
 import { ActionTree } from "vuex";
 import { Character, CharacterCore, CharacterQueryResult } from ".";
 import { Assignment } from "./types";
@@ -7,10 +9,19 @@ export const mapCharacterResult = (item: CharacterQueryResult): Character => {
   const core = item as CharacterCore;
   return {
     ...core,
-    weapons: item.weapons?.items,
-    skills: item.skills?.items,
+    weapons: item.weapons?.items.map(i => ({
+      ...i,
+      weapon: localiseItem(i.weapon, i18n.locale),
+    })),
+    skills: item.skills?.items.map(i => ({
+      ...i,
+      skill: localiseItem(i.skill, i18n.locale),
+    })),
     companions: item.companions?.items,
-    magicalItems: item.magicalItems?.items,
+    magicalItems: item.magicalItems?.items.map(i => ({
+      ...i,
+      magicalItem: localiseItem(i.magicalItem, i18n.locale),
+    })),
   };
 };
 
