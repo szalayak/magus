@@ -1,66 +1,76 @@
 <template>
-  <v-row dense>
-    <v-col id="combat-values" cols="12" xs="12" sm="6" xl="3">
-      <character-combat-values-quick-view
-        :character="character"
-        @error="onError"
-      />
-    </v-col>
-    <v-col id="vitality" cols="12" xs="12" sm="6" lg="3" xl="2"
-      ><character-vitality-quick-view :character="character" @error="onError"
-    /></v-col>
-    <v-col
-      id="psi-mana-points"
-      v-if="character.psiUser || character.magicUser"
-      cols="12"
-      xs="12"
-      md="6"
-      lg="3"
-      xl="2"
-      ><character-psi-mana-points-quick-view
-        :character="character"
-        @error="onError"
-      />
-    </v-col>
-    <v-col id="abilities" cols="12" xs="12" sm="6" lg="3">
-      <character-abilities-quick-view :character="character" @error="onError" />
-    </v-col>
-    <v-col id="spell-resistance" cols="12" xs="12" sm="6" lg="3" xl="2">
-      <character-spell-resistance-quick-view
-        :character="character"
-        @error="onError"
-      />
-    </v-col>
-    <v-col
-      v-if="hasPercentageSkills"
-      id="percentage-skills"
-      cols="12"
-      xs="12"
-      md="6"
-      lg="3"
-      xl="2"
-      ><character-percentage-skills-quick-view
-        :character="character"
-        @error="onError"
-    /></v-col>
-    <v-col v-if="hasSkills" id="skills" cols="12" xs="12" sm="6" lg="3" xl="2"
-      ><character-skills-quick-view :character="character" @error="onError"
-    /></v-col>
-    <v-snackbar
-      v-for="message in messages"
-      v-model="notification"
-      :key="message"
+  <v-card class="pa-0" flat tile>
+    <v-toolbar flat class="character-info-card-toolbar "
+      ><v-toolbar-title>{{ $t("overview") }}</v-toolbar-title></v-toolbar
     >
-      {{ message }}
+    <v-card-text class="pa-0">
+      <v-row dense>
+        <v-col cols="12" xs="12" sm="6" xl="3">
+          <character-combat-values-quick-view
+            :character="character"
+            @error="onError"
+          />
+        </v-col>
+        <v-col cols="12" xs="12" sm="6" lg="3" xl="2"
+          ><character-vitality-quick-view
+            :character="character"
+            @error="onError"
+        /></v-col>
+        <v-col
+          v-if="character.psiUser || character.magicUser"
+          cols="12"
+          xs="12"
+          md="6"
+          lg="3"
+          xl="2"
+          ><character-psi-mana-points-quick-view
+            :character="character"
+            @error="onError"
+          />
+        </v-col>
+        <v-col cols="12" xs="12" sm="6" lg="3">
+          <character-abilities-quick-view
+            :character="character"
+            @error="onError"
+          />
+        </v-col>
+        <v-col cols="12" xs="12" sm="6" lg="3" xl="2">
+          <character-spell-resistance-quick-view
+            :character="character"
+            @error="onError"
+          />
+        </v-col>
+        <v-col v-if="hasPercentageSkills" cols="12" xs="12" md="6" lg="3" xl="2"
+          ><character-percentage-skills-quick-view
+            :character="character"
+            @error="onError"
+        /></v-col>
+        <v-col v-if="hasSkills" cols="12" xs="12" sm="6" lg="3" xl="2"
+          ><character-skills-quick-view :character="character" @error="onError"
+        /></v-col>
+        <v-snackbar
+          v-for="message in messages"
+          v-model="notification"
+          :key="message"
+        >
+          {{ message }}
 
-      <template v-slot:action="{ attrs }">
-        <v-btn text v-bind="attrs" @click="notification = false">
-          {{ $t("close") }}
-        </v-btn>
-      </template>
-    </v-snackbar>
-  </v-row>
+          <template v-slot:action="{ attrs }">
+            <v-btn text v-bind="attrs" @click="notification = false">
+              {{ $t("close") }}
+            </v-btn>
+          </template>
+        </v-snackbar>
+      </v-row>
+    </v-card-text>
+  </v-card>
 </template>
+
+<style>
+.character-info-card-toolbar .v-toolbar__content {
+  padding: 0px !important;
+}
+</style>
 
 <script lang="ts">
 import Component from "vue-class-component";

@@ -1,7 +1,12 @@
 export default [
   {
-    id: "appearance",
+    id: "overview",
     icon: "mdi-eye",
+    title: "overview",
+  },
+  {
+    id: "appearance",
+    icon: "mdi-account",
     title: "appearance",
   },
   {

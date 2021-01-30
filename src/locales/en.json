@@ -312,5 +312,7 @@
   "perception-check": "Perception Check",
   "percentage-skills": "Percentage Skills",
   "skill-check": "Skill Check",
-  "armour-active": "Active"
+  "armour-active": "Active",
+  "overview": "Overview",
+  "navigate-to": "Navigate To"
 }

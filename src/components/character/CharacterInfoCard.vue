@@ -1,7 +1,7 @@
 <template>
   <v-hover v-slot="{ hover }">
-    <v-card flat>
-      <v-toolbar flat>
+    <v-card class="pa-0" flat tile>
+      <v-toolbar class="character-info-card-toolbar" flat>
         <v-toolbar-title>{{ title }}</v-toolbar-title>
         <v-btn
           icon
@@ -16,7 +16,7 @@
           <v-icon>{{ show ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
         </v-btn> -->
       </v-toolbar>
-      <v-card-text v-show="show">
+      <v-card-text class="pa-0" v-show="show">
         <v-alert
           :value="error"
           dense
@@ -43,6 +43,13 @@
     </v-card>
   </v-hover>
 </template>
+
+<style>
+.character-info-card-toolbar .v-toolbar__content {
+  padding: 0px !important;
+}
+</style>
+
 <script lang="ts">
 import { Form } from "@/utils";
 import Component from "vue-class-component";
