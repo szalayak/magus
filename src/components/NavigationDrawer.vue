@@ -4,9 +4,11 @@
     :value="isNavDrawerOpen"
     @input="setNavDrawerOpen($event)"
     clipped
+    floating
     app
   >
     <v-list nav dense>
+      <slot name="navbar-items"></slot>
       <v-subheader>{{ $t("general") }}</v-subheader>
       <v-list-item to="/">
         <v-list-item-icon>
@@ -50,7 +52,7 @@
           {{ $t(dungeonMasterAreaRoute.title) }}
         </v-list-item-title>
       </v-list-item>
-      <template>
+      <template v-if="encyclopedia">
         <v-subheader>{{ $t("encyclopedia") }}</v-subheader>
         <v-list-item
           v-for="adminRoute in adminRoutes"
@@ -65,14 +67,17 @@
           </v-list-item-title>
         </v-list-item>
       </template>
-      <v-list-item v-if="isCurrentUserAdmin" to="/admin/seed-default-values">
-        <v-list-item-icon>
-          <v-icon>mdi-database-sync</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title>
-          {{ $t("seed-default-values") }}
-        </v-list-item-title>
-      </v-list-item>
+      <template v-if="isCurrentUserAdmin && administration">
+        <v-subheader>{{ $t("administration") }}</v-subheader>
+        <v-list-item to="/admin/seed-default-values">
+          <v-list-item-icon>
+            <v-icon>mdi-database-sync</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>
+            {{ $t("seed-default-values") }}
+          </v-list-item-title>
+        </v-list-item>
+      </template>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -83,11 +88,16 @@ import { adminRoutes } from "@/router/admin";
 import { playerAreaRoutes } from "@/router/playerArea";
 import { dungeonMasterAreaRoutes } from "@/router/dungeonMasterArea";
 export default Vue.extend({
+  name: "navigation-drawer",
   data: () => ({
     adminRoutes,
     playerAreaRoutes,
     dungeonMasterAreaRoutes,
   }),
+  props: {
+    encyclopedia: Boolean,
+    administration: Boolean,
+  },
   computed: {
     ...mapGetters([
       "isCurrentUserAdmin",

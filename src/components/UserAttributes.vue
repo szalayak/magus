@@ -6,7 +6,7 @@
       </v-list-item>
     </template>
     <v-card>
-      <v-toolbar dark color="primary" class="mb-2">
+      <v-toolbar flat class="mb-2">
         <v-toolbar-title>{{ $t("profile") }}</v-toolbar-title>
       </v-toolbar>
       <v-card-text>

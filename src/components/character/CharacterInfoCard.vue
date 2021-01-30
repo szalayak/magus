@@ -1,10 +1,8 @@
 <template>
   <v-hover v-slot="{ hover }">
-    <v-card outlined>
+    <v-card flat>
       <v-toolbar flat>
         <v-toolbar-title>{{ title }}</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <slot name="toolbar" :edit="edit" />
         <v-btn
           icon
           @click="$emit('update:edit', true)"
@@ -12,9 +10,11 @@
         >
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
-        <v-btn icon @click="show = !show">
+        <v-spacer></v-spacer>
+        <slot name="toolbar" :edit="edit" />
+        <!-- <v-btn icon @click="show = !show">
           <v-icon>{{ show ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
-        </v-btn>
+        </v-btn> -->
       </v-toolbar>
       <v-card-text v-show="show">
         <v-alert
