@@ -536,8 +536,8 @@ export default class CharacterOverviewAsDM extends TitleComponent {
     return this.$store.getters["character/nonPlayerCharactersAsDM"];
   }
 
-  characterToLink(character: Character, page?: number, selector?: string) {
-    return characterToLink(character, page, selector);
+  characterToLink(character: Character, selector?: string) {
+    return characterToLink(character, selector);
   }
 
   onError(error: { messages: string[] }) {

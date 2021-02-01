@@ -4,11 +4,12 @@
     :notification="notification"
     :messages="messages"
     @refresh="refresh"
+    v-if="character"
   >
     <v-row dense no-gutters>
-      <v-col id="overview" cols="12">
+      <!-- <v-col id="overview" cols="12">
         <character-overview :character="character" :id="id" />
-      </v-col>
+      </v-col> -->
       <v-col id="appearance" cols="12">
         <appearance :id="id" :editable="editable" :character="character" />
       </v-col>
@@ -121,6 +122,7 @@
       </v-col>
     </v-row>
   </character-page-layout>
+  <skeleton-cards v-else :count="12" />
 </template>
 <script lang="ts">
 import CharacterPage from "./CharacterPage";
@@ -153,6 +155,7 @@ import AnimalsCard from "@/components/character/AnimalsCard.vue";
 import ServantsCard from "@/components/character/ServantsCard.vue";
 import CharacterOverview from "@/components/character/CharacterOverview.vue";
 import CharacterPageLayout from "@/components/CharacterPageLayout.vue";
+import SkeletonCards from "@/components/SkeletonCards.vue";
 
 @Component({
   name: "player-character",
@@ -185,6 +188,7 @@ import CharacterPageLayout from "@/components/CharacterPageLayout.vue";
     servants: ServantsCard,
     "character-overview": CharacterOverview,
     "character-page-layout": CharacterPageLayout,
+    "skeleton-cards": SkeletonCards,
   },
 })
 export default class PlayerCharacter extends CharacterPage {}

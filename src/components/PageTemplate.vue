@@ -15,7 +15,7 @@
 <script lang="ts">
 import Vue from "vue";
 import AppBar from "./AppBar.vue";
-import NavigationDrawer from "./NavigationDrawer.vue";
+import NavigationDrawer from "@/components/navigation/NavigationDrawer.vue";
 export default Vue.extend({
   name: "page-template",
   components: {

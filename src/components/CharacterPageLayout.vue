@@ -19,11 +19,7 @@
         </v-list-item>
       </v-list-group>
     </template>
-    <vue-pull-refresh
-      v-if="character"
-      :on-refresh="refresh"
-      :config="pullToRefreshConfig"
-    >
+    <vue-pull-refresh :on-refresh="refresh" :config="pullToRefreshConfig">
       <v-card flat>
         <v-card-text class="pt-1">
           <slot :character="character"></slot>
@@ -69,14 +65,12 @@
         </v-card-actions>
       </v-card>
     </vue-pull-refresh>
-    <skeleton-cards v-else :count="12" />
   </page-template>
 </template>
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
 import VuePullRefresh from "vue-pull-refresh";
-import SkeletonCards from "@/components/SkeletonCards.vue";
 import { Character } from "@/store";
 import { Prop } from "vue-property-decorator";
 import PageTemplate from "./PageTemplate.vue";
@@ -87,7 +81,6 @@ import { characterToLink } from "@/utils";
   name: "player-character",
   components: {
     "vue-pull-refresh": VuePullRefresh,
-    "skeleton-cards": SkeletonCards,
     PageTemplate,
   },
 })
@@ -115,7 +108,7 @@ export default class CharacterPageLayout extends Vue {
   }
 
   get characterComponents() {
-    return characterComponents;
+    return characterComponents(this.character);
   }
 
   nav = false;
