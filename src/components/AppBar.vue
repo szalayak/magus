@@ -59,7 +59,7 @@ import ThrowDice from "./ThrowDice.vue";
 })
 export default class AppBar extends Vue {
   get color() {
-    return this.$vuetify.theme.dark ? "#1E1E1E" : "white";
+    return this.$vuetify.theme.dark ? "#121212" : "white";
   }
 }
 </script>

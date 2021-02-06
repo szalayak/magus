@@ -7,6 +7,7 @@
     clipped
     floating
     app
+    :color="color"
   >
     <v-list nav dense>
       <general />
@@ -54,6 +55,9 @@ export default Vue.extend({
       "isLoggedIn",
       "isNavDrawerOpen",
     ]),
+    color() {
+      return this.$vuetify.theme.dark ? "#121212" : "white";
+    },
   },
   methods: {
     ...mapMutations(["setNavDrawerOpen"]),
