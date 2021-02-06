@@ -3,7 +3,7 @@
     v-if="isLoggedIn"
     :value="isNavDrawerOpen"
     @input="setNavDrawerOpen($event)"
-    mobile-breakpoint="sm"
+    mobile-breakpoint="1000"
     clipped
     floating
     app
