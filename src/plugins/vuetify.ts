@@ -11,4 +11,9 @@ export default new Vuetify({
     locales: { en, hu },
     current: locale,
   },
+  theme: {
+    dark:
+      window?.matchMedia &&
+      window?.matchMedia("(prefers-color-scheme: dark)").matches,
+  },
 });

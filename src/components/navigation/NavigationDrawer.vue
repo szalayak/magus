@@ -9,8 +9,8 @@
     app
   >
     <v-list nav dense>
-      <slot name="navbar-items"></slot>
       <general />
+      <slot name="navbar-items"></slot>
       <player-area />
       <dungeon-master-area />
       <encyclopedia v-if="encyclopedia" />

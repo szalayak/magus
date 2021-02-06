@@ -1,7 +1,7 @@
 <template>
   <v-hover v-slot="{ hover }">
     <v-card class="pa-0" flat tile>
-      <v-toolbar class="character-info-card-toolbar" flat>
+      <v-toolbar class="character-info-card-toolbar" flat :color="color">
         <v-toolbar-title>{{ title }}</v-toolbar-title>
         <v-btn
           icon
@@ -12,9 +12,6 @@
         </v-btn>
         <v-spacer></v-spacer>
         <slot name="toolbar" :edit="edit" />
-        <!-- <v-btn icon @click="show = !show">
-          <v-icon>{{ show ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
-        </v-btn> -->
       </v-toolbar>
       <v-card-text class="pa-0" v-show="show">
         <v-alert
@@ -77,6 +74,10 @@ export default class CharacterInfoCard extends Vue {
 
   valid = true;
   show = true;
+
+  get color() {
+    return this.$vuetify.theme.dark ? "#1E1E1E" : "white";
+  }
 
   async save() {
     if ((this.$refs.data as Form).validate()) {

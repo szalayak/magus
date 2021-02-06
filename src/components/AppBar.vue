@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar clipped-left app elevate-on-scroll color="white">
+  <v-app-bar clipped-left app elevate-on-scroll :color="color">
     <v-app-bar-nav-icon
       v-if="isLoggedIn"
       @click="$store.commit('toggleNavDrawer')"
@@ -14,7 +14,8 @@
     >
 
     <v-spacer></v-spacer>
-    <slot name="actions">
+    <slot name="actions"></slot>
+    <template v-if="!hideDefaultActions">
       <throw-dice v-if="isLoggedIn" />
       <v-menu offset-y v-if="isLoggedIn">
         <template v-slot:activator="{ on, attrs }">
@@ -34,7 +35,7 @@
           <user-attributes />
         </v-list>
       </v-menu>
-    </slot>
+    </template>
   </v-app-bar>
 </template>
 
@@ -47,11 +48,18 @@ import ThrowDice from "./ThrowDice.vue";
 
 @Component({
   name: "app-bar",
+  props: {
+    hideDefaultActions: { type: Boolean, default: false },
+  },
   components: {
     "user-attributes": UserAttributes,
     "throw-dice": ThrowDice,
   },
   computed: { ...mapState(["app"]), ...mapGetters(["isLoggedIn", "title"]) },
 })
-export default class AppBar extends Vue {}
+export default class AppBar extends Vue {
+  get color() {
+    return this.$vuetify.theme.dark ? "#1E1E1E" : "white";
+  }
+}
 </script>

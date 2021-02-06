@@ -62,6 +62,13 @@ export default Vue.extend({
   },
   methods: {
     ...mapMutations(["setAuthState", "setUser"]),
+    created() {
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", event => {
+          this.$vuetify.theme.dark = event.matches;
+        });
+    },
   },
 });
 </script>

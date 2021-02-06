@@ -27,51 +27,45 @@
               {{ messages }}
             </v-alert>
             <v-form :disabled="!editable" ref="form" v-model="valid">
-              <v-container>
-                <v-row dense>
-                  <v-col cols="12">
-                    <v-select
-                      v-model="editedItem.skill"
-                      :items="skills"
-                      item-text="description.title"
-                      item-value="id"
-                      :label="$t('skill')"
-                      return-object
-                    ></v-select>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-select
-                      v-model="editedItem.mastery"
-                      v-if="
-                        editedItem.skill && !editedItem.skill.percentageSkill
-                      "
-                      :items="masteryLevels"
-                      :label="$t('mastery')"
-                    ></v-select>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-text-field
-                      v-model.number="editedItem.percentageValue"
-                      v-if="
-                        editedItem.skill && editedItem.skill.percentageSkill
-                      "
-                      :label="$t('percentage')"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-text-field
-                      v-model.number="editedItem.skillPointsUsed"
-                      :label="$t('skill-points-used')"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-text-field
-                      v-model="editedItem.notes"
-                      :label="$t('notes')"
-                    />
-                  </v-col>
-                </v-row>
-              </v-container>
+              <v-row dense>
+                <v-col cols="12">
+                  <v-select
+                    v-model="editedItem.skill"
+                    :items="skills"
+                    item-text="description.title"
+                    item-value="id"
+                    :label="$t('skill')"
+                    return-object
+                  ></v-select>
+                </v-col>
+                <v-col cols="12">
+                  <v-select
+                    v-model="editedItem.mastery"
+                    v-if="editedItem.skill && !editedItem.skill.percentageSkill"
+                    :items="masteryLevels"
+                    :label="$t('mastery')"
+                  ></v-select>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model.number="editedItem.percentageValue"
+                    v-if="editedItem.skill && editedItem.skill.percentageSkill"
+                    :label="$t('percentage')"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model.number="editedItem.skillPointsUsed"
+                    :label="$t('skill-points-used')"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="editedItem.notes"
+                    :label="$t('notes')"
+                  />
+                </v-col>
+              </v-row>
             </v-form>
           </v-card-text>
 

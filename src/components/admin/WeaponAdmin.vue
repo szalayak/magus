@@ -141,7 +141,6 @@ export default class WeaponAdmin extends Vue {
       { text: this.$t("attack-range"), value: "attackRange" },
       { text: this.$t("price"), value: "price" },
       { text: this.$t("weight"), value: "weight" },
-      { text: this.$t("actions"), value: "actions", sortable: false },
     ];
   }
 

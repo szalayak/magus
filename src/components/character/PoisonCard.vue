@@ -27,23 +27,21 @@
           </v-alert>
           <v-card-text>
             <v-form ref="form" v-model="valid">
-              <v-container>
-                <v-row dense>
-                  <v-col cols="12">
-                    <v-text-field
-                      v-model="editedItem.name"
-                      :label="$t('name')"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-text-field
-                      v-model.number="editedItem.amount"
-                      type="number"
-                      :label="$t('amount')"
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
+              <v-row dense>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="editedItem.name"
+                    :label="$t('name')"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model.number="editedItem.amount"
+                    type="number"
+                    :label="$t('amount')"
+                  ></v-text-field>
+                </v-col>
+              </v-row>
             </v-form>
           </v-card-text>
           <v-card-actions>

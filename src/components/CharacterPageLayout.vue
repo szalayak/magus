@@ -1,5 +1,19 @@
 <template>
   <page-template>
+    <template v-slot:app-bar>
+      <app-bar>
+        <template v-slot:actions>
+          <slot name="actions">
+            <v-btn icon text :to="`${characterToLink()}`"
+              ><v-icon>mdi-eye</v-icon></v-btn
+            >
+            <v-btn icon text @click="refresh"
+              ><v-icon>mdi-refresh</v-icon></v-btn
+            >
+          </slot>
+        </template>
+      </app-bar>
+    </template>
     <template v-slot:navbar-items="{}">
       <v-list-group :value="true">
         <template v-slot:activator>
@@ -20,23 +34,19 @@
       </v-list-group>
     </template>
     <vue-pull-refresh :on-refresh="refresh" :config="pullToRefreshConfig">
-      <v-card flat>
+      <v-card flat :loading="loading">
         <v-card-text class="pt-1">
-          <slot :character="character"></slot>
-          <v-snackbar
-            v-for="message in messages"
+          <v-alert
             :value="notification"
-            :key="message"
-            @input="$emit('update:notification', $event)"
+            dense
+            outlined
+            type="error"
+            dismissible
+            @input="$emit('update:notification', false)"
           >
-            {{ message }}
-
-            <template v-slot:action="{ attrs }">
-              <v-btn text v-bind="attrs" @click="notification = false">
-                {{ $t("close") }}
-              </v-btn>
-            </template>
-          </v-snackbar>
+            {{ messages }}
+          </v-alert>
+          <slot :character="character"></slot>
         </v-card-text>
         <v-card-actions>
           <v-bottom-navigation
@@ -92,12 +102,14 @@ import { Prop } from "vue-property-decorator";
 import PageTemplate from "./PageTemplate.vue";
 import characterComponents from "@/utils/characterComponents";
 import { characterToLink } from "@/utils";
+import AppBar from "./AppBar.vue";
 
 @Component({
   name: "player-character",
   components: {
     "vue-pull-refresh": VuePullRefresh,
     PageTemplate,
+    "app-bar": AppBar,
   },
 })
 export default class CharacterPageLayout extends Vue {
@@ -109,6 +121,9 @@ export default class CharacterPageLayout extends Vue {
 
   @Prop({ type: Array })
   messages: string[] | undefined;
+
+  @Prop({ type: Boolean })
+  loading: boolean | undefined;
 
   get page() {
     return this.$route.params.page ? parseInt(this.$route.params.page) : 0;

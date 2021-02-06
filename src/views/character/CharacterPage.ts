@@ -8,6 +8,7 @@ export default class CharacterPage extends Vue {
   id = this.$route.params.id;
   messages: string[] = [];
   notification = false;
+  loading = false;
 
   pullToRefreshConfig = {
     loadingLabel: this.$t("loading-indicator"),
@@ -43,9 +44,13 @@ export default class CharacterPage extends Vue {
   }
 
   async refresh() {
+    this.loading = true;
     try {
       // load character
       await this.$store.dispatch("character/loadItem", this.id);
+
+      // set title
+      this.$store.commit("setAppTitle", this.character?.name || "");
     } catch (error) {
       this.messages =
         typeof error === "string"
@@ -53,9 +58,11 @@ export default class CharacterPage extends Vue {
           : error.errors?.map((err: LooseObject) => err.message) || [];
       this.notification = true;
     }
+    this.loading = false;
   }
 
   async created() {
+    this.loading = true;
     try {
       // load character
       if (!this.character)
@@ -85,5 +92,7 @@ export default class CharacterPage extends Vue {
     }
     if (this.character?.playerCharacter)
       this.$store.dispatch("character/subscribeToUpdate", this.character);
+
+    this.loading = false;
   }
 }

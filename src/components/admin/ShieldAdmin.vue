@@ -121,7 +121,6 @@ export default class ShieldAdmin extends Vue {
       { text: this.$t("damage"), value: "damage", sortable: false },
       { text: this.$t("price"), value: "price" },
       { text: this.$t("weight"), value: "weight" },
-      { text: this.$t("actions"), value: "actions", sortable: false },
     ];
   }
 

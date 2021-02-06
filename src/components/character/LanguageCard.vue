@@ -27,23 +27,21 @@
               {{ messages }}
             </v-alert>
             <v-form ref="form" v-model="valid">
-              <v-container>
-                <v-row dense>
-                  <v-col cols="12">
-                    <v-text-field
-                      v-model="editedItem.language"
-                      :label="$t('language')"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-select
-                      v-model="editedItem.level"
-                      :items="languageLevels"
-                      :label="$t('level')"
-                    ></v-select>
-                  </v-col>
-                </v-row>
-              </v-container>
+              <v-row dense>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="editedItem.language"
+                    :label="$t('language')"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <v-select
+                    v-model="editedItem.level"
+                    :items="languageLevels"
+                    :label="$t('level')"
+                  ></v-select>
+                </v-col>
+              </v-row>
             </v-form>
           </v-card-text>
           <v-card-actions>

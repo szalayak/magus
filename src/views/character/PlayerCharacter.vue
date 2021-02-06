@@ -5,11 +5,9 @@
     :messages="messages"
     @refresh="refresh"
     v-if="character"
+    :loading="loading"
   >
     <v-row dense no-gutters>
-      <!-- <v-col id="overview" cols="12">
-        <character-overview :character="character" :id="id" />
-      </v-col> -->
       <v-col id="appearance" cols="12">
         <appearance :id="id" :editable="editable" :character="character" />
       </v-col>

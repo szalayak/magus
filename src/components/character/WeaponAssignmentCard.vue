@@ -27,53 +27,51 @@
               {{ messages }}
             </v-alert>
             <v-form :disabled="!editable" ref="form" v-model="valid">
-              <v-container>
-                <v-row dense>
-                  <v-col cols="12">
-                    <v-select
-                      v-model="editedItem.weapon"
-                      :items="weapons"
-                      item-text="description.title"
-                      item-value="id"
-                      :label="$t('weapon')"
-                      return-object
-                    ></v-select>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-select
-                      v-model="editedItem.mastery"
-                      :items="masteryLevels"
-                      :label="$t('mastery')"
-                    ></v-select>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-select
-                      v-model="editedItem.breakWeapon"
-                      :items="masteryLevels"
-                      :label="$t('break-weapon')"
-                    ></v-select>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-select
-                      v-model="editedItem.disarm"
-                      :items="masteryLevels"
-                      :label="$t('disarm')"
-                    ></v-select>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-checkbox
-                      v-model="editedItem.inHand"
-                      :label="$t('in-hand')"
-                    />
-                  </v-col>
-                  <v-col cols="12">
-                    <v-text-field
-                      v-model="editedItem.notes"
-                      :label="$t('notes')"
-                    />
-                  </v-col>
-                </v-row>
-              </v-container>
+              <v-row dense>
+                <v-col cols="12">
+                  <v-select
+                    v-model="editedItem.weapon"
+                    :items="weapons"
+                    item-text="description.title"
+                    item-value="id"
+                    :label="$t('weapon')"
+                    return-object
+                  ></v-select>
+                </v-col>
+                <v-col cols="12">
+                  <v-select
+                    v-model="editedItem.mastery"
+                    :items="masteryLevels"
+                    :label="$t('mastery')"
+                  ></v-select>
+                </v-col>
+                <v-col cols="12">
+                  <v-select
+                    v-model="editedItem.breakWeapon"
+                    :items="masteryLevels"
+                    :label="$t('break-weapon')"
+                  ></v-select>
+                </v-col>
+                <v-col cols="12">
+                  <v-select
+                    v-model="editedItem.disarm"
+                    :items="masteryLevels"
+                    :label="$t('disarm')"
+                  ></v-select>
+                </v-col>
+                <v-col cols="12">
+                  <v-checkbox
+                    v-model="editedItem.inHand"
+                    :label="$t('in-hand')"
+                  />
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="editedItem.notes"
+                    :label="$t('notes')"
+                  />
+                </v-col>
+              </v-row>
             </v-form>
           </v-card-text>
 

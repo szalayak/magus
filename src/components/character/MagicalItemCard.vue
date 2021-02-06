@@ -21,32 +21,30 @@
               {{ messages }}
             </v-alert>
             <v-form :disabled="!editable" ref="form" v-model="valid">
-              <v-container>
-                <v-row dense>
-                  <v-col cols="12">
-                    <v-select
-                      v-model="editedItem.magicalItem"
-                      :items="magicalItems"
-                      item-text="description.title"
-                      item-value="id"
-                      :label="$t('magical-item')"
-                      return-object
-                    ></v-select>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-text-field
-                      v-model="editedItem.location"
-                      :label="$t('location')"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-text-field
-                      v-model="editedItem.notes"
-                      :label="$t('notes')"
-                    />
-                  </v-col>
-                </v-row>
-              </v-container>
+              <v-row dense>
+                <v-col cols="12">
+                  <v-select
+                    v-model="editedItem.magicalItem"
+                    :items="magicalItems"
+                    item-text="description.title"
+                    item-value="id"
+                    :label="$t('magical-item')"
+                    return-object
+                  ></v-select>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="editedItem.location"
+                    :label="$t('location')"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="editedItem.notes"
+                    :label="$t('notes')"
+                  />
+                </v-col>
+              </v-row>
             </v-form>
           </v-card-text>
 
