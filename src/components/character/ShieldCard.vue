@@ -11,7 +11,7 @@
   >
     <template v-slot:fields="{ edit }">
       <v-row dense>
-        <v-col cols="12">
+        <v-col cols="6">
           <v-select
             v-model="shieldData.shield"
             :items="shields"
@@ -22,7 +22,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12">
+        <v-col cols="6">
           <v-select
             v-model="shieldData.shieldMastery"
             :items="masteryLevels"
@@ -30,39 +30,39 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12">
-          <v-checkbox
-            v-model="shieldData.shieldInHand"
-            :label="$t('in-hand')"
-            :disabled="!edit"
-          />
-        </v-col>
-        <v-col cols="12">
+        <v-col cols="4">
           <v-text-field
             :label="$t('defence')"
             :value="combatValues.defence"
             disabled
           />
         </v-col>
-        <v-col cols="12">
+        <v-col cols="4">
           <v-text-field
             :label="$t('mpv')"
             :value="shield.movementPreventionValue"
             disabled
           />
         </v-col>
-        <v-col cols="12">
+        <v-col cols="4">
           <v-text-field
             :label="$t('damage')"
             :value="damage(shield.damage)"
             disabled
           />
         </v-col>
-        <v-col cols="12">
+        <v-col cols="6">
           <v-text-field :label="$t('weight')" :value="shield.weight" disabled />
         </v-col>
-        <v-col cols="12">
+        <v-col cols="6">
           <v-text-field :label="$t('price')" :value="price(shield)" disabled />
+        </v-col>
+        <v-col cols="12">
+          <v-checkbox
+            v-model="shieldData.shieldInHand"
+            :label="$t('in-hand')"
+            :disabled="!edit"
+          />
         </v-col>
       </v-row>
     </template>

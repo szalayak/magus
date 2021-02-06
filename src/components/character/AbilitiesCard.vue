@@ -11,55 +11,33 @@
   >
     <template v-slot:fields="{ edit }">
       <v-row dense>
-        <v-col cols="6">
+        <v-col cols="6" xs="6" sm="3">
           <v-text-field
             v-model.number="abilities.strength"
-            :label="$t('strength')"
+            :label="`${$t('strength')}, ${$t('damage-bonus')}: ${damageBonus}`"
             type="number"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="6">
-          <v-text-field
-            :value="damageBonus"
-            :label="$t('damage-bonus')"
-            type="number"
-            disabled
-          />
-        </v-col>
-        <v-col cols="6">
+        <v-col cols="6" xs="6" sm="3">
           <v-text-field
             v-model.number="abilities.agility"
-            :label="$t('agility')"
+            :label="`${$t('agility')}, ${$t('in-armour')}: ${agilityInArmour}`"
             type="number"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="6">
-          <v-text-field
-            :value="agilityInArmour"
-            :label="$t('in-armour')"
-            type="number"
-            disabled
-          />
-        </v-col>
-        <v-col cols="6">
+        <v-col cols="6" xs="6" sm="3">
           <v-text-field
             v-model.number="abilities.dexterity"
-            :label="$t('dexterity')"
+            :label="
+              `${$t('dexterity')}, ${$t('in-armour')}: ${dexterityInArmour}`
+            "
             type="number"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="6">
-          <v-text-field
-            :value="dexterityInArmour"
-            :label="$t('in-armour')"
-            type="number"
-            disabled
-          />
-        </v-col>
-        <v-col cols="12">
+        <v-col cols="6" xs="6" sm="3">
           <v-text-field
             v-model.number="abilities.stamina"
             :label="$t('stamina')"
@@ -67,7 +45,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12">
+        <v-col cols="6" xs="6" sm="3">
           <v-text-field
             v-model.number="abilities.health"
             :label="$t('health')"
@@ -75,7 +53,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12">
+        <v-col cols="6" xs="6" sm="3">
           <v-text-field
             v-model.number="abilities.beauty"
             :label="$t('beauty')"
@@ -83,7 +61,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12">
+        <v-col cols="6" xs="6" sm="3">
           <v-text-field
             v-model.number="abilities.intelligence"
             :label="$t('intelligence')"
@@ -91,7 +69,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12">
+        <v-col cols="6" xs="6" sm="3">
           <v-text-field
             v-model.number="abilities.willpower"
             :label="$t('willpower')"
@@ -99,7 +77,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12">
+        <v-col cols="6" xs="6" sm="3">
           <v-text-field
             v-model.number="abilities.astral"
             :label="$t('astral')"
@@ -107,7 +85,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12">
+        <v-col cols="6" xs="6" sm="3">
           <v-text-field
             v-model.number="abilities.perception"
             :label="$t('perception')"

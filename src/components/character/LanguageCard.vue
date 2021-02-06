@@ -64,12 +64,36 @@
       />
     </template>
     <template v-slot:fields="{}">
+      <!-- <v-list tile two-line>
+        <v-list-item
+          class="ps-0"
+          :key="item.language"
+          v-for="item in assignments"
+          @click="editItem(item, assignments)"
+        >
+          <template v-slot:default="{ active }">
+            <v-list-item-action>
+              <v-checkbox
+                @click="languageSelected(item, $event)"
+                :input-value="active"
+              ></v-checkbox>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>{{ item.language }}</v-list-item-title>
+              <v-list-item-subtitle>{{
+                `${$t("level")}: ${$t(item.level)}`
+              }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </template>
+        </v-list-item>
+      </v-list> -->
       <v-data-table
         width="auto"
         height="auto"
         :headers="headers"
         :items="assignments"
-        :sort-by="sortBy"
+        disable-sort
+        disable-filtering
         disable-pagination
         hide-default-footer
       >
@@ -78,14 +102,6 @@
         </template>
         <template v-slot:[`item.level`]="{ item }">
           {{ $t(item.level) }}
-        </template>
-        <template v-if="editable" v-slot:[`item.actions`]="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item, assignments)">
-            mdi-pencil
-          </v-icon>
-          <v-icon small @click="deleteItem(item, assignments)">
-            mdi-delete
-          </v-icon>
         </template>
       </v-data-table>
     </template>
@@ -108,18 +124,14 @@ import CharacterInfoList from "./CharacterInfoList";
 })
 export default class LanguageCard extends CharacterInfoList {
   sortBy = ["language"];
+  selected: LanguageAbility[] = [];
 
   get headers() {
     const headers = [
       { text: this.$t("language"), value: "language" },
       { text: this.$t("level"), value: "level" },
     ];
-    return this.editable
-      ? [
-          ...headers,
-          { text: this.$t("actions"), value: "actions", sortable: false },
-        ]
-      : headers;
+    return headers;
   }
 
   get assignments() {
@@ -141,6 +153,13 @@ export default class LanguageCard extends CharacterInfoList {
 
   defaultItem(): LanguageAbility {
     return {};
+  }
+
+  languageSelected(item: LanguageAbility, event: MouseEvent) {
+    const sel = this.selected.findIndex(i => i === item);
+    if (sel > -1) this.selected.splice(sel, 1);
+    else this.selected.push(item);
+    event.stopPropagation();
   }
 
   async createFunction(item: LanguageAbility) {

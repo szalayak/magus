@@ -3,6 +3,7 @@
     v-if="isLoggedIn"
     :value="isNavDrawerOpen"
     @input="setNavDrawerOpen($event)"
+    mobile-breakpoint="sm"
     clipped
     floating
     app
@@ -58,7 +59,7 @@ export default Vue.extend({
     ...mapMutations(["setNavDrawerOpen"]),
   },
   created() {
-    this.setNavDrawerOpen(!this.$vuetify.breakpoint.xs);
+    this.setNavDrawerOpen(this.$vuetify.breakpoint.mdAndUp);
   },
 });
 </script>

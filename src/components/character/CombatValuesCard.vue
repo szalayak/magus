@@ -14,7 +14,7 @@
         `${$t("initiation")}: ${initiationString}`
       }}</v-subheader>
       <v-row dense>
-        <v-col cols="12" sm="12" md="6" lg="4">
+        <v-col cols="4">
           <v-text-field
             v-model.number="base.initiation"
             :label="$t('base')"
@@ -22,7 +22,7 @@
             type="number"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="6" lg="4">
+        <v-col cols="4">
           <v-text-field
             v-model.number="spent.initiation"
             :label="$t('spent-cm')"
@@ -30,7 +30,7 @@
             type="number"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="6" lg="4">
+        <v-col cols="4">
           <v-text-field
             v-model.number="other.initiation"
             :label="$t('modifier')"
@@ -43,7 +43,7 @@
         `${$t("offence")}: ${offenceString}`
       }}</v-subheader>
       <v-row dense>
-        <v-col cols="12" sm="12" md="6" lg="4">
+        <v-col cols="4">
           <v-text-field
             v-model.number="base.offence"
             :label="$t('base')"
@@ -51,7 +51,7 @@
             type="number"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="6" lg="4">
+        <v-col cols="4">
           <v-text-field
             v-model.number="spent.offence"
             :label="$t('spent-cm')"
@@ -59,7 +59,7 @@
             type="number"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="6" lg="4">
+        <v-col cols="4">
           <v-text-field
             v-model.number="other.offence"
             :label="$t('modifier')"
@@ -72,7 +72,7 @@
         `${$t("defence")}: ${defenceString}`
       }}</v-subheader>
       <v-row dense>
-        <v-col cols="12" sm="12" md="6" lg="4">
+        <v-col cols="4">
           <v-text-field
             v-model.number="base.defence"
             :label="$t('base')"
@@ -80,7 +80,7 @@
             type="number"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="6" lg="4">
+        <v-col cols="4">
           <v-text-field
             v-model.number="spent.defence"
             :label="$t('spent-cm')"
@@ -88,7 +88,7 @@
             type="number"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="6" lg="4">
+        <v-col cols="4">
           <v-text-field
             v-model.number="other.defence"
             :label="$t('modifier')"
@@ -101,7 +101,7 @@
         `${$t("aiming")}: ${aimingString}`
       }}</v-subheader>
       <v-row dense>
-        <v-col cols="12" sm="12" md="6" lg="4">
+        <v-col cols="4">
           <v-text-field
             v-model.number="base.aiming"
             :label="$t('base')"
@@ -109,7 +109,7 @@
             type="number"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="6" lg="4">
+        <v-col cols="4">
           <v-text-field
             v-model.number="spent.aiming"
             :label="$t('spent-cm')"
@@ -117,7 +117,7 @@
             type="number"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="6" lg="4">
+        <v-col cols="4">
           <v-text-field
             v-model.number="other.aiming"
             :label="$t('modifier')"
@@ -128,7 +128,7 @@
       </v-row>
       <v-subheader class="pl-0">{{ $t("combat-value-modifiers") }}</v-subheader>
       <v-row dense>
-        <v-col cols="12" xs="12" sm="6">
+        <v-col cols="6">
           <v-text-field
             v-model.number="combatValueModifiersPerLevel"
             :label="$t('combat-value-modifiers-per-level')"
@@ -136,7 +136,7 @@
             type="number"
           />
         </v-col>
-        <v-col cols="12" xs="12" sm="6">
+        <v-col cols="6">
           <v-text-field
             v-model="mandatoryCombatValueModifierDistribution"
             :label="$t('mandatory-combat-value-modifier-distribution')"
@@ -146,7 +146,7 @@
       </v-row>
       <v-subheader class="pl-0">{{ $t("no-weapons") }}</v-subheader>
       <v-row dense>
-        <v-col cols="12" xs="12" sm="6">
+        <v-col cols="6">
           <v-text-field
             v-model.number="attacksPerTurn"
             :disabled="!edit"
@@ -154,7 +154,7 @@
             type="number"
           />
         </v-col>
-        <v-col cols="12" xs="12" sm="6">
+        <v-col cols="6">
           <throw-scenario-dialog v-bind.sync="damage" :title="$t('damage')">
             <template v-slot:activator="{ on, attrs }">
               <v-text-field

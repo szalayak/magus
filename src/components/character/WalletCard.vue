@@ -10,7 +10,7 @@
   >
     <template v-slot:fields="{ edit }">
       <v-row dense>
-        <v-col cols="12" xs="12" sm="6" md="4">
+        <v-col cols="4">
           <v-text-field
             v-model.number="gold"
             type="number"
@@ -18,7 +18,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" xs="12" sm="6" md="4">
+        <v-col cols="4">
           <v-text-field
             v-model.number="silver"
             type="number"
@@ -26,7 +26,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" xs="12" sm="6" md="4">
+        <v-col cols="4">
           <v-text-field
             v-model.number="copper"
             type="number"
@@ -34,21 +34,21 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" xs="12" sm="6" md="4">
+        <v-col cols="4">
           <v-text-field
             v-model="wallet.mithrill"
             :label="$t('mithril')"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" xs="12" sm="6" md="4">
+        <v-col cols="4">
           <v-text-field
             v-model="wallet.gemstones"
             :label="$t('gemstones')"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" xs="12" sm="6" md="4">
+        <v-col cols="4">
           <v-text-field
             v-model="wallet.misc"
             :label="$t('other')"

@@ -39,19 +39,35 @@
           </v-snackbar>
         </v-card-text>
         <v-card-actions>
-          <v-bottom-navigation v-if="$vuetify.breakpoint.smAndDown" app>
+          <v-bottom-navigation
+            v-touch="{
+              up: () => (nav = true),
+            }"
+            v-if="$vuetify.breakpoint.smAndDown"
+            app
+          >
             <v-btn @click="nav = true">
               <span>{{ $t("navigate-to") }}</span>
               <v-icon>mdi-share</v-icon>
             </v-btn></v-bottom-navigation
           >
-          <v-bottom-sheet v-model="nav">
-            <v-list>
+          <v-bottom-sheet
+            v-touch="{
+              down: () => (nav = false),
+            }"
+            v-model="nav"
+          >
+            <v-list
+              v-touch="{
+                down: () => (nav = false),
+              }"
+            >
               <v-subheader>{{ $t("navigate-to") }}</v-subheader>
               <v-list-item
                 :key="`${component.id}-bottom`"
                 v-for="component in characterComponents"
                 :to="characterToLink(component.id)"
+                @click="nav = false"
               >
                 <v-list-item-icon>
                   <v-icon>{{ component.icon }}</v-icon>

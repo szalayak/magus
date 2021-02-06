@@ -1,7 +1,25 @@
 <template>
   <page-template>
-    <v-container v-if="!loading" fluid>
-      <v-data-iterator :items="characters" hide-default-footer>
+    <v-list v-if="!loading" three-line>
+      <v-list-item
+        :to="characterToLink(character)"
+        v-for="character in characters"
+        :key="character.id"
+      >
+        <v-list-item-content>
+          <v-list-item-title v-text="character.name"></v-list-item-title>
+
+          <v-list-item-subtitle>{{
+            characterToString(character)
+          }}</v-list-item-subtitle>
+
+          <v-list-item-subtitle>{{
+            `${$t("owner")}: ${ownerToString(character.owner)}`
+          }}</v-list-item-subtitle>
+        </v-list-item-content></v-list-item
+      >
+    </v-list>
+    <!-- <v-data-iterator :items="characters" hide-default-footer>
         <template v-slot:header>
           <v-toolbar flat>
             <v-toolbar-title>{{ title }}</v-toolbar-title>
@@ -78,27 +96,13 @@
             </v-col>
           </v-row>
         </template>
-      </v-data-iterator>
-      <v-snackbar
-        v-for="message in messages"
-        :value="notification"
-        :key="message"
-        @input="$emit('update:notification', false)"
-      >
-        {{ message }}
-
-        <template v-slot:action="{ attrs }">
-          <v-btn
-            text
-            v-bind="attrs"
-            @click="$emit('update:notification', false)"
-          >
-            {{ $t("close") }}
-          </v-btn>
-        </template>
-      </v-snackbar>
-    </v-container>
-    <skeleton-cards v-else />
+      </v-data-iterator> -->
+    <v-skeleton-loader
+      v-for="i in 12"
+      :key="i"
+      v-else
+      type="list-item-three-line"
+    ></v-skeleton-loader>
   </page-template>
 </template>
 <script lang="ts">
