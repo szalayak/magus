@@ -176,7 +176,7 @@ import { Form } from "@/utils";
     "character-list": CharacterList,
   },
 })
-export default class NavigationDrawerPlayerCharactersAsPlayer extends TitleComponent {
+export default class PlayerCharactersAsPlayer extends TitleComponent {
   title = this.$t("my-characters");
   messages: string[] = [];
   notification = false;

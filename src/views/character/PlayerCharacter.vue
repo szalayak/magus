@@ -153,7 +153,6 @@ import PoisonCard from "@/components/character/PoisonCard.vue";
 import MagicalItemAssignmentCard from "@/components/character/MagicalItemCard.vue";
 import AnimalsCard from "@/components/character/AnimalsCard.vue";
 import ServantsCard from "@/components/character/ServantsCard.vue";
-import CharacterOverview from "@/components/character/CharacterOverview.vue";
 import CharacterPageLayout from "@/components/CharacterPageLayout.vue";
 import SkeletonCards from "@/components/SkeletonCards.vue";
 
@@ -186,7 +185,6 @@ import SkeletonCards from "@/components/SkeletonCards.vue";
     "magical-item-assignments": MagicalItemAssignmentCard,
     animals: AnimalsCard,
     servants: ServantsCard,
-    "character-overview": CharacterOverview,
     "character-page-layout": CharacterPageLayout,
     "skeleton-cards": SkeletonCards,
   },

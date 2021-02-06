@@ -66,8 +66,8 @@
 <script lang="ts">
 import { MagicalAbility, MutablePointValue } from "@/store";
 import Component from "vue-class-component";
-import CharacterQuickView from "./CharacterQuickView";
-import QuickUpdatePropertyField from "./QuickUpdatePropertyField.vue";
+import CharacterQuickView from "../CharacterQuickView";
+import QuickUpdatePropertyField from "../QuickUpdatePropertyField.vue";
 @Component({
   name: "character-psi-mana-points-quick-view",
   components: {

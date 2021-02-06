@@ -83,9 +83,9 @@
 <script lang="ts">
 import { HealthInformation } from "@/store";
 import Component from "vue-class-component";
-import CharacterQuickView from "./CharacterQuickView";
-import QuickUpdatePropertyField from "./QuickUpdatePropertyField.vue";
-import ThrowScenarioTriggerField from "./ThrowScenarioTriggerField.vue";
+import CharacterQuickView from "../CharacterQuickView";
+import QuickUpdatePropertyField from "../QuickUpdatePropertyField.vue";
+import ThrowScenarioTriggerField from "../ThrowScenarioTriggerField.vue";
 @Component({
   name: "character-vitality-quick-view",
   components: {

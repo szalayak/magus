@@ -23,7 +23,7 @@
 </template>
 <script lang="ts">
 import Component from "vue-class-component";
-import CharacterQuickView from "./CharacterQuickView";
+import CharacterQuickView from "../CharacterQuickView";
 import { localiseItem } from "@/utils";
 import { Mastery } from "@/store";
 @Component({

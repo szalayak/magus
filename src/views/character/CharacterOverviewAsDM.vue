@@ -491,19 +491,19 @@
   </page-template>
 </template>
 <script lang="ts">
-import CharacterAbilitiesQuickView from "@/components/character/CharacterAbilitiesQuickView.vue";
-import CharacterCombatValuesQuickView from "@/components/character/CharacterCombatValuesQuickView.vue";
-import CharacterPsiManaPointsQuickView from "@/components/character/CharacterPsiManaPointsQuickView.vue";
-import CharacterSpellResistanceQuickView from "@/components/character/CharacterSpellResistanceQuickView.vue";
-import CharacterVitalityQuickView from "@/components/character/CharacterVitalityQuickView.vue";
+import CharacterAbilitiesQuickView from "@/components/character/dm-quick-view/CharacterAbilitiesQuickView.vue";
+import CharacterCombatValuesQuickView from "@/components/character/dm-quick-view/CharacterCombatValuesQuickView.vue";
+import CharacterPsiManaPointsQuickView from "@/components/character/dm-quick-view/CharacterPsiManaPointsQuickView.vue";
+import CharacterSpellResistanceQuickView from "@/components/character/dm-quick-view/CharacterSpellResistanceQuickView.vue";
+import CharacterVitalityQuickView from "@/components/character/dm-quick-view/CharacterVitalityQuickView.vue";
 import TitleComponent from "@/mixins/TitleComponent";
 import { Character, LooseObject, User } from "@/store";
 import { characterToLink } from "@/utils";
 import Component from "vue-class-component";
 import Vue from "vue";
 import CharacterAbilitySelector from "@/components/character/CharacterAbilitySelector.vue";
-import CharacterPercentageSkillsQuickView from "@/components/character/CharacterPercentageSkillsQuickView.vue";
-import CharacterSkillsQuickView from "@/components/character/CharacterSkillsQuickView.vue";
+import CharacterPercentageSkillsQuickView from "@/components/character/dm-quick-view/CharacterPercentageSkillsQuickView.vue";
+import CharacterSkillsQuickView from "@/components/character/dm-quick-view/CharacterSkillsQuickView.vue";
 import PageTemplate from "@/components/PageTemplate.vue";
 
 @Component({

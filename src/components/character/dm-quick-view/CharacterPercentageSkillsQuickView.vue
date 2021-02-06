@@ -57,8 +57,8 @@
 </template>
 <script lang="ts">
 import Component from "vue-class-component";
-import ThrowScenarioTriggerField from "./ThrowScenarioTriggerField.vue";
-import CharacterQuickView from "./CharacterQuickView";
+import ThrowScenarioTriggerField from "../ThrowScenarioTriggerField.vue";
+import CharacterQuickView from "../CharacterQuickView";
 import {
   localiseItem,
   skillCheck,

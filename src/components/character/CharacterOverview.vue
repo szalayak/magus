@@ -74,14 +74,14 @@
 
 <script lang="ts">
 import Component from "vue-class-component";
-import CharacterAbilitiesQuickView from "./CharacterAbilitiesQuickView.vue";
-import CharacterCombatValuesQuickView from "./CharacterCombatValuesQuickView.vue";
+import CharacterAbilitiesQuickView from "./dm-quick-view/CharacterAbilitiesQuickView.vue";
+import CharacterCombatValuesQuickView from "./dm-quick-view/CharacterCombatValuesQuickView.vue";
 import CharacterInfo from "./CharacterInfo";
-import CharacterPercentageSkillsQuickView from "./CharacterPercentageSkillsQuickView.vue";
-import CharacterPsiManaPointsQuickView from "./CharacterPsiManaPointsQuickView.vue";
-import CharacterSkillsQuickView from "./CharacterSkillsQuickView.vue";
-import CharacterSpellResistanceQuickView from "./CharacterSpellResistanceQuickView.vue";
-import CharacterVitalityQuickView from "./CharacterVitalityQuickView.vue";
+import CharacterPercentageSkillsQuickView from "./dm-quick-view/CharacterPercentageSkillsQuickView.vue";
+import CharacterPsiManaPointsQuickView from "./dm-quick-view/CharacterPsiManaPointsQuickView.vue";
+import CharacterSkillsQuickView from "./dm-quick-view/CharacterSkillsQuickView.vue";
+import CharacterSpellResistanceQuickView from "./dm-quick-view/CharacterSpellResistanceQuickView.vue";
+import CharacterVitalityQuickView from "./dm-quick-view/CharacterVitalityQuickView.vue";
 @Component({
   name: "character-overview",
   components: {

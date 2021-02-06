@@ -107,8 +107,8 @@ import {
   ThrowScenarioResult,
 } from "@/utils";
 import Component from "vue-class-component";
-import CharacterQuickView from "./CharacterQuickView";
-import ThrowScenarioTriggerField from "./ThrowScenarioTriggerField.vue";
+import CharacterQuickView from "../CharacterQuickView";
+import ThrowScenarioTriggerField from "../ThrowScenarioTriggerField.vue";
 @Component({
   name: "character-spell-resistance-quick-view",
   components: {
