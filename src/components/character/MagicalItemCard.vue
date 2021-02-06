@@ -61,28 +61,26 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-      <v-dialog v-model="dialogDelete" max-width="500px">
-        <v-card>
-          <v-card-title class="headline">{{
-            $t("confirm-delete-message")
-          }}</v-card-title>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="error" text @click="closeDelete">{{
-              $t("cancel")
-            }}</v-btn>
-            <v-btn color="primary" text @click="deleteItemConfirm">{{
-              $t("ok")
-            }}</v-btn>
-            <v-spacer></v-spacer>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+      <confirm-delete-dialog
+        :open.sync="dialogDelete"
+        @cancel="closeDelete"
+        @confirm="deleteItemsConfirm(selected)"
+      />
+      <v-btn
+        v-if="editable"
+        :disabled="selected.length === 0"
+        icon
+        text
+        @click="deleteItems"
+        color="error"
+        ><v-icon>mdi-delete</v-icon></v-btn
+      >
     </template>
     <template v-slot:fields="{}">
       <v-data-table
-        width="auto"
-        height="auto"
+        v-model="selected"
+        :show-select="editable"
+        item-key="id"
         :headers="headers"
         :items="assignments"
         :sort-by="sortBy"
@@ -94,14 +92,6 @@
             item.magicalItem.description.title
           }}</a>
         </template>
-        <template v-if="editable" v-slot:[`item.actions`]="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item, assignments)">
-            mdi-pencil
-          </v-icon>
-          <v-icon small @click="deleteItem(item, assignments)">
-            mdi-delete
-          </v-icon>
-        </template>
       </v-data-table>
     </template>
   </character-info-card>
@@ -111,28 +101,24 @@ import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
 import { MagicalItemAssignment } from "@/store/modules/character";
 import CharacterInfoList from "./CharacterInfoList";
+import ConfirmDeleteDialog from "../ConfirmDeleteDialog.vue";
 
 @Component({
   name: "magical-item-card",
   components: {
     "character-info-card": CharacterInfoCard,
+    "confirm-delete-dialog": ConfirmDeleteDialog,
   },
 })
 export default class MagicalItemAssignmentCard extends CharacterInfoList {
   sortBy = ["magicalItem.description.title"];
 
   get headers() {
-    const headers = [
+    return [
       { text: this.$t("magical-item"), value: "magicalItem.description.title" },
       { text: this.$t("location"), value: "location" },
       { text: this.$t("notes"), value: "notes" },
     ];
-    return this.editable
-      ? [
-          ...headers,
-          { text: this.$t("actions"), value: "actions", sortable: false },
-        ]
-      : headers;
   }
 
   get magicalItems() {

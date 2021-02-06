@@ -50,13 +50,17 @@ const router = new VueRouter({
   scrollBehavior: (to, _from, savedPosition) => {
     let scrollTo: string | number = 0;
 
-    if (to.hash) {
-      scrollTo = to.hash;
-    } else if (savedPosition) {
-      scrollTo = savedPosition.y;
-    }
+    return new Promise(resolve => {
+      setTimeout(() => {
+        if (to.hash) {
+          scrollTo = to.hash;
+        } else if (savedPosition) {
+          scrollTo = savedPosition.y;
+        }
 
-    return goTo(scrollTo, {});
+        resolve(goTo(scrollTo, { behavior: "smooth" }));
+      }, 500);
+    });
   },
   routes,
 });

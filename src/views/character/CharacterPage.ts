@@ -58,7 +58,8 @@ export default class CharacterPage extends Vue {
   async created() {
     try {
       // load character
-      await this.$store.dispatch("character/loadItem", this.id);
+      if (!this.character)
+        await this.$store.dispatch("character/loadItem", this.id);
 
       // set title
       this.$store.commit("setAppTitle", this.character?.name || "");

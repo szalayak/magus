@@ -7,13 +7,6 @@
     :messages="messages"
   >
     <template v-slot:toolbar="{}">
-      <v-text-field
-        v-model="search"
-        append-icon-inner="mdi-magnify"
-        :label="$t('search')"
-        single-line
-        hide-details
-      ></v-text-field>
       <v-dialog scrollable v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on, attrs }">
           <v-btn
@@ -96,19 +89,39 @@
       <confirm-delete-dialog
         :open.sync="dialogDelete"
         @cancel="closeDelete"
-        @confirm="deleteItemConfirm"
+        @confirm="deleteItemsConfirm(selected)"
       />
+      <v-btn
+        v-if="editable"
+        :disabled="selected.length === 0"
+        icon
+        text
+        @click="deleteItems"
+        color="error"
+        ><v-icon>mdi-delete</v-icon></v-btn
+      >
     </template>
     <template v-slot:fields="{}">
       <v-data-table
-        width="auto"
-        height="auto"
+        v-model="selected"
+        :show-select="editable"
+        item-key="id"
         :headers="headers"
         :items="assignments"
         :sort-by="sortBy"
         :search="search"
         :items-per-page="skills.length"
       >
+        <template v-slot:top>
+          <v-text-field
+            v-model="search"
+            append-icon-inner="mdi-magnify"
+            :label="$t('search')"
+            class="mx-4"
+            single-line
+            hide-details
+          ></v-text-field>
+        </template>
         <template v-slot:[`item.mastery`]="{ item }">
           {{ masteryToString(item) }}
         </template>
@@ -116,14 +129,6 @@
           <a @click="editItem(item, assignments)">{{
             item.skill.description.title
           }}</a>
-        </template>
-        <template v-if="editable" v-slot:[`item.actions`]="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item, assignments)">
-            mdi-pencil
-          </v-icon>
-          <v-icon small @click="deleteItem(item, assignments)">
-            mdi-delete
-          </v-icon>
         </template>
       </v-data-table>
     </template>
@@ -148,7 +153,7 @@ export default class SkillAssignmentCard extends CharacterInfoList {
   search = "";
 
   get headers() {
-    const headers = [
+    return [
       { text: this.$t("skill"), value: "skill.description.title" },
       {
         text: `${this.$t("mastery")}/${this.$t("percentage")}`,
@@ -157,12 +162,6 @@ export default class SkillAssignmentCard extends CharacterInfoList {
       { text: this.$t("skill-points-used"), value: "skillPointsUsed" },
       { text: this.$t("notes"), value: "notes" },
     ];
-    return this.editable
-      ? [
-          ...headers,
-          { text: this.$t("actions"), value: "actions", sortable: false },
-        ]
-      : headers;
   }
 
   get skills() {

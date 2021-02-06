@@ -11,6 +11,13 @@
   >
     <template v-slot:fields="{ edit }">
       <v-row dense>
+        <v-col cols="12">
+          <v-text-field
+            v-model="coreInformation.name"
+            :label="$t('name')"
+            :disabled="!edit"
+          />
+        </v-col>
         <v-col cols="6" sm="3" lg="1">
           <v-select
             v-model="coreInformation.race"
@@ -142,6 +149,7 @@ type CoreInformation = Pick<
 >;
 
 const copyCoreInformation = (character: Character) => ({
+  name: character.name,
   race: character.race,
   class: character.class,
   subclass: character.subclass,

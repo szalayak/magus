@@ -91,13 +91,23 @@
       <confirm-delete-dialog
         :open.sync="dialogDelete"
         @cancel="closeDelete"
-        @confirm="deleteItemConfirm"
+        @confirm="deleteItemsConfirm(selected)"
       />
+      <v-btn
+        v-if="editable"
+        :disabled="selected.length === 0"
+        icon
+        text
+        @click="deleteItems"
+        color="error"
+        ><v-icon>mdi-delete</v-icon></v-btn
+      >
     </template>
     <template v-slot:fields="{}">
       <v-data-table
-        width="auto"
-        height="auto"
+        v-model="selected"
+        :show-select="editable"
+        item-key="id"
         :headers="headers"
         :items="assignments"
         :sort-by="sortBy"
@@ -127,19 +137,6 @@
         </template>
         <template v-slot:[`item.horseback`]="{ item }">
           {{ $t(item.horseback) }}
-        </template>
-        <template v-slot:[`item.actions`]="{ item }">
-          <v-icon
-            v-if="editable"
-            small
-            class="mr-2"
-            @click="editItem(item, assignments)"
-          >
-            mdi-pencil
-          </v-icon>
-          <v-icon v-if="editable" small @click="deleteItem(item, assignments)">
-            mdi-delete
-          </v-icon>
         </template>
       </v-data-table>
     </template>
@@ -181,7 +178,6 @@ export default class RangedWeaponAssignmentCard extends CharacterInfoList {
       { text: this.$t("aim"), value: "aim" },
       { text: this.$t("horseback-archery"), value: "horseback" },
       { text: this.$t("notes"), value: "notes" },
-      { text: this.$t("actions"), value: "actions", sortable: false },
     ];
   }
 

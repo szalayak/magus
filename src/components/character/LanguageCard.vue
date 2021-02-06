@@ -60,36 +60,23 @@
       <confirm-delete-dialog
         :open.sync="dialogDelete"
         @cancel="closeDelete"
-        @confirm="deleteItemConfirm"
+        @confirm="deleteItemsConfirm(selected)"
       />
+      <v-btn
+        v-if="editable"
+        :disabled="selected.length === 0"
+        icon
+        text
+        @click="deleteItems"
+        color="error"
+        ><v-icon>mdi-delete</v-icon></v-btn
+      >
     </template>
     <template v-slot:fields="{}">
-      <!-- <v-list tile two-line>
-        <v-list-item
-          class="ps-0"
-          :key="item.language"
-          v-for="item in assignments"
-          @click="editItem(item, assignments)"
-        >
-          <template v-slot:default="{ active }">
-            <v-list-item-action>
-              <v-checkbox
-                @click="languageSelected(item, $event)"
-                :input-value="active"
-              ></v-checkbox>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title>{{ item.language }}</v-list-item-title>
-              <v-list-item-subtitle>{{
-                `${$t("level")}: ${$t(item.level)}`
-              }}</v-list-item-subtitle>
-            </v-list-item-content>
-          </template>
-        </v-list-item>
-      </v-list> -->
       <v-data-table
-        width="auto"
-        height="auto"
+        v-model="selected"
+        :show-select="editable"
+        item-key="language"
         :headers="headers"
         :items="assignments"
         disable-sort
@@ -124,7 +111,6 @@ import CharacterInfoList from "./CharacterInfoList";
 })
 export default class LanguageCard extends CharacterInfoList {
   sortBy = ["language"];
-  selected: LanguageAbility[] = [];
 
   get headers() {
     const headers = [
@@ -155,13 +141,6 @@ export default class LanguageCard extends CharacterInfoList {
     return {};
   }
 
-  languageSelected(item: LanguageAbility, event: MouseEvent) {
-    const sel = this.selected.findIndex(i => i === item);
-    if (sel > -1) this.selected.splice(sel, 1);
-    else this.selected.push(item);
-    event.stopPropagation();
-  }
-
   async createFunction(item: LanguageAbility) {
     const languages = [...this.assignments, item];
     return this.update({ id: this.character.id, languages });
@@ -173,9 +152,9 @@ export default class LanguageCard extends CharacterInfoList {
     return this.update({ id: this.character.id, languages });
   }
 
-  async deleteFunction() {
+  async deleteFunction(item: LanguageAbility) {
     const languages = [...this.assignments];
-    languages.splice(this.editedIndex, 1);
+    languages.splice(languages.indexOf(item), 1);
     return this.update({ id: this.character.id, languages });
   }
 }

@@ -6,6 +6,13 @@
         v-for="character in characters"
         :key="character.id"
       >
+        <v-list-item-avatar>
+          <v-avatar color="primary"
+            ><span class="white--text headline">{{
+              initials(character)
+            }}</span></v-avatar
+          >
+        </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title v-text="character.name"></v-list-item-title>
 
@@ -173,6 +180,16 @@ export default class CharacterList extends Vue {
     return `${raceString}${classString}, ${this.$t("ex-lev")}: ${
       character.level?.currentLevel
     }`;
+  }
+
+  initials(character: Character) {
+    const nameparts = character.name?.split(" ");
+    return (
+      nameparts
+        ?.map(part => part[0])
+        .join("")
+        .toUpperCase() || ""
+    );
   }
 
   characterToLink(character: Character) {
