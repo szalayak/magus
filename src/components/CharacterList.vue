@@ -30,8 +30,17 @@
           <v-list-item-subtitle>{{
             `${$t("owner")}: ${ownerToString(character.owner)}`
           }}</v-list-item-subtitle>
-        </v-list-item-content></v-list-item
-      >
+        </v-list-item-content>
+        <v-list-item-action>
+          <v-btn
+            icon
+            text
+            :to="characterToLink(character, true)"
+            @click="$event.stopPropagation()"
+            ><v-icon>mdi-account-details</v-icon></v-btn
+          >
+        </v-list-item-action>
+      </v-list-item>
     </v-list>
     <v-skeleton-loader
       v-for="i in 12"
@@ -123,8 +132,8 @@ export default class CharacterList extends Vue {
     );
   }
 
-  characterToLink(character: Character) {
-    return characterToLink(character);
+  characterToLink(character: Character, details?: boolean) {
+    return characterToLink(character, undefined, details);
   }
 
   characterPageToLink(character: Character, page: number) {

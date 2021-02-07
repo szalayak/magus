@@ -4,7 +4,7 @@
       <app-bar>
         <template v-slot:actions>
           <slot name="actions">
-            <v-btn icon text :to="`${characterToLink()}`"
+            <v-btn icon text :to="`${characterToLink(null, false)}`"
               ><v-icon>mdi-eye</v-icon></v-btn
             >
             <v-btn icon text @click="refresh"
@@ -48,47 +48,6 @@
           </v-alert>
           <slot :character="character"></slot>
         </v-card-text>
-        <v-card-actions>
-          <v-bottom-navigation
-            v-touch="{
-              up: () => (nav = true),
-            }"
-            v-if="$vuetify.breakpoint.smAndDown"
-            app
-          >
-            <v-btn @click="nav = true">
-              <span>{{ $t("navigate-to") }}</span>
-              <v-icon>mdi-share</v-icon>
-            </v-btn></v-bottom-navigation
-          >
-          <v-bottom-sheet
-            v-touch="{
-              down: () => (nav = false),
-            }"
-            v-model="nav"
-          >
-            <v-list
-              v-touch="{
-                down: () => (nav = false),
-              }"
-            >
-              <v-subheader>{{ $t("navigate-to") }}</v-subheader>
-              <v-list-item
-                :key="`${component.id}-bottom`"
-                v-for="component in characterComponents"
-                :to="characterToLink(component.id)"
-                @click="nav = false"
-              >
-                <v-list-item-icon>
-                  <v-icon>{{ component.icon }}</v-icon>
-                </v-list-item-icon>
-                <v-list-item-title>
-                  {{ $t(component.title) }}
-                </v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-bottom-sheet>
-        </v-card-actions>
       </v-card>
     </vue-pull-refresh>
   </page-template>
@@ -125,24 +84,9 @@ export default class CharacterPageLayout extends Vue {
   @Prop({ type: Boolean })
   loading: boolean | undefined;
 
-  get page() {
-    return this.$route.params.page ? parseInt(this.$route.params.page) : 0;
-  }
-
-  set page(page) {
-    if (page !== undefined) {
-      this.$router.push({
-        name: this.$route.name || undefined,
-        params: { ...this.$route.params, page: page.toString() },
-      });
-    }
-  }
-
   get characterComponents() {
     return characterComponents(this.character);
   }
-
-  nav = false;
 
   pullToRefreshConfig = {
     loadingLabel: this.$t("loading-indicator"),
@@ -151,8 +95,8 @@ export default class CharacterPageLayout extends Vue {
     errorLabel: this.$t("error"),
   };
 
-  characterToLink(selector?: string) {
-    return characterToLink(this.character, selector);
+  characterToLink(selector?: string, details = true) {
+    return characterToLink(this.character, selector, details);
   }
 
   refresh() {

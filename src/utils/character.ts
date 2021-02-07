@@ -252,12 +252,15 @@ export const calculateInnateSpellResistance = (ability?: number): number => {
 
 export const characterToLink = (
   character: Character,
-  selector?: string
+  selector?: string,
+  details?: boolean
 ): string => {
   const type = character.playerCharacter
     ? "player-characters"
     : "non-player-characters";
-  const link = `/${type}/${character.id}`;
+  const link = details
+    ? `/${type}/${character.id}/details`
+    : `/${type}/${character.id}`;
   if (selector) return `${link}#${selector}`;
   else return link;
 };

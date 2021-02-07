@@ -3,7 +3,7 @@ import { RouteConfigSingleView } from "vue-router/types/router";
 export const characterRoutes: Array<RouteConfigSingleView> = [
   {
     path: "/player-characters/:id",
-    name: "Player Character",
+    name: "player-character-overview",
     component: () =>
       import(
         /* webpackChunkName: "player-character" */ "../views/character/CharacterOverview.vue"
@@ -11,7 +11,7 @@ export const characterRoutes: Array<RouteConfigSingleView> = [
   },
   {
     path: "/player-characters/:id/details",
-    name: "Player Character",
+    name: "player-character-details",
     component: () =>
       import(
         /* webpackChunkName: "player-character-details" */ "../views/character/PlayerCharacter.vue"
@@ -19,7 +19,7 @@ export const characterRoutes: Array<RouteConfigSingleView> = [
   },
   {
     path: "/non-player-characters/:id",
-    name: "Non-Player Character",
+    name: "non-player-character-overview",
     component: () =>
       import(
         /* webpackChunkName: "non-player-character" */ "../views/character/CharacterOverview.vue"
@@ -27,7 +27,7 @@ export const characterRoutes: Array<RouteConfigSingleView> = [
   },
   {
     path: "/non-player-characters/:id/details",
-    name: "Non-Player Character",
+    name: "non-player-character-details",
     component: () =>
       import(
         /* webpackChunkName: "non-player-character-details" */ "../views/character/NonPlayerCharacter.vue"

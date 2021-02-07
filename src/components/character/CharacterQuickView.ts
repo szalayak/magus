@@ -14,7 +14,7 @@ export default class CharacterQuickView extends Vue {
     return this.character.owner === this.$store.getters["currentUser"];
   }
 
-  characterToLink(character: Character, _page: number, selector: string) {
+  characterToLink(character: Character, selector: string) {
     return characterToLink(character, selector);
   }
 

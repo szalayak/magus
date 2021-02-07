@@ -15,10 +15,16 @@
       </app-bar>
     </template>
     <vue-pull-refresh :on-refresh="refresh" :config="pullToRefreshConfig">
-      <v-card flat>
-        <v-card-text class="pt-1"> </v-card-text>
-        <v-card-actions> </v-card-actions>
+      <v-card v-if="character" flat>
+        <v-card-title>{{ character.name }}</v-card-title>
+        <v-card-subtitle>{{ characterToString() }}</v-card-subtitle>
+        <v-card-text class="pa-0">
+          <!-- <header-quick-view :character="character" /> -->
+          <abilities-quick-view :character="character" />
+          <combat-values-quick-view :character="character" />
+        </v-card-text>
       </v-card>
+      <skeleton-cards v-else />
     </vue-pull-refresh>
   </page-template>
 </template>
@@ -27,9 +33,13 @@ import Component from "vue-class-component";
 import VuePullRefresh from "vue-pull-refresh";
 import PageTemplate from "@/components/PageTemplate.vue";
 import CharacterPage from "./CharacterPage";
-import { LooseObject } from "@/store";
+import { Class, Race } from "@/store";
 import AppBar from "@/components/AppBar.vue";
-import { characterToLink } from "@/utils";
+import { characterToLink, localiseItem } from "@/utils";
+import HeaderQuickView from "@/components/character/quick-view/HeaderQuickView.vue";
+import AbilitiesQuickView from "@/components/character/quick-view/AbilitiesQuickView.vue";
+import CombatValuesQuickView from "@/components/character/quick-view/CombatValuesQuickView.vue";
+import SkeletonCards from "@/components/SkeletonCards.vue";
 
 @Component({
   name: "player-character",
@@ -37,9 +47,13 @@ import { characterToLink } from "@/utils";
     "vue-pull-refresh": VuePullRefresh,
     PageTemplate,
     "app-bar": AppBar,
+    SkeletonCards,
+    HeaderQuickView,
+    AbilitiesQuickView,
+    CombatValuesQuickView,
   },
 })
-export default class CharacterPageLayout extends CharacterPage {
+export default class CharacterOverview extends CharacterPage {
   pullToRefreshConfig = {
     loadingLabel: this.$t("loading-indicator"),
     startLabel: this.$t("loading-indicator"),
@@ -51,20 +65,24 @@ export default class CharacterPageLayout extends CharacterPage {
     return this.character ? characterToLink(this.character) : "";
   }
 
-  async refresh() {
-    try {
-      // load character
-      await this.$store.dispatch("character/loadItem", this.id);
+  raceToString(race: Race): string {
+    return localiseItem(race, this.$i18n.locale)?.description?.title || "";
+  }
 
-      // set title
-      this.$store.commit("setAppTitle", this.character?.name || "");
-    } catch (error) {
-      this.messages =
-        typeof error === "string"
-          ? [error]
-          : error.errors?.map((err: LooseObject) => err.message) || [];
-      this.notification = true;
-    }
+  classToString(cl: Class): string {
+    return localiseItem(cl, this.$i18n.locale)?.description?.title || "";
+  }
+
+  characterToString() {
+    const raceString = this.character?.race
+      ? `${this.raceToString(this.character?.race)} `
+      : "";
+    const classString = this.character?.class
+      ? `${this.classToString(this.character?.class)}`
+      : "";
+    return `${raceString}${classString}, ${this.$t("ex-lev")}: ${
+      this.character?.level?.currentLevel
+    }`;
   }
 }
 </script>

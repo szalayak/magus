@@ -16,6 +16,7 @@
       <dungeon-master-area />
       <encyclopedia v-if="encyclopedia" />
       <administration v-if="isCurrentUserAdmin && administration" />
+      <profile />
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -30,6 +31,7 @@ import Encyclopedia from "./Encyclopedia.vue";
 import DungeonMasterArea from "./DungeonMasterArea.vue";
 import PlayerArea from "./PlayerArea.vue";
 import General from "./General.vue";
+import Profile from "./Profile.vue";
 export default Vue.extend({
   name: "navigation-drawer",
   components: {
@@ -38,6 +40,7 @@ export default Vue.extend({
     "dungeon-master-area": DungeonMasterArea,
     "player-area": PlayerArea,
     General,
+    Profile,
   },
   data: () => ({
     adminRoutes,

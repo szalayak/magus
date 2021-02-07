@@ -17,24 +17,6 @@
     <slot name="actions"></slot>
     <template v-if="!hideDefaultActions">
       <throw-dice v-if="isLoggedIn" />
-      <v-menu offset-y v-if="isLoggedIn">
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn icon text v-bind="attrs" v-on="on">
-            <v-icon>mdi-account</v-icon>
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item>
-            <v-list-item-title>{{
-              app.user.attributes.name
-            }}</v-list-item-title>
-          </v-list-item>
-          <v-list-item @click="$store.dispatch('logout')">
-            <v-list-item-title>{{ $t("sign-out") }}</v-list-item-title>
-          </v-list-item>
-          <user-attributes />
-        </v-list>
-      </v-menu>
     </template>
   </v-app-bar>
 </template>
@@ -42,7 +24,6 @@
 <script lang="ts">
 import Vue from "vue";
 import { mapGetters, mapState } from "vuex";
-import UserAttributes from "@/components/UserAttributes.vue";
 import { Component } from "vue-property-decorator";
 import ThrowDice from "./ThrowDice.vue";
 
@@ -52,7 +33,6 @@ import ThrowDice from "./ThrowDice.vue";
     hideDefaultActions: { type: Boolean, default: false },
   },
   components: {
-    "user-attributes": UserAttributes,
     "throw-dice": ThrowDice,
   },
   computed: { ...mapState(["app"]), ...mapGetters(["isLoggedIn", "title"]) },

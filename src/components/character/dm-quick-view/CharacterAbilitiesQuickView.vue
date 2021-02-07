@@ -177,17 +177,8 @@
 </template>
 
 <script lang="ts">
-import { Dice } from "@/API";
-import {
-  abilityCheck,
-  AbilityCheckResult,
-  executeThrowScenario,
-  movementPreventionValueTotal,
-  parseThrowScenarioString,
-  ThrowScenarioResult,
-} from "@/utils";
 import Component from "vue-class-component";
-import CharacterQuickView from "../CharacterQuickView";
+import CharacterAbilitiesQuickViewBase from "../CharacterAbilitiesQuickViewBase";
 import ThrowScenarioTriggerField from "../ThrowScenarioTriggerField.vue";
 @Component({
   name: "character-abilities-quick-view",
@@ -195,60 +186,5 @@ import ThrowScenarioTriggerField from "../ThrowScenarioTriggerField.vue";
     "throw-scenario-trigger-field": ThrowScenarioTriggerField,
   },
 })
-export default class CharacterAbilitiesQuickView extends CharacterQuickView {
-  abilityCheckResult: AbilityCheckResult | null = null;
-
-  get abilities() {
-    return this.character.abilities || {};
-  }
-
-  get abilityCheckStatus() {
-    return {
-      show: !!this.abilityCheckResult,
-      type:
-        this.abilityCheckResult && this.abilityCheckResult.success
-          ? "success"
-          : "error",
-    };
-  }
-
-  get agilityInArmour() {
-    return this.abilities.agility
-      ? this.abilities.agility - movementPreventionValueTotal(this.character)
-      : 0;
-  }
-
-  get dexterityInArmour() {
-    return this.abilities.dexterity
-      ? this.abilities.dexterity - movementPreventionValueTotal(this.character)
-      : 0;
-  }
-
-  onCheckResult(
-    result: ThrowScenarioResult,
-    abilityName: string,
-    abilityValue: number
-  ) {
-    this.abilityCheckResult = abilityCheck({
-      result,
-      abilityName,
-      abilityValue,
-    });
-  }
-
-  created() {
-    if (this.bus) {
-      this.bus.$on("ability-check", (ability: string, modifier: number) => {
-        this.abilityCheckResult = abilityCheck({
-          result: {
-            ...executeThrowScenario(parseThrowScenarioString(Dice.D10)),
-            modifier,
-          },
-          abilityName: ability,
-          abilityValue: this.abilities[ability] || 0,
-        });
-      });
-    }
-  }
-}
+export default class CharacterAbilitiesQuickView extends CharacterAbilitiesQuickViewBase {}
 </script>

@@ -1,55 +1,51 @@
 <template
-  ><v-dialog v-model="dialog" max-width="800px">
-    <template v-slot:activator="{ on, attrs }">
-      <v-list-item v-bind="attrs" v-on="on">
-        <v-list-item-title>{{ $t("profile") }}</v-list-item-title>
-      </v-list-item>
+  ><page-template>
+    <template v-slot:app-bar>
+      <app-bar>
+        <template v-slot:actions>
+          <v-btn v-if="!edit" icon text @click="edit = true"
+            ><v-icon>mdi-pencil</v-icon></v-btn
+          >
+          <v-btn v-if="edit" icon text @click="cancel" color="error"
+            ><v-icon>mdi-close</v-icon></v-btn
+          >
+          <v-btn v-if="edit" icon text @click="save" color="primary"
+            ><v-icon>mdi-content-save</v-icon></v-btn
+          >
+        </template>
+      </app-bar>
     </template>
-    <v-card>
-      <v-toolbar flat class="mb-2">
-        <v-toolbar-title>{{ $t("profile") }}</v-toolbar-title>
-      </v-toolbar>
+    <v-card flat>
+      <v-card-title>{{ $t("profile") }}</v-card-title>
       <v-card-text>
+        <v-alert v-model="notification" dense outlined type="error" dismissible>
+          {{ messages }}
+        </v-alert>
         <v-form ref="profile">
           <v-text-field :value="username" :label="$t('username')" disabled />
           <v-text-field
+            :disabled="!edit"
             v-model="name"
             :label="$t('name')"
             :rules="[v => !!v || $t('field-is-mandatory')]"
           />
           <v-text-field
+            :disabled="!edit"
             v-model="email"
             :label="$t('email')"
             type="email"
             :rules="[v => !!v || $t('field-is-mandatory')]"
           />
-          <v-select v-model="locale" :items="locales" :label="$t('locale')" />
+          <v-select
+            :disabled="!edit"
+            v-model="locale"
+            :items="locales"
+            :label="$t('locale')"
+          />
         </v-form>
       </v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn color="error" text @click="dialog = false">
-          {{ $t("cancel") }}
-        </v-btn>
-        <v-btn color="primary" text @click="save">
-          {{ $t("save") }}
-        </v-btn>
-      </v-card-actions>
     </v-card>
-    <v-snackbar
-      v-for="message in messages"
-      v-model="notification"
-      :key="message"
-    >
-      {{ message }}
-
-      <template v-slot:action="{ attrs }">
-        <v-btn text v-bind="attrs" @click="notification = false">
-          {{ $t("close") }}
-        </v-btn>
-      </template>
-    </v-snackbar>
-  </v-dialog>
+  </page-template>
 </template>
 <script lang="ts">
 import { Auth } from "aws-amplify";
@@ -58,6 +54,8 @@ import Component from "vue-class-component";
 import { CognitoUserAttribute } from "amazon-cognito-identity-js";
 import { Locale } from "@/API";
 import { Form } from "@/utils";
+import PageTemplate from "@/components/PageTemplate.vue";
+import AppBar from "@/components/AppBar.vue";
 
 interface Attribute {
   name: string;
@@ -66,9 +64,13 @@ interface Attribute {
 
 @Component({
   name: "user-attributes",
+  components: {
+    PageTemplate,
+    AppBar,
+  },
 })
 export default class UserAttributes extends Vue {
-  dialog = false;
+  edit = false;
   notification = false;
   messages: string[] = [];
   currentAttributes: CognitoUserAttribute[] = [];
@@ -131,30 +133,45 @@ export default class UserAttributes extends Vue {
     else this.currentAttributes.push(new CognitoUserAttribute({ Name, Value }));
   }
 
-  save() {
+  cancel() {
+    this.refresh();
+    this.edit = false;
+  }
+
+  async save() {
     if ((this.$refs.profile as Form).validate()) {
-      Auth.updateUserAttributes(this.$store.state.app.user, {
-        name: this.name,
-        email: this.email,
-        locale: this.locale,
-      })
-        .then(() => {
+      try {
+        await Auth.updateUserAttributes(this.$store.state.app.user, {
+          name: this.name,
+          email: this.email,
+          locale: this.locale,
+        });
+        if (this.$i18n.locale !== this.locale) {
           this.$i18n.locale = this.locale;
           this.$root.$i18n.locale = this.locale;
           this.$vuetify.lang.current = this.locale;
-          this.dialog = false;
-        })
-        .catch(err => {
-          this.messages = [err.message];
-          this.notification = true;
-        });
+          this.locales = Object.keys(Locale).map(locale => ({
+            value: locale,
+            text: this.$i18n.t(locale),
+          }));
+        }
+        this.edit = false;
+        this.notification = false;
+      } catch (err) {
+        this.messages = [err.message];
+        this.notification = true;
+      }
     }
   }
 
-  mounted() {
+  refresh() {
     Auth.userAttributes(this.$store.state.app?.user).then(
       attributes => (this.currentAttributes = attributes)
     );
+  }
+
+  mounted() {
+    this.refresh();
   }
 }
 </script>
