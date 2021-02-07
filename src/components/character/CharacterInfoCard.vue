@@ -45,9 +45,6 @@
 .character-info-card-toolbar .v-toolbar__content {
   padding: 0px !important;
 }
-/* .theme--dark.v-card {
-  background-color: #121212 !important;
-} */
 </style>
 
 <script lang="ts">

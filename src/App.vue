@@ -13,7 +13,23 @@
     />
   </v-app>
 </template>
-
+<style>
+.theme--dark.v-application {
+  background-color: var(--v-background-base, #121212) !important;
+}
+.theme--light.v-application {
+  background-color: var(--v-background-base, white) !important;
+}
+.theme--dark.v-card {
+  background-color: var(--v-background-base, #121212) !important;
+}
+.theme--dark.v-data-table {
+  background-color: var(--v-background-base, #121212) !important;
+}
+.theme--dark.v-sheet {
+  background-color: var(--v-background-base, #121212) !important;
+}
+</style>
 <script lang="ts">
 import Vue from "vue";
 import { onAuthUIStateChange } from "@aws-amplify/ui-components";

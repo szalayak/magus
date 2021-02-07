@@ -172,9 +172,6 @@
 #admin-table-toolbar .v-toolbar__content {
   padding: 0px !important;
 }
-.theme--dark.v-toolbar.v-sheet {
-  background-color: #1e1e1e;
-}
 </style>
 
 <script lang="ts">

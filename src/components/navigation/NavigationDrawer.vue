@@ -7,6 +7,7 @@
     clipped
     floating
     app
+    color="background"
   >
     <v-list nav dense>
       <general />

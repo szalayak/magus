@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar clipped-left app elevate-on-scroll>
+  <v-app-bar clipped-left app elevate-on-scroll color="background">
     <v-app-bar-nav-icon
       v-if="isLoggedIn"
       @click="$store.commit('toggleNavDrawer')"
@@ -20,15 +20,6 @@
     </template>
   </v-app-bar>
 </template>
-
-<style>
-.theme--light.v-app-bar.v-toolbar.v-sheet {
-  background-color: #ffffff;
-}
-.theme--dark.v-app-bar.v-toolbar.v-sheet {
-  background-color: #1e1e1e;
-}
-</style>
 
 <script lang="ts">
 import Vue from "vue";
