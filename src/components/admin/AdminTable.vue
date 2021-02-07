@@ -1,5 +1,124 @@
 <template>
   <page-template>
+    <template v-slot:app-bar>
+      <app-bar>
+        <template v-slot:actions>
+          <v-dialog scrollable v-model="dialog" max-width="1200px">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                v-if="!readonly"
+                icon
+                color="primary"
+                text
+                v-bind="attrs"
+                v-on="on"
+              >
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+            </template>
+            <v-card>
+              <v-toolbar flat :color="color">
+                <v-toolbar-title>{{ formTitle }}</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-btn-toggle
+                  dense
+                  tile
+                  color="primary"
+                  group
+                  v-model="editedItem.locale"
+                  @change="changeEditedLocale"
+                >
+                  <v-btn
+                    v-for="locale in locales"
+                    :key="locale.value"
+                    :value="locale.value"
+                    >{{ locale.text }}</v-btn
+                  >
+                </v-btn-toggle>
+              </v-toolbar>
+              <v-card-text>
+                <v-alert
+                  v-model="notification"
+                  dense
+                  outlined
+                  type="error"
+                  dismissible
+                >
+                  {{ messages }}
+                </v-alert>
+                <v-form :disabled="readonly" ref="input" v-model="valid">
+                  <v-row dense>
+                    <v-subheader class="pl-1">{{
+                      $t("general-properties")
+                    }}</v-subheader>
+                  </v-row>
+                  <v-row dense>
+                    <v-col cols="12" xs="12" sm="6">
+                      <v-text-field
+                        v-model="editedItem.id"
+                        :disabled="!isNewItem"
+                        :label="$t('id')"
+                        :hint="$t('id-empty-auto-generated-message')"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" xs="12" sm="6">
+                      <v-text-field
+                        v-model="editedItem.description.title"
+                        :rules="[v => !!v || $t('field-is-mandatory')]"
+                        :label="$t('title')"
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                  <slot name="editable-fields" :editedItem="editedItem"></slot>
+                  <v-row v-if="readonly" dense>
+                    <v-subheader class="pl-1">{{
+                      $t("description")
+                    }}</v-subheader>
+                  </v-row>
+                  <v-row dense>
+                    <v-col v-if="!readonly" cols="12">
+                      <v-textarea
+                        auto-grow
+                        rows="1"
+                        v-model="editedItem.description.description"
+                        :label="$t('description')"
+                      />
+                    </v-col>
+                    <v-col cols="12" sm="12" :md="readonly ? '12' : '6'">
+                      <div v-html="markdownDescription" />
+                    </v-col>
+                  </v-row>
+                </v-form>
+              </v-card-text>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="error" text @click="close">
+                  {{ $t("cancel") }}
+                </v-btn>
+                <v-btn v-if="!readonly" color="primary" text @click="save">
+                  {{ $t("save") }}
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <confirm-delete-dialog
+            :open.sync="dialogDelete"
+            @cancel="closeDelete"
+            @confirm="deleteItemsConfirm(selected)"
+          />
+          <v-btn
+            v-if="!readonly"
+            :disabled="selected.length === 0"
+            icon
+            text
+            @click="dialogDelete = true"
+            color="error"
+            ><v-icon>mdi-delete</v-icon></v-btn
+          >
+        </template>
+      </app-bar>
+    </template>
     <v-card>
       <v-card-text>
         <v-alert v-model="notification" dense outlined type="error" dismissible>
@@ -14,6 +133,7 @@
           :sort-by="sortBy"
           :search="search"
           multi-sort
+          :disable-sort="$vuetify.breakpoint.xsOnly"
         >
           <template v-slot:top>
             <v-toolbar dense id="admin-table-toolbar" flat :color="color">
@@ -26,123 +146,6 @@
                 :label="$t('search')"
                 class="mr-4"
               ></v-text-field>
-              <v-spacer></v-spacer>
-              <v-dialog scrollable v-model="dialog" max-width="1200px">
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    v-if="!readonly"
-                    icon
-                    color="primary"
-                    text
-                    v-bind="attrs"
-                    v-on="on"
-                  >
-                    <v-icon>mdi-plus</v-icon>
-                  </v-btn>
-                </template>
-                <v-card>
-                  <v-toolbar flat :color="color">
-                    <v-toolbar-title>{{ formTitle }}</v-toolbar-title>
-                    <v-spacer></v-spacer>
-                    <v-btn-toggle
-                      dense
-                      tile
-                      color="primary"
-                      group
-                      v-model="editedItem.locale"
-                      @change="changeEditedLocale"
-                    >
-                      <v-btn
-                        v-for="locale in locales"
-                        :key="locale.value"
-                        :value="locale.value"
-                        >{{ locale.text }}</v-btn
-                      >
-                    </v-btn-toggle>
-                  </v-toolbar>
-                  <v-card-text>
-                    <v-alert
-                      v-model="notification"
-                      dense
-                      outlined
-                      type="error"
-                      dismissible
-                    >
-                      {{ messages }}
-                    </v-alert>
-                    <v-form :disabled="readonly" ref="input" v-model="valid">
-                      <v-row dense>
-                        <v-subheader class="pl-1">{{
-                          $t("general-properties")
-                        }}</v-subheader>
-                      </v-row>
-                      <v-row dense>
-                        <v-col cols="12" xs="12" sm="6">
-                          <v-text-field
-                            v-model="editedItem.id"
-                            :disabled="!isNewItem"
-                            :label="$t('id')"
-                            :hint="$t('id-empty-auto-generated-message')"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col cols="12" xs="12" sm="6">
-                          <v-text-field
-                            v-model="editedItem.description.title"
-                            :rules="[v => !!v || $t('field-is-mandatory')]"
-                            :label="$t('title')"
-                          ></v-text-field>
-                        </v-col>
-                      </v-row>
-                      <slot
-                        name="editable-fields"
-                        :editedItem="editedItem"
-                      ></slot>
-                      <v-row v-if="readonly" dense>
-                        <v-subheader class="pl-1">{{
-                          $t("description")
-                        }}</v-subheader>
-                      </v-row>
-                      <v-row dense>
-                        <v-col v-if="!readonly" cols="12">
-                          <v-textarea
-                            auto-grow
-                            rows="1"
-                            v-model="editedItem.description.description"
-                            :label="$t('description')"
-                          />
-                        </v-col>
-                        <v-col cols="12" sm="12" :md="readonly ? '12' : '6'">
-                          <div v-html="markdownDescription" />
-                        </v-col>
-                      </v-row>
-                    </v-form>
-                  </v-card-text>
-
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="error" text @click="close">
-                      {{ $t("cancel") }}
-                    </v-btn>
-                    <v-btn v-if="!readonly" color="primary" text @click="save">
-                      {{ $t("save") }}
-                    </v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
-              <confirm-delete-dialog
-                :open.sync="dialogDelete"
-                @cancel="closeDelete"
-                @confirm="deleteItemsConfirm(selected)"
-              />
-              <v-btn
-                v-if="!readonly"
-                :disabled="selected.length === 0"
-                icon
-                text
-                @click="dialogDelete = true"
-                color="error"
-                ><v-icon>mdi-delete</v-icon></v-btn
-              >
             </v-toolbar>
           </template>
           <template v-slot:no-data>
@@ -184,6 +187,7 @@ import marked from "marked";
 import { Form } from "@/utils";
 import PageTemplate from "../PageTemplate.vue";
 import ConfirmDeleteDialog from "../ConfirmDeleteDialog.vue";
+import AppBar from "../AppBar.vue";
 
 const AdminTableProps = Vue.extend({
   props: {
@@ -201,6 +205,7 @@ const AdminTableProps = Vue.extend({
   components: {
     "page-template": PageTemplate,
     "confirm-delete-dialog": ConfirmDeleteDialog,
+    "app-bar": AppBar,
   },
   name: "admin-table",
 })

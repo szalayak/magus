@@ -1,7 +1,7 @@
 <template>
   <v-hover v-slot="{ hover }">
     <v-card class="pa-0" flat tile>
-      <v-toolbar class="character-info-card-toolbar" flat :color="color">
+      <v-app-bar flat class="character-info-card-toolbar" color="transparent">
         <v-toolbar-title>{{ title }}</v-toolbar-title>
         <v-btn
           icon
@@ -12,7 +12,7 @@
         </v-btn>
         <v-spacer></v-spacer>
         <slot name="toolbar" :edit="edit" />
-      </v-toolbar>
+      </v-app-bar>
       <v-card-text class="pa-0" v-show="show">
         <v-alert
           :value="error"
@@ -45,6 +45,9 @@
 .character-info-card-toolbar .v-toolbar__content {
   padding: 0px !important;
 }
+/* .theme--dark.v-card {
+  background-color: #121212 !important;
+} */
 </style>
 
 <script lang="ts">
@@ -75,29 +78,14 @@ export default class CharacterInfoCard extends Vue {
   valid = true;
   show = true;
 
-  get color() {
-    return this.$vuetify.theme.dark ? "#1E1E1E" : "white";
-  }
-
   async save() {
     if ((this.$refs.data as Form).validate()) {
       this.$emit("save");
-      // try {
-      //   await this.$store.dispatch("character/save", this.character.id);
-      //   this.edit = false;
-      // } catch (error) {
-      //   this.messages =
-      //     typeof error === "string"
-      //       ? [error]
-      //       : error.errors?.map((err: LooseObject) => err.message) || [];
-      //   this.error = true;
-      // }
     }
   }
 
   cancel() {
     this.$emit("cancel");
-    // this.$store.dispatch("character/revert", this.id);
     this.$emit("update:edit", false);
   }
 }

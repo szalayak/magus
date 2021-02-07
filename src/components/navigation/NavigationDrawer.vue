@@ -7,7 +7,6 @@
     clipped
     floating
     app
-    :color="color"
   >
     <v-list nav dense>
       <general />
