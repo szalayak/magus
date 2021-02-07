@@ -33,9 +33,8 @@ import Component from "vue-class-component";
 import VuePullRefresh from "vue-pull-refresh";
 import PageTemplate from "@/components/PageTemplate.vue";
 import CharacterPage from "./CharacterPage";
-import { Class, Race } from "@/store";
 import AppBar from "@/components/AppBar.vue";
-import { characterToLink, localiseItem } from "@/utils";
+import { characterToLink } from "@/utils";
 import HeaderQuickView from "@/components/character/quick-view/HeaderQuickView.vue";
 import AbilitiesQuickView from "@/components/character/quick-view/AbilitiesQuickView.vue";
 import CombatValuesQuickView from "@/components/character/quick-view/CombatValuesQuickView.vue";
@@ -54,35 +53,8 @@ import SkeletonCards from "@/components/SkeletonCards.vue";
   },
 })
 export default class CharacterOverview extends CharacterPage {
-  pullToRefreshConfig = {
-    loadingLabel: this.$t("loading-indicator"),
-    startLabel: this.$t("loading-indicator"),
-    readyLabel: this.$t("pull-to-refresh"),
-    errorLabel: this.$t("error"),
-  };
-
   characterToLink() {
     return this.character ? characterToLink(this.character) : "";
-  }
-
-  raceToString(race: Race): string {
-    return localiseItem(race, this.$i18n.locale)?.description?.title || "";
-  }
-
-  classToString(cl: Class): string {
-    return localiseItem(cl, this.$i18n.locale)?.description?.title || "";
-  }
-
-  characterToString() {
-    const raceString = this.character?.race
-      ? `${this.raceToString(this.character?.race)} `
-      : "";
-    const classString = this.character?.class
-      ? `${this.classToString(this.character?.class)}`
-      : "";
-    return `${raceString}${classString}, ${this.$t("ex-lev")}: ${
-      this.character?.level?.currentLevel
-    }`;
   }
 }
 </script>

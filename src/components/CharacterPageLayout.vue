@@ -35,6 +35,8 @@
     </template>
     <vue-pull-refresh :on-refresh="refresh" :config="pullToRefreshConfig">
       <v-card flat :loading="loading">
+        <v-card-title>{{ character.name }}</v-card-title>
+        <v-card-subtitle>{{ characterToString() }}</v-card-subtitle>
         <v-card-text class="pt-1">
           <v-alert
             :value="notification"
@@ -56,11 +58,11 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import VuePullRefresh from "vue-pull-refresh";
-import { Character } from "@/store";
+import { Character, Class, Race } from "@/store";
 import { Prop } from "vue-property-decorator";
 import PageTemplate from "./PageTemplate.vue";
 import characterComponents from "@/utils/characterComponents";
-import { characterToLink } from "@/utils";
+import { characterToLink, localiseItem } from "@/utils";
 import AppBar from "./AppBar.vue";
 
 @Component({
@@ -97,6 +99,26 @@ export default class CharacterPageLayout extends Vue {
 
   characterToLink(selector?: string, details = true) {
     return characterToLink(this.character, selector, details);
+  }
+
+  raceToString(race: Race): string {
+    return localiseItem(race, this.$i18n.locale)?.description?.title || "";
+  }
+
+  classToString(cl: Class): string {
+    return localiseItem(cl, this.$i18n.locale)?.description?.title || "";
+  }
+
+  characterToString() {
+    const raceString = this.character?.race
+      ? `${this.raceToString(this.character?.race)} `
+      : "";
+    const classString = this.character?.class
+      ? `${this.classToString(this.character?.class)}`
+      : "";
+    return `${raceString}${classString}, ${this.$t("ex-lev")}: ${
+      this.character?.level?.currentLevel
+    }`;
   }
 
   refresh() {

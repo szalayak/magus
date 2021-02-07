@@ -2,6 +2,8 @@ import Vue from "vue";
 import { Character } from "@/store/modules/character";
 import { LooseObject } from "@/store/types";
 import Component from "vue-class-component";
+import { Race, Class } from "@/store";
+import { localiseItem } from "@/utils";
 
 @Component
 export default class CharacterPage extends Vue {
@@ -41,6 +43,26 @@ export default class CharacterPage extends Vue {
     return this.$store.getters["character/list"].find(
       (char: Character) => char.id === this.id
     );
+  }
+
+  raceToString(race: Race): string {
+    return localiseItem(race, this.$i18n.locale)?.description?.title || "";
+  }
+
+  classToString(cl: Class): string {
+    return localiseItem(cl, this.$i18n.locale)?.description?.title || "";
+  }
+
+  characterToString() {
+    const raceString = this.character?.race
+      ? `${this.raceToString(this.character?.race)} `
+      : "";
+    const classString = this.character?.class
+      ? `${this.classToString(this.character?.class)}`
+      : "";
+    return `${raceString}${classString}, ${this.$t("ex-lev")}: ${
+      this.character?.level?.currentLevel
+    }`;
   }
 
   async refresh() {
