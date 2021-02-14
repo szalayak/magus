@@ -19,9 +19,12 @@
         <v-card-title>{{ character.name }}</v-card-title>
         <v-card-subtitle>{{ characterToString() }}</v-card-subtitle>
         <v-card-text class="pa-0">
-          <!-- <header-quick-view :character="character" /> -->
           <abilities-quick-view :character="character" />
           <combat-values-quick-view :character="character" />
+          <vitality-quick-view :character="character" />
+          <psi-mana-points-quick-view :character="character" />
+          <spell-resistance-quick-view :character="character" />
+          <percentage-skills-quick-view :character="character" />
         </v-card-text>
       </v-card>
       <skeleton-cards v-else />
@@ -38,6 +41,10 @@ import { characterToLink } from "@/utils";
 import HeaderQuickView from "@/components/character/quick-view/HeaderQuickView.vue";
 import AbilitiesQuickView from "@/components/character/quick-view/AbilitiesQuickView.vue";
 import CombatValuesQuickView from "@/components/character/quick-view/CombatValuesQuickView.vue";
+import VitalityQuickView from "@/components/character/quick-view/VitalityQuickView.vue";
+import PsiManaPointsQuickView from "@/components/character/quick-view/PsiManaPointsQuickView.vue";
+import SpellResistanceQuickView from "@/components/character/quick-view/SpellResistanceQuickView.vue";
+import PercentageSkillsQuickView from "@/components/character/quick-view/PercentageSkillsQuickView.vue";
 import SkeletonCards from "@/components/SkeletonCards.vue";
 
 @Component({
@@ -50,6 +57,10 @@ import SkeletonCards from "@/components/SkeletonCards.vue";
     HeaderQuickView,
     AbilitiesQuickView,
     CombatValuesQuickView,
+    VitalityQuickView,
+    PsiManaPointsQuickView,
+    SpellResistanceQuickView,
+    PercentageSkillsQuickView,
   },
 })
 export default class CharacterOverview extends CharacterPage {

@@ -1,13 +1,10 @@
 <template>
-  <v-card outlined>
-    <v-card-title>
-      <slot name="title">
-        <router-link :to="characterToLink(character, 3, 'skills')">{{
-          $t("percentage-skills")
-        }}</router-link></slot
-      ></v-card-title
-    >
-    <v-card-subtitle><slot name="subtitle"></slot></v-card-subtitle>
+  <v-card flat>
+    <v-app-bar dense flat color="transparent">
+      <v-toolbar-title class="text-h6">{{
+        $t("percentage-skills")
+      }}</v-toolbar-title>
+    </v-app-bar>
     <v-card-text>
       <v-alert
         dense
@@ -51,19 +48,19 @@
               :title="skill.skill.description.title"
               :value="`${skill.percentageValue}%`"
               @save="onCheckResult($event, skill)"/></v-col
-        ></template> </v-row
-    ></v-card-text>
+        ></template>
+      </v-row>
+    </v-card-text>
   </v-card>
 </template>
 <script lang="ts">
 import Component from "vue-class-component";
+import QuickViewOutputField from "./QuickViewOutputField.vue";
 import ThrowScenarioTriggerField from "../ThrowScenarioTriggerField.vue";
 import CharacterPercentageSkillsQuickViewBase from "../CharacterPercentageSkillsQuickViewBase";
 @Component({
-  name: "character-percentage-skills-quick-view",
-  components: {
-    "throw-scenario-trigger-field": ThrowScenarioTriggerField,
-  },
+  components: { QuickViewOutputField, ThrowScenarioTriggerField },
+  name: "percentage-skills-quick-view",
 })
-export default class CharacterPercentageSkillsQuickView extends CharacterPercentageSkillsQuickViewBase {}
+export default class PercentageSkillsQuickView extends CharacterPercentageSkillsQuickViewBase {}
 </script>

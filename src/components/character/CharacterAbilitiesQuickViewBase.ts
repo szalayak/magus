@@ -7,8 +7,9 @@ import {
   executeThrowScenario,
   parseThrowScenarioString,
 } from "@/utils";
+import Component from "vue-class-component";
 import CharacterQuickView from "./CharacterQuickView";
-
+@Component({})
 export default class CharacterAbilitiesQuickViewBase extends CharacterQuickView {
   abilityCheckResult: AbilityCheckResult | null = null;
 

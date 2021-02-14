@@ -1,6 +1,8 @@
 <template>
   <v-card flat>
-    <v-card-title>{{ $t("abilities") }}</v-card-title>
+    <v-app-bar dense flat color="transparent">
+      <v-toolbar-title class="text-h6">{{ $t("abilities") }}</v-toolbar-title>
+    </v-app-bar>
     <v-card-text>
       <v-alert
         dense

@@ -15,8 +15,10 @@ import {
   ThrowScenarioResult,
   UnskilledCombatValueModifiers,
 } from "@/utils";
+import Component from "vue-class-component";
 import CharacterQuickView from "./CharacterQuickView";
 
+@Component({})
 export default class CharacterCombatValuesQuickViewBase extends CharacterQuickView {
   combatValueThrowResult: CombatValueThrowResult | null = null;
 

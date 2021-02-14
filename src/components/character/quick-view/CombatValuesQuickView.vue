@@ -1,6 +1,19 @@
 <template>
   <v-card flat>
-    <v-card-title>{{ $t("combat-values") }}</v-card-title>
+    <v-app-bar dense flat color="transparent">
+      <v-toolbar-title class="text-h6">{{
+        $t("combat-values")
+      }}</v-toolbar-title>
+      <v-spacer />
+      <v-switch
+        :disabled="!isCurrentUser"
+        v-if="!!character.shield"
+        :input-value="character.shieldInHand"
+        :label="$t('shield')"
+        @change="toggleShieldInHand"
+        class="pt-4"
+      />
+    </v-app-bar>
     <v-card-text>
       <v-alert
         dense
@@ -83,7 +96,7 @@
           </template>
         </v-row>
       </v-alert>
-      <div class="text-h7 mb-2">{{ $t("no-weapons") }}</div>
+      <div class="mt-2 primary--text">{{ $t("no-weapons") }}</div>
       <v-row dense>
         <v-col cols="3" sm="2">
           <throw-scenario-trigger-field
@@ -171,7 +184,7 @@
         </v-col>
       </v-row>
       <template v-for="weapon in combatValuesWithWeapons">
-        <div :key="`${weapon.id}-label`" class="text-h7 mb-2">
+        <div :key="`${weapon.id}-label`" class="mt-2 primary--text">
           {{ weapon.weapon.description.title }}
         </div>
         <v-row :key="weapon.id" dense>
@@ -218,13 +231,13 @@
               />
             </throw-scenario-trigger-field>
           </v-col>
-          <v-col cols="3" sm="2">
+          <v-col v-if="!weapon.weapon.ranged" cols="3" sm="2">
             <quick-view-output-field
               :caption="$t('defence')"
               :value="weapon.combatValues.defence"
             />
           </v-col>
-          <v-col cols="3" sm="2">
+          <v-col v-if="weapon.weapon.ranged" cols="3" sm="2">
             <throw-scenario-trigger-field
               throwScenarioString="D100"
               :title="$t('aiming')"
