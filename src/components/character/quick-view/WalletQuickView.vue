@@ -56,24 +56,6 @@
             v-else
           />
         </v-col>
-        <!-- <v-col cols="4">
-          <quick-view-output-field
-            :caption="$t('mithril')"
-            :value="wallet.mithrill"
-          />
-        </v-col>
-        <v-col cols="4">
-          <quick-view-output-field
-            :caption="$t('gemstones')"
-            :value="wallet.gemstones"
-          />
-        </v-col>
-        <v-col cols="4">
-          <quick-view-output-field
-            :caption="$t('other')"
-            :value="wallet.misc"
-          />
-        </v-col> -->
       </v-row>
     </v-card-text>
   </v-card>

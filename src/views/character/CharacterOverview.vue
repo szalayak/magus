@@ -14,19 +14,107 @@
         </template>
       </app-bar>
     </template>
+    <template v-slot:navbar-items="{}">
+      <v-list-group :value="true">
+        <template v-slot:activator>
+          <v-list-item-title>{{ character.name }}</v-list-item-title>
+        </template>
+        <v-list-item :to="characterToLink('abilities')">
+          <v-list-item-icon>
+            <v-icon>mdi-arm-flex</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>
+            {{ $t("abilities") }}
+          </v-list-item-title>
+        </v-list-item>
+        <v-list-item :to="characterToLink('combat-values')">
+          <v-list-item-icon>
+            <v-icon>mdi-sword</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>
+            {{ $t("combat-values") }}
+          </v-list-item-title>
+        </v-list-item>
+        <v-list-item :to="characterToLink('vitality')">
+          <v-list-item-icon>
+            <v-icon>mdi-stethoscope</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>
+            {{ $t("vitality") }}
+          </v-list-item-title>
+        </v-list-item>
+        <v-list-item :to="characterToLink('psi-mana-points')">
+          <v-list-item-icon>
+            <v-icon>mdi-head-cog</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>
+            {{ $t("psi") }}/{{ $t("mana-points") }}
+          </v-list-item-title>
+        </v-list-item>
+        <v-list-item :to="characterToLink('spell-resistance')">
+          <v-list-item-icon>
+            <v-icon>mdi-shield-sun</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>
+            {{ $t("spell-resistance") }}
+          </v-list-item-title>
+        </v-list-item>
+        <v-list-item :to="characterToLink('wallet')">
+          <v-list-item-icon>
+            <v-icon>mdi-language-ruby</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>
+            {{ $t("wallet") }}
+          </v-list-item-title>
+        </v-list-item>
+        <v-list-item :to="characterToLink('percentage-skills')">
+          <v-list-item-icon>
+            <v-icon>mdi-certificate</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>
+            {{ $t("percentage-skills") }}
+          </v-list-item-title>
+        </v-list-item>
+        <v-list-item :to="characterToLink('skills')">
+          <v-list-item-icon>
+            <v-icon>mdi-certificate</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>
+            {{ $t("skills") }}
+          </v-list-item-title>
+        </v-list-item>
+        <v-list-item :to="`${characterToLink()}/details`">
+          <v-list-item-icon>
+            <v-icon>mdi-account-details</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>
+            {{ $t("details") }}
+          </v-list-item-title>
+        </v-list-item>
+      </v-list-group>
+    </template>
     <vue-pull-refresh :on-refresh="refresh" :config="pullToRefreshConfig">
       <v-card v-if="character" flat>
         <v-card-title>{{ character.name }}</v-card-title>
         <v-card-subtitle>{{ characterToString() }}</v-card-subtitle>
         <v-card-text class="pa-0">
-          <abilities-quick-view :character="character" />
-          <combat-values-quick-view :character="character" />
-          <vitality-quick-view :character="character" />
-          <psi-mana-points-quick-view :character="character" />
-          <spell-resistance-quick-view :character="character" />
-          <wallet-quick-view :character="character" />
-          <percentage-skills-quick-view :character="character" />
-          <skills-quick-view :character="character" />
+          <abilities-quick-view id="abilities" :character="character" />
+          <combat-values-quick-view id="combat-values" :character="character" />
+          <vitality-quick-view id="vitality" :character="character" />
+          <psi-mana-points-quick-view
+            id="psi-mana-points"
+            :character="character"
+          />
+          <spell-resistance-quick-view
+            id="spell-resistance"
+            :character="character"
+          />
+          <wallet-quick-view id="wallet" :character="character" />
+          <percentage-skills-quick-view
+            id="percentage-skills"
+            :character="character"
+          />
+          <skills-quick-view id="skills" :character="character" />
         </v-card-text>
       </v-card>
       <skeleton-cards v-else />
@@ -70,8 +158,8 @@ import SkeletonCards from "@/components/SkeletonCards.vue";
   },
 })
 export default class CharacterOverview extends CharacterPage {
-  characterToLink() {
-    return this.character ? characterToLink(this.character) : "";
+  characterToLink(selector?: string) {
+    return this.character ? characterToLink(this.character, selector) : "";
   }
 }
 </script>

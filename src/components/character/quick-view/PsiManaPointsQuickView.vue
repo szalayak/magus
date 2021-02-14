@@ -17,7 +17,7 @@
         {{ messages }}
       </v-alert>
       <v-row dense>
-        <v-col v-if="character.psiUser" cols="6">
+        <v-col v-if="character.psiUser" cols="5">
           <quick-update-property-field
             v-if="isCurrentUser"
             :value="psiPoints.current || 0"
@@ -35,7 +35,7 @@
             :value="`${psiPoints.current || 0}/${psiPoints.max || 0}`"
           />
         </v-col>
-        <v-col v-if="character.magicUser" cols="6">
+        <v-col v-if="character.magicUser" cols="7">
           <quick-update-property-field
             v-if="isCurrentUser"
             :value="manaPoints.current || 0"
