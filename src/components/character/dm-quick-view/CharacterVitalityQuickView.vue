@@ -82,7 +82,7 @@
 
 <script lang="ts">
 import Component from "vue-class-component";
-import CharacterAbilitiesQuickViewBase from "../CharacterAbilitiesQuickViewBase";
+import CharacterVitalityQuickViewBase from "../CharacterVitalityQuickViewBase";
 import QuickUpdatePropertyField from "../QuickUpdatePropertyField.vue";
 import ThrowScenarioTriggerField from "../ThrowScenarioTriggerField.vue";
 @Component({
@@ -92,5 +92,5 @@ import ThrowScenarioTriggerField from "../ThrowScenarioTriggerField.vue";
     "quick-update-property-field": QuickUpdatePropertyField,
   },
 })
-export default class CharacterVitalityQuickView extends CharacterAbilitiesQuickViewBase {}
+export default class CharacterVitalityQuickView extends CharacterVitalityQuickViewBase {}
 </script>

@@ -12,7 +12,7 @@
         @change="toggleArmourActive"
       />
     </v-app-bar>
-    <v-card-text>
+    <v-card-text class="pt-0">
       <v-alert
         :value="error"
         dense
@@ -24,7 +24,7 @@
         {{ messages }}
       </v-alert>
       <v-row dense>
-        <v-col cols="6">
+        <v-col cols="5">
           <quick-update-property-field
             v-if="isCurrentUser"
             :value="health.hitPoints.current || 0"
@@ -46,7 +46,7 @@
             "
           />
         </v-col>
-        <v-col cols="6">
+        <v-col cols="5">
           <quick-update-property-field
             v-if="isCurrentUser"
             :value="health.vitality.current || 0"
@@ -65,6 +65,16 @@
             :caption="$t('current-vp')"
             :value="
               `${health.vitality.current || 0}/${health.vitality.max || 0}`
+            "
+          />
+        </v-col>
+        <v-col v-if="character.armour && character.armourActive" cols="2">
+          <quick-view-output-field
+            :caption="$t('drv')"
+            :value="
+              character.armourCurrentDamageReductionValue ||
+                armour.damageReductionValue ||
+                0
             "
           />
         </v-col>

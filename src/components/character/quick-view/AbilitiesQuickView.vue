@@ -3,7 +3,7 @@
     <v-app-bar dense flat color="transparent">
       <v-toolbar-title class="text-h6">{{ $t("abilities") }}</v-toolbar-title>
     </v-app-bar>
-    <v-card-text>
+    <v-card-text class="pt-0">
       <v-alert
         dense
         v-if="abilityCheckStatus.show"

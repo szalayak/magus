@@ -5,7 +5,7 @@
         $t("percentage-skills")
       }}</v-toolbar-title>
     </v-app-bar>
-    <v-card-text>
+    <v-card-text class="pt-0">
       <v-alert
         dense
         v-if="skillCheckStatus.show"
@@ -36,20 +36,24 @@
           }}</v-col>
         </v-row>
       </v-alert>
-      <v-row dense>
-        <template v-for="skill in skills">
-          <v-col :key="`${skill.id}-id`" cols="8">
-            <strong>{{ skill.skill.description.title }}</strong></v-col
-          ><v-col :key="`${skill.id}-value`" cols="4">
-            <throw-scenario-trigger-field
-              bold
-              dialog
-              throwScenarioString="D100"
-              :title="skill.skill.description.title"
-              :value="`${skill.percentageValue}%`"
-              @save="onCheckResult($event, skill)"/></v-col
-        ></template>
-      </v-row>
+      <v-list flat dense class="pa-0">
+        <v-list-item class="ps-0" v-for="skill in skills" :key="skill.id">
+          <v-list-item-content>
+            <v-list-item-title v-text="skill.skill.description.title" />
+          </v-list-item-content>
+          <v-list-item-action>
+            <v-list-item-action-text
+              ><throw-scenario-trigger-field
+                bold
+                dialog
+                throwScenarioString="D100"
+                :title="skill.skill.description.title"
+                :value="`${skill.percentageValue}%`"
+                @save="onCheckResult($event, skill)"
+            /></v-list-item-action-text>
+          </v-list-item-action>
+        </v-list-item>
+      </v-list>
     </v-card-text>
   </v-card>
 </template>
@@ -58,9 +62,16 @@ import Component from "vue-class-component";
 import QuickViewOutputField from "./QuickViewOutputField.vue";
 import ThrowScenarioTriggerField from "../ThrowScenarioTriggerField.vue";
 import CharacterPercentageSkillsQuickViewBase from "../CharacterPercentageSkillsQuickViewBase";
+import { executeThrowScenario, parseThrowScenarioString } from "@/utils";
+import { SkillAssignment } from "@/store";
 @Component({
   components: { QuickViewOutputField, ThrowScenarioTriggerField },
   name: "percentage-skills-quick-view",
 })
-export default class PercentageSkillsQuickView extends CharacterPercentageSkillsQuickViewBase {}
+export default class PercentageSkillsQuickView extends CharacterPercentageSkillsQuickViewBase {
+  performThrow(throwScenarioString: string, skill: SkillAssignment) {
+    const throwScenario = parseThrowScenarioString(throwScenarioString);
+    this.onCheckResult(executeThrowScenario(throwScenario), skill);
+  }
+}
 </script>

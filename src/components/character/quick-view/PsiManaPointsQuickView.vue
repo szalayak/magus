@@ -5,7 +5,7 @@
         {{ $t("psi") }}/{{ $t("mana-points") }}
       </v-toolbar-title>
     </v-app-bar>
-    <v-card-text>
+    <v-card-text class="pt-0">
       <v-alert
         :value="error"
         dense

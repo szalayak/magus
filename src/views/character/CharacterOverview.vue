@@ -24,7 +24,9 @@
           <vitality-quick-view :character="character" />
           <psi-mana-points-quick-view :character="character" />
           <spell-resistance-quick-view :character="character" />
+          <wallet-quick-view :character="character" />
           <percentage-skills-quick-view :character="character" />
+          <skills-quick-view :character="character" />
         </v-card-text>
       </v-card>
       <skeleton-cards v-else />
@@ -45,6 +47,8 @@ import VitalityQuickView from "@/components/character/quick-view/VitalityQuickVi
 import PsiManaPointsQuickView from "@/components/character/quick-view/PsiManaPointsQuickView.vue";
 import SpellResistanceQuickView from "@/components/character/quick-view/SpellResistanceQuickView.vue";
 import PercentageSkillsQuickView from "@/components/character/quick-view/PercentageSkillsQuickView.vue";
+import SkillsQuickView from "@/components/character/quick-view/SkillsQuickView.vue";
+import WalletQuickView from "@/components/character/quick-view/WalletQuickView.vue";
 import SkeletonCards from "@/components/SkeletonCards.vue";
 
 @Component({
@@ -61,6 +65,8 @@ import SkeletonCards from "@/components/SkeletonCards.vue";
     PsiManaPointsQuickView,
     SpellResistanceQuickView,
     PercentageSkillsQuickView,
+    SkillsQuickView,
+    WalletQuickView,
   },
 })
 export default class CharacterOverview extends CharacterPage {

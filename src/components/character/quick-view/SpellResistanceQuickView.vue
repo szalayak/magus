@@ -5,7 +5,7 @@
         $t("spell-resistance")
       }}</v-toolbar-title>
     </v-app-bar>
-    <v-card-text>
+    <v-card-text class="pt-0">
       <div class="mt-2 primary--text">{{ $t("astral-sr") }}</div>
       <v-row dense>
         <v-col cols="2">

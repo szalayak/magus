@@ -128,6 +128,7 @@ export default class CharacterCombatValuesQuickViewBase extends CharacterQuickVi
   }
 
   async toggleShieldInHand() {
+    this.loading = true;
     const shieldInHand = this.character.shieldInHand ? false : true;
     try {
       await this.$store.dispatch("character/update", {
@@ -137,6 +138,7 @@ export default class CharacterCombatValuesQuickViewBase extends CharacterQuickVi
     } catch (error) {
       this.throwError(error);
     }
+    this.loading = false;
   }
 
   created() {
