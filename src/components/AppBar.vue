@@ -1,5 +1,11 @@
 <template>
-  <v-app-bar clipped-left app elevate-on-scroll color="background">
+  <v-app-bar
+    clipped-left
+    app
+    elevate-on-scroll
+    color="background"
+    :prominent="prominent"
+  >
     <v-app-bar-nav-icon
       v-if="isLoggedIn"
       @click="$store.commit('toggleNavDrawer')"
@@ -18,6 +24,9 @@
     <template v-if="!hideDefaultActions">
       <throw-dice v-if="isLoggedIn" />
     </template>
+    <template v-if="extended || prominent" v-slot:extension>
+      <slot name="extension"></slot>
+    </template>
   </v-app-bar>
 </template>
 
@@ -31,6 +40,8 @@ import ThrowDice from "./ThrowDice.vue";
   name: "app-bar",
   props: {
     hideDefaultActions: { type: Boolean, default: false },
+    prominent: { type: Boolean, default: false },
+    extended: { type: Boolean, default: false },
   },
   components: {
     "throw-dice": ThrowDice,

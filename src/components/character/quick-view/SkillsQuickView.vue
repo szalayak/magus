@@ -8,10 +8,8 @@
         <v-list-item class="ps-0" v-for="skill in skills" :key="skill.id">
           <v-list-item-content>
             <v-list-item-title v-text="skill.skill.description.title" />
+            <v-list-item-subtitle v-text="masteryToString(skill.mastery)" />
           </v-list-item-content>
-          <v-list-item-action>
-            <v-list-item-action-text v-text="masteryToString(skill.mastery)" />
-          </v-list-item-action>
         </v-list-item>
       </v-list>
     </v-card-text>

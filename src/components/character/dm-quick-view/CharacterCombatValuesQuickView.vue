@@ -270,6 +270,7 @@
         :input-value="character.shieldInHand"
         :label="$t('shield')"
         @change="toggleShieldInHand"
+        :disabled="!isCurrentUser"
       />
     </v-card-actions>
   </v-card>

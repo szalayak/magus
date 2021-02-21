@@ -15,7 +15,7 @@
       </app-bar>
     </template>
     <template v-slot:navbar-items="{}">
-      <v-list-group :value="true">
+      <v-list-group v-if="character" :value="true">
         <template v-slot:activator>
           <v-list-item-title>{{ character.name }}</v-list-item-title>
         </template>

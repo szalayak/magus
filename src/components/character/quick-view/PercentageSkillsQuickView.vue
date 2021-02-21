@@ -37,22 +37,23 @@
         </v-row>
       </v-alert>
       <v-list flat dense class="pa-0">
-        <v-list-item class="ps-0" v-for="skill in skills" :key="skill.id">
-          <v-list-item-content>
-            <v-list-item-title v-text="skill.skill.description.title" />
-          </v-list-item-content>
-          <v-list-item-action>
-            <v-list-item-action-text
-              ><throw-scenario-trigger-field
-                bold
-                dialog
-                throwScenarioString="D100"
-                :title="skill.skill.description.title"
-                :value="`${skill.percentageValue}%`"
-                @save="onCheckResult($event, skill)"
-            /></v-list-item-action-text>
-          </v-list-item-action>
-        </v-list-item>
+        <throw-scenario-trigger-field
+          v-for="skill in skills"
+          :key="skill.id"
+          bold
+          dialog
+          throwScenarioString="D100"
+          :title="skill.skill.description.title"
+          :value="`${skill.percentageValue}%`"
+          @save="onCheckResult($event, skill)"
+        >
+          <v-list-item class="ps-0">
+            <v-list-item-content>
+              <v-list-item-title v-text="skill.skill.description.title" />
+              <v-list-item-subtitle v-text="`${skill.percentageValue}%`" />
+            </v-list-item-content>
+          </v-list-item>
+        </throw-scenario-trigger-field>
       </v-list>
     </v-card-text>
   </v-card>
