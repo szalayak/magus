@@ -27,53 +27,51 @@
               {{ messages }}
             </v-alert>
             <v-form :disabled="!editable" ref="form" v-model="valid">
-              <v-container>
-                <v-row dense>
-                  <v-col cols="12">
-                    <v-select
-                      v-model="editedItem.weapon"
-                      :items="weapons"
-                      item-text="description.title"
-                      item-value="id"
-                      :label="$t('weapon')"
-                      return-object
-                    ></v-select>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-select
-                      v-model="editedItem.mastery"
-                      :items="masteryLevels"
-                      :label="$t('mastery')"
-                    ></v-select>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-select
-                      v-model="editedItem.breakWeapon"
-                      :items="masteryLevels"
-                      :label="$t('break-weapon')"
-                    ></v-select>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-select
-                      v-model="editedItem.disarm"
-                      :items="masteryLevels"
-                      :label="$t('disarm')"
-                    ></v-select>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-checkbox
-                      v-model="editedItem.inHand"
-                      :label="$t('in-hand')"
-                    />
-                  </v-col>
-                  <v-col cols="12">
-                    <v-text-field
-                      v-model="editedItem.notes"
-                      :label="$t('notes')"
-                    />
-                  </v-col>
-                </v-row>
-              </v-container>
+              <v-row dense>
+                <v-col cols="12">
+                  <v-select
+                    v-model="editedItem.weapon"
+                    :items="weapons"
+                    item-text="description.title"
+                    item-value="id"
+                    :label="$t('weapon')"
+                    return-object
+                  ></v-select>
+                </v-col>
+                <v-col cols="12">
+                  <v-select
+                    v-model="editedItem.mastery"
+                    :items="masteryLevels"
+                    :label="$t('mastery')"
+                  ></v-select>
+                </v-col>
+                <v-col cols="12">
+                  <v-select
+                    v-model="editedItem.breakWeapon"
+                    :items="masteryLevels"
+                    :label="$t('break-weapon')"
+                  ></v-select>
+                </v-col>
+                <v-col cols="12">
+                  <v-select
+                    v-model="editedItem.disarm"
+                    :items="masteryLevels"
+                    :label="$t('disarm')"
+                  ></v-select>
+                </v-col>
+                <v-col cols="12">
+                  <v-checkbox
+                    v-model="editedItem.inHand"
+                    :label="$t('in-hand')"
+                  />
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="editedItem.notes"
+                    :label="$t('notes')"
+                  />
+                </v-col>
+              </v-row>
             </v-form>
           </v-card-text>
 
@@ -91,13 +89,23 @@
       <confirm-delete-dialog
         :open.sync="dialogDelete"
         @cancel="closeDelete"
-        @confirm="deleteItemConfirm"
+        @confirm="deleteItemsConfirm(selected)"
       />
+      <v-btn
+        v-if="editable"
+        :disabled="selected.length === 0"
+        icon
+        text
+        @click="deleteItems"
+        color="error"
+        ><v-icon>mdi-delete</v-icon></v-btn
+      >
     </template>
     <template v-slot:fields="{}">
       <v-data-table
-        width="auto"
-        height="auto"
+        v-model="selected"
+        :show-select="editable"
+        item-key="id"
         :headers="headers"
         :items="assignments"
         :sort-by="sortBy"
@@ -130,19 +138,6 @@
         </template>
         <template v-slot:[`item.disarm`]="{ item }">
           {{ $t(item.disarm) }}
-        </template>
-        <template v-slot:[`item.actions`]="{ item }">
-          <v-icon
-            v-if="editable"
-            small
-            class="mr-2"
-            @click="editItem(item, assignments)"
-          >
-            mdi-pencil
-          </v-icon>
-          <v-icon v-if="editable" small @click="deleteItem(item, assignments)">
-            mdi-delete
-          </v-icon>
         </template>
       </v-data-table>
     </template>
@@ -185,7 +180,6 @@ export default class WeaponAssignmentCard extends CharacterInfoList {
       { text: this.$t("break-weapon"), value: "breakWeapon" },
       { text: this.$t("disarm"), value: "disarm" },
       { text: this.$t("notes"), value: "notes" },
-      { text: this.$t("actions"), value: "actions", sortable: false },
     ];
   }
 

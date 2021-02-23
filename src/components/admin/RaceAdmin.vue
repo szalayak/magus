@@ -46,7 +46,6 @@ export default class RaceAdmin extends Vue {
     return [
       { text: this.$t("title"), value: "description.title" },
       { text: this.$t("playable"), value: "playable" },
-      { text: this.$t("actions"), value: "actions", sortable: false },
     ];
   }
 

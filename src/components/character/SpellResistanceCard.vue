@@ -14,28 +14,28 @@
         `${$t("astral-sr")}: ${astralTotal}`
       }}</v-subheader>
       <v-row dense>
-        <v-col cols="12" sm="12" md="6">
+        <v-col cols="3">
           <v-text-field
             v-model.number="spellResistance.astral.staticShield"
             :label="$t('static')"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="6">
+        <v-col cols="3">
           <v-text-field
             v-model.number="spellResistance.astral.dynamicShield"
             :label="$t('dynamic')"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="6">
+        <v-col cols="3">
           <v-text-field
             v-model.number="spellResistance.astral.innate"
             :label="$t('innate')"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="6">
+        <v-col cols="3">
           <v-text-field
             v-model.number="spellResistance.astral.magical"
             :label="$t('magical')"
@@ -47,28 +47,28 @@
         `${$t("mental")}: ${mentalTotal}`
       }}</v-subheader>
       <v-row dense>
-        <v-col cols="12" sm="12" md="6">
+        <v-col cols="3">
           <v-text-field
             v-model.number="spellResistance.mental.staticShield"
             :label="$t('static')"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="6">
+        <v-col cols="3">
           <v-text-field
             v-model.number="spellResistance.mental.dynamicShield"
             :label="$t('dynamic')"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="6">
+        <v-col cols="3">
           <v-text-field
             v-model.number="spellResistance.mental.innate"
             :label="$t('innate')"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="6">
+        <v-col cols="3">
           <v-text-field
             v-model.number="spellResistance.mental.magical"
             :label="$t('magical')"

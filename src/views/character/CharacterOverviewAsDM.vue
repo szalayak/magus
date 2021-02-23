@@ -1,21 +1,27 @@
 <template>
-  <v-container fluid>
-    <v-toolbar flat>
-      <v-toolbar-title>{{ $t("dm-overview") }}</v-toolbar-title>
-      <v-spacer />
-      <v-btn icon text @click="refresh"><v-icon>mdi-refresh</v-icon></v-btn>
-    </v-toolbar>
-    <v-tabs v-model="tab" align-title>
+  <page-template>
+    <template v-slot:app-bar>
+      <app-bar>
+        <template v-slot:title>{{ $t("dm-overview") }}</template>
+        <template v-slot:actions>
+          <v-btn icon text @click="refresh"><v-icon>mdi-refresh</v-icon></v-btn>
+        </template>
+      </app-bar>
+    </template>
+    <v-tabs v-model="tab" background-color="background">
       <v-tab key="abilities">{{ $t("abilities") }}</v-tab>
       <v-tab-item key="abilities">
         <v-card flat>
-          <v-toolbar flat>
-            <v-card-title>{{ $t("player-characters") }}</v-card-title>
+          <v-app-bar dense flat color="transparent">
+            <v-toolbar-title class="text-h6">
+              {{ $t("player-characters") }}
+            </v-toolbar-title>
+            <v-spacer />
             <character-ability-selector
               modifier-dialog
               @select="abilityCheckForAllPCs"
             />
-          </v-toolbar>
+          </v-app-bar>
           <v-card-text
             ><v-row dense>
               <template v-for="character in playerCharacters">
@@ -46,13 +52,16 @@
           </v-card-text>
         </v-card>
         <v-card flat>
-          <v-toolbar flat>
-            <v-card-title>{{ $t("non-player-characters") }}</v-card-title>
+          <v-app-bar dense flat color="transparent">
+            <v-toolbar-title class="text-h6">
+              {{ $t("non-player-characters") }}
+            </v-toolbar-title>
+            <v-spacer />
             <character-ability-selector
               modifier-dialog
               @select="abilityCheckForAllNPCs"
             />
-          </v-toolbar>
+          </v-app-bar>
           <v-card-text
             ><v-row dense>
               <template v-for="character in nonPlayerCharacters">
@@ -176,15 +185,18 @@
           </v-card-text>
         </v-card>
         <v-card flat>
-          <v-toolbar flat>
-            <v-card-title>{{ $t("non-player-characters") }}</v-card-title>
-            <v-btn color="primary" text @click="initiationForAllNPCs">{{
-              $t("throw-initiative")
-            }}</v-btn>
-            <v-btn color="primary" text @click="offenceForAllNPCs">{{
-              $t("throw-attack")
-            }}</v-btn>
-          </v-toolbar>
+          <v-app-bar dense flat color="transparent">
+            <v-toolbar-title class="text-h6">
+              {{ $t("non-player-characters") }}
+            </v-toolbar-title>
+            <v-spacer />
+            <v-btn icon color="primary" text @click="initiationForAllNPCs"
+              ><v-icon>mdi-camera-timer</v-icon></v-btn
+            >
+            <v-btn icon color="primary" text @click="offenceForAllNPCs"
+              ><v-icon>mdi-sword</v-icon></v-btn
+            >
+          </v-app-bar>
           <v-card-text
             ><v-row dense>
               <template v-for="character in nonPlayerCharacters">
@@ -482,22 +494,25 @@
         </v-btn>
       </template>
     </v-snackbar>
-  </v-container>
+  </page-template>
 </template>
 <script lang="ts">
-import CharacterAbilitiesQuickView from "@/components/character/CharacterAbilitiesQuickView.vue";
-import CharacterCombatValuesQuickView from "@/components/character/CharacterCombatValuesQuickView.vue";
-import CharacterPsiManaPointsQuickView from "@/components/character/CharacterPsiManaPointsQuickView.vue";
-import CharacterSpellResistanceQuickView from "@/components/character/CharacterSpellResistanceQuickView.vue";
-import CharacterVitalityQuickView from "@/components/character/CharacterVitalityQuickView.vue";
+import CharacterAbilitiesQuickView from "@/components/character/dm-quick-view/CharacterAbilitiesQuickView.vue";
+import CharacterCombatValuesQuickView from "@/components/character/dm-quick-view/CharacterCombatValuesQuickView.vue";
+import CharacterPsiManaPointsQuickView from "@/components/character/dm-quick-view/CharacterPsiManaPointsQuickView.vue";
+import CharacterSpellResistanceQuickView from "@/components/character/dm-quick-view/CharacterSpellResistanceQuickView.vue";
+import CharacterVitalityQuickView from "@/components/character/dm-quick-view/CharacterVitalityQuickView.vue";
 import TitleComponent from "@/mixins/TitleComponent";
 import { Character, LooseObject, User } from "@/store";
 import { characterToLink } from "@/utils";
 import Component from "vue-class-component";
 import Vue from "vue";
 import CharacterAbilitySelector from "@/components/character/CharacterAbilitySelector.vue";
-import CharacterPercentageSkillsQuickView from "@/components/character/CharacterPercentageSkillsQuickView.vue";
-import CharacterSkillsQuickView from "@/components/character/CharacterSkillsQuickView.vue";
+import CharacterPercentageSkillsQuickView from "@/components/character/dm-quick-view/CharacterPercentageSkillsQuickView.vue";
+import CharacterSkillsQuickView from "@/components/character/dm-quick-view/CharacterSkillsQuickView.vue";
+import PageTemplate from "@/components/PageTemplate.vue";
+import AppBar from "@/components/AppBar.vue";
+
 @Component({
   name: "character-overview-as-dm",
   components: {
@@ -509,6 +524,8 @@ import CharacterSkillsQuickView from "@/components/character/CharacterSkillsQuic
     "character-percentage-skills-quick-view": CharacterPercentageSkillsQuickView,
     "character-skills-quick-view": CharacterSkillsQuickView,
     "character-ability-selector": CharacterAbilitySelector,
+    "page-template": PageTemplate,
+    "app-bar": AppBar,
   },
 })
 export default class CharacterOverviewAsDM extends TitleComponent {
@@ -527,8 +544,8 @@ export default class CharacterOverviewAsDM extends TitleComponent {
     return this.$store.getters["character/nonPlayerCharactersAsDM"];
   }
 
-  characterToLink(character: Character, page?: number, selector?: string) {
-    return characterToLink(character, page, selector);
+  characterToLink(character: Character, selector?: string) {
+    return characterToLink(character, selector);
   }
 
   onError(error: { messages: string[] }) {

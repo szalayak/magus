@@ -16,6 +16,8 @@
             v-model="properties.personalityTraits"
             :label="$t('personality-traits')"
             :disabled="!edit"
+            auto-grow
+            rows="1"
           />
         </v-col>
         <v-col cols="12">
@@ -23,6 +25,8 @@
             v-model="properties.specialAbilities"
             :label="$t('special-abilities')"
             :disabled="!edit"
+            auto-grow
+            rows="1"
           />
         </v-col>
       </v-row>

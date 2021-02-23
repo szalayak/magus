@@ -27,23 +27,21 @@
           </v-alert>
           <v-card-text>
             <v-form ref="form" v-model="valid">
-              <v-container>
-                <v-row dense>
-                  <v-col cols="12">
-                    <v-text-field
-                      v-model="editedItem.name"
-                      :label="$t('name')"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-text-field
-                      v-model.number="editedItem.amount"
-                      type="number"
-                      :label="$t('amount')"
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
+              <v-row dense>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="editedItem.name"
+                    :label="$t('name')"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model.number="editedItem.amount"
+                    type="number"
+                    :label="$t('amount')"
+                  ></v-text-field>
+                </v-col>
+              </v-row>
             </v-form>
           </v-card-text>
           <v-card-actions>
@@ -60,13 +58,23 @@
       <confirm-delete-dialog
         :open.sync="dialogDelete"
         @cancel="closeDelete"
-        @confirm="deleteItemConfirm"
+        @confirm="deleteItemsConfirm(selected)"
       />
+      <v-btn
+        v-if="editable"
+        :disabled="selected.length === 0"
+        icon
+        text
+        @click="deleteItems"
+        color="error"
+        ><v-icon>mdi-delete</v-icon></v-btn
+      >
     </template>
     <template v-slot:fields="{}">
       <v-data-table
-        width="auto"
-        height="auto"
+        v-model="selected"
+        :show-select="editable"
+        item-key="name"
         :headers="headers"
         :items="assignments"
         :sort-by="sortBy"
@@ -75,14 +83,6 @@
       >
         <template v-slot:[`item.name`]="{ item }">
           <a @click="editItem(item, assignments)">{{ item.name }}</a>
-        </template>
-        <template v-if="editable" v-slot:[`item.actions`]="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item, assignments)">
-            mdi-pencil
-          </v-icon>
-          <v-icon small @click="deleteItem(item, assignments)">
-            mdi-delete
-          </v-icon>
         </template>
       </v-data-table>
     </template>
@@ -106,16 +106,10 @@ export default class PoisonCard extends CharacterInfoList {
   sortBy = ["name"];
 
   get headers() {
-    const headers = [
+    return [
       { text: this.$t("poison"), value: "name" },
       { text: this.$t("amount"), value: "amount" },
     ];
-    return this.editable
-      ? [
-          ...headers,
-          { text: this.$t("actions"), value: "actions", sortable: false },
-        ]
-      : headers;
   }
 
   get assignments() {

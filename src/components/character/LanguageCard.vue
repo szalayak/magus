@@ -27,23 +27,21 @@
               {{ messages }}
             </v-alert>
             <v-form ref="form" v-model="valid">
-              <v-container>
-                <v-row dense>
-                  <v-col cols="12">
-                    <v-text-field
-                      v-model="editedItem.language"
-                      :label="$t('language')"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-select
-                      v-model="editedItem.level"
-                      :items="languageLevels"
-                      :label="$t('level')"
-                    ></v-select>
-                  </v-col>
-                </v-row>
-              </v-container>
+              <v-row dense>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="editedItem.language"
+                    :label="$t('language')"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <v-select
+                    v-model="editedItem.level"
+                    :items="languageLevels"
+                    :label="$t('level')"
+                  ></v-select>
+                </v-col>
+              </v-row>
             </v-form>
           </v-card-text>
           <v-card-actions>
@@ -60,16 +58,27 @@
       <confirm-delete-dialog
         :open.sync="dialogDelete"
         @cancel="closeDelete"
-        @confirm="deleteItemConfirm"
+        @confirm="deleteItemsConfirm(selected)"
       />
+      <v-btn
+        v-if="editable"
+        :disabled="selected.length === 0"
+        icon
+        text
+        @click="deleteItems"
+        color="error"
+        ><v-icon>mdi-delete</v-icon></v-btn
+      >
     </template>
     <template v-slot:fields="{}">
       <v-data-table
-        width="auto"
-        height="auto"
+        v-model="selected"
+        :show-select="editable"
+        item-key="language"
         :headers="headers"
         :items="assignments"
-        :sort-by="sortBy"
+        disable-sort
+        disable-filtering
         disable-pagination
         hide-default-footer
       >
@@ -78,14 +87,6 @@
         </template>
         <template v-slot:[`item.level`]="{ item }">
           {{ $t(item.level) }}
-        </template>
-        <template v-if="editable" v-slot:[`item.actions`]="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item, assignments)">
-            mdi-pencil
-          </v-icon>
-          <v-icon small @click="deleteItem(item, assignments)">
-            mdi-delete
-          </v-icon>
         </template>
       </v-data-table>
     </template>
@@ -114,12 +115,7 @@ export default class LanguageCard extends CharacterInfoList {
       { text: this.$t("language"), value: "language" },
       { text: this.$t("level"), value: "level" },
     ];
-    return this.editable
-      ? [
-          ...headers,
-          { text: this.$t("actions"), value: "actions", sortable: false },
-        ]
-      : headers;
+    return headers;
   }
 
   get assignments() {
@@ -154,9 +150,9 @@ export default class LanguageCard extends CharacterInfoList {
     return this.update({ id: this.character.id, languages });
   }
 
-  async deleteFunction() {
+  async deleteFunction(item: LanguageAbility) {
     const languages = [...this.assignments];
-    languages.splice(this.editedIndex, 1);
+    languages.splice(languages.indexOf(item), 1);
     return this.update({ id: this.character.id, languages });
   }
 }

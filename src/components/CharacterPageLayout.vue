@@ -1,79 +1,76 @@
 <template>
-  <vue-pull-refresh
-    v-if="character"
-    :on-refresh="refresh"
-    :config="pullToRefreshConfig"
-  >
-    <v-card flat>
-      <v-hover v-slot="{ hover }">
-        <v-toolbar v-if="$vuetify.breakpoint.mdAndUp" flat>
-          <v-card-title class="pl-1">{{ character.name }}</v-card-title>
-          <v-btn v-show="hover" text icon @click="refresh"
-            ><v-icon>mdi-refresh</v-icon></v-btn
-          >
-          <v-spacer />
-          <v-btn-toggle dense tile color="primary" group v-model="page">
-            <slot name="pages-top" :character="character">
-              <v-btn><v-icon>mdi-eye</v-icon></v-btn>
-              <v-btn>1</v-btn>
-              <v-btn>2</v-btn>
-              <v-btn>3</v-btn>
-              <v-btn>4</v-btn>
-            </slot>
-          </v-btn-toggle>
-        </v-toolbar>
-      </v-hover>
-      <v-card-text class="pt-1">
-        <slot :character="character"></slot>
-        <v-snackbar
-          v-for="message in messages"
-          :value="notification"
-          :key="message"
-          @input="$emit('update:notification', $event)"
-        >
-          {{ message }}
-
-          <template v-slot:action="{ attrs }">
-            <v-btn text v-bind="attrs" @click="notification = false">
-              {{ $t("close") }}
-            </v-btn>
-          </template>
-        </v-snackbar>
-      </v-card-text>
-      <v-card-actions>
-        <v-bottom-navigation
-          v-if="$vuetify.breakpoint.smAndDown"
-          app
-          v-model="page"
-          color="primary"
-          fixed
-        >
-          <slot name="pages-top" :character="character">
-            <v-btn><span></span><v-icon>mdi-eye</v-icon></v-btn>
-            <v-btn><span>1</span></v-btn>
-            <v-btn><span>2</span></v-btn>
-            <v-btn><span>3</span></v-btn>
-            <v-btn><span>4</span></v-btn>
+  <page-template>
+    <template v-slot:app-bar>
+      <app-bar>
+        <template v-slot:actions>
+          <slot name="actions">
+            <v-btn icon text :to="`${characterToLink(null, false)}`"
+              ><v-icon>mdi-eye</v-icon></v-btn
+            >
+            <v-btn icon text @click="refresh"
+              ><v-icon>mdi-refresh</v-icon></v-btn
+            >
           </slot>
-        </v-bottom-navigation>
-      </v-card-actions>
-    </v-card>
-  </vue-pull-refresh>
-  <skeleton-cards v-else :count="12" />
+        </template>
+      </app-bar>
+    </template>
+    <template v-slot:navbar-items="{}">
+      <v-list-group :value="true">
+        <template v-slot:activator>
+          <v-list-item-title>{{ character.name }}</v-list-item-title>
+        </template>
+        <v-list-item
+          :key="component.id"
+          v-for="component in characterComponents"
+          :to="characterToLink(component.id)"
+        >
+          <v-list-item-icon>
+            <v-icon>{{ component.icon }}</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>
+            {{ $t(component.title) }}
+          </v-list-item-title>
+        </v-list-item>
+      </v-list-group>
+    </template>
+    <vue-pull-refresh :on-refresh="refresh" :config="pullToRefreshConfig">
+      <v-card flat :loading="loading">
+        <v-card-title>{{ character.name }}</v-card-title>
+        <v-card-subtitle>{{ characterToString() }}</v-card-subtitle>
+        <v-card-text class="pt-1">
+          <v-alert
+            :value="notification"
+            dense
+            outlined
+            type="error"
+            dismissible
+            @input="$emit('update:notification', false)"
+          >
+            {{ messages }}
+          </v-alert>
+          <slot :character="character"></slot>
+        </v-card-text>
+      </v-card>
+    </vue-pull-refresh>
+  </page-template>
 </template>
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
 import VuePullRefresh from "vue-pull-refresh";
-import SkeletonCards from "@/components/SkeletonCards.vue";
-import { Character } from "@/store";
+import { Character, Class, Race } from "@/store";
 import { Prop } from "vue-property-decorator";
+import PageTemplate from "./PageTemplate.vue";
+import characterComponents from "@/utils/characterComponents";
+import { characterToLink, localiseItem } from "@/utils";
+import AppBar from "./AppBar.vue";
 
 @Component({
   name: "player-character",
   components: {
     "vue-pull-refresh": VuePullRefresh,
-    "skeleton-cards": SkeletonCards,
+    PageTemplate,
+    "app-bar": AppBar,
   },
 })
 export default class CharacterPageLayout extends Vue {
@@ -86,17 +83,11 @@ export default class CharacterPageLayout extends Vue {
   @Prop({ type: Array })
   messages: string[] | undefined;
 
-  get page() {
-    return this.$route.params.page ? parseInt(this.$route.params.page) : 0;
-  }
+  @Prop({ type: Boolean })
+  loading: boolean | undefined;
 
-  set page(page) {
-    if (page !== undefined) {
-      this.$router.push({
-        name: this.$route.name || undefined,
-        params: { ...this.$route.params, page: page.toString() },
-      });
-    }
+  get characterComponents() {
+    return characterComponents(this.character);
   }
 
   pullToRefreshConfig = {
@@ -105,6 +96,30 @@ export default class CharacterPageLayout extends Vue {
     readyLabel: this.$t("pull-to-refresh"),
     errorLabel: this.$t("error"),
   };
+
+  characterToLink(selector?: string, details = true) {
+    return characterToLink(this.character, selector, details);
+  }
+
+  raceToString(race: Race): string {
+    return localiseItem(race, this.$i18n.locale)?.description?.title || "";
+  }
+
+  classToString(cl: Class): string {
+    return localiseItem(cl, this.$i18n.locale)?.description?.title || "";
+  }
+
+  characterToString() {
+    const raceString = this.character?.race
+      ? `${this.raceToString(this.character?.race)} `
+      : "";
+    const classString = this.character?.class
+      ? `${this.classToString(this.character?.class)}`
+      : "";
+    return `${raceString}${classString}, ${this.$t("ex-lev")}: ${
+      this.character?.level?.currentLevel
+    }`;
+  }
 
   refresh() {
     this.$emit("refresh");

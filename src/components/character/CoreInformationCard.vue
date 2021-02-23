@@ -11,7 +11,14 @@
   >
     <template v-slot:fields="{ edit }">
       <v-row dense>
-        <v-col cols="12" sm="12" md="1">
+        <v-col cols="12">
+          <v-text-field
+            v-model="coreInformation.name"
+            :label="$t('name')"
+            :disabled="!edit"
+          />
+        </v-col>
+        <v-col cols="6" sm="3" lg="1">
           <v-select
             v-model="coreInformation.race"
             :label="$t('race')"
@@ -24,7 +31,7 @@
             return-object
           />
         </v-col>
-        <v-col cols="12" sm="12" md="2">
+        <v-col cols="6" sm="3" lg="2">
           <v-select
             v-model="coreInformation.class"
             :label="$t('class')"
@@ -37,21 +44,21 @@
             return-object
           />
         </v-col>
-        <v-col cols="12" sm="12" md="2">
+        <v-col cols="12" sm="3" lg="2">
           <v-text-field
             v-model="coreInformation.subclass"
             :label="$t('subclass')"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="2">
+        <v-col cols="12" sm="3" lg="2">
           <v-text-field
             v-model="coreInformation.specialisation"
             :label="$t('specialisation')"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="1">
+        <v-col cols="12" sm="4" lg="3">
           <v-select
             v-model="coreInformation.personality"
             :label="$t('personality')"
@@ -63,23 +70,21 @@
             return-object
           />
         </v-col>
-        <v-col cols="12" sm="12" md="2">
+        <v-col cols="12" sm="4" lg="2">
           <v-text-field
             v-model="country"
             :label="$t('country')"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="2">
+        <v-col cols="12" sm="4" lg="2">
           <v-text-field
             v-model="religion"
             :label="$t('religion')"
             :disabled="!edit"
           />
         </v-col>
-      </v-row>
-      <v-row dense>
-        <v-col cols="12" sm="12" md="2">
+        <v-col cols="6" sm="2">
           <v-text-field
             v-model.number="coreInformation.level.currentLevel"
             :label="$t('current-level')"
@@ -87,7 +92,7 @@
             type="number"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="2">
+        <v-col cols="6" sm="2">
           <v-text-field
             v-model.number="coreInformation.level.currentExperience"
             :label="$t('current-experience')"
@@ -95,7 +100,7 @@
             type="number"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="2">
+        <v-col cols="12" sm="2">
           <v-text-field
             v-model.number="coreInformation.level.experienceForNextLevel"
             :label="$t('experience-for-next-level')"
@@ -103,14 +108,14 @@
             type="number"
           />
         </v-col>
-        <v-col cols="6" sm="12" md="2">
+        <v-col cols="6" sm="3" lg="2">
           <v-checkbox
             v-model="coreInformation.magicUser"
             :label="$t('magic-user')"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="6" sm="12" md="2">
+        <v-col cols="6" sm="3" lg="2">
           <v-checkbox
             v-model="coreInformation.psiUser"
             :label="$t('psi-user')"
@@ -144,6 +149,7 @@ type CoreInformation = Pick<
 >;
 
 const copyCoreInformation = (character: Character) => ({
+  name: character.name,
   race: character.race,
   class: character.class,
   subclass: character.subclass,

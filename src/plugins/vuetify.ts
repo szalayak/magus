@@ -11,4 +11,20 @@ export default new Vuetify({
     locales: { en, hu },
     current: locale,
   },
+  theme: {
+    options: {
+      customProperties: true,
+    },
+    themes: {
+      dark: {
+        background: "#121212",
+      },
+      light: {
+        background: "#ffffff",
+      },
+    },
+    dark:
+      window?.matchMedia &&
+      window?.matchMedia("(prefers-color-scheme: dark)").matches,
+  },
 });

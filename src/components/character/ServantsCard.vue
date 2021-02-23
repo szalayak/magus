@@ -159,16 +159,28 @@
       <confirm-delete-dialog
         :open.sync="dialogDelete"
         @cancel="closeDelete"
-        @confirm="deleteItemConfirm"
+        @confirm="deleteItemsConfirm(selected)"
       />
+      <v-btn
+        v-if="editable"
+        :disabled="selected.length === 0"
+        icon
+        text
+        @click="deleteItems"
+        color="error"
+        ><v-icon>mdi-delete</v-icon></v-btn
+      >
     </template>
     <template v-slot:fields="{}">
       <v-data-table
-        width="auto"
-        height="auto"
+        v-model="selected"
+        :show-select="editable"
+        item-key="id"
         :headers="headers"
         :items="assignments"
         :sort-by="sortBy"
+        disable-pagination
+        hide-default-footer
       >
         <template v-slot:[`item.name`]="{ item }">
           <a @click="editItem(item)">{{ item.name }}</a>
@@ -199,14 +211,6 @@
         </template>
         <template v-slot:[`item.health.hitPoints`]="{ item }">
           {{ mutablePointValueToString(item.health.hitPoints) }}
-        </template>
-        <template v-if="editable" v-slot:[`item.actions`]="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item, assignments)">
-            mdi-pencil
-          </v-icon>
-          <v-icon small @click="deleteItem(item, assignments)">
-            mdi-delete
-          </v-icon>
         </template>
       </v-data-table>
     </template>
@@ -239,7 +243,7 @@ export default class ServantsCard extends CharacterInfoList {
   sortBy = ["name"];
 
   get headers() {
-    const headers = [
+    return [
       { text: this.$t("name"), value: "name" },
       { text: this.$t("vp"), value: "health.vitality" },
       { text: this.$t("hp"), value: "health.hitPoints" },
@@ -254,12 +258,6 @@ export default class ServantsCard extends CharacterInfoList {
       { text: this.$t("special-abilities"), value: "specialAbilities" },
       { text: this.$t("notes"), value: "notes" },
     ];
-    return this.editable
-      ? [
-          ...headers,
-          { text: this.$t("actions"), value: "actions", sortable: false },
-        ]
-      : headers;
   }
 
   get weapons() {

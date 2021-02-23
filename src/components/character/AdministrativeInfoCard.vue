@@ -11,7 +11,7 @@
   >
     <template v-slot:fields="{ edit }">
       <v-row dense>
-        <v-col cols="12">
+        <v-col cols="12" xs="12" sm="6">
           <v-menu
             v-model="startDatePicker"
             :close-on-content-click="false"
@@ -39,7 +39,7 @@
             ></v-date-picker>
           </v-menu>
         </v-col>
-        <v-col cols="12">
+        <v-col cols="12" xs="12" sm="6">
           <v-select
             v-model="administrativeInfo.dungeonMaster"
             :label="$t('dungeon-master')"

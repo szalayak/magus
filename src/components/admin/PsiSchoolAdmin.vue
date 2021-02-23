@@ -55,7 +55,6 @@ export default class PsiSchoolAdmin extends Vue {
       { text: this.$t("title"), value: "description.title" },
       { text: this.$t("base-psi-points"), value: "basePsiPoints" },
       { text: this.$t("psi-points-per-level"), value: "psiPointsPerLevel" },
-      { text: this.$t("actions"), value: "actions", sortable: false },
     ];
   }
 }

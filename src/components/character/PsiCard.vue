@@ -11,7 +11,7 @@
   >
     <template v-slot:fields="{ edit }">
       <v-row dense>
-        <v-col cols="12" sm="12">
+        <v-col cols="12">
           <v-select
             v-model="psi.psiSchool"
             :label="$t('school')"
@@ -22,7 +22,7 @@
             return-object
           />
         </v-col>
-        <v-col cols="12" sm="12" md="6">
+        <v-col cols="3">
           <v-text-field
             class="font-weight-bold"
             v-model.number="psi.psiPoints.current"
@@ -31,7 +31,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="6">
+        <v-col cols="3">
           <v-text-field
             v-model.number="psi.psiPoints.max"
             :label="$t('max')"
@@ -39,7 +39,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="6">
+        <v-col cols="3">
           <v-text-field
             v-model.number="psi.psiLevel"
             :label="$t('level')"
@@ -47,7 +47,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="6">
+        <v-col cols="3">
           <v-text-field
             :label="$t('psi-points-per-level')"
             :value="psiPointsPerLevel"

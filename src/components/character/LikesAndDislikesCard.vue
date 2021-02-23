@@ -16,6 +16,8 @@
             v-model="properties.likes"
             :label="$t('likes')"
             :disabled="!edit"
+            auto-grow
+            rows="1"
           />
         </v-col>
         <v-col cols="12">
@@ -23,6 +25,8 @@
             v-model="properties.dislikes"
             :label="$t('dislikes')"
             :disabled="!edit"
+            auto-grow
+            rows="1"
           />
         </v-col>
         <v-col cols="12">
@@ -30,6 +34,8 @@
             v-model="properties.fears"
             :label="$t('fears')"
             :disabled="!edit"
+            auto-grow
+            rows="1"
           />
         </v-col>
       </v-row>

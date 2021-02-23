@@ -1,11 +1,9 @@
 <template>
-  <v-container fluid>
-    <v-row dense>
-      <v-col v-for="i in count" :key="i" cols="12" xs="12" sm="6" md="4" lg="3"
-        ><v-skeleton-loader type="card"></v-skeleton-loader
-      ></v-col>
-    </v-row>
-  </v-container>
+  <v-row dense>
+    <v-col v-for="i in count" :key="i" cols="12" xs="12" sm="6" md="4" lg="3"
+      ><v-skeleton-loader type="card"></v-skeleton-loader
+    ></v-col>
+  </v-row>
 </template>
 <script lang="ts">
 import Vue from "vue";

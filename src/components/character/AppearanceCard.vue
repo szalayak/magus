@@ -11,7 +11,7 @@
   >
     <template v-slot:fields="{ edit }">
       <v-row dense>
-        <v-col cols="12" xs="12" sm="6" md="3" lg="1">
+        <v-col cols="6" sm="3" lg="1">
           <v-select
             v-model="appearance.sex"
             :label="$t('sex')"
@@ -19,35 +19,35 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" xs="12" sm="6" md="3" lg="1">
+        <v-col cols="6" sm="3" lg="1">
           <v-text-field
             v-model="appearance.eyes"
             :label="$t('eyes')"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" xs="12" sm="6" md="3" lg="1">
+        <v-col cols="6" sm="3" lg="1">
           <v-text-field
             v-model="appearance.hair"
             :label="$t('hair')"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" xs="12" sm="6" md="3" lg="1">
+        <v-col cols="6" sm="3" lg="1">
           <v-text-field
             v-model="appearance.weight"
             :label="$t('weight')"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" xs="12" sm="6" md="3" lg="1">
+        <v-col cols="6" sm="3" lg="1">
           <v-text-field
             v-model="appearance.height"
             :label="$t('height')"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" xs="12" sm="6" md="3" lg="1">
+        <v-col cols="6" sm="3" lg="1">
           <v-text-field
             v-model.number="appearance.age"
             type="number"
@@ -63,7 +63,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" xs="12" sm="6" md="3" lg="4">
+        <v-col cols="12" xs="12" md="3" lg="4">
           <v-text-field
             v-model="appearance.identifier"
             :label="$t('identifier')"
@@ -71,10 +71,12 @@
           />
         </v-col>
         <v-col cols="12">
-          <v-text-field
+          <v-textarea
             v-model="appearance.attire"
             :label="$t('attire')"
             :disabled="!edit"
+            auto-grow
+            rows="1"
           />
         </v-col>
       </v-row>
