@@ -15,6 +15,12 @@
       "auth": {
         "magusa74e493a": {},
         "userPoolGroups": {}
+      },
+      "function": {
+        "GraphQLResolverFunction": {
+          "deploymentBucketName": "amplify-magus-dev-183351-deployment",
+          "s3Key": "amplify-builds/GraphQLResolverFunction-736137636c57544e554b-build.zip"
+        }
       }
     }
   }

@@ -1,94 +1,96 @@
 <template>
-  <v-container fluid>
-    <v-toolbar extended flat>
-      <v-toolbar-title>{{ $t("seed-default-values") }} </v-toolbar-title>
-      <v-spacer />
-      <v-btn
-        :disabled="!itemSelected"
-        :loading="updateInProgress"
-        color="error"
-        text
-        @click="deleteExisting"
-        >{{ $t("delete") }}</v-btn
-      >
-      <v-btn
-        :disabled="!itemSelected"
-        :loading="updateInProgress"
-        color="primary"
-        text
-        @click="upload"
-        >{{ $t("start") }}</v-btn
-      >
-      <template v-slot:extension>
-        <v-radio-group v-model="updateMode" row>
-          <v-radio :label="$t('insert-values-only')" value="INSERT" />
-          <v-radio :label="$t('update-existing-values')" value="UPDATE" />
-        </v-radio-group>
+  <page-template>
+    <v-container fluid>
+      <v-toolbar extended flat>
+        <v-toolbar-title>{{ $t("seed-default-values") }} </v-toolbar-title>
         <v-spacer />
         <v-btn
-          icon
-          color="primary"
-          text
-          @click="selectAll"
-          :disabled="allSelected"
-          ><v-icon>mdi-check-all</v-icon></v-btn
-        >
-        <v-btn
-          icon
+          :disabled="!itemSelected"
+          :loading="updateInProgress"
           color="error"
           text
-          @click="deselectAll"
+          @click="deleteExisting"
+          >{{ $t("delete") }}</v-btn
+        >
+        <v-btn
           :disabled="!itemSelected"
-          ><v-icon>mdi-check-all</v-icon></v-btn
+          :loading="updateInProgress"
+          color="primary"
+          text
+          @click="upload"
+          >{{ $t("start") }}</v-btn
         >
-      </template>
-    </v-toolbar>
-    <v-alert v-if="notification" dense outlined type="error" dismissible>
-      {{ messages }}
-    </v-alert>
-    <v-list>
-      <v-list-item v-for="item in items" :key="item.id">
-        <v-list-item-action>
-          <v-checkbox v-model="item.selected"></v-checkbox>
-        </v-list-item-action>
-        <v-list-item-action>
-          <v-dialog scrollable v-model="item.dialog" max-width="800px">
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn icon text v-on="on" v-bind="attrs"
-                ><v-icon>mdi-information</v-icon></v-btn
-              >
-            </template>
-            <v-card>
-              <v-card-title>{{ item.title }}</v-card-title>
-              <v-card-text>
-                <div v-html="fixture(item.fixture)" />
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer />
-                <v-btn text @click="item.dialog = false">{{
-                  $t("close")
-                }}</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </v-list-item-action>
-        <v-list-item-content>
-          <v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-        </v-list-item-content>
-        <v-spacer />
-        <v-list-item-icon>
-          <v-progress-circular
-            v-show="item.inProgress"
-            indeterminate
+        <template v-slot:extension>
+          <v-radio-group v-model="updateMode" row>
+            <v-radio :label="$t('insert-values-only')" value="INSERT" />
+            <v-radio :label="$t('update-existing-values')" value="UPDATE" />
+          </v-radio-group>
+          <v-spacer />
+          <v-btn
+            icon
             color="primary"
-          ></v-progress-circular
-          ><v-icon v-show="item.done" :color="item.colour"
-            >mdi-check</v-icon
-          ></v-list-item-icon
-        >
-      </v-list-item>
-    </v-list>
-  </v-container>
+            text
+            @click="selectAll"
+            :disabled="allSelected"
+            ><v-icon>mdi-check-all</v-icon></v-btn
+          >
+          <v-btn
+            icon
+            color="error"
+            text
+            @click="deselectAll"
+            :disabled="!itemSelected"
+            ><v-icon>mdi-check-all</v-icon></v-btn
+          >
+        </template>
+      </v-toolbar>
+      <v-alert v-if="notification" dense outlined type="error" dismissible>
+        {{ messages }}
+      </v-alert>
+      <v-list>
+        <v-list-item v-for="item in items" :key="item.id">
+          <v-list-item-action>
+            <v-checkbox v-model="item.selected"></v-checkbox>
+          </v-list-item-action>
+          <v-list-item-action>
+            <v-dialog scrollable v-model="item.dialog" max-width="800px">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn icon text v-on="on" v-bind="attrs"
+                  ><v-icon>mdi-information</v-icon></v-btn
+                >
+              </template>
+              <v-card>
+                <v-card-title>{{ item.title }}</v-card-title>
+                <v-card-text>
+                  <div v-html="fixture(item.fixture)" />
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer />
+                  <v-btn text @click="item.dialog = false">{{
+                    $t("close")
+                  }}</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+          </v-list-item-content>
+          <v-spacer />
+          <v-list-item-icon>
+            <v-progress-circular
+              v-show="item.inProgress"
+              indeterminate
+              color="primary"
+            ></v-progress-circular
+            ><v-icon v-show="item.done" :color="item.colour"
+              >mdi-check</v-icon
+            ></v-list-item-icon
+          >
+        </v-list-item>
+      </v-list>
+    </v-container>
+  </page-template>
 </template>
 <script lang="ts">
 import TitleComponent from "@/mixins/TitleComponent";
@@ -97,6 +99,7 @@ import VueI18n from "vue-i18n";
 import fixtures from "@/fixtures/index";
 import JSONFormatter from "json-formatter-js";
 import { Editable, LooseObject } from "@/store/types";
+import PageTemplate from "@/components/PageTemplate.vue";
 
 interface Fixture {
   id: string;
@@ -112,7 +115,10 @@ interface Fixture {
 
 const [INSERT, UPDATE] = ["INSERT", "UPDATE"];
 
-@Component({ name: "seed-default-values" })
+@Component({
+  components: { "page-template": PageTemplate },
+  name: "seed-default-values",
+})
 export default class SeedDefaultValues extends TitleComponent {
   title = this.$t("seed-default-values");
   notification = false;

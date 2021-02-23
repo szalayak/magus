@@ -42,7 +42,7 @@
   "ok": "OK",
   "close": "Close",
   "refresh": "Refresh",
-  "confirm-delete-message": "Are you sure you want to delete this item?",
+  "confirm-delete-message": "Are you sure you want to delete this item/these items?",
   "general-properties": "General",
   "category": "Category",
   "descriptions": "Descriptions",
@@ -312,5 +312,8 @@
   "perception-check": "Perception Check",
   "percentage-skills": "Percentage Skills",
   "skill-check": "Skill Check",
-  "armour-active": "Active"
+  "armour-active": "Active",
+  "overview": "Overview",
+  "navigate-to": "Navigate To",
+  "details": "Details"
 }

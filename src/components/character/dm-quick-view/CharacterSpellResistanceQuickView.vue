@@ -98,24 +98,22 @@
   </v-card>
 </template>
 <script lang="ts">
-import { SpellResistance, ThrowScenario } from "@/store";
+import { ThrowScenario } from "@/store";
 import {
-  calculateSpellResistanceTotal,
-  copySpellResistance,
   getThrowScenarioString,
   SpellResistanceThrowResult,
   ThrowScenarioResult,
 } from "@/utils";
 import Component from "vue-class-component";
-import CharacterQuickView from "./CharacterQuickView";
-import ThrowScenarioTriggerField from "./ThrowScenarioTriggerField.vue";
+import CharacterSpellResistanceQuickViewBase from "../CharacterSpellResistanceQuickViewBase";
+import ThrowScenarioTriggerField from "../ThrowScenarioTriggerField.vue";
 @Component({
   name: "character-spell-resistance-quick-view",
   components: {
     "throw-scenario-trigger-field": ThrowScenarioTriggerField,
   },
 })
-export default class CharacterSpellResistanceQuickView extends CharacterQuickView {
+export default class CharacterSpellResistanceQuickView extends CharacterSpellResistanceQuickViewBase {
   spellResistanceThrowResult: SpellResistanceThrowResult | null = null;
 
   get spellResistanceThrowResults() {
@@ -129,22 +127,6 @@ export default class CharacterSpellResistanceQuickView extends CharacterQuickVie
     return {
       show: !!this.spellResistanceThrowResult,
     };
-  }
-
-  get astralSpellResistanceTotal() {
-    return calculateSpellResistanceTotal(this.spellResistance.astral);
-  }
-
-  get mentalSpellResistanceTotal() {
-    return calculateSpellResistanceTotal(this.spellResistance.mental);
-  }
-
-  get spellResistance(): SpellResistance {
-    return copySpellResistance(
-      this.character.spellResistance,
-      this.character.abilities?.astral,
-      this.character.abilities?.willpower
-    );
   }
 
   throwScenarioToString(damage: ThrowScenario) {

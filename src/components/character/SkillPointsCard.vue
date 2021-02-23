@@ -11,7 +11,7 @@
   >
     <template v-slot:fields="{ edit }">
       <v-row dense>
-        <v-col cols="12" xs="12" sm="6">
+        <v-col cols="4" sm="2">
           <v-text-field
             class="font-weight-bold"
             v-model.number="skillPoints.current"
@@ -20,7 +20,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" xs="12" sm="6">
+        <v-col cols="4" sm="2">
           <v-text-field
             v-model.number="skillPoints.base"
             type="number"
@@ -28,7 +28,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12">
+        <v-col cols="4" sm="4">
           <v-text-field
             v-model.number="skillPoints.perLevel"
             type="number"
@@ -36,7 +36,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" xs="12" sm="6">
+        <v-col cols="6" sm="2">
           <v-text-field
             v-model.number="skillPoints.intelligence"
             type="number"
@@ -44,7 +44,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12" xs="12" sm="6">
+        <v-col cols="6" sm="2">
           <v-text-field
             v-model.number="skillPoints.dexterity"
             type="number"

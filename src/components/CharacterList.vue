@@ -1,98 +1,54 @@
 <template>
-  <v-container fluid>
-    <v-data-iterator :items="characters" hide-default-footer>
-      <template v-slot:header>
-        <v-toolbar flat>
-          <v-toolbar-title>{{ title }}</v-toolbar-title>
-          <v-spacer></v-spacer>
-          <slot name="toolbar-buttons"></slot>
-        </v-toolbar>
-      </template>
-      <template v-slot:default="props">
-        <v-row class="px-3">
-          <v-col
-            v-for="item in props.items"
-            :key="item.id"
-            cols="12"
-            sm="6"
-            md="4"
-            lg="4"
-            xl="3"
+  <page-template>
+    <template v-slot:app-bar>
+      <app-bar>
+        <template v-slot:actions>
+          <slot name="actions"></slot>
+        </template>
+      </app-bar>
+    </template>
+    <v-list v-if="!loading" three-line>
+      <v-list-item
+        :to="characterToLink(character)"
+        v-for="character in characters"
+        :key="character.id"
+      >
+        <v-list-item-avatar>
+          <v-avatar color="primary"
+            ><span class="white--text headline">{{
+              initials(character)
+            }}</span></v-avatar
           >
-            <v-card>
-              <v-card-title>
-                <router-link :to="characterToLink(item)">{{
-                  item.name
-                }}</router-link>
-              </v-card-title>
-              <v-card-subtitle>{{ characterToString(item) }}</v-card-subtitle>
-              <v-card-text>
-                {{
-                  `${$t("owner")}: ${ownerToString(item.owner)}`
-                }}</v-card-text
-              >
-              <v-card-actions>
-                <v-subheader class="pl-2">{{ $t("page") }}</v-subheader>
-                <v-btn-toggle dense tile color="primary" group>
-                  <v-btn :to="characterPageToLink(item, 0)"
-                    ><v-icon>mdi-eye</v-icon></v-btn
-                  >
-                  <v-btn :to="characterPageToLink(item, 1)">1</v-btn>
-                  <v-btn :to="characterPageToLink(item, 2)">2</v-btn>
-                  <v-btn :to="characterPageToLink(item, 3)">3</v-btn>
-                  <v-btn :to="characterPageToLink(item, 4)">4</v-btn>
-                </v-btn-toggle>
-                <v-spacer />
-                <v-dialog
-                  v-if="editable"
-                  v-model="deleteDialog"
-                  max-width="500px"
-                >
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-btn color="error" icon text v-on="on" v-bind="attrs"
-                      ><v-icon>mdi-delete</v-icon></v-btn
-                    >
-                  </template>
-                  <v-card>
-                    <v-card-title class="headline">{{
-                      $t("confirm-delete-message")
-                    }}</v-card-title>
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn color="error" text @click="closeDelete">{{
-                        $t("cancel")
-                      }}</v-btn>
-                      <v-btn
-                        color="primary"
-                        text
-                        @click="deleteItemConfirm(item.id)"
-                        >{{ $t("ok") }}</v-btn
-                      >
-                      <v-spacer></v-spacer>
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
-              </v-card-actions>
-            </v-card>
-          </v-col>
-        </v-row>
-      </template>
-    </v-data-iterator>
-    <v-snackbar
-      v-for="message in messages"
-      :value="notification"
-      :key="message"
-      @input="$emit('update:notification', false)"
-    >
-      {{ message }}
+        </v-list-item-avatar>
+        <v-list-item-content>
+          <v-list-item-title v-text="character.name"></v-list-item-title>
 
-      <template v-slot:action="{ attrs }">
-        <v-btn text v-bind="attrs" @click="$emit('update:notification', false)">
-          {{ $t("close") }}
-        </v-btn>
-      </template>
-    </v-snackbar>
-  </v-container>
+          <v-list-item-subtitle>{{
+            characterToString(character)
+          }}</v-list-item-subtitle>
+
+          <v-list-item-subtitle>{{
+            `${$t("owner")}: ${ownerToString(character.owner)}`
+          }}</v-list-item-subtitle>
+        </v-list-item-content>
+        <v-list-item-action>
+          <v-btn
+            icon
+            text
+            :to="characterToLink(character, true)"
+            @click="$event.stopPropagation()"
+            ><v-icon>mdi-account-details</v-icon></v-btn
+          >
+        </v-list-item-action>
+      </v-list-item>
+    </v-list>
+    <v-skeleton-loader
+      v-for="i in 12"
+      :key="i"
+      v-else
+      type="list-item-three-line"
+    ></v-skeleton-loader>
+  </page-template>
 </template>
 <script lang="ts">
 import { Character } from "@/store/modules/character";
@@ -105,9 +61,17 @@ import { localiseItem } from "@/utils/localise";
 import { LooseObject } from "@/store/types";
 import { User } from "@/store";
 import { characterToLink } from "@/utils";
+import SkeletonCards from "@/components/SkeletonCards.vue";
+import PageTemplate from "./PageTemplate.vue";
+import AppBar from "./AppBar.vue";
 
 @Component({
   name: "character-list",
+  components: {
+    "skeleton-cards": SkeletonCards,
+    "page-template": PageTemplate,
+    "app-bar": AppBar,
+  },
 })
 export default class CharacterList extends Vue {
   @Prop({ type: Array, required: true })
@@ -124,6 +88,9 @@ export default class CharacterList extends Vue {
 
   @Prop({ type: Boolean, required: false })
   editable!: boolean;
+
+  @Prop({ type: Boolean })
+  loading: boolean | undefined;
 
   deleteDialog = false;
 
@@ -155,8 +122,18 @@ export default class CharacterList extends Vue {
     }`;
   }
 
-  characterToLink(character: Character) {
-    return characterToLink(character);
+  initials(character: Character) {
+    const nameparts = character.name?.split(" ");
+    return (
+      nameparts
+        ?.map(part => part[0])
+        .join("")
+        .toUpperCase() || ""
+    );
+  }
+
+  characterToLink(character: Character, details?: boolean) {
+    return characterToLink(character, undefined, details);
   }
 
   characterPageToLink(character: Character, page: number) {

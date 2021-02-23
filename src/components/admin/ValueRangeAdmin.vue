@@ -58,7 +58,6 @@ export default class ValueRangeAdmin extends Vue {
     return [
       { text: this.$t("type"), value: "type" },
       { text: this.$t("title"), value: "description.title" },
-      { text: this.$t("actions"), value: "actions", sortable: false },
     ];
   }
 

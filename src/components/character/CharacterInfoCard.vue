@@ -1,10 +1,8 @@
 <template>
   <v-hover v-slot="{ hover }">
-    <v-card outlined>
-      <v-toolbar flat>
+    <v-card class="pa-0" flat tile>
+      <v-app-bar flat class="character-info-card-toolbar" color="transparent">
         <v-toolbar-title>{{ title }}</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <slot name="toolbar" :edit="edit" />
         <v-btn
           icon
           @click="$emit('update:edit', true)"
@@ -12,11 +10,10 @@
         >
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
-        <v-btn icon @click="show = !show">
-          <v-icon>{{ show ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
-        </v-btn>
-      </v-toolbar>
-      <v-card-text v-show="show">
+        <v-spacer></v-spacer>
+        <slot name="toolbar" :edit="edit" />
+      </v-app-bar>
+      <v-card-text class="pa-0" v-show="show">
         <v-alert
           :value="error"
           dense
@@ -43,6 +40,13 @@
     </v-card>
   </v-hover>
 </template>
+
+<style>
+.character-info-card-toolbar .v-toolbar__content {
+  padding: 0px !important;
+}
+</style>
+
 <script lang="ts">
 import { Form } from "@/utils";
 import Component from "vue-class-component";
@@ -74,22 +78,11 @@ export default class CharacterInfoCard extends Vue {
   async save() {
     if ((this.$refs.data as Form).validate()) {
       this.$emit("save");
-      // try {
-      //   await this.$store.dispatch("character/save", this.character.id);
-      //   this.edit = false;
-      // } catch (error) {
-      //   this.messages =
-      //     typeof error === "string"
-      //       ? [error]
-      //       : error.errors?.map((err: LooseObject) => err.message) || [];
-      //   this.error = true;
-      // }
     }
   }
 
   cancel() {
     this.$emit("cancel");
-    // this.$store.dispatch("character/revert", this.id);
     this.$emit("update:edit", false);
   }
 }

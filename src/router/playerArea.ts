@@ -3,7 +3,7 @@ import { NavItemConfig } from ".";
 export const playerAreaRoutes: Array<NavItemConfig> = [
   {
     path: "/player-area/player-characters",
-    name: "Player Characters",
+    name: "player-characters-as-player",
     title: "my-characters",
     icon: "mdi-account-group",
     component: () =>

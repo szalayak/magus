@@ -12,7 +12,13 @@
     <template v-slot:fields="{ edit }">
       <v-row dense>
         <v-col cols="12">
-          <v-textarea v-model="notes" :label="$t('notes')" :disabled="!edit" />
+          <v-textarea
+            v-model="notes"
+            :label="$t('notes')"
+            :disabled="!edit"
+            auto-grow
+            rows="1"
+          />
         </v-col>
       </v-row>
     </template>

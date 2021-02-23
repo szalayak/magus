@@ -13,6 +13,12 @@
     "authmagusa74e493aUserPoolId": {
       "Type": "String",
       "Default": "authmagusa74e493aUserPoolId"
+    },
+    "deploymentBucketName": {
+      "Type": "String"
+    },
+    "s3Key": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -75,8 +81,12 @@
         "Layers": [],
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-magus-dev-183351-deployment",
-          "S3Key": "amplify-builds/GraphQLResolverFunction-736137636c57544e554b-build.zip"
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": {
+            "Ref": "s3Key"
+          }
         }
       }
     },

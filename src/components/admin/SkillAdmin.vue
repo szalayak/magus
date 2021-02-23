@@ -84,7 +84,6 @@ export default class SkillAdmin extends Vue {
       { text: this.$t("percentage-skill"), value: "percentageSkill" },
       { text: this.$t("skill-basic-cost"), value: "basicCost" },
       { text: this.$t("skill-master-cost"), value: "masterCost" },
-      { text: this.$t("actions"), value: "actions", sortable: false },
     ];
   }
 

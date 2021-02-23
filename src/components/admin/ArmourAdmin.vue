@@ -82,7 +82,6 @@ export default class ArmourAdmin extends Vue {
       },
       { text: this.$t("weight"), value: "weight" },
       { text: this.$t("price"), value: "price" },
-      { text: this.$t("actions"), value: "actions", sortable: false },
     ];
   }
 

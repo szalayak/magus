@@ -12,7 +12,7 @@
     <template v-slot:fields="{ edit }">
       <v-subheader class="pl-0">{{ $t("vitality") }}</v-subheader>
       <v-row dense>
-        <v-col cols="6" md="4">
+        <v-col cols="4">
           <v-text-field
             class="font-weight-bold"
             v-model.number="health.vitality.current"
@@ -21,7 +21,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="6" md="4">
+        <v-col cols="4">
           <v-text-field
             v-model.number="health.vitality.max"
             :label="$t('max')"
@@ -29,7 +29,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="6" md="4">
+        <v-col cols="4">
           <v-text-field
             v-model.number="health.baseVitality"
             :label="$t('base')"
@@ -40,7 +40,7 @@
       </v-row>
       <v-subheader class="pl-0">{{ $t("hit-points") }}</v-subheader>
       <v-row dense>
-        <v-col cols="6" md="4">
+        <v-col cols="6" sm="3">
           <v-text-field
             class="font-weight-bold"
             v-model.number="health.hitPoints.current"
@@ -49,7 +49,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="6" md="4">
+        <v-col cols="6" sm="3">
           <v-text-field
             v-model.number="health.hitPoints.max"
             :label="$t('max')"
@@ -57,7 +57,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="6" md="4">
+        <v-col cols="6" sm="3">
           <v-text-field
             v-model.number="health.baseHitPoints"
             :label="$t('base')"
@@ -65,7 +65,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="6" md="4">
+        <v-col cols="6" sm="3">
           <throw-scenario-dialog
             v-bind.sync="health.hitPointsPerLevel"
             :title="$t('hit-points-per-level')"
