@@ -450,6 +450,42 @@
     "masterCost": 25
   },
   {
+    "id": "SG4-024",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Jog/Törvénykezés",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 10,
+    "masterCost": 30
+  },
+  {
+    "id": "SG4-025",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Antissjárás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 15,
+    "masterCost": 45
+  },
+  {
+    "id": "SG4-026",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Művészettörténet",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 10,
+    "masterCost": 25
+  },
+  {
+    "id": "SG4-027",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Balzsamozás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG4",
+    "basicCost": 5,
+    "masterCost": 10
+  },
+  {
     "id": "SG2-001",
     "descriptions.locale": "hu",
     "descriptions.title": "Idomítás",
@@ -718,6 +754,105 @@
     "skillGroup.id": "SG2",
     "basicCost": 1,
     "masterCost": 6
+  },
+  {
+    "id": "SG2-031",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Kultúra",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 2,
+    "masterCost": 30
+  },
+  {
+    "id": "SG2-032",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Pénzügyek/Birtokigazgatás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 10,
+    "masterCost": 30
+  },
+  {
+    "id": "SG2-033",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Politika/Diplomácia",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 10,
+    "masterCost": 25
+  },
+  {
+    "id": "SG2-034",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Erkölcs",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 10,
+    "masterCost": 45
+  },
+  {
+    "id": "SG2-035",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Lélektan",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 8,
+    "masterCost": 25
+  },
+  {
+    "id": "SG2-036",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Rajzolás",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 5,
+    "masterCost": 25
+  },
+  {
+    "id": "SG2-037",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Festészet",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 5,
+    "masterCost": 30
+  },
+  {
+    "id": "SG2-038",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Szobrászat",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 8,
+    "masterCost": 30
+  },
+  {
+    "id": "SG2-039",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Irodalom",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 7,
+    "masterCost": 22
+  },
+  {
+    "id": "SG2-040",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Színészet",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 12,
+    "masterCost": 35
+  },
+  {
+    "id": "SG2-041",
+    "descriptions.locale": "hu",
+    "descriptions.title": "Ékszerészet",
+    "percentageSkill": null,
+    "skillGroup.id": "SG2",
+    "basicCost": 8,
+    "masterCost": 30
   },
   {
     "id": "SG3-001",
