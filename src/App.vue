@@ -1,55 +1,42 @@
 <template>
   <v-app>
-    <app-bar />
-    <v-navigation-drawer
-      v-if="isLoggedIn"
-      :value="isNavDrawerOpen"
-      @input="setNavDrawerOpen($event)"
-      clipped
-      app
-    >
-      <navigation-drawer />
-    </v-navigation-drawer>
-    <v-main>
-      <v-container v-if="!isLoggedIn" fluid fill-height>
-        <v-row align="center" justify="center">
-          <amplify-authenticator
-            ><amplify-sign-in slot="sign-in" hide-sign-up
-          /></amplify-authenticator>
-        </v-row>
-      </v-container>
-      <router-view v-if="isLoggedIn && userLoaded" />
-      <v-snackbar
-        :value="throwResultNotification"
-        timeout="-1"
-        v-if="$vuetify.breakpoint.mdAndUp"
-      >
-        {{ $t("result") }}: {{ throwResult }}
-        <template v-slot:action="{ attrs }">
-          <v-btn
-            text
-            v-bind="attrs"
-            @click="
-              $store.commit('setThrowResult', {
-                throwResultNotification: false,
-              })
-            "
-          >
-            {{ $t("close") }}
-          </v-btn>
-        </template>
-      </v-snackbar>
-    </v-main>
+    <sign-in v-if="!isLoggedIn" fluid fill-height />
+    <router-view v-if="isLoggedIn && userLoaded" />
+    <overlay-information
+      :active="throwResultNotification"
+      :text="String(throwResult)"
+      @close="
+        $store.commit('setThrowResult', {
+          throwResultNotification: false,
+        })
+      "
+    />
   </v-app>
 </template>
-
+<style>
+.theme--dark.v-application {
+  background-color: var(--v-background-base, #121212) !important;
+}
+.theme--light.v-application {
+  background-color: var(--v-background-base, white) !important;
+}
+.theme--dark.v-card {
+  background-color: var(--v-background-base, #121212) !important;
+}
+.theme--dark.v-data-table {
+  background-color: var(--v-background-base, #121212) !important;
+}
+.theme--dark.v-sheet {
+  background-color: var(--v-background-base, #121212) !important;
+}
+</style>
 <script lang="ts">
 import Vue from "vue";
 import { onAuthUIStateChange } from "@aws-amplify/ui-components";
-import NavigationDrawer from "./components/NavigationDrawer.vue";
 import { mapGetters, mapMutations, mapState } from "vuex";
 import { Auth } from "aws-amplify";
-import AppBar from "./components/AppBar.vue";
+import SignIn from "./components/SignIn.vue";
+import OverlayInformation from "./components/OverlayInformation.vue";
 
 export default Vue.extend({
   name: "App",
@@ -60,21 +47,14 @@ export default Vue.extend({
     };
   },
   components: {
-    "navigation-drawer": NavigationDrawer,
-    "app-bar": AppBar,
+    "sign-in": SignIn,
+    "overlay-information": OverlayInformation,
   },
-
   computed: {
     ...mapState(["app"]),
-    ...mapGetters([
-      "isLoggedIn",
-      "isNavDrawerOpen",
-      "throwResultNotification",
-      "throwResult",
-    ]),
+    ...mapGetters(["isLoggedIn", "throwResultNotification", "throwResult"]),
   },
   created() {
-    this.setNavDrawerOpen(!this.$vuetify.breakpoint.lgAndDown);
     onAuthUIStateChange((authState, authData) => {
       this.setAuthState(authState);
       this.setUser(authData);
@@ -97,12 +77,14 @@ export default Vue.extend({
     return onAuthUIStateChange;
   },
   methods: {
-    ...mapMutations([
-      "setAuthState",
-      "setUser",
-      "logoutUser",
-      "setNavDrawerOpen",
-    ]),
+    ...mapMutations(["setAuthState", "setUser"]),
+    created() {
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", event => {
+          this.$vuetify.theme.dark = event.matches;
+        });
+    },
   },
 });
 </script>

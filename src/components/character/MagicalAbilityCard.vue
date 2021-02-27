@@ -11,13 +11,6 @@
   >
     <template v-slot:fields="{ edit }">
       <v-row dense>
-        <v-col cols="12">
-          <v-text-field
-            v-model="magicalAbility.manaPointsPerLevel"
-            :label="$t('mana-points-per-level')"
-            :disabled="!edit"
-          />
-        </v-col>
         <v-col cols="6">
           <v-text-field
             class="font-weight-bold"
@@ -35,7 +28,14 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12">
+        <v-col cols="6">
+          <v-text-field
+            v-model="magicalAbility.manaPointsPerLevel"
+            :label="$t('mana-points-per-level')"
+            :disabled="!edit"
+          />
+        </v-col>
+        <v-col cols="6">
           <v-text-field
             v-model="magicalAbility.modifiers"
             :label="$t('modifiers')"
@@ -57,10 +57,12 @@
           />
         </v-col>
         <v-col cols="12">
-          <v-text-field
+          <v-textarea
             v-model="magicalAbility.notes"
             :label="$t('notes')"
             :disabled="!edit"
+            auto-grow
+            rows="1"
           />
         </v-col>
       </v-row>

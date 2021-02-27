@@ -6,7 +6,9 @@
     large
     :save-text="$t('save')"
     :cancel-text="$t('cancel')"
-    ><strong>{{ value }}</strong>
+    ><slot
+      ><strong>{{ value }}</strong></slot
+    >
     <template v-slot:input>
       <div class="mt-4 title">
         {{ title }}

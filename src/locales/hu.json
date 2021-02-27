@@ -42,7 +42,7 @@
   "ok": "OK",
   "close": "Bezárás",
   "refresh": "Frissítés",
-  "confirm-delete-message": "Biztosan törlöd ezt az elemet?",
+  "confirm-delete-message": "Biztosan törlöd ez(eke)t az eleme(ke)t?",
   "general-properties": "Általános",
   "category": "Kategória",
   "descriptions": "Leírások",
@@ -312,5 +312,8 @@
   "perception-check": "Érzékeléspróba",
   "percentage-skills": "Százalékos Képzettségek",
   "skill-check": "Képzettségpróba",
-  "armour-active": "Aktív"
+  "armour-active": "Aktív",
+  "overview": "Áttekintés",
+  "navigate-to": "Ugrás",
+  "details":"Részletek"
 }

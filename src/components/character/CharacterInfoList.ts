@@ -9,6 +9,7 @@ export default class CharacterInfoList extends CharacterInfo {
   editedIndex = -1;
   dialogDelete = false;
   editedItem = this.defaultItem();
+  selected: unknown[] = [];
 
   get isNewItem() {
     return this.editedIndex === -1;
@@ -58,6 +59,20 @@ export default class CharacterInfoList extends CharacterInfo {
     }
     this.closeDelete();
   }
+  async deleteItemsConfirm(items: unknown[]) {
+    try {
+      await Promise.all(items.map(item => this.deleteFunction(item)));
+      items.forEach(item =>
+        this.selected.splice(this.selected.indexOf(item), 1)
+      );
+      this.error = false;
+      this.dialog = false;
+      this.resetEditedItem();
+    } catch (error) {
+      this.throwError(error);
+    }
+    this.closeDelete();
+  }
   closeDelete() {
     this.dialogDelete = false;
     this.resetEditedItem();
@@ -70,6 +85,9 @@ export default class CharacterInfoList extends CharacterInfo {
   deleteItem(item: unknown, assignments: unknown[]) {
     this.editedIndex = assignments.indexOf(item);
     this.editedItem = Object.assign({}, item);
+    this.dialogDelete = true;
+  }
+  deleteItems() {
     this.dialogDelete = true;
   }
   resetEditedItem() {

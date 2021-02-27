@@ -81,11 +81,10 @@
 </template>
 
 <script lang="ts">
-import { HealthInformation } from "@/store";
 import Component from "vue-class-component";
-import CharacterQuickView from "./CharacterQuickView";
-import QuickUpdatePropertyField from "./QuickUpdatePropertyField.vue";
-import ThrowScenarioTriggerField from "./ThrowScenarioTriggerField.vue";
+import CharacterVitalityQuickViewBase from "../CharacterVitalityQuickViewBase";
+import QuickUpdatePropertyField from "../QuickUpdatePropertyField.vue";
+import ThrowScenarioTriggerField from "../ThrowScenarioTriggerField.vue";
 @Component({
   name: "character-vitality-quick-view",
   components: {
@@ -93,50 +92,5 @@ import ThrowScenarioTriggerField from "./ThrowScenarioTriggerField.vue";
     "quick-update-property-field": QuickUpdatePropertyField,
   },
 })
-export default class CharacterVitalityQuickView extends CharacterQuickView {
-  get health() {
-    return (
-      this.character.health || {
-        vitality: {},
-        hitPoints: {},
-      }
-    );
-  }
-
-  get armour() {
-    return this.character.armour || {};
-  }
-
-  async onCurrentVitalityChanged(newValue: number) {
-    const health = { ...this.character.health } || { vitality: {} };
-    if (health.vitality) health.vitality.current = newValue;
-    return await this.save(this.character.id, health);
-  }
-
-  async onCurrentHitPointsChanged(newValue: number) {
-    const health = { ...this.character.health } || { hitPoints: {} };
-    if (health.hitPoints) health.hitPoints.current = newValue;
-    return await this.save(this.character.id, health);
-  }
-
-  async save(id?: string, health?: HealthInformation) {
-    try {
-      await this.$store.dispatch("character/update", { id, health });
-    } catch (error) {
-      this.throwError(error);
-    }
-  }
-
-  async toggleArmourActive() {
-    const armourActive = this.character.armourActive ? false : true;
-    try {
-      await this.$store.dispatch("character/update", {
-        id: this.character.id,
-        armourActive,
-      });
-    } catch (error) {
-      this.throwError(error);
-    }
-  }
-}
+export default class CharacterVitalityQuickView extends CharacterVitalityQuickViewBase {}
 </script>

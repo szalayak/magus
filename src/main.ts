@@ -5,10 +5,12 @@ import store from "./store";
 import vuetify from "./plugins/vuetify";
 import i18n from "./i18n";
 import Amplify from "aws-amplify";
+import { Auth } from "@aws-amplify/auth";
 import "@aws-amplify/ui-vue";
 import awsExports from "./aws-exports";
 
 Amplify.configure(awsExports);
+Auth.configure(awsExports);
 
 Vue.config.productionTip = false;
 

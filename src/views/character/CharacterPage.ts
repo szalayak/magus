@@ -2,12 +2,15 @@ import Vue from "vue";
 import { Character } from "@/store/modules/character";
 import { LooseObject } from "@/store/types";
 import Component from "vue-class-component";
+import { Race, Class } from "@/store";
+import { localiseItem } from "@/utils";
 
 @Component
 export default class CharacterPage extends Vue {
   id = this.$route.params.id;
   messages: string[] = [];
   notification = false;
+  loading = false;
 
   pullToRefreshConfig = {
     loadingLabel: this.$t("loading-indicator"),
@@ -42,10 +45,34 @@ export default class CharacterPage extends Vue {
     );
   }
 
+  raceToString(race: Race): string {
+    return localiseItem(race, this.$i18n.locale)?.description?.title || "";
+  }
+
+  classToString(cl: Class): string {
+    return localiseItem(cl, this.$i18n.locale)?.description?.title || "";
+  }
+
+  characterToString() {
+    const raceString = this.character?.race
+      ? `${this.raceToString(this.character?.race)} `
+      : "";
+    const classString = this.character?.class
+      ? `${this.classToString(this.character?.class)}`
+      : "";
+    return `${raceString}${classString}, ${this.$t("ex-lev")}: ${
+      this.character?.level?.currentLevel
+    }`;
+  }
+
   async refresh() {
+    this.loading = true;
     try {
       // load character
       await this.$store.dispatch("character/loadItem", this.id);
+
+      // set title
+      this.$store.commit("setAppTitle", this.character?.name || "");
     } catch (error) {
       this.messages =
         typeof error === "string"
@@ -53,12 +80,15 @@ export default class CharacterPage extends Vue {
           : error.errors?.map((err: LooseObject) => err.message) || [];
       this.notification = true;
     }
+    this.loading = false;
   }
 
   async created() {
+    this.loading = true;
     try {
       // load character
-      await this.$store.dispatch("character/loadItem", this.id);
+      if (!this.character)
+        await this.$store.dispatch("character/loadItem", this.id);
 
       // set title
       this.$store.commit("setAppTitle", this.character?.name || "");
@@ -84,5 +114,7 @@ export default class CharacterPage extends Vue {
     }
     if (this.character?.playerCharacter)
       this.$store.dispatch("character/subscribeToUpdate", this.character);
+
+    this.loading = false;
   }
 }

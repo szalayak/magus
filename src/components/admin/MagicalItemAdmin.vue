@@ -82,7 +82,6 @@ export default class MagicalItemAdmin extends Vue {
       { text: this.$t("mana-cost"), value: "manaCost" },
       { text: this.$t("duration"), value: "duration" },
       { text: this.$t("price"), value: "price" },
-      { text: this.$t("actions"), value: "actions", sortable: false },
     ];
   }
 

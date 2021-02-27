@@ -3,7 +3,7 @@ import { NavItemConfig } from ".";
 export const dungeonMasterAreaRoutes: Array<NavItemConfig> = [
   {
     path: "/dm-area/player-characters",
-    name: "Player Characters as DM",
+    name: "player-characters-as-dm",
     title: "player-characters",
     icon: "mdi-account-group",
     component: () =>
@@ -13,7 +13,7 @@ export const dungeonMasterAreaRoutes: Array<NavItemConfig> = [
   },
   {
     path: "/dm-area/non-player-characters",
-    name: "Non-Player Characters as DM",
+    name: "non-player-characters-as-dm",
     title: "non-player-characters",
     icon: "mdi-account-group-outline",
     component: () =>
@@ -23,7 +23,7 @@ export const dungeonMasterAreaRoutes: Array<NavItemConfig> = [
   },
   {
     path: "/dm-area/dm-overview",
-    name: "DM Overview",
+    name: "dm-overview",
     title: "dm-overview",
     icon: "mdi-eye",
     component: () =>

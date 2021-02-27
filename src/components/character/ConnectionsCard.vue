@@ -23,6 +23,8 @@
             v-model="connections.companions"
             :label="$t('companions')"
             :disabled="!edit"
+            auto-grow
+            rows="1"
           />
         </v-col>
         <v-col cols="12">
@@ -30,6 +32,8 @@
             v-model="connections.enemies"
             :label="$t('enemies')"
             :disabled="!edit"
+            auto-grow
+            rows="1"
           />
         </v-col>
         <v-col cols="12">
@@ -38,6 +42,8 @@
             :label="$t('fame')"
             :disabled="!edit"
             type="number"
+            auto-grow
+            rows="1"
           />
         </v-col>
       </v-row>

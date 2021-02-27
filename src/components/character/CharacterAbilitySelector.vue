@@ -1,8 +1,8 @@
 <template>
   <v-menu v-model="menu" offset-y>
     <template v-slot:activator="{ on, attrs }">
-      <v-btn color="primary" text v-bind="attrs" v-on="on">
-        <div>{{ $t("ability-check") }}</div>
+      <v-btn icon color="primary" text v-bind="attrs" v-on="on">
+        <v-icon>mdi-dice-5</v-icon>
       </v-btn>
     </template>
     <v-list>

@@ -1,35 +1,27 @@
 <template>
   <character-list
     :characters="characters"
-    :messages="messages"
-    :notification="notification"
+    :messages.sync="messages"
+    :notification.sync="notification"
     :title="$t('non-player-characters')"
     :editable="true"
+    :loading="loading"
   >
-    <template v-slot:toolbar-buttons>
-      <v-dialog v-model="createDialog" persistent max-width="50%">
+    <template v-slot:actions>
+      <v-dialog v-model="createDialog" persistent>
         <template v-slot:activator="{ on, attrs }">
-          <v-btn color="primary" v-bind="attrs" v-on="on" text>
+          <v-btn icon color="primary" v-bind="attrs" v-on="on" text>
             <v-icon>mdi-plus</v-icon>
-            <div class="ml-2 d-none d-sm-flex">
-              {{ $t("new-character") }}
-            </div>
-            <div class="ml-2 d-flex d-sm-none">{{ $t("new") }}</div>
           </v-btn>
         </template>
         <v-card>
-          <v-toolbar dark color="primary">
+          <v-toolbar flat>
             <v-toolbar-title>{{ $t("new-character") }}</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
             <v-form ref="create" v-model="createValid">
               <v-row dense>
-                <v-subheader class="pl-1">{{
-                  $t("general-properties")
-                }}</v-subheader>
-              </v-row>
-              <v-row dense>
-                <v-col cols="12" md="6" lg="4">
+                <v-col cols="12" md="6" lg="3">
                   <v-text-field
                     v-model="editedItem.name"
                     :label="$t('name')"
@@ -37,13 +29,6 @@
                     required
                   ></v-text-field>
                 </v-col>
-              </v-row>
-              <v-row dense>
-                <v-subheader class="pl-1"
-                  >{{ $t("race-and-class") }}
-                </v-subheader>
-              </v-row>
-              <v-row dense>
                 <v-col cols="12" sm="12" md="6" lg="3">
                   <v-select
                     v-model="editedItem.race"
@@ -79,12 +64,7 @@
                     :label="$t('specialisation')"
                   />
                 </v-col>
-              </v-row>
-              <v-row dense>
-                <v-subheader class="pl-1">{{ $t("level") }}</v-subheader>
-              </v-row>
-              <v-row dense>
-                <v-col cols="12" sm="12" md="6" lg="4">
+                <v-col cols="12" sm="12" md="6" lg="3">
                   <v-text-field
                     v-model.number="editedItem.level.currentLevel"
                     type="number"
@@ -120,6 +100,7 @@ import { GraphQLResult } from "@aws-amplify/api-graphql";
 import CharacterList from "@/components/CharacterList.vue";
 import TitleComponent from "@/mixins/TitleComponent";
 import { Form } from "@/utils";
+import { LooseObject } from "@/store";
 
 @Component({
   name: "non-player-characters-as-dm",
@@ -140,6 +121,7 @@ export default class NonPlayerCharactersAsDM extends TitleComponent {
     playerCharacter: false,
     dungeonMaster: this.$store.getters["currentUser"],
   };
+  loading = false;
 
   get characters(): Character[] {
     return this.$store.getters["character/nonPlayerCharactersAsDM"];
@@ -165,21 +147,34 @@ export default class NonPlayerCharactersAsDM extends TitleComponent {
     }
   }
 
-  created() {
-    this.$store
-      .dispatch("character/loadByOwner", this.$store.state.app.user.username)
-      .catch((error: GraphQLResult<Character>) => {
-        this.messages = error.errors?.map(err => err.message) || [];
-        this.notification = true;
-      });
-
-    Promise.all([
-      this.$store.dispatch("race/load"),
-      this.$store.dispatch("class/load"),
-    ]).catch((error: GraphQLResult<Character>) => {
-      this.messages = error.errors?.map(err => err.message) || [];
+  async refresh() {
+    this.loading = true;
+    try {
+      await this.$store.dispatch(
+        "character/loadByOwner",
+        this.$store.state.app.user.username
+      );
+    } catch (error) {
+      this.messages =
+        error.errors?.map((err: LooseObject) => err.message) || [];
       this.notification = true;
-    });
+    }
+
+    try {
+      await Promise.all([
+        this.$store.dispatch("race/load"),
+        this.$store.dispatch("class/load"),
+      ]);
+    } catch (error) {
+      this.messages =
+        error.errors?.map((err: LooseObject) => err.message) || [];
+      this.notification = true;
+    }
+    this.loading = false;
+  }
+
+  created() {
+    if (this.characters.length < 1) this.refresh();
   }
 }
 </script>

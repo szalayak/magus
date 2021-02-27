@@ -1,33 +1,26 @@
 <template>
   <character-list
-    v-if="!loading"
+    :loading="loading"
     :characters="characters"
     :messages.sync="messages"
     :notification.sync="notification"
     :title="$t('my-characters')"
     :editable="true"
   >
-    <template v-slot:toolbar-buttons>
-      <v-dialog v-model="createDialog" persistent max-width="50%">
+    <template v-slot:actions>
+      <v-dialog v-model="createDialog" persistent>
         <template v-slot:activator="{ on, attrs }">
-          <v-btn color="primary" v-bind="attrs" v-on="on" text>
+          <v-btn icon color="primary" v-bind="attrs" v-on="on" text>
             <v-icon>mdi-plus</v-icon>
-            <div class="ml-2 d-none d-sm-flex">
-              {{ $t("new-character") }}
-            </div>
-            <div class="ml-2 d-flex d-sm-none">{{ $t("new") }}</div>
           </v-btn>
         </template>
         <v-card>
-          <v-toolbar dark color="primary">
+          <v-toolbar flat>
             <v-toolbar-title>{{ $t("new-character") }}</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
             <v-form ref="create" v-model="createValid">
-              <v-row>
-                <v-subheader>{{ $t("general-properties") }}</v-subheader>
-              </v-row>
-              <v-row>
+              <v-row dense>
                 <v-col cols="12" md="6" lg="4">
                   <v-text-field
                     v-model="editedItem.name"
@@ -72,11 +65,6 @@
                     item-text="name"
                   />
                 </v-col>
-              </v-row>
-              <v-row>
-                <v-subheader>{{ $t("race-and-class") }} </v-subheader>
-              </v-row>
-              <v-row>
                 <v-col cols="12" sm="12" md="6" lg="3">
                   <v-select
                     v-model="editedItem.race"
@@ -113,11 +101,6 @@
                     :label="$t('specialisation')"
                   />
                 </v-col>
-              </v-row>
-              <v-row>
-                <v-subheader>{{ $t("level") }}</v-subheader>
-              </v-row>
-              <v-row>
                 <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model.number="editedItem.level.currentLevel"
@@ -157,7 +140,6 @@
       </v-dialog>
     </template>
   </character-list>
-  <skeleton-cards v-else />
 </template>
 <script lang="ts">
 import { Character } from "@/store/modules/character";
@@ -170,13 +152,11 @@ import CharacterList from "@/components/CharacterList.vue";
 import TitleComponent from "@/mixins/TitleComponent";
 import { LooseObject, User } from "@/store";
 import { Form } from "@/utils";
-import SkeletonCards from "@/components/SkeletonCards.vue";
 
 @Component({
   name: "player-characters-as-player",
   components: {
     "character-list": CharacterList,
-    "skeleton-cards": SkeletonCards,
   },
 })
 export default class PlayerCharactersAsPlayer extends TitleComponent {
@@ -224,7 +204,7 @@ export default class PlayerCharactersAsPlayer extends TitleComponent {
     }
   }
 
-  async created() {
+  async refresh() {
     this.loading = true;
     try {
       await this.$store.dispatch(
@@ -256,6 +236,10 @@ export default class PlayerCharactersAsPlayer extends TitleComponent {
       this.notification = true;
     }
     this.loading = false;
+  }
+
+  created() {
+    if (this.characters.length < 1) this.refresh();
   }
 }
 </script>

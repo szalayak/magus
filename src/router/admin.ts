@@ -3,7 +3,7 @@ import { NavItemConfig } from ".";
 export const adminRoutes: Array<NavItemConfig> = [
   {
     path: "/admin/value-ranges",
-    name: "Value Ranges",
+    name: "value-ranges",
     title: "value-ranges",
     icon: "mdi-code-braces",
     component: () =>
@@ -13,7 +13,7 @@ export const adminRoutes: Array<NavItemConfig> = [
   },
   {
     path: "/admin/races",
-    name: "Races",
+    name: "races",
     title: "races",
     icon: "mdi-account-multiple",
     component: () =>
@@ -21,7 +21,7 @@ export const adminRoutes: Array<NavItemConfig> = [
   },
   {
     path: "/admin/classes",
-    name: "Classes",
+    name: "classes",
     title: "classes",
     icon: "mdi-account-details",
     component: () =>
@@ -31,7 +31,7 @@ export const adminRoutes: Array<NavItemConfig> = [
   },
   {
     path: "/admin/psi-schools",
-    name: "PsiSchools",
+    name: "psi-schools",
     title: "psi-schools",
     icon: "mdi-head-cog",
     component: () =>
@@ -41,7 +41,7 @@ export const adminRoutes: Array<NavItemConfig> = [
   },
   {
     path: "/admin/armours",
-    name: "Armours",
+    name: "armours",
     title: "armours",
     icon: "mdi-shield-star",
     component: () =>
@@ -51,7 +51,7 @@ export const adminRoutes: Array<NavItemConfig> = [
   },
   {
     path: "/admin/shields",
-    name: "Shields",
+    name: "shields",
     title: "shields",
     icon: "mdi-shield",
     component: () =>
@@ -61,7 +61,7 @@ export const adminRoutes: Array<NavItemConfig> = [
   },
   {
     path: "/admin/skills",
-    name: "Skills",
+    name: "skills",
     title: "skills",
     icon: "mdi-certificate",
     component: () =>
@@ -71,7 +71,7 @@ export const adminRoutes: Array<NavItemConfig> = [
   },
   {
     path: "/admin/weapons",
-    name: "Weapons",
+    name: "weapons",
     title: "weapons",
     icon: "mdi-sword-cross",
     component: () =>
@@ -81,7 +81,7 @@ export const adminRoutes: Array<NavItemConfig> = [
   },
   {
     path: "/admin/magical-items",
-    name: "MagicalItems",
+    name: "magical-items",
     title: "magical-items",
     icon: "mdi-auto-fix",
     component: () =>

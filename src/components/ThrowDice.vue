@@ -1,9 +1,8 @@
 <template>
   <v-menu offset-y v-if="$vuetify.breakpoint.mdAndUp">
     <template v-slot:activator="{ on, attrs }">
-      <v-btn :icon="$vuetify.breakpoint.xs" text v-bind="attrs" v-on="on"
-        ><div class="d-none d-sm-flex">{{ $t("throw-dice") }}</div>
-        <v-icon class="ml-sm-2">mdi-dice-5</v-icon></v-btn
+      <v-btn icon text v-bind="attrs" v-on="on">
+        <v-icon>mdi-dice-5</v-icon></v-btn
       >
     </template>
     <v-list>

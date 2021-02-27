@@ -11,7 +11,7 @@
   >
     <template v-slot:fields="{ edit }">
       <v-row dense>
-        <v-col cols="12">
+        <v-col cols="6">
           <v-select
             v-model="armourData.armour"
             :items="armours"
@@ -22,7 +22,7 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12">
+        <v-col cols="6">
           <v-select
             v-model="armourData.armourMastery"
             :items="masteryLevels"
@@ -30,46 +30,46 @@
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12">
-          <v-checkbox
-            v-model="armourData.armourActive"
-            :label="$t('armour-active')"
-            :disabled="!edit"
-          />
-        </v-col>
-        <v-col cols="12">
+        <v-col cols="4">
           <v-text-field
             :label="$t('mpv')"
             :value="armourData.armour.movementPreventionValue"
             disabled
           />
         </v-col>
-        <v-col cols="12">
+        <v-col cols="4">
           <v-text-field
             :label="$t('drv')"
             :value="armourData.armour.damageReductionValue"
             disabled
           />
         </v-col>
-        <v-col cols="12">
+        <v-col cols="4">
           <v-text-field
             :label="$t('current-drv')"
             v-model="armourData.armourCurrentDamageReductionValue"
             :disabled="!edit"
           />
         </v-col>
-        <v-col cols="12">
+        <v-col cols="6">
           <v-text-field
             :label="$t('weight')"
             :value="armourData.armour.weight"
             disabled
           />
         </v-col>
-        <v-col cols="12">
+        <v-col cols="6">
           <v-text-field
             :label="$t('price')"
             :value="price(armourData.armour)"
             disabled
+          />
+        </v-col>
+        <v-col cols="12">
+          <v-checkbox
+            v-model="armourData.armourActive"
+            :label="$t('armour-active')"
+            :disabled="!edit"
           />
         </v-col>
       </v-row>

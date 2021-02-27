@@ -65,7 +65,6 @@ export default class ClassAdmin extends Vue {
       { text: this.$t("main-class"), value: "mainClass.description.title" },
       { text: this.$t("title"), value: "description.title" },
       { text: this.$t("magic-user"), value: "magicUser" },
-      { text: this.$t("actions"), value: "actions", sortable: false },
     ];
   }
 
