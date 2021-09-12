@@ -29,7 +29,7 @@
               + ({{ skillCheckResult.result.modifier }}%) =
               {{
                 (skillCheckResult.skill.percentageValue || 0) +
-                  skillCheckResult.result.modifier
+                skillCheckResult.result.modifier
               }}%</template
             ></v-col
           >
@@ -50,7 +50,7 @@
               throwScenarioString="D100"
               :title="skill.skill.description.title"
               :value="`${skill.percentageValue}%`"
-              @save="onCheckResult($event, skill)"/></v-col
+              @save="onCheckResult($event, skill)" /></v-col
         ></template> </v-row
     ></v-card-text>
   </v-card>

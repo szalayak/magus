@@ -1,6 +1,6 @@
 import { LooseObject } from "@/store/types";
 
-export const purgeUndefined = (obj: unknown) => {
+export const purgeUndefined = (obj: unknown): LooseObject => {
   const input = obj as LooseObject;
   const result: LooseObject = {};
   Object.keys(input).forEach(key => {

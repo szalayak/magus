@@ -64,7 +64,7 @@ import { Wallet } from "@/store/types";
 import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
-import { convertFromCopper, convertToCopper } from "@/utils/price";
+import { convertFromCopper, convertToCopper, Currency } from "@/utils/price";
 
 const copyWallet = (wallet?: Wallet): Wallet => ({
   money: wallet?.money,
@@ -82,11 +82,11 @@ const copyWallet = (wallet?: Wallet): Wallet => ({
 export default class WalletCard extends CharacterInfo {
   wallet = copyWallet(this.character.wallet);
 
-  get currency() {
+  get currency(): Currency {
     return convertFromCopper(this.wallet.money || 0);
   }
 
-  get gold() {
+  get gold(): number {
     return this.currency.gold;
   }
   set gold(gold: number) {
@@ -95,7 +95,7 @@ export default class WalletCard extends CharacterInfo {
     this.wallet.money = convertToCopper(currency);
   }
 
-  get silver() {
+  get silver(): number {
     return this.currency.silver;
   }
 
@@ -105,7 +105,7 @@ export default class WalletCard extends CharacterInfo {
     this.wallet.money = convertToCopper(currency);
   }
 
-  get copper() {
+  get copper(): number {
     return this.currency.copper;
   }
 
@@ -115,11 +115,11 @@ export default class WalletCard extends CharacterInfo {
     this.wallet.money = convertToCopper(currency);
   }
 
-  save() {
+  save(): void {
     this.update({ id: this.character.id, wallet: this.wallet });
   }
 
-  cancel() {
+  cancel(): void {
     this.wallet = copyWallet(this.wallet);
   }
 }

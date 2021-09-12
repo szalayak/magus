@@ -1,5 +1,5 @@
-<template
-  ><page-template>
+<template>
+  <page-template>
     <template v-slot:app-bar>
       <app-bar>
         <template v-slot:actions>
@@ -56,11 +56,7 @@ import { Locale } from "@/API";
 import { Form } from "@/utils";
 import PageTemplate from "@/components/PageTemplate.vue";
 import AppBar from "@/components/AppBar.vue";
-
-interface Attribute {
-  name: string;
-  value?: string;
-}
+import { LooseObject } from "@/store";
 
 @Component({
   name: "user-attributes",
@@ -111,7 +107,7 @@ export default class UserAttributes extends Vue {
     this.setAttributeValue("email", email);
   }
 
-  get locale() {
+  get locale(): string {
     return this.getAttributeValue("locale");
   }
 
@@ -127,18 +123,18 @@ export default class UserAttributes extends Vue {
     return this.getAttribute(attr)?.getValue() || "";
   }
 
-  setAttributeValue(Name: string, Value: string) {
+  setAttributeValue(Name: string, Value: string): void {
     const attribute = this.getAttribute(Name);
     if (attribute) attribute.setValue(Value);
     else this.currentAttributes.push(new CognitoUserAttribute({ Name, Value }));
   }
 
-  cancel() {
+  cancel(): void {
     this.refresh();
     this.edit = false;
   }
 
-  async save() {
+  async save(): Promise<void> {
     if ((this.$refs.profile as Form).validate()) {
       try {
         await Auth.updateUserAttributes(this.$store.state.app.user, {
@@ -158,19 +154,19 @@ export default class UserAttributes extends Vue {
         this.edit = false;
         this.notification = false;
       } catch (err) {
-        this.messages = [err.message];
+        this.messages = [(err as LooseObject).message as string];
         this.notification = true;
       }
     }
   }
 
-  refresh() {
+  refresh(): void {
     Auth.userAttributes(this.$store.state.app?.user).then(
       attributes => (this.currentAttributes = attributes)
     );
   }
 
-  mounted() {
+  mounted(): void {
     this.refresh();
   }
 }

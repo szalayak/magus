@@ -1,10 +1,10 @@
-import { HealthInformation } from "@/store";
+import { Armour, HealthInformation } from "@/store";
 import Component from "vue-class-component";
 import CharacterQuickView from "./CharacterQuickView";
 
 @Component({})
 export default class CharacterVitalityQuickViewBase extends CharacterQuickView {
-  get health() {
+  get health(): HealthInformation {
     return (
       this.character.health || {
         vitality: {},
@@ -13,23 +13,23 @@ export default class CharacterVitalityQuickViewBase extends CharacterQuickView {
     );
   }
 
-  get armour() {
+  get armour(): Armour {
     return this.character.armour || {};
   }
 
-  async onCurrentVitalityChanged(newValue: number) {
+  async onCurrentVitalityChanged(newValue: number): Promise<void> {
     const health = { ...this.character.health } || { vitality: {} };
     if (health.vitality) health.vitality.current = newValue;
     return await this.save(this.character.id, health);
   }
 
-  async onCurrentHitPointsChanged(newValue: number) {
+  async onCurrentHitPointsChanged(newValue: number): Promise<void> {
     const health = { ...this.character.health } || { hitPoints: {} };
     if (health.hitPoints) health.hitPoints.current = newValue;
     return await this.save(this.character.id, health);
   }
 
-  async save(id?: string, health?: HealthInformation) {
+  async save(id?: string, health?: HealthInformation): Promise<void> {
     this.loading = true;
     try {
       await this.$store.dispatch("character/update", { id, health });
@@ -39,7 +39,7 @@ export default class CharacterVitalityQuickViewBase extends CharacterQuickView {
     this.loading = false;
   }
 
-  async toggleArmourActive() {
+  async toggleArmourActive(): Promise<void> {
     this.loading = true;
     const armourActive = this.character.armourActive ? false : true;
     try {

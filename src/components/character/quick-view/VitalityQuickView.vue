@@ -33,17 +33,17 @@
           >
             <quick-view-output-field
               :caption="$t('current-hp')"
-              :value="
-                `${health.hitPoints.current || 0}/${health.hitPoints.max || 0}`
-              "
+              :value="`${health.hitPoints.current || 0}/${
+                health.hitPoints.max || 0
+              }`"
             />
           </quick-update-property-field>
           <quick-view-output-field
             v-else
             :caption="$t('current-hp')"
-            :value="
-              `${health.hitPoints.current || 0}/${health.hitPoints.max || 0}`
-            "
+            :value="`${health.hitPoints.current || 0}/${
+              health.hitPoints.max || 0
+            }`"
           />
         </v-col>
         <v-col cols="5">
@@ -55,17 +55,17 @@
           >
             <quick-view-output-field
               :caption="$t('current-vp')"
-              :value="
-                `${health.vitality.current || 0}/${health.vitality.max || 0}`
-              "
+              :value="`${health.vitality.current || 0}/${
+                health.vitality.max || 0
+              }`"
             />
           </quick-update-property-field>
           <quick-view-output-field
             v-else
             :caption="$t('current-vp')"
-            :value="
-              `${health.vitality.current || 0}/${health.vitality.max || 0}`
-            "
+            :value="`${health.vitality.current || 0}/${
+              health.vitality.max || 0
+            }`"
           />
         </v-col>
         <v-col v-if="character.armour && character.armourActive" cols="2">
@@ -73,8 +73,8 @@
             :caption="$t('drv')"
             :value="
               character.armourCurrentDamageReductionValue ||
-                armour.damageReductionValue ||
-                0
+              armour.damageReductionValue ||
+              0
             "
           />
         </v-col>

@@ -32,7 +32,7 @@
             <strong>
               {{
                 (combatValueThrowResult.value || 0) +
-                  (combatValueThrowResult.result.total || 0)
+                (combatValueThrowResult.result.total || 0)
               }}</strong
             ></v-col
           >
@@ -127,7 +127,7 @@
                   combatValuesWithoutWeapon.initiation || 0,
                   'initiation'
                 )
-              "/></strong
+              " /></strong
         ></v-col>
         <v-col cols="1">
           <strong
@@ -142,7 +142,7 @@
                   combatValuesWithoutWeapon.offence || 0,
                   'offence'
                 )
-              "/></strong
+              " /></strong
         ></v-col>
         <v-col cols="1">
           <throw-scenario-trigger-field
@@ -171,7 +171,7 @@
                   combatValuesWithoutWeapon.aiming || 0,
                   'aiming'
                 )
-              "/></strong
+              " /></strong
         ></v-col>
         <v-col cols="3"
           ><strong
@@ -179,7 +179,7 @@
               :throwScenarioString="damageToString(character.damage)"
               :title="$t('damage')"
               :value="damageToString(character.damage)"
-              @save="onThrowResult($event, $t('damage'))"/></strong
+              @save="onThrowResult($event, $t('damage'))" /></strong
         ></v-col>
         <template v-for="weapon in combatValuesWithWeapons">
           <v-col :key="`${weapon.id}-weapon`" cols="3"
@@ -202,7 +202,7 @@
                     'initiation',
                     weapon
                   )
-                "/></strong
+                " /></strong
           ></v-col>
           <v-col :key="`${weapon.id}-offence`" cols="1">
             <strong
@@ -219,7 +219,7 @@
                     'offence',
                     weapon
                   )
-                "/></strong
+                " /></strong
           ></v-col>
           <v-col :key="`${weapon.id}-defence`" cols="1"
             ><template v-if="!weapon.weapon.ranged">{{
@@ -241,7 +241,7 @@
                     'aiming',
                     weapon
                   )
-                "/></strong
+                " /></strong
           ></v-col>
           <v-col :key="`${weapon.id}-damage`" cols="3"
             ><strong
@@ -258,7 +258,7 @@
                     weapon,
                     damageBonus
                   )
-                "/></strong
+                " /></strong
           ></v-col>
         </template>
       </v-row>

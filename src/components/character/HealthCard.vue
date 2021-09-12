@@ -93,14 +93,6 @@ import CharacterInfoCard from "./CharacterInfoCard.vue";
 import ThrowScenarioDialog from "../ThrowScenarioDialog.vue";
 import { getThrowScenarioString } from "@/utils/throwScenario";
 
-// vitality?: MutablePointValue;
-// baseVitality?: number;
-// vitalityModifier?: number;
-// hitPoints?: MutablePointValue;
-// baseHitPoints?: number;
-// hitPointModifier?: number;
-// hitPointsPerLevel?: ThrowScenario;
-
 const copyHealth = (health?: HealthInformation): HealthInformation => ({
   vitality: {
     current: health?.vitality?.current,
@@ -131,15 +123,15 @@ const copyHealth = (health?: HealthInformation): HealthInformation => ({
 export default class HealthCard extends CharacterInfo {
   health = copyHealth(this.character.health);
 
-  throwScenarioToString(scenario: ThrowScenario) {
+  throwScenarioToString(scenario: ThrowScenario): string {
     return getThrowScenarioString(scenario);
   }
 
-  save() {
+  save(): void {
     this.update({ id: this.character.id, health: this.health });
   }
 
-  cancel() {
+  cancel(): void {
     this.health = copyHealth(this.character.health);
   }
 }

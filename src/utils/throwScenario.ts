@@ -45,7 +45,9 @@ export interface SpellResistanceThrowResult {
   value?: number;
 }
 
-export const getThrowScenarioString = (scenario: ThrowScenario = {}) => {
+export const getThrowScenarioString = (
+  scenario: ThrowScenario = {}
+): string => {
   const iterationCount =
     scenario?.iterationCount && scenario?.iterationCount > 1
       ? scenario.iterationCount.toString()
@@ -125,7 +127,7 @@ export const skillCheck = ({
 }: {
   result: ThrowScenarioResult;
   skill: SkillAssignment;
-}) => {
+}): SkillCheckResult => {
   return {
     result,
     skill,

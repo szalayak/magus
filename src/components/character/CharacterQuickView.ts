@@ -1,7 +1,8 @@
-import { Character, LooseObject } from "@/store";
+import { Character } from "@/store";
 import { characterToLink } from "@/utils";
 import { Component, Prop } from "vue-property-decorator";
 import Vue from "vue";
+import { BackendError } from "@/types";
 
 @Component({})
 export default class CharacterQuickView extends Vue {
@@ -15,27 +16,25 @@ export default class CharacterQuickView extends Vue {
   error = false;
   messages: string[] = [];
 
-  get isCurrentUser() {
+  get isCurrentUser(): boolean {
     return this.character.owner === this.$store.getters["currentUser"];
   }
 
-  characterToLink(character: Character, selector: string) {
+  characterToLink(character: Character, selector: string): string {
     return characterToLink(character, selector);
   }
 
-  dismissError() {
+  dismissError(): void {
     this.error = false;
     this.messages = [];
   }
 
-  throwError(error: LooseObject) {
+  throwError(error: BackendError | unknown): void {
     this.error = true;
     this.messages =
       typeof error === "string"
         ? [error]
-        : (error.errors as LooseObject[])?.map(
-            (err: LooseObject) => err.message as string
-          ) || [];
+        : (error as BackendError).errors?.map(err => err.message) || [];
 
     this.$emit("error", {
       messages: this.messages,

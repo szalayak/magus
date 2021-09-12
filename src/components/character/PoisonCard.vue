@@ -94,6 +94,8 @@ import CharacterInfoCard from "./CharacterInfoCard.vue";
 import { Poison } from "@/store/types";
 import ConfirmDeleteDialog from "../ConfirmDeleteDialog.vue";
 import CharacterInfoList from "./CharacterInfoList";
+import { HeaderEntry } from "@/types";
+import { TranslateResult } from "vue-i18n";
 
 @Component({
   name: "poison-card",
@@ -105,18 +107,18 @@ import CharacterInfoList from "./CharacterInfoList";
 export default class PoisonCard extends CharacterInfoList {
   sortBy = ["name"];
 
-  get headers() {
+  get headers(): HeaderEntry[] {
     return [
       { text: this.$t("poison"), value: "name" },
       { text: this.$t("amount"), value: "amount" },
     ];
   }
 
-  get assignments() {
+  get assignments(): Poison[] {
     return this.character.poisons || [];
   }
 
-  get formTitle() {
+  get formTitle(): TranslateResult | undefined {
     return this.editedIndex === -1
       ? this.$t("new-poison")
       : this.$t("edit-poison");
@@ -126,18 +128,18 @@ export default class PoisonCard extends CharacterInfoList {
     return {};
   }
 
-  async createFunction(item: Poison[]) {
+  async createFunction(item: Poison[]): Promise<void> {
     const poisons = [...this.assignments, item];
     return this.update({ id: this.character.id, poisons });
   }
 
-  async updateFunction(item: Poison) {
+  async updateFunction(item: Poison): Promise<void> {
     const poisons = [...this.assignments];
     Object.assign(poisons[this.editedIndex], item);
     return this.update({ id: this.character.id, poisons });
   }
 
-  async deleteFunction() {
+  async deleteFunction(): Promise<void> {
     const poisons = [...this.assignments];
     poisons.splice(this.editedIndex, 1);
     return this.update({ id: this.character.id, poisons });

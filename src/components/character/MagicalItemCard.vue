@@ -100,6 +100,9 @@ import CharacterInfoCard from "./CharacterInfoCard.vue";
 import { MagicalItemAssignment } from "@/store/modules/character";
 import CharacterInfoList from "./CharacterInfoList";
 import ConfirmDeleteDialog from "../ConfirmDeleteDialog.vue";
+import { HeaderEntry } from "@/types";
+import { MagicalItem } from "@/store";
+import { TranslateResult } from "vue-i18n";
 
 @Component({
   name: "magical-item-card",
@@ -111,7 +114,7 @@ import ConfirmDeleteDialog from "../ConfirmDeleteDialog.vue";
 export default class MagicalItemAssignmentCard extends CharacterInfoList {
   sortBy = ["magicalItem.description.title"];
 
-  get headers() {
+  get headers(): HeaderEntry[] {
     return [
       { text: this.$t("magical-item"), value: "magicalItem.description.title" },
       { text: this.$t("location"), value: "location" },
@@ -119,15 +122,15 @@ export default class MagicalItemAssignmentCard extends CharacterInfoList {
     ];
   }
 
-  get magicalItems() {
+  get magicalItems(): MagicalItem[] {
     return this.$store.getters["magicalItem/list"];
   }
 
-  get assignments() {
+  get assignments(): MagicalItemAssignment[] {
     return this.character.magicalItems || [];
   }
 
-  get formTitle() {
+  get formTitle(): TranslateResult | undefined {
     return this.editedIndex === -1
       ? this.$t("new-magical-item")
       : this.$t("edit-magical-item");
@@ -139,15 +142,15 @@ export default class MagicalItemAssignmentCard extends CharacterInfoList {
     };
   }
 
-  async createFunction(item: MagicalItemAssignment) {
+  async createFunction(item: MagicalItemAssignment): Promise<void> {
     return this.$store.dispatch("character/createMagicalItemAssignment", item);
   }
 
-  async updateFunction(item: MagicalItemAssignment) {
+  async updateFunction(item: MagicalItemAssignment): Promise<void> {
     return this.$store.dispatch("character/updateMagicalItemAssignment", item);
   }
 
-  async deleteFunction(item: MagicalItemAssignment) {
+  async deleteFunction(item: MagicalItemAssignment): Promise<void> {
     return this.$store.dispatch("character/deleteMagicalItemAssignment", item);
   }
 }

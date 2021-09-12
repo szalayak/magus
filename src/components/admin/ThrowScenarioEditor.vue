@@ -30,13 +30,13 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
-import { getDice } from "@/utils/dice";
+import { DiceObject, getDice } from "@/utils/dice";
 
 export default Vue.extend({
   name: "throw-scenario-editor",
   props: ["iterationCount", "dice", "modifier"],
   computed: {
-    diceList() {
+    diceList(): DiceObject[] {
       return getDice(this.$i18n);
     },
   },

@@ -30,9 +30,8 @@ const mapFlatObject: MappingFunction = ({ default: data }) => {
             (result.descriptions as Array<LooseObject>).push({ [attr]: value });
             localeIndex++;
           } else {
-            (result.descriptions as Array<LooseObject>)[localeIndex][
-              attr
-            ] = value;
+            (result.descriptions as Array<LooseObject>)[localeIndex][attr] =
+              value;
           }
         } else {
           result[subobj] = Object.assign(result[subobj] || {}, {
@@ -58,15 +57,15 @@ export interface Fixtures {
 }
 
 const fixtures: Fixtures = {
-  valueRanges: mapFlatObject((valueRange as unknown) as JsonData),
-  races: mapFlatObject((race as unknown) as JsonData),
-  classes: mapFlatObject((cls as unknown) as JsonData),
-  psiSchools: mapFlatObject((psiSchool as unknown) as JsonData),
-  armours: mapFlatObject((armour as unknown) as JsonData),
-  shields: mapFlatObject((shield as unknown) as JsonData),
-  skills: mapFlatObject((skill as unknown) as JsonData),
-  weapons: mapFlatObject((weapon as unknown) as JsonData),
-  magicalItems: mapFlatObject((magicalItem as unknown) as JsonData),
+  valueRanges: mapFlatObject(valueRange as unknown as JsonData),
+  races: mapFlatObject(race as unknown as JsonData),
+  classes: mapFlatObject(cls as unknown as JsonData),
+  psiSchools: mapFlatObject(psiSchool as unknown as JsonData),
+  armours: mapFlatObject(armour as unknown as JsonData),
+  shields: mapFlatObject(shield as unknown as JsonData),
+  skills: mapFlatObject(skill as unknown as JsonData),
+  weapons: mapFlatObject(weapon as unknown as JsonData),
+  magicalItems: mapFlatObject(magicalItem as unknown as JsonData),
 };
 
 export default fixtures;

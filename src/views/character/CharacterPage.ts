@@ -1,9 +1,9 @@
 import Vue from "vue";
 import { Character } from "@/store/modules/character";
-import { LooseObject } from "@/store/types";
 import Component from "vue-class-component";
 import { Race, Class } from "@/store";
 import { localiseItem } from "@/utils";
+import { BackendError } from "@/types";
 
 @Component
 export default class CharacterPage extends Vue {
@@ -19,11 +19,11 @@ export default class CharacterPage extends Vue {
     errorLabel: this.$t("error"),
   };
 
-  get page() {
+  get page(): number {
     return this.$route.params.page ? parseInt(this.$route.params.page) : 0;
   }
 
-  set page(page) {
+  set page(page: number) {
     if (page !== undefined) {
       this.$router.push({
         name: this.$route.name || undefined,
@@ -53,7 +53,7 @@ export default class CharacterPage extends Vue {
     return localiseItem(cl, this.$i18n.locale)?.description?.title || "";
   }
 
-  characterToString() {
+  characterToString(): string {
     const raceString = this.character?.race
       ? `${this.raceToString(this.character?.race)} `
       : "";
@@ -65,7 +65,7 @@ export default class CharacterPage extends Vue {
     }`;
   }
 
-  async refresh() {
+  async refresh(): Promise<void> {
     this.loading = true;
     try {
       // load character
@@ -77,13 +77,13 @@ export default class CharacterPage extends Vue {
       this.messages =
         typeof error === "string"
           ? [error]
-          : error.errors?.map((err: LooseObject) => err.message) || [];
+          : (error as BackendError).errors?.map(err => err.message) || [];
       this.notification = true;
     }
     this.loading = false;
   }
 
-  async created() {
+  async created(): Promise<void> {
     this.loading = true;
     try {
       // load character
@@ -109,7 +109,7 @@ export default class CharacterPage extends Vue {
       this.messages =
         typeof error === "string"
           ? [error]
-          : error.errors?.map((err: LooseObject) => err.message) || [];
+          : (error as BackendError).errors?.map(err => err.message) || [];
       this.notification = true;
     }
     if (this.character?.playerCharacter)

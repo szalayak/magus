@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import { RouteConfigSingleView } from "vue-router/types/router";
+import { PositionResult, RouteConfigSingleView } from "vue-router/types/router";
 import Home from "../views/Home.vue";
 import { adminRoutes } from "./admin";
 import { characterRoutes } from "./character";
@@ -67,7 +67,7 @@ const router = new VueRouter({
           scrollTo = savedPosition.y;
         }
 
-        resolve(goTo(scrollTo, { behavior: "smooth" }));
+        resolve(goTo(scrollTo, { behavior: "smooth" }) as PositionResult);
       }, 500);
     });
   },

@@ -136,18 +136,6 @@ import { Class } from "@/store/modules/class";
 import { ValueRange } from "@/store/modules/valueRange";
 import { Character } from "@/store";
 
-type CoreInformation = Pick<
-  Character,
-  | "race"
-  | "class"
-  | "subclass"
-  | "specialisation"
-  | "personality"
-  | "level"
-  | "magicUser"
-  | "psiUser"
->;
-
 const copyCoreInformation = (character: Character) => ({
   name: character.name,
   race: character.race,
@@ -193,7 +181,7 @@ export default class CoreInformationCard extends CharacterInfo {
     );
   }
 
-  save() {
+  save(): void {
     const basicInfo = {
       ...this.character.basicInfo,
       country: this.country,
@@ -202,7 +190,7 @@ export default class CoreInformationCard extends CharacterInfo {
     this.update({ id: this.character.id, basicInfo, ...this.coreInformation });
   }
 
-  cancel() {
+  cancel(): void {
     this.coreInformation = copyCoreInformation(this.character);
     this.country = this.character.basicInfo?.country;
     this.religion = this.character.basicInfo?.religion;

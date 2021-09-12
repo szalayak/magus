@@ -50,15 +50,15 @@ export default class CharacterAbilitySelector extends Vue {
 
   menu = false;
 
-  get abilities() {
+  get abilities(): Ability[] {
     return Object.values(Ability);
   }
 
-  open() {
+  open(): void {
     this.modifier = null;
   }
 
-  save(ability: string) {
+  save(ability: string): void {
     this.menu = false;
     this.$emit("select", { modifier: this.modifier, ability });
   }

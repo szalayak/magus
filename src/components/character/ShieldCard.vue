@@ -74,7 +74,7 @@ import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
 import { getPriceString } from "@/utils/price";
 import { Shield } from "@/store/modules/shield";
-import { ThrowScenario } from "@/store/types";
+import { CombatValues, ThrowScenario } from "@/store/types";
 import { getThrowScenarioString } from "@/utils/throwScenario";
 import { Character } from "@/store";
 
@@ -105,11 +105,11 @@ const copyShieldData = (shieldData: ShieldData): ShieldData => ({
 export default class ShieldCard extends CharacterInfo {
   shieldData = copyShieldData(this.character);
 
-  damage(damage?: ThrowScenario) {
+  damage(damage?: ThrowScenario): string {
     return getThrowScenarioString(damage);
   }
 
-  price(shield: Shield) {
+  price(shield: Shield): string {
     return getPriceString(shield.price);
   }
 
@@ -125,18 +125,18 @@ export default class ShieldCard extends CharacterInfo {
     ] as Shield[];
   }
 
-  get combatValues() {
+  get combatValues(): CombatValues {
     return this.shieldData.shield?.combatValues || {};
   }
-  get shield() {
+  get shield(): Shield {
     return this.shieldData.shield || {};
   }
 
-  save() {
+  save(): void {
     this.update({ id: this.character.id, ...this.shieldData });
   }
 
-  cancel() {
+  cancel(): void {
     this.shieldData = copyShieldData(this.character);
   }
 }

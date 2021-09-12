@@ -38,11 +38,11 @@ import CharacterInfoCard from "./CharacterInfoCard.vue";
 export default class NotesCard extends CharacterInfo {
   notes = this.character.notes;
 
-  save() {
+  save(): void {
     this.update({ id: this.character.id, notes: this.notes });
   }
 
-  cancel() {
+  cancel(): void {
     this.notes = this.character.notes;
   }
 }

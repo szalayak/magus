@@ -185,6 +185,8 @@ import { Form } from "@/utils";
 import PageTemplate from "../PageTemplate.vue";
 import ConfirmDeleteDialog from "../ConfirmDeleteDialog.vue";
 import AppBar from "../AppBar.vue";
+import { TranslateResult } from "vue-i18n";
+import { BackendError } from "@/types";
 
 const AdminTableProps = Vue.extend({
   props: {
@@ -223,11 +225,11 @@ export default class AdminTable extends AdminTableProps {
       : this.defaultItem
   ) as Editable;
 
-  get color() {
+  get color(): string {
     return this.$vuetify.theme.dark ? "#1E1E1E" : "white";
   }
 
-  get markdownDescription() {
+  get markdownDescription(): string {
     return marked(this.editedItem.description?.description || "");
   }
 
@@ -238,14 +240,14 @@ export default class AdminTable extends AdminTableProps {
     })) as DropdownValueList[];
   }
 
-  get readonly() {
+  get readonly(): boolean {
     return !(
       this.$store.getters["isCurrentUserAdmin"] ||
       this.$store.getters["isCurrentUserEditor"]
     );
   }
 
-  get computedHeaders() {
+  get computedHeaders(): unknown[] {
     return this.readonly
       ? this.headers.filter(h => (h as LooseObject).value !== "actions")
       : this.headers;
@@ -255,31 +257,31 @@ export default class AdminTable extends AdminTableProps {
     return this.$store.getters[`${this.module}/list`];
   }
 
-  get isNewItem() {
+  get isNewItem(): boolean {
     return this.editedIndex === -1;
   }
 
-  get formTitle() {
+  get formTitle(): TranslateResult | undefined {
     return this.editedIndex === -1
       ? this.$t(this.newText)
       : this.$t(this.editText);
   }
 
-  changeEditedLocale(locale: Locale) {
+  changeEditedLocale(locale: Locale): void {
     this.editedItem = localiseItem(this.editedItem, locale);
   }
 
-  async refresh() {
+  async refresh(): Promise<void> {
     try {
       await this.$store.dispatch(`${this.module}/load`);
     } catch (error) {
       this.messages =
-        error.errors?.map((err: { message: string }) => err.message) || [];
+        (error as BackendError).errors?.map(err => err.message) || [];
       this.notification = true;
     }
   }
 
-  resetEditedItem() {
+  resetEditedItem(): void {
     this.$nextTick(() => {
       this.editedItem = Object.assign(
         {},
@@ -293,11 +295,11 @@ export default class AdminTable extends AdminTableProps {
     });
   }
 
-  close() {
+  close(): void {
     this.dialog = false;
     this.resetEditedItem();
   }
-  async save() {
+  async save(): Promise<void> {
     if ((this.$refs.input as Form).validate()) {
       try {
         await this.$store.dispatch(
@@ -308,23 +310,23 @@ export default class AdminTable extends AdminTableProps {
         this.resetEditedItem();
       } catch (error) {
         this.messages =
-          error.errors?.map((err: { message: string }) => err.message) || [];
+          (error as BackendError).errors?.map(err => err.message) || [];
         this.notification = true;
       }
     }
   }
-  async deleteItemConfirm() {
+  async deleteItemConfirm(): Promise<void> {
     try {
       await this.$store.dispatch(`${this.module}/delete`, this.editedItem.id);
     } catch (error) {
       this.messages =
-        error.errors?.map((err: { message: string }) => err.message) || [];
+        (error as BackendError).errors?.map(err => err.message) || [];
       this.notification = true;
     }
     this.closeDelete();
   }
 
-  async deleteItemsConfirm(items: Editable[]) {
+  async deleteItemsConfirm(items: Editable[]): Promise<void> {
     try {
       await Promise.all(
         items.map(item =>
@@ -336,27 +338,27 @@ export default class AdminTable extends AdminTableProps {
       );
     } catch (error) {
       this.messages =
-        error.errors?.map((err: { message: string }) => err.message) || [];
+        (error as BackendError).errors?.map(err => err.message) || [];
       this.notification = true;
     }
     this.closeDelete();
   }
 
-  closeDelete() {
+  closeDelete(): void {
     this.dialogDelete = false;
     this.resetEditedItem();
   }
-  editItem(item: Editable) {
+  editItem(item: Editable): void {
     this.editedIndex = this.items.indexOf(item);
     this.editedItem = JSON.parse(JSON.stringify(item));
     this.dialog = true;
   }
-  deleteItem(item: Editable) {
+  deleteItem(item: Editable): void {
     this.editedIndex = this.items.indexOf(item);
     this.editedItem = Object.assign({}, item);
     this.dialogDelete = true;
   }
-  created() {
+  created(): void {
     this.refresh();
   }
 }

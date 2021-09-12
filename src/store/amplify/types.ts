@@ -1,5 +1,6 @@
 import { Identifiable, PageableState } from "@/store";
-import { LooseObject } from '../types';
+import { DocumentNode } from "graphql/language/ast";
+import { LooseObject } from "../types";
 
 export interface PageableResult {
   data: { [key: string]: PageableState };
@@ -9,15 +10,15 @@ export interface IdentifiableResult {
   data: { [key: string]: Identifiable };
 }
 
-export interface DefaultAmplifyActions{
-  list?: string,
-  read?: string,
-  create?: string,
-  update?: string,
-  delete?: string;
+export interface DefaultAmplifyActions {
+  list?: string | DocumentNode;
+  read?: string | DocumentNode;
+  create?: string | DocumentNode;
+  update?: string | DocumentNode;
+  delete?: string | DocumentNode;
 }
 
-export interface DefaultActionInputs{
-  actions: DefaultAmplifyActions,
+export interface DefaultActionInputs {
+  actions: DefaultAmplifyActions;
   mappingFunction: (item: Identifiable) => LooseObject;
 }

@@ -70,6 +70,7 @@ import AdminTable from "./AdminTable.vue";
 import { ThrowScenario } from "@/store/types";
 import { getThrowScenarioString } from "@/utils/throwScenario";
 import { getPriceString } from "@/utils/price";
+import { HeaderEntry } from "@/types";
 
 @Component({
   name: "shield-admin",
@@ -103,7 +104,7 @@ export default class ShieldAdmin extends Vue {
 
   customColumns = ["damage", "price"];
 
-  get headers() {
+  get headers(): HeaderEntry[] {
     return [
       { text: this.$t("title"), value: "description.title" },
       {
@@ -124,11 +125,11 @@ export default class ShieldAdmin extends Vue {
     ];
   }
 
-  damageToString(damage: ThrowScenario) {
+  damageToString(damage: ThrowScenario): string {
     return getThrowScenarioString(damage);
   }
 
-  priceToString(price: number) {
+  priceToString(price: number): string {
     return getPriceString(price);
   }
 }

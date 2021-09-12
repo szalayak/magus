@@ -26,7 +26,7 @@
               + ({{ abilityCheckResult.result.modifier }}) =
               {{
                 (abilityCheckResult.abilityValue || 0) +
-                  abilityCheckResult.result.modifier
+                abilityCheckResult.result.modifier
               }}</template
             ></v-col
           >

@@ -37,10 +37,10 @@ export default class QuickUpdatePropertyField extends Vue {
 
   currentValue: string | number = 0;
 
-  open() {
+  open(): void {
     this.currentValue = this.value || 0;
   }
-  save() {
+  save(): void {
     this.$emit("save", this.currentValue);
   }
 }

@@ -72,7 +72,8 @@ export const defaultMutations: MutationTree<PageableState> = {
   },
 };
 
-export const createDefaultMutations = () => defaultMutations;
+export const createDefaultMutations = (): MutationTree<PageableState> =>
+  defaultMutations;
 
 export const createMutations = ({
   additionalMutations,

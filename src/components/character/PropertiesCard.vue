@@ -58,12 +58,12 @@ const copyProperties = (properties?: Properties): Properties => ({
 export default class PropertiesCard extends CharacterInfo {
   properties = copyProperties(this.character.basicInfo);
 
-  save() {
+  save(): void {
     const basicInfo = { ...this.character.basicInfo, ...this.properties };
     this.update({ id: this.character.id, basicInfo });
   }
 
-  cancel() {
+  cancel(): void {
     this.properties = copyProperties(this.character.basicInfo);
   }
 }

@@ -202,6 +202,8 @@ import CombatValueEditorVue from "../admin/CombatValueEditor.vue";
 import ThrowScenarioEditorVue from "../admin/ThrowScenarioEditor.vue";
 import ConfirmDeleteDialog from "../ConfirmDeleteDialog.vue";
 import CharacterInfoList from "./CharacterInfoList";
+import { HeaderEntry } from "@/types";
+import { TranslateResult } from "vue-i18n";
 
 @Component({
   name: "animals-card",
@@ -215,7 +217,7 @@ import CharacterInfoList from "./CharacterInfoList";
 export default class AnimalsCard extends CharacterInfoList {
   sortBy = ["name"];
 
-  get headers() {
+  get headers(): HeaderEntry[] {
     return [
       { text: this.$t("name"), value: "name" },
       { text: this.$t("type"), value: "type" },
@@ -233,7 +235,7 @@ export default class AnimalsCard extends CharacterInfoList {
     ];
   }
 
-  get assignments() {
+  get assignments(): CharacterCompanion[] {
     return (
       this.character.companions?.filter(
         c =>
@@ -242,7 +244,7 @@ export default class AnimalsCard extends CharacterInfoList {
     );
   }
 
-  get formTitle() {
+  get formTitle(): TranslateResult | undefined {
     return this.editedIndex === -1
       ? this.$t("new-animal")
       : this.$t("edit-animal");
@@ -270,27 +272,27 @@ export default class AnimalsCard extends CharacterInfoList {
     };
   }
 
-  damageToString(damage: ThrowScenario) {
+  damageToString(damage: ThrowScenario): string {
     return getThrowScenarioString(damage);
   }
 
-  typeToString(type: CompanionType) {
+  typeToString(type: CompanionType): TranslateResult | undefined {
     return this.$t(type);
   }
 
-  mutablePointValueToString(value: MutablePointValue) {
+  mutablePointValueToString(value: MutablePointValue): string {
     return `${value.current || 0}/${value.max || 0}`;
   }
 
-  async createFunction(item: CharacterCompanion) {
+  async createFunction(item: CharacterCompanion): Promise<void> {
     return this.$store.dispatch("character/createCharacterCompanion", item);
   }
 
-  async updateFunction(item: CharacterCompanion) {
+  async updateFunction(item: CharacterCompanion): Promise<void> {
     return this.$store.dispatch("character/updateCharacterCompanion", item);
   }
 
-  async deleteFunction(item: CharacterCompanion) {
+  async deleteFunction(item: CharacterCompanion): Promise<void> {
     return this.$store.dispatch("character/deleteCharacterCompanion", item);
   }
 }

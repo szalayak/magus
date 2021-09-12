@@ -25,11 +25,14 @@ export const mapCharacterResult = (item: CharacterQueryResult): Character => {
   };
 };
 
-export const findById = (items?: Identifiable[], id?: string) => {
+export const findById = (
+  items?: Identifiable[],
+  id?: string
+): Identifiable | undefined => {
   return items?.find((item: Identifiable) => item.id === id);
 };
 
-export const removeAssignment = (items?: Identifiable[], id?: string) => {
+export const removeAssignment = (items?: Identifiable[], id?: string): void => {
   const existing = findById(items, id);
   if (items && existing) items.splice(items.indexOf(existing), 1);
 };
@@ -37,7 +40,7 @@ export const removeAssignment = (items?: Identifiable[], id?: string) => {
 export const updateAssignment = (
   items: Assignment[],
   assignment: Assignment
-) => {
+): void => {
   const existing = findById(items, assignment.id);
   if (existing) Object.assign(existing, assignment);
   else items.push(assignment);

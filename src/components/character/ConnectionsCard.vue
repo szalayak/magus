@@ -77,12 +77,12 @@ const copyConnections = (connections?: Connections): Connections => ({
 export default class ConnectionsCard extends CharacterInfo {
   connections = copyConnections(this.character.basicInfo);
 
-  save() {
+  save(): void {
     const basicInfo = { ...this.character.basicInfo, ...this.connections };
     this.update({ id: this.character.id, basicInfo });
   }
 
-  cancel() {
+  cancel(): void {
     this.connections = copyConnections(this.character.basicInfo);
   }
 }

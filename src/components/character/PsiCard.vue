@@ -97,15 +97,15 @@ export default class PsiCard extends CharacterInfo {
     ] as PsiSchool[];
   }
 
-  get psiPointsPerLevel() {
+  get psiPointsPerLevel(): number | undefined {
     return this.psi.psiSchool?.psiPointsPerLevel;
   }
 
-  save() {
+  save(): void {
     this.update({ id: this.character.id, ...this.psi });
   }
 
-  cancel() {
+  cancel(): void {
     this.psi = copyPsi(this.character);
   }
 }

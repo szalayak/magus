@@ -61,7 +61,9 @@ import VuePullRefresh from "vue-pull-refresh";
 import { Character, Class, Race } from "@/store";
 import { Prop } from "vue-property-decorator";
 import PageTemplate from "./PageTemplate.vue";
-import characterComponents from "@/utils/characterComponents";
+import characterComponents, {
+  CharacterNavbarItem,
+} from "@/utils/characterComponents";
 import { characterToLink, localiseItem } from "@/utils";
 import AppBar from "./AppBar.vue";
 
@@ -86,7 +88,7 @@ export default class CharacterPageLayout extends Vue {
   @Prop({ type: Boolean })
   loading: boolean | undefined;
 
-  get characterComponents() {
+  get characterComponents(): CharacterNavbarItem[] {
     return characterComponents(this.character);
   }
 
@@ -97,7 +99,7 @@ export default class CharacterPageLayout extends Vue {
     errorLabel: this.$t("error"),
   };
 
-  characterToLink(selector?: string, details = true) {
+  characterToLink(selector?: string, details = true): string {
     return characterToLink(this.character, selector, details);
   }
 
@@ -109,7 +111,7 @@ export default class CharacterPageLayout extends Vue {
     return localiseItem(cl, this.$i18n.locale)?.description?.title || "";
   }
 
-  characterToString() {
+  characterToString(): string {
     const raceString = this.character?.race
       ? `${this.raceToString(this.character?.race)} `
       : "";
@@ -121,7 +123,7 @@ export default class CharacterPageLayout extends Vue {
     }`;
   }
 
-  refresh() {
+  refresh(): void {
     this.$emit("refresh");
   }
 }

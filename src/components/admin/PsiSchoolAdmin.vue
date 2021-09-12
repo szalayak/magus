@@ -34,6 +34,7 @@ import Component from "vue-class-component";
 import Vue from "vue";
 import AdminTable from "./AdminTable.vue";
 import { Locale } from "@/API";
+import { HeaderEntry } from "@/types";
 
 @Component({
   name: "psi-school-admin",
@@ -50,7 +51,7 @@ export default class PsiSchoolAdmin extends Vue {
     psiPointsPerLevel: 0,
   };
 
-  get headers() {
+  get headers(): HeaderEntry[] {
     return [
       { text: this.$t("title"), value: "description.title" },
       { text: this.$t("base-psi-points"), value: "basePsiPoints" },

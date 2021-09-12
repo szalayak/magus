@@ -158,7 +158,7 @@ import SkeletonCards from "@/components/SkeletonCards.vue";
   },
 })
 export default class CharacterOverview extends CharacterPage {
-  characterToLink(selector?: string) {
+  characterToLink(selector?: string): string {
     return this.character ? characterToLink(this.character, selector) : "";
   }
 }

@@ -58,8 +58,8 @@
           <v-col cols="4">
             <strong>{{
               character.armourCurrentDamageReductionValue ||
-                armour.damageReductionValue ||
-                0
+              armour.damageReductionValue ||
+              0
             }}</strong>
           </v-col>
           <v-col cols="4">

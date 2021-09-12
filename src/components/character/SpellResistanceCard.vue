@@ -98,21 +98,21 @@ export default class SpellResistanceCard extends CharacterInfo {
     this.character.abilities?.willpower
   );
 
-  get astralTotal() {
+  get astralTotal(): number {
     return calculateSpellResistanceTotal(this.spellResistance.astral);
   }
 
-  get mentalTotal() {
+  get mentalTotal(): number {
     return calculateSpellResistanceTotal(this.spellResistance.mental);
   }
-  save() {
+  save(): void {
     this.update({
       id: this.character.id,
       spellResistance: copySpellResistance(this.spellResistance),
     });
   }
 
-  cancel() {
+  cancel(): void {
     this.spellResistance = copySpellResistance(
       this.character.spellResistance,
       this.character.abilities?.astral,

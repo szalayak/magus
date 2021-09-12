@@ -1,5 +1,11 @@
 import { Mastery, Dice } from "@/API";
-import { WeaponAssignment, CombatValues, ThrowScenario } from "@/store";
+import {
+  WeaponAssignment,
+  CombatValues,
+  ThrowScenario,
+  Armour,
+  Weapon,
+} from "@/store";
 import {
   aimingTotal,
   combatValuesWithWeapon,
@@ -16,34 +22,46 @@ import {
   UnskilledCombatValueModifiers,
 } from "@/utils";
 import Component from "vue-class-component";
+import { TranslateResult } from "vue-i18n";
 import CharacterQuickView from "./CharacterQuickView";
+
+interface ThrowStatus {
+  show: boolean;
+}
+
+interface CombatValuesWithWeapon {
+  id?: string;
+  weapon?: Weapon;
+  mastery?: Mastery;
+  combatValues: CombatValues;
+}
 
 @Component({})
 export default class CharacterCombatValuesQuickViewBase extends CharacterQuickView {
   combatValueThrowResult: CombatValueThrowResult | null = null;
 
-  get damageBonus() {
+  get damageBonus(): number {
     return this.character.abilities?.strength &&
       this.character.abilities?.strength > 16
       ? this.character.abilities.strength - 16
       : 0;
   }
 
-  get combatValueThrowStatus() {
+  get combatValueThrowStatus(): ThrowStatus {
     return { show: !!this.combatValueThrowResult };
   }
 
-  get combatValueThrowResults() {
+  get combatValueThrowResults(): number[] {
     return (
       this.combatValueThrowResult?.result.throwResults.map(r => r.result) || []
     );
   }
 
-  get combatValueThrowResultWeapon() {
+  get combatValueThrowResultWeapon(): string | undefined {
     return this.combatValueThrowResult?.weapon?.weapon?.description?.title;
   }
 
-  get weapons() {
+  get weapons(): WeaponAssignment[] {
     return this.character.weapons
       ?.filter(w => w.inHand)
       .map(w => ({
@@ -52,11 +70,11 @@ export default class CharacterCombatValuesQuickViewBase extends CharacterQuickVi
       })) as WeaponAssignment[];
   }
 
-  get armour() {
+  get armour(): Armour {
     return this.character.armour || {};
   }
 
-  get combatValuesWithWeapons() {
+  get combatValuesWithWeapons(): CombatValuesWithWeapon[] {
     return this.weapons?.map(w => {
       return {
         id: w.id,
@@ -80,23 +98,23 @@ export default class CharacterCombatValuesQuickViewBase extends CharacterQuickVi
     };
   }
 
-  damageToString(damage: ThrowScenario) {
+  damageToString(damage: ThrowScenario): string {
     return getThrowScenarioString(damage);
   }
 
-  masteryToString(mastery: Mastery) {
+  masteryToString(mastery: Mastery): TranslateResult | undefined {
     return this.$t(mastery);
   }
 
-  get mastery() {
+  get mastery(): typeof Mastery {
     return Mastery;
   }
 
-  get masterSkillCombatValueModifiers() {
+  get masterSkillCombatValueModifiers(): typeof MasterSkillCombatValueModifiers {
     return MasterSkillCombatValueModifiers;
   }
 
-  get unskilledCombatValueModifiers() {
+  get unskilledCombatValueModifiers(): typeof UnskilledCombatValueModifiers {
     return UnskilledCombatValueModifiers;
   }
 
@@ -107,7 +125,7 @@ export default class CharacterCombatValuesQuickViewBase extends CharacterQuickVi
     id?: string,
     weapon?: WeaponAssignment,
     damageBonus?: number
-  ) {
+  ): void {
     const hasDamageBonus =
       damageBonus && damageBonus > 0 && !weapon?.weapon?.ranged;
     const damageBonusValue = hasDamageBonus ? damageBonus || 0 : 0;
@@ -127,7 +145,7 @@ export default class CharacterCombatValuesQuickViewBase extends CharacterQuickVi
     };
   }
 
-  async toggleShieldInHand() {
+  async toggleShieldInHand(): Promise<void> {
     this.loading = true;
     const shieldInHand = this.character.shieldInHand ? false : true;
     try {
@@ -141,7 +159,7 @@ export default class CharacterCombatValuesQuickViewBase extends CharacterQuickVi
     this.loading = false;
   }
 
-  created() {
+  created(): void {
     if (this.bus) {
       const weapon =
         this.combatValuesWithWeapons.length > 0

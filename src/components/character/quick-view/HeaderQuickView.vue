@@ -28,10 +28,10 @@ import QuickViewOutputField from "./QuickViewOutputField.vue";
   name: "header-quick-view",
 })
 export default class HeaderQuickView extends CharacterQuickView {
-  get currentExperience() {
+  get currentExperience(): number | undefined {
     return this.character?.level?.currentExperience;
   }
-  get experienceForNextLevel() {
+  get experienceForNextLevel(): number | undefined {
     return this.character?.level?.experienceForNextLevel;
   }
 }

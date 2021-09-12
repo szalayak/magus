@@ -117,7 +117,7 @@ const copyArmourData = (armourData: ArmourData): ArmourData => ({
 export default class ArmourCard extends CharacterInfo {
   armourData = copyArmourData(this.character);
 
-  price(armour: Armour) {
+  price(armour: Armour): string {
     return getPriceString(armour.price);
   }
 
@@ -133,11 +133,11 @@ export default class ArmourCard extends CharacterInfo {
     ] as Armour[];
   }
 
-  save() {
+  save(): void {
     this.update({ id: this.character.id, ...this.armourData });
   }
 
-  cancel() {
+  cancel(): void {
     this.armourData = copyArmourData(this.character);
   }
 }

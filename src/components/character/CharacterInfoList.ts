@@ -11,7 +11,7 @@ export default class CharacterInfoList extends CharacterInfo {
   editedItem = this.defaultItem();
   selected: unknown[] = [];
 
-  get isNewItem() {
+  get isNewItem(): boolean {
     return this.editedIndex === -1;
   }
 
@@ -28,11 +28,11 @@ export default class CharacterInfoList extends CharacterInfo {
     return {};
   }
 
-  close() {
+  close(): void {
     this.dialog = false;
     this.resetEditedItem();
   }
-  async save() {
+  async save(): Promise<void> {
     const form = this.$refs.form as Form;
     if (!form || form.validate()) {
       const saveFunction = this.isNewItem
@@ -48,7 +48,7 @@ export default class CharacterInfoList extends CharacterInfo {
       }
     }
   }
-  async deleteItemConfirm() {
+  async deleteItemConfirm(): Promise<void> {
     try {
       await this.deleteFunction(this.editedItem);
       this.error = false;
@@ -59,7 +59,7 @@ export default class CharacterInfoList extends CharacterInfo {
     }
     this.closeDelete();
   }
-  async deleteItemsConfirm(items: unknown[]) {
+  async deleteItemsConfirm(items: unknown[]): Promise<void> {
     try {
       await Promise.all(items.map(item => this.deleteFunction(item)));
       items.forEach(item =>
@@ -73,24 +73,24 @@ export default class CharacterInfoList extends CharacterInfo {
     }
     this.closeDelete();
   }
-  closeDelete() {
+  closeDelete(): void {
     this.dialogDelete = false;
     this.resetEditedItem();
   }
-  editItem(item: unknown, assignments: unknown[]) {
+  editItem(item: unknown, assignments: unknown[]): void {
     this.editedIndex = assignments.indexOf(item);
     this.editedItem = Object.assign({}, item);
     this.dialog = true;
   }
-  deleteItem(item: unknown, assignments: unknown[]) {
+  deleteItem(item: unknown, assignments: unknown[]): void {
     this.editedIndex = assignments.indexOf(item);
     this.editedItem = Object.assign({}, item);
     this.dialogDelete = true;
   }
-  deleteItems() {
+  deleteItems(): void {
     this.dialogDelete = true;
   }
-  resetEditedItem() {
+  resetEditedItem(): void {
     this.$nextTick(() => {
       this.editedItem = this.defaultItem();
       this.editedIndex = -1;

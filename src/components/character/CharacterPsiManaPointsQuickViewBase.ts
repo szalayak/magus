@@ -4,19 +4,19 @@ import CharacterQuickView from "./CharacterQuickView";
 
 @Component({})
 export default class CharacterPsiManaPointsQuickViewBase extends CharacterQuickView {
-  get psiPoints() {
+  get psiPoints(): MutablePointValue {
     return this.character.psiPoints || {};
   }
 
-  get manaPoints() {
+  get manaPoints(): MutablePointValue {
     return this.character.magicalAbility?.manaPoints || {};
   }
 
-  get magicalAbility() {
+  get magicalAbility(): MagicalAbility {
     return this.character.magicalAbility || {};
   }
 
-  async onCurrentPsiPointsChanged(newValue: number) {
+  async onCurrentPsiPointsChanged(newValue: number): Promise<void> {
     this.loading = true;
     const psiPoints: MutablePointValue = { ...this.character.psiPoints } || {};
     psiPoints.current = newValue;
@@ -31,7 +31,7 @@ export default class CharacterPsiManaPointsQuickViewBase extends CharacterQuickV
     this.loading = false;
   }
 
-  async onCurrentManaPointsChanged(newValue: number) {
+  async onCurrentManaPointsChanged(newValue: number): Promise<void> {
     this.loading = true;
     const magicalAbility: MagicalAbility = {
       ...this.character.magicalAbility,

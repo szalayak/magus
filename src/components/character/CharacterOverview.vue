@@ -1,6 +1,6 @@
 <template>
   <v-card class="pa-0" flat tile>
-    <v-toolbar flat class="character-info-card-toolbar "
+    <v-toolbar flat class="character-info-card-toolbar"
       ><v-toolbar-title>{{ $t("overview") }}</v-toolbar-title></v-toolbar
     >
     <v-card-text class="pa-0">
@@ -90,7 +90,8 @@ import CharacterVitalityQuickView from "./dm-quick-view/CharacterVitalityQuickVi
     "character-combat-values-quick-view": CharacterCombatValuesQuickView,
     "character-spell-resistance-quick-view": CharacterSpellResistanceQuickView,
     "character-psi-mana-points-quick-view": CharacterPsiManaPointsQuickView,
-    "character-percentage-skills-quick-view": CharacterPercentageSkillsQuickView,
+    "character-percentage-skills-quick-view":
+      CharacterPercentageSkillsQuickView,
     "character-skills-quick-view": CharacterSkillsQuickView,
   },
 })
@@ -98,15 +99,15 @@ export default class CharacterOverview extends CharacterInfo {
   messages: string[] = [];
   notification = false;
 
-  get hasPercentageSkills() {
+  get hasPercentageSkills(): boolean {
     return !!this.character.skills?.find(s => s.skill?.percentageSkill);
   }
 
-  get hasSkills() {
+  get hasSkills(): boolean {
     return !!this.character.skills?.find(s => !s.skill?.percentageSkill);
   }
 
-  onError(error: { messages: string[] }) {
+  onError(error: { messages: string[] }): void {
     this.messages = error.messages;
     this.notification = true;
   }

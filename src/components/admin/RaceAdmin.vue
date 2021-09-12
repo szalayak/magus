@@ -27,6 +27,7 @@ import Component from "vue-class-component";
 import Vue from "vue";
 import { Locale } from "@/API";
 import AdminTable from "./AdminTable.vue";
+import { HeaderEntry } from "@/types";
 
 @Component({
   name: "race-admin",
@@ -42,7 +43,7 @@ export default class RaceAdmin extends Vue {
   };
   customColumns = ["playable"];
 
-  get headers() {
+  get headers(): HeaderEntry[] {
     return [
       { text: this.$t("title"), value: "description.title" },
       { text: this.$t("playable"), value: "playable" },

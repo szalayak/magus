@@ -26,7 +26,7 @@
               + ({{ skillCheckResult.result.modifier }}%) =
               {{
                 (skillCheckResult.skill.percentageValue || 0) +
-                  skillCheckResult.result.modifier
+                skillCheckResult.result.modifier
               }}%</template
             ></v-col
           >
@@ -70,7 +70,7 @@ import { SkillAssignment } from "@/store";
   name: "percentage-skills-quick-view",
 })
 export default class PercentageSkillsQuickView extends CharacterPercentageSkillsQuickViewBase {
-  performThrow(throwScenarioString: string, skill: SkillAssignment) {
+  performThrow(throwScenarioString: string, skill: SkillAssignment): void {
     const throwScenario = parseThrowScenarioString(throwScenarioString);
     this.onCheckResult(executeThrowScenario(throwScenario), skill);
   }

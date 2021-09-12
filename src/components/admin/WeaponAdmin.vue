@@ -95,6 +95,7 @@ import { ValueRange } from "@/store/modules/valueRange";
 import { getThrowScenarioString } from "@/utils/throwScenario";
 import { ThrowScenario } from "@/store/types";
 import { getPriceString } from "@/utils/price";
+import { HeaderEntry } from "@/types";
 
 @Component({
   name: "weapon-table",
@@ -124,7 +125,7 @@ export default class WeaponAdmin extends Vue {
   };
   customColumns = ["ranged", "damage", "price"];
 
-  get headers() {
+  get headers(): HeaderEntry[] {
     return [
       { text: this.$t("title"), value: "description.title" },
       { text: this.$t("weapon-type"), value: "weaponType.description.title" },
@@ -148,15 +149,15 @@ export default class WeaponAdmin extends Vue {
     return this.$store.getters["valueRange/getWeaponTypes"];
   }
 
-  damageToString(damage: ThrowScenario) {
+  damageToString(damage: ThrowScenario): string {
     return getThrowScenarioString(damage);
   }
 
-  priceToString(price: number) {
+  priceToString(price: number): string {
     return getPriceString(price);
   }
 
-  created() {
+  created(): void {
     this.$store.dispatch("valueRange/loadByType", ValueRangeType.WEAPON_TYPE);
   }
 }

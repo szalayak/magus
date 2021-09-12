@@ -58,12 +58,12 @@ import { Prop } from "vue-property-decorator";
 import { Race } from "@/store/modules/race";
 import { Class } from "@/store/modules/class";
 import { localiseItem } from "@/utils/localise";
-import { LooseObject } from "@/store/types";
 import { User } from "@/store";
 import { characterToLink } from "@/utils";
 import SkeletonCards from "@/components/SkeletonCards.vue";
 import PageTemplate from "./PageTemplate.vue";
 import AppBar from "./AppBar.vue";
+import { BackendError } from "@/types";
 
 @Component({
   name: "character-list",
@@ -94,7 +94,7 @@ export default class CharacterList extends Vue {
 
   deleteDialog = false;
 
-  get users() {
+  get users(): User[] {
     return this.$store.getters["getUsers"];
   }
 
@@ -110,7 +110,7 @@ export default class CharacterList extends Vue {
     return this.users.find((u: User) => u.username === owner)?.name || owner;
   }
 
-  characterToString(character: Character) {
+  characterToString(character: Character): string {
     const raceString = character.race
       ? `${this.raceToString(character.race)} `
       : "";
@@ -122,7 +122,7 @@ export default class CharacterList extends Vue {
     }`;
   }
 
-  initials(character: Character) {
+  initials(character: Character): string {
     const nameparts = character.name?.split(" ");
     return (
       nameparts
@@ -132,26 +132,26 @@ export default class CharacterList extends Vue {
     );
   }
 
-  characterToLink(character: Character, details?: boolean) {
+  characterToLink(character: Character, details?: boolean): string {
     return characterToLink(character, undefined, details);
   }
 
-  characterPageToLink(character: Character, page: number) {
+  characterPageToLink(character: Character, page: number): string {
     return `${this.characterToLink(character)}/${page}`;
   }
 
-  closeDelete() {
+  closeDelete(): void {
     this.deleteDialog = false;
   }
 
-  async deleteItemConfirm(id: string) {
+  async deleteItemConfirm(id: string): Promise<void> {
     try {
       await this.$store.dispatch(`character/delete`, id);
     } catch (error) {
       const messages =
         typeof error === "string"
           ? [error]
-          : error.errors?.map((err: LooseObject) => err.message) || [];
+          : (error as BackendError).errors?.map(err => err.message) || [];
       this.$emit("update:messages", messages);
       this.$emit("update:notification", true);
     }

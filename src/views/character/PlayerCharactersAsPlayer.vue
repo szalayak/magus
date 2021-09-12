@@ -150,8 +150,9 @@ import Component from "vue-class-component";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
 import CharacterList from "@/components/CharacterList.vue";
 import TitleComponent from "@/mixins/TitleComponent";
-import { LooseObject, User } from "@/store";
 import { Form } from "@/utils";
+import { BackendError } from "@/types";
+import { User } from "@/store";
 
 @Component({
   name: "player-characters-as-player",
@@ -192,19 +193,20 @@ export default class PlayerCharactersAsPlayer extends TitleComponent {
     return localise(this.$store.getters["class/list"], this.$i18n.locale);
   }
 
-  save() {
+  save(): void {
     if ((this.$refs.create as Form).validate()) {
       this.createDialog = false;
       this.$store
         .dispatch("character/create", this.editedItem)
         .catch((error: GraphQLResult<Character>) => {
-          this.messages = error.errors?.map(err => err.message) || [];
+          this.messages =
+            (error as BackendError).errors?.map(err => err.message) || [];
           this.notification = true;
         });
     }
   }
 
-  async refresh() {
+  async refresh(): Promise<void> {
     this.loading = true;
     try {
       await this.$store.dispatch(
@@ -213,7 +215,7 @@ export default class PlayerCharactersAsPlayer extends TitleComponent {
       );
     } catch (error) {
       this.messages =
-        error.errors?.map((err: LooseObject) => err.message) || [];
+        (error as BackendError).errors?.map(err => err.message) || [];
       this.notification = true;
     }
     try {
@@ -223,7 +225,7 @@ export default class PlayerCharactersAsPlayer extends TitleComponent {
       ]);
     } catch (error) {
       this.messages =
-        error.errors?.map((err: LooseObject) => err.message) || [];
+        (error as BackendError).errors?.map(err => err.message) || [];
       this.notification = true;
     }
 
@@ -232,13 +234,13 @@ export default class PlayerCharactersAsPlayer extends TitleComponent {
       this.$forceUpdate();
     } catch (error) {
       this.messages =
-        error.errors?.map((err: LooseObject) => err.message) || [];
+        (error as BackendError).errors?.map(err => err.message) || [];
       this.notification = true;
     }
     this.loading = false;
   }
 
-  created() {
+  created(): void {
     if (this.characters.length < 1) this.refresh();
   }
 }

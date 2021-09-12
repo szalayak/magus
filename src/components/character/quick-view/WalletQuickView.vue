@@ -62,7 +62,7 @@
 </template>
 <script lang="ts">
 import { Wallet } from "@/store";
-import { convertFromCopper, convertToCopper } from "@/utils";
+import { convertFromCopper, convertToCopper, Currency } from "@/utils";
 import Component from "vue-class-component";
 import CharacterQuickView from "../CharacterQuickView";
 import QuickViewOutputField from "./QuickViewOutputField.vue";
@@ -82,11 +82,11 @@ const copyWallet = (wallet?: Wallet): Wallet => ({
 export default class WalletQuickView extends CharacterQuickView {
   wallet = copyWallet(this.character.wallet);
 
-  get currency() {
+  get currency(): Currency {
     return convertFromCopper(this.wallet.money || 0);
   }
 
-  get gold() {
+  get gold(): number {
     return this.currency.gold;
   }
   set gold(gold: number) {
@@ -96,7 +96,7 @@ export default class WalletQuickView extends CharacterQuickView {
     this.save();
   }
 
-  get silver() {
+  get silver(): number {
     return this.currency.silver;
   }
 
@@ -107,7 +107,7 @@ export default class WalletQuickView extends CharacterQuickView {
     this.save();
   }
 
-  get copper() {
+  get copper(): number {
     return this.currency.copper;
   }
 
@@ -118,7 +118,7 @@ export default class WalletQuickView extends CharacterQuickView {
     this.save();
   }
 
-  async save() {
+  async save(): Promise<void> {
     this.loading = true;
     try {
       await this.$store.dispatch(`character/update`, {
@@ -131,7 +131,7 @@ export default class WalletQuickView extends CharacterQuickView {
     this.loading = false;
   }
 
-  cancel() {
+  cancel(): void {
     this.wallet = copyWallet(this.wallet);
   }
 }

@@ -6,7 +6,7 @@ export interface CharacterNavbarItem {
   title: string;
 }
 
-export default function(character: Character) {
+export default function (character: Character): CharacterNavbarItem[] {
   const items: CharacterNavbarItem[] = [
     {
       id: "appearance",

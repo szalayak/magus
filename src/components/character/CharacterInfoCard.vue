@@ -75,13 +75,13 @@ export default class CharacterInfoCard extends Vue {
   valid = true;
   show = true;
 
-  async save() {
+  async save(): Promise<void> {
     if ((this.$refs.data as Form).validate()) {
       this.$emit("save");
     }
   }
 
-  cancel() {
+  cancel(): void {
     this.$emit("cancel");
     this.$emit("update:edit", false);
   }

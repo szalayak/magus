@@ -8,11 +8,16 @@ import {
 import Component from "vue-class-component";
 import CharacterQuickView from "./CharacterQuickView";
 
+interface SkillCheckStatus {
+  show: boolean;
+  type: string;
+}
+
 @Component({})
 export default class CharacterPercentageSkillsQuickViewBase extends CharacterQuickView {
   skillCheckResult: SkillCheckResult | null = null;
 
-  get skillCheckStatus() {
+  get skillCheckStatus(): SkillCheckStatus {
     return {
       show: !!this.skillCheckResult,
       type:
@@ -22,7 +27,7 @@ export default class CharacterPercentageSkillsQuickViewBase extends CharacterQui
     };
   }
 
-  get skills() {
+  get skills(): SkillAssignment[] | undefined {
     return this.character.skills
       ?.filter(s => s.skill?.percentageSkill)
       .map(s => ({
@@ -31,7 +36,7 @@ export default class CharacterPercentageSkillsQuickViewBase extends CharacterQui
       }));
   }
 
-  onCheckResult(result: ThrowScenarioResult, skill: SkillAssignment) {
+  onCheckResult(result: ThrowScenarioResult, skill: SkillAssignment): void {
     this.skillCheckResult = skillCheck({ result, skill });
   }
 }

@@ -1,6 +1,7 @@
 import { Mastery } from "@/API";
 import { Character } from "@/store/modules/character";
 import { DropdownValueList, LooseObject } from "@/store/types";
+import { BackendError } from "@/types";
 import Vue from "vue";
 import { Prop } from "vue-property-decorator";
 export default class CharacterInfo extends Vue {
@@ -33,7 +34,7 @@ export default class CharacterInfo extends Vue {
     ];
   }
 
-  async update(item: LooseObject) {
+  async update(item: LooseObject): Promise<void> {
     try {
       await this.$store.dispatch(`${this.module}/update`, item);
       this.edit = false;
@@ -43,14 +44,12 @@ export default class CharacterInfo extends Vue {
     }
   }
 
-  throwError(error: LooseObject) {
+  throwError(error: BackendError | unknown): void {
     this.error = true;
     this.messages =
       typeof error === "string"
         ? [error]
-        : (error.errors as LooseObject[])?.map(
-            (err: LooseObject) => err.message as string
-          ) || [];
+        : (error as BackendError).errors?.map(err => err.message) || [];
 
     this.$emit("error", {
       messages: this.messages,

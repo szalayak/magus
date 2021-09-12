@@ -229,6 +229,8 @@ import { localiseItem } from "@/utils/localise";
 import { Weapon } from "@/store/modules/weapon";
 import ConfirmDeleteDialog from "../ConfirmDeleteDialog.vue";
 import CharacterInfoList from "./CharacterInfoList";
+import { HeaderEntry } from "@/types";
+import { TranslateResult } from "vue-i18n";
 
 @Component({
   name: "servants-card",
@@ -242,7 +244,7 @@ import CharacterInfoList from "./CharacterInfoList";
 export default class ServantsCard extends CharacterInfoList {
   sortBy = ["name"];
 
-  get headers() {
+  get headers(): HeaderEntry[] {
     return [
       { text: this.$t("name"), value: "name" },
       { text: this.$t("vp"), value: "health.vitality" },
@@ -260,11 +262,11 @@ export default class ServantsCard extends CharacterInfoList {
     ];
   }
 
-  get weapons() {
+  get weapons(): Weapon[] {
     return this.$store.getters["weapon/list"]?.filter((w: Weapon) => !w.ranged);
   }
 
-  get assignments() {
+  get assignments(): CharacterCompanion[] {
     return (
       this.character.companions?.filter(
         c => c.type === CompanionType.SERVANT
@@ -272,7 +274,7 @@ export default class ServantsCard extends CharacterInfoList {
     );
   }
 
-  get formTitle() {
+  get formTitle(): TranslateResult | undefined {
     return this.editedIndex === -1
       ? this.$t("new-servant")
       : this.$t("edit-servant");
@@ -301,53 +303,53 @@ export default class ServantsCard extends CharacterInfoList {
     };
   }
 
-  attacksPerTurn(item: CharacterCompanion) {
+  attacksPerTurn(item: CharacterCompanion): number | undefined {
     return item.weapon?.attacksPerTurn || item.attacksPerTurn;
   }
 
-  initiation(value?: number, weapon?: Weapon) {
+  initiation(value?: number, weapon?: Weapon): number {
     return (value || 0) + (weapon?.combatValues?.initiation || 0);
   }
 
-  offence(value?: number, weapon?: Weapon) {
+  offence(value?: number, weapon?: Weapon): number {
     return (value || 0) + (weapon?.combatValues?.offence || 0);
   }
 
-  defence(value?: number, weapon?: Weapon) {
+  defence(value?: number, weapon?: Weapon): number {
     return (value || 0) + (weapon?.combatValues?.defence || 0);
   }
 
-  aiming(value?: number, weapon?: Weapon) {
+  aiming(value?: number, weapon?: Weapon): number {
     return (value || 0) + (weapon?.combatValues?.aiming || 0);
   }
 
-  damageToString(damage: ThrowScenario, weapon?: Weapon) {
+  damageToString(damage: ThrowScenario, weapon?: Weapon): string {
     return getThrowScenarioString(weapon?.damage || damage);
   }
 
-  typeToString(type: CompanionType) {
+  typeToString(type: CompanionType): TranslateResult | undefined {
     return this.$t(type);
   }
 
-  mutablePointValueToString(value: MutablePointValue) {
+  mutablePointValueToString(value: MutablePointValue): string {
     return `${value.current || 0}/${value.max || 0}`;
   }
 
-  weaponToString(weapon: Weapon) {
+  weaponToString(weapon: Weapon): string | undefined {
     return weapon
       ? localiseItem(weapon, this.$i18n.locale).description?.title
       : "";
   }
 
-  async createFunction(item: CharacterCompanion) {
+  async createFunction(item: CharacterCompanion): Promise<void> {
     return this.$store.dispatch("character/createCharacterCompanion", item);
   }
 
-  async updateFunction(item: CharacterCompanion) {
+  async updateFunction(item: CharacterCompanion): Promise<void> {
     return this.$store.dispatch("character/updateCharacterCompanion", item);
   }
 
-  async deleteFunction(item: CharacterCompanion) {
+  async deleteFunction(item: CharacterCompanion): Promise<void> {
     return this.$store.dispatch("character/deleteCharacterCompanion", item);
   }
 }

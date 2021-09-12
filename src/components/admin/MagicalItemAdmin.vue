@@ -56,6 +56,7 @@ import { Class } from "@/store/modules/class";
 import { Locale } from "@/API";
 import AdminTable from "./AdminTable.vue";
 import { getPriceString } from "@/utils/price";
+import { HeaderEntry } from "@/types";
 
 @Component({
   name: "magical-item-admin",
@@ -75,7 +76,7 @@ export default class MagicalItemAdmin extends Vue {
   };
   customColumns = ["price"];
 
-  get headers() {
+  get headers(): HeaderEntry[] {
     return [
       { text: this.$t("title"), value: "description.title" },
       { text: this.$t("can-be-made-by"), value: "class.description.title" },
@@ -89,11 +90,11 @@ export default class MagicalItemAdmin extends Vue {
     return this.$store.getters["class/getMagicUserClasses"];
   }
 
-  priceToString(price: number) {
+  priceToString(price: number): string {
     return getPriceString(price);
   }
 
-  created() {
+  created(): void {
     this.$store.dispatch("class/load");
   }
 }

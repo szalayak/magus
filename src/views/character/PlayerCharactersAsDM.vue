@@ -12,6 +12,7 @@ import { Character } from "@/store/modules/character";
 import Component from "vue-class-component";
 import CharacterList from "@/components/CharacterList.vue";
 import TitleComponent from "@/mixins/TitleComponent";
+import { BackendError } from "@/types";
 
 @Component({
   name: "player-characters-as-dm",
@@ -29,7 +30,7 @@ export default class PlayerCharactersAsDM extends TitleComponent {
     return this.$store.getters["character/playerCharactersAsDM"];
   }
 
-  async refresh() {
+  async refresh(): Promise<void> {
     this.loading = true;
     try {
       await this.$store.dispatch(
@@ -38,7 +39,7 @@ export default class PlayerCharactersAsDM extends TitleComponent {
       );
     } catch (error) {
       this.messages =
-        error.errors?.map((err: { message: string }) => err.message) || [];
+        (error as BackendError).errors?.map(err => err.message) || [];
       this.notification = true;
     }
     try {
@@ -46,13 +47,13 @@ export default class PlayerCharactersAsDM extends TitleComponent {
       this.$forceUpdate();
     } catch (error) {
       this.messages =
-        error.errors?.map((err: { message: string }) => err.message) || [];
+        (error as BackendError).errors?.map(err => err.message) || [];
       this.notification = true;
     }
     this.loading = false;
   }
 
-  created() {
+  created(): void {
     this.refresh();
   }
 }

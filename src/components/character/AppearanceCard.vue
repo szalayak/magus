@@ -131,12 +131,12 @@ export default class AppearanceCard extends CharacterInfo {
     }));
   }
 
-  save() {
+  save(): void {
     const basicInfo = { ...this.character.basicInfo, ...this.appearance };
     this.update({ id: this.character.id, basicInfo });
   }
 
-  cancel() {
+  cancel(): void {
     this.appearance = copyAppearance(this.character.basicInfo);
   }
 }

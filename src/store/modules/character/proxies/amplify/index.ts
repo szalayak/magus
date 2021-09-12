@@ -185,7 +185,7 @@ const characterCompanionActions = createDefaultActions({
   }),
 });
 
-const loadByOwner = async (owner: string) => {
+const loadByOwner = async (owner: string): Promise<CharacterResults> => {
   const result = (await API.graphql({
     query: listCharactersByOwner,
     variables: { owner },
@@ -193,7 +193,9 @@ const loadByOwner = async (owner: string) => {
   return Object.values(result.data)[0] as CharacterResults;
 };
 
-const loadByDungeonMaster = async (dungeonMaster: string) => {
+const loadByDungeonMaster = async (
+  dungeonMaster: string
+): Promise<CharacterResults> => {
   const result = (await API.graphql({
     query: listCharactersByDungeonMaster,
     variables: {
@@ -213,8 +215,9 @@ const subscribeToUpdate = async (
   })) as Observable<LooseObject>;
   const subscription = observable.subscribe({
     next: characterData => {
-      const queryResult = ((characterData.value as LooseObject)
-        .data as LooseObject).onUpdateCharacter as CharacterQueryResult;
+      const queryResult = (
+        (characterData.value as LooseObject).data as LooseObject
+      ).onUpdateCharacter as CharacterQueryResult;
       callback(queryResult, subscription);
     },
   });

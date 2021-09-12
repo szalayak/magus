@@ -150,6 +150,8 @@ import { WeaponAssignment } from "@/store/modules/character";
 import { combatValuesWithWeapon } from "@/utils/character";
 import ConfirmDeleteDialog from "../ConfirmDeleteDialog.vue";
 import CharacterInfoList from "./CharacterInfoList";
+import { HeaderEntry } from "@/types";
+import { TranslateResult } from "vue-i18n";
 
 @Component({
   name: "ranged-weapon-assignment-card",
@@ -161,7 +163,7 @@ import CharacterInfoList from "./CharacterInfoList";
 export default class RangedWeaponAssignmentCard extends CharacterInfoList {
   sortBy = ["weapon.description.title"];
 
-  get headers() {
+  get headers(): HeaderEntry[] {
     return [
       { text: this.$t("weapon"), value: "weapon.description.title" },
       { text: this.$t("mastery"), value: "mastery" },
@@ -179,15 +181,15 @@ export default class RangedWeaponAssignmentCard extends CharacterInfoList {
     ];
   }
 
-  get weapons() {
+  get weapons(): Weapon[] {
     return this.$store.getters["weapon/list"].filter((w: Weapon) => w.ranged);
   }
 
-  get assignments() {
+  get assignments(): WeaponAssignment[] {
     return this.character.weapons?.filter(w => w.weapon?.ranged) || [];
   }
 
-  get formTitle() {
+  get formTitle(): TranslateResult | undefined {
     return this.editedIndex === -1
       ? this.$t("new-weapon")
       : this.$t("edit-weapon");
@@ -199,18 +201,18 @@ export default class RangedWeaponAssignmentCard extends CharacterInfoList {
     };
   }
 
-  damageToString(damage: ThrowScenario) {
+  damageToString(damage: ThrowScenario): string {
     return getThrowScenarioString(damage);
   }
 
-  initiation(assignment: WeaponAssignment) {
+  initiation(assignment: WeaponAssignment): number | undefined {
     return combatValuesWithWeapon({
       character: this.character,
       weapon: assignment.weapon,
       mastery: assignment.mastery,
     }).initiation;
   }
-  aiming(assignment: WeaponAssignment) {
+  aiming(assignment: WeaponAssignment): number | undefined {
     return combatValuesWithWeapon({
       character: this.character,
       weapon: assignment.weapon,
@@ -218,15 +220,15 @@ export default class RangedWeaponAssignmentCard extends CharacterInfoList {
     }).aiming;
   }
 
-  async createFunction(item: WeaponAssignment) {
+  async createFunction(item: WeaponAssignment): Promise<void> {
     return this.$store.dispatch("character/createWeaponAssignment", item);
   }
 
-  async updateFunction(item: WeaponAssignment) {
+  async updateFunction(item: WeaponAssignment): Promise<void> {
     return this.$store.dispatch("character/updateWeaponAssignment", item);
   }
 
-  async deleteFunction(item: WeaponAssignment) {
+  async deleteFunction(item: WeaponAssignment): Promise<void> {
     return this.$store.dispatch("character/deleteWeaponAssignment", item);
   }
 }

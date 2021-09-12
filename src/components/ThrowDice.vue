@@ -61,18 +61,18 @@ import { mapGetters } from "vuex";
 export default class ThrowDice extends Vue {
   diceDialog = false;
 
-  closeDialog() {
+  closeDialog(): void {
     this.diceDialog = false;
     this.$store.commit("setThrowResult", { throwResultNotification: false });
   }
 
-  doThrow(diceObject: DiceObject) {
+  doThrow(diceObject: DiceObject): void {
     this.$store.commit("setThrowResult", {
       throwResultNotification: true,
       throwResult: throwDice(diceObject.id),
     });
   }
-  dice() {
+  dice(): DiceObject[] {
     return getDice(this.$i18n);
   }
 }

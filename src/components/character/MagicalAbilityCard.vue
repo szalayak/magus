@@ -98,11 +98,11 @@ const copyMagicalAbility = (
 export default class MagicalAbilityCard extends CharacterInfo {
   magicalAbility = copyMagicalAbility(this.character.magicalAbility);
 
-  save() {
+  save(): void {
     this.update({ id: this.character.id, magicalAbility: this.magicalAbility });
   }
 
-  cancel() {
+  cancel(): void {
     this.magicalAbility = copyMagicalAbility(this.character.magicalAbility);
   }
 }

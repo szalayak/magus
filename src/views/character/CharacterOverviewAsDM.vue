@@ -503,7 +503,6 @@ import CharacterPsiManaPointsQuickView from "@/components/character/dm-quick-vie
 import CharacterSpellResistanceQuickView from "@/components/character/dm-quick-view/CharacterSpellResistanceQuickView.vue";
 import CharacterVitalityQuickView from "@/components/character/dm-quick-view/CharacterVitalityQuickView.vue";
 import TitleComponent from "@/mixins/TitleComponent";
-import { Character, LooseObject, User } from "@/store";
 import { characterToLink } from "@/utils";
 import Component from "vue-class-component";
 import Vue from "vue";
@@ -512,6 +511,8 @@ import CharacterPercentageSkillsQuickView from "@/components/character/dm-quick-
 import CharacterSkillsQuickView from "@/components/character/dm-quick-view/CharacterSkillsQuickView.vue";
 import PageTemplate from "@/components/PageTemplate.vue";
 import AppBar from "@/components/AppBar.vue";
+import { BackendError } from "@/types";
+import { Character, User } from "@/store";
 
 @Component({
   name: "character-overview-as-dm",
@@ -521,7 +522,8 @@ import AppBar from "@/components/AppBar.vue";
     "character-combat-values-quick-view": CharacterCombatValuesQuickView,
     "character-spell-resistance-quick-view": CharacterSpellResistanceQuickView,
     "character-psi-mana-points-quick-view": CharacterPsiManaPointsQuickView,
-    "character-percentage-skills-quick-view": CharacterPercentageSkillsQuickView,
+    "character-percentage-skills-quick-view":
+      CharacterPercentageSkillsQuickView,
     "character-skills-quick-view": CharacterSkillsQuickView,
     "character-ability-selector": CharacterAbilitySelector,
     "page-template": PageTemplate,
@@ -544,11 +546,11 @@ export default class CharacterOverviewAsDM extends TitleComponent {
     return this.$store.getters["character/nonPlayerCharactersAsDM"];
   }
 
-  characterToLink(character: Character, selector?: string) {
+  characterToLink(character: Character, selector?: string): string {
     return characterToLink(character, selector);
   }
 
-  onError(error: { messages: string[] }) {
+  onError(error: { messages: string[] }): void {
     this.messages = error.messages;
     this.notification = true;
   }
@@ -557,11 +559,11 @@ export default class CharacterOverviewAsDM extends TitleComponent {
     return this.users.find((u: User) => u.username === owner)?.name || owner;
   }
 
-  get users() {
+  get users(): User[] {
     return this.$store.getters["getUsers"];
   }
 
-  async refresh() {
+  async refresh(): Promise<void> {
     try {
       await this.$store.dispatch(
         "character/loadByDungeonMaster",
@@ -573,12 +575,12 @@ export default class CharacterOverviewAsDM extends TitleComponent {
       this.messages =
         typeof error === "string"
           ? [error]
-          : error.errors?.map((err: LooseObject) => err.message) || [];
+          : (error as BackendError).errors?.map(err => err.message) || [];
       this.notification = true;
     }
   }
 
-  async created() {
+  async created(): Promise<void> {
     await this.refresh();
     const owners = Array.from(
       new Set(this.playerCharacters.map(character => character.owner))
@@ -594,11 +596,11 @@ export default class CharacterOverviewAsDM extends TitleComponent {
     );
   }
 
-  initiationForAllNPCs() {
+  initiationForAllNPCs(): void {
     this.npcEvents.$emit("initiation");
   }
 
-  offenceForAllNPCs() {
+  offenceForAllNPCs(): void {
     this.npcEvents.$emit("offence");
   }
 
@@ -608,7 +610,7 @@ export default class CharacterOverviewAsDM extends TitleComponent {
   }: {
     modifier: number;
     ability: string;
-  }) {
+  }): void {
     this.pcEvents.$emit("ability-check", ability, modifier);
   }
 
@@ -618,7 +620,7 @@ export default class CharacterOverviewAsDM extends TitleComponent {
   }: {
     modifier: number;
     ability: string;
-  }) {
+  }): void {
     this.npcEvents.$emit("ability-check", ability, modifier);
   }
 }

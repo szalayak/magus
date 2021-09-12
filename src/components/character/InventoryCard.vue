@@ -97,6 +97,8 @@ import CharacterInfoCard from "./CharacterInfoCard.vue";
 import { InventoryItem } from "@/store/types";
 import ConfirmDeleteDialog from "../ConfirmDeleteDialog.vue";
 import CharacterInfoList from "./CharacterInfoList";
+import { HeaderEntry } from "@/types";
+import { TranslateResult } from "vue-i18n";
 
 @Component({
   name: "inventory-card",
@@ -108,7 +110,7 @@ import CharacterInfoList from "./CharacterInfoList";
 export default class InventoryCard extends CharacterInfoList {
   sortBy = ["name"];
 
-  get headers() {
+  get headers(): HeaderEntry[] {
     return [
       { text: this.$t("item"), value: "name" },
       { text: this.$t("amount"), value: "amount" },
@@ -116,11 +118,11 @@ export default class InventoryCard extends CharacterInfoList {
     ];
   }
 
-  get assignments() {
+  get assignments(): InventoryItem[] {
     return this.character.inventory || [];
   }
 
-  get formTitle() {
+  get formTitle(): TranslateResult | undefined {
     return this.editedIndex === -1
       ? this.$t("new-inventory-item")
       : this.$t("edit-inventory-item");
@@ -130,18 +132,18 @@ export default class InventoryCard extends CharacterInfoList {
     return {};
   }
 
-  async createFunction(item: InventoryItem) {
+  async createFunction(item: InventoryItem): Promise<void> {
     const inventory = [...this.assignments, item];
     return this.update({ id: this.character.id, inventory });
   }
 
-  async updateFunction(item: InventoryItem) {
+  async updateFunction(item: InventoryItem): Promise<void> {
     const inventory = [...this.assignments];
     Object.assign(inventory[this.editedIndex], item);
     return this.update({ id: this.character.id, inventory });
   }
 
-  async deleteFunction() {
+  async deleteFunction(): Promise<void> {
     const inventory = [...this.assignments];
     inventory.splice(this.editedIndex, 1);
     return this.update({ id: this.character.id, inventory });

@@ -53,7 +53,7 @@ export default class ThrowScenarioDialog extends Vue {
 
   dialog = false;
 
-  save() {
+  save(): void {
     this.$emit("update:dice", this.editedScenario.dice);
     this.$emit("update:iterationCount", this.editedScenario.iterationCount);
     this.$emit("update:modifier", this.editedScenario.modifier);

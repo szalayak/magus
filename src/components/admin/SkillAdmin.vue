@@ -58,6 +58,7 @@ import { Skill } from "@/store/modules/skill";
 import { ValueRange } from "@/store/modules/valueRange";
 import { Locale, ValueRangeType } from "@/API";
 import AdminTable from "./AdminTable.vue";
+import { HeaderEntry } from "@/types";
 
 @Component({
   name: "skill-admin",
@@ -77,7 +78,7 @@ export default class SkillAdmin extends Vue {
   };
   customColumns = ["percentageSkill"];
 
-  get headers() {
+  get headers(): HeaderEntry[] {
     return [
       { text: this.$t("skill-group"), value: "skillGroup.description.title" },
       { text: this.$t("title"), value: "description.title" },
@@ -91,7 +92,7 @@ export default class SkillAdmin extends Vue {
     return this.$store.getters["valueRange/getSkillGroups"];
   }
 
-  created() {
+  created(): void {
     this.$store.dispatch("valueRange/loadByType", ValueRangeType.SKILL_GROUP);
   }
 }

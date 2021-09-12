@@ -38,7 +38,7 @@
             <strong>
               {{
                 (combatValueThrowResult.value || 0) +
-                  (combatValueThrowResult.result.total || 0)
+                (combatValueThrowResult.result.total || 0)
               }}</strong
             ></v-col
           >
@@ -321,7 +321,7 @@ import QuickViewOutputField from "./QuickViewOutputField.vue";
 export default class CombatValuesQuickView extends CharacterCombatValuesQuickViewBase {
   noWeapon = true;
 
-  get selectedWeapons() {
+  get selectedWeapons(): number[] {
     const defaultArray = this.noWeapon ? [0] : [];
     if (!this.character.weapons) return defaultArray;
     const result = [...defaultArray];
@@ -337,11 +337,11 @@ export default class CombatValuesQuickView extends CharacterCombatValuesQuickVie
       []),
   ];
 
-  get showNoWeapon() {
+  get showNoWeapon(): boolean {
     return this.selectedWeapons.find(w => w === 0) !== undefined;
   }
 
-  async selectedWeaponsChanged(selected: number[]) {
+  async selectedWeaponsChanged(selected: number[]): Promise<void> {
     this.noWeapon = selected.find(w => w === 0) !== undefined;
     const weaponsInHand = this.character.weapons?.filter(w => !!w.inHand) || [];
     const create: WeaponAssignment[] = [];
@@ -363,7 +363,10 @@ export default class CombatValuesQuickView extends CharacterCombatValuesQuickVie
     }
   }
 
-  async weaponSwitch(weaponAssignments: WeaponAssignment[], inHand: boolean) {
+  async weaponSwitch(
+    weaponAssignments: WeaponAssignment[],
+    inHand: boolean
+  ): Promise<unknown[] | undefined> {
     try {
       return await Promise.all(
         weaponAssignments.map(async w => {

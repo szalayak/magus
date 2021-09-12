@@ -100,7 +100,7 @@ import { GraphQLResult } from "@aws-amplify/api-graphql";
 import CharacterList from "@/components/CharacterList.vue";
 import TitleComponent from "@/mixins/TitleComponent";
 import { Form } from "@/utils";
-import { LooseObject } from "@/store";
+import { BackendError } from "@/types";
 
 @Component({
   name: "non-player-characters-as-dm",
@@ -135,7 +135,7 @@ export default class NonPlayerCharactersAsDM extends TitleComponent {
     return localise(this.$store.getters["class/list"], this.$i18n.locale);
   }
 
-  save() {
+  save(): void {
     if ((this.$refs.create as Form).validate()) {
       this.createDialog = false;
       this.$store
@@ -147,7 +147,7 @@ export default class NonPlayerCharactersAsDM extends TitleComponent {
     }
   }
 
-  async refresh() {
+  async refresh(): Promise<void> {
     this.loading = true;
     try {
       await this.$store.dispatch(
@@ -156,7 +156,7 @@ export default class NonPlayerCharactersAsDM extends TitleComponent {
       );
     } catch (error) {
       this.messages =
-        error.errors?.map((err: LooseObject) => err.message) || [];
+        (error as BackendError).errors?.map(err => err.message) || [];
       this.notification = true;
     }
 
@@ -167,13 +167,13 @@ export default class NonPlayerCharactersAsDM extends TitleComponent {
       ]);
     } catch (error) {
       this.messages =
-        error.errors?.map((err: LooseObject) => err.message) || [];
+        (error as BackendError).errors?.map(err => err.message) || [];
       this.notification = true;
     }
     this.loading = false;
   }
 
-  created() {
+  created(): void {
     if (this.characters.length < 1) this.refresh();
   }
 }

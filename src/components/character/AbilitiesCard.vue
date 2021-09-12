@@ -30,9 +30,9 @@
         <v-col cols="6" xs="6" sm="3">
           <v-text-field
             v-model.number="abilities.dexterity"
-            :label="
-              `${$t('dexterity')}, ${$t('in-armour')}: ${dexterityInArmour}`
-            "
+            :label="`${$t('dexterity')}, ${$t(
+              'in-armour'
+            )}: ${dexterityInArmour}`"
             type="number"
             :disabled="!edit"
           />
@@ -103,8 +103,6 @@ import CharacterInfo from "./CharacterInfo";
 import Component from "vue-class-component";
 import CharacterInfoCard from "./CharacterInfoCard.vue";
 import { movementPreventionValueTotal } from "@/utils/character";
-import { Character } from "@/store";
-import { Prop } from "vue-property-decorator";
 
 const copyAbilities = (abilities?: Abilities) => ({
   strength: abilities?.strength,
@@ -126,34 +124,31 @@ const copyAbilities = (abilities?: Abilities) => ({
   },
 })
 export default class AbilitiesCard extends CharacterInfo {
-  @Prop({ type: Object })
-  character!: Character;
-
   abilities: Abilities = copyAbilities(this.character.abilities);
 
-  get damageBonus() {
+  get damageBonus(): number {
     return this.abilities.strength && this.abilities.strength > 16
       ? this.abilities.strength - 16
       : 0;
   }
 
-  get agilityInArmour() {
+  get agilityInArmour(): number {
     return this.abilities.agility
       ? this.abilities.agility - movementPreventionValueTotal(this.character)
       : 0;
   }
 
-  get dexterityInArmour() {
+  get dexterityInArmour(): number {
     return this.abilities.dexterity
       ? this.abilities.dexterity - movementPreventionValueTotal(this.character)
       : 0;
   }
 
-  save() {
+  save(): void {
     this.update({ id: this.character.id, abilities: this.abilities });
   }
 
-  cancel() {
+  cancel(): void {
     this.abilities = copyAbilities(this.character.abilities);
   }
 }

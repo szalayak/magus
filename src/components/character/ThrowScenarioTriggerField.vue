@@ -77,21 +77,21 @@ export default class ThrowScenarioTriggerField extends Vue {
   throwScenario: ThrowScenario = {};
   modifier: number | null = null;
 
-  get throwScenarioToString() {
+  get throwScenarioToString(): string {
     return getThrowScenarioString(this.throwScenario);
   }
 
-  open() {
+  open(): void {
     this.throwScenario = parseThrowScenarioString(this.throwScenarioString);
     this.modifier = null;
   }
-  save() {
+  save(): void {
     this.$emit("save", {
       ...executeThrowScenario(this.throwScenario),
       modifier: this.modifier,
     });
   }
-  performThrow() {
+  performThrow(): void {
     this.throwScenario = parseThrowScenarioString(this.throwScenarioString);
     this.$emit("save", executeThrowScenario(this.throwScenario));
   }

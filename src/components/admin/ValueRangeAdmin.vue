@@ -29,12 +29,16 @@
 </template>
 <script lang="ts">
 import { getDescriptionsForLocales } from "@/utils/localise";
-import { getValueRangeTypes } from "@/utils/valueRangeTypes";
+import {
+  getValueRangeTypes,
+  ValueRangeTypeObject,
+} from "@/utils/valueRangeTypes";
 import Component from "vue-class-component";
 import Vue from "vue";
 import { ValueRange } from "@/store/modules/valueRange";
 import AdminTable from "./AdminTable.vue";
 import { Locale, ValueRangeType } from "@/API";
+import { HeaderEntry } from "@/types";
 
 @Component({
   name: "value-range-admin",
@@ -50,11 +54,11 @@ export default class ValueRangeAdmin extends Vue {
   };
   customColumns = ["type"];
 
-  get valueRangeTypes() {
+  get valueRangeTypes(): ValueRangeTypeObject[] {
     return getValueRangeTypes();
   }
 
-  get headers() {
+  get headers(): HeaderEntry[] {
     return [
       { text: this.$t("type"), value: "type" },
       { text: this.$t("title"), value: "description.title" },

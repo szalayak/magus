@@ -82,15 +82,15 @@ export default class AdministrativeInfoCard extends CharacterInfo {
     return this.$store.getters["getUsers"];
   }
 
-  async created() {
+  async created(): Promise<void> {
     this.$store.dispatch("loadUsers");
   }
 
-  save() {
+  save(): void {
     this.update({ id: this.character.id, ...this.administrativeInfo });
   }
 
-  cancel() {
+  cancel(): void {
     this.administrativeInfo = copyAdministrativeInfo(this.character);
   }
 }

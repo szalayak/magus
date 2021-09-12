@@ -23,7 +23,7 @@ const calculateCombatValueTotal = (
   spentModifier?: number,
   otherModifier?: number,
   abilityModifier?: number
-) => {
+): number => {
   return (
     (base || 0) +
     (spentModifier || 0) +
@@ -209,7 +209,7 @@ export const combatValuesWithWeapon = ({
   character,
   weapon,
   mastery,
-}: CombatValuesWithWeaponInput) => {
+}: CombatValuesWithWeaponInput): CombatValues => {
   const base: CombatValues = {
     initiation: calculateCombatValueTotal(
       initiationTotal(character),

@@ -99,6 +99,8 @@ import { DropdownValueList, LanguageAbility } from "@/store/types";
 import { LanguageLevel } from "@/API";
 import ConfirmDeleteDialog from "../ConfirmDeleteDialog.vue";
 import CharacterInfoList from "./CharacterInfoList";
+import { HeaderEntry } from "@/types";
+import { TranslateResult } from "vue-i18n";
 
 @Component({
   name: "language-card",
@@ -110,7 +112,7 @@ import CharacterInfoList from "./CharacterInfoList";
 export default class LanguageCard extends CharacterInfoList {
   sortBy = ["language"];
 
-  get headers() {
+  get headers(): HeaderEntry[] {
     const headers = [
       { text: this.$t("language"), value: "language" },
       { text: this.$t("level"), value: "level" },
@@ -118,7 +120,7 @@ export default class LanguageCard extends CharacterInfoList {
     return headers;
   }
 
-  get assignments() {
+  get assignments(): LanguageAbility[] {
     return this.character.languages || [];
   }
 
@@ -129,7 +131,7 @@ export default class LanguageCard extends CharacterInfoList {
     }));
   }
 
-  get formTitle() {
+  get formTitle(): TranslateResult | undefined {
     return this.editedIndex === -1
       ? this.$t("new-language")
       : this.$t("edit-language");
@@ -139,18 +141,18 @@ export default class LanguageCard extends CharacterInfoList {
     return {};
   }
 
-  async createFunction(item: LanguageAbility) {
+  async createFunction(item: LanguageAbility): Promise<void> {
     const languages = [...this.assignments, item];
     return this.update({ id: this.character.id, languages });
   }
 
-  async updateFunction(item: LanguageAbility) {
+  async updateFunction(item: LanguageAbility): Promise<void> {
     const languages = [...this.assignments];
     Object.assign(languages[this.editedIndex], item);
     return this.update({ id: this.character.id, languages });
   }
 
-  async deleteFunction(item: LanguageAbility) {
+  async deleteFunction(item: LanguageAbility): Promise<void> {
     const languages = [...this.assignments];
     languages.splice(languages.indexOf(item), 1);
     return this.update({ id: this.character.id, languages });

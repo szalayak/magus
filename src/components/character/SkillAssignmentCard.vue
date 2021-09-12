@@ -134,6 +134,9 @@ import CharacterInfoCard from "./CharacterInfoCard.vue";
 import { SkillAssignment } from "@/store/modules/character";
 import ConfirmDeleteDialog from "../ConfirmDeleteDialog.vue";
 import CharacterInfoList from "./CharacterInfoList";
+import { HeaderEntry } from "@/types";
+import { Skill } from "@/store";
+import { TranslateResult } from "vue-i18n";
 
 @Component({
   name: "skill-assignment-card",
@@ -146,7 +149,7 @@ export default class SkillAssignmentCard extends CharacterInfoList {
   sortBy = ["skill.description.title"];
   search = "";
 
-  get headers() {
+  get headers(): HeaderEntry[] {
     return [
       { text: this.$t("skill"), value: "skill.description.title" },
       {
@@ -158,7 +161,7 @@ export default class SkillAssignmentCard extends CharacterInfoList {
     ];
   }
 
-  get skills() {
+  get skills(): Skill[] {
     return this.$store.getters["skill/list"];
   }
 
@@ -166,7 +169,7 @@ export default class SkillAssignmentCard extends CharacterInfoList {
     return this.character.skills || [];
   }
 
-  get formTitle() {
+  get formTitle(): TranslateResult | undefined {
     return this.editedIndex === -1
       ? this.$t("new-skill")
       : this.$t("edit-skill");
@@ -178,21 +181,23 @@ export default class SkillAssignmentCard extends CharacterInfoList {
     };
   }
 
-  masteryToString(assignment: SkillAssignment) {
+  masteryToString(
+    assignment: SkillAssignment
+  ): TranslateResult | string | undefined {
     return assignment.skill?.percentageSkill
       ? `${assignment.percentageValue || 0}%`
       : this.$t(assignment.mastery || "");
   }
 
-  async createFunction(item: SkillAssignment) {
+  async createFunction(item: SkillAssignment): Promise<void> {
     return this.$store.dispatch("character/createSkillAssignment", item);
   }
 
-  async updateFunction(item: SkillAssignment) {
+  async updateFunction(item: SkillAssignment): Promise<void> {
     return this.$store.dispatch("character/updateSkillAssignment", item);
   }
 
-  async deleteFunction(item: SkillAssignment) {
+  async deleteFunction(item: SkillAssignment): Promise<void> {
     return this.$store.dispatch("character/deleteSkillAssignment", item);
   }
 }

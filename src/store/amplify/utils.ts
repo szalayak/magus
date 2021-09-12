@@ -13,20 +13,20 @@ export const createDefaultActions = ({
   return {
     loadFunction: async () => {
       const result = (await API.graphql({
-        query: actions.list,
+        query: actions.list || "",
       })) as PageableResult;
       return Object.values(result.data)[0] as PageableState;
     },
     getFunction: async (id: string | number) => {
       const result = (await API.graphql({
-        query: actions.read,
+        query: actions.read || "",
         variables: { id },
       })) as IdentifiableResult;
       return Object.values(result.data)[0] as Identifiable;
     },
     createFunction: async (item: Identifiable) => {
       const result = (await API.graphql({
-        query: actions.create,
+        query: actions.create || "",
         variables: {
           input: mappingFunction(item),
         },
@@ -35,14 +35,14 @@ export const createDefaultActions = ({
     },
     updateFunction: async (item: Identifiable) => {
       const result = (await API.graphql({
-        query: actions.update,
+        query: actions.update || "",
         variables: { input: mappingFunction(item) },
       })) as IdentifiableResult;
       return Object.values(result.data)[0] as Identifiable;
     },
     deleteFunction: async (id: string | number) => {
       await API.graphql({
-        query: actions.delete,
+        query: actions.delete || "",
         variables: { input: { id } },
       });
     },

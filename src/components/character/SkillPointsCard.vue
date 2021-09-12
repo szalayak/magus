@@ -79,11 +79,11 @@ const copySkillPoints = (skillPoints?: SkillPoints): SkillPoints => ({
 export default class SkillPointsCard extends CharacterInfo {
   skillPoints = copySkillPoints(this.character.skillPoints);
 
-  save() {
+  save(): void {
     this.update({ id: this.character.id, skillPoints: this.skillPoints });
   }
 
-  cancel() {
+  cancel(): void {
     this.skillPoints = copySkillPoints(this.character.skillPoints);
   }
 }

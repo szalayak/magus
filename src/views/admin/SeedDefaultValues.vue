@@ -98,8 +98,9 @@ import Component from "vue-class-component";
 import VueI18n from "vue-i18n";
 import fixtures from "@/fixtures/index";
 import JSONFormatter from "json-formatter-js";
-import { Editable, LooseObject } from "@/store/types";
+import { Editable } from "@/store/types";
 import PageTemplate from "@/components/PageTemplate.vue";
+import { BackendError } from "@/types";
 
 interface Fixture {
   id: string;
@@ -209,29 +210,32 @@ export default class SeedDefaultValues extends TitleComponent {
     },
   ];
 
-  get itemSelected() {
+  get itemSelected(): boolean {
     return !!this.items.find(i => i.selected);
   }
 
-  get allSelected() {
+  get allSelected(): boolean {
     return this.items.every(i => i.selected);
   }
 
-  fixture(fixture: string) {
+  fixture(fixture: string): string {
     return new JSONFormatter(fixtures[fixture], 3, {
       hoverPreviewEnabled: true,
     }).render().outerHTML;
   }
 
-  selectAll() {
+  selectAll(): void {
     this.items.forEach(i => (i.selected = true));
   }
 
-  deselectAll() {
+  deselectAll(): void {
     this.items.forEach(i => (i.selected = false));
   }
 
-  async processOperations(operations: Promise<unknown>[], item: Fixture) {
+  async processOperations(
+    operations: Promise<unknown>[],
+    item: Fixture
+  ): Promise<void> {
     try {
       await Promise.all(operations);
       item.done = true;
@@ -243,20 +247,19 @@ export default class SeedDefaultValues extends TitleComponent {
       this.messages.concat(
         typeof e === "string"
           ? [e]
-          : e.errors?.map((err: LooseObject) => err.message) || []
+          : (e as BackendError).errors?.map(err => err.message) || []
       );
     }
   }
 
-  async deleteExisting() {
+  async deleteExisting(): Promise<void> {
     this.updateInProgress = true;
     const items = this.items.filter(i => i.selected);
     for (const item of items) {
       item.inProgress = true;
       item.done = false;
-      const existingData: Editable[] = this.$store.getters[
-        `${item.module}/list`
-      ];
+      const existingData: Editable[] =
+        this.$store.getters[`${item.module}/list`];
       const deletions = existingData.map(d =>
         this.$store.dispatch(`${item.module}/delete`, d.id)
       );
@@ -266,16 +269,15 @@ export default class SeedDefaultValues extends TitleComponent {
     this.updateInProgress = false;
   }
 
-  async upload() {
+  async upload(): Promise<void> {
     this.updateInProgress = true;
     const items = this.items.filter(i => i.selected);
 
     for (const item of items) {
       item.inProgress = true;
       item.done = false;
-      const existingData: Editable[] = this.$store.getters[
-        `${item.module}/list`
-      ];
+      const existingData: Editable[] =
+        this.$store.getters[`${item.module}/list`];
       const itemFixtures = fixtures[item.fixture];
       const operations = itemFixtures
         .map(f => {
@@ -293,7 +295,7 @@ export default class SeedDefaultValues extends TitleComponent {
     this.updateInProgress = false;
   }
 
-  async created() {
+  async created(): Promise<void> {
     this.items.forEach(i => this.$store.dispatch(`${i.module}/load`));
   }
 }

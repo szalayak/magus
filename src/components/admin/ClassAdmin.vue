@@ -41,6 +41,7 @@ import { Class } from "@/store/modules/class";
 import { ValueRange } from "@/store/modules/valueRange";
 import { Locale, ValueRangeType } from "@/API";
 import AdminTable from "./AdminTable.vue";
+import { HeaderEntry } from "@/types";
 
 @Component({
   name: "class-admin",
@@ -60,7 +61,7 @@ export default class ClassAdmin extends Vue {
   };
   customColumns = ["magicUser"];
 
-  get headers() {
+  get headers(): HeaderEntry[] {
     return [
       { text: this.$t("main-class"), value: "mainClass.description.title" },
       { text: this.$t("title"), value: "description.title" },
@@ -72,7 +73,7 @@ export default class ClassAdmin extends Vue {
     return this.$store.getters["valueRange/getMainClasses"];
   }
 
-  created() {
+  created(): void {
     this.$store.dispatch("valueRange/loadByType", ValueRangeType.MAIN_CLASS);
   }
 }

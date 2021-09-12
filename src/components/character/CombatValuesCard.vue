@@ -214,10 +214,10 @@ export default class CombatValuesCard extends CharacterInfo {
   damage = copyDamage(this.character.damage);
   combatValueModifiersPerLevel = this.character.combatValueModifiersPerLevel;
   attacksPerTurn = this.character.attacksPerTurn;
-  mandatoryCombatValueModifierDistribution = this.character
-    .mandatoryCombatValueModifierDistribution;
+  mandatoryCombatValueModifierDistribution =
+    this.character.mandatoryCombatValueModifierDistribution;
 
-  get initiationString() {
+  get initiationString(): string | number {
     const total = initiationTotal(this.transientCharacter, true);
     if (isCharacterMovementRestricted(this.character))
       return `${total}, ${this.$t("in-armour")}:${initiationTotal(
@@ -225,7 +225,7 @@ export default class CombatValuesCard extends CharacterInfo {
       )}`;
     return total;
   }
-  get offenceString() {
+  get offenceString(): string | number {
     const total = offenceTotal(this.transientCharacter, true);
     if (isCharacterMovementRestricted(this.character))
       return `${total}, ${this.$t("in-armour")}:${offenceTotal(
@@ -234,7 +234,7 @@ export default class CombatValuesCard extends CharacterInfo {
     return total;
   }
 
-  get defenceString() {
+  get defenceString(): string | number {
     const total = defenceTotal(this.transientCharacter, true);
     if (isCharacterMovementRestricted(this.character))
       return `${total}, ${this.$t("in-armour")}:${defenceTotal(
@@ -243,7 +243,7 @@ export default class CombatValuesCard extends CharacterInfo {
     return total;
   }
 
-  get aimingString() {
+  get aimingString(): string | number {
     const total = aimingTotal(this.transientCharacter, true);
     if (isCharacterMovementRestricted(this.character))
       return `${total}, ${this.$t("in-armour")}:${aimingTotal(
@@ -261,26 +261,26 @@ export default class CombatValuesCard extends CharacterInfo {
     };
   }
 
-  get initiationTotal() {
+  get initiationTotal(): number {
     return initiationTotal(this.transientCharacter);
   }
 
-  get offenceTotal() {
+  get offenceTotal(): number {
     return offenceTotal(this.transientCharacter);
   }
 
-  get defenceTotal() {
+  get defenceTotal(): number {
     return defenceTotal(this.transientCharacter);
   }
 
-  get aimingTotal() {
+  get aimingTotal(): number {
     return aimingTotal(this.transientCharacter);
   }
 
-  throwScenarioToString(scenario: ThrowScenario) {
+  throwScenarioToString(scenario: ThrowScenario): string {
     return getThrowScenarioString(scenario);
   }
-  save() {
+  save(): void {
     this.update({
       id: this.character.id,
       baseCombatValues: this.base,
@@ -289,19 +289,21 @@ export default class CombatValuesCard extends CharacterInfo {
       attacksPerTurn: this.attacksPerTurn,
       damage: this.damage,
       combatValueModifiersPerLevel: this.combatValueModifiersPerLevel,
-      mandatoryCombatValueModifierDistribution: this
-        .mandatoryCombatValueModifierDistribution,
+      mandatoryCombatValueModifierDistribution:
+        this.mandatoryCombatValueModifierDistribution,
     });
   }
 
-  cancel() {
+  cancel(): void {
     this.base = copyCombatValues(this.character.baseCombatValues);
     this.spent = copyCombatValues(this.character.spentCombatValueModifiers);
     this.other = copyCombatValues(this.character.otherCombatValueModifiers);
     this.damage = copyDamage(this.character.damage);
-    this.combatValueModifiersPerLevel = this.character.combatValueModifiersPerLevel;
+    this.combatValueModifiersPerLevel =
+      this.character.combatValueModifiersPerLevel;
     this.attacksPerTurn = this.character.attacksPerTurn;
-    this.mandatoryCombatValueModifierDistribution = this.character.mandatoryCombatValueModifierDistribution;
+    this.mandatoryCombatValueModifierDistribution =
+      this.character.mandatoryCombatValueModifierDistribution;
   }
 }
 </script>

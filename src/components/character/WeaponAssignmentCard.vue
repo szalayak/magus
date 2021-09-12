@@ -153,6 +153,8 @@ import { WeaponAssignment } from "@/store/modules/character";
 import { combatValuesWithWeapon } from "@/utils/character";
 import ConfirmDeleteDialog from "../ConfirmDeleteDialog.vue";
 import CharacterInfoList from "./CharacterInfoList";
+import { TranslateResult } from "vue-i18n";
+import { HeaderEntry } from "@/types";
 
 @Component({
   name: "weapon-assignment-card",
@@ -164,7 +166,7 @@ import CharacterInfoList from "./CharacterInfoList";
 export default class WeaponAssignmentCard extends CharacterInfoList {
   sortBy = ["weapon.description.title"];
 
-  get headers() {
+  get headers(): HeaderEntry[] {
     return [
       { text: this.$t("weapon"), value: "weapon.description.title" },
       { text: this.$t("mastery"), value: "mastery" },
@@ -183,15 +185,15 @@ export default class WeaponAssignmentCard extends CharacterInfoList {
     ];
   }
 
-  get weapons() {
+  get weapons(): Weapon[] {
     return this.$store.getters["weapon/list"].filter((w: Weapon) => !w.ranged);
   }
 
-  get assignments() {
+  get assignments(): Weapon[] {
     return this.character.weapons?.filter(w => !w.weapon?.ranged) || [];
   }
 
-  get formTitle() {
+  get formTitle(): TranslateResult | undefined {
     return this.editedIndex === -1
       ? this.$t("new-weapon")
       : this.$t("edit-weapon");
@@ -203,25 +205,25 @@ export default class WeaponAssignmentCard extends CharacterInfoList {
     };
   }
 
-  damageToString(damage: ThrowScenario) {
+  damageToString(damage: ThrowScenario): string {
     return getThrowScenarioString(damage);
   }
 
-  initiation(assignment: WeaponAssignment) {
+  initiation(assignment: WeaponAssignment): number | undefined {
     return combatValuesWithWeapon({
       character: this.character,
       weapon: assignment.weapon,
       mastery: assignment.mastery,
     }).initiation;
   }
-  offence(assignment: WeaponAssignment) {
+  offence(assignment: WeaponAssignment): number | undefined {
     return combatValuesWithWeapon({
       character: this.character,
       weapon: assignment.weapon,
       mastery: assignment.mastery,
     }).offence;
   }
-  defence(assignment: WeaponAssignment) {
+  defence(assignment: WeaponAssignment): number | undefined {
     return combatValuesWithWeapon({
       character: this.character,
       weapon: assignment.weapon,
@@ -229,15 +231,15 @@ export default class WeaponAssignmentCard extends CharacterInfoList {
     }).defence;
   }
 
-  async createFunction(item: WeaponAssignment) {
+  async createFunction(item: WeaponAssignment): Promise<void> {
     return this.$store.dispatch("character/createWeaponAssignment", item);
   }
 
-  async updateFunction(item: WeaponAssignment) {
+  async updateFunction(item: WeaponAssignment): Promise<void> {
     return this.$store.dispatch("character/updateWeaponAssignment", item);
   }
 
-  async deleteFunction(item: WeaponAssignment) {
+  async deleteFunction(item: WeaponAssignment): Promise<void> {
     return this.$store.dispatch("character/deleteWeaponAssignment", item);
   }
 }

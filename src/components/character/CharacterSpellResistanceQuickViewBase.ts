@@ -5,11 +5,11 @@ import CharacterQuickView from "./CharacterQuickView";
 
 @Component({})
 export default class CharacterSpellResistanceQuickViewBase extends CharacterQuickView {
-  get astralSpellResistanceTotal() {
+  get astralSpellResistanceTotal(): number {
     return calculateSpellResistanceTotal(this.spellResistance.astral);
   }
 
-  get mentalSpellResistanceTotal() {
+  get mentalSpellResistanceTotal(): number {
     return calculateSpellResistanceTotal(this.spellResistance.mental);
   }
 
